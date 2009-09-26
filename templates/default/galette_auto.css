@@ -1,0 +1,15 @@
+#change_owner{
+	display:block;
+	background:url(../../../../templates/default/images/edit.png) 50% 1px no-repeat;
+	width:20px;
+	height:20px;
+	text-indent:-5000px;
+	margin-left:.3em;
+	float:right;
+	vertical-align:bottom;
+}
+
+/*#owners_list{
+	position:absolute;
+	background-color:white;
+}*/

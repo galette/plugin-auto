@@ -1,0 +1,175 @@
+Index: picture.php
+===================================================================
+--- picture.php	(révision 0)
++++ picture.php	(révision 0)
+@@ -0,0 +1,50 @@
++<?php
++
++// Copyright © 2005 Frédéric Jaqcuot
++// Copyright © 2007-2009 Johan Cwiklinski
++//
++// This file is part of Galette (http://galette.tuxfamily.org).
++//
++// Galette is free software: you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation, either version 3 of the License, or
++// (at your option) any later version.
++//
++// Galette is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with Galette. If not, see <http://www.gnu.org/licenses/>.
++
++/**
++ * Affiche une photo de voiture
++ *
++ * @package    Galette
++ *
++ * @author     Frédéric Jaqcuot
++ * @copyright  2004 Frédéric Jaqcuot
++ * @copyright  2007-2008 Johan Cwiklinski
++ * @license    http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
++ * @version    $Id: picture.php 606 2009-09-20 09:17:50Z trashy $
++ * @since      Disponible depuis la Release 0.7
++ */
++
++$base_path = '../../';
++require_once($base_path . 'includes/galette.inc.php');
++require_once('classes/auto_picture.class.php');
++
++if( !$login->isLogged() ){
++	header("location: index.php");
++	die();
++}
++
++if( !$login->isAdmin() ) /** FIXME: these should not be fired when accessing from public pages */
++	$id_adh = $login->id;
++else
++	$id_adh = $_GET['id_adh'];
++
++$picture = new AutoPicture($id_adh);
++$picture->display();
++?>
+\ No newline at end of file
+Index: classes/auto.class.php
+===================================================================
+--- classes/auto.class.php	(révision 9)
++++ classes/auto.class.php	(copie de travail)
+@@ -39,8 +39,8 @@
+ 
+ //main Galette classes required
+ require_once(WEB_ROOT . 'classes/adherent.class.php');
+-require_once(WEB_ROOT . 'classes/picture.class.php');
+ //current plugin classes required
++require_once('auto_picture.class.php');
+ require_once('auto-models.class.php');
+ require_once('auto-bodies.class.php');
+ require_once('auto-colors.class.php');
+@@ -95,7 +95,7 @@
+ 		$this->owner = new Adherent();
+ 		$this->transmission = new AutoTransmissions();
+ 		$this->finition = new AutoFinitions();
+-		$this->picture = new picture();
++		$this->picture = new AutoPicture();
+ 	}
+ 
+ 	/**
+Index: classes/auto_picture.class.php
+===================================================================
+--- classes/auto_picture.class.php	(révision 0)
++++ classes/auto_picture.class.php	(révision 0)
+@@ -0,0 +1,48 @@
++<?php
++
++// Copyright © 2009 Johan Cwiklinski
++//
++// This file is part of Galette (http://galette.tuxfamily.org).
++//
++// Galette is free software: you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation, either version 3 of the License, or
++// (at your option) any later version.
++//
++// Galette is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with Galette. If not, see <http://www.gnu.org/licenses/>.
++
++/**
++ * Logo handling
++ *
++ * @package Galette
++ * 
++ * @author     Johan Cwiklinski
++ * @copyright  2009 Johan Cwiklinski
++ * @license    http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
++ * @version    $Id: logo.class.php 546 2009-03-05 06:09:00Z trashy $
++ */
++
++require_once(WEB_ROOT . 'classes/picture.class.php');
++require_once('_config.inc.php');
++
++class AutoPicture extends Picture{
++	protected $tbl_prefix = AUTO_PREFIX;
++
++	/**
++	* @override
++	*/
++	protected function getDefaultPicture(){
++		global $plugins;
++		$this->file_path = $plugins->getTemplatesPath('Auto') . '/images/car.png';
++		$this->format = 'png';
++		$this->mime = 'image/png';
++		$this->custom = false;
++	}
++}
++?>
+Index: templates/default/vehicles.tpl
+===================================================================
+--- templates/default/vehicles.tpl	(révision 9)
++++ templates/default/vehicles.tpl	(copie de travail)
+@@ -54,8 +54,7 @@
+ 				<legend>{_T string="Car's photo"}</legend>
+ 				<p>
+ 					<span class="bline">{_T string="Picture:"}</span>
+-					<img src="{$template_subdir}images/default.png" alt="{_T string="Functionnality not yet available."}" />
+-					{*<img src="picture.php?id_adh={$member->id}&amp;rand={$time}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>*}
++					<img src="picture.php?id_adh={$car->id}&amp;rand={$time}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>
+ {if $car->hasPicture() }
+ 					<span class="labelalign"><label for="del_photo">{_T string="Delete image"}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
+ {/if}
+Index: templates/default/galette_auto.css
+===================================================================
+--- templates/default/galette_auto.css	(révision 2)
++++ templates/default/galette_auto.css	(copie de travail)
+@@ -1,3 +1,14 @@
++#change_owner{
++	display:block;
++	background:url(../../../../templates/default/images/edit.png) 50% 1px no-repeat;
++	width:20px;
++	height:20px;
++	text-indent:-5000px;
++	margin-left:.3em;
++	float:right;
++	vertical-align:bottom;
++}
++
+ /*#owners_list{
+ 	position:absolute;
+ 	background-color:white;
+Index: templates/default/images/car.png
+===================================================================
+Impossible d'afficher : fichier considéré comme binaire.
+svn:mime-type = application/octet-stream
+
+Modification de propriétés sur templates/default/images/car.png
+___________________________________________________________________
+Ajouté : svn:mime-type
+   + application/octet-stream
+

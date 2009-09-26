@@ -1,0 +1,2352 @@
+# translation of fr_FR@euro.po to fr_FR
+# translation of fr_FR@euro.po to
+# Copyright (C) 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+#
+# Georges Khaznadar <gekhajofour@netinfo.fr>, 2004.
+# StÃ©phane SalÃ¨s <ssales@tuxz.org>, 2005, 2006.
+# LoÃ¯s Taulelle <gruiick@gmail.com>, 2006.
+# Johan Cwiklinski <johan.cwiklinski@fedoraproject.org>, 2007.
+# Thomas Canniot <mrtom@fedoraproject.org>, 2007.
+# Johan Cwiklinski <johan@x-tnd.be>, 2007, 2008, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: fr_FR@euro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-12-20 16:44+0100\n"
+"PO-Revision-Date: 2009-03-19 08:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: French <kde-i18n-doc@lists.kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../object.php:99 ../models.php:99
+msgid "Brand '%s'"
+msgstr "Marque « %s »"
+
+#: ../templates/default/vehicles.tpl:65
+msgid "Color:"
+msgstr "Couleur&nbsp;:"
+
+#: ../templates/default/vehicles.tpl:35
+msgid "First circulation date:"
+msgstr "Date de première mise en circulation&nbsp;:"
+
+#: ../object.php:53 ../models.php:53
+msgid "Change color '%s'"
+msgstr "Modifier la couleur « %s »"
+
+#: ../object.php:103 ../models.php:103
+msgid "Do you really want to delete the brand '%s'?"
+msgstr "Voulez vous vraiment effacer la marque « %s »&nbsp;?"
+
+#: ../object.php:89 ../models.php:89
+msgid "New transmission"
+msgstr "Nouvelle transmission"
+
+#: ../templates/default/vehicles.tpl:14
+msgid "Model:"
+msgstr "Modèle :"
+
+#: ../object.php:71 ../models.php:71
+msgid "New finition"
+msgstr "Nouvelle finition"
+
+#: ../templates/default/menu.tpl:5
+msgid "Colors list"
+msgstr "Liste des couleurs"
+
+#: ../templates/default/object_list.tpl:56
+#: ../templates/default/models_list.tpl:55
+#: ../templates/default/vehicles_list.tpl:55
+msgid "Other:"
+msgstr "Autres&nbsp;:"
+
+#: ../object.php:71 ../models.php:71
+msgid "Change finition '%s'"
+msgstr "Modifier la finition « %s »"
+
+#: ../templates/default/vehicles.tpl:31
+msgid "First registration date:"
+msgstr "Date de première immatriculation&nbsp;:"
+
+#: ../object.php:84 ../models.php:84
+msgid "Do you really want to delete the body '%s'?"
+msgstr "Voulez vous vraiment effacer la carrosserie « %s »&nbsp;?"
+
+#: ../templates/default/object_list.tpl:47
+#: ../templates/default/models_list.tpl:46
+#: ../templates/default/vehicles_list.tpl:46
+msgid "no record found"
+msgstr "aucun enregistrement trouvé"
+
+#: ../templates/default/vehicles.tpl:67
+msgid "Choose a color"
+msgstr "Choisissez une couleur"
+
+#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:209
+msgid "Owners"
+msgstr "Propriétaires"
+
+#: ../templates/default/vehicles.tpl:6
+msgid "Car's base informations"
+msgstr "Informations de base de la voiture"
+
+#: ../templates/default/vehicles_list.tpl:53
+msgid "Do you really want to delete selected vehicles?"
+msgstr "Voulez vous vraiment effacer les véhicules sélectionnés&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:118
+msgid "Chassis number:"
+msgstr "Numéro de chassis&nbsp;:"
+
+#: ../object.php:62 ../models.php:62
+msgid "New state"
+msgstr "Nouvel état"
+
+#: ../templates/default/vehicles.tpl:60
+msgid "Show full car state history"
+msgstr "Afficher l'historique complet des états la voiture"
+
+#: ../templates/default/vehicles_list.tpl:56
+msgid "Add new vehicle"
+msgstr "Ajouter un nouveau véhicule"
+
+#: ../templates/default/object_list.tpl:13
+#: ../templates/default/models_list.tpl:10
+#: ../templates/default/vehicles_list.tpl:10
+msgid "Actions"
+msgstr "Actions"
+
+#: ../templates/default/vehicles.tpl:61
+msgid "Change car's owner"
+msgstr "Modifier le propriétaire de la voiture"
+
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:42
+#: ../templates/default/vehicles_list.tpl:42
+msgid "[del]"
+msgstr "[suppr]"
+
+#: ../templates/default/object_list.tpl:5
+#: ../templates/default/object_list.tpl:12
+msgid "$name"
+msgstr ""
+
+#: ../templates/default/owners.tpl:9 ../templates/default/owners.tpl:11
+msgid "Name"
+msgstr "Nom"
+
+#: ../templates/default/vehicles.tpl:76
+msgid "Choose a state"
+msgstr "Choisissez un état"
+
+#: ../object.php:80 ../models.php:80
+msgid "New body"
+msgstr "Nouvelle carrosserie"
+
+#: ../templates/default/object_show.tpl:17
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
+
+#: ../templates/default/object_show.tpl:17
+msgid "Do you want to create a new one?"
+msgstr "Souhaitez vous en créer un nouveau&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:17
+msgid "Choose a brand"
+msgstr "Choisissez une marque"
+
+#: ../object.php:131 ../models.php:144 ../vehicles_edit.php:76
+#: ../vehicles_list.php:80
+msgid "- You must provide a value!"
+msgstr "- Vous devez fournir une valeur&nbsp;!"
+
+#: ../object.php:102 ../models.php:102
+msgid "Do you really want to delete selected brands?"
+msgstr "Voulez vous vraiment effacer les marques sélectionnées&nbsp;?"
+
+#: ../templates/default/object_list.tpl:42
+#: ../templates/default/models_list.tpl:41
+#: ../templates/default/vehicles_list.tpl:41
+msgid "[mod]"
+msgstr "[mod]"
+
+#: ../object.php:62 ../models.php:62
+msgid "Change state '%s'"
+msgstr "Modifier l'état « %s »"
+
+#: ../classes/auto.class.php:104
+msgid "Petrol"
+msgstr "Essence"
+
+#: ../object.php:98 ../models.php:98
+msgid "New brand"
+msgstr "Nouvelle marque"
+
+#: ../templates/default/model.tpl:17 ../templates/default/models_list.tpl:8
+#: ../templates/default/vehicles_list.tpl:8
+msgid "Model"
+msgstr "Modèle"
+
+#: ../object.php:136 ../models.php:149 ../vehicles_edit.php:81
+#: ../vehicles_list.php:85
+msgid "- An error occured while saving record. Please try again."
+msgstr ""
+"- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
+"nouveau."
+
+#: ../templates/default/vehicles.tpl:60
+msgid "Car state history"
+msgstr "Historique de l'état de la voiture"
+
+#: ../templates/default/owners.tpl:68
+msgid "[admin]"
+msgstr "[admin]"
+
+#: ../object.php:100 ../models.php:100 ../templates/default/model.tpl:22
+#: ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:14
+#: ../templates/default/vehicles_list.tpl:9
+msgid "Brand"
+msgstr "Marque"
+
+#: ../object.php:74 ../models.php:74
+msgid "Do you really want to delete selected finitions?"
+msgstr "Voulez vous vraiment effacer les finitions sélectionnées&nbsp;?"
+
+#: ../classes/auto.class.php:107
+msgid "Electricity"
+msgstr "Électricité"
+
+#: ../templates/default/menu.tpl:16
+msgid "My Cars"
+msgstr "Mes voitures"
+
+#: ../templates/default/model.tpl:24
+msgid "Select one brand"
+msgstr "Sélectionnez une marque"
+
+#: ../object.php:64 ../models.php:64
+msgid "Add new state"
+msgstr "Ajouter un nouvel état"
+
+#: ../object.php:80 ../models.php:80
+msgid "Change body '%s'"
+msgstr "Modifier la carrosserie « %s »"
+
+#: ../templates/default/vehicles.tpl:91
+msgid "Body:"
+msgstr "Carrosseries&nbsp;:"
+
+#: ../templates/default/models_list.tpl:53
+msgid "Do you really want to delete selected models?"
+msgstr "Voulez vous vraiment effacer les modèles sélectionnés&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:109
+msgid "Finition:"
+msgstr "Finition&nbsp;:"
+
+#: ../templates/default/model.tpl:30
+msgid ""
+"No brand is registered yet. You have to %create at least one brand% to "
+"register models."
+msgstr ""
+"Aucune marque n'a été enregistrée. Vous devez au moins %créer une marque% "
+"pour ajouter des modèles."
+
+#: ../templates/default/vehicles.tpl:89
+msgid "Car's technical informations"
+msgstr "Informations techniques de la voiture"
+
+#: ../templates/default/vehicles.tpl:74
+msgid "State:"
+msgstr "État&nbsp;:"
+
+#: ../object.php:90 ../models.php:90
+msgid "Transmission"
+msgstr "Transmission"
+
+#: ../vehicles_edit.php:52 ../vehicles_list.php:56
+msgid "New vehicle"
+msgstr "Ajouter un nouveau véhicule"
+
+#: ../classes/auto.class.php:108
+msgid "Bio"
+msgstr "Bio-carburant"
+
+#: ../templates/default/vehicles.tpl:61
+msgid "Change"
+msgstr "Changer"
+
+#: ../templates/default/object.tpl:9 ../templates/default/model.tpl:6
+msgid "- ERROR -"
+msgstr "- ERREUR -"
+
+#: ../object.php:53 ../models.php:53
+msgid "New color"
+msgstr "Nouvelle couleur"
+
+#: ../object.php:83 ../models.php:83
+msgid "Do you really want to delete selected bodies?"
+msgstr "Voulez vous vraiment effacer les carrosseries sélectionnées&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:93
+msgid "Choose a body"
+msgstr "Choisissez une carrosserie"
+
+#: ../templates/default/object.tpl:27 ../templates/default/model.tpl:37
+msgid "Cancel"
+msgstr "Effacer"
+
+#: ../templates/default/menu.tpl:7
+msgid "Finitions list"
+msgstr "Liste des finitions"
+
+#: ../templates/default/vehicles.tpl:227
+msgid "Click to choose this owner for current car"
+msgstr "Cliquez pour attribuer la voiture courantez à ce propriétaire"
+
+#: ../templates/default/object.tpl:26 ../templates/default/model.tpl:36
+#: ../templates/default/vehicles.tpl:141
+msgid "Save"
+msgstr "Enregistrer"
+
+#: ../object.php:57 ../models.php:57 ../models.php:119
+msgid "Do you really want to delete the color '%s'?"
+msgstr "Voulez vous vraiment effacer la couleur « %s »&nbsp;?"
+
+#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+msgid "red"
+msgstr "rouge"
+
+#: ../templates/default/object_show.tpl:15
+msgid "Create a new model for brand '%s'"
+msgstr "Créer un nouveau modèle pour la marque « %s  »"
+
+#: ../templates/default/vehicles.tpl:132
+msgid "Choose a fuel"
+msgstr "Choisissez un carburant"
+
+#: ../templates/default/object_list.tpl:53
+#: ../templates/default/models_list.tpl:52
+#: ../templates/default/vehicles_list.tpl:52
+msgid "Selection:"
+msgstr "Sélection&nbsp;:"
+
+#: ../templates/default/object_show.tpl:9
+msgid "Registered models for the brand '%s':"
+msgstr "Modèles enregistrés pour la marque « %s  »&nbsp;:"
+
+#: ../templates/default/owners.tpl:22 ../templates/default/owners.tpl:24
+msgid "Nickname"
+msgstr "Pseudo"
+
+#: ../templates/default/vehicles.tpl:47
+msgid "Comment:"
+msgstr "Commentaire&nbsp;:"
+
+#: ../templates/default/menu.tpl:9
+msgid "Transmissions list"
+msgstr "Liste des transmissions"
+
+#: ../models.php:115
+msgid "New model"
+msgstr "Nouveau modèle"
+
+#: ../templates/default/vehicles.tpl:102
+msgid "Choose a transmission"
+msgstr "Choisissez une transmission"
+
+#: ../templates/default/vehicles.tpl:9
+msgid "Name:"
+msgstr "Nom&nbsp;:"
+
+#: ../object.php:98 ../models.php:98
+msgid "Change brand '%s'"
+msgstr "Modifier la marque « %s »"
+
+#: ../templates/default/menu.tpl:10
+msgid "Brands list"
+msgstr "Liste des marques"
+
+#: ../templates/default/vehicles.tpl:100
+msgid "Transmission:"
+msgstr "Transmission&nbsp;:"
+
+#: ../templates/default/vehicles_list.tpl:1 ../vehicles_list.php:115
+msgid "Vehicles list"
+msgstr "Liste des véhicules"
+
+#: ../object.php:89 ../models.php:89
+msgid "Change transmission '%s'"
+msgstr "Modifier la transmission « %s »"
+
+#: ../object.php:54 ../models.php:54 ../models.php:116
+msgid "Color"
+msgstr "Couleur"
+
+#: ../templates/default/owners.tpl:59
+msgid "[M]"
+msgstr "[H]"
+
+#: ../models.php:209 ../templates/default/menu.tpl:11
+msgid "Models list"
+msgstr "Liste des modèles"
+
+#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+msgid "NB : The mandatory fields are in"
+msgstr "NB&nbsp;: Les champs obligatoires apparaissent en"
+
+#: ../templates/default/vehicles.tpl:23
+msgid "Choose a model"
+msgstr "Choisissez un modèle"
+
+#: ../object.php:82 ../models.php:82
+msgid "Add new body"
+msgstr "Ajouter une nouvelle carrosserie"
+
+#: ../templates/default/vehicles.tpl:83
+msgid "Registration:"
+msgstr "Immatriculation&nbsp;:"
+
+#: ../templates/default/menu.tpl:2
+msgid "Cars"
+msgstr "Voitures"
+
+#: ../models.php:115
+msgid "Change model '%s'"
+msgstr "Modifier le modèle « %s »"
+
+#: ../classes/auto.class.php:105
+msgid "Diesel"
+msgstr "Diesel"
+
+#: ../object.php:73 ../models.php:73
+msgid "Add new finition"
+msgstr "Ajouter une finition"
+
+#: ../object.php:55 ../models.php:55 ../models.php:117
+msgid "Add new color"
+msgstr "Ajouter une nouvelle couleur"
+
+#: ../object.php:63 ../models.php:63
+msgid "State"
+msgstr "État"
+
+#: ../templates/default/models_list.tpl:56
+msgid "Add new model"
+msgstr "Ajouter un nouveau modèle"
+
+#: ../templates/default/owners.tpl:77
+msgid "no member"
+msgstr "aucun adhÃ©rent"
+
+#: ../templates/default/vehicles.tpl:39
+msgid "Mileage:"
+msgstr "Kilométrage&nbsp;:"
+
+#: ../object.php:92 ../models.php:92
+msgid "Do you really want to delete selected transmissions?"
+msgstr "Voulez vous vraiment effacer les transmissions sélectionnées&nbsp;?"
+
+#: ../templates/default/menu.tpl:12
+msgid "Cars list"
+msgstr "Liste des voitures"
+
+#: ../templates/default/models_list.tpl:42
+#: ../templates/default/vehicles_list.tpl:42
+msgid "Do you really want to delete the model '%s'?"
+msgstr "Voulez vous vraiment effacer le modèle « %s »&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:126
+msgid "Engine size:"
+msgstr "Cylindrée&nbsp;:"
+
+#: ../templates/default/object_list.tpl:20
+#: ../templates/default/models_list.tpl:17
+#: ../templates/default/vehicles_list.tpl:17
+msgid "(Un)Check all"
+msgstr "Tout (dé)cocher"
+
+#: ../object.php:72 ../models.php:72
+msgid "Finition"
+msgstr "Finition"
+
+#: ../templates/default/vehicles.tpl:43
+msgid "Seats:"
+msgstr "Places&nbsp;:"
+
+#: ../object.php:81 ../models.php:81
+msgid "Body"
+msgstr "Carrosseries"
+
+#: ../object.php:93 ../models.php:93
+msgid "Do you really want to delete the transmission '%s'?"
+msgstr "Voulez vous vraiment effacer la transmission « %s »&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:130
+msgid "Fuel:"
+msgstr "Carburant&nbsp;:"
+
+#: ../object.php:101 ../models.php:101
+msgid "Add new brand"
+msgstr "Ajouter une nouvelle marque"
+
+#: ../templates/default/object_list.tpl:54
+#: ../templates/default/models_list.tpl:53
+#: ../templates/default/vehicles_list.tpl:53
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../object.php:66 ../models.php:66
+msgid "Do you really want to delete the state '%s'?"
+msgstr "Voulez vous vraiment effacer l'état « %s »&nbsp;?"
+
+#: ../templates/default/vehicles.tpl:61
+msgid "Current owner:"
+msgstr "Propriétaire actuel&nbsp;:"
+
+#: ../object.php:91 ../models.php:91
+msgid "Add new transmission"
+msgstr "Ajouter une transaction"
+
+#: ../templates/default/vehicles.tpl:122
+msgid "Horsepower:"
+msgstr "Puissance&nbsp;:"
+
+#: ../templates/default/owners.tpl:61 ../templates/default/owners.tpl:63
+msgid "[W]"
+msgstr "[F]"
+
+#: ../templates/default/vehicles.tpl:54
+msgid "Current car's state informations"
+msgstr "Informations sur l'état courant de la voiture"
+
+#: ../templates/default/vehicles.tpl:111
+msgid "Choose a finition"
+msgstr "Choisissez une finition"
+
+#: ../object.php:56 ../models.php:56 ../models.php:118
+msgid "Do you really want to delete selected colors?"
+msgstr "Voulez vous vraiment effacer les couleurs sélectionnées&nbsp;?"
+
+#: ../object.php:75 ../models.php:75
+msgid "Do you really want to delete the finition '%s'?"
+msgstr "Voulez vous vraiment effacer la finition « %s »&nbsp;?"
+
+#: ../object.php:65 ../models.php:65
+msgid "Do you really want to delete selected states?"
+msgstr "Voulez vous vraiment effacer les états sélectionnés&nbsp;?"
+
+#: ../templates/default/menu.tpl:8
+msgid "Bodies list"
+msgstr "Liste des carrosseries"
+
+#: ../object.php:125 ../models.php:132 ../vehicles_edit.php:64
+#: ../vehicles_list.php:68
+msgid "- No id provided for modifying this record! (internal)"
+msgstr ""
+"- Pas d'identifiant fourni pour modifier cet enregistrement ! (interne)"
+
+#: ../models.php:139 ../vehicles_edit.php:71 ../vehicles_list.php:75
+msgid "- You must select a brand!"
+msgstr "- Vous devez sélectionner une marque&nbsp;!"
+
+#: ../vehicles_edit.php:52 ../vehicles_list.php:56
+msgid "Change vehicle '%s'"
+msgstr "Modifier le véhicule « %s »"
+
+#: ../classes/auto.class.php:106
+msgid "Gas"
+msgstr "Gaz"
+
+#: ../templates/default/object_list.tpl:21
+#: ../templates/default/models_list.tpl:18 ../templates/default/owners.tpl:39
+#: ../templates/default/vehicles_list.tpl:18
+msgid "Pages:"
+msgstr "Pages&nbsp;:"
+
+#: ../templates/default/menu.tpl:6
+msgid "States list"
+msgstr "Liste des états"
+
+#~ msgid "Colors"
+#~ msgstr "Couleurs"
+
+#~ msgid "Models"
+#~ msgstr "Modèles"
+
+#~ msgid "Bodies"
+#~ msgstr "Carrosseries"
+
+#~ msgid "among:"
+#~ msgstr "parmi :"
+
+#~ msgid "SELECT operation allowed"
+#~ msgstr "OpÃ©ration SELECT autorisÃ©e"
+
+#~ msgid "Recipient of new online registation emails"
+#~ msgstr "Destinataire pour les courriels des nouvelles inscriptions en ligne"
+
+#~ msgid "This comment is only displayed for admins."
+#~ msgstr "Ce commentaire n'est visible que par les administrateurs."
+
+#~ msgid "Phone:"
+#~ msgstr "TÃ©l&nbsp;:"
+
+#~ msgid "(for a directory)"
+#~ msgstr "(pour un dossier)"
+
+#~ msgid "Emailing disabled"
+#~ msgstr "Envoi de courriel dÃ©sactivÃ©"
+
+#~ msgid "Email"
+#~ msgstr "Courriel"
+
+#~ msgid ""
+#~ "Do you really want to delete this member from the base? This will also "
+#~ "delete the history of his fees. You could instead disable the account.\\n"
+#~ "\\nDo you still want to delete this member ?"
+#~ msgstr ""
+#~ "Voulez vous vraiment effacer cet adhÃ©rent de la base&nbsp;? Cela "
+#~ "effacera l'historique de ses contributions. Pour Ã©viter cela vous pouvez "
+#~ "simplement dÃ©sactiver son compte.\n"
+#~ "\n"
+#~ "Voulez vous toujours effacer cet adhÃ©rent&nbsp;?"
+
+#~ msgid "Position:"
+#~ msgstr "Position&nbsp;:"
+
+#~ msgid "End date of membership:"
+#~ msgstr "Date de fin d'adhÃ©sion&nbsp;:"
+
+#~ msgid "Contribution card"
+#~ msgstr "Fiche contribution"
+
+#~ msgid "Edit field"
+#~ msgstr "Ãdition de champ"
+
+#~ msgid "- Non-valid E-Mail address!"
+#~ msgstr "- Adresse courriel non valide&nbsp;!"
+
+#~ msgid "Leave empty to use Sender Email as reply address"
+#~ msgstr ""
+#~ "Laisser vide pour utiliser le courriel expÃ©diteur comme adresse de "
+#~ "rÃ©ponse"
+
+#~ msgid ""
+#~ "- You must indicate an email address Galette should use to send emails!"
+#~ msgstr ""
+#~ "- Vous devez indiquer l'adresse qu'utilisera Galette pour expÃ©dier des "
+#~ "courriels&nbsp;!"
+
+#~ msgid "Partnership"
+#~ msgstr "Partenariat"
+
+#~ msgid "Be visible in the<br /> members list :"
+#~ msgstr "Je souhaite apparaÃ®tre dans la liste des membres&nbsp;:"
+
+#~ msgid "Your database is maybe not usable, try to restore the older version."
+#~ msgstr ""
+#~ "Votre base est peut-Ãªtre inutilisable, essayez de restaurer une ancienne "
+#~ "version."
+
+#~ msgid "(Choose address printed below name)"
+#~ msgstr "(Choix de l'adresse imprimÃ©e sous le nom)"
+
+#~ msgid "line"
+#~ msgstr "ligne"
+
+#~ msgid "Required"
+#~ msgstr "Obligatoire"
+
+#~ msgid "UPDATE operation allowed"
+#~ msgstr "OpÃ©ration UPDATE autorisÃ©e"
+
+#~ msgid "Admin settings"
+#~ msgstr "ParamÃ¨tres administrateur"
+
+#~ msgid "Show/Hide color selector"
+#~ msgstr "Afficher/Masquer le sÃ©lecteur de couleurs"
+
+#~ msgid "Installation complete !"
+#~ msgstr "Fin de l'installation"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "Lost your password?"
+#~ msgstr "Mot de passe perdu&nbsp;?"
+
+#~ msgid ""
+#~ "This account doesn't have a valid email address. Please contact an "
+#~ "administrator."
+#~ msgstr ""
+#~ "Ce compte ne contient pas d'adresse courriel, contactez votre "
+#~ "administrateur Galette"
+
+#~ msgid "Contribution type:"
+#~ msgstr "Type de contribution&nbsp;:"
+
+#~ msgid "Your current Galette version is comprised between"
+#~ msgstr "Votre version actuelle de Galette est comprise entre"
+
+#~ msgid "Board Members Color:"
+#~ msgstr "Couleur pour les membres du bureau&nbsp;:"
+
+#~ msgid "Values:"
+#~ msgstr "Valeurs&nbsp;:"
+
+#~ msgid "Website:"
+#~ msgstr "Site Web&nbsp;:"
+
+#~ msgid "Address type:"
+#~ msgstr "Type d'adresse&nbsp;:"
+
+#~ msgid "Jabber"
+#~ msgstr "Jabber&nbsp;:"
+
+#~ msgid "contribution"
+#~ msgstr "contribution"
+
+#~ msgid "- You must indicate the SMTP server you want to use!"
+#~ msgstr "- Vous devez indiquer le serveur SMTP Ã  utiliser&nbsp;!"
+
+#~ msgid "Zip Code:"
+#~ msgstr "Code Postal&nbsp;:"
+
+#~ msgid "Horizontal margins:"
+#~ msgstr "Marges horizontales&nbsp;:"
+
+#~ msgid "Password:"
+#~ msgstr "Mot de passe&nbsp;:"
+
+#~ msgid "Email Body:"
+#~ msgstr "Corps du message&nbsp;:"
+
+#~ msgid "Show contributions since"
+#~ msgstr "Afficher les contributions du"
+
+#~ msgid "Company cotisation"
+#~ msgstr "Cotisation entreprise"
+
+#~ msgid "direcory_name"
+#~ msgstr "nom_dossier"
+
+#~ msgid "Sent mail is checked but there is no email address"
+#~ msgstr "Aucun des destinataires sÃ©lectionnÃ©s n'a d'adresse de courriel."
+
+#~ msgid "Default preferences were successfully stored."
+#~ msgstr "Les prÃ©fÃ©rences par dÃ©faut ont Ã©tÃ© sauvegardÃ©es avec succÃ¨s."
+
+#~ msgid "Admin account (independant of members):"
+#~ msgstr "Compte administrateur (indÃ©pendant des adhÃ©rents)&nbsp;:"
+
+#~ msgid "Strip Background colors:"
+#~ msgstr "Couleur du bandeau&nbsp;:"
+
+#~ msgid "middle"
+#~ msgstr "milieu"
+
+#~ msgid "Filter"
+#~ msgstr "Filtrer"
+
+#~ msgid "Translation of '%s' label"
+#~ msgstr "Traduction du libellÃ© Â« %s Â»"
+
+#~ msgid "Mail"
+#~ msgstr "Envoyer un courriel"
+
+#~ msgid "Vertical spacing:"
+#~ msgstr "Espacement vertical&nbsp;:"
+
+#~ msgid "Object:"
+#~ msgstr "Sujet&nbsp;:"
+
+#~ msgid "Emailing method:"
+#~ msgstr "MÃ©thode d'envoi des courriels&nbsp;:"
+
+#~ msgid "Freed of dues"
+#~ msgstr "Exempt de cotisation"
+
+#~ msgid "Mail sent to :"
+#~ msgstr "Courriel envoyÃ© Ã &nbsp;:"
+
+#~ msgid "CREATE operation not allowed"
+#~ msgstr "OpÃ©ration CREATE non autorisÃ©e"
+
+#~ msgid "Never contributed: Registered "
+#~ msgstr "N'a jamais cotisÃ©&nbsp;: Inscrit depuis "
+
+#~ msgid "Management of transactions"
+#~ msgstr "Gestion des transactions"
+
+#~ msgid "- Non valid date!"
+#~ msgstr "- Date non valide&nbsp;!"
+
+#~ msgid "Email Subject"
+#~ msgstr "Sujet du courriel"
+
+#~ msgid "Email sent is disabled in the preferences. Ask galette admin."
+#~ msgstr ""
+#~ "L'envoi de courriel est dÃ©sactivÃ©. Contactez votre administrateur "
+#~ "Galette."
+
+#~ msgid "Email,URL,IM"
+#~ msgstr "Email, URL, IM"
+
+#~ msgid "Beginning of membership:"
+#~ msgstr "Date de dÃ©but d'exercice&nbsp;:"
+
+#~ msgid "Delete '%s' field"
+#~ msgstr "Supprimer le champ Â« %s Â»"
+
+#~ msgid "Default status cannot be initialized."
+#~ msgstr "Les statuts par dÃ©faut n'ont pas Ã©tÃ© initialisÃ©s."
+
+#~ msgid "Passwords mismatch"
+#~ msgstr "Les mots de passe ne correspondent pas&nbsp;: "
+
+#~ msgid "- Invalid date for beginning of membership."
+#~ msgstr "- Mauvais format de date de dÃ©but d'exercice."
+
+#~ msgid "Password recovery"
+#~ msgstr "RÃ©cupÃ©ration de mot de passe"
+
+#~ msgid "Your current Galette version is"
+#~ msgstr "Votre version actuelle de Galette est la"
+
+#~ msgid "Horizontal spacing:"
+#~ msgstr "Espacement horizontal&nbsp;:"
+
+#~ msgid "Id GNUpg (GPG):"
+#~ msgstr "Id GNUpg (GPG)&nbsp;:"
+
+#~ msgid "Galette-related data:"
+#~ msgstr "Informations relatives Ã  Galette&nbsp;:"
+
+#~ msgid "Vice-president"
+#~ msgstr "Vice-prÃ©sident"
+
+#~ msgid "donation in kind"
+#~ msgstr "don en nature"
+
+#~ msgid ""
+#~ "Database can't be reached. Please go back to enter the connection "
+#~ "parameters again."
+#~ msgstr ""
+#~ "La base n'est pas accessible. Veuillez revenir en arriÃ¨re pour saisir Ã  "
+#~ "nouveau les paramÃ¨tres de connexion."
+
+#~ msgid "Active"
+#~ msgstr "Actif"
+
+#~ msgid ""
+#~ "- You can't send a confirmation by email if the member hasn't got an "
+#~ "address!"
+#~ msgstr ""
+#~ "- Vous ne pouvez pas envoyer de confirmation par courriel si l'adhÃ©rent "
+#~ "n'a pas d'adresse&nbsp;!"
+
+#~ msgid "A problem happened while sending email to admin for user:"
+#~ msgstr ""
+#~ "Un problÃ¨me est survenu dans l'envoi du courriel Ã  l'administrateur "
+#~ "pour le compte&nbsp;:"
+
+#~ msgid "Delete image"
+#~ msgstr "Supprimer l'image"
+
+#~ msgid "Mail settings:"
+#~ msgstr "ParamÃ¨tres courriel&nbsp;:"
+
+#~ msgid "List of contributions"
+#~ msgstr "Liste des contributions"
+
+#~ msgid "Choice list (one entry per line)."
+#~ msgstr "Liste de choix (une entrÃ©e par ligne)."
+
+#~ msgid "Sender Email:"
+#~ msgstr "Courriel expÃ©diteur&nbsp;:"
+
+#~ msgid "Password sent. Login:"
+#~ msgstr "Mot de passe envoyÃ©. Identifiant&nbsp;:"
+
+#~ msgid "Default status were successfully stored."
+#~ msgstr "Les statuts par dÃ©faut ont Ã©tÃ© sauvegardÃ©s avec succÃ¨s."
+
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#~ msgid ""
+#~ "This can come from the permissions on the file includes/config.inc.php or "
+#~ "the impossibility to make an INSERT into the database."
+#~ msgstr ""
+#~ "Ceci peut provenir des droits sur le fichier includes/config.inc.php ou "
+#~ "de l'impossibilitÃ© de faire un INSERT dans la base."
+
+#~ msgid "Never contributed"
+#~ msgstr "N'a jamais cotisÃ©"
+
+#~ msgid "- Membership period overlaps period starting at "
+#~ msgstr "- La pÃ©riode d'adhÃ©sion chevauche la pÃ©riode commenÃ§ant le "
+
+#~ msgid "SELECT operation not allowed"
+#~ msgstr "OpÃ©ration SELECT non autorisÃ©e"
+
+#~ msgid "Profession"
+#~ msgstr "Profession"
+
+#~ msgid "Configuration"
+#~ msgstr "Configuration"
+
+#~ msgid "Membership extension:"
+#~ msgstr "Extension d'adhÃ©sion&nbsp;:"
+
+#~ msgid "Language:"
+#~ msgstr "Langue&nbsp;:"
+
+#~ msgid "Details of contribution"
+#~ msgstr "DÃ©tail des contributions"
+
+#~ msgid "days"
+#~ msgstr "jours"
+
+#~ msgid "Member's Cards"
+#~ msgstr "Cartes de Membres"
+
+#~ msgid "Member profile"
+#~ msgstr "Fiche adhÃ©rent"
+
+#~ msgid "Number of label columns:"
+#~ msgstr "Nombre de colonnes d'Ã©tiquettes&nbsp;:"
+
+#~ msgid "Sends an email each time a new member registers online"
+#~ msgstr "Envoie un mail chaque fois qu'un nouveau membre s'inscrit en ligne"
+
+#~ msgid "all"
+#~ msgstr "tous"
+
+#~ msgid "transactions"
+#~ msgstr "transactions"
+
+#~ msgid "Treasurer"
+#~ msgstr "TrÃ©sorier"
+
+#~ msgid "- The numbers and measures have to be integers!"
+#~ msgstr "- Les nombres et mesures doivent Ãªtre des entiers&nbsp;!"
+
+#~ msgid "UPDATE operation not allowed"
+#~ msgstr "OpÃ©ration UPDATE non autorisÃ©e"
+
+#~ msgid "ALTER Operation allowed"
+#~ msgstr "OpÃ©ration ALTER autorisÃ©e"
+
+#~ msgid "Management of members"
+#~ msgstr "Gestion des adhÃ©rents"
+
+#~ msgid "Maximum number of characters."
+#~ msgstr "Nombre maximal de caractÃ¨res."
+
+#~ msgid "No password"
+#~ msgstr "Mot de passe vide"
+
+#~ msgid "Select mandatory fields for new adherents:"
+#~ msgstr "SÃ©lectionnez les champs requis pour les nouveaux adhÃ©rents :"
+
+#~ msgid "- Transaction amount must be positive."
+#~ msgstr "- Le montant de la transaction doit Ãªtre positif."
+
+#~ msgid "until"
+#~ msgstr "au"
+
+#~ msgid "Address:"
+#~ msgstr "Adresse&nbsp;:"
+
+#~ msgid "Permissions on the base"
+#~ msgstr "Permissions sur la base"
+
+#~ msgid "INSERT operation allowed"
+#~ msgstr "OpÃ©ration INSERT autorisÃ©e"
+
+#~ msgid " (continuation)"
+#~ msgstr " (suite)"
+
+#~ msgid "Email: '%s' has been successfully modified."
+#~ msgstr "Le courriel Â« %s Â» a Ã©tÃ© modifiÃ© avec succÃ¨s."
+
+#~ msgid "Management of contributions"
+#~ msgstr "Gestion des contributions"
+
+#~ msgid ""
+#~ "GALETTE hasn't got enough permissions on the database to continue the "
+#~ "installation."
+#~ msgstr ""
+#~ "Galette ne dispose pas de droits suffisants sur la base de donnÃ©es pour "
+#~ "poursuivre l'installation."
+
+#~ msgid "Send a mail:"
+#~ msgstr "Envoi de courriel&nbsp;:"
+
+#~ msgid "Your e-mail was sent to"
+#~ msgstr "Votre courriel a Ã©tÃ© envoyÃ© Ã "
+
+#~ msgid "in:"
+#~ msgstr "dans&nbsp;:"
+
+#~ msgid "Installation Report"
+#~ msgstr "Compte rendu d'installation"
+
+#~ msgid "View contributions"
+#~ msgstr "Voir les contributions"
+
+#~ msgid "There was a database error"
+#~ msgstr "Une erreur de base de donnÃ©es Ã  Ã©tÃ© rencontrÃ©e"
+
+#~ msgid "ICQ:"
+#~ msgstr "ICQ&nbsp;:"
+
+#~ msgid "Database type:"
+#~ msgstr "Type de base de donnÃ©es&nbsp;:"
+
+#~ msgid "Job"
+#~ msgstr "Emploi"
+
+#~ msgid "Web Site"
+#~ msgstr "Site Web"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactif"
+
+#~ msgid "- Only .jpg, .gif and .png files are allowed."
+#~ msgstr "- Seul les fichiers .jpg, .gif et .png sont acceptÃ©s."
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "Deletion"
+#~ msgstr "Suppression"
+
+#~ msgid "Files permissions are not OK!"
+#~ msgstr "Les permissions des fichiers ne sont pas correctes&nbsp;!"
+
+#~ msgid "Previous month"
+#~ msgstr "Mois prÃ©cÃ©dent"
+
+#~ msgid "Language"
+#~ msgstr "Langue"
+
+#~ msgid "Galette's parameters:"
+#~ msgstr "ParamÃ¨tres Galette&nbsp;:"
+
+#~ msgid "Flush the logs"
+#~ msgstr "Effacer les logs"
+
+#~ msgid "delete failed"
+#~ msgstr "La suppression a Ã©chouÃ©"
+
+#~ msgid "Number of values or zero if infinite."
+#~ msgstr "Nombre de valeurs ou zÃ©ro pour une infinitÃ©."
+
+#~ msgid "DELETE operation not allowed"
+#~ msgstr "OpÃ©ration DELETE non autorisÃ©e"
+
+#~ msgid "Profile configuration"
+#~ msgstr "Configuration des fiches"
+
+#~ msgid "Required membership:"
+#~ msgstr "AdhÃ©sion souhaitÃ©e :"
+
+#~ msgid "Installation mode"
+#~ msgstr "Type d'installation"
+
+#~ msgid "Please select your administration language"
+#~ msgstr "Veuillez sÃ©lectionner la langue d'administration"
+
+#~ msgid "- No originator selected (register a non-member first if necessary)."
+#~ msgstr ""
+#~ "- Aucun emetteur sÃ©lectionnÃ© (enregistrez un non-membre si nÃ©cessaire)."
+
+#~ msgid "Username or email:"
+#~ msgstr "Identifiant ou adresse e-mail&nbsp;:"
+
+#~ msgid "(dd/mm/yyyy format)"
+#~ msgstr "(format jj/mm/aaaa)"
+
+#~ msgid "State of dues"
+#~ msgstr "Ãtat cotisations"
+
+#~ msgid "Woman"
+#~ msgstr "Femme"
+
+#~ msgid "(De)Activate HTML editor"
+#~ msgstr "(DÃ©s)Activer l'Ã©diteur HTML"
+
+#~ msgid "your fee."
+#~ msgstr "votre cotisation."
+
+#~ msgid "Donation in money"
+#~ msgstr "Donation pÃ©cuniÃ¨re"
+
+#~ msgid "User:"
+#~ msgstr "Utilisateur&nbsp;:"
+
+#~ msgid "Passworg image"
+#~ msgstr "Image mot de passe"
+
+#~ msgid "Mister"
+#~ msgstr "Monsieur"
+
+#~ msgid "choice"
+#~ msgstr "choix"
+
+#~ msgid "Label generation parameters:"
+#~ msgstr "ParamÃ¨tres de gÃ©nÃ©ration d'Ã©tiquettes&nbsp;:"
+
+#~ msgid "Under UNIX/Linux, you can give the permissions using those commands"
+#~ msgstr "Sous UNIX/Linux, vous pouvez donner ces droits par les commandes"
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"
+
+#~ msgid "A problem happened while sending password for account:"
+#~ msgstr ""
+#~ "Un problÃ¨me est survenu dans l'envoi du mot de passe pour le "
+#~ "compte&nbsp;:"
+
+#~ msgid "Late of "
+#~ msgstr "En retard de "
+
+#~ msgid "None of the selected members has an email address."
+#~ msgstr "Aucun des destinataires sÃ©lectionnÃ©s n'a d'adresse de courriel."
+
+#~ msgid "Send down '%s' field"
+#~ msgstr "Faire descendre le champ Â« %s Â»"
+
+#~ msgid "- The username must be composed of at least 4 characters!"
+#~ msgstr "- L'identifiant doit Ãªtre composÃ© d'au moins 4 caractÃ¨res&nbsp;!"
+
+#~ msgid "Size:"
+#~ msgstr "Taille&nbsp;:"
+
+#~ msgid "Email: '%s' has not been modified!"
+#~ msgstr "Le courriel Â« %s Â» n'as pas Ã©tÃ© modifiÃ©&nbsp;!"
+
+#~ msgid "Sender name:"
+#~ msgstr "Nom expÃ©diteur&nbsp;:"
+
+#~ msgid "Legal entity"
+#~ msgstr "Personne morale"
+
+#~ msgid "annual fee"
+#~ msgstr "cotisation annuelle"
+
+#~ msgid "- Empty transaction description!"
+#~ msgstr "- La description de la transaction est vide&nbsp;!"
+
+#~ msgid "Update Report"
+#~ msgstr "Compte rendu de mise Ã  jour"
+
+#~ msgid "Country"
+#~ msgstr "Pays"
+
+#~ msgid "Automatic emails texts edition"
+#~ msgstr "Ãdition des courriels automatiques"
+
+#~ msgid "months"
+#~ msgstr "mois"
+
+#~ msgid "Inscription sent to the administrator for approval"
+#~ msgstr ""
+#~ "Votre inscription a Ã©tÃ© envoyÃ©e pour validation Ã  l'administrateur"
+
+#~ msgid "Transaction details"
+#~ msgstr "DÃ©tails de la transaction"
+
+#~ msgid "Secretary"
+#~ msgstr "SecrÃ©taire"
+
+#~ msgid "Year:"
+#~ msgstr "AnnÃ©e&nbsp;:"
+
+#~ msgid "Select contributor and contribution type"
+#~ msgstr "SÃ©lectionnez le contributeur et le type de contribution"
+
+#~ msgid "Duration"
+#~ msgstr "DurÃ©e"
+
+#~ msgid "No database name"
+#~ msgstr "Nom de la base non prÃ©cisÃ©"
+
+#~ msgid "Number of label lines:"
+#~ msgstr "Nombre de lignes d'Ã©tiquettes&nbsp;:"
+
+#~ msgid "Homepage"
+#~ msgstr "Page d'accueil"
+
+#~ msgid "Begin."
+#~ msgstr "DÃ©but"
+
+#~ msgid "Allow members to print card ?"
+#~ msgstr "Permettre aux membres d'imprimer leur carte ?"
+
+#~ msgid "Amount:"
+#~ msgstr "Montant&nbsp;:"
+
+#~ msgid ""
+#~ "Some members you have selected have no e-mail address. However, you can "
+#~ "generate envelope labels to contact them by snail mail."
+#~ msgstr ""
+#~ "Certains des membres que vous avez sÃ©lectionnÃ©s n'ont pas d'adresse de "
+#~ "courriel. Cependant vous pouvez produire des Ã©tiquettes d'enveloppes "
+#~ "pour les contacter par courrier postal."
+
+#~ msgid "Contribution"
+#~ msgstr "Contribution"
+
+#~ msgid "apache_user"
+#~ msgstr "utilisateur_apache"
+
+#~ msgid "members"
+#~ msgstr "adhÃ©rents"
+
+#~ msgid "President"
+#~ msgstr "PrÃ©sident"
+
+#~ msgid ""
+#~ "(the member will receive his username and password by email, if he has an "
+#~ "address.)"
+#~ msgstr ""
+#~ "(l'adhÃ©rent recevra son identifiant et son mot de passe par courriel, "
+#~ "s'il a une adresse.)"
+
+#~ msgid "(Members will be able to generate their own member card)"
+#~ msgstr "(Les membres pourront imprimer leur carte)"
+
+#~ msgid "(10 characters max)"
+#~ msgstr "(10 caractÃ¨res max)"
+
+#~ msgid "Send email to administrators ?"
+#~ msgstr "Envoyer des mails aux administrateurs&nbsp;?"
+
+#~ msgid "My contributions"
+#~ msgstr "Mes contributions"
+
+#~ msgid ""
+#~ "The mail server filled in the preferences cannot be reached. Ask Galette "
+#~ "admin"
+#~ msgstr ""
+#~ "Le serveur de mail indiquÃ© dans les prÃ©fÃ©rences n'est pas joignable. "
+#~ "Contactez votre administrateur Galette"
+
+#~ msgid "Database type unknown"
+#~ msgstr "Type de base inconnu"
+
+#~ msgid "Please compose your mail."
+#~ msgstr "RÃ©digez votre courriel."
+
+#~ msgid "Password misrepeated: "
+#~ msgstr "Erreur en recopiant le mot de passe&nbsp;: "
+
+#~ msgid "Members up to date"
+#~ msgstr "Les adhÃ©rents Ã  jour"
+
+#~ msgid "transaction added"
+#~ msgstr "transaction ajoutÃ©e"
+
+#~ msgid "admin"
+#~ msgstr "admin"
+
+#~ msgid "All the accounts"
+#~ msgstr "Tous  les comptes"
+
+#~ msgid "Select installation mode to launch"
+#~ msgstr "SÃ©lectionnez le type d'installation Ã  lancer"
+
+#~ msgid "Back to login page"
+#~ msgstr "Retour Ã  la page d'accueil"
+
+#~ msgid "Welcome to the Galette Install!"
+#~ msgstr "Bienvenue Ã  l'installation de Galette&nbsp;!"
+
+#~ msgid "Start date of membership:"
+#~ msgstr "Date de dÃ©but d'adhÃ©sion&nbsp;:"
+
+#~ msgid "Graphics:"
+#~ msgstr "Graphisme&nbsp;:"
+
+#~ msgid "List of transactions"
+#~ msgstr "Liste des transactions"
+
+#~ msgid "Next year"
+#~ msgstr "AnnÃ©e suivante"
+
+#~ msgid "Activate HTML editor ?"
+#~ msgstr "Activer l'Ã©diteur HTML ?"
+
+#~ msgid "this login doesn't exist"
+#~ msgstr "Cet identifiant n'existe pas"
+
+#~ msgid "Host:"
+#~ msgstr "HÃ´te&nbsp;:"
+
+#~ msgid "Originator"
+#~ msgstr "Emetteur"
+
+#~ msgid "- The password must be of at least 4 characters!"
+#~ msgstr ""
+#~ "- Le mot de passe doit Ãªtre composÃ© d'au moins 4 caractÃ¨res&nbsp;!"
+
+#~ msgid "Please enter a message."
+#~ msgstr "Veuillez saisir un message."
+
+#~ msgid "Galette has been successfully updated!"
+#~ msgstr "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
+
+#~ msgid "ICQ"
+#~ msgstr "ICQ"
+
+#~ msgid "Nickname:"
+#~ msgstr "Pseudo&nbsp;:"
+
+#~ msgid "Date:"
+#~ msgstr "Date&nbsp;:"
+
+#~ msgid "english"
+#~ msgstr "anglais"
+
+#~ msgid "You can prepare a picture to upload after sending"
+#~ msgstr ""
+#~ "Vous pouvez prÃ©parer une photo Ã  tÃ©lÃ©charger aprÃ¨s avoir envoyÃ©"
+
+#~ msgid "(Months)"
+#~ msgstr "(Mois)"
+
+#~ msgid "INSERT operation not allowed"
+#~ msgstr "OpÃ©ration INSERT non autorisÃ©e"
+
+#~ msgid "(Show or not title in front of name)"
+#~ msgstr "(Afficher le titre devant le nom)"
+
+#~ msgid ""
+#~ "Do you really want to delete this field ?\\n All associated data will be "
+#~ "deleted as well."
+#~ msgstr ""
+#~ "Voulez vous vraiment effacer ce champ&nbsp;? \n"
+#~ " Toutes les donnÃ©es associÃ©es seront effacÃ©es."
+
+#~ msgid "partnership"
+#~ msgstr "partenariat"
+
+#~ msgid "- Field name already used."
+#~ msgstr "- Un champ de ce nom existe dÃ©jÃ ."
+
+#~ msgid "Configuration file created (includes/config.inc.php)"
+#~ msgstr "Fichier de configuration crÃ©Ã© (includes/config.inc.php)"
+
+#~ msgid "Retype password:"
+#~ msgstr "Confirmation&nbsp;:"
+
+#~ msgid "Width:"
+#~ msgstr "Largeur&nbsp;:"
+
+#~ msgid "City"
+#~ msgstr "Ville"
+
+#~ msgid "- The passwords don't match!"
+#~ msgstr "- Les mots de passe ne correspondent pas&nbsp;!"
+
+#~ msgid "To secure the system, please delete the install directory"
+#~ msgstr ""
+#~ "Pour sÃ©curiser le systÃ¨me, veuillez supprimer le dossier Â« install Â»"
+
+#~ msgid "Member card added"
+#~ msgstr "Fiche adhÃ©rent ajoutÃ©e"
+
+#~ msgid "DROP operation allowed"
+#~ msgstr "OpÃ©ration DROP autorisÃ©e"
+
+#~ msgid "MSN:"
+#~ msgstr "MSN&nbsp;:"
+
+#~ msgid "Short Text (Card Center):"
+#~ msgstr "AbrÃ©viation (centre de la carte)&nbsp;:"
+
+#~ msgid "Active Member Color:"
+#~ msgstr "Couleur pour les membres actifs&nbsp;:"
+
+#~ msgid "Active accounts"
+#~ msgstr "Comptes actifs"
+
+#~ msgid "Subscribe"
+#~ msgstr "S'inscrire"
+
+#~ msgid "Continue"
+#~ msgstr "Continuer"
+
+#~ msgid "Member's Labels"
+#~ msgstr "Ãtiquettes des membres"
+
+#~ msgid "Mr."
+#~ msgstr "M."
+
+#~ msgid "My transactions"
+#~ msgstr "Mes transactions"
+
+#~ msgid "(Confirmation)"
+#~ msgstr "(Confirmation)"
+
+#~ msgid "Amount"
+#~ msgstr "Montant"
+
+#~ msgid "- The amount must be an integer!"
+#~ msgstr "- Le montant doit Ãªtre un nombre entier&nbsp;!"
+
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgid "Default membership extension:"
+#~ msgstr "DurÃ©e d'adhÃ©sion par dÃ©faut&nbsp;:"
+
+#~ msgid "Member Profile"
+#~ msgstr "Fiche adhÃ©rent"
+
+#~ msgid "The tables are not totally created, it's maybe a permission problem."
+#~ msgstr ""
+#~ "Les tables n'ont pas pu Ãªtre totalement crÃ©Ã©es, il s'agit peut-Ãªtre "
+#~ "d'un problÃ¨me de droits."
+
+#~ msgid "separator"
+#~ msgstr "sÃ©parateur"
+
+#~ msgid "No user name"
+#~ msgstr "Nom d'utilisateur vide"
+
+#~ msgid "Required:"
+#~ msgstr "Obligatoire&nbsp;:"
+
+#~ msgid "Reduced annual contribution"
+#~ msgstr "Cotisation annuelle rÃ©duite"
+
+#~ msgid "Log off"
+#~ msgstr "DÃ©connexion"
+
+#~ msgid ""
+#~ "Enter here a short description for your association, it will be displayed "
+#~ "on the index page and into pages' title."
+#~ msgstr ""
+#~ "Entrez une description pour votre association, elle sera affichÃ©e sur la "
+#~ "page d'accueil ainsi que sur le titre des pages."
+
+#~ msgid "Using a SMTP server (slower)"
+#~ msgstr "Utilisation d'un SMTP (plus lent)"
+
+#~ msgid "Name (corporate name) of the association:"
+#~ msgstr "Nom (raison sociale) de l'association&nbsp;:"
+
+#~ msgid "Mrs."
+#~ msgstr "Mme."
+
+#~ msgid "Table prefix:"
+#~ msgstr "PrÃ©fixe de table&nbsp;:"
+
+#~ msgid ""
+#~ "To run, Galette needs a number of rights on the database (CREATE, DROP, "
+#~ "DELETE, UPDATE, SELECT and INSERT)"
+#~ msgstr ""
+#~ "Pour fonctionner, Galette doit avoir un certain nombre de droits sur la "
+#~ "base de donnÃ©es (CREATE, DROP, DELETE, UPDATE, SELECT et INSERT)"
+
+#~ msgid "[Mail]"
+#~ msgstr "[Courriel]"
+
+#~ msgid "Galette Admin:"
+#~ msgstr "Administrateur Galette&nbsp;:"
+
+#~ msgid "Show:"
+#~ msgstr "Afficher&nbsp;:"
+
+#~ msgid "Lines / Page:"
+#~ msgstr "Lignes / Page&nbsp;:"
+
+#~ msgid "Miss."
+#~ msgstr "Mlle."
+
+#~ msgid "Check above errors to know what went wrong."
+#~ msgstr "Consultez les erreurs ci-dessous pour avoir ce qui n'a pas Ã©tÃ©."
+
+#~ msgid "Labels"
+#~ msgstr "Ãtiquettes"
+
+#~ msgid "Date of contribution:"
+#~ msgstr "Date contribution&nbsp;:"
+
+#~ msgid "Settings"
+#~ msgstr "PrÃ©fÃ©rences"
+
+#~ msgid ""
+#~ "You're installing Galette for the first time, or you wish to erase an "
+#~ "older version of Galette without keeping your data"
+#~ msgstr ""
+#~ "Vous installez Galette pour la premiÃ¨re fois, ou vous souhaitez Ã©craser "
+#~ "une ancienne version de Galette sans conserver vos donnÃ©es"
+
+#~ msgid "contributions"
+#~ msgstr "contributions"
+
+#~ msgid "Permissions to database are OK."
+#~ msgstr "Les droits d'accÃ¨s Ã  la base sont corrects."
+
+#~ msgid "Delete failed"
+#~ msgstr "La suppression a Ã©chouÃ©"
+
+#~ msgid "unreachable member"
+#~ msgstr "membre qui n'a pu Ãªtre joint"
+
+#~ msgid "Login failed."
+#~ msgstr "Ãchec de l'identification."
+
+#~ msgid "Old-timer"
+#~ msgstr "Ancien membre"
+
+#~ msgid "Donation in kind"
+#~ msgstr "Donation en nature"
+
+#~ msgid "Please type an object for the message."
+#~ msgstr "Veuillez indiquer un objet pour le message."
+
+#~ msgid ""
+#~ "**IMPORTANT** There was a probably breaking attempt when sending mail to :"
+#~ msgstr ""
+#~ "**IMPORTANT** Il est possible qu'une tentative d'atteinte au systÃ¨me ai "
+#~ "eu lieu lors de l'envoi Ã &nbsp;:"
+
+#~ msgid "creation"
+#~ msgstr "crÃ©ation"
+
+#~ msgid "Vertical margins:"
+#~ msgstr "Marges verticales&nbsp;:"
+
+#~ msgid "Enter connection data for the existing database."
+#~ msgstr "Veuillez entrer les paramÃ¨tres de connexion Ã  la base existante."
+
+#~ msgid "You are about to send an e-mail to"
+#~ msgstr "Vous Ãªtes sur le point d'envoyer un courriel Ã "
+
+#~ msgid ""
+#~ "The tables have not been totally created, it may be a permission problem."
+#~ msgstr ""
+#~ "Les tables n'ont pas pu Ãªtre totalement crÃ©Ã©es, il s'agit peut-Ãªtre "
+#~ "d'un problÃ¨me de droits."
+
+#~ msgid "french"
+#~ msgstr "franÃ§ais"
+
+#~ msgid "Hexadecimal color notation: #RRGGBB"
+#~ msgstr "Notation de couleur hexadÃ©cimale : #RRVVBB"
+
+#~ msgid "-- select a name --"
+#~ msgstr "-- selectionner un nom --"
+
+#~ msgid "Unable to create configuration file (includes/config.inc.php)"
+#~ msgstr ""
+#~ "Impossible de crÃ©er le fichier de configuration (includes/config.inc.php)"
+
+#~ msgid "Member"
+#~ msgstr "AdhÃ©rent"
+
+#~ msgid "Galette has been successfully installed!"
+#~ msgstr "Galette a Ã©tÃ© installÃ© avec succÃ¨s&nbsp;!"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "- Wrong date format (dd/mm/yyyy)!"
+#~ msgstr "- Mauvais format de date (jj/mm/aaaa)&nbsp;!"
+
+#~ msgid "Generate Member Card"
+#~ msgstr "GÃ©nÃ©rer la carte de membre"
+
+#~ msgid "Action"
+#~ msgstr "Action"
+
+#~ msgid "Translate labels"
+#~ msgstr "Traduction de libellÃ©s"
+
+#~ msgid "Pseudo"
+#~ msgstr "Pseudo"
+
+#~ msgid "General"
+#~ msgstr "GÃ©nÃ©ral"
+
+#~ msgid "Label height:"
+#~ msgstr "Hauteur Ã©tiquette&nbsp;:"
+
+#~ msgid "There was a database error when inserting data"
+#~ msgstr "La base de donnÃ©es a retournÃ© une erreur lors de l'insertion"
+
+#~ msgid "Inactive account"
+#~ msgstr "Compte dÃ©sactivÃ©"
+
+#~ msgid "Access permissions to database"
+#~ msgstr "Droits d'accÃ¨s Ã  la base"
+
+#~ msgid "Utilities"
+#~ msgstr "Utilitaires"
+
+#~ msgid "Association's short description:"
+#~ msgstr "Description de l'association&nbsp;:"
+
+#~ msgid "Logs"
+#~ msgstr "Historique"
+
+#~ msgid "Required fields"
+#~ msgstr "Champs obligatoires"
+
+#~ msgid "Miss"
+#~ msgstr "Mademoiselle"
+
+#~ msgid ""
+#~ "GALETTE hasn't got enough permissions on the database to continue the "
+#~ "update."
+#~ msgstr ""
+#~ "Galette ne dispose pas de droits suffisants sur la base de donnÃ©es pour "
+#~ "poursuivre la mise Ã  jour."
+
+#~ msgid "(65 characters max)"
+#~ msgstr "(65 caractÃ¨res max)"
+
+#~ msgid "Membership will expire soon (&lt;30d)"
+#~ msgstr "AdhÃ©sion Ã  Ã©chÃ©ance (&lt;30j)"
+
+#~ msgid "Title:"
+#~ msgstr "Titre&nbsp;:"
+
+#~ msgid "Connection to database successfull"
+#~ msgstr "La connexion Ã  la base est Ã©tablie"
+
+#~ msgid "Previous year"
+#~ msgstr "AnnÃ©e prÃ©cÃ©dente"
+
+#~ msgid "logs are empty"
+#~ msgstr "historique vide"
+
+#~ msgid "Username:"
+#~ msgstr "Identifiant&nbsp;:"
+
+#~ msgid "Reference:"
+#~ msgstr "RÃ©fÃ©rence&nbsp;:"
+
+#~ msgid "E-Mail"
+#~ msgstr "Courriel"
+
+#~ msgid "Contributor:"
+#~ msgstr "Contributeur&nbsp;:"
+
+#~ msgid "End"
+#~ msgstr "Fin"
+
+#~ msgid "Interpret HTML"
+#~ msgstr "InterprÃ©ter les balises HTML"
+
+#~ msgid "transaction updated"
+#~ msgstr "transaction mise Ã  jour"
+
+#~ msgid "Retry"
+#~ msgstr "RÃ©essayer"
+
+#~ msgid "Database:"
+#~ msgstr "Nom de la base&nbsp;:"
+
+#~ msgid "Transactions"
+#~ msgstr "Transactions"
+
+#~ msgid ""
+#~ "Under Windows, check these files are not in Read-Only mode in their "
+#~ "property panel."
+#~ msgstr ""
+#~ "Sous Windows, vÃ©rifiez que les fichiers en question ne sont pas en "
+#~ "lecture seule dans leurs propriÃ©tÃ©s."
+
+#~ msgid "Galette installation"
+#~ msgstr "Installation de Galette"
+
+#~ msgid "Honor Members Color:"
+#~ msgstr "Couleur pour les membres d'honneur&nbsp;:"
+
+#~ msgid "Steps:"
+#~ msgstr "Ãtapes&nbsp;:"
+
+#~ msgid "Username"
+#~ msgstr "Identifiant"
+
+#~ msgid "Next Page"
+#~ msgstr "Page suivante"
+
+#~ msgid "Last day!"
+#~ msgstr "Dernier jour&nbsp;!"
+
+#~ msgid "(for a file)"
+#~ msgstr "(pour un fichier)"
+
+#~ msgid ""
+#~ "- Default membership extention and beginning of membership are mutually "
+#~ "exclusive."
+#~ msgstr ""
+#~ "- Vous devez indiquer soit une durÃ©e d'adhÃ©sion par dÃ©faut, soit une "
+#~ "date de dÃ©but d'exercice (pas les deux)."
+
+#~ msgid "Disabled"
+#~ msgstr "DÃ©sactivÃ©"
+
+#~ msgid "You must first register a member"
+#~ msgstr "Vous devez d'abord enregistrer un adhÃ©rent"
+
+#~ msgid "reduced annual fee"
+#~ msgstr "cotisation annuelle rÃ©duite"
+
+#~ msgid "Galette Installation"
+#~ msgstr "Installation de Galette"
+
+#~ msgid "Preview"
+#~ msgstr "PrÃ©visualisation"
+
+#~ msgid "The tables has been correctly created."
+#~ msgstr "Les tables ont Ã©tÃ© correctement crÃ©Ã©es."
+
+#~ msgid "Subscription"
+#~ msgstr "Inscription"
+
+#~ msgid "modification"
+#~ msgstr "modification"
+
+#~ msgid "Label width:"
+#~ msgstr "Largeur Ã©tiquette&nbsp;:"
+
+#~ msgid "Repeat:"
+#~ msgstr "RÃ©pÃ©tition&nbsp;:"
+
+#~ msgid "ending on"
+#~ msgstr "fin le"
+
+#~ msgid "ALTER Operation not allowed"
+#~ msgstr "OpÃ©ration ALTER non autorisÃ©e"
+
+#~ msgid "Infos"
+#~ msgstr "Informations"
+
+#~ msgid "(Indicate the CURRENT prefix of your Galette tables)"
+#~ msgstr "(Indiquez le prÃ©fixe ACTUEL de vos tables Galette)"
+
+#~ msgid "Next month"
+#~ msgstr "Mois suivant"
+
+#~ msgid "Password changed, you will be redirected to login page"
+#~ msgstr ""
+#~ "Le mot de passe a Ã©tÃ© changÃ©. Vous allez Ãªtre redirigÃ© vers la page "
+#~ "d'accueil"
+
+#~ msgid "Man"
+#~ msgstr "Homme"
+
+#~ msgid "- You must indicate a sender name for emails!"
+#~ msgstr ""
+#~ "- Vous devez indiquer un nom d'expÃ©diteur pour les courriels&nbsp;!"
+
+#~ msgid "- The name field cannot be void."
+#~ msgstr "- Le champ nom ne peut pas Ãªtre vide."
+
+#~ msgid "Login"
+#~ msgstr "Identification"
+
+#~ msgid "Latecomers"
+#~ msgstr "Les retardataires"
+
+#~ msgid "My information"
+#~ msgstr "Mes informations"
+
+#~ msgid "Access to the database"
+#~ msgstr "AccÃ¨s Ã  la base"
+
+#~ msgid "(Integer)"
+#~ msgstr "(Entier)"
+
+#~ msgid "Inactive accounts"
+#~ msgstr "Comptes dÃ©sactivÃ©s"
+
+#~ msgid "empty login"
+#~ msgstr "login vide"
+
+#~ msgid "Unable to connect to the database"
+#~ msgstr "Connexion Ã  la base impossible"
+
+#~ msgid "Mobile phone:"
+#~ msgstr "GSM&nbsp;:"
+
+#~ msgid "E-mail"
+#~ msgstr "Courriel"
+
+#~ msgid "Publisher:"
+#~ msgstr "Ãditeur&nbsp;:"
+
+#~ msgid "List of members"
+#~ msgstr "Liste des adhÃ©rents"
+
+#~ msgid "right"
+#~ msgstr "droite"
+
+#~ msgid "There is  no password for user :"
+#~ msgstr "Il n'y a pas de mot de passe pour l'utilisateur&nbsp;:"
+
+#~ msgid "Mrs"
+#~ msgstr "Madame"
+
+#~ msgid ""
+#~ "In order to be updated, Galette needs the Write permission on these files."
+#~ msgstr ""
+#~ "Pour Ãªtre mis Ã  jour et fonctionner correctement, Galette a besoin "
+#~ "d'avoir les droits en Ã©criture sur ces fichiers."
+
+#~ msgid "Contribution added"
+#~ msgstr "Contribution ajoutÃ©e"
+
+#~ msgid "Update of the tables"
+#~ msgstr "Mise Ã  jour des tables"
+
+#~ msgid ""
+#~ "For a correct functioning, Galette needs the Write permission on these "
+#~ "files."
+#~ msgstr ""
+#~ "Pour fonctionner correctement, Galette a besoin d'avoir les droits en "
+#~ "Ã©criture sur ces fichiers."
+
+#~ msgid "unreachable members:"
+#~ msgstr "membres qui n'ont pu Ãªtre joints&nbsp;:"
+
+#~ msgid "Jabber:"
+#~ msgstr "Jabber&nbsp;:"
+
+#~ msgid "Legend"
+#~ msgstr "LÃ©gende"
+
+#~ msgid "Logging level:"
+#~ msgstr "Niveau d'historique&nbsp;:"
+
+#~ msgid "Send me my password"
+#~ msgstr "Envoyez-moi mon mot de passe"
+
+#~ msgid ""
+#~ "The mail server filled in the preferences cannot be reached. Ask Galette "
+#~ "admin."
+#~ msgstr ""
+#~ "Le serveur de mail indiquÃ© dans les prÃ©fÃ©rences ne peut pas Ãªtre "
+#~ "contactÃ©. Contactez votre administrateur Galette."
+
+#~ msgid "E-Mail:"
+#~ msgstr "Courriel&nbsp;:"
+
+#~ msgid "Society"
+#~ msgstr "Personne morale"
+
+#~ msgid "Late of"
+#~ msgstr "En retard de"
+
+#~ msgid "A problem happened while sending mail to :"
+#~ msgstr ""
+#~ "Un problÃ¨me est survenu dans l'envoi du courriel pour le compte&nbsp;:"
+
+#~ msgid "Your account has been successfully created."
+#~ msgstr "Votre compte a Ã©tÃ© crÃ©Ã© avec succÃ¨s."
+
+#~ msgid "Show title ?"
+#~ msgstr "Afficher le titre&nbsp;?"
+
+#~ msgid "Address"
+#~ msgstr "Adresse"
+
+#~ msgid "no contribution"
+#~ msgstr "aucune contribution"
+
+#~ msgid "The username cannot contain the @ character"
+#~ msgstr "L'identifiant ne peut pas contenir le caractÃ¨re @&nbsp;!"
+
+#~ msgid "- Invalid format of beginning of membership."
+#~ msgstr "- Mauvais format de date de dÃ©but d'exercice invalide"
+
+#~ msgid "Logo"
+#~ msgstr "Logo"
+
+#~ msgid "free text"
+#~ msgstr "texte libre"
+
+#~ msgid "- WARNING -"
+#~ msgstr "- AVERTISSEMENT -"
+
+#~ msgid "annual fee (to be paid)"
+#~ msgstr "cotisation annuelle (dÃ»e)"
+
+#~ msgid "file_name"
+#~ msgstr "nom_fichier"
+
+#~ msgid "Files permissions"
+#~ msgstr "Permissions de fichiers"
+
+#~ msgid "Originator:"
+#~ msgstr "Ãmetteur&nbsp;:"
+
+#~ msgid ""
+#~ "The needed permissions are CREATE, DROP, DELETE, UPDATE, SELECT and "
+#~ "INSERT."
+#~ msgstr ""
+#~ "Les droits nÃ©cessaires sont CREATE, DROP, DELETE, UPDATE, SELECT et "
+#~ "INSERT."
+
+#~ msgid "Send"
+#~ msgstr "Envoyer"
+
+#~ msgid "Files permissions are OK!"
+#~ msgstr "Les permissions des fichiers sont correctes&nbsp;!"
+
+#~ msgid "SMTP server:"
+#~ msgstr "Serveur SMTP&nbsp;:"
+
+#~ msgid "Search:"
+#~ msgstr "Rechercher&nbsp;:"
+
+#~ msgid "Height:"
+#~ msgstr "Hauteur&nbsp;:"
+
+#~ msgid "Send a mail"
+#~ msgstr "Envoyer un courriel"
+
+#~ msgid "MSN"
+#~ msgstr "MSN"
+
+#~ msgid "Identity:"
+#~ msgstr "IdentitÃ©&nbsp;:"
+
+#~ msgid "Contribution updated"
+#~ msgstr "Contribution mise Ã  jour"
+
+#~ msgid "Please repeat in the field the password shown in the image."
+#~ msgstr "Recopiez dans le cadre le mot de passe prÃ©sentÃ© dans l'image."
+
+#~ msgid "All members"
+#~ msgstr "Tous les adhÃ©rents"
+
+#~ msgid "donation in money"
+#~ msgstr "donation pÃ©cuniÃ¨re"
+
+#~ msgid "- Select a valid member name!"
+#~ msgstr "- SÃ©lectionnez un nom d'adhÃ©rent valide&nbsp;!"
+
+#~ msgid "Tables Creation/Update"
+#~ msgstr "CrÃ©ation/Mise Ã  jour des tables"
+
+#~ msgid "Default language:"
+#~ msgstr "Langue par dÃ©faut&nbsp;:"
+
+#~ msgid "- Non-valid Website address! Maybe you've skipped the http:// ?"
+#~ msgstr ""
+#~ "- Adresse web non valide&nbsp;! Peut Ãªtre avez vous oubliÃ© le http://"
+#~ "&nbsp;?"
+
+#~ msgid "Non-member"
+#~ msgstr "Non membre"
+
+#~ msgid "Active member"
+#~ msgstr "Membre actif"
+
+#~ msgid "lines"
+#~ msgstr "lignes"
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "First name:"
+#~ msgstr "PrÃ©nom&nbsp;:"
+
+#~ msgid "-  Sum of all contributions exceed corresponding transaction amount."
+#~ msgstr ""
+#~ "-  La somme de toutes les contributions dÃ©passe le montant de la "
+#~ "transaction."
+
+#~ msgid "No member was selected, please check at least one name."
+#~ msgstr "Veuillez sÃ©lectionner au moins un adhÃ©rent."
+
+#~ msgid "Gift"
+#~ msgstr "Don"
+
+#~ msgid "Freed of dues:"
+#~ msgstr "Exempt de cotisation&nbsp;:"
+
+#~ msgid "Detailed"
+#~ msgstr "DÃ©taillÃ©"
+
+#~ msgid "Close expiries"
+#~ msgstr "Les Ã©chÃ©ances proches"
+
+#~ msgid "Position"
+#~ msgstr "Position"
+
+#~ msgid "Country:"
+#~ msgstr "Pays&nbsp;:"
+
+#~ msgid "- The duration must be an integer!"
+#~ msgstr "- La durÃ©e doit Ãªtre un entier&nbsp;!"
+
+#~ msgid "remaining days"
+#~ msgstr "jours restants"
+
+#~ msgid "- This username is already used by another member !"
+#~ msgstr "- Cet identifiant est dÃ©jÃ  utilisÃ© par un autre adhÃ©rent&nbsp;!"
+
+#~ msgid "Mailing"
+#~ msgstr "Mailing"
+
+#~ msgid "Members administrator's Email:"
+#~ msgstr "Courriel de l'administrateur des membres&nbsp;:"
+
+#~ msgid "Cards generation parameters:"
+#~ msgstr "ParamÃ¨tres de gÃ©nÃ©ration des cartes&nbsp;:"
+
+#~ msgid "Update complete !"
+#~ msgstr "Fin de la mise Ã  jour"
+
+#~ msgid "PHP mail() function"
+#~ msgstr "Fonction PHP mail()"
+
+#~ msgid "Generate Member Cards"
+#~ msgstr "GÃ©nÃ©rer les Cartes de Membres"
+
+#~ msgid "Check of the database"
+#~ msgstr "VÃ©rification de la base"
+
+#~ msgid "If it hadn't been made, create a database and a user for Galette."
+#~ msgstr ""
+#~ "Si ce n'est pas dÃ©jÃ  fait, crÃ©ez une base de donnÃ©es et un "
+#~ "utilisateur pour Galette."
+
+#~ msgid "Edit '%s' field"
+#~ msgstr "Modifier le champ Â« %s Â»"
+
+#~ msgid "Add a member"
+#~ msgstr "Ajouter un adhÃ©rent"
+
+#~ msgid "Modify"
+#~ msgstr "Modifier"
+
+#~ msgid "Message preview:"
+#~ msgstr "PrÃ©visualisation du message&nbsp;:"
+
+#~ msgid "Navigation"
+#~ msgstr "Navigation"
+
+#~ msgid "Lateness in fee"
+#~ msgstr "Retard de cotisation"
+
+#~ msgid "Configure member forms"
+#~ msgstr "Configurer les fiches"
+
+#~ msgid "since"
+#~ msgstr "depuis le"
+
+#~ msgid "A problem happened while sending email to admin for account:"
+#~ msgstr ""
+#~ "Un problÃ¨me est survenu dans l'envoi du mot de passe Ã  l'administrateur "
+#~ "pour le compte&nbsp;:"
+
+#~ msgid "Zip Code"
+#~ msgstr "Code Postal"
+
+#~ msgid "Check the parameters and the existence of the database"
+#~ msgstr "VÃ©rification des paramÃ¨tres et de l'existence de la base"
+
+#~ msgid "[$]"
+#~ msgstr "[$]"
+
+#~ msgid "birth date:"
+#~ msgstr "Date de naissance&nbsp;:"
+
+#~ msgid "Choose label to translate"
+#~ msgstr "Choisissez le libellÃ© Ã  traduire"
+
+#~ msgid "fingerprint:"
+#~ msgstr "fingerprint&nbsp;:"
+
+#~ msgid "Picture:"
+#~ msgstr "Image&nbsp;:"
+
+#~ msgid "Email contents"
+#~ msgstr "Contenu du courriel"
+
+#~ msgid "(Max 32 characters)"
+#~ msgstr "(maximum 32 caractÃ¨res)"
+
+#~ msgid "Strip Text Color:"
+#~ msgstr "Couleur du texte sur le bandeau&nbsp;:"
+
+#~ msgid "Description:"
+#~ msgstr "Description&nbsp;:"
+
+#~ msgid "Should HTML editor be activated on page load ?"
+#~ msgstr "L'Ã©diteur HTML doit-il Ãªtre activÃ© au chargement de la page ?"
+
+#~ msgid "End!"
+#~ msgstr "Fin&nbsp;!"
+
+#~ msgid "Generate labels"
+#~ msgstr "GÃ©nÃ©rer les Ã©tiquettes"
+
+#~ msgid "Other informations (admin):"
+#~ msgstr "Autres informations (admin)&nbsp;:"
+
+#~ msgid "company fee"
+#~ msgstr "cotisation entreprise"
+
+#~ msgid "(Errors on DROP and RENAME operations can be ignored)"
+#~ msgstr ""
+#~ "(Les erreurs sur les opÃ©rations DROP et RENAME peuvent Ãªtre ignorÃ©es)"
+
+#~ msgid "Account:"
+#~ msgstr "Compte&nbsp;:"
+
+#~ msgid "Members"
+#~ msgstr "AdhÃ©rents"
+
+#~ msgid "Long Text (Bottom Line):"
+#~ msgstr "Texte du bandeau&nbsp;:"
+
+#~ msgid "Visibility:"
+#~ msgstr "VisibilitÃ©&nbsp;:"
+
+#~ msgid "First name"
+#~ msgstr "PrÃ©nom"
+
+#~ msgid "(Strip color will change according to member's status)"
+#~ msgstr "(Couleur du bandeau dÃ©pendant du statut des membres)"
+
+#~ msgid "(at least 4 characters)"
+#~ msgstr "(au moins 4 caractÃ¨res)"
+
+#~ msgid "CREATE operation allowed"
+#~ msgstr "OpÃ©ration CREATE autorisÃ©e"
+
+#~ msgid "Email sent is disabled in the preferences. Ask galette admin"
+#~ msgstr ""
+#~ "L'envoi de courriel est dÃ©sactivÃ© dans les prÃ©fÃ©rences. Contactez "
+#~ "votre administrateur Galette."
+
+#~ msgid "City:"
+#~ msgstr "Ville&nbsp;:"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Founder member"
+#~ msgstr "Membre fondateur"
+
+#~ msgid "Admin"
+#~ msgstr "Administrateur"
+
+#~ msgid "Membership in order"
+#~ msgstr "AdhÃ©sion en rÃ¨gle"
+
+#~ msgid " days ago (since "
+#~ msgstr " jours (depuis "
+
+#~ msgid "This comment is reserved to the member."
+#~ msgstr "Ce commentaire est rÃ©servÃ© Ã  l'adhÃ©rent."
+
+#~ msgid "Update"
+#~ msgstr "Mise Ã  jour"
+
+#~ msgid "[ See member profile ]"
+#~ msgstr "[ Voir la fiche adhÃ©rent ]"
+
+#~ msgid "The tables has been correctly updated."
+#~ msgstr "Les tables ont Ã©tÃ© correctement mises Ã  jour."
+
+#~ msgid "Member card updated:"
+#~ msgstr "Fiche adhÃ©rent mise Ã  jour&nbsp;:"
+
+#~ msgid "Parameters"
+#~ msgstr "ParamÃ¨tres"
+
+#~ msgid "Member form"
+#~ msgstr "Formulaire d'adhÃ©sion"
+
+#~ msgid "- Invalid number of months of membership extension."
+#~ msgstr "- DurÃ©e d'extension d'adhÃ©sion invalide"
+
+#~ msgid "Warning: Don't forget to backup your current database."
+#~ msgstr "Attention&nbsp;: pensez Ã  sauvegarder votre base existante."
+
+#~ msgid "Default contributions types cannot be initialized."
+#~ msgstr "Les types de contribution par dÃ©faut n'ont pas Ã©tÃ© initialisÃ©s."
+
+#~ msgid "(dd/mm)"
+#~ msgstr "(jj/mm)"
+
+#~ msgid "- The username cannot contain the @ character"
+#~ msgstr "- L'identifiant ne peut pas contenir le caractÃ¨re @&nbsp;!"
+
+#~ msgid "Creation of the tables"
+#~ msgstr "CrÃ©ation des tables"
+
+#~ msgid "- Mandatory field empty."
+#~ msgstr "- Champ obligatoire non renseignÃ©."
+
+#~ msgid "No host"
+#~ msgstr "Aucun hÃ´te"
+
+#~ msgid "Please chose the parameters of the admin account on Galette"
+#~ msgstr "Veuillez choisir les paramÃ¨tres du compte administrateur Galette"
+
+#~ msgid "A problem happened while sending contribution receipt to user:"
+#~ msgstr ""
+#~ "Un problÃ¨me est survenu lors de l'envoi du reÃ§u pour la contribution de "
+#~ "l'adhÃ©rent&nbsp;:"
+
+#~ msgid "Benefactor member"
+#~ msgstr "Membre bienfaiteur"
+
+#~ msgid "Reply-To Email:"
+#~ msgstr "Courriel de rÃ©ponse&nbsp;:"
+
+#~ msgid "spanish"
+#~ msgstr "espagnol"
+
+#~ msgid ""
+#~ "Your browser should redirect you to the login page in a few seconds, if "
+#~ "not, please go to: "
+#~ msgstr ""
+#~ "Votre navigateur devrait vous rediriger vers la page de connexion dans "
+#~ "quelques instants. Si tel n'est pas le cas, rendez-vous sur&nbsp;:"
+
+#~ msgid "Database exists and connection parameters are OK."
+#~ msgstr "La base existe et les paramÃ¨tres de connexion sont corrects."
+
+#~ msgid "Database"
+#~ msgstr "Base de donnÃ©es"
+
+#~ msgid "Admin parameters"
+#~ msgstr "ParamÃ¨tres administrateur"
+
+#~ msgid "Politeness"
+#~ msgstr "CivilitÃ©"
+
+#~ msgid "Logo:"
+#~ msgstr "Logo&nbsp;:"
+
+#~ msgid "Installation mode unknown"
+#~ msgstr "Type d'installation inconnu"
+
+#~ msgid ""
+#~ "(the member will receive a confirmation by email, if he has an address.)"
+#~ msgstr ""
+#~ "(l'adhÃ©rent recevra confirmation par courriel, s'il a une adresse.)"
+
+#~ msgid "left"
+#~ msgstr "gauche"
+
+#~ msgid "Confirmation:"
+#~ msgstr "Confirmation :"
+
+#~ msgid "Saving the parameters"
+#~ msgstr "Sauvegarde des paramÃ¨tres"
+
+#~ msgid "Parameters couldn't be saved."
+#~ msgstr "Les paramÃ¨tres n'ont pas pu Ãªtre sauvegardÃ©s."
+
+#~ msgid "Modification"
+#~ msgstr "Modification"
+
+#~ msgid "Go back"
+#~ msgstr "Retour"
+
+#~ msgid "transaction"
+#~ msgstr "transaction"
+
+#~ msgid "All"
+#~ msgstr "Tout"
+
+#~ msgid "Zip - Town"
+#~ msgstr "Code postal - Ville"
+
+#~ msgid "remaining day"
+#~ msgstr "jour restant"
+
+#~ msgid "Default preferences cannot be initialized."
+#~ msgstr "Les prÃ©fÃ©rences par dÃ©faut n'ont pas Ã©tÃ© initialisÃ©es."
+
+#~ msgid "DELETE operation allowed"
+#~ msgstr "OpÃ©ration DELETE autorisÃ©e"
+
+#~ msgid "member"
+#~ msgstr "adhÃ©rent"
+
+#~ msgid "Profession:"
+#~ msgstr "Profession&nbsp;:"
+
+#~ msgid "Generated by Galette"
+#~ msgstr "GÃ©nÃ©rer par Galette"
+
+#~ msgid "single line"
+#~ msgstr "ligne simple"
+
+#~ msgid "Save the parameters"
+#~ msgstr "Sauvegarde des paramÃ¨tres"
+
+#~ msgid "Picture"
+#~ msgstr "Image"
+
+#~ msgid "User"
+#~ msgstr "Utilisateur"
+
+#~ msgid "Change my password"
+#~ msgstr "Modifier mon mot de passe"
+
+#~ msgid "Active account"
+#~ msgstr "Compte actif"
+
+#~ msgid ""
+#~ "This link is no longer valid. You should <a href='lostpasswd.php'>ask to "
+#~ "retrieve your password</a> again."
+#~ msgstr ""
+#~ "Ce lien n'est plus valide. Vous devriez <a href='lostpasswd.php'>demander "
+#~ "la rÃ©cupÃ©ration de votre mot de passe</a> Ã  nouveau"
+
+#~ msgid "no transaction"
+#~ msgstr "aucune transaction"
+
+#~ msgid "DROP operation not allowed"
+#~ msgstr "OpÃ©ration DROP non autorisÃ©e"
+
+#~ msgid "Visibility"
+#~ msgstr "VisibilitÃ©"
+
+#~ msgid ""
+#~ "In order to be updated, Galette needs a number of rights on the database "
+#~ "(CREATE, DROP, DELETE, UPDATE, SELECT and INSERT)"
+#~ msgstr ""
+#~ "Pour Ãªtre mis Ã  jour, Galette doit avoir un certain nombre de droits "
+#~ "sur la base de donnÃ©es (CREATE, DROP, DELETE, UPDATE, SELECT, INSERT et "
+#~ "ALTER)"
+
+#~ msgid "Additionnal fields:"
+#~ msgstr "Champs supplÃ©mentaires&nbsp;:"
+
+#~ msgid "Send up '%s' field"
+#~ msgstr "Faire monter le champ Â« %s Â»"
+
+#~ msgid "Default contributions types were successfully stored."
+#~ msgstr ""
+#~ "Les types de contribution par dÃ©faut ont Ã©tÃ© sauvegardÃ©s avec succÃ¨s."
+
+#~ msgid "Donation"
+#~ msgstr "Simple don"
+
+#~ msgid "[ Add a contribution ]"
+#~ msgstr "[ Ajouter une contribution ]"

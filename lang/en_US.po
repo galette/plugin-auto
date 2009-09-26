@@ -1,0 +1,617 @@
+# translation of en_US.po to
+# Copyright (C) 2006, 2007, 2008 Free Software Foundation, Inc.
+#
+# Johan Cwiklinski <johan@x-tnd.be>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: en_US\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-15 09:00+0100\n"
+"PO-Revision-Date: 2009-03-19 08:22+0100\n"
+"Last-Translator: \n"
+"Language-Team: French <kde-i18n-doc@lists.kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../object.php:99 ../models.php:99
+msgid "Brand '%s'"
+msgstr "Brand '%s'"
+
+#: ../templates/default/vehicles.tpl:65
+#, fuzzy
+msgid "Color:"
+msgstr "Color"
+
+#: ../templates/default/vehicles.tpl:35
+msgid "First circulation date:"
+msgstr ""
+
+#: ../object.php:53 ../models.php:53
+msgid "Change color '%s'"
+msgstr ""
+"Modifier la couleur "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« %s "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»"
+
+#: ../object.php:103 ../models.php:103
+msgid "Do you really want to delete the brand '%s'?"
+msgstr "Do you really want to delete the brand '%s'?"
+
+#: ../object.php:89 ../models.php:89
+msgid "New transmission"
+msgstr "New transmission"
+
+#: ../templates/default/vehicles.tpl:14
+#, fuzzy
+msgid "Model:"
+msgstr "Model"
+
+#: ../object.php:71 ../models.php:71
+msgid "New finition"
+msgstr "New finition"
+
+#: ../templates/default/menu.tpl:5
+#, fuzzy
+msgid "Colors list"
+msgstr "Models list"
+
+#: ../templates/default/object_list.tpl:56
+#: ../templates/default/models_list.tpl:55
+#: ../templates/default/vehicles_list.tpl:55
+msgid "Other:"
+msgstr "Other:"
+
+#: ../object.php:71 ../models.php:71
+msgid "Change finition '%s'"
+msgstr "Change finition '%s'"
+
+#: ../templates/default/vehicles.tpl:31
+msgid "First registration date:"
+msgstr ""
+
+#: ../object.php:84 ../models.php:84
+msgid "Do you really want to delete the body '%s'?"
+msgstr "Do you really want to delete the body '%s'?"
+
+#: ../templates/default/object_list.tpl:47
+#: ../templates/default/models_list.tpl:46
+#: ../templates/default/vehicles_list.tpl:46
+msgid "no record found"
+msgstr "no record found"
+
+#: ../templates/default/vehicles.tpl:67
+#, fuzzy
+msgid "Choose a color"
+msgstr "New color"
+
+#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:209
+msgid "Owners"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:6
+msgid "Car's base informations"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:53
+#, fuzzy
+msgid "Do you really want to delete selected vehicles?"
+msgstr "Do you really want to delete selected models?"
+
+#: ../templates/default/vehicles.tpl:118
+msgid "Chassis number:"
+msgstr ""
+
+#: ../object.php:62 ../models.php:62
+msgid "New state"
+msgstr "New state"
+
+#: ../templates/default/vehicles.tpl:60
+msgid "Show full car state history"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:56
+#, fuzzy
+msgid "Add new vehicle"
+msgstr "Add new color"
+
+#: ../templates/default/object_list.tpl:13
+#: ../templates/default/models_list.tpl:10
+#: ../templates/default/vehicles_list.tpl:10
+msgid "Actions"
+msgstr "Actions"
+
+#: ../templates/default/vehicles.tpl:61
+#, fuzzy
+msgid "Change car's owner"
+msgstr ""
+"Modifier la couleur "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« %s "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»"
+
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:42
+#: ../templates/default/vehicles_list.tpl:42
+msgid "[del]"
+msgstr "[del]"
+
+#: ../templates/default/object_list.tpl:5
+#: ../templates/default/object_list.tpl:12
+msgid "$name"
+msgstr ""
+
+#: ../templates/default/owners.tpl:9 ../templates/default/owners.tpl:11
+msgid "Name"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:76
+#, fuzzy
+msgid "Choose a state"
+msgstr "New state"
+
+#: ../object.php:80 ../models.php:80
+msgid "New body"
+msgstr "New body"
+
+#: ../templates/default/object_show.tpl:17
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "The brand '%s' does not have any registered model at this time."
+
+#: ../templates/default/object_show.tpl:17
+msgid "Do you want to create a new one?"
+msgstr "Do you want to create a new one?"
+
+#: ../templates/default/vehicles.tpl:17
+#, fuzzy
+msgid "Choose a brand"
+msgstr "New brand"
+
+#: ../object.php:131 ../models.php:144 ../vehicles_edit.php:76
+#: ../vehicles_list.php:80
+msgid "- You must provide a value!"
+msgstr "- You must provide a value!"
+
+#: ../object.php:102 ../models.php:102
+msgid "Do you really want to delete selected brands?"
+msgstr "Do you really want to delete selected brands?"
+
+#: ../templates/default/object_list.tpl:42
+#: ../templates/default/models_list.tpl:41
+#: ../templates/default/vehicles_list.tpl:41
+msgid "[mod]"
+msgstr "[mod]"
+
+#: ../object.php:62 ../models.php:62
+msgid "Change state '%s'"
+msgstr "Change state '%s'"
+
+#: ../classes/auto.class.php:104
+msgid "Petrol"
+msgstr ""
+
+#: ../object.php:98 ../models.php:98
+msgid "New brand"
+msgstr "New brand"
+
+#: ../templates/default/model.tpl:17 ../templates/default/models_list.tpl:8
+#: ../templates/default/vehicles_list.tpl:8
+msgid "Model"
+msgstr "Model"
+
+#: ../object.php:136 ../models.php:149 ../vehicles_edit.php:81
+#: ../vehicles_list.php:85
+msgid "- An error occured while saving record. Please try again."
+msgstr "- An error occured while saving record. Please try again."
+
+#: ../templates/default/vehicles.tpl:60
+msgid "Car state history"
+msgstr ""
+
+#: ../templates/default/owners.tpl:68
+msgid "[admin]"
+msgstr ""
+
+#: ../object.php:100 ../models.php:100 ../templates/default/model.tpl:22
+#: ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:14
+#: ../templates/default/vehicles_list.tpl:9
+msgid "Brand"
+msgstr "Brand"
+
+#: ../object.php:74 ../models.php:74
+msgid "Do you really want to delete selected finitions?"
+msgstr "Do you really want to delete selected finitions?"
+
+#: ../classes/auto.class.php:107
+msgid "Electricity"
+msgstr ""
+
+#: ../templates/default/menu.tpl:16
+msgid "My Cars"
+msgstr "My Cars"
+
+#: ../templates/default/model.tpl:24
+msgid "Select one brand"
+msgstr "Select one brand"
+
+#: ../object.php:64 ../models.php:64
+msgid "Add new state"
+msgstr "Add new state"
+
+#: ../object.php:80 ../models.php:80
+msgid "Change body '%s'"
+msgstr "Change body '%s'"
+
+#: ../templates/default/vehicles.tpl:91
+#, fuzzy
+msgid "Body:"
+msgstr "Body"
+
+#: ../templates/default/models_list.tpl:53
+msgid "Do you really want to delete selected models?"
+msgstr "Do you really want to delete selected models?"
+
+#: ../templates/default/vehicles.tpl:109
+#, fuzzy
+msgid "Finition:"
+msgstr "Finition"
+
+#: ../templates/default/model.tpl:30
+msgid ""
+"No brand is registered yet. You have to %create at least one brand% to "
+"register models."
+msgstr ""
+"No brand is registered yet. You have to %create at least one brand% to "
+"register models."
+
+#: ../templates/default/vehicles.tpl:89
+msgid "Car's technical informations"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:74
+#, fuzzy
+msgid "State:"
+msgstr "State"
+
+#: ../object.php:90 ../models.php:90
+msgid "Transmission"
+msgstr "Transmission"
+
+#: ../vehicles_edit.php:52 ../vehicles_list.php:56
+#, fuzzy
+msgid "New vehicle"
+msgstr "Add new color"
+
+#: ../classes/auto.class.php:108
+msgid "Bio"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:61
+#, fuzzy
+msgid "Change"
+msgstr "Cancel"
+
+#: ../templates/default/object.tpl:9 ../templates/default/model.tpl:6
+msgid "- ERROR -"
+msgstr "- ERROR -"
+
+#: ../object.php:53 ../models.php:53
+msgid "New color"
+msgstr "New color"
+
+#: ../object.php:83 ../models.php:83
+msgid "Do you really want to delete selected bodies?"
+msgstr "Do you really want to delete selected bodies?"
+
+#: ../templates/default/vehicles.tpl:93
+msgid "Choose a body"
+msgstr ""
+
+#: ../templates/default/object.tpl:27 ../templates/default/model.tpl:37
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../templates/default/menu.tpl:7
+#, fuzzy
+msgid "Finitions list"
+msgstr "Finitions"
+
+#: ../templates/default/vehicles.tpl:227
+msgid "Click to choose this owner for current car"
+msgstr ""
+
+#: ../templates/default/object.tpl:26 ../templates/default/model.tpl:36
+#: ../templates/default/vehicles.tpl:141
+msgid "Save"
+msgstr "Save"
+
+#: ../object.php:57 ../models.php:57 ../models.php:119
+msgid "Do you really want to delete the color '%s'?"
+msgstr "Do you really want to delete the color '%s'?"
+
+#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+msgid "red"
+msgstr "red"
+
+#: ../templates/default/object_show.tpl:15
+#, fuzzy
+msgid "Create a new model for brand '%s'"
+msgstr "Registered models for the brand '%s':"
+
+#: ../templates/default/vehicles.tpl:132
+msgid "Choose a fuel"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:53
+#: ../templates/default/models_list.tpl:52
+#: ../templates/default/vehicles_list.tpl:52
+msgid "Selection:"
+msgstr "Selection:"
+
+#: ../templates/default/object_show.tpl:9
+msgid "Registered models for the brand '%s':"
+msgstr "Registered models for the brand '%s':"
+
+#: ../templates/default/owners.tpl:22 ../templates/default/owners.tpl:24
+msgid "Nickname"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:47
+msgid "Comment:"
+msgstr ""
+
+#: ../templates/default/menu.tpl:9
+#, fuzzy
+msgid "Transmissions list"
+msgstr "Transmissions"
+
+#: ../models.php:115
+msgid "New model"
+msgstr "New model"
+
+#: ../templates/default/vehicles.tpl:102
+#, fuzzy
+msgid "Choose a transmission"
+msgstr "New transmission"
+
+#: ../templates/default/vehicles.tpl:9
+msgid "Name:"
+msgstr ""
+
+#: ../object.php:98 ../models.php:98
+msgid "Change brand '%s'"
+msgstr "Change brand '%s'"
+
+#: ../templates/default/menu.tpl:10
+#, fuzzy
+msgid "Brands list"
+msgstr "Brands"
+
+#: ../templates/default/vehicles.tpl:100
+#, fuzzy
+msgid "Transmission:"
+msgstr "Transmission"
+
+#: ../templates/default/vehicles_list.tpl:1 ../vehicles_list.php:115
+#, fuzzy
+msgid "Vehicles list"
+msgstr "Models list"
+
+#: ../object.php:89 ../models.php:89
+msgid "Change transmission '%s'"
+msgstr "Change transmission '%s'"
+
+#: ../object.php:54 ../models.php:54 ../models.php:116
+msgid "Color"
+msgstr "Color"
+
+#: ../templates/default/owners.tpl:59
+msgid "[M]"
+msgstr ""
+
+#: ../models.php:209 ../templates/default/menu.tpl:11
+msgid "Models list"
+msgstr "Models list"
+
+#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+msgid "NB : The mandatory fields are in"
+msgstr "NB : The mandatory fields are in"
+
+#: ../templates/default/vehicles.tpl:23
+#, fuzzy
+msgid "Choose a model"
+msgstr "New model"
+
+#: ../object.php:82 ../models.php:82
+msgid "Add new body"
+msgstr "Add new body"
+
+#: ../templates/default/vehicles.tpl:83
+msgid "Registration:"
+msgstr ""
+
+#: ../templates/default/menu.tpl:2
+msgid "Cars"
+msgstr "Cars"
+
+#: ../models.php:115
+msgid "Change model '%s'"
+msgstr "Change model '%s'"
+
+#: ../classes/auto.class.php:105
+msgid "Diesel"
+msgstr ""
+
+#: ../object.php:73 ../models.php:73
+msgid "Add new finition"
+msgstr "Add new finition"
+
+#: ../object.php:55 ../models.php:55 ../models.php:117
+msgid "Add new color"
+msgstr "Add new color"
+
+#: ../object.php:63 ../models.php:63
+msgid "State"
+msgstr "State"
+
+#: ../templates/default/models_list.tpl:56
+msgid "Add new model"
+msgstr "Add new model"
+
+#: ../templates/default/owners.tpl:77
+msgid "no member"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:39
+msgid "Mileage:"
+msgstr ""
+
+#: ../object.php:92 ../models.php:92
+msgid "Do you really want to delete selected transmissions?"
+msgstr "Do you really want to delete selected transmissions?"
+
+#: ../templates/default/menu.tpl:12
+#, fuzzy
+msgid "Cars list"
+msgstr "Cars"
+
+#: ../templates/default/models_list.tpl:42
+#: ../templates/default/vehicles_list.tpl:42
+msgid "Do you really want to delete the model '%s'?"
+msgstr "Do you really want to delete the model '%s'?"
+
+#: ../templates/default/vehicles.tpl:126
+msgid "Engine size:"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:20
+#: ../templates/default/models_list.tpl:17
+#: ../templates/default/vehicles_list.tpl:17
+msgid "(Un)Check all"
+msgstr "(Un)Check all"
+
+#: ../object.php:72 ../models.php:72
+msgid "Finition"
+msgstr "Finition"
+
+#: ../templates/default/vehicles.tpl:43
+#, fuzzy
+msgid "Seats:"
+msgstr "States"
+
+#: ../object.php:81 ../models.php:81
+msgid "Body"
+msgstr "Body"
+
+#: ../object.php:93 ../models.php:93
+msgid "Do you really want to delete the transmission '%s'?"
+msgstr "Do you really want to delete the transmission '%s'?"
+
+#: ../templates/default/vehicles.tpl:130
+msgid "Fuel:"
+msgstr ""
+
+#: ../object.php:101 ../models.php:101
+msgid "Add new brand"
+msgstr "Add new brand"
+
+#: ../templates/default/object_list.tpl:54
+#: ../templates/default/models_list.tpl:53
+#: ../templates/default/vehicles_list.tpl:53
+msgid "Delete"
+msgstr "Delete"
+
+#: ../object.php:66 ../models.php:66
+msgid "Do you really want to delete the state '%s'?"
+msgstr "Do you really want to delete the state '%s'?"
+
+#: ../templates/default/vehicles.tpl:61
+msgid "Current owner:"
+msgstr ""
+
+#: ../object.php:91 ../models.php:91
+msgid "Add new transmission"
+msgstr "Add new transmission"
+
+#: ../templates/default/vehicles.tpl:122
+msgid "Horsepower:"
+msgstr ""
+
+#: ../templates/default/owners.tpl:61 ../templates/default/owners.tpl:63
+msgid "[W]"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:54
+msgid "Current car's state informations"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:111
+#, fuzzy
+msgid "Choose a finition"
+msgstr "New finition"
+
+#: ../object.php:56 ../models.php:56 ../models.php:118
+msgid "Do you really want to delete selected colors?"
+msgstr "Do you really want to delete selected colors?"
+
+#: ../object.php:75 ../models.php:75
+msgid "Do you really want to delete the finition '%s'?"
+msgstr "Do you really want to delete the finition '%s'?"
+
+#: ../object.php:65 ../models.php:65
+msgid "Do you really want to delete selected states?"
+msgstr "Do you really want to delete selected states?"
+
+#: ../templates/default/menu.tpl:8
+#, fuzzy
+msgid "Bodies list"
+msgstr "Models list"
+
+#: ../object.php:125 ../models.php:132 ../vehicles_edit.php:64
+#: ../vehicles_list.php:68
+msgid "- No id provided for modifying this record! (internal)"
+msgstr "- No id provided for modifying this record! (internal)"
+
+#: ../models.php:139 ../vehicles_edit.php:71 ../vehicles_list.php:75
+msgid "- You must select a brand!"
+msgstr "- You must select a brand!"
+
+#: ../vehicles_edit.php:52 ../vehicles_list.php:56
+#, fuzzy
+msgid "Change vehicle '%s'"
+msgstr ""
+"Modifier la couleur "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ« %s "
+"ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ»"
+
+#: ../classes/auto.class.php:106
+msgid "Gas"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:21
+#: ../templates/default/models_list.tpl:18 ../templates/default/owners.tpl:39
+#: ../templates/default/vehicles_list.tpl:18
+msgid "Pages:"
+msgstr "Pages:"
+
+#: ../templates/default/menu.tpl:6
+#, fuzzy
+msgid "States list"
+msgstr "States"
+
+#~ msgid "Colors"
+#~ msgstr "Colors"
+
+#~ msgid "Models"
+#~ msgstr "Models"
+
+#~ msgid "Bodies"
+#~ msgstr "Bodies"
+
+#, fuzzy
+#~ msgid "Late of "
+#~ msgstr "Late of"
+
+#~ msgid "Late of"
+#~ msgstr "Late of"
