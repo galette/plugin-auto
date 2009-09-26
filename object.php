@@ -184,6 +184,7 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	$tpl->assign('add_text', $add_text);
 	$tpl->assign('deletes_text', $deletes_text);
 	//$delete_text = str_replace('%s', $obj->value, $delete_text);
+	$tpl->assign('field_name', $field_name);
 	$tpl->assign('delete_text', $delete_text);
 	$tpl->assign('obj', $obj);
 	$content = $tpl->fetch("object_list.tpl");
