@@ -1,12 +1,12 @@
 <?php
-// This file was automatically generated on Sat Sep  5 20:48:51 2009 (GMT)
+// This file was automatically generated on Sat Sep 26 11:24:26 2009 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
 // ../object.php:66 ../models.php:66 
 $lang['Do you really want to delete the state \'%s\'?'] = 'Voulez vous vraiment effacer l\'état « %s »&nbsp;?';
 
-// ../templates/default/vehicles.tpl:54 
+// ../templates/default/vehicles.tpl:67 
 $lang['Current car\'s state informations'] = 'Informations sur l\'état courant de la voiture';
 
 // ../object.php:74 ../models.php:74 
@@ -18,7 +18,7 @@ $lang['- No id provided for modifying this record! (internal)'] = '- Pas d\'iden
 // ../templates/default/owners.tpl:59 
 $lang['[M]'] = '[H]';
 
-// ../classes/auto.class.php:105 
+// ../classes/auto.class.php:107 
 $lang['Diesel'] = 'Diesel';
 
 // ../object.php:84 ../models.php:84 
@@ -30,19 +30,19 @@ $lang['- An error occured while saving record. Please try again.'] = '- Une erre
 // ../templates/default/menu.tpl:9 
 $lang['Transmissions list'] = 'Liste des transmissions';
 
-// ../templates/default/vehicles.tpl:60 
+// ../templates/default/vehicles.tpl:73 
 $lang['Show full car state history'] = 'Afficher l\'historique complet des états la voiture';
 
-// ../templates/default/vehicles.tpl:109 
+// ../templates/default/vehicles.tpl:122 
 $lang['Finition:'] = 'Finition&nbsp;:';
 
-// ../templates/default/vehicles.tpl:61 
+// ../templates/default/vehicles.tpl:74 
 $lang['Change car\'s owner'] = 'Modifier le propriétaire de la voiture';
 
 // ../object.php:81 ../models.php:81 
 $lang['Body'] = 'Carrosseries';
 
-// ../classes/auto.class.php:108 
+// ../classes/auto.class.php:110 
 $lang['Bio'] = 'Bio-carburant';
 
 // ../templates/default/menu.tpl:10 
@@ -57,7 +57,7 @@ $lang['Create a new model for brand \'%s\''] = 'Créer un nouveau modèle pour l
 // ../object.php:100 ../models.php:100 ../templates/default/model.tpl:22 ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:14 ../templates/default/vehicles_list.tpl:9 
 $lang['Brand'] = 'Marque';
 
-// ../classes/auto.class.php:106 
+// ../classes/auto.class.php:108 
 $lang['Gas'] = 'Gaz';
 
 // ../templates/default/vehicles.tpl:35 
@@ -69,13 +69,13 @@ $lang['New model'] = 'Nouveau modèle';
 // ../templates/default/model.tpl:30 
 $lang['No brand is registered yet. You have to %create at least one brand% to register models.'] = 'Aucune marque n\'a été enregistrée. Vous devez au moins %créer une marque% pour ajouter des modèles.';
 
-// ../templates/default/vehicles.tpl:227 
+// ../templates/default/vehicles.tpl:240 
 $lang['Click to choose this owner for current car'] = 'Cliquez pour attribuer la voiture courantez à ce propriétaire';
 
-// ../templates/default/vehicles.tpl:61 
+// ../templates/default/vehicles.tpl:74 
 $lang['Change'] = 'Changer';
 
-// ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:209 
+// ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:222 
 $lang['Owners'] = 'Propriétaires';
 
 // ../templates/default/vehicles.tpl:47 
@@ -83,6 +83,9 @@ $lang['Comment:'] = 'Commentaire&nbsp;:';
 
 // ../object.php:131 ../models.php:144 ../vehicles_edit.php:76 ../vehicles_list.php:80 
 $lang['- You must provide a value!'] = '- Vous devez fournir une valeur&nbsp;!';
+
+// ../templates/default/object_list.tpl:20 ../templates/default/models_list.tpl:17 ../templates/default/vehicles_list.tpl:17 
+$lang['(Un)Check all'] = 'Tout (dé)cocher';
 
 // ../templates/default/model.tpl:24 
 $lang['Select one brand'] = 'Sélectionnez une marque';
@@ -102,7 +105,7 @@ $lang['Do you really want to delete selected models?'] = 'Voulez vous vraiment e
 // ../object.php:62 ../models.php:62 
 $lang['New state'] = 'Nouvel état';
 
-// ../templates/default/vehicles.tpl:100 
+// ../templates/default/vehicles.tpl:113 
 $lang['Transmission:'] = 'Transmission&nbsp;:';
 
 // ../object.php:93 ../models.php:93 
@@ -120,16 +123,16 @@ $lang['[mod]'] = '[mod]';
 // ../object.php:103 ../models.php:103 
 $lang['Do you really want to delete the brand \'%s\'?'] = 'Voulez vous vraiment effacer la marque « %s »&nbsp;?';
 
-// ../templates/default/vehicles.tpl:67 
+// ../templates/default/vehicles.tpl:80 
 $lang['Choose a color'] = 'Choisissez une couleur';
 
 // ../object.php:80 ../models.php:80 
 $lang['New body'] = 'Nouvelle carrosserie';
 
-// ../templates/default/vehicles.tpl:132 
+// ../templates/default/vehicles.tpl:145 
 $lang['Choose a fuel'] = 'Choisissez un carburant';
 
-// ../templates/default/object.tpl:26 ../templates/default/model.tpl:36 ../templates/default/vehicles.tpl:141 
+// ../templates/default/object.tpl:26 ../templates/default/model.tpl:36 ../templates/default/vehicles.tpl:154 
 $lang['Save'] = 'Enregistrer';
 
 // ../templates/default/object_list.tpl:43 ../templates/default/models_list.tpl:42 ../templates/default/vehicles_list.tpl:42 
@@ -138,7 +141,7 @@ $lang['[del]'] = '[suppr]';
 // ../object.php:89 ../models.php:89 
 $lang['Change transmission \'%s\''] = 'Modifier la transmission « %s »';
 
-// ../templates/default/vehicles.tpl:89 
+// ../templates/default/vehicles.tpl:102 
 $lang['Car\'s technical informations'] = 'Informations techniques de la voiture';
 
 // ../templates/default/object.tpl:32 ../templates/default/model.tpl:41 
@@ -174,25 +177,22 @@ $lang['Do you really want to delete the color \'%s\'?'] = 'Voulez vous vraiment 
 // ../templates/default/object.tpl:9 ../templates/default/model.tpl:6 
 $lang['- ERROR -'] = '- ERREUR -';
 
-// ../classes/auto.class.php:104 
-$lang['Petrol'] = 'Essence';
-
 // ../models.php:209 ../templates/default/menu.tpl:11 
 $lang['Models list'] = 'Liste des modèles';
 
 // ../templates/default/object_show.tpl:9 
 $lang['Registered models for the brand \'%s\':'] = 'Modèles enregistrés pour la marque « %s  »&nbsp;:';
 
-// ../templates/default/vehicles.tpl:118 
+// ../templates/default/vehicles.tpl:131 
 $lang['Chassis number:'] = 'Numéro de chassis&nbsp;:';
 
-// ../templates/default/vehicles.tpl:126 
+// ../templates/default/vehicles.tpl:139 
 $lang['Engine size:'] = 'Cylindrée&nbsp;:';
 
-// ../classes/auto.class.php:107 
+// ../classes/auto.class.php:109 
 $lang['Electricity'] = 'Électricité';
 
-// ../templates/default/vehicles.tpl:111 
+// ../templates/default/vehicles.tpl:124 
 $lang['Choose a finition'] = 'Choisissez une finition';
 
 // ../templates/default/object_show.tpl:17 
@@ -207,17 +207,17 @@ $lang['Colors list'] = 'Liste des couleurs';
 // ../templates/default/object_list.tpl:21 ../templates/default/models_list.tpl:18 ../templates/default/owners.tpl:39 ../templates/default/vehicles_list.tpl:18 
 $lang['Pages:'] = 'Pages&nbsp;:';
 
-// ../templates/default/vehicles.tpl:76 
+// ../templates/default/vehicles.tpl:89 
 $lang['Choose a state'] = 'Choisissez un état';
 
 // ../templates/default/menu.tpl:6 
 $lang['States list'] = 'Liste des états';
 
-// ../templates/default/vehicles.tpl:93 
+// ../templates/default/vehicles.tpl:106 
 $lang['Choose a body'] = 'Choisissez une carrosserie';
 
-// ../templates/default/object_list.tpl:5 ../templates/default/object_list.tpl:12 
-$lang['$name'] = '';
+// ../classes/auto.class.php:106 
+$lang['Petrol'] = 'Essence';
 
 // ../templates/default/menu.tpl:2 
 $lang['Cars'] = 'Voitures';
@@ -234,13 +234,13 @@ $lang['Finition'] = 'Finition';
 // ../templates/default/object.tpl:32 ../templates/default/model.tpl:41 
 $lang['NB : The mandatory fields are in'] = 'NB&nbsp;: Les champs obligatoires apparaissent en';
 
-// ../templates/default/object_list.tpl:20 ../templates/default/models_list.tpl:17 ../templates/default/vehicles_list.tpl:17 
-$lang['(Un)Check all'] = 'Tout (dé)cocher';
+// ../templates/default/vehicles.tpl:59 
+$lang['Delete image'] = 'Supprimer l\'image';
 
 // ../templates/default/vehicles.tpl:31 
 $lang['First registration date:'] = 'Date de première immatriculation&nbsp;:';
 
-// ../templates/default/vehicles.tpl:65 
+// ../templates/default/vehicles.tpl:78 
 $lang['Color:'] = 'Couleur&nbsp;:';
 
 // ../templates/default/owners.tpl:22 ../templates/default/owners.tpl:24 
@@ -249,8 +249,8 @@ $lang['Nickname'] = 'Pseudo';
 // ../object.php:101 ../models.php:101 
 $lang['Add new brand'] = 'Ajouter une nouvelle marque';
 
-// ../object.php:53 ../models.php:53 
-$lang['Change color \'%s\''] = 'Modifier la couleur « %s »';
+// ../templates/default/vehicles.tpl:56 
+$lang['Picture:'] = 'Image&nbsp;:';
 
 // ../templates/default/menu.tpl:12 
 $lang['Cars list'] = 'Liste des voitures';
@@ -258,7 +258,7 @@ $lang['Cars list'] = 'Liste des voitures';
 // ../templates/default/models_list.tpl:56 
 $lang['Add new model'] = 'Ajouter un nouveau modèle';
 
-// ../templates/default/vehicles.tpl:102 
+// ../templates/default/vehicles.tpl:115 
 $lang['Choose a transmission'] = 'Choisissez une transmission';
 
 // ../templates/default/models_list.tpl:42 ../templates/default/vehicles_list.tpl:42 
@@ -282,7 +282,7 @@ $lang['Change finition \'%s\''] = 'Modifier la finition « %s »';
 // ../vehicles_edit.php:52 ../vehicles_list.php:56 
 $lang['Change vehicle \'%s\''] = 'Modifier le véhicule « %s »';
 
-// ../templates/default/vehicles.tpl:122 
+// ../templates/default/vehicles.tpl:135 
 $lang['Horsepower:'] = 'Puissance&nbsp;:';
 
 // ../templates/default/vehicles.tpl:43 
@@ -300,6 +300,12 @@ $lang['Cancel'] = 'Effacer';
 // ../templates/default/object_show.tpl:17 
 $lang['Do you want to create a new one?'] = 'Souhaitez vous en créer un nouveau&nbsp;?';
 
+// ../object.php:53 ../models.php:53 
+$lang['Change color \'%s\''] = 'Modifier la couleur « %s »';
+
+// ../templates/default/vehicles.tpl:54 ../templates/default/vehicles.tpl:57 
+$lang['Car\'s photo'] = 'Photo de la voiture';
+
 // ../templates/default/owners.tpl:68 
 $lang['[admin]'] = '[admin]';
 
@@ -315,7 +321,7 @@ $lang['Add new finition'] = 'Ajouter une finition';
 // ../templates/default/menu.tpl:8 
 $lang['Bodies list'] = 'Liste des carrosseries';
 
-// ../templates/default/vehicles.tpl:60 
+// ../templates/default/vehicles.tpl:73 
 $lang['Car state history'] = 'Historique de l\'état de la voiture';
 
 // ../templates/default/vehicles.tpl:6 
@@ -327,7 +333,7 @@ $lang['My Cars'] = 'Mes voitures';
 // ../object.php:91 ../models.php:91 
 $lang['Add new transmission'] = 'Ajouter une transaction';
 
-// ../templates/default/vehicles.tpl:74 
+// ../templates/default/vehicles.tpl:87 
 $lang['State:'] = 'État&nbsp;:';
 
 // ../templates/default/vehicles.tpl:9 
@@ -354,7 +360,7 @@ $lang['New vehicle'] = 'Ajouter un nouveau véhicule';
 // ../models.php:115 
 $lang['Change model \'%s\''] = 'Modifier le modèle « %s »';
 
-// ../templates/default/vehicles.tpl:61 
+// ../templates/default/vehicles.tpl:74 
 $lang['Current owner:'] = 'Propriétaire actuel&nbsp;:';
 
 // ../object.php:98 ../models.php:98 
@@ -366,7 +372,7 @@ $lang['Brand \'%s\''] = 'Marque « %s »';
 // ../templates/default/model.tpl:17 ../templates/default/models_list.tpl:8 ../templates/default/vehicles_list.tpl:8 
 $lang['Model'] = 'Modèle';
 
-// ../templates/default/vehicles.tpl:83 
+// ../templates/default/vehicles.tpl:96 
 $lang['Registration:'] = 'Immatriculation&nbsp;:';
 
 // ../models.php:139 ../vehicles_edit.php:71 ../vehicles_list.php:75 
@@ -378,7 +384,7 @@ $lang['Add new color'] = 'Ajouter une nouvelle couleur';
 // ../object.php:54 ../models.php:54 ../models.php:116 
 $lang['Color'] = 'Couleur';
 
-// ../templates/default/vehicles.tpl:130 
+// ../templates/default/vehicles.tpl:143 
 $lang['Fuel:'] = 'Carburant&nbsp;:';
 
 // ../templates/default/object_list.tpl:13 ../templates/default/models_list.tpl:10 ../templates/default/vehicles_list.tpl:10 
@@ -387,7 +393,7 @@ $lang['Actions'] = 'Actions';
 // ../object.php:56 ../models.php:56 ../models.php:118 
 $lang['Do you really want to delete selected colors?'] = 'Voulez vous vraiment effacer les couleurs sélectionnées&nbsp;?';
 
-// ../templates/default/vehicles.tpl:91 
+// ../templates/default/vehicles.tpl:104 
 $lang['Body:'] = 'Carrosseries&nbsp;:';
 
 ?>

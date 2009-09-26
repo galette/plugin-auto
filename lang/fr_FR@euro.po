@@ -13,20 +13,20 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-20 16:44+0100\n"
-"PO-Revision-Date: 2009-03-19 08:22+0100\n"
+"PO-Revision-Date: 2009-09-26 13:24+0200\n"
 "Last-Translator: \n"
-"Language-Team: French <kde-i18n-doc@lists.kde.org>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../object.php:99 ../models.php:99
 msgid "Brand '%s'"
 msgstr "Marque « %s »"
 
-#: ../templates/default/vehicles.tpl:65
+#: ../templates/default/vehicles.tpl:78
 msgid "Color:"
 msgstr "Couleur&nbsp;:"
 
@@ -82,11 +82,11 @@ msgstr "Voulez vous vraiment effacer la carrosserie « %s »&nbsp;?"
 msgid "no record found"
 msgstr "aucun enregistrement trouvé"
 
-#: ../templates/default/vehicles.tpl:67
+#: ../templates/default/vehicles.tpl:80
 msgid "Choose a color"
 msgstr "Choisissez une couleur"
 
-#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:209
+#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:222
 msgid "Owners"
 msgstr "Propriétaires"
 
@@ -98,7 +98,7 @@ msgstr "Informations de base de la voiture"
 msgid "Do you really want to delete selected vehicles?"
 msgstr "Voulez vous vraiment effacer les véhicules sélectionnés&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:118
+#: ../templates/default/vehicles.tpl:131
 msgid "Chassis number:"
 msgstr "Numéro de chassis&nbsp;:"
 
@@ -106,7 +106,7 @@ msgstr "Numéro de chassis&nbsp;:"
 msgid "New state"
 msgstr "Nouvel état"
 
-#: ../templates/default/vehicles.tpl:60
+#: ../templates/default/vehicles.tpl:73
 msgid "Show full car state history"
 msgstr "Afficher l'historique complet des états la voiture"
 
@@ -120,7 +120,7 @@ msgstr "Ajouter un nouveau véhicule"
 msgid "Actions"
 msgstr "Actions"
 
-#: ../templates/default/vehicles.tpl:61
+#: ../templates/default/vehicles.tpl:74
 msgid "Change car's owner"
 msgstr "Modifier le propriétaire de la voiture"
 
@@ -130,16 +130,11 @@ msgstr "Modifier le propriétaire de la voiture"
 msgid "[del]"
 msgstr "[suppr]"
 
-#: ../templates/default/object_list.tpl:5
-#: ../templates/default/object_list.tpl:12
-msgid "$name"
-msgstr ""
-
 #: ../templates/default/owners.tpl:9 ../templates/default/owners.tpl:11
 msgid "Name"
 msgstr "Nom"
 
-#: ../templates/default/vehicles.tpl:76
+#: ../templates/default/vehicles.tpl:89
 msgid "Choose a state"
 msgstr "Choisissez un état"
 
@@ -178,7 +173,7 @@ msgstr "[mod]"
 msgid "Change state '%s'"
 msgstr "Modifier l'état « %s »"
 
-#: ../classes/auto.class.php:104
+#: ../classes/auto.class.php:106
 msgid "Petrol"
 msgstr "Essence"
 
@@ -198,7 +193,7 @@ msgstr ""
 "- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
 "nouveau."
 
-#: ../templates/default/vehicles.tpl:60
+#: ../templates/default/vehicles.tpl:73
 msgid "Car state history"
 msgstr "Historique de l'état de la voiture"
 
@@ -216,7 +211,7 @@ msgstr "Marque"
 msgid "Do you really want to delete selected finitions?"
 msgstr "Voulez vous vraiment effacer les finitions sélectionnées&nbsp;?"
 
-#: ../classes/auto.class.php:107
+#: ../classes/auto.class.php:109
 msgid "Electricity"
 msgstr "Électricité"
 
@@ -236,7 +231,7 @@ msgstr "Ajouter un nouvel état"
 msgid "Change body '%s'"
 msgstr "Modifier la carrosserie « %s »"
 
-#: ../templates/default/vehicles.tpl:91
+#: ../templates/default/vehicles.tpl:104
 msgid "Body:"
 msgstr "Carrosseries&nbsp;:"
 
@@ -244,7 +239,7 @@ msgstr "Carrosseries&nbsp;:"
 msgid "Do you really want to delete selected models?"
 msgstr "Voulez vous vraiment effacer les modèles sélectionnés&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:109
+#: ../templates/default/vehicles.tpl:122
 msgid "Finition:"
 msgstr "Finition&nbsp;:"
 
@@ -256,11 +251,11 @@ msgstr ""
 "Aucune marque n'a été enregistrée. Vous devez au moins %créer une marque% "
 "pour ajouter des modèles."
 
-#: ../templates/default/vehicles.tpl:89
+#: ../templates/default/vehicles.tpl:102
 msgid "Car's technical informations"
 msgstr "Informations techniques de la voiture"
 
-#: ../templates/default/vehicles.tpl:74
+#: ../templates/default/vehicles.tpl:87
 msgid "State:"
 msgstr "État&nbsp;:"
 
@@ -272,11 +267,11 @@ msgstr "Transmission"
 msgid "New vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
-#: ../classes/auto.class.php:108
+#: ../classes/auto.class.php:110
 msgid "Bio"
 msgstr "Bio-carburant"
 
-#: ../templates/default/vehicles.tpl:61
+#: ../templates/default/vehicles.tpl:74
 msgid "Change"
 msgstr "Changer"
 
@@ -292,7 +287,7 @@ msgstr "Nouvelle couleur"
 msgid "Do you really want to delete selected bodies?"
 msgstr "Voulez vous vraiment effacer les carrosseries sélectionnées&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:93
+#: ../templates/default/vehicles.tpl:106
 msgid "Choose a body"
 msgstr "Choisissez une carrosserie"
 
@@ -304,12 +299,12 @@ msgstr "Effacer"
 msgid "Finitions list"
 msgstr "Liste des finitions"
 
-#: ../templates/default/vehicles.tpl:227
+#: ../templates/default/vehicles.tpl:240
 msgid "Click to choose this owner for current car"
 msgstr "Cliquez pour attribuer la voiture courantez à ce propriétaire"
 
 #: ../templates/default/object.tpl:26 ../templates/default/model.tpl:36
-#: ../templates/default/vehicles.tpl:141
+#: ../templates/default/vehicles.tpl:154
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -325,7 +320,7 @@ msgstr "rouge"
 msgid "Create a new model for brand '%s'"
 msgstr "Créer un nouveau modèle pour la marque « %s  »"
 
-#: ../templates/default/vehicles.tpl:132
+#: ../templates/default/vehicles.tpl:145
 msgid "Choose a fuel"
 msgstr "Choisissez un carburant"
 
@@ -355,13 +350,17 @@ msgstr "Liste des transmissions"
 msgid "New model"
 msgstr "Nouveau modèle"
 
-#: ../templates/default/vehicles.tpl:102
+#: ../templates/default/vehicles.tpl:115
 msgid "Choose a transmission"
 msgstr "Choisissez une transmission"
 
 #: ../templates/default/vehicles.tpl:9
 msgid "Name:"
 msgstr "Nom&nbsp;:"
+
+#: ../templates/default/vehicles.tpl:56
+msgid "Picture:"
+msgstr "Image&nbsp;:"
 
 #: ../object.php:98 ../models.php:98
 msgid "Change brand '%s'"
@@ -371,7 +370,7 @@ msgstr "Modifier la marque « %s »"
 msgid "Brands list"
 msgstr "Liste des marques"
 
-#: ../templates/default/vehicles.tpl:100
+#: ../templates/default/vehicles.tpl:113
 msgid "Transmission:"
 msgstr "Transmission&nbsp;:"
 
@@ -407,7 +406,7 @@ msgstr "Choisissez un modèle"
 msgid "Add new body"
 msgstr "Ajouter une nouvelle carrosserie"
 
-#: ../templates/default/vehicles.tpl:83
+#: ../templates/default/vehicles.tpl:96
 msgid "Registration:"
 msgstr "Immatriculation&nbsp;:"
 
@@ -419,7 +418,7 @@ msgstr "Voitures"
 msgid "Change model '%s'"
 msgstr "Modifier le modèle « %s »"
 
-#: ../classes/auto.class.php:105
+#: ../classes/auto.class.php:107
 msgid "Diesel"
 msgstr "Diesel"
 
@@ -455,12 +454,16 @@ msgstr "Voulez vous vraiment effacer les transmissions sélectionnées&nbsp;?"
 msgid "Cars list"
 msgstr "Liste des voitures"
 
+#: ../templates/default/vehicles.tpl:59
+msgid "Delete image"
+msgstr "Supprimer l'image"
+
 #: ../templates/default/models_list.tpl:42
 #: ../templates/default/vehicles_list.tpl:42
 msgid "Do you really want to delete the model '%s'?"
 msgstr "Voulez vous vraiment effacer le modèle « %s »&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:126
+#: ../templates/default/vehicles.tpl:139
 msgid "Engine size:"
 msgstr "Cylindrée&nbsp;:"
 
@@ -469,6 +472,10 @@ msgstr "Cylindrée&nbsp;:"
 #: ../templates/default/vehicles_list.tpl:17
 msgid "(Un)Check all"
 msgstr "Tout (dé)cocher"
+
+#: ../templates/default/vehicles.tpl:54 ../templates/default/vehicles.tpl:57
+msgid "Car's photo"
+msgstr "Photo de la voiture"
 
 #: ../object.php:72 ../models.php:72
 msgid "Finition"
@@ -486,7 +493,7 @@ msgstr "Carrosseries"
 msgid "Do you really want to delete the transmission '%s'?"
 msgstr "Voulez vous vraiment effacer la transmission « %s »&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:130
+#: ../templates/default/vehicles.tpl:143
 msgid "Fuel:"
 msgstr "Carburant&nbsp;:"
 
@@ -504,7 +511,7 @@ msgstr "Supprimer"
 msgid "Do you really want to delete the state '%s'?"
 msgstr "Voulez vous vraiment effacer l'état « %s »&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:61
+#: ../templates/default/vehicles.tpl:74
 msgid "Current owner:"
 msgstr "Propriétaire actuel&nbsp;:"
 
@@ -512,7 +519,7 @@ msgstr "Propriétaire actuel&nbsp;:"
 msgid "Add new transmission"
 msgstr "Ajouter une transaction"
 
-#: ../templates/default/vehicles.tpl:122
+#: ../templates/default/vehicles.tpl:135
 msgid "Horsepower:"
 msgstr "Puissance&nbsp;:"
 
@@ -520,11 +527,11 @@ msgstr "Puissance&nbsp;:"
 msgid "[W]"
 msgstr "[F]"
 
-#: ../templates/default/vehicles.tpl:54
+#: ../templates/default/vehicles.tpl:67
 msgid "Current car's state informations"
 msgstr "Informations sur l'état courant de la voiture"
 
-#: ../templates/default/vehicles.tpl:111
+#: ../templates/default/vehicles.tpl:124
 msgid "Choose a finition"
 msgstr "Choisissez une finition"
 
@@ -558,7 +565,7 @@ msgstr "- Vous devez sélectionner une marque&nbsp;!"
 msgid "Change vehicle '%s'"
 msgstr "Modifier le véhicule « %s »"
 
-#: ../classes/auto.class.php:106
+#: ../classes/auto.class.php:108
 msgid "Gas"
 msgstr "Gaz"
 
@@ -854,9 +861,6 @@ msgstr "Liste des états"
 #~ msgstr ""
 #~ "Un problÃ¨me est survenu dans l'envoi du courriel Ã  l'administrateur "
 #~ "pour le compte&nbsp;:"
-
-#~ msgid "Delete image"
-#~ msgstr "Supprimer l'image"
 
 #~ msgid "Mail settings:"
 #~ msgstr "ParamÃ¨tres courriel&nbsp;:"
@@ -2074,9 +2078,6 @@ msgstr "Liste des états"
 
 #~ msgid "fingerprint:"
 #~ msgstr "fingerprint&nbsp;:"
-
-#~ msgid "Picture:"
-#~ msgstr "Image&nbsp;:"
 
 #~ msgid "Email contents"
 #~ msgstr "Contenu du courriel"
