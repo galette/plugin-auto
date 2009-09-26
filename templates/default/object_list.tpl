@@ -2,14 +2,14 @@
 {assign var='pk' value=$obj->pk}
 {assign var='field' value=$obj->field}
 {assign var='list' value=$obj->getList()}
-		<h1 id="titre">{_T string="$name"|ucfirst}</h1>
+		<h1 id="titre">{$field_name}</h1>
 
 		<form action="" method="post" id="listform">
 		<table id="listing">
 			<thead>
 				<tr>
 					<th class="listing actions_row"></th>
-					<th class="listing">{_T string="$name"|ucfirst}</th>
+					<th class="listing">{$field_name}</th>
 					<th class="listing actions_row">{_T string="Actions"}</th>
 				</tr>
 			</thead>
