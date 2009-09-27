@@ -49,8 +49,30 @@ require_once('auto-states.class.php');
 require_once('auto-transmissions.class.php');
 
 class Auto {
-	const TABLE = 'auto';
-	const PK = 'id_auto';
+	const TABLE = 'cars';
+	const PK = 'id_car';
+
+	private $fields = array(
+		'id_car'			=>	'integer',
+		'car_name'			=>	'string',
+		'car_registration'		=>	'string',
+		'car_first_registration_date'	=>	'date',
+		'car_first_circulation_date'	=>	'date',
+		'car_mileage'			=>	'integer',
+		'car_comment'			=>	'string',
+		'car_creation_date'		=>	'date',
+		'car_chassis_number'		=>	'string',
+		'car_seats'			=>	'integer',
+		'car_horsepower'		=>	'integer',
+		'car_engine_size'		=>	'integer',
+		'car_fuel'			=>	'integer',
+		AutoColors::PK			=>	'integer',
+		AutoBodies::PK			=>	'integer',
+		AutoStates::PK			=>	'integer',
+		AutoTransmissions::PK		=>	'integer',
+		AutoFinitions::PK		=>	'integer',
+		AutoModels::PK			=>	'integer'
+	);
 
 	private $id;				//identifiant
 	private $registration;			//immatriculation
@@ -72,11 +94,11 @@ class Auto {
 	private $finition;			//niveau de finition
 	private $color;				//couleur
 	private $model;				//modèle
-	//private $engine_size;			//cylindrée
 	private $transmission;			//type de transmission
 	private $body;				//carrosserie
 	private $history;			//historique
 	private $owner;				//propriétaire actuel
+	private $state;				//état actuel
 
 	const FUEL_PETROL = 1;
 	const FUEL_DIESEL = 2;
@@ -84,10 +106,38 @@ class Auto {
 	const FUEL_ELECTRICITY = 4;
 	const FUEL_BIO = 5;
 
+	private $propnames;			//textual properties names
+
+	//internal properties (not updatable outside the object)
+	private $internals = array (
+		'id', 
+		'creation_date',
+		'update_date',
+		'history',
+		'picture',
+		'propnames',
+		'internals',
+		'fields'
+	);
 	/**
 	* Default constructor
 	*/
 	public function __construct(){
+		$this->propnames = array(
+			'name'				=>	_T("name"),
+			'model'				=>	_T("model"),
+			'registration'			=> 	_T("registration"),
+			'first_registration_date'	=>	_T("first registration date"),
+			'first_circulation_date'	=>	_T("first circulation date"),
+			'mileage'			=>	_T("mileage"),
+			'seats'				=>	_T("seats"),
+			'horsepower'			=>	_T("horsepower"),
+			'engine_size'			=>	_T("engine size"),
+			'color'				=>	_T("color"),
+			'state'				=>	_T("state")
+		);
+		//internal values are automatically updated
+		//$this->internals = array ('id', 'creation_date', 'update_date', 'history', 'picture', 'propnames', 'internals', 'fields');
 		// initialize linked objects properly
 		$this->model = new AutoModels();
 		$this->color = new AutoColors();
@@ -96,6 +146,7 @@ class Auto {
 		$this->transmission = new AutoTransmissions();
 		$this->finition = new AutoFinitions();
 		$this->picture = new AutoPicture();
+		$this->body = new AutoBodies();
 	}
 
 	/**
@@ -103,11 +154,11 @@ class Auto {
 	*/
 	public function listFuels(){
 		$f = array(
-			1	=>	_T("Petrol"),
-			2	=>	_T("Diesel"),
-			3	=>	_T("Gas"),
-			4	=>	_T("Electricity"),
-			5	=>	_T("Bio")
+			self::FUEL_PETROL	=>	_T("Petrol"),
+			self::FUEL_DIESEL	=>	_T("Diesel"),
+			self::FUEL_GAS		=>	_T("Gas"),
+			self::FUEL_ELECTRICITY	=>	_T("Electricity"),
+			self::FUEL_BIO		=>	_T("Bio")
 		);
 		return $f;
 	}
@@ -116,20 +167,172 @@ class Auto {
 	* Get the list of all vehicles
 	*/
 	public function getList(){
+		$query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE;
 		return array();
 	}
 
-	/* GETTERS */
-	public function hasPicture(){
-		//not yet implemented
-		return false;
+	/**
+	* Stores the vehicle in the database
+	* @param boolean new true if it's a new record, false to update on that already exists. Defaults to false
+	*/
+	public function store($new = false){
+		global $mdb, $log;
+
+		if( $new ) $this->creation_date = date('Y-m-d');
+		$this->update_date = date('Y-m-d');
+
+		$query = '';
+
+		if( $new ){
+			$query = 'INSERT INTO ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . ' (' . implode(', ', array_keys($this->fields) ) . ') VALUES (';
+			foreach($this->fields as $k=>$v){
+				switch($k){
+					case self::PK:
+						$query .= 'null, ';
+						break;
+					case AutoColors::PK:
+						$query .= $this->color->id . ', ';
+						break;
+					case AutoBodies::PK:
+						$query .= $this->body->id . ', ';
+						break;
+					case AutoStates::PK:
+						$query .= $this->state->id . ', ';
+						break;
+					case AutoTransmissions::PK:
+						$query .= $this->transmission->id . ', ';
+						break;
+					case AutoFinitions::PK:
+						$query .= $this->finition->id . ', ';
+						break;
+					case AutoModels::PK:
+						$query .= $this->model->id . ', ';
+						break;
+					default:
+						$propName = substr($k, 4, strlen($k));
+						switch($v){
+							case 'string':
+							case 'date':
+								$query .= '\'' . $this->$propName . '\', ';
+								break;
+							case 'integer':
+								$query .= (($this->$propName != '') ? $this->$propName : 0) . ', ';
+								break;
+							default:
+								$query .= '\'' . $this->$propName . '\', ';
+								break;
+						}
+						break;
+				}
+			}
+			//remove last ', ', add final ')'
+			$query = substr($query, 0, strlen($query)-2) . ')';
+		} else {
+			$query = 'UPDATE ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . ' SET ';
+			foreach($this->fields as $k=>$v){
+				switch($k){
+					case self::PK:
+						break;
+					case AutoColors::PK:
+						$query .= AutoColors::PK . '=' . $this->color->id . ', ';
+						break;
+					case AutoBodies::PK:
+						$query .= AutoBodies::PK . '=' . $this->body->id . ', ';
+						break;
+					case AutoStates::PK:
+						$query .= AutoStates::PK . '=' . $this->state->id . ', ';
+						break;
+					case AutoTransmissions::PK:
+						$query .= AutoTransmissions::PK . '=' . $this->transmission->id . ', ';
+						break;
+					case AutoFinitions::PK:
+						$query .= AutoFinitions::PK . '=' . $this->finition->id . ', ';
+						break;
+					case AutoModels::PK:
+						$query .= AutoModels::PK . '=' . $this->model->id . ', ';
+						break;
+					default:
+						$propName = substr($k, 4, strlen($k));
+						switch($v){
+							case 'string':
+							case 'date':
+								$query .= $k . '=\'' . $this->$propName . '\', ';
+								break;
+							case 'integer':
+								$query .= $k . '=' . (($this->$propName != '') ? $this->$propName : null) . ', ';
+								break;
+							default:
+								$query .= $k . '=\'' . $this->$propName . '\', ';
+								break;
+						}
+						
+						break;
+				}
+			}
+			//remove last ', ', add where clause
+			$query = substr($query, 0, strlen($query)-2) . ' WHERE ' . self::PK . '=' . $this->id;
+		}
+
+		$result = $mdb->query( $query );
+		if( MDB2::isError($result) ){
+			$log->log('An error has occured ' . (($new)?'inserting':'updating') . ' car | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			return false;
+		}
+		return true;
 	}
+
+	/**
+	* List object's properties
+	* @param boolean restrict : true to exclude $this->internals from returned result, false otherwise. Default to false
+	*/
+	private function getAllProperties($restrict = false){
+		$result = array();
+		foreach($this as $key => $value) {
+			if(!$restrict || ($restrict && !in_array($key, $this->internals)))
+				$result[] = $key;
+		}
+		return $result;
+	}
+
+	/**
+	* Get object's properties. List only properties that can be modified externally (ie. not in $this->internals)
+	*/
+	public function getProperties(){
+		return $this->getAllProperties(true);
+	}
+
+	/**
+	* Does the current car has a picture?
+	*/
+	public function hasPicture(){
+		return $this->picture->hasPicture();
+	}
+
+	/**
+	* Returns plain text property name, generally used for translations
+	*/
+	public function getPropName($name){
+		return $this->propnames[$name];
+	}
+
+	/* GETTERS */
 	public function __get($name){
 		global $log;
 		$forbidden = array();
-		if( !in_array($name, $forbidden) )
-			return $this->$name;
-		else {
+		if( !in_array($name, $forbidden) ) {
+			switch($name){
+				case 'first_registration_date':
+				case 'first_circulation_date':
+				case 'creation_date':
+				case 'update_date':
+					/** FIXME: date function from functions.inc.php does use adodb */
+					return date_db2text($this->$name);
+					break;
+				default:
+					return $this->$name;
+					break;
+			}
+		} else {
 			$log->log('[Auto] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
 			return false;
 		}
@@ -138,6 +341,37 @@ class Auto {
 	/* SETTERS */
 	public function __set($name, $value){
 		/** TODO: What to do ? :-) */
+		if( !in_array($name, $this->internals) ){
+			switch($name){
+				case 'finition':
+					$this->finition->load( (int)$value );
+					break;
+				case 'color':
+					$this->color->load( (int)$value );
+					break;
+				case 'model':
+					$this->model->load( (int)$value );
+					break;
+				case 'transmission':
+					$this->transmission->load( (int)$value );
+					break;
+				case 'body':
+					$this->body->load( (int)$value );
+					break;
+				case 'owner':
+					$this->owner->load( (int)$value );
+					break;
+				case 'state':
+					$this->state->load( (int)$value );
+					break;
+				default:
+					$this->$name = $value;
+					break;
+			}
+		} else {
+			$log->log('Trying to set an internal property (`' . $name . '`)', PEAR_LOG_INFO);
+			return false;
+		}
 	}
 }
 ?>

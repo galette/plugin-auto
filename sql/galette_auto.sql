@@ -30,7 +30,7 @@ CREATE TABLE `galette_auto_cars` (
   `car_first_circulation_date` date NOT NULL,
   `car_mileage` int(10) DEFAULT NULL,
   `car_comment` text COLLATE utf8_unicode_ci,
-  `car_date_creation` date NOT NULL,
+  `car_creation_date` date NOT NULL,
   `car_chassis_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_seats` int(1) DEFAULT NULL,
   `car_horsepower` int(4) DEFAULT NULL,

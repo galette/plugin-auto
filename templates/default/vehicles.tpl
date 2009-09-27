@@ -1,5 +1,24 @@
 		<h1 id="titre">{$title}</h1>
-<h2>{$myBrand}</h2>
+{if $error_detected|@count != 0}
+		<div id="errorbox">
+			<h1>{_T string="- ERROR -"}</h1>
+			<ul>
+	{foreach from=$error_detected item=error}
+				<li>{$error}</li>
+	{/foreach}
+			</ul>
+		</div>
+{/if}
+{if $warning_detected|@count != 0}
+		<div id="warningbox">
+			<h1>{_T string="- WARNING -"}</h1>
+			<ul>
+	{foreach from=$warning_detected item=warning}
+				<li>{$warning}</li>
+	{/foreach}
+			</ul>
+		</div>
+{/if}
 		<form action="" method="get" id="modifform">
 		<div class="bigtable">
 			<fieldset class="cssform">
@@ -16,13 +35,13 @@
 					<select name="brand" id="brand">
 						<option value="-1">{_T string="Choose a brand"}</option>
 	{foreach from=$brands item=brand}
-						<option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->id_brand} selected="selected"{/if}>{$brand->brand}</option>
+						<option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->brand} selected="selected"{/if}>{$brand->brand}</option>
 	{/foreach}
 					</select>
 					<select name="model" id="model">
 						<option value="-1">{_T string="Choose a model"}</option>
 	{foreach from=$models item=model}
-						<option value="{$model->id_model}"{if $model->id_model eq $car->model->id_model} selected="selected"{/if}>{$model->model}</option>
+						<option value="{$model->id_model}"{if $model->id_model eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
 	{/foreach}
 					</select>
 					<!--<input type="text" name="bradn" id="name" value="{$car->name}" maxlength="20"/>-->
@@ -66,7 +85,7 @@
 			<fieldset class="cssform">
 				<legend>{_T string="Current car's state informations"}</legend>
 				<div>
-				<input type="hidden" name="owner" id="owner" value="{$car->owner->id_adherent}"/>
+				<input type="text" name="owner" id="owner" value="{$car->owner->id}"/>
 	{if $login->isAdmin()}
 				<p class="notform">
 					{* Does car's history should be visible by the actual owner? *}
@@ -79,7 +98,7 @@
 					<select name="color" id="color">
 						<option value="-1">{_T string="Choose a color"}</option>
 	{foreach from=$colors item=color}
-						<option value="{$color->color}"{if $color->id_color eq $car->color->id_color} selected="selected"{/if}>{$color->color}</option>
+						<option value="{$color->id_color}"{if $color->id_color eq $car->color->id} selected="selected"{/if}>{$color->color}</option>
 	{/foreach}
 					</select>
 				</p>
@@ -88,7 +107,7 @@
 					<select name="state" id="state">
 						<option value="-1">{_T string="Choose a state"}</option>
 	{foreach from=$states item=state}
-						<option value="{$state->state}"{if $state->id_state eq $car->state->id_state} selected="selected"{/if}>{$state->state}</option>
+						<option value="{$state->id_state}"{if $state->id_state eq $car->state->id} selected="selected"{/if}>{$state->state}</option>
 	{/foreach}
 					</select>
 				</p>
@@ -105,7 +124,7 @@
 					<select name="body" id="body">
 						<option value="-1">{_T string="Choose a body"}</option>
 	{foreach from=$bodies item=body}
-						<option value="{$body->body}"{if $body->id_body eq $car->body->id_body} selected="selected"{/if}>{$body->body}</option>
+						<option value="{$body->id_body}"{if $body->id_body eq $car->body->id} selected="selected"{/if}>{$body->body}</option>
 	{/foreach}
 					</select>
 				</p>
@@ -114,7 +133,7 @@
 					<select name="transmission" id="transmission">
 						<option value="-1">{_T string="Choose a transmission"}</option>
 	{foreach from=$transmissions item=transmission}
-						<option value="{$transmission->transmission}"{if $transmission->id_transmission eq $car->transmission->id_transmission} selected="selected"{/if}>{$transmission->transmission}</option>
+						<option value="{$transmission->id_transmission}"{if $transmission->id_transmission eq $car->transmission->id} selected="selected"{/if}>{$transmission->transmission}</option>
 	{/foreach}
 					</select>
 				</p>
@@ -123,7 +142,7 @@
 					<select name="finition" id="finition">
 						<option value="-1">{_T string="Choose a finition"}</option>
 	{foreach from=$finitions item=finition}
-						<option value="{$finition->finition}"{if $finition->id_finition eq $car->finition->id_finition} selected="selected"{/if}>{$finition->finition}</option>
+						<option value="{$finition->id_finition}"{if $finition->id_finition eq $car->finition->id} selected="selected"{/if}>{$finition->finition}</option>
 	{/foreach}
 					</select>
 				</p>
@@ -152,7 +171,8 @@
 		</div>
 		<div class="button-container">
 			<input type="submit" class="submit" name="valid" value="{_T string="Save"}"/>
-			<input type="hidden" name="id_adh" value="{$member->id}"/>
+			<input type="hidden" name="{$mode}" value="1"/>
+			<input type="hidden" name="id_car" value="{$car->id}"/>
 		</div>
 		</form>
 		<script type="text/javascript">
@@ -172,16 +192,18 @@
 						buttonImage: '{$template_subdir}images/calendar.png',
 						buttonImageOnly: true
 					{rdelim});
-					{* If javascript is active, we do not want complete models list when page loads *}
-					var _modelChoose = $('#model :first');
 					var _models = $('#model');
+					var _modelChoose = $('#model :first');
+	{if $js_init_models}
+					{* If javascript is active, we do not want complete models list when page loads *}
+					{* Empty model list *}
 					_models.empty();
+					{* Set the first option *}
 					_modelChoose.appendTo(_models);
+	{/if}
 					{* Refresh models list when brand is changed *}
 					$('#brand').change(function(){ldelim}
 						var id_brand = $('#brand option:selected').attr('value');
-						//var _model = $('#model');
-						//var _choose = $('#model :first');
 						{* Empty model list *}
 						_models.empty();
 						{* Set the first option *}
