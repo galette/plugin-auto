@@ -42,7 +42,7 @@ class AutoPicture extends Picture{
 		$this->file_path = $plugins->getTemplatesPath('Auto') . '/images/car.png';
 		$this->format = 'png';
 		$this->mime = 'image/png';
-		$this->custom = false;
+		$this->has_picture = false;
 	}
 }
 ?>

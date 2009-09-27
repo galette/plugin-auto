@@ -69,7 +69,7 @@
 					{else}
 						<img src="{$template_subdir}images/icon-empty.png" alt="" width="12" height="13"/>
 					{/if}
-					<a href="voir_adherent.php?id_adh={$owner->id_adh}">{$owner->sfullname}</a>
+					<a href="voir_adherent.php?id_adh={$owner->id}">{$owner->sfullname}</a>
 					</td>
 					<td class="nowrap">{$owner->nickname|htmlspecialchars}</td>
 				</tr>
