@@ -50,8 +50,11 @@ class AutoModels {
 
 	/**
 	* Default constructor
+	* @param integer id model's id to load. Defaults to null
 	*/
-	public function __construct(){}
+	public function __construct($id = null){
+		if( is_int($id) ) $this->load($id);
+	}
 
 	/**
 	* Get models list
@@ -107,7 +110,7 @@ class AutoModels {
 		$this->id = $r->id_model;
 		$this->model = $r->model;
 		$id_brand = AutoBrands::PK;
-		$this->brand = new AutoBrands($r->$id_brand);
+		$this->brand = new AutoBrands( (int)$r->$id_brand );
 
 		$result->free();
 
@@ -156,6 +159,9 @@ class AutoModels {
 			switch( $name ){
 				case 'brand':
 					return $this->brand->id;
+					break;
+				case 'obrand':
+					return $this->brand;
 					break;
 				default:
 					return $this->$name;

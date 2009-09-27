@@ -49,12 +49,14 @@ abstract class AutoObject {
 
 	/**
 	* Default constructor
+	* @param integer id id to load. Defaults to null
 	*/
-	public function __construct($table, $pk, $field, $name){
+	public function __construct($table, $pk, $field, $name, $id = null){
 		$this->table = AUTO_PREFIX . $table;
 		$this->pk = $pk;
 		$this->field = $field;
 		$this->name = $name;
+		if( is_int($id) ) $this->load($id);
 	}
 
 	public function getList(){

@@ -47,13 +47,15 @@ class AutoBodies extends AutoObject {
 
 	/**
 	* Default constructor
+	* @param integer id body's id to load. Defaults to null
 	*/
-	public function __construct(){
+	public function __construct($id = null){
 		parent::__construct(
 			self::TABLE,
 			self::PK,
 			self::FIELD,
-			self::NAME
+			self::NAME,
+			$id
 		);
 	}
 
