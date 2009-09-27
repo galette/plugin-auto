@@ -28,14 +28,20 @@ msgstr ""
 msgid "Brand '%s'"
 msgstr "y"
 
-#: ../templates/default/vehicles.tpl:78
+#: ../templates/default/vehicles.tpl:97
 msgid "Color:"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:35
+#: ../templates/default/vehicles.tpl:54
 #, fuzzy
 msgid "First circulation date:"
 msgstr "Fecha de creación:"
+
+#: ../vehicles_edit.php:91 ../vehicles_edit.php:101 ../vehicles_edit.php:110
+#: ../vehicles_edit.php:127
+#, fuzzy
+msgid "- Mandatory field %s empty."
+msgstr "- Campo obligatorio no rellenado."
 
 #: ../object.php:53 ../models.php:53
 msgid "Change color '%s'"
@@ -51,7 +57,7 @@ msgstr "¿Quiere verdaderamente eliminar esta transacción de la base de datos?"
 msgid "New transmission"
 msgstr "Nueva transacción"
 
-#: ../templates/default/vehicles.tpl:14
+#: ../templates/default/vehicles.tpl:33
 #, fuzzy
 msgid "Model:"
 msgstr "[sup]"
@@ -61,7 +67,7 @@ msgstr "[sup]"
 msgid "New finition"
 msgstr "Nueva instalación:"
 
-#: ../templates/default/menu.tpl:5
+#: ../object.php:53 ../templates/default/menu.tpl:5
 msgid "Colors list"
 msgstr ""
 
@@ -75,10 +81,15 @@ msgstr ""
 msgid "Change finition '%s'"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:31
+#: ../templates/default/vehicles.tpl:50
 #, fuzzy
 msgid "First registration date:"
 msgstr "Fecha de creación:"
+
+#: ../classes/auto.class.php:135
+#, fuzzy
+msgid "engine size"
+msgstr "Tamaño del tipo de letra:"
 
 #: ../object.php:84 ../models.php:84
 #, fuzzy
@@ -91,15 +102,15 @@ msgstr "¿Quiere verdaderamente eliminar esta contribución de la base de datos?"
 msgid "no record found"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:80
+#: ../templates/default/vehicles.tpl:99
 msgid "Choose a color"
 msgstr ""
 
-#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:222
+#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:244
 msgid "Owners"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:6
+#: ../templates/default/vehicles.tpl:25
 #, fuzzy
 msgid "Car's base informations"
 msgstr "Otras informaciones:"
@@ -111,7 +122,7 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../templates/default/vehicles.tpl:131
+#: ../templates/default/vehicles.tpl:150
 #, fuzzy
 msgid "Chassis number:"
 msgstr "Número de transacción:"
@@ -121,9 +132,14 @@ msgstr "Número de transacción:"
 msgid "New state"
 msgstr "Siguiente paso"
 
-#: ../templates/default/vehicles.tpl:73
+#: ../templates/default/vehicles.tpl:92
 msgid "Show full car state history"
 msgstr ""
+
+#: ../classes/auto.class.php:129
+#, fuzzy
+msgid "registration"
+msgstr "Realizado por:"
 
 #: ../templates/default/vehicles_list.tpl:56
 #, fuzzy
@@ -136,7 +152,7 @@ msgstr "Añadir una contribución"
 msgid "Actions"
 msgstr "Acciones"
 
-#: ../templates/default/vehicles.tpl:74
+#: ../templates/default/vehicles.tpl:93
 #, fuzzy
 msgid "Change car's owner"
 msgstr "Envíeme mi contraseña"
@@ -152,7 +168,7 @@ msgstr "[sup]"
 msgid "Name"
 msgstr "Nombre:"
 
-#: ../templates/default/vehicles.tpl:89
+#: ../templates/default/vehicles.tpl:108
 #, fuzzy
 msgid "Choose a state"
 msgstr "Siguiente paso"
@@ -161,9 +177,19 @@ msgstr "Siguiente paso"
 msgid "New body"
 msgstr ""
 
+#: ../classes/auto.class.php:128
+#, fuzzy
+msgid "model"
+msgstr "[sup]"
+
 #: ../templates/default/object_show.tpl:17
 msgid "The brand '%s' does not have any registered model at this time."
 msgstr ""
+
+#: ../classes/auto.class.php:131
+#, fuzzy
+msgid "first circulation date"
+msgstr "Fecha de creación:"
 
 #: ../templates/default/object_show.tpl:17
 #, fuzzy
@@ -172,12 +198,11 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../templates/default/vehicles.tpl:17
+#: ../templates/default/vehicles.tpl:36
 msgid "Choose a brand"
 msgstr ""
 
-#: ../object.php:131 ../models.php:144 ../vehicles_edit.php:76
-#: ../vehicles_list.php:80
+#: ../object.php:131 ../models.php:144 ../vehicles_list.php:80
 msgid "- You must provide a value!"
 msgstr ""
 
@@ -196,7 +221,7 @@ msgstr "[mod]"
 msgid "Change state '%s'"
 msgstr ""
 
-#: ../classes/auto.class.php:106
+#: ../classes/auto.class.php:157
 msgid "Petrol"
 msgstr ""
 
@@ -210,12 +235,11 @@ msgstr ""
 msgid "Model"
 msgstr "[sup]"
 
-#: ../object.php:136 ../models.php:149 ../vehicles_edit.php:81
-#: ../vehicles_list.php:85
+#: ../object.php:136 ../models.php:149 ../vehicles_list.php:85
 msgid "- An error occured while saving record. Please try again."
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:73
+#: ../templates/default/vehicles.tpl:92
 msgid "Car state history"
 msgstr ""
 
@@ -224,7 +248,7 @@ msgid "[admin]"
 msgstr "[admin]"
 
 #: ../object.php:100 ../models.php:100 ../templates/default/model.tpl:22
-#: ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:14
+#: ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:33
 #: ../templates/default/vehicles_list.tpl:9
 #, fuzzy
 msgid "Brand"
@@ -237,7 +261,7 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../classes/auto.class.php:109
+#: ../classes/auto.class.php:160
 msgid "Electricity"
 msgstr ""
 
@@ -251,6 +275,15 @@ msgstr "Señora"
 msgid "Select one brand"
 msgstr "Selección:"
 
+#: ../classes/auto.class.php:136
+msgid "color"
+msgstr ""
+
+#: ../vehicles_edit.php:118
+#, fuzzy
+msgid "- Wrong date format for %s (dd/mm/yyyy)!"
+msgstr "- ¡Formato de fecha (dd/mm/aaaa) incorrecto!"
+
 #: ../object.php:64 ../models.php:64
 msgid "Add new state"
 msgstr ""
@@ -259,7 +292,7 @@ msgstr ""
 msgid "Change body '%s'"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:104
+#: ../templates/default/vehicles.tpl:123
 #, fuzzy
 msgid "Body:"
 msgstr "Método de envío de correo:"
@@ -271,10 +304,14 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../templates/default/vehicles.tpl:122
+#: ../templates/default/vehicles.tpl:141
 #, fuzzy
 msgid "Finition:"
 msgstr "Contribuciones"
+
+#: ../vehicles_edit.php:141
+msgid "- You must choose a fuel in the list"
+msgstr ""
 
 #: ../templates/default/model.tpl:30
 msgid ""
@@ -282,12 +319,12 @@ msgid ""
 "register models."
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:102
+#: ../templates/default/vehicles.tpl:121
 #, fuzzy
 msgid "Car's technical informations"
 msgstr "Información general:"
 
-#: ../templates/default/vehicles.tpl:87
+#: ../templates/default/vehicles.tpl:106
 #, fuzzy
 msgid "State:"
 msgstr "Estado"
@@ -302,16 +339,17 @@ msgstr "Permisos de los ficheros"
 msgid "New vehicle"
 msgstr "Añadir una contribución"
 
-#: ../classes/auto.class.php:110
+#: ../classes/auto.class.php:161
 msgid "Bio"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:74
+#: ../templates/default/vehicles.tpl:93
 #, fuzzy
 msgid "Change"
 msgstr "Cancelar"
 
 #: ../templates/default/object.tpl:9 ../templates/default/model.tpl:6
+#: ../templates/default/vehicles.tpl:4
 msgid "- ERROR -"
 msgstr "- ERROR -"
 
@@ -326,7 +364,7 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../templates/default/vehicles.tpl:106
+#: ../templates/default/vehicles.tpl:125
 msgid "Choose a body"
 msgstr ""
 
@@ -334,17 +372,17 @@ msgstr ""
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../templates/default/menu.tpl:7
+#: ../object.php:71 ../templates/default/menu.tpl:7
 #, fuzzy
 msgid "Finitions list"
 msgstr "Contribuciones"
 
-#: ../templates/default/vehicles.tpl:240
+#: ../templates/default/vehicles.tpl:262
 msgid "Click to choose this owner for current car"
 msgstr ""
 
 #: ../templates/default/object.tpl:26 ../templates/default/model.tpl:36
-#: ../templates/default/vehicles.tpl:154
+#: ../templates/default/vehicles.tpl:173
 msgid "Save"
 msgstr "Grabar"
 
@@ -362,7 +400,12 @@ msgstr "rojo"
 msgid "Create a new model for brand '%s'"
 msgstr "Obligatorio"
 
-#: ../templates/default/vehicles.tpl:145
+#: ../classes/auto.class.php:133
+#, fuzzy
+msgid "seats"
+msgstr "Estado:"
+
+#: ../templates/default/vehicles.tpl:164
 msgid "Choose a fuel"
 msgstr ""
 
@@ -371,6 +414,11 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:52
 msgid "Selection:"
 msgstr "Selección:"
+
+#: ../classes/auto.class.php:130
+#, fuzzy
+msgid "first registration date"
+msgstr "Fecha de creación:"
 
 #: ../templates/default/object_show.tpl:9
 #, fuzzy
@@ -381,12 +429,17 @@ msgstr "Obligatorio"
 msgid "Nickname"
 msgstr "Alias"
 
-#: ../templates/default/vehicles.tpl:47
+#: ../templates/default/vehicles.tpl:66
 #, fuzzy
 msgid "Comment:"
 msgstr "Comentarios:"
 
-#: ../templates/default/menu.tpl:9
+#: ../vehicles_edit.php:116
+#, fuzzy
+msgid "- Non valid date for %s!"
+msgstr "- ¡Fecha inválida!"
+
+#: ../object.php:89 ../templates/default/menu.tpl:9
 #, fuzzy
 msgid "Transmissions list"
 msgstr "Permisos de los ficheros"
@@ -395,16 +448,16 @@ msgstr "Permisos de los ficheros"
 msgid "New model"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:115
+#: ../templates/default/vehicles.tpl:134
 #, fuzzy
 msgid "Choose a transmission"
 msgstr "Nueva transacción"
 
-#: ../templates/default/vehicles.tpl:9
+#: ../templates/default/vehicles.tpl:28
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../templates/default/vehicles.tpl:56
+#: ../templates/default/vehicles.tpl:75
 msgid "Picture:"
 msgstr "Foto:"
 
@@ -412,18 +465,26 @@ msgstr "Foto:"
 msgid "Change brand '%s'"
 msgstr ""
 
-#: ../templates/default/menu.tpl:10
+#: ../object.php:98 ../templates/default/menu.tpl:10
 #, fuzzy
 msgid "Brands list"
 msgstr "y"
 
-#: ../templates/default/vehicles.tpl:113
+#: ../templates/default/vehicles.tpl:132
 #, fuzzy
 msgid "Transmission:"
 msgstr "Permisos de los ficheros"
 
 #: ../templates/default/vehicles_list.tpl:1 ../vehicles_list.php:115
 msgid "Vehicles list"
+msgstr ""
+
+#: ../vehicles_edit.php:182
+msgid "- You must choose a %s in the list"
+msgstr ""
+
+#: ../vehicles_edit.php:190
+msgid "- you must attach an owner to this car"
 msgstr ""
 
 #: ../object.php:89 ../models.php:89
@@ -439,6 +500,20 @@ msgstr ""
 msgid "[M]"
 msgstr "[H]"
 
+#: ../classes/auto.class.php:127
+#, fuzzy
+msgid "name"
+msgstr "Nombre completo"
+
+#: ../classes/auto.class.php:134
+msgid "horsepower"
+msgstr ""
+
+#: ../vehicles_edit.php:132
+#, fuzzy
+msgid "- You must enter a positive integer for %s"
+msgstr "¡Los correos deben llevar un remitente!"
+
 #: ../models.php:209 ../templates/default/menu.tpl:11
 msgid "Models list"
 msgstr ""
@@ -447,7 +522,7 @@ msgstr ""
 msgid "NB : The mandatory fields are in"
 msgstr "Nota: los campos obligatorios aparecen en"
 
-#: ../templates/default/vehicles.tpl:23
+#: ../templates/default/vehicles.tpl:42
 msgid "Choose a model"
 msgstr ""
 
@@ -455,7 +530,7 @@ msgstr ""
 msgid "Add new body"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:96
+#: ../templates/default/vehicles.tpl:115
 #, fuzzy
 msgid "Registration:"
 msgstr "Realizado por:"
@@ -469,7 +544,7 @@ msgstr ""
 msgid "Change model '%s'"
 msgstr "Permisos de los ficheros"
 
-#: ../classes/auto.class.php:107
+#: ../classes/auto.class.php:158
 msgid "Diesel"
 msgstr ""
 
@@ -496,7 +571,7 @@ msgstr "Añadir una contribución"
 msgid "no member"
 msgstr "ningún socio"
 
-#: ../templates/default/vehicles.tpl:39
+#: ../templates/default/vehicles.tpl:58
 #, fuzzy
 msgid "Mileage:"
 msgstr "Mensaje:"
@@ -512,7 +587,7 @@ msgstr ""
 msgid "Cars list"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:59
+#: ../templates/default/vehicles.tpl:78
 msgid "Delete image"
 msgstr "Borrar la imagen"
 
@@ -522,7 +597,7 @@ msgstr "Borrar la imagen"
 msgid "Do you really want to delete the model '%s'?"
 msgstr "¿Quiere verdaderamente eliminar esta contribución de la base de datos?"
 
-#: ../templates/default/vehicles.tpl:139
+#: ../templates/default/vehicles.tpl:158
 #, fuzzy
 msgid "Engine size:"
 msgstr "Tamaño del tipo de letra:"
@@ -533,7 +608,7 @@ msgstr "Tamaño del tipo de letra:"
 msgid "(Un)Check all"
 msgstr "(Des)Marcar todo"
 
-#: ../templates/default/vehicles.tpl:54 ../templates/default/vehicles.tpl:57
+#: ../templates/default/vehicles.tpl:73 ../templates/default/vehicles.tpl:76
 msgid "Car's photo"
 msgstr ""
 
@@ -542,7 +617,7 @@ msgstr ""
 msgid "Finition"
 msgstr "Contribuciones"
 
-#: ../templates/default/vehicles.tpl:43
+#: ../templates/default/vehicles.tpl:62
 #, fuzzy
 msgid "Seats:"
 msgstr "Estado:"
@@ -556,7 +631,11 @@ msgstr ""
 msgid "Do you really want to delete the transmission '%s'?"
 msgstr "¿Quiere verdaderamente eliminar esta transacción de la base de datos?"
 
-#: ../templates/default/vehicles.tpl:143
+#: ../templates/default/vehicles.tpl:14
+msgid "- WARNING -"
+msgstr "- ADVERTENCIA -"
+
+#: ../templates/default/vehicles.tpl:162
 msgid "Fuel:"
 msgstr ""
 
@@ -575,29 +654,39 @@ msgstr "Borrar"
 msgid "Do you really want to delete the state '%s'?"
 msgstr "¿Quiere verdaderamente eliminar esta transacción de la base de datos?"
 
-#: ../templates/default/vehicles.tpl:74
+#: ../templates/default/vehicles.tpl:93
 msgid "Current owner:"
 msgstr ""
+
+#: ../classes/auto.class.php:132
+#, fuzzy
+msgid "mileage"
+msgstr "Mensaje:"
 
 #: ../object.php:91 ../models.php:91
 #, fuzzy
 msgid "Add new transmission"
 msgstr "Añadir una transacción"
 
-#: ../templates/default/vehicles.tpl:135
+#: ../templates/default/vehicles.tpl:154
 msgid "Horsepower:"
 msgstr ""
+
+#: ../classes/auto.class.php:137
+#, fuzzy
+msgid "state"
+msgstr "Estado"
 
 #: ../templates/default/owners.tpl:61 ../templates/default/owners.tpl:63
 msgid "[W]"
 msgstr "[M]"
 
-#: ../templates/default/vehicles.tpl:67
+#: ../templates/default/vehicles.tpl:86
 #, fuzzy
 msgid "Current car's state informations"
 msgstr "Información de contacto:"
 
-#: ../templates/default/vehicles.tpl:124
+#: ../templates/default/vehicles.tpl:143
 #, fuzzy
 msgid "Choose a finition"
 msgstr "Nueva instalación:"
@@ -621,7 +710,7 @@ msgstr ""
 "¿Quiere verdaderamente eliminar todas las cuentas seleccionadas (y las "
 "contribuciones relacionadas con ellas)?"
 
-#: ../templates/default/menu.tpl:8
+#: ../object.php:80 ../templates/default/menu.tpl:8
 msgid "Bodies list"
 msgstr ""
 
@@ -630,7 +719,7 @@ msgstr ""
 msgid "- No id provided for modifying this record! (internal)"
 msgstr ""
 
-#: ../models.php:139 ../vehicles_edit.php:71 ../vehicles_list.php:75
+#: ../models.php:139 ../vehicles_list.php:75
 msgid "- You must select a brand!"
 msgstr ""
 
@@ -639,7 +728,7 @@ msgstr ""
 msgid "Change vehicle '%s'"
 msgstr "Permisos de los ficheros"
 
-#: ../classes/auto.class.php:108
+#: ../classes/auto.class.php:159
 msgid "Gas"
 msgstr ""
 
@@ -649,14 +738,10 @@ msgstr ""
 msgid "Pages:"
 msgstr "Páginas:"
 
-#: ../templates/default/menu.tpl:6
+#: ../object.php:62 ../templates/default/menu.tpl:6
 #, fuzzy
 msgid "States list"
 msgstr "Estado"
-
-#, fuzzy
-#~ msgid "$name"
-#~ msgstr "Nombre completo"
 
 #~ msgid "among:"
 #~ msgstr "entre:"
@@ -850,9 +935,6 @@ msgstr "Estado"
 
 #~ msgid "Management of transactions"
 #~ msgstr "Gestión de transacciones"
-
-#~ msgid "- Non valid date!"
-#~ msgstr "- ¡Fecha inválida!"
 
 #, fuzzy
 #~ msgid "Email sent is disabled in the preferences. Ask galette admin."
@@ -1571,9 +1653,6 @@ msgstr "Estado"
 #~ msgid "Type"
 #~ msgstr "Tipo"
 
-#~ msgid "- Wrong date format (dd/mm/yyyy)!"
-#~ msgstr "- ¡Formato de fecha (dd/mm/aaaa) incorrecto!"
-
 #, fuzzy
 #~ msgid "Generate Member Card"
 #~ msgstr "Generación de etiquetas"
@@ -1759,9 +1838,6 @@ msgstr "Estado"
 #~ msgid "Man"
 #~ msgstr "Hombre"
 
-#~ msgid "- You must indicate a sender name for emails!"
-#~ msgstr "¡Los correos deben llevar un remitente!"
-
 #, fuzzy
 #~ msgid "- The name field cannot be void."
 #~ msgstr "- El campo Apellido no puede estar vacío."
@@ -1886,9 +1962,6 @@ msgstr "Estado"
 #, fuzzy
 #~ msgid "Logo"
 #~ msgstr "Logo:"
-
-#~ msgid "- WARNING -"
-#~ msgstr "- ADVERTENCIA -"
 
 #, fuzzy
 #~ msgid "annual fee (to be paid)"
@@ -2181,9 +2254,6 @@ msgstr "Estado"
 #, fuzzy
 #~ msgid "Creation of the tables"
 #~ msgstr "Creación de la base de datos"
-
-#~ msgid "- Mandatory field empty."
-#~ msgstr "- Campo obligatorio no rellenado."
 
 #~ msgid "Please chose the parameters of the admin account on Galette"
 #~ msgstr ""
