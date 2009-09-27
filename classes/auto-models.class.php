@@ -53,6 +53,7 @@ class AutoModels {
 	* @param integer id model's id to load. Defaults to null
 	*/
 	public function __construct($id = null){
+		$this->brand = new AutoBrands();
 		if( is_int($id) ) $this->load($id);
 	}
 
@@ -110,7 +111,7 @@ class AutoModels {
 		$this->id = $r->id_model;
 		$this->model = $r->model;
 		$id_brand = AutoBrands::PK;
-		$this->brand = new AutoBrands( (int)$r->$id_brand );
+		$this->brand->load( (int)$r->$id_brand );
 
 		$result->free();
 

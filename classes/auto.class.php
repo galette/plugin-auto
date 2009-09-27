@@ -122,7 +122,7 @@ class Auto {
 	/**
 	* Default constructor
 	*/
-	public function __construct(){
+	public function __construct($args = null){
 		$this->propnames = array(
 			'name'				=>	_T("name"),
 			'model'				=>	_T("model"),
@@ -136,9 +136,7 @@ class Auto {
 			'color'				=>	_T("color"),
 			'state'				=>	_T("state")
 		);
-		//internal values are automatically updated
-		//$this->internals = array ('id', 'creation_date', 'update_date', 'history', 'picture', 'propnames', 'internals', 'fields');
-		// initialize linked objects properly
+
 		$this->model = new AutoModels();
 		$this->color = new AutoColors();
 		$this->state = new AutoStates();
@@ -147,6 +145,70 @@ class Auto {
 		$this->finition = new AutoFinitions();
 		$this->picture = new AutoPicture();
 		$this->body = new AutoBodies();
+		if ( is_object($args) ){
+			$this->loadFromRS($args);
+		}
+	}
+
+	/**
+	* Loads a car from its id
+	* @param id the identifiant for the car to load
+	*/
+	public function load($id){
+		global $mdb, $log;
+
+		$requete = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . ' WHERE ' . self::PK . '=' . $id;
+
+		$result = $mdb->query( $requete );
+
+		if (MDB2::isError($result)) {
+			$log->log('Cannot load car form id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			return false;
+		}
+
+		$this->loadFromRS($result->fetchRow());
+		$result->free();
+
+		return true;
+	}
+
+	/**
+	* Populate object from a resultset row
+	*/
+	private function loadFromRS($r){
+		$pk = self::PK;
+		$this->id = $r->$pk;
+		$this->registration = $r->car_registration;
+		$this->name = $r->car_name;
+		$this->first_registration_date = $r->car_first_registration_date;
+		$this->first_circulation_date = $r->car_first_circulation_date;
+		$this->mileage = $r->car_mileage;
+		$this->comment = $r->car_comment;
+		$this->chassis_number = $r->car_chassis_number;
+		$this->seats = $r->car_seats;
+		$this->horsepower = $r->car_horsepower;
+		$this->engine_size = $r->car_engine_size;
+		$this->creation_date = $r->car_creation_date;
+		//$this->update_date = $r->car_update_date;
+		$this->fuel = $r->car_fuel;
+		//External objects
+		//$this->picture = new AutoPicture( (int)$this->id );
+		$fpk = AutoFinitions::PK;
+		$this->finition->load( (int)$r->$fpk );
+		$cpk = AutoColors::PK;
+		$this->color->load( (int)$r->$cpk );
+		$mpk = AutoModels::PK;
+		$this->model->load( (int)$r->$mpk );
+		$tpk = AutoTransmissions::PK;
+		$this->transmission->load( (int)$r->$tpk );
+		$bpk = AutoBodies::PK;
+		$this->body->load( (int)$r->$bpk );
+		/** TODO: car's history */
+		//$this->history->load( $this->id );
+		/** FIXME: owner is not saved in database ! */
+		//$this->owner = new Adherent( $r->owner );
+		$spk = AutoStates::PK;
+		$this->state->load( (int)$r->$spk );
 	}
 
 	/**
@@ -166,10 +228,18 @@ class Auto {
 	/**
 	* Get the list of all vehicles
 	*/
-	public function getList(){
+	/*public function getList(){
+		global $mdb, $log;
 		$query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE;
-		return array();
-	}
+
+		$result = $mdb->query( $query );
+		if( MDB2::isError($result) ){
+			$log->log('An error has occured listing cars | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			return false;
+		} else {
+			return $result->fetchAll();
+		}
+	}*/
 
 	/**
 	* Stores the vehicle in the database

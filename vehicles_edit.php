@@ -45,11 +45,14 @@ require_once('_config.inc.php');
 
 require_once('classes/auto.class.php');
 
-$is_new = ( isset($_GET[Auto::PK]) && is_int($_GET[Auto::PK]) ) ? false : true;
+$is_new = ( isset($_GET[Auto::PK]) && is_int((int)$_GET[Auto::PK]) ) ? false : true;
 $set = get_form_value('set', null);
 
 $auto = new Auto();
 $title = ( $is_new ) ? _T("New vehicle") : _T("Change vehicle '%s'");
+if( !$is_new ){
+	$auto->load( (int)$_GET[Auto::PK] );
+}
 
 //We have a new or a modified object
 if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0) == 1 && !isset($_POST['cancel']) ){
