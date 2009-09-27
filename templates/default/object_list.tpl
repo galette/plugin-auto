@@ -2,7 +2,7 @@
 {assign var='pk' value=$obj->pk}
 {assign var='field' value=$obj->field}
 {assign var='list' value=$obj->getList()}
-		<h1 id="titre">{$field_name}</h1>
+		<h1 id="titre">{$title}</h1>
 
 		<form action="" method="post" id="listform">
 		<table id="listing">

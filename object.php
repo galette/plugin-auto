@@ -50,7 +50,7 @@ switch( $set ) {
 	case 'colors':
 		require_once('classes/auto-colors.class.php');
 		$obj = new AutoColors();
-		$title = ( $is_new ) ? _T("New color") : _T("Change color '%s'");
+		$title = ( $is_new ) ? _T("New color") : ( isset($_GET[AutoColors::PK]) ? _T("Change color '%s'") : _T("Colors list") );
 		$field_name = _T("Color");
 		$add_text = _T("Add new color");
 		$deletes_text = _T("Do you really want to delete selected colors?");
@@ -59,7 +59,7 @@ switch( $set ) {
 	case 'states':
 		require_once('classes/auto-states.class.php');
 		$obj = new AutoStates();
-		$title = ( $is_new ) ? _T("New state") : _T("Change state '%s'");
+		$title = ( $is_new ) ? _T("New state") : ( isset($_GET[AutoStates::PK]) ? _T("Change state '%s'") : _T("States list") );
 		$field_name = _T("State");
 		$add_text = _T("Add new state");
 		$deletes_text = _T("Do you really want to delete selected states?");
@@ -68,7 +68,7 @@ switch( $set ) {
 	case 'finitions':
 		require_once('classes/auto-finitions.class.php');
 		$obj = new AutoFinitions();
-		$title = ( $is_new ) ? _T("New finition") : _T("Change finition '%s'");
+		$title = ( $is_new ) ? _T("New finition") : ( isset($_GET[AutoFinitions::PK]) ? _T("Change finition '%s'") : _T("Finitions list") );
 		$field_name = _T("Finition");
 		$add_text = _T("Add new finition");
 		$deletes_text = _T("Do you really want to delete selected finitions?");
@@ -77,7 +77,7 @@ switch( $set ) {
 	case 'bodies':
 		require_once('classes/auto-bodies.class.php');
 		$obj = new AutoBodies();
-		$title = ( $is_new ) ? _T("New body") : _T("Change body '%s'");
+		$title = ( $is_new ) ? _T("New body") : ( isset($_GET[AutoBodies::PK]) ? _T("Change body '%s'") : _T("Bodies list") );
 		$field_name = _T("Body");
 		$add_text = _T("Add new body");
 		$deletes_text = _T("Do you really want to delete selected bodies?");
@@ -86,7 +86,7 @@ switch( $set ) {
 	case 'transmissions':
 		require_once('classes/auto-transmissions.class.php');
 		$obj = new AutoTransmissions();
-		$title = ( $is_new ) ? _T("New transmission") : _T("Change transmission '%s'");
+		$title = ( $is_new ) ? _T("New transmission") : ( isset($_GET[AutoTransmissions::PK]) ? _T("Change transmission '%s'") : _T("Transmissions list") );
 		$field_name = _T("Transmission");
 		$add_text = _T("Add new transmission");
 		$deletes_text = _T("Do you really want to delete selected transmissions?");
@@ -95,7 +95,7 @@ switch( $set ) {
 	case 'brands':
 		require_once('classes/auto-brands.class.php');
 		$obj = new AutoBrands();
-		$title = ( $is_new ) ? _T("New brand") : _T("Change brand '%s'");
+		$title = ( $is_new ) ? _T("New brand") : ( isset($_GET[AutoBrands::PK]) ? _T("Change brand '%s'") : _T("Brands list"));
 		$show_title = _T("Brand '%s'");
 		$field_name = _T("Brand");
 		$add_text = _T("Add new brand");
@@ -160,7 +160,9 @@ $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('set', $set);
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
-$tpl->assign('show', $can_show);
+if(isset($can_show)) $tpl->assign('show', $can_show);
+$tpl->assign('field_name', $field_name);
+
 if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null) != null ) {
 	$obj->load( get_numeric_form_value('show', '') );
 	if( $obj->name == 'brands' ) {
@@ -169,7 +171,6 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	$title = str_replace('%s', $obj->value, $show_title);
 	$tpl->assign('title', $title);
 	$tpl->assign('obj', $obj);
-	$tpl->assign('field_name', $field_name);
 	$content = $tpl->fetch("object_show.tpl");
 } else if( isset( $_GET[$obj->pk] ) || $is_new ) {
 	if( !$is_new ){
@@ -178,17 +179,17 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	}
 	$tpl->assign('title', $title);
 	$tpl->assign('obj', $obj);
-	$tpl->assign('field_name', $field_name);
 	$content = $tpl->fetch("object.tpl");
 } else {
 	$tpl->assign('add_text', $add_text);
 	$tpl->assign('deletes_text', $deletes_text);
 	//$delete_text = str_replace('%s', $obj->value, $delete_text);
-	$tpl->assign('field_name', $field_name);
+	$tpl->assign('title', $title);
 	$tpl->assign('delete_text', $delete_text);
 	$tpl->assign('obj', $obj);
 	$content = $tpl->fetch("object_list.tpl");
 }
+
 $tpl->assign("content",$content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
