@@ -32,7 +32,7 @@ $base_path = '../../';
 require_once($base_path . 'includes/galette.inc.php');
 if ( !$login->isLogged() )
 {
-	header("location: index.php");
+	header('location: ' . $base_path . 'index.php');
 	die();
 }
 

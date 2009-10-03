@@ -36,7 +36,7 @@ require_once($base_path . 'includes/galette.inc.php');
 require_once('classes/auto_picture.class.php');
 
 if( !$login->isLogged() ){
-	header("location: index.php");
+	header('location: ' . $base_path . 'index.php');
 	die();
 }
 
