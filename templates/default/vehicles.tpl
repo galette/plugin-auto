@@ -89,7 +89,7 @@
 	{if $login->isAdmin()}
 				<p class="notform">
 					{* Does car's history should be visible by the actual owner? *}
-					<a href="#" title="{_T string="Show full car state history"}" id="state_history">{_T string="Car state history"}</a>
+					<a href="history.php?id_car={$car->id}" title="{_T string="Show full car state history"}" id="state_history">{_T string="Car state history"}</a>
 					<strong class="fright"><a href="#" id="change_owner" title="{_T string="Change car's owner"}">{_T string="Change"}</a> {_T string="Current owner:"} <span id="current_owner_name">{$car->owner->sfullname}</span></strong>
 				</p>
 	{/if}
@@ -262,6 +262,32 @@
 							{rdelim}).attr('title', '{_T string="Click to choose this owner for current car"}');
 						{rdelim});
 					{rdelim}
+
+					$('#state_history').click(function(){ldelim}
+						$.ajax({ldelim}
+							url: this.href + '&amp;ajax=true',
+							data: {ldelim}ajax: true{rdelim},
+							success: function(res){ldelim}
+								_history_dialog(res);
+							{rdelim}
+						{rdelim});
+						return false;
+					{rdelim});
+
+					var _history_dialog = function(res){ldelim}
+						var _el = $('<div id="history_list" title="{_T string="Car\\'s history"}"> </div>');
+						_el.appendTo('#modifform').dialog({ldelim}
+							modal: true,
+							hide: 'fold',
+							width: '60%',
+							height: 400,
+							close: function(event, ui){ldelim}
+								_el.remove();
+							{rdelim}
+						{rdelim});
+						$('#history_list').append( res );
+					{rdelim}
+
 	{/if}
 				{rdelim});
 			//]]>

@@ -224,8 +224,7 @@ $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
 if( !$is_new ){
 	$auto->load( get_numeric_form_value(Auto::PK, null) );
 }
-//print_r($auto->color);
-//print_r($auto->owner);
+
 $tpl->assign('require_calendar', true);
 $tpl->assign('require_dialog', true);
 $tpl->assign('title', $title);

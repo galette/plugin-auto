@@ -5,6 +5,9 @@ PACKAGE = galette_auto
 MKLANG = ../../../lang/make_lang_l12n.py
 PHP_SOURCES = ../object.php \
 ../models.php \
+../vehicles_edit.php \
+../vehicles_list.php \
+../history.php \
 ../templates/default/menu.tpl \
 ../templates/default/object_list.tpl \
 ../templates/default/object.tpl \
@@ -14,16 +17,15 @@ PHP_SOURCES = ../object.php \
 ../templates/default/owners.tpl \
 ../templates/default/vehicles.tpl \
 ../templates/default/vehicles_list.tpl \
-../vehicles_edit.php \
-../vehicles_list.php \
+../templates/default/history.tpl \
 ../classes/auto.class.php
 
 
 all : messages.po lang
 	@echo "Génération des fichiers *.po :"
 	@for l in ${LANGUAGES}; do \
-	  echo "  Mise à jour de $$l.po"; \
-	  msgmerge -U $$l.po messages.po >/dev/null 2>&1; \
+	  echo -n "  Mise à jour de $$l.po"; \
+	  msgmerge -U $$l.po messages.po >/dev/null ; \
 	  mkdir -p ${INSTALLDIR}/$$l/LC_MESSAGES; \
 	  echo "    formatage de ${INSTALLDIR}/$$l/LC_MESSAGES/${PACKAGE}.mo."; \
 	  msgfmt $$l.po -o ${INSTALLDIR}/$$l/LC_MESSAGES/${PACKAGE}.mo.new; \

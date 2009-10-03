@@ -30,9 +30,11 @@
 
 require_once(WEB_ROOT . 'classes/picture.class.php');
 require_once('_config.inc.php');
+require_once('auto.class.php');
 
 class AutoPicture extends Picture{
 	protected $tbl_prefix = AUTO_PREFIX;
+	const PK = Auto::PK;
 
 	/**
 	* @override

@@ -119,8 +119,8 @@ CREATE TABLE `galette_auto_cars` (
 
 CREATE TABLE `galette_auto_history` (
   `id_car` int(11) NOT NULL,
-  `id_adh` int(10) NOT NULL,
-  `history_date` date NOT NULL,
+  `id_adh` int(10) unsigned NOT NULL,
+  `history_date` datetime NOT NULL,
   `car_registration` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `id_color` int(11) NOT NULL,
   `id_state` int(11) NOT NULL,
@@ -133,4 +133,16 @@ CREATE TABLE `galette_auto_history` (
   CONSTRAINT `galette_auto_history_member` FOREIGN KEY (`id_adh`) REFERENCES `galette_adherents` (`id_adh`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `galette_auto_history_color` FOREIGN KEY (`id_color`) REFERENCES `galette_auto_colors` (`id_color`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `galette_auto_history_state` FOREIGN KEY (`id_state`) REFERENCES `galette_auto_states` (`id_state`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Table structure for table `galette_auto_pictures`
+--
+
+CREATE TABLE `galette_auto_pictures` (
+  `id_car` int(11) NOT NULL,
+  `picture` mediumblob NOT NULL,
+  `format` varchar(10) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_car`),
+  CONSTRAINT `galette_auto_picture_car` FOREIGN KEY (`id_car`) REFERENCES `galette_auto_cars` (`id_car`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

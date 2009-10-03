@@ -47,6 +47,7 @@ require_once('auto-colors.class.php');
 require_once('auto-finitions.class.php');
 require_once('auto-states.class.php');
 require_once('auto-transmissions.class.php');
+require_once('auto-history.class.php');
 
 class Auto {
 	const TABLE = 'cars';
@@ -86,7 +87,6 @@ class Auto {
 	private $horsepower;			//puissance fiscale
 	private $engine_size;			//cylindrée
 	private $creation_date;			//date de création
-	private $update_date;			//usefull ? better to get it from history //date de mise à jour de la fiche
 	private $fuel;				//carburant
 
 	//External objects
@@ -108,17 +108,21 @@ class Auto {
 
 	private $propnames;			//textual properties names
 
+	//do we have to fire an history entry?
+	private $fire_history = false;
+
 	//internal properties (not updatable outside the object)
 	private $internals = array (
 		'id', 
 		'creation_date',
-		'update_date',
 		'history',
 		'picture',
 		'propnames',
 		'internals',
-		'fields'
+		'fields',
+		'fire_history'
 	);
+
 	/**
 	* Default constructor
 	*/
@@ -145,6 +149,7 @@ class Auto {
 		$this->finition = new AutoFinitions();
 		$this->picture = new AutoPicture();
 		$this->body = new AutoBodies();
+		$this->history = new AutoHistory();
 		if ( is_object($args) ){
 			$this->loadFromRS($args);
 		}
@@ -189,10 +194,9 @@ class Auto {
 		$this->horsepower = $r->car_horsepower;
 		$this->engine_size = $r->car_engine_size;
 		$this->creation_date = $r->car_creation_date;
-		//$this->update_date = $r->car_update_date;
 		$this->fuel = $r->car_fuel;
 		//External objects
-		//$this->picture = new AutoPicture( (int)$this->id );
+		$this->picture = new AutoPicture( (int)$this->id );
 		$fpk = AutoFinitions::PK;
 		$this->finition->load( (int)$r->$fpk );
 		$cpk = AutoColors::PK;
@@ -203,12 +207,11 @@ class Auto {
 		$this->transmission->load( (int)$r->$tpk );
 		$bpk = AutoBodies::PK;
 		$this->body->load( (int)$r->$bpk );
-		/** TODO: car's history */
-		//$this->history->load( $this->id );
-		/** FIXME: owner is not saved in database ! */
-		//$this->owner = new Adherent( $r->owner );
+		$opk = Adherent::PK;
+		$this->owner->load( (int)$r->$opk );
 		$spk = AutoStates::PK;
 		$this->state->load( (int)$r->$spk );
+		$this->history->load( (int)$this->id );
 	}
 
 	/**
@@ -249,7 +252,6 @@ class Auto {
 		global $mdb, $log;
 
 		if( $new ) $this->creation_date = date('Y-m-d');
-		$this->update_date = date('Y-m-d');
 
 		$query = '';
 
@@ -329,7 +331,7 @@ class Auto {
 								$query .= $k . '=\'' . $this->$propName . '\', ';
 								break;
 							case 'integer':
-								$query .= $k . '=' . (($this->$propName != '') ? $this->$propName : null) . ', ';
+								$query .= $k . '=' . (($this->$propName != 0 && $this->$propName != '') ? $this->$propName : 'null') . ', ';
 								break;
 							default:
 								$query .= $k . '=\'' . $this->$propName . '\', ';
@@ -348,6 +350,31 @@ class Auto {
 			$log->log('An error has occured ' . (($new)?'inserting':'updating') . ' car | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
 			return false;
 		}
+
+		/** TODO: get the car's id for $new=true */
+
+		//if all goes well, we check to add an entry into car's history
+		foreach($this->history->getLatest() as $k=>$v){
+			if($k != 'history_date' && $this->$k != $v){
+				//if one has been modified, we flag to add an entry event
+				$this->fire_history = true;
+				break;
+			}
+		}
+
+		if( $this->fire_history ){
+			$h_props = array();
+			foreach($this->history->fields as $prop){
+				if( $prop != 'history_date' ) {
+					$h_props[$prop] = $this->$prop;
+				} else {
+					$h_props[$prop] = date('Y-m-d H:i:s');
+				}
+			}
+			$this->history->register( $h_props );
+			$this->fire_history = false;
+		}
+
 		return true;
 	}
 
@@ -391,12 +418,29 @@ class Auto {
 		$forbidden = array();
 		if( !in_array($name, $forbidden) ) {
 			switch($name){
+				case self::PK:
+					return $this->id;
+					break;
+				case Adherent::PK:
+					return $this->owner->id;
+					break;
+				case AutoColors::PK:
+					return $this->color->id;
+					break;
+				case AutoStates::PK:
+					return $this->state->id;
+					break;
+				case 'car_registration':
+					return $this->registration;
+					break;
 				case 'first_registration_date':
 				case 'first_circulation_date':
 				case 'creation_date':
-				case 'update_date':
 					/** FIXME: date function from functions.inc.php does use adodb */
 					return date_db2text($this->$name);
+					break;
+				case AutoColors::PK:
+					return $this->colors->id;
 					break;
 				default:
 					return $this->$name;
