@@ -68,7 +68,7 @@ class AutoBrands extends AutoObject {
 		$result = $mdb->query( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoBrands] Cannot load models list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load models list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 

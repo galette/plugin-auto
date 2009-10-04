@@ -167,7 +167,7 @@ class Auto {
 		$result = $mdb->query( $requete );
 
 		if (MDB2::isError($result)) {
-			$log->log('Cannot load car form id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load car form id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
@@ -227,22 +227,6 @@ class Auto {
 		);
 		return $f;
 	}
-
-	/**
-	* Get the list of all vehicles
-	*/
-	/*public function getList(){
-		global $mdb, $log;
-		$query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE;
-
-		$result = $mdb->query( $query );
-		if( MDB2::isError($result) ){
-			$log->log('An error has occured listing cars | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
-			return false;
-		} else {
-			return $result->fetchAll();
-		}
-	}*/
 
 	/**
 	* Stores the vehicle in the database
@@ -347,7 +331,7 @@ class Auto {
 
 		$result = $mdb->query( $query );
 		if( MDB2::isError($result) ){
-			$log->log('An error has occured ' . (($new)?'inserting':'updating') . ' car | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			$log->log('[' . get_class($this) . '] An error has occured ' . (($new)?'inserting':'updating') . ' car | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
 			return false;
 		}
 
@@ -447,7 +431,7 @@ class Auto {
 					break;
 			}
 		} else {
-			$log->log('[Auto] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
+			$log->log('[' . get_class($this) . '] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
 			return false;
 		}
 	}
@@ -483,7 +467,7 @@ class Auto {
 					break;
 			}
 		} else {
-			$log->log('Trying to set an internal property (`' . $name . '`)', PEAR_LOG_INFO);
+			$log->log('[' . get_class($this) . '] Trying to set an internal property (`' . $name . '`)', PEAR_LOG_INFO);
 			return false;
 		}
 	}

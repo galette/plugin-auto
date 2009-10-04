@@ -151,7 +151,6 @@ if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0)
 			case 'body':
 			case 'state':
 			case 'model':
-				//$value = get_numeric_form_value($prop, 0);
 				if( $value > 0 )
 					$auto->$prop = $value;
 				else {
@@ -198,6 +197,43 @@ if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0)
 				break;
 		}//switch
 	}//foreach
+
+	// picture upload
+	if (isset($_FILES['photo']) ){
+		if ($_FILES['photo']['tmp_name'] !='' ) {
+			if (is_uploaded_file($_FILES['photo']['tmp_name'])){
+				$res = $auto->picture->store($_FILES['photo']);
+				if ( $res < 0) {
+					switch($res){
+						case AutoPicture::INVALID_FILE:
+							$patterns = array('|%s|', '|%t|');
+							$replacements = array($auto->picture->getAllowedExts(), htmlentities($auto->picture->getBadChars()));
+							$error_detected[] = preg_replace($patterns, $replacements, _T("- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t"));
+							break;
+						case AutoPicture::FILE_TOO_BIG:
+							$error_detected[] = preg_replace('|%d|', AutoPicture::MAX_FILE_SIZE, _T("File is too big. Maximum allowed size is %d"));
+							break;
+						case AutoPicture::MIME_NOT_ALLOWED:
+							/** FIXME: should be more descriptive */
+							$error_detected[] = _T("Mime-Type not allowed");
+							break;
+						case AutoPicture::SQL_ERROR:
+						case AutoPicture::SQL_BLOB_ERROR:
+							$error_detected[] = _T("An SQL error has occured.");
+							break;
+						
+					}
+				}
+			}
+		}
+	}
+
+	//delete photo
+	if (isset($_POST['del_photo'])){
+		if (!$auto->picture->delete()){
+			$error_detected[] = _T("An error occured while trying to delete car's photo");
+		}
+	}
 
 	//if no errors were thrown, we can store the car
 	if( count($error_detected) == 0 ){

@@ -19,7 +19,7 @@
 
 $this->register(
 	'Galette Auto',					//Name
-	'Plugin to manage Automobile associations',	//Short description
+	'Plugin to manage Automobile clubs',		//Short description
 	'Johan Cwiklinski',				//Author
 	'0.0.1',					//Version
 	null						//Permissions needed - not yet implemented

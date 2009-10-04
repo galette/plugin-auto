@@ -35,6 +35,8 @@ require_once('auto.class.php');
 class AutoPicture extends Picture{
 	protected $tbl_prefix = AUTO_PREFIX;
 	const PK = Auto::PK;
+	//path is relative to Picture class, not to AutoPicture
+	protected $store_path = '../plugins/Auto/auto_photos/';
 
 	/**
 	* @override

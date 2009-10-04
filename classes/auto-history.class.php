@@ -76,7 +76,7 @@ class AutoHistory{
 		global $mdb, $log;
 
 		if( $id == null || !is_int($id) ){
-			$log->log('[AutoHistory] Unable to load car\'s history : Invalid car id (id was: `' . $id . '`)', PEAR_LOG_ERR);
+			$log->log('[' . get_class($this) . '] Unable to load car\'s history : Invalid car id (id was: `' . $id . '`)', PEAR_LOG_ERR);
 			return false;
 		}
 
@@ -85,7 +85,7 @@ class AutoHistory{
 
 		$result = $mdb->query($query);
 		if (MDB2::isError($result)) {
-			$log->log('[AutoHistory] Cannot get car\'s history (id was ' . $this->id_car . ') | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			$log->log('[' . get_class($this) . '] Cannot get car\'s history (id was ' . $this->id_car . ') | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
 			return false;
 		}
 		$this->entries = $result->fetchAll();
@@ -102,7 +102,7 @@ class AutoHistory{
 
 		$result = $mdb->query($query);
 		if( MDB2::isError($result) ){
-			$log->log('[AutoHistory] Cannot get car\'s latest history entry | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			$log->log('[' . get_class($this) . '] Cannot get car\'s latest history entry | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
 			return false;
 		}
 
@@ -114,7 +114,7 @@ class AutoHistory{
 	*/
 	private function formatEntries(){
 		for($i = 0 ; $i < count($this->entries) ; $i++ ){
-			//put a fromatted date to show
+			//put a formatted date to show
 			$this->entries[$i]->formatted_date = strftime('%d %B %Y', strtotime($this->entries[$i]->history_date));
 			//associate member to current history entry
 			$this->entries[$i]->owner = new Adherent( (int)$this->entries[$i]->id_adh );
@@ -131,7 +131,7 @@ class AutoHistory{
 	*/
 	public function register($props){
 		global $mdb, $log;
-		$log->log('[AutoHistory] Trying to register a new history entry.', PEAR_LOG_DEBUG);
+		$log->log('[' . get_class($this) . '] Trying to register a new history entry.', PEAR_LOG_DEBUG);
 
 		$fields = $this->fields;
 		ksort($fields);
@@ -145,10 +145,10 @@ class AutoHistory{
 
 		$result = $mdb->query($query);
 		if( MDB2::isError($result) ){
-			$log->log('[AutoHistory] Cannot register new histroy entry | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
+			$log->log('[' . get_class($this) . '] Cannot register new histroy entry | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_ERR);
 			return false;
 		} else {
-			$log->log('[AutoHistory] new AutoHistory entry set successfully.', PEAR_LOG_DEBUG);
+			$log->log('[' . get_class($this) . '] new AutoHistory entry set successfully.', PEAR_LOG_DEBUG);
 		}
 	}
 
@@ -167,7 +167,7 @@ class AutoHistory{
 				return $this->entries;
 				break;
 			default:
-				$log->log('[AutoHistory] Trying to get an unknown property (' . $name . ')', PEAR_LOG_INFO);
+				$log->log('[' . get_class($this) . '] Trying to get an unknown property (' . $name . ')', PEAR_LOG_INFO);
 				break;
 		}
 	}

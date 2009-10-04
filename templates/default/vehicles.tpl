@@ -19,7 +19,7 @@
 			</ul>
 		</div>
 {/if}
-		<form action="" method="get" id="modifform">
+		<form action="" method="post" id="modifform" enctype="multipart/form-data">
 		<div class="bigtable">
 			<fieldset class="cssform">
 				<legend>{_T string="Car's base informations"}</legend>
@@ -44,7 +44,6 @@
 						<option value="{$model->id_model}"{if $model->id_model eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
 	{/foreach}
 					</select>
-					<!--<input type="text" name="bradn" id="name" value="{$car->name}" maxlength="20"/>-->
 				</p>
 				<p>
 					<label for="first_registration_date" class="bline required">{_T string="First registration date:"}</label>

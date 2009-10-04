@@ -77,7 +77,7 @@ class AutoModels {
 		$result = $mdb->query( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoModels] Cannot load models list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load models list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
@@ -103,7 +103,7 @@ class AutoModels {
 		$result = $mdb->query( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoModels] Cannot load model from id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load model from id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
@@ -131,7 +131,7 @@ class AutoModels {
 		$result = $mdb->execute( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoModels] Cannot store model values `' . $this->id . '`, `' . $this->value . '`, `' . $this->brand->id_brand .  '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot store model values `' . $this->id . '`, `' . $this->value . '`, `' . $this->brand->id_brand .  '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 		return true;
@@ -146,7 +146,7 @@ class AutoModels {
 		$result = $mdb->execute( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoModels] Cannot delete model from ids `' . implode(' - ', $ids) . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot delete model from ids `' . implode(' - ', $ids) . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 		return true;
@@ -169,7 +169,7 @@ class AutoModels {
 					break;
 			}
 		else {
-			$log->log('[AutoModels] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
+			$log->log('[' . get_class($this) . '] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
 			return false;
 		}
 	}

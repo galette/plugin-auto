@@ -67,7 +67,7 @@ abstract class AutoObject {
 		$result = $mdb->query( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoObject] Cannot load ' . $this->name . ' list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load ' . $this->name . ' list | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
@@ -82,7 +82,7 @@ abstract class AutoObject {
 		$result = $mdb->query( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoObject] Cannot load ' . $this->name . ' from id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot load ' . $this->name . ' from id `' . $id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
@@ -112,7 +112,7 @@ abstract class AutoObject {
 		$result = $mdb->execute( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoObject] Cannot store ' . $this->name . ' values `' . $this->id . '`, `' . $this->value . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot store ' . $this->name . ' values `' . $this->id . '`, `' . $this->value . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 		return true;
@@ -127,7 +127,7 @@ abstract class AutoObject {
 		$result = $mdb->execute( $query );
 
 		if (MDB2::isError($result)) {
-			$log->log('[AutoObject] Cannot delete ' . $this->name . ' from id `' . $this->id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot delete ' . $this->name . ' from id `' . $this->id . '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 		return true;
@@ -140,7 +140,7 @@ abstract class AutoObject {
 		if( !in_array($name, $forbidden) )
 			return $this->$name;
 		else {
-			$log->log('[AutoObject] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
+			$log->log('[' . get_class($this) . '] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
 			return false;
 		}
 	}

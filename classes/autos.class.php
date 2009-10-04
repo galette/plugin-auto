@@ -68,7 +68,7 @@ class Autos {
 
 		$result = $mdb->query( $requete );
 		if (MDB2::isError($result)) {
-			$log->log('Cannot list Autos | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
+			$log->log('[' . get_class($this) . '] Cannot list Autos | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')', PEAR_LOG_WARNING);
 			return false;
 		}
 
