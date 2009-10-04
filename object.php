@@ -162,6 +162,7 @@ $tpl->assign('set', $set);
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
 if(isset($can_show)) $tpl->assign('show', $can_show);
 $tpl->assign('field_name', $field_name);
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null) != null ) {
 	$obj->load( get_numeric_form_value('show', '') );
@@ -171,7 +172,7 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	$title = str_replace('%s', $obj->value, $show_title);
 	$tpl->assign('title', $title);
 	$tpl->assign('obj', $obj);
-	$content = $tpl->fetch("object_show.tpl");
+	$content = $tpl->fetch('object_show.tpl', AUTO_SMARTY_PREFIX);
 } else if( isset( $_GET[$obj->pk] ) || $is_new ) {
 	if( !$is_new ){
 		$obj->load( get_numeric_form_value($obj->pk, '') );
@@ -179,7 +180,7 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	}
 	$tpl->assign('title', $title);
 	$tpl->assign('obj', $obj);
-	$content = $tpl->fetch("object.tpl");
+	$content = $tpl->fetch('object.tpl', AUTO_SMARTY_PREFIX);
 } else {
 	$tpl->assign('add_text', $add_text);
 	$tpl->assign('deletes_text', $deletes_text);
@@ -187,11 +188,11 @@ if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null
 	$tpl->assign('title', $title);
 	$tpl->assign('delete_text', $delete_text);
 	$tpl->assign('obj', $obj);
-	$content = $tpl->fetch("object_list.tpl");
+	$content = $tpl->fetch('object_list.tpl', AUTO_SMARTY_PREFIX);
 }
 
-$tpl->assign("content",$content);
+$tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
-$tpl->display("page.tpl");
+$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 ?>

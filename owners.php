@@ -53,15 +53,16 @@ $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('ajax', $ajax);
 $tpl->assign('owners', $owners);
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if( $ajax ){
 	$tpl->assign('mode', 'ajax');
-	$tpl->display("owners.tpl");
+	$tpl->display('owners.tpl', AUTO_SMARTY_PREFIX);
 } else {
-	$content = $tpl->fetch("owners.tpl");
-	$tpl->assign("content",$content);
+	$content = $tpl->fetch('owners.tpl', AUTO_SMARTY_PREFIX);
+	$tpl->assign('content', $content);
 	//Set path to main Galette's template
 	$tpl->template_dir = $orig_template_path;
-	$tpl->display("page.tpl");
+	$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 }
 ?>

@@ -45,79 +45,10 @@ $set = get_form_value('set', null);
 
 //Constants and classes from plugin
 require_once('_config.inc.php');
-
-/*switch( $set ) {
-	case 'colors':
-		require_once('classes/auto-colors.class.php');
-		$obj = new AutoColors();
-		$title = ( $is_new ) ? _T("New color") : _T("Change color '%s'");
-		$field_name = _T("Color");
-		$add_text = _T("Add new color");
-		$deletes_text = _T("Do you really want to delete selected colors?");
-		$delete_text = _T("Do you really want to delete the color '%s'?");
-		break;
-	case 'states':
-		require_once('classes/auto-states.class.php');
-		$obj = new AutoStates();
-		$title = ( $is_new ) ? _T("New state") : _T("Change state '%s'");
-		$field_name = _T("State");
-		$add_text = _T("Add new state");
-		$deletes_text = _T("Do you really want to delete selected states?");
-		$delete_text = _T("Do you really want to delete the state '%s'?");
-		break;
-	case 'finitions':
-		require_once('classes/auto-finitions.class.php');
-		$obj = new AutoFinitions();
-		$title = ( $is_new ) ? _T("New finition") : _T("Change finition '%s'");
-		$field_name = _T("Finition");
-		$add_text = _T("Add new finition");
-		$deletes_text = _T("Do you really want to delete selected finitions?");
-		$delete_text = _T("Do you really want to delete the finition '%s'?");
-		break;
-	case 'bodies':
-		require_once('classes/auto-bodies.class.php');
-		$obj = new AutoBodies();
-		$title = ( $is_new ) ? _T("New body") : _T("Change body '%s'");
-		$field_name = _T("Body");
-		$add_text = _T("Add new body");
-		$deletes_text = _T("Do you really want to delete selected bodies?");
-		$delete_text = _T("Do you really want to delete the body '%s'?");
-		break;
-	case 'transmissions':
-		require_once('classes/auto-transmissions.class.php');
-		$obj = new AutoTransmissions();
-		$title = ( $is_new ) ? _T("New transmission") : _T("Change transmission '%s'");
-		$field_name = _T("Transmission");
-		$add_text = _T("Add new transmission");
-		$deletes_text = _T("Do you really want to delete selected transmissions?");
-		$delete_text = _T("Do you really want to delete the transmission '%s'?");
-		break;
-	case 'brands':
-		require_once('classes/auto-brands.class.php');
-		$obj = new AutoBrands();
-		$title = ( $is_new ) ? _T("New brand") : _T("Change brand '%s'");
-		$show_title = _T("Brand '%s'");
-		$field_name = _T("Brand");
-		$add_text = _T("Add new brand");
-		$deletes_text = _T("Do you really want to delete selected brands?");
-		$delete_text = _T("Do you really want to delete the brand '%s'?");
-		$can_show = true;
-		//$models = AutoModel::getBrandList();
-		break;
-	default: //by default, we redirecto to index page
-		$log->log('[Auto Plugin] No "set" defined for ; could not load object.', PEAR_LOG_WARNING);
-		header('location: ' . $base_path . 'index.php');
-		die();
-		break;
-}*/
 require_once('classes/auto-models.class.php');
+
 $model = new AutoModels();
 $title = ( $is_new ) ? _T("New model") : _T("Change model '%s'");
-/*$field_name = _T("Color");
-$add_text = _T("Add new color");*/
-/*$deletes_text = _T("Do you really want to delete selected colors?");
-$delete_text = _T("Do you really want to delete the color '%s'?");*/
-
 
 //We have a new or a modified object
 if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0) == 1 && !isset($_POST['cancel']) ){
@@ -175,20 +106,9 @@ if(isset($error_detected))
 //Set the path to the current plugin's templates, but backup main Galette's template path before
 $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
-//$tpl->assign('set', $set);
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
-//$tpl->assign('show', $can_show);
-/*if( isset($can_show) && $can_show == true && get_numeric_form_value('show', null) != null ) {
-	$obj->load( get_numeric_form_value('show', '') );
-	if( $obj->name == 'brands' ) {
-		$tpl->assign('models', $obj->getModels( get_numeric_form_value('show', '') ));
-	}
-	$title = str_replace('%s', $obj->value, $show_title);
-	$tpl->assign('title', $title);
-	$tpl->assign('obj', $obj);
-	$tpl->assign('field_name', $field_name);
-	$content = $tpl->fetch("object_show.tpl");
-} else */
+$tpl->compile_id = SMARTY_PREFIX;
+
 if( isset( $_GET[AutoModels::PK] ) || $is_new ) {
 	if( !$is_new ){
 		$model->load( get_numeric_form_value(AutoModels::PK, '') );
@@ -200,19 +120,15 @@ if( isset( $_GET[AutoModels::PK] ) || $is_new ) {
 	require_once('classes/auto-brands.class.php');
 	$b = new AutoBrands();
 	$tpl->assign('brands', $b->getList());
-	$content = $tpl->fetch("model.tpl");
+	$content = $tpl->fetch('model.tpl', AUTO_SMARTY_PREFIX);
 } else {
-	/*$tpl->assign('add_text', $add_text);
-	$tpl->assign('deletes_text', $deletes_text);
-	//$delete_text = str_replace('%s', $obj->value, $delete_text);
-	$tpl->assign('delete_text', $delete_text);*/
 	$title = _T("Models list");
 	$tpl->assign('title', $title);
 	$tpl->assign('models', $model->getList());
-	$content = $tpl->fetch("models_list.tpl");
+	$content = $tpl->fetch('models_list.tpl', AUTO_SMARTY_PREFIX);
 }
-$tpl->assign("content",$content);
+$tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
-$tpl->display("page.tpl");
+$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 ?>

@@ -261,6 +261,7 @@ if( !$is_new ){
 	$auto->load( get_numeric_form_value(Auto::PK, null) );
 }
 
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 $tpl->assign('require_calendar', true);
 $tpl->assign('require_dialog', true);
 $tpl->assign('title', $title);
@@ -274,10 +275,10 @@ $tpl->assign('transmissions', $auto->transmission->getList());
 $tpl->assign('finitions', $auto->finition->getList());
 $tpl->assign('states', $auto->state->getList());
 $tpl->assign('fuels', $auto->listFuels());
-$content = $tpl->fetch("vehicles.tpl");
+$content = $tpl->fetch('vehicles.tpl', AUTO_SMARTY_PREFIX);
 
-$tpl->assign("content",$content);
+$tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
-$tpl->display("page.tpl");
+$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 ?>

@@ -57,14 +57,15 @@ $auto = new Autos();
 //Set the path to the current plugin's templates, but backup main Galette's template path before
 $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 $title = _T("Vehicles list");
 $tpl->assign('title', $title);
 $tpl->assign('autos', $auto->getList(true));
-$content = $tpl->fetch("vehicles_list.tpl");
+$content = $tpl->fetch('vehicles_list.tpl', AUTO_SMARTY_PREFIX);
 
-$tpl->assign("content",$content);
+$tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
-$tpl->display("page.tpl");
+$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 ?>

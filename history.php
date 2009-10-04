@@ -60,15 +60,16 @@ $tpl->assign('ajax', $ajax);
 $tpl->assign('entries', $history->entries);
 $apk = Auto::PK;
 $tpl->assign('title', str_replace('%d', $history->$apk, _T("History of car #%d")));
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if( $ajax ){
 	$tpl->assign('mode', 'ajax');
-	$tpl->display("history.tpl");
+	$tpl->display("history.tpl", AUTO_SMARTY_PREFIX);
 } else {
-	$content = $tpl->fetch("history.tpl");
+	$content = $tpl->fetch('history.tpl', AUTO_SMARTY_PREFIX);
 	$tpl->assign("content",$content);
 	//Set path to main Galette's template
 	$tpl->template_dir = $orig_template_path;
-	$tpl->display("page.tpl");
+	$tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 }
 ?>
