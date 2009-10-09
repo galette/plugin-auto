@@ -17,9 +17,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Galette. If not, see <http://www.gnu.org/licenses/>.
 
-define('AUTO_PREFIX', 'auto_');
-define('AUTO_SMARTY_PREFIX', 'plugins|auto');
-//additional headers
-$headers = '<link rel="stylesheet" type="text/css" href="templates/default/galette_auto.css"/>';
-$tpl->assign("headers", $headers);
+//additionnal Smarty variables
+$_tpl_assignments = array(
+	'auto_tpl_dir'	=>	'__plugin_templates_dir__',
+);
+
 ?>
