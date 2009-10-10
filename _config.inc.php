@@ -17,12 +17,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Galette. If not, see <http://www.gnu.org/licenses/>.
 
-$this->register(
-	'Galette Auto',					//Name
-	'Plugin to manage Automobile clubs',		//Short description
-	'Johan Cwiklinski',				//Author
-	'0.0.1',					//Version
-	null						//Permissions needed - not yet implemented
-);
-
+define('AUTO_PREFIX', 'auto_');
+define('AUTO_SMARTY_PREFIX', 'plugins|auto');
 ?>
