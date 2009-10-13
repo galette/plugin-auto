@@ -156,7 +156,8 @@ class AutoModels {
 	public function __get($name){
 		global $log;
 		$forbidden = array();
-		if( !in_array($name, $forbidden) )
+		if( !in_array($name, $forbidden) ) {
+			$log->log('[' . get_class($this) . '] Trying to get `' . $name . '`', PEAR_LOG_DEBUG);
 			switch( $name ){
 				case 'brand':
 					return $this->brand->id;
@@ -168,7 +169,7 @@ class AutoModels {
 					return $this->$name;
 					break;
 			}
-		else {
+		} else {
 			$log->log('[' . get_class($this) . '] Unable to retrieve `' . $name . '`', PEAR_LOG_INFO);
 			return false;
 		}
@@ -182,7 +183,7 @@ class AutoModels {
 				$this->$name = $value;
 				break;
 			case 'brand':
-				$this->brand = new AutoBrands($value);
+				$this->brand = new AutoBrands( (int)$value );
 				break;
 		}
 	}

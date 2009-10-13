@@ -35,10 +35,10 @@ if( !$login->isLogged() || !$login->isAdmin() ) {
 	die();
 }
 
-$numrows = PREF_NUMROWS;
-if (isset($_GET["nbshow"]))
-	if (is_numeric($_GET["nbshow"]))
-		$numrows = $_GET["nbshow"];
+$numrows = $preferences->pref_numrows;
+if (isset($_GET['nbshow']))
+	if (is_numeric($_GET['nbshow']))
+		$numrows = $_GET['nbshow'];
 
 $is_new = ( get_numeric_form_value('new', '') == 1  || isset($_POST['donew']) || isset($_GET['donew']) ) ? true : false;
 $set = get_form_value('set', null);
@@ -107,7 +107,7 @@ if(isset($error_detected))
 $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
-$tpl->compile_id = SMARTY_PREFIX;
+$tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if( isset( $_GET[AutoModels::PK] ) || $is_new ) {
 	if( !$is_new ){
