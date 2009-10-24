@@ -13,9 +13,8 @@
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="4" class="right">
+					<td colspan="4" class="right" id="table_footer">
 {if $autos|@count gt 0}
-						<a href="#" onclick="check();" class="fleft">{_T string="(Un)Check all"}</a>
 						{_T string="Pages:"}
 						<span class="pagelink">
 						{* {section name="pageLoop" start=1 loop=$nb_pages+1}
@@ -59,3 +58,31 @@
 				<li><input type="submit" id="donew" class="submit" name="donew" value="{_T string="Add new vehicle"}"/></li>
 			</ul>
 		</form>
+{if $autos|@count gt 0}
+		<script type="text/javascript">
+		//<![CDATA[
+		var _is_checked = true;
+		var _bind_check = function(){ldelim}
+			$('#checkall').click(function(){ldelim}
+				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
+					this.checked = _is_checked; 
+				{rdelim});
+				_is_checked = !_is_checked;
+			{rdelim});
+			$('#checkinvert').click(function(){ldelim}
+				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
+					this.checked = !$(this).is(':checked'); 
+				{rdelim});
+			{rdelim});
+		{rdelim}
+		{* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
+		$(function(){ldelim}
+			$('#table_footer').append('<span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span>');
+			_bind_check();
+			{* $('#nbshow').change(function() {ldelim}
+				this.form.submit();
+			{rdelim});*}
+		{rdelim});
+		//]]>
+		</script>
+{/if}
