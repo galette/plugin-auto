@@ -49,10 +49,10 @@ $is_new = ( isset($_GET[Auto::PK]) && is_int((int)$_GET[Auto::PK]) ) ? false : t
 $set = get_form_value('set', null);
 
 $auto = new Auto();
-$title = ( $is_new ) ? _T("New vehicle") : _T("Change vehicle '%s'");
 if( !$is_new ){
 	$auto->load( (int)$_GET[Auto::PK] );
 }
+$title = ( $is_new ) ? _T("New vehicle") : str_replace('%s', $auto->name, _T("Change vehicle '%s'"));
 
 //We have a new or a modified object
 if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0) == 1 && !isset($_POST['cancel']) ){
@@ -129,7 +129,7 @@ if( get_numeric_form_value( 'modif', 0) == 1 || get_numeric_form_value('new', 0)
 				if($value == '' && in_array($prop, array_keys($required))){
 					$error_detected[] = str_replace('%s', '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>', _T("- Mandatory field %s empty."));
 				} else {
-					if( is_int($value) ){
+					if( is_int((int)$value) ){
 						$auto->$prop = $value;
 					}else if($value != ''){
 						$error_detected[] = str_replace('%s', '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>', _T("- You must enter a positive integer for %s"));

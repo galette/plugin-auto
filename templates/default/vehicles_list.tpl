@@ -1,4 +1,4 @@
-		<h1 id="titre">{_T string="Vehicles list"}</h1>
+		<h1 id="titre">{_T string="Cars list"}</h1>
 
 		<form action="" method="post" id="listform">
 		<table id="listing">
