@@ -61,10 +61,6 @@
 					<label for="seats" class="bline">{_T string="Seats:"}</label>
 					<input type="text" name="seats" id="seats" value="{$car->seats}"/>
 				</p>
-				<p>
-					<label for="comment" class="bline">{_T string="Comment:"}</label>
-					<textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
-				</p>
 				</div>
 			</fieldset>
 
@@ -166,6 +162,14 @@
 	{/foreach}
 					</select>
 				</p>
+			</fieldset>
+			<fieldset>
+				<legend>{_T string="Comment"}</legend>
+				<p>
+					<label for="comment" class="bline">{_T string="Comment:"}</label>
+					<textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
+				</p>
+
 			</fieldset>
 		</div>
 		<div class="button-container">
