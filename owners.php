@@ -29,8 +29,8 @@
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  *
- * @category  Classes
- * @package   Galette
+ * @category  Plugins
+ * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
