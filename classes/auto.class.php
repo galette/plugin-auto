@@ -83,7 +83,8 @@ class Auto
         AutoStates::PK                  => 'integer',
         AutoTransmissions::PK           => 'integer',
         AutoFinitions::PK               => 'integer',
-        AutoModels::PK                  => 'integer'
+        AutoModels::PK                  => 'integer',
+        Adherent::PK                    => 'integer'
     );
 
     private $_id;                       //identifiant
@@ -348,6 +349,9 @@ class Auto
                 case AutoModels::PK:
                     $query .= AutoModels::PK . '=' . $this->_model->id . ', ';
                     break;
+                case Adherent::PK:
+                    $query .= Adherent::PK . '=' . $this->_owner->id . ', ';
+                    break;
                 default:
                     $propName = substr($k, 4, strlen($k));
                     switch($v){
@@ -421,9 +425,9 @@ class Auto
         $result = array();
         foreach ( $this as $key => $value ) {
             if ( !$restrict
-                || ($restrict && !in_array($key, $this->_internals))
+                || ($restrict && !in_array(substr($key, 1), $this->_internals))
             ) {
-                $result[] = $key;
+                $result[] = substr($key, 1);
             }
         }
         return $result;
