@@ -1,4 +1,4 @@
-		<h1 id="titre">{_T string="Cars list"}</h1>
+		<h1 id="titre">{if $show_mine eq 1}{_T string="My Cars"}{else}{_T string="Cars list"}{/if}</h1>
 
 		<form action="" method="post" id="listform">
 		<table id="listing">
@@ -45,7 +45,7 @@
 					</td>
 				</tr>
 {foreachelse}
-				<tr><td colspan="4" class="emptylist">{_T string="no record found"}</td></tr>
+				<tr><td colspan="5" class="emptylist">{if $show_mine eq 1}{_T string="No car has been registered yet for your account."}{else}{_T string="No car in the database"}{/if}</td></tr>
 {/foreach}
 			</tbody>
 		</table>
@@ -65,13 +65,13 @@
 		var _bind_check = function(){ldelim}
 			$('#checkall').click(function(){ldelim}
 				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
-					this.checked = _is_checked; 
+					this.checked = _is_checked;
 				{rdelim});
 				_is_checked = !_is_checked;
 			{rdelim});
 			$('#checkinvert').click(function(){ldelim}
 				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
-					this.checked = !$(this).is(':checked'); 
+					this.checked = !$(this).is(':checked');
 				{rdelim});
 			{rdelim});
 		{rdelim}

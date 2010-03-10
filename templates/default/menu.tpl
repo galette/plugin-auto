@@ -12,6 +12,6 @@
 {/if}
 {* Super Admin is not a regular user *}
 {if !$login->isSuperAdmin()}
-			<li class="mnu_last{if $PAGENAME eq ".php"} selected{/if}"><a href="{$galette_base_path}{$galette_auto_path}.php">{_T string="My Cars"}</a></li>
+			<li class="mnu_last{if $PAGENAME eq "my_vehicles.php"} selected{/if}"><a href="{$galette_base_path}{$galette_auto_path}my_vehicles.php">{_T string="My Cars"}</a></li>
 {/if}
 		</ul>

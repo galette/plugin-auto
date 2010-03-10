@@ -68,15 +68,16 @@ class Autos
     *
     * @param boolean      $as_autos return the results as an array of Auto object.
     *                                   When true, fields are not relevant
+    * @param boolean      $mine     show only current logged member cars
     * @param array|string $fields   field(s) name(s) to get. Should be a string
     *                               or an array. If null, all fields will be returned
     * @param string       $filter   should add filter... TODO
     *
     * @return array|Autos[]
     */
-    public static function getList($as_autos=false, $fields=null, $filter=null)
+    public static function getList($as_autos=false, $mine=false, $fields=null, $filter=null)
     {
-        global $mdb, $log;
+        global $mdb, $log, $login;
 
         /** TODO: Check if filter is valid ? */
         if ( $filter != null && trim($filter) != '' ) {
@@ -91,6 +92,10 @@ class Autos
 
         $query = 'SELECT ' . $fieldsList . ' FROM ' . PREFIX_DB . AUTO_PREFIX .
             self::TABLE;
+
+        if ( $mine == true || !$login->isAdmin() ) {
+            $query .= ' WHERE ' . Adherent::PK . '=' . $login->id;
+        }
 
         $result = $mdb->query($query);
         if (MDB2::isError($result)) {

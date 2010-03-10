@@ -40,8 +40,11 @@
  */
 
 $base_path = '../../';
+if( !isset($mine) ) {
+    $mine = false;
+}
 require_once $base_path . 'includes/galette.inc.php';
-if ( !$login->isLogged() || !$login->isAdmin() ) {
+if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
     header('location: ' . $base_path . 'index.php');
     die();
 }
@@ -76,7 +79,8 @@ $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 $title = _T("Vehicles list");
 $tpl->assign('title', $title);
-$tpl->assign('autos', $auto->getList(true));
+$tpl->assign('autos', $auto->getList(true, $mine));
+$tpl->assign('show_mine', $mine);
 $content = $tpl->fetch('vehicles_list.tpl', AUTO_SMARTY_PREFIX);
 
 $tpl->assign('content', $content);
