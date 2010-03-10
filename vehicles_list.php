@@ -50,7 +50,11 @@ if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
 }
 
 if ( isset($_POST['donew']) ) {
-    header('location: vehicles_edit.php');
+    if ( $mine ) {
+        header('location: my_vehicles_edit.php');
+    } else {
+        header('location: vehicles_edit.php');
+    }
 }
 
 $numrows = $preferences->pref_numrows;

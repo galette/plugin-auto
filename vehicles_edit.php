@@ -41,7 +41,7 @@
 
 $base_path = '../../';
 require_once $base_path . 'includes/galette.inc.php';
-if ( !$login->isLogged() || !$login->isAdmin() ) {
+if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
     header('location: ' . $base_path . 'index.php');
     die();
 }
