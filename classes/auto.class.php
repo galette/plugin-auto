@@ -304,6 +304,9 @@ class Auto
                 case AutoModels::PK:
                     $query .= $this->_model->id . ', ';
                     break;
+                case Adherent::PK:
+                    $query .= $this->_owner->id . ', ';
+                    break;
                 default:
                     $propName = substr($k, 4, strlen($k));
                     switch($v){
@@ -452,6 +455,17 @@ class Auto
     public function hasPicture()
     {
         return $this->_picture->hasPicture();
+    }
+
+    /**
+    * Set car's owner to current logged user
+    *
+    * @return void
+    */
+    public function appropriateCar()
+    {
+        global $login;
+        $this->_owner->load($login->id);
     }
 
     /**

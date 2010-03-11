@@ -80,7 +80,7 @@
 			<fieldset class="cssform">
 				<legend>{_T string="Current car's state informations"}</legend>
 				<div>
-				<input type="hidden" name="owner" id="owner" value="{$car->owner->id}"/>
+				<input type="text" name="owner" id="owner" value="{$car->owner->id}"/>
 	{if $login->isAdmin()}
 				<p class="notform">
 					{* Does car's history should be visible by the actual owner? *}

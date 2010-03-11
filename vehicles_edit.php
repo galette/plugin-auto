@@ -63,7 +63,10 @@ $set = get_form_value('set', null);
 $auto = new Auto();
 if ( !$is_new ) {
     $auto->load((int)$_GET[Auto::PK]);
+} else if ( $mine ) {
+    $auto->appropriateCar();
 }
+
 $title = ( $is_new )
     ? _T("New vehicle")
     : str_replace('%s', $auto->name, _T("Change vehicle '%s'"));
@@ -234,7 +237,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 }
                 $error_detected[] = str_replace(
                     '%s',
-                    '<a href="#' . $prop . '">' . $name . '</a>',
+                    '<a href="#' . $prop . '">' . $auto->getPropName($name) . '</a>',
                     _T("- You must choose a %s in the list")
                 );
             }
@@ -311,7 +314,11 @@ if ( get_numeric_form_value('modif', 0) == 1
             $error_detected[]
                 = _T('- An error has occured while saving car in the database.');
         } else {
-            header('location: vehicles_list.php');
+            if( $mine ) {
+                header('location: my_vehicles_list.php');
+            } else {
+                header('location: vehicles_list.php');
+            }
         }
     }
 } else if ( isset($_POST['cancel']) ) {
@@ -337,6 +344,7 @@ if ( !$is_new ) {
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 $tpl->assign('require_calendar', true);
 $tpl->assign('require_dialog', true);
+$tpl->assign('show_mine', $mine);
 $tpl->assign('title', $title);
 $tpl->assign('car', $auto);
 $tpl->assign('models', $auto->model->getList((int)$auto->model->brand));
