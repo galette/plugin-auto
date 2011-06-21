@@ -312,7 +312,7 @@ if ( get_numeric_form_value('modif', 0) == 1
     if ( count($error_detected) == 0 ) {
         if ( !$auto->store($is_new) ) {
             $error_detected[]
-                = _T('- An error has occured while saving car in the database.');
+                = _T("- An error has occured while saving car in the database.");
         } else {
             if( $mine ) {
                 header('location: my_vehicles_list.php');
