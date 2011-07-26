@@ -173,125 +173,122 @@
 			</fieldset>
 		</div>
 		<div class="button-container">
-			<input type="submit" class="submit" name="valid" value="{_T string="Save"}"/>
+			<input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
 			<input type="hidden" name="{$mode}" value="1"/>
 			<input type="hidden" name="id_car" value="{$car->id}"/>
 		</div>
 		</form>
 		<script type="text/javascript">
-			//<![CDATA[
-				$(function() {ldelim}
-					_collapsibleFieldsets();
+            $(function() {ldelim}
+                _collapsibleFieldsets();
 
-					$('#first_circulation_date').datepicker({ldelim}
-						changeMonth: true,
-						changeYear: true,
-						showOn: 'button',
-						buttonImage: '{$template_subdir}images/calendar.png',
-						buttonImageOnly: true
-					{rdelim});
-					$('#first_registration_date').datepicker({ldelim}
-						showOn: 'button',
-						buttonImage: '{$template_subdir}images/calendar.png',
-						buttonImageOnly: true
-					{rdelim});
-					var _models = $('#model');
-					var _modelChoose = $('#model :first');
+                $('#first_circulation_date').datepicker({ldelim}
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'button',
+                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImageOnly: true
+                {rdelim});
+                $('#first_registration_date').datepicker({ldelim}
+                    showOn: 'button',
+                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImageOnly: true
+                {rdelim});
+                var _models = $('#model');
+                var _modelChoose = $('#model :first');
 	{if $js_init_models}
-					{* If javascript is active, we do not want complete models list when page loads *}
-					{* Empty model list *}
-					_models.empty();
-					{* Set the first option *}
-					_modelChoose.appendTo(_models);
+                {* If javascript is active, we do not want complete models list when page loads *}
+                {* Empty model list *}
+                _models.empty();
+                {* Set the first option *}
+                _modelChoose.appendTo(_models);
 	{/if}
-					{* Refresh models list when brand is changed *}
-					$('#brand').change(function(){ldelim}
-						var id_brand = $('#brand option:selected').attr('value');
-						{* Empty model list *}
-						_models.empty();
-						{* Set the first option *}
-						_modelChoose.appendTo(_models);
-						{* Get the new list for selected brand, and appent it to models on the page *}
-						$.get(
-							'models-ajax.php',
-							{ldelim} brand: id_brand {rdelim},
-							function(data){ldelim}
-								$(data).each(function(i){ldelim}
-									var _data = data[i];
-									$('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
-								{rdelim});
-							{rdelim},
-							'json'
-						);
-					{rdelim});
+                {* Refresh models list when brand is changed *}
+                $('#brand').change(function(){ldelim}
+                    var id_brand = $('#brand option:selected').attr('value');
+                    {* Empty model list *}
+                    _models.empty();
+                    {* Set the first option *}
+                    _modelChoose.appendTo(_models);
+                    {* Get the new list for selected brand, and appent it to models on the page *}
+                    $.get(
+                        'models-ajax.php',
+                        {ldelim} brand: id_brand {rdelim},
+                        function(data){ldelim}
+                            $(data).each(function(i){ldelim}
+                                var _data = data[i];
+                                $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
+                            {rdelim});
+                        {rdelim},
+                        'json'
+                    );
+                {rdelim});
 	{if $login->isAdmin()}
-					{* Popup for owner change *}
-					$('#change_owner').click(function(){ldelim}
-						$.ajax({ldelim}
-							url: 'owners.php',
-							data: {ldelim}ajax: true{rdelim},
-							{*beforeSend: function(){ldelim}
-								flobu.enable();
-							{rdelim},
-							complete: function(){ldelim}
-								flobu.disable();
-							{rdelim},*}
-							success: function(res){ldelim}
-								_owners_dialog(res);
-							{rdelim}
-						});
-						return false;
-					{rdelim});
+                {* Popup for owner change *}
+                $('#change_owner').click(function(){ldelim}
+                    $.ajax({ldelim}
+                        url: 'owners.php',
+                        data: {ldelim}ajax: true{rdelim},
+                        {*beforeSend: function(){ldelim}
+                            flobu.enable();
+                        {rdelim},
+                        complete: function(){ldelim}
+                            flobu.disable();
+                        {rdelim},*}
+                        success: function(res){ldelim}
+                            _owners_dialog(res);
+                        {rdelim}
+                    });
+                    return false;
+                {rdelim});
 
-					var _owners_dialog = function(res){ldelim}
-						var _el = $('<div id="owners_list" title="{_T string="Owners"}"> </div>');
-						_el.appendTo('#modifform').dialog({ldelim}
-							modal: true,
-							hide: 'fold',
-							width: '60%',
-							height: 400,
-							close: function(event, ui){ldelim}
-								_el.remove();
-							{rdelim}
-						{rdelim});
-						$('#owners_list').append( res );
-						$('#owners_list').find('a').each(function(){ldelim}
-							$(this).click(function(){ldelim}
-								var _id = this.href.substring(this.href.indexOf('id_adh=') + 7, this.href.length);
-								$('#owner').attr('value', _id);
-								$('#current_owner_name').html($(this).html());
-								_el.dialog('close');
-								return false;
-							{rdelim}).attr('title', '{_T string="Click to choose this owner for current car"}');
-						{rdelim});
-					{rdelim}
+                var _owners_dialog = function(res){ldelim}
+                    var _el = $('<div id="owners_list" title="{_T string="Owners"}"> </div>');
+                    _el.appendTo('#modifform').dialog({ldelim}
+                        modal: true,
+                        hide: 'fold',
+                        width: '60%',
+                        height: 400,
+                        close: function(event, ui){ldelim}
+                            _el.remove();
+                        {rdelim}
+                    {rdelim});
+                    $('#owners_list').append( res );
+                    $('#owners_list').find('a').each(function(){ldelim}
+                        $(this).click(function(){ldelim}
+                            var _id = this.href.substring(this.href.indexOf('id_adh=') + 7, this.href.length);
+                            $('#owner').attr('value', _id);
+                            $('#current_owner_name').html($(this).html());
+                            _el.dialog('close');
+                            return false;
+                        {rdelim}).attr('title', '{_T string="Click to choose this owner for current car"}');
+                    {rdelim});
+                {rdelim}
 
-					$('#state_history').click(function(){ldelim}
-						$.ajax({ldelim}
-							url: this.href + '&amp;ajax=true',
-							data: {ldelim}ajax: true{rdelim},
-							success: function(res){ldelim}
-								_history_dialog(res);
-							{rdelim}
-						{rdelim});
-						return false;
-					{rdelim});
+                $('#state_history').click(function(){ldelim}
+                    $.ajax({ldelim}
+                        url: this.href + '&amp;ajax=true',
+                        data: {ldelim}ajax: true{rdelim},
+                        success: function(res){ldelim}
+                            _history_dialog(res);
+                        {rdelim}
+                    {rdelim});
+                    return false;
+                {rdelim});
 
-					var _history_dialog = function(res){ldelim}
-						var _el = $('<div id="history_list" title="{_T string="Car\\'s history"}"> </div>');
-						_el.appendTo('#modifform').dialog({ldelim}
-							modal: true,
-							hide: 'fold',
-							width: '60%',
-							height: 400,
-							close: function(event, ui){ldelim}
-								_el.remove();
-							{rdelim}
-						{rdelim});
-						$('#history_list').append( res );
-					{rdelim}
-
+                var _history_dialog = function(res){ldelim}
+                    var _el = $('<div id="history_list" title="{_T string="Car\\'s history"}"> </div>');
+                    _el.appendTo('#modifform').dialog({ldelim}
+                        modal: true,
+                        hide: 'fold',
+                        width: '60%',
+                        height: 400,
+                        close: function(event, ui){ldelim}
+                            _el.remove();
+                        {rdelim}
+                    {rdelim});
+                    $('#history_list').append( res );
+                {rdelim}
 	{/if}
-				{rdelim});
-			//]]>
+            {rdelim});
 		</script>

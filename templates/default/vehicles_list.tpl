@@ -52,10 +52,10 @@
 			<ul class="selection_menu">
 {if $autos|@count gt 0}
 				<li>{_T string="Selection:"}</li>
-				<li><input type="submit" id="delete" class="submit" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
+				<li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
 				<li>{_T string="Other:"}</li>
-				<li><input type="submit" id="donew" class="submit" name="donew" value="{_T string="Add new vehicle"}"/></li>
+				<li><input type="submit" id="donew" name="donew" value="{_T string="Add new vehicle"}"/></li>
 			</ul>
 		</form>
 {if $autos|@count gt 0}
