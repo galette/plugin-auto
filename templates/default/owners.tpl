@@ -4,7 +4,7 @@
 		<table id="listing">
 			<thead>
 				<tr> 
-					<th class="listing" id="id_row">#</th>
+					<th class="listing" class="id_row">#</th>
 					<th class="listing left"> 
 						{_T string="Name"}
 						{*<a href="owners.php?tri=0" class="listing">
