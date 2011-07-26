@@ -315,7 +315,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 = _T("- An error has occured while saving car in the database.");
         } else {
             if( $mine ) {
-                header('location: my_vehicles_list.php');
+                header('location: my_vehicles.php');
             } else {
                 header('location: vehicles_list.php');
             }
