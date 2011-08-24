@@ -55,7 +55,7 @@
 				<li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
 				<li>{_T string="Other:"}</li>
-				<li><input type="submit" id="donew" name="donew" value="{_T string="Add new vehicle"}"/></li>
+				<li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new vehicle"}"/></li>
 			</ul>
 		</form>
 {if $autos|@count gt 0}
@@ -79,9 +79,6 @@
 		$(function(){ldelim}
 			$('#table_footer').append('<span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span>');
 			_bind_check();
-			{* $('#nbshow').change(function() {ldelim}
-				this.form.submit();
-			{rdelim});*}
 		{rdelim});
 		//]]>
 		</script>

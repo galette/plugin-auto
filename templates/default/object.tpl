@@ -23,8 +23,8 @@
 			</fieldset>
 		</div>
 		<div class="button-container">
-			<input type="submit" class="submit" name="valid" value="{_T string="Save"}"/>
-			<input type="submit" class="submit" name="cancel" value="{_T string="Cancel"}"/>
+			<input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
+			<input type="reset" id="btncancel" name="cancel" value="{_T string="Cancel"}"/>
 			<input type="hidden" name="set" value="{$set}"/>
 			<input type="hidden" name="{$mode}" value="1"/>
 			<input type="hidden" name="{$pk}" value="{$obj->$pk}"/>

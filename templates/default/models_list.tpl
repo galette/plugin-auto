@@ -12,9 +12,8 @@
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="4" class="right">
+					<td colspan="4" class="right" id="table_footer">
 {if $models|@count gt 0}
-						<a href="#" onclick="check();" class="fleft">{_T string="(Un)Check all"}</a>
 						{_T string="Pages:"}
 						<span class="pagelink">
 						{* {section name="pageLoop" start=1 loop=$nb_pages+1}
@@ -50,9 +49,34 @@
 			<ul class="selection_menu">
 {if $models|@count gt 0}
 				<li>{_T string="Selection:"}</li>
-				<li><input type="submit" id="delete" class="submit" onclick="return confirm('{_T string="Do you really want to delete selected models?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
+				<li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
 				<li>{_T string="Other:"}</li>
-				<li><input type="submit" id="donew" class="submit" name="donew" value="{_T string="Add new model"}"/></li>
+				<li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new model"}"/></li>
 			</ul>
 		</form>
+{if $models|@count gt 0}
+		<script type="text/javascript">
+		var _is_checked = true;
+		var _bind_check = function(){ldelim}
+			$('#checkall').click(function(){ldelim}
+				$('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+					this.checked = _is_checked;
+				{rdelim});
+				_is_checked = !_is_checked;
+				return false;
+			{rdelim});
+			$('#checkinvert').click(function(){ldelim}
+				$('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+					this.checked = !$(this).is(':checked');
+				{rdelim});
+				return false;
+			{rdelim});
+		{rdelim}
+		{* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
+		$(function(){ldelim}
+			$('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span></td></tr>');
+			_bind_check();
+		{rdelim});
+		</script>
+{/if}
