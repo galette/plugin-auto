@@ -144,30 +144,34 @@ abstract class AutoObject
     */
     public function store($new = false)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        if ( $new ) {
-            $query = 'INSERT INTO ' . PREFIX_DB . $this->_table . ' (' .
-                $this->_field . ')';
-            $query .= ' VALUES (\'' . $this->value . '\')';
-        } else {
-            $query = 'UPDATE ' . PREFIX_DB . $this->_table . ' SET ' .
-                $this->_field . '=\'' . $this->value . '\' WHERE ' . $this->_pk .
-                '=' . $this->id;
-        }
-
-        $result = $mdb->execute($query);
-
-        if ( MDB2::isError($result) ) {
+        try {
+            $values = array(
+                $this->_field => $this->value
+            );
+            if ( $new ) {
+                $zdb->db->insert(
+                    PREFIX_DB . $this->_table,
+                    $values
+                );
+            } else {
+                $zdb->db->update(
+                    PREFIX_DB . $this->_table,
+                    $values,
+                    $this->_pk . ' = ' . $this->id
+                );
+            }
+            return true;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot store ' . $this->_name .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
         }
-        return true;
     }
 
     /**
@@ -179,24 +183,21 @@ abstract class AutoObject
     */
     public function delete($ids)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'DELETE FROM ' . PREFIX_DB . $this->_table . ' WHERE ' .
-            $this->_pk . '=';
-        $query .= implode(' OR ' . $this->_pk . '=', $ids);
-
-        $result = $mdb->execute($query);
-
-        if (MDB2::isError($result)) {
+        try {
+            $zdb->db->delete(
+                PREFIX_DB . $this->_table,
+                $this->_pk . ' IN (' . implode(',', $ids) . ')'
+            );
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
-                ' from id `' . $this->id . '` | ' . $result->getMessage() . '(' .
-                $result->getDebugInfo() . ')',
+                ' from id `' . $this->id . '` | ' . $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
         }
-        return true;
     }
 
     /**
