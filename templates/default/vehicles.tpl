@@ -187,12 +187,18 @@
                     changeYear: true,
                     showOn: 'button',
                     buttonImage: '{$template_subdir}images/calendar.png',
-                    buttonImageOnly: true
+                    buttonImageOnly: true,
+                    maxDate: '-0d',
+                    yearRange: 'c-100'
                 {rdelim});
                 $('#first_registration_date').datepicker({ldelim}
+                    changeMonth: true,
+                    changeYear: true,
                     showOn: 'button',
                     buttonImage: '{$template_subdir}images/calendar.png',
-                    buttonImageOnly: true
+                    buttonImageOnly: true,
+                    maxDate: '-0d',
+                    yearRange: 'c-100'
                 {rdelim});
                 var _models = $('#model');
                 var _modelChoose = $('#model :first');
