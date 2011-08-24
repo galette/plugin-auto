@@ -131,14 +131,16 @@ class AutoHistory
     */
     public function getLatest()
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' WHERE ' . Auto::PK . '=' . $this->_id_car .
-            ' ORDER BY history_date DESC LIMIT 1';
-
-        $result = $mdb->query($query);
-        if ( MDB2::isError($result) ) {
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
+                ->where(Auto::PK . ' = ?', $this->_id_car)
+                ->order('history_date DESC')
+                ->limit(1);
+            return $select->query()->fetch();
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
@@ -147,8 +149,6 @@ class AutoHistory
             );
             return false;
         }
-
-        return $result->fetchRow();
     }
 
     /**
@@ -160,10 +160,11 @@ class AutoHistory
     {
         for ( $i = 0 ; $i < count($this->_entries); $i++ ) {
             //put a formatted date to show
-            $this->_entries[$i]->formatted_date = strftime(
+            //strftime output is ISO-8859-1...
+            $this->_entries[$i]->formatted_date = utf8_encode(strftime(
                 '%d %B %Y',
                 strtotime($this->_entries[$i]->history_date)
-            );
+            ));
             //associate member to current history entry
             $this->_entries[$i]->owner
                 = new Adherent((int)$this->_entries[$i]->id_adh);
@@ -185,40 +186,43 @@ class AutoHistory
     */
     public function register($props)
     {
-        global $mdb, $log;
+        global $zdb, $log;
+
         $log->log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
             PEAR_LOG_DEBUG
         );
 
-        $fields = $this->_fields;
-        ksort($fields);
-        ksort($props);
-        $query = 'INSERT INTO ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . ' (' .
-            implode(', ', array_keys($fields)) . ') VALUES (';
-        foreach ( $props as $key=>$prop ) {
-            $query .= ($this->_fields[$key] == 'integer')
-                ? $prop
-                : $mdb->quote($prop);
-            if ( end(array_keys($fields)) != $key ) {
-                $query .= ', ';
-            }
-        }
-        $query .= ')';
+        try {
+            $fields = $this->_fields;
+            ksort($fields);
+            ksort($props);
 
-        $result = $mdb->query($query);
-        if ( MDB2::isError($result) ) {
+            $values = array();
+            foreach ( $props as $key=>$prop ) {
+                $values[$key] = $prop;
+            }
+
+            $add = $zdb->db->insert(
+                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                $values
+            );
+
+            if ( $add > 0 ) {
+                $log->log(
+                    '[' . get_class($this) . '] new AutoHistory entry set successfully.',
+                    PEAR_LOG_DEBUG
+                );
+            } else {
+                throw new Exception('An error occured registering car new history entry :(');
+            }
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot register new histroy entry | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                $e->getMessage(),
                 PEAR_LOG_ERR
             );
             return false;
-        } else {
-            $log->log(
-                '[' . get_class($this) . '] new AutoHistory entry set successfully.',
-                PEAR_LOG_DEBUG
-            );
         }
     }
 

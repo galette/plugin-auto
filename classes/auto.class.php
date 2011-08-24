@@ -179,26 +179,23 @@ class Auto
     */
     public function load($id)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $requete = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' WHERE ' . self::PK . '=' . $id;
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
+                ->where(self::PK . ' = ?', $id);
 
-        $result = $mdb->query($requete);
-
-        if (MDB2::isError($result)) {
+            $this->_loadFromRS($select->query()->fetch());
+            return true;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load car form id `' . $id .
-                '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                '` | ' . $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
         }
-
-        $this->_loadFromRS($result->fetchRow());
-        $result->free();
-
-        return true;
     }
 
     /**
@@ -270,149 +267,134 @@ class Auto
     */
     public function store($new = false)
     {
-        global $mdb, $log;
+        global $zdb, $log, $hist;
 
         if ( $new ) {
             $this->_creation_date = date('Y-m-d');
         }
 
-        $query = '';
+        try {
+            $values = array();
 
-        if ( $new ) {
-            $query = 'INSERT INTO ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-                ' (' . implode(', ', array_keys($this->_fields)) . ') VALUES (';
             foreach ( $this->_fields as $k=>$v ) {
                 switch ( $k ) {
                 case self::PK:
-                    $query .= 'null, ';
                     break;
                 case AutoColors::PK:
-                    $query .= $this->_color->id . ', ';
+                    $values[$k] = $this->_color->id;
                     break;
                 case AutoBodies::PK:
-                    $query .= $this->_body->id . ', ';
+                    $values[$k] = $this->_body->id;
                     break;
                 case AutoStates::PK:
-                    $query .= $this->_state->id . ', ';
+                    $values[$k] = $this->_state->id;
                     break;
                 case AutoTransmissions::PK:
-                    $query .= $this->_transmission->id . ', ';
+                    $values[$k] = $this->_transmission->id;
                     break;
                 case AutoFinitions::PK:
-                    $query .= $this->_finition->id . ', ';
+                    $values[$k] = $this->_finition->id;
                     break;
                 case AutoModels::PK:
-                    $query .= $this->_model->id . ', ';
+                    $values[$k] = $this->_model->id;
                     break;
                 case Adherent::PK:
-                    $query .= $this->_owner->id . ', ';
+                    $values[$k] = $this->_owner->id;
                     break;
                 default:
                     $propName = substr($k, 4, strlen($k));
                     switch($v){
                     case 'string':
                     case 'date':
-                        $query .= '\'' . $this->$propName . '\', ';
+                        $values[$k] = $this->$propName;
                         break;
                     case 'integer':
-                        $query .= (($this->$propName != '')
-                            ? $this->$propName : 0) . ', ';
+                        $values[$k] = (
+                            ($this->$propName != 0 && $this->$propName != '')
+                                ? $this->$propName
+                                : new Zend_Db_Expr('NULL')
+                        );
                         break;
                     default:
-                        $query .= '\'' . $this->$propName . '\', ';
+                        $values[$k] = $this->$propName;
                         break;
                     }
                     break;
                 }
             }
-            //remove last ', ', add final ')'
-            $query = substr($query, 0, strlen($query)-2) . ')';
-        } else {
-            $query = 'UPDATE ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . ' SET ';
-            foreach ( $this->_fields as $k=>$v ) {
-                switch($k){
-                case self::PK:
-                    break;
-                case AutoColors::PK:
-                    $query .= AutoColors::PK . '=' . $this->_color->id . ', ';
-                    break;
-                case AutoBodies::PK:
-                    $query .= AutoBodies::PK . '=' . $this->_body->id . ', ';
-                    break;
-                case AutoStates::PK:
-                    $query .= AutoStates::PK . '=' . $this->_state->id . ', ';
-                    break;
-                case AutoTransmissions::PK:
-                    $query .= AutoTransmissions::PK . '=' .
-                        $this->_transmission->id . ', ';
-                    break;
-                case AutoFinitions::PK:
-                    $query .= AutoFinitions::PK . '=' . $this->_finition->id . ', ';
-                    break;
-                case AutoModels::PK:
-                    $query .= AutoModels::PK . '=' . $this->_model->id . ', ';
-                    break;
-                case Adherent::PK:
-                    $query .= Adherent::PK . '=' . $this->_owner->id . ', ';
-                    break;
-                default:
-                    $propName = substr($k, 4, strlen($k));
-                    switch($v){
-                    case 'string':
-                    case 'date':
-                        $query .= $k . '=\'' . $this->$propName . '\', ';
-                        break;
-                    case 'integer':
-                        $query .= $k . '=' . (($this->$propName != 0 && $this->$propName != '') ? $this->$propName : 'null') . ', ';
-                        break;
-                    default:
-                        $query .= $k . '=\'' . $this->$propName . '\', ';
-                        break;
-                    }
-                    break;
-                }
-            }
-            //remove last ', ', add where clause
-            $query = substr($query, 0, strlen($query)-2) . ' WHERE ' .
-                self::PK . '=' . $this->_id;
-        }
 
-        $result = $mdb->query($query);
-        if ( MDB2::isError($result) ) {
+            if ( $new === true ) {
+                $add = $zdb->db->insert(
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                    $values
+                );
+                if ( $add > 0) {
+                    $this->_id = $zdb->db->lastInsertId();
+                    // logging
+                    $hist->add(
+                        _T("New car added"),
+                        strtoupper($this->_name)
+                    );
+                } else {
+                    $hist->add('Fail to add new car.');
+                    throw new Exception(
+                        'An error occured inserting new car!'
+                    );
+                }
+            } else {
+                $edit = $zdb->db->update(
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                    $values,
+                    self::PK . '=' . $this->_id
+                );
+                //edit == 0 does not mean there were an error, but that there
+                //were nothing to change
+                if ( $edit > 0 ) {
+                    $hist->add(
+                        _T("Car updated"),
+                        strtoupper($this->_name)
+                    );
+                }
+            }
+
+            //if all goes well, we check to add an entry into car's history
+            $h = $this->_history->getLatest();
+            if ( $h !== false ) {
+                foreach ( $h as $k=>$v ) {
+                    if ( $k != 'history_date' && $this->$k != $v ) {
+                        //if one has been modified, we flag to add an entry event
+                        $this->_fire_history = true;
+                        break;
+                    }
+                }
+            } else {
+                //no history entry... yet! Let's create one.
+                $this->_fire_history = true;
+            }
+
+            if ( $this->_fire_history ) {
+                $h_props = array();
+                foreach ( $this->_history->fields as $prop ) {
+                    if ( $prop != 'history_date' ) {
+                        $h_props[$prop] = $this->$prop;
+                    } else {
+                        $h_props[$prop] = date('Y-m-d H:i:s');
+                    }
+                }
+                $this->_history->register($h_props);
+                $this->_fire_history = false;
+            }
+
+            return true;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] An error has occured ' .
                 (($new)?'inserting':'updating') . ' car | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                $e->getMessage(),
                 PEAR_LOG_ERR
             );
             return false;
         }
-
-        /** TODO: get the car's id for $new=true */
-
-        //if all goes well, we check to add an entry into car's history
-        foreach ( $this->_history->getLatest() as $k=>$v ) {
-            if ( $k != 'history_date' && $this->$k != $v ) {
-                //if one has been modified, we flag to add an entry event
-                $this->_fire_history = true;
-                break;
-            }
-        }
-
-        if ( $this->_fire_history ) {
-            $h_props = array();
-            foreach ( $this->history->fields as $prop ) {
-                if ( $prop != 'history_date' ) {
-                    $h_props[$prop] = $this->$prop;
-                } else {
-                    $h_props[$prop] = date('Y-m-d H:i:s');
-                }
-            }
-            $this->_history->register($h_props);
-            $this->_fire_history = false;
-        }
-
-        return true;
     }
 
     /**
