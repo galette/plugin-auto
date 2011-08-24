@@ -18,7 +18,7 @@
 			<fieldset class="cssform">
 				<p>
 					<label for="{$field}" class="bline">{$field_name}</label>
-					<input type="text" name="{$field}" id="{$field}" value="{$obj->value}" maxlength="20" required/>
+					<input type="text" name="{$field}" id="{$field}" value="{$obj->value}" maxlength="20" required autofocus/>
 				</p>
 			</fieldset>
 		</div>
