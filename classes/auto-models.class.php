@@ -89,8 +89,8 @@ class AutoModels
             $select->from(
                 array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE)
             )->join(
-                    array('b' => PREFIX_DB . AUTO_PREFIX . Autobrands::TABLE),
-                    'a.' . AutoBrands::PK . '=b.' . AutoBrands::PK
+                array('b' => PREFIX_DB . AUTO_PREFIX . Autobrands::TABLE),
+                'a.' . AutoBrands::PK . '=b.' . AutoBrands::PK
             );
 
             //if required, the where clause

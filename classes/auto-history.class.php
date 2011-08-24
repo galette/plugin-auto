@@ -161,10 +161,12 @@ class AutoHistory
         for ( $i = 0 ; $i < count($this->_entries); $i++ ) {
             //put a formatted date to show
             //strftime output is ISO-8859-1...
-            $this->_entries[$i]->formatted_date = utf8_encode(strftime(
-                '%d %B %Y',
-                strtotime($this->_entries[$i]->history_date)
-            ));
+            $this->_entries[$i]->formatted_date = utf8_encode(
+                strftime(
+                    '%d %B %Y',
+                    strtotime($this->_entries[$i]->history_date)
+                )
+            );
             //associate member to current history entry
             $this->_entries[$i]->owner
                 = new Adherent((int)$this->_entries[$i]->id_adh);

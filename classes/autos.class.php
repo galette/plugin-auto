@@ -173,8 +173,9 @@ class Autos
     *
     * @return array|Autos[]
     */
-    public static function getList($as_autos=false, $mine=false, $fields=null, $filter=null)
-    {
+    public static function getList(
+        $as_autos=false, $mine=false, $fields=null, $filter=null
+    ) {
         global $zdb, $log, $login;
 
         /** TODO: Check if filter is valid ? */
