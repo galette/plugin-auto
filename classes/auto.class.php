@@ -367,7 +367,7 @@ class Auto
                         break;
                     }
                 }
-            } else {
+            } else if ( !$new ) {
                 //no history entry... yet! Let's create one.
                 $this->_fire_history = true;
             }
@@ -494,8 +494,22 @@ class Auto
             case 'first_circulation_date':
             case 'creation_date':
                 $rname = '_' . $name;
-                /** FIXME: date function from functions.inc.php does use adodb */
-                return date_db2text($this->$rname);
+                if ( $this->$rname != '' ) {
+                    try {
+                        $d = new DateTime($this->$rname);
+                        return $d->format(_T("Y-m-d"));
+                    } catch (Exception $e) {
+                        //oops, we've got a bad date :/
+                        $log->log(
+                            'Bad date (' . $his->$rname . ') | ' .
+                            $e->getMessage(),
+                            PER_LOG_INFO
+                        );
+                        return $this->$rname;
+                    }
+                }
+                break;
+
                 break;
             case AutoColors::PK:
                 return $this->_colors->id;
