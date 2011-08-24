@@ -14,13 +14,13 @@
 		<div class="bigtable">
 			<fieldset class="cssform">
 				<p>
-					<label for="model" class="bline required">{_T string="Model"}</label>
-					<input type="text" name="model" id="model" value="{$model->model}" maxlength="20"/>
+					<label for="model" class="bline">{_T string="Model"}</label>
+					<input type="text" name="model" id="model" value="{$model->model}" maxlength="20" required/>
 				</p>
 				<p>
 {if $brands|@count gt 0}
-					<label for="brand" class="bline required">{_T string="Brand"}</label>
-					<select name="brand" id="brand">
+					<label for="brand" class="bline">{_T string="Brand"}</label>
+					<select name="brand" id="brand" required>
 						<option value="-1">{_T string="Select one brand"}</option>
 	{foreach from=$brands item=brand}
 						<option value="{$brand->id_brand}"{if $brand->id_brand eq $model->brand} selected="selected"{/if}>{$brand->brand}</option>

@@ -25,20 +25,20 @@
 				<legend>{_T string="Car's base informations"}</legend>
 				<div>
 				<p>
-					<label for="name" class="bline required">{_T string="Name:"}</label>
-					<input type="text" name="name" id="name" value="{$car->name}" maxlength="20"/>
+					<label for="name" class="bline">{_T string="Name:"}</label>
+					<input type="text" name="name" id="name" value="{$car->name}" maxlength="20" required/>
 				</p>
 				<p>
 					<span class="bline">
-						<label for="brand" class="required">{_T string="Brand"}</label>/<label for="model" class="required">{_T string="Model:"}</label>
+						<label for="brand">{_T string="Brand"}</label>/<label for="model">{_T string="Model:"}</label>
 					</span>
-					<select name="brand" id="brand">
+					<select name="brand" id="brand" required>
 						<option value="-1">{_T string="Choose a brand"}</option>
 	{foreach from=$brands item=brand}
 						<option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->brand} selected="selected"{/if}>{$brand->brand}</option>
 	{/foreach}
 					</select>
-					<select name="model" id="model">
+					<select name="model" id="model" required>
 						<option value="-1">{_T string="Choose a model"}</option>
 	{foreach from=$models item=model}
 						<option value="{$model->id_model}"{if $model->id_model eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
@@ -46,12 +46,12 @@
 					</select>
 				</p>
 				<p>
-					<label for="first_registration_date" class="bline required">{_T string="First registration date:"}</label>
-					<input type="text" name="first_registration_date" id="first_registration_date" value="{$car->first_registration_date}" maxlength="20"/>
+					<label for="first_registration_date" class="bline">{_T string="First registration date:"}</label>
+					<input type="text" name="first_registration_date" id="first_registration_date" value="{$car->first_registration_date}" maxlength="20" required/>
 				</p>
 				<p>
-					<label for="first_circulation_date" class="bline required">{_T string="First circulation date:"}</label>
-					<input type="text" name="first_circulation_date" id="first_circulation_date" value="{$car->first_circulation_date}" maxlength="20"/>
+					<label for="first_circulation_date" class="bline">{_T string="First circulation date:"}</label>
+					<input type="text" name="first_circulation_date" id="first_circulation_date" value="{$car->first_circulation_date}" maxlength="20" required/>
 				</p>
 				<p>
 					<label for="mileage" class="bline">{_T string="Mileage:"}</label>
@@ -89,8 +89,8 @@
 				</p>
 	{/if}
 				<p>
-					<label for="color" class="bline required">{_T string="Color:"}</label>
-					<select name="color" id="color">
+					<label for="color" class="bline">{_T string="Color:"}</label>
+					<select name="color" id="color" required>
 						<option value="-1">{_T string="Choose a color"}</option>
 	{foreach from=$colors item=color}
 						<option value="{$color->id_color}"{if $color->id_color eq $car->color->id} selected="selected"{/if}>{$color->color}</option>
@@ -98,8 +98,8 @@
 					</select>
 				</p>
 				<p>
-					<label for="state" class="bline required">{_T string="State:"}</label>
-					<select name="state" id="state">
+					<label for="state" class="bline">{_T string="State:"}</label>
+					<select name="state" id="state" required>
 						<option value="-1">{_T string="Choose a state"}</option>
 	{foreach from=$states item=state}
 						<option value="{$state->id_state}"{if $state->id_state eq $car->state->id} selected="selected"{/if}>{$state->state}</option>
@@ -107,16 +107,16 @@
 					</select>
 				</p>
 				<p>
-					<label for="registration" class="bline required">{_T string="Registration:"}</label>
-					<input type="text" name="registration" id="registration" value="{$car->registration}"/>
+					<label for="registration" class="bline">{_T string="Registration:"}</label>
+					<input type="text" name="registration" id="registration" value="{$car->registration}" required/>
 				</p>
 				</div>
 			</fieldset>
 			<fieldset class="cssform">
 				<legend>{_T string="Car's technical informations"}</legend>
 				<p>
-					<label class="bline required" for="body">{_T string="Body:"}</label>
-					<select name="body" id="body">
+					<label class="bline" for="body">{_T string="Body:"}</label>
+					<select name="body" id="body" required>
 						<option value="-1">{_T string="Choose a body"}</option>
 	{foreach from=$bodies item=body}
 						<option value="{$body->id_body}"{if $body->id_body eq $car->body->id} selected="selected"{/if}>{$body->body}</option>
@@ -124,8 +124,8 @@
 					</select>
 				</p>
 				<p>
-					<label class="bline required" for="transmission">{_T string="Transmission:"}</label>
-					<select name="transmission" id="transmission">
+					<label class="bline" for="transmission">{_T string="Transmission:"}</label>
+					<select name="transmission" id="transmission" required>
 						<option value="-1">{_T string="Choose a transmission"}</option>
 	{foreach from=$transmissions item=transmission}
 						<option value="{$transmission->id_transmission}"{if $transmission->id_transmission eq $car->transmission->id} selected="selected"{/if}>{$transmission->transmission}</option>
@@ -133,8 +133,8 @@
 					</select>
 				</p>
 				<p>
-					<label class="bline required" for="finition">{_T string="Finition:"}</label>
-					<select name="finition" id="finition">
+					<label class="bline" for="finition">{_T string="Finition:"}</label>
+					<select name="finition" id="finition" required>
 						<option value="-1">{_T string="Choose a finition"}</option>
 	{foreach from=$finitions item=finition}
 						<option value="{$finition->id_finition}"{if $finition->id_finition eq $car->finition->id} selected="selected"{/if}>{$finition->finition}</option>
@@ -154,8 +154,8 @@
 					<input type="text" name="engine_size" id="engine_size" value="{$car->engine_size}"/>
 				</p>
 				<p>
-					<label for="fuel" class="bline required">{_T string="Fuel:"}</label>
-					<select name="fuel" id="fuel">
+					<label for="fuel" class="bline">{_T string="Fuel:"}</label>
+					<select name="fuel" id="fuel" required>
 						<option value="-1">{_T string="Choose a fuel"}</option>
 	{foreach from=$fuels key=k item=fuel}
 						<option value="{$k}"{if $k eq $car->fuel} selected="selected"{/if}>{$fuel}</option>

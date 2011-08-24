@@ -17,8 +17,8 @@
 		<div class="bigtable">
 			<fieldset class="cssform">
 				<p>
-					<label for="{$field}" class="bline required">{$field_name}</label>
-					<input type="text" name="{$field}" id="{$field}" value="{$obj->value}" maxlength="20"/>
+					<label for="{$field}" class="bline">{$field_name}</label>
+					<input type="text" name="{$field}" id="{$field}" value="{$obj->value}" maxlength="20" required/>
 				</p>
 			</fieldset>
 		</div>
