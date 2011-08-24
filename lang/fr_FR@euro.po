@@ -9,19 +9,21 @@
 # Thomas Canniot <mrtom@fedoraproject.org>, 2007.
 # Johan Cwiklinski <johan@x-tnd.be>, 2007, 2008, 2009.
 # Johan "Papa" Cwiklinski, 2010.
+# Johan Cwiklinski <johan AT x-tnd DOT be>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-20 16:44+0100\n"
-"PO-Revision-Date: 2010-02-25 20:05+0100\n"
-"Last-Translator: Johan \"Papa\" Cwiklinski\n"
+"PO-Revision-Date: 2011-08-24 18:17+0200\n"
+"Last-Translator: Johan Cwiklinski <johan AT x-tnd DOT be>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 
 #: ../object.php:139
 msgid "Brand '%s'"
@@ -639,7 +641,7 @@ msgstr "kilométrage"
 
 #: ../object.php:127
 msgid "Add new transmission"
-msgstr "Ajouter une transaction"
+msgstr "Ajouter une transmission"
 
 #: ../templates/default/vehicles.tpl:49
 msgid "First registration date:"

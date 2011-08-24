@@ -418,7 +418,7 @@ $lang['Car\'s base informations'] = 'Informations de base de la voiture';
 $lang['My Cars'] = 'Mes voitures';
 
 // ../object.php:127 
-$lang['Add new transmission'] = 'Ajouter une transaction';
+$lang['Add new transmission'] = 'Ajouter une transmission';
 
 // ../templates/default/vehicles.tpl:101 
 $lang['State:'] = 'État&nbsp;:';
