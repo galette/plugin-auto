@@ -92,7 +92,7 @@ class AutoHistory
     */
     public function load($id)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
         if ( $id == null || !is_int($id) ) {
             $log->log(
@@ -105,21 +105,23 @@ class AutoHistory
         }
 
         $this->_id_car = $id;
-        $query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' WHERE ' . Auto::PK . '=' . $id . ' ORDER BY history_date DESC';
 
-        $result = $mdb->query($query);
-        if ( MDB2::isError($result) ) {
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
+                ->where(Auto::PK . ' = ?', $id)
+                ->order('history_date ASC');
+
+            $this->_entries = $select->query()->fetchAll();
+            $this->_formatEntries();
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
-                $this->_id_car . ') | ' . $result->getMessage() . '(' .
-                $result->getDebugInfo() . ')',
+                $this->_id_car . ') | ' . $e->getMessage(),
                 PEAR_LOG_ERR
             );
             return false;
         }
-        $this->_entries = $result->fetchAll();
-        $this->_formatEntries();
     }
 
     /**

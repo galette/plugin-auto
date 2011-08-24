@@ -81,35 +81,35 @@ class AutoModels
     */
     public function getList($brandId = null)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' INNER JOIN ' . PREFIX_DB . AUTO_PREFIX . Autobrands::TABLE .
-            ' ON (' . PREFIX_DB . AUTO_PREFIX . self::TABLE . '.' . AutoBrands::PK .
-            '=' . PREFIX_DB . AUTO_PREFIX . AutoBrands::TABLE . '.' .
-            AutoBrands::PK . ')';
+        try {
+            $select = new Zend_Db_Select($zdb->db);
 
-        //if required, the where clause
-        if ( isset($brandId) && is_int($brandId) ) {
-            $query .= ' WHERE ' . PREFIX_DB . AUTO_PREFIX . self::TABLE . '.' .
-                AutoBrands::PK . '=' . $brandId;
-        }
+            $select->from(
+                array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE)
+            )->join(
+                    array('b' => PREFIX_DB . AUTO_PREFIX . Autobrands::TABLE),
+                    'a.' . AutoBrands::PK . '=b.' . AutoBrands::PK
+            );
 
-        // the order clause
-        $query .= ' ORDER BY ' . self::FIELD . ' ASC';
+            //if required, the where clause
+            if ( isset($brandId) && is_int($brandId) ) {
+                $select->where('a.' . AutoBrands::PK . '= ?', $brandId);
+            }
 
-        $result = $mdb->query($query);
+            // the order clause
+            $select->order(self::FIELD . ' ASC');
 
-        if ( MDB2::isError($result) ) {
+            return $select->query()->fetchAll();
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
-                PEAR_LOG_WARNING
+                $e->getMessage(),
+                PEAR_LOG_ERR
             );
             return false;
         }
-
-        return $result->fetchAll();
     }
 
     /**
@@ -137,31 +137,27 @@ class AutoModels
     */
     public function load($id)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' WHERE ' . self::PK . '=' . $id;
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
+                ->where(self::PK . ' = ?', $id);
 
-        $result = $mdb->query($query);
-
-        if ( MDB2::isError($result) ) {
+            $r = $select->query()->fetch();
+            $this->id = $r->id_model;
+            $this->model = $r->model;
+            $id_brand = AutoBrands::PK;
+            $this->brand->load((int)$r->$id_brand);
+            return true;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load model from id `' . $id .
-                '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')',
-                PEAR_LOG_WARNING
+                '` | ' . $e->getMessage(),
+                PEAR_LOG_ERR
             );
             return false;
         }
-
-        $r = $result->fetchRow();
-        $this->id = $r->id_model;
-        $this->model = $r->model;
-        $id_brand = AutoBrands::PK;
-        $this->brand->load((int)$r->$id_brand);
-
-        $result->free();
-
-        return true;
     }
 
     /**

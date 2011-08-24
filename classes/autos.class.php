@@ -77,7 +77,7 @@ class Autos
     */
     public static function getList($as_autos=false, $mine=false, $fields=null, $filter=null)
     {
-        global $mdb, $log, $login;
+        global $zdb, $log, $login;
 
         /** TODO: Check if filter is valid ? */
         if ( $filter != null && trim($filter) != '' ) {
@@ -86,36 +86,41 @@ class Autos
 
         $fieldsList = ( $fields != null && !$as_autos )
             ? (( !is_array($fields) || count($fields) < 1 )
-                ? '*'
+                ? (array)'*'
                 : implode(', ', $fields))
-            : '*';
+            : (array)'*';
 
-        $query = 'SELECT ' . $fieldsList . ' FROM ' . PREFIX_DB . AUTO_PREFIX .
-            self::TABLE;
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(
+                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                $fieldsList
+            );
 
-        if ( $mine == true || !$login->isAdmin() ) {
-            $query .= ' WHERE ' . Adherent::PK . '=' . $login->id;
-        }
+            //restict on user self vehicles when not admin, or if admin and
+            //requested 'my vehicles'
+            if ( $mine == true || !$login->isAdmin() ) {
+                $select->where(Adherent::PK . ' = ?', $login->id);
+            }
 
-        $result = $mdb->query($query);
-        if (MDB2::isError($result)) {
+            $results = $select->query()->fetchAll();
+            $autos = array();
+            if ( $as_autos ) {
+                foreach ( $results as $row ) {
+                    $autos[] = new Auto($row);
+                }
+            } else {
+                $autos = $results;
+            }
+            return $autos;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
-                PEAR_LOG_WARNING
+                $e->getMessage(),
+                PEAR_LOG_ERR
             );
             return false;
         }
-
-        $autos = array();
-        if ( $as_autos ) {
-            foreach ( $result->fetchAll() as $row ) {
-                $autos[] = new Auto($row);
-            }
-        } else {
-            $autos = $result->fetchAll();
-        }
-        return $autos;
     }
 }
 ?>

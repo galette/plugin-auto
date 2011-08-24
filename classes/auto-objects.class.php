@@ -84,24 +84,22 @@ abstract class AutoObject
     */
     public function getList()
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . $this->_table . ' ORDER BY ' .
-            $this->_field . ' ASC';
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . $this->_table)
+                ->order($this->_field . ' ASC');
 
-        $result = $mdb->query($query);
-
-        if (MDB2::isError($result)) {
+            return $select->query()->fetchAll();
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
-                ' list | ' . $result->getMessage() . '(' .
-                $result->getDebugInfo() . ')',
-                PEAR_LOG_WARNING
+                ' list | ' . $e->getMessage(),
+                PEAR_LOG_ERR
             );
             return false;
         }
-
-        return $result->fetchAll();
     }
 
     /**
@@ -113,32 +111,28 @@ abstract class AutoObject
     */
     public function load($id)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . $this->_table . ' WHERE ' .
-            $this->_pk . '=' . $id;
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . $this->_table)
+                ->where($this->_pk . ' = ?', $id);
 
-        $result = $mdb->query($query);
+            $r = $select->query()->fetch();
+            $pk = $this->_pk;
+            $this->id = $r->$pk;
+            $field = $this->_field;
+            $this->value = $r->$field;
 
-        if ( MDB2::isError($result) ) {
+            return true;
+        } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
-                ' from id `' . $id . '` | ' . $result->getMessage() . '(' .
-                $result->getDebugInfo() . ')',
-                PEAR_LOG_WARNING
+                ' from id `' . $id . '` | ' . $e->getMessage(),
+                PEAR_LOG_ERR
             );
             return false;
         }
-
-        $r = $result->fetchRow();
-        $pk = $this->_pk;
-        $this->id = $r->$pk;
-        $field = $this->_field;
-        $this->value = $r->$field;
-
-        $result->free();
-
-        return true;
     }
 
     /**
