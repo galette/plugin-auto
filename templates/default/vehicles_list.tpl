@@ -34,7 +34,7 @@
 	{assign var='brand' value=$auto->model->obrand}
 				<tr>
 					<td class="tbl_line_{if $smarty.foreach.autos_list.iteration % 2 eq 0}even{else}odd{/if}">
-						<input type="checkbox" name="_sel[]" value="{$auto->id}"/>
+						<input type="checkbox" name="vehicle_sel[]" value="{$auto->id}"/>
 					</td>
 					<td class="tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}"><a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}">{$auto->name}</a></td>
 					<td class="tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}"><a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}">{$brand->value}</a></td>

@@ -64,6 +64,104 @@ class Autos
     }
 
     /**
+     * Remove specified vehicles
+     *
+     * @param interger|array $ids Vehicles identifiers to delete
+     *
+     * @return boolean
+     */
+    public function removeVehicles($ids)
+    {
+        global $zdb, $log, $hist;
+
+        $list = array();
+        if ( is_numeric($ids) ) {
+            //we've got only one identifier
+            $list[] = $ids;
+        } else {
+            $list = $ids;
+        }
+
+        if ( is_array($list) ) {
+            try {
+                $zdb->db->beginTransaction();
+
+                //Retrieve some informations
+                $select = new Zend_Db_Select($zdb->db);
+                $select->from(
+                    array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
+                    array(self::PK, 'a.car_name', 'c.brand', 'b.model')
+                )->join(
+                    array('b' => PREFIX_DB . AUTO_PREFIX . AutoModels::TABLE),
+                    'a.' . AutoModels::PK . ' = b.' . AutoModels::PK
+                )->join(
+                    array('c' => PREFIX_DB . AUTO_PREFIX . AutoBrands::TABLE),
+                    'b.' . AutoBrands::PK . ' = c.' . AutoBrands::PK
+                )->where(self::PK . ' IN (?)', $ids);
+
+                $vehicles = $select->query()->fetchAll();
+
+                $infos = null;
+                foreach ($vehicles as $vehicle ) {
+                    $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
+                        ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
+                    $infos .=  $str_v . "\n";
+
+                    $p = new AutoPicture($vehicle->id_car);
+                    if ( $p->hasPicture() ) {
+                        if ( !$p->delete() ) {
+                            $log->log(
+                                'Unable to delete picture for vehicle ' .
+                                $str_v,
+                                PEAR_LOG_ERR
+                            );
+                            throw new Exception(
+                                'Unable to delete picture for vehicle ' .
+                                $str_v
+                            );
+                        } else {
+                            $hist->add(
+                                "Vehicle Picture deleted",
+                                $str_adh
+                            );
+                        }
+                    }
+                }
+
+                //delete vehicles
+                $del = $zdb->db->delete(
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                    self::PK . ' IN (' . implode(',', $ids) . ')'
+                );
+
+                //add an history entry
+                $hist->add(
+                    "Delete vehicles cards",
+                    $infos
+                );
+
+                //commit all changes
+                $zdb->db->commit();
+            } catch (Exception $e) {
+                $zdb->db->rollBack();
+                $log->log(
+                    'Unable to delete selected vehicle(s) |' .
+                    $e->getMessage(),
+                    PEAR_LOG_ERR
+                );
+                return false;
+            }
+        } else {
+            //not numeric and not an array: incorrect.
+            $log->log(
+                'Asking to remove vehicles, but without providing an array or a single numeric value.',
+                PEAR_LOG_WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
     * Get the list of all vehicles
     *
     * @param boolean      $as_autos return the results as an array of Auto object.

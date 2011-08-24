@@ -64,16 +64,19 @@ if ( isset($_GET["nbshow"]) ) {
     }
 }
 
-$is_new = ( get_numeric_form_value('new', '') == 1
-    || isset($_POST['donew']) || isset($_GET['donew']) )
-    ? true
-    : false;
-$set = get_form_value('set', null);
-
 //Constants and classes from plugin
 require_once '_config.inc.php';
 require_once 'classes/autos.class.php';
 $auto = new Autos();
+
+if (isset($_GET['sup']) || isset($_POST['delete'])) {
+    if ( isset($_GET['sup']) ) {
+        $auto->removeVehicles($_GET['sup']);
+    } else if ( isset($_POST['vehicle_sel']) ) {
+        $auto->removeVehicles($_POST['vehicle_sel']);
+    }
+}
+
 
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
