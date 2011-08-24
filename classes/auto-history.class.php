@@ -144,7 +144,7 @@ class AutoHistory
             $log->log(
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                $e->getMessage(),
                 PEAR_LOG_ERR
             );
             return false;
