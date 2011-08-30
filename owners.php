@@ -72,6 +72,7 @@ if ( $ajax ) {
     $tpl->assign('mode', 'ajax');
     $tpl->display('owners.tpl', AUTO_SMARTY_PREFIX);
 } else {
+    $tpl->assign('page_title', _T("Owners"));
     $content = $tpl->fetch('owners.tpl', AUTO_SMARTY_PREFIX);
     $tpl->assign('content', $content);
     //Set path to main Galette's template

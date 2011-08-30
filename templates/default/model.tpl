@@ -1,5 +1,3 @@
-		<h1 id="titre">{$title}</h1>
-
 		<form action="" method="post" id="modifform">
 {if $error_detected|@count != 0}
 		<div id="errorbox">

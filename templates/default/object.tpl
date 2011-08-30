@@ -1,7 +1,6 @@
 {assign var='name' value=$obj->name}
 {assign var='pk' value=$obj->pk}
 {assign var='field' value=$obj->field}
-		<h1 id="titre">{$title}</h1>
 
 		<form action="" method="post" id="modifform">
 {if $error_detected|@count != 0}

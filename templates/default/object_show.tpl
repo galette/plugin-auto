@@ -1,8 +1,6 @@
 {assign var='name' value=$obj->name}
 {assign var='pk' value=$obj->pk}
 {assign var='field' value=$obj->field}
-		<h1 id="titre">{$title}</h1>
-
 		<div class="bigtable">
 {if $name eq 'brands'}
 	{if $models|@count gt 0}

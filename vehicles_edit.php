@@ -331,6 +331,8 @@ if ( isset($error_detected) ) {
     $tpl->assign('error_detected', $error_detected);
 }
 
+$tpl->assign('page_title', $title);
+
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
 $orig_template_path = $tpl->template_dir;
@@ -345,7 +347,6 @@ $tpl->compile_id = AUTO_SMARTY_PREFIX;
 $tpl->assign('require_calendar', true);
 $tpl->assign('require_dialog', true);
 $tpl->assign('show_mine', $mine);
-$tpl->assign('title', $title);
 $tpl->assign('car', $auto);
 $tpl->assign('models', $auto->model->getList((int)$auto->model->brand));
 $tpl->assign('js_init_models', (($auto->model->brand != '') ? false : true));

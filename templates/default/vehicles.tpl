@@ -1,4 +1,3 @@
-		<h1 id="titre">{$title}</h1>
 {if $error_detected|@count != 0}
 		<div id="errorbox">
 			<h1>{_T string="- ERROR -"}</h1>
@@ -22,7 +21,7 @@
 		<form action="" method="post" id="modifform" enctype="multipart/form-data">
 		<div class="bigtable">
 			<fieldset class="cssform">
-				<legend>{_T string="Car's base informations"}</legend>
+				<legend class="ui-state-active ui-corner-top">{_T string="Car's base informations"}</legend>
 				<div>
 				<p>
 					<label for="name" class="bline">{_T string="Name:"}</label>
@@ -65,7 +64,7 @@
 			</fieldset>
 
 			<fieldset>
-				<legend>{_T string="Car's photo"}</legend>
+				<legend class="ui-state-active ui-corner-top">{_T string="Car's photo"}</legend>
 				<p>
 					<span class="bline">{_T string="Picture:"}</span>
 					<img src="picture.php?id_adh={$car->id}&amp;rand={$time}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>
@@ -78,7 +77,7 @@
 			</fieldset>
 
 			<fieldset class="cssform">
-				<legend>{_T string="Current car's state informations"}</legend>
+				<legend class="ui-state-active ui-corner-top">{_T string="Current car's state informations"}</legend>
 				<div>
 				<input type="hidden" name="owner" id="owner" value="{$car->owner->id}"/>
 	{if $login->isAdmin()}
@@ -113,7 +112,7 @@
 				</div>
 			</fieldset>
 			<fieldset class="cssform">
-				<legend>{_T string="Car's technical informations"}</legend>
+				<legend class="ui-state-active ui-corner-top">{_T string="Car's technical informations"}</legend>
 				<p>
 					<label class="bline" for="body">{_T string="Body:"}</label>
 					<select name="body" id="body" required>
@@ -164,7 +163,7 @@
 				</p>
 			</fieldset>
 			<fieldset>
-				<legend>{_T string="Comment"}</legend>
+				<legend class="ui-state-active ui-corner-top">{_T string="Comment"}</legend>
 				<p>
 					<label for="comment" class="bline">{_T string="Comment:"}</label>
 					<textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>

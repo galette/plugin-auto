@@ -230,7 +230,7 @@ if ( isset($can_show)
         $tpl->assign('models', $obj->getModels(get_numeric_form_value('show', '')));
     }
     $title = str_replace('%s', $obj->value, $show_title);
-    $tpl->assign('title', $title);
+    $tpl->assign('page_title', $title);
     $tpl->assign('obj', $obj);
     $content = $tpl->fetch('object_show.tpl', AUTO_SMARTY_PREFIX);
 } else if ( isset( $_GET[$obj->pk] ) || $is_new ) {
@@ -238,14 +238,14 @@ if ( isset($can_show)
         $obj->load(get_numeric_form_value($obj->pk, ''));
         $title = str_replace('%s', $obj->value, $title);
     }
-    $tpl->assign('title', $title);
+    $tpl->assign('page_title', $title);
     $tpl->assign('obj', $obj);
     $content = $tpl->fetch('object.tpl', AUTO_SMARTY_PREFIX);
 } else {
     $tpl->assign('add_text', $add_text);
     $tpl->assign('deletes_text', $deletes_text);
     //$delete_text = str_replace('%s', $obj->value, $delete_text);
-    $tpl->assign('title', $title);
+    $tpl->assign('page_title', $title);
     $tpl->assign('delete_text', $delete_text);
     $tpl->assign('obj', $obj);
     $content = $tpl->fetch('object_list.tpl', AUTO_SMARTY_PREFIX);

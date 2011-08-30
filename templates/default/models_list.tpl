@@ -1,5 +1,3 @@
-		<h1 id="titre">{$title}</h1>
-
 		<form action="" method="get" id="listform">
 		<table id="listing">
 			<thead>

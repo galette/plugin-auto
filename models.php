@@ -147,7 +147,7 @@ if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
     if ( isset($_GET['brand']) ) {
         $model->brand = $_GET['brand'];
     }
-    $tpl->assign('title', $title);
+    $tpl->assign('page_title', $title);
     $tpl->assign('model', $model);
     include_once 'classes/auto-brands.class.php';
     $b = new AutoBrands();
@@ -155,7 +155,7 @@ if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
     $content = $tpl->fetch('model.tpl', AUTO_SMARTY_PREFIX);
 } else {
     $title = _T("Models list");
-    $tpl->assign('title', $title);
+    $tpl->assign('page_title', $title);
     $tpl->assign('models', $model->getList());
     $content = $tpl->fetch('models_list.tpl', AUTO_SMARTY_PREFIX);
 }

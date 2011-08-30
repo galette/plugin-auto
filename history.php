@@ -66,7 +66,7 @@ $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('ajax', $ajax);
 $tpl->assign('entries', $history->entries);
 $apk = Auto::PK;
-$tpl->assign('title', str_replace('%d', $history->$apk, _T("History of car #%d")));
+$tpl->assign('page_title', str_replace('%d', $history->$apk, _T("History of car #%d")));
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if ( $ajax ) {

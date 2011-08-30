@@ -78,6 +78,8 @@ if (isset($_GET['sup']) || isset($_POST['delete'])) {
 }
 
 
+$title = ($mine == 1) ? _T("My Cars") : _T("Cars list");
+$tpl->assign('page_title', $title);
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
 $orig_template_path = $tpl->template_dir;

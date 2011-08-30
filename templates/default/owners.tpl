@@ -1,6 +1,3 @@
-{if !$mode eq 'ajax'}
-		<h1 id="titre">{_T string="Owners"}</h1>
-{/if}
 		<table id="listing">
 			<thead>
 				<tr> 

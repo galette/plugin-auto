@@ -1,5 +1,3 @@
-		<h1 id="titre">{if $show_mine eq 1}{_T string="My Cars"}{else}{_T string="Cars list"}{/if}</h1>
-
 		<form action="" method="post" id="listform">
 		<table id="listing">
 			<thead>
