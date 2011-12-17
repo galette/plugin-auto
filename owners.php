@@ -52,8 +52,8 @@ $ajax = ( isset($_GET['ajax']) && $_GET['ajax'] == 'true' ) ? true : false;
 require_once WEB_ROOT . 'classes/members.class.php';
 require_once WEB_ROOT . 'classes/varslist.class.php';
 
-if ( isset($_SESSION['galette']['varslist']) ) {
-    $varslist = unserialize($_SESSION['galette']['varslist']);
+if ( isset($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['varslist']) ) {
+    $varslist = unserialize($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['varslist']);
 } else {
     $varslist = new VarsList();
 }
