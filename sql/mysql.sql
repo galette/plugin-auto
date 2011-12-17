@@ -1,4 +1,5 @@
 -- Table structure for table galette_auto_bodies
+DROP TABLE IF EXISTS galette_auto_bodies;
 CREATE TABLE galette_auto_bodies (
   id_body int(11) NOT NULL AUTO_INCREMENT,
   body varchar(50) NOT NULL,
@@ -6,6 +7,7 @@ CREATE TABLE galette_auto_bodies (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_brands
+DROP TABLE IF EXISTS galette_auto_brands;
 CREATE TABLE galette_auto_brands (
   id_brand int(11) NOT NULL AUTO_INCREMENT,
   brand varchar(50) NOT NULL,
@@ -13,6 +15,7 @@ CREATE TABLE galette_auto_brands (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_colors
+DROP TABLE IF EXISTS galette_auto_colors;
 CREATE TABLE galette_auto_colors (
   id_color int(11) NOT NULL AUTO_INCREMENT,
   color varchar(50) NOT NULL,
@@ -20,6 +23,7 @@ CREATE TABLE galette_auto_colors (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_finitions
+DROP TABLE IF EXISTS galette_auto_finitions;
 CREATE TABLE galette_auto_finitions (
   id_finition int(11) NOT NULL AUTO_INCREMENT,
   finition varchar(50) NOT NULL,
@@ -27,6 +31,7 @@ CREATE TABLE galette_auto_finitions (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_models
+DROP TABLE IF EXISTS galette_auto_models;
 CREATE TABLE galette_auto_models (
   id_model int(11) NOT NULL AUTO_INCREMENT,
   model varchar(50) NOT NULL,
@@ -36,8 +41,9 @@ CREATE TABLE galette_auto_models (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_states
+DROP TABLE IF EXISTS galette_auto_states;
 CREATE TABLE galette_auto_states (
-  id_state int(11) NOT NULL,
+  id_state int(11) NOT NULL AUTO_INCREMENT,
   state varchar(50) NOT NULL,
   PRIMARY KEY (id_state)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -51,6 +57,7 @@ CREATE TABLE galette_auto_transmissions (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_cars
+DROP TABLE IF EXISTS galette_auto_cars;
 CREATE TABLE galette_auto_cars (
   id_car int(11) NOT NULL AUTO_INCREMENT,
   car_name varchar(50) NOT NULL,
@@ -81,6 +88,7 @@ CREATE TABLE galette_auto_cars (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_history
+DROP TABLE IF EXISTS galette_auto_history;
 CREATE TABLE galette_auto_history (
   id_car int(11) NOT NULL,
   id_adh int(10) unsigned NOT NULL,
@@ -96,6 +104,7 @@ CREATE TABLE galette_auto_history (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_pictures
+DROP TABLE IF EXISTS galette_auto_pictures;
 CREATE TABLE galette_auto_pictures (
   id_car int(11) NOT NULL,
   picture mediumblob NOT NULL,
