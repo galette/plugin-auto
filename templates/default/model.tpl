@@ -1,14 +1,4 @@
 		<form action="" method="post" id="modifform">
-{if $error_detected|@count != 0}
-		<div id="errorbox">
-			<h1>{_T string="- ERROR -"}</h1>
-			<ul>
-	{foreach from=$error_detected item=error}
-				<li>{$error}</li>
-	{/foreach}
-			</ul>
-		</div>
-{/if}
 		<div class="bigtable">
 			<fieldset class="cssform">
 				<p>
