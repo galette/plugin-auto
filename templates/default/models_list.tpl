@@ -1,4 +1,4 @@
-		<form action="" method="get" id="listform">
+		<form action="" method="post" id="listform">
 		<table id="listing">
 			<thead>
 				<tr>
