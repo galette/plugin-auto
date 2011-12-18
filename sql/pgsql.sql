@@ -63,7 +63,7 @@ CREATE SEQUENCE galette_auto_states_id_seq
     CACHE 1;
 
 -- Table structure for table galette_auto_bodies
-DROP TABLE IF EXISTS galette_auto_bodies;
+DROP TABLE IF EXISTS galette_auto_bodies CASCADE;
 CREATE TABLE galette_auto_bodies (
   id_body integer DEFAULT nextval('galette_auto_bodies_id_seq'::text) NOT NULL,
   body character varying(50) NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE galette_auto_bodies (
 );
 
 -- Table structure for table galette_auto_brands
-DROP TABLE IF EXISTS galette_auto_brands;
+DROP TABLE IF EXISTS galette_auto_brands CASCADE;
 CREATE TABLE galette_auto_brands (
   id_brand integer DEFAULT nextval('galette_auto_brands_id_seq'::text) NOT NULL,
   brand character varying(50) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE galette_auto_brands (
 );
 
 -- Table structure for table galette_auto_colors
-DROP TABLE IF EXISTS galette_auto_colors;
+DROP TABLE IF EXISTS galette_auto_colors CASCADE;
 CREATE TABLE galette_auto_colors (
   id_color integer DEFAULT nextval('galette_auto_colors_id_seq'::text) NOT NULL,
   color character varying(50) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE galette_auto_colors (
 );
 
 -- Table structure for table galette_auto_finitions
-DROP TABLE IF EXISTS galette_auto_finitions;
+DROP TABLE IF EXISTS galette_auto_finitions CASCADE;
 CREATE TABLE galette_auto_finitions (
   id_finition integer  DEFAULT nextval('galette_auto_finitions_id_seq'::text) NOT NULL,
   finition character varying(50) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE galette_auto_finitions (
 );
 
 -- Table structure for table galette_auto_models
-DROP TABLE IF EXISTS galette_auto_models;
+DROP TABLE IF EXISTS galette_auto_models CASCADE;
 CREATE TABLE galette_auto_models (
   id_model integer DEFAULT nextval('galette_auto_models_id_seq'::text) NOT NULL,
   model character varying(50) NOT NULL,
@@ -104,15 +104,15 @@ CREATE TABLE galette_auto_models (
 );
 
 -- Table structure for table galette_auto_states
-DROP TABLE IF EXISTS galette_auto_states;
+DROP TABLE IF EXISTS galette_auto_states CASCADE;
 CREATE TABLE galette_auto_states (
-  id_state integer DEFAULT nextval('galette_auto_models_id_seq'::text) NOT NULL,
+  id_state integer DEFAULT nextval('galette_auto_states_id_seq'::text) NOT NULL,
   state character varying(50) NOT NULL,
   PRIMARY KEY (id_state)
 );
 
 -- Table structure for table galette_auto_transmissions
-DROP TABLE IF EXISTS galette_auto_transmissions;
+DROP TABLE IF EXISTS galette_auto_transmissions CASCADE;
 CREATE TABLE galette_auto_transmissions (
   id_transmission integer DEFAULT nextval('galette_auto_transmissions_id_seq'::text) NOT NULL,
   transmission character varying(50) NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE galette_auto_transmissions (
 );
 
 -- Table structure for table galette_auto_cars
-DROP TABLE IF EXISTS galette_auto_cars;
+DROP TABLE IF EXISTS galette_auto_cars CASCADE;
 CREATE TABLE galette_auto_cars (
   id_car integer DEFAULT nextval('galette_auto_cars_id_seq'::text) NOT NULL,
   car_name character varying(50) NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE galette_auto_history (
 );
 
 -- Table structure for table galette_auto_pictures
-DROP TABLE IF EXISTS galette_auto_pictures;
+DROP TABLE IF EXISTS galette_auto_pictures CASCADE;
 CREATE TABLE galette_auto_pictures (
   id_car integer NOT NULL REFERENCES galette_auto_cars (id_car) ON DELETE CASCADE ON UPDATE CASCADE,
   picture bytea NOT NULL,
