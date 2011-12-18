@@ -169,31 +169,35 @@ class AutoModels
     */
     public function store($new = false)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        if ( $new ) {
-            $query = 'INSERT INTO ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-                ' (model, ' . AutoBrands::PK . ')';
-            $query .= ' VALUES (\'' . $this->model . '\', ' .
-                $this->brand->id_brand . ')';
-        } else {
-            $query = 'UPDATE ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-                ' SET model=\'' . $this->model . '\', ' . AutoModels::PK . '=' .
-                $this->brand->id_brand . ' WHERE ' . self::PK . '=' . $this->id;
-        }
-
-        $result = $mdb->execute($query);
-
-        if (MDB2::isError($result)) {
+        try {
+            $values = array(
+                'model'         => $this->model,
+                AutoBrands::PK  => $this->brand->id_brand
+            );
+            if ( $new ) {
+                $zdb->db->insert(
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                    $values
+                );
+            } else {
+                $zdb->db->update(
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                    $values,
+                    self::PK . ' = ' . $this->id
+                );
+            }
+            return true;
+        } catch (Exception $e) {
             $log->log(
-                '[' . get_class($this) . '] Cannot store model values `' .
-                $this->id . '`, `' . $this->value . '`, `' . $this->brand->id_brand .
-                '` | ' . $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                '[' . get_class($this) . '] Cannot store model' .
+                ' values `' . $this->id . '`, `' . $this->value . '` | ' .
+                $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
         }
-        return true;
     }
 
     /**
@@ -205,24 +209,21 @@ class AutoModels
     */
     public function delete($ids)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'DELETE FROM ' . PREFIX_DB . AUTO_PREFIX . self::TABLE .
-            ' WHERE ' . self::PK . '=';
-        $query .= implode(' OR ' . self::PK . '=', $ids);
-
-        $result = $mdb->execute($query);
-
-        if (MDB2::isError($result)) {
+        try {
+            $zdb->db->delete(
+                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                self::PK . ' IN (' . implode(',', $ids) . ')'
+            );
+        } catch (Exception $e) {
             $log->log(
-                '[' . get_class($this) . '] Cannot delete model from ids `' .
-                implode(' - ', $ids) . '` | ' . $result->getMessage() . '(' .
-                $result->getDebugInfo() . ')',
+                '[' . get_class($this) . '] Cannot delete models from ids `' .
+                implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
         }
-        return true;
     }
 
     /**
