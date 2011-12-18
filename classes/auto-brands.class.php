@@ -82,24 +82,26 @@ class AutoBrands extends AutoObject
     */
     public function getModels($brand)
     {
-        global $mdb, $log;
+        global $zdb, $log;
 
-        $query = 'SELECT * FROM ' . PREFIX_DB . AUTO_PREFIX .
-            AutoModels::TABLE . ' WHERE ' . self::PK . '=' . $brand .
-            ' ORDER BY ' . AutoModels::FIELD . ' ASC';
-
-        $result = $mdb->query($query);
-
-        if ( MDB2::isError($result) ) {
+        try {
+            $select = new Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . AutoModels::TABLE)
+                ->where(self::PK . ' = ? ', $brand)
+                ->order(AutoModels::FIELD . ' ASC');
+            return $select->query()->fetchAll();
+        } catch(Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
-                $result->getMessage() . '(' . $result->getDebugInfo() . ')',
+                $e->getMessage(),
                 PEAR_LOG_WARNING
+            );
+            $log->log(
+                'Query was: ' . $select->__toString(),
+                PEAR_LOG_DEBUG
             );
             return false;
         }
-
-        return $result->fetchAll();
     }
 
 
