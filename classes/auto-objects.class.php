@@ -193,7 +193,7 @@ abstract class AutoObject
         } catch (Exception $e) {
             $log->log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
-                ' from id `' . $this->id . '` | ' . $e->getMessage(),
+                ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 PEAR_LOG_WARNING
             );
             return false;
