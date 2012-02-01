@@ -2,24 +2,24 @@
 msgid "Brand '%s'"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:92
+#: ../templates/default/vehicles.tpl:71
 msgid "Color:"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:53
+#: ../templates/default/vehicles.tpl:32
 msgid "First circulation date:"
 msgstr ""
 
-#: ../vehicles_edit.php:115 ../vehicles_edit.php:129
-#: ../vehicles_edit.php:142 ../vehicles_edit.php:172
+#: ../vehicles_edit.php:118 ../vehicles_edit.php:132
+#: ../vehicles_edit.php:145 ../vehicles_edit.php:175
 msgid "- Mandatory field %s empty."
 msgstr ""
 
-#: ../templates/default/history.tpl:12
+#: ../templates/default/history.tpl:9
 msgid "Owner"
 msgstr ""
 
-#: ../templates/default/history.tpl:15
+#: ../templates/default/history.tpl:12
 msgid "Registration"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "New transmission"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:33
+#: ../templates/default/vehicles.tpl:12
 msgid "Model:"
 msgstr ""
 
@@ -43,16 +43,16 @@ msgstr ""
 msgid "New finition"
 msgstr ""
 
-#: ../vehicles_edit.php:304
+#: ../vehicles_edit.php:307
 msgid "An error occured while trying to delete car's photo"
 msgstr ""
 
-#: ../object.php:73 ../templates/default/menu.tpl:4
+#: ../object.php:73 ../templates/default/menu.tpl:5
 msgid "Colors list"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:56 ../templates/default/models_list.tpl:55
-#: ../templates/default/vehicles_list.tpl:57
+#: ../templates/default/object_list.tpl:53 ../templates/default/models_list.tpl:52
+#: ../templates/default/vehicles_list.tpl:55
 msgid "Other:"
 msgstr ""
 
@@ -60,11 +60,11 @@ msgstr ""
 msgid "Change finition '%s'"
 msgstr ""
 
-#: ../vehicles_edit.php:238
+#: ../vehicles_edit.php:241
 msgid "- You must choose a %s in the list"
 msgstr ""
 
-#: ../classes/auto.class.php:153
+#: ../classes/auto.class.php:154
 msgid "engine size"
 msgstr ""
 
@@ -72,12 +72,11 @@ msgstr ""
 msgid "Do you really want to delete the body '%s'?"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:47 ../templates/default/models_list.tpl:46
-#: ../templates/default/vehicles_list.tpl:48
+#: ../templates/default/object_list.tpl:44 ../templates/default/models_list.tpl:43
 msgid "no record found"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:94
+#: ../templates/default/vehicles.tpl:73
 msgid "Choose a color"
 msgstr ""
 
@@ -85,15 +84,15 @@ msgstr ""
 msgid "Finition"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:25
+#: ../templates/default/vehicles.tpl:4
 msgid "Car's base informations"
 msgstr ""
 
-#: ../templates/default/vehicles_list.tpl:55
+#: ../templates/default/vehicles_list.tpl:53
 msgid "Do you really want to delete selected vehicles?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:145
+#: ../templates/default/vehicles.tpl:124
 msgid "Chassis number:"
 msgstr ""
 
@@ -101,38 +100,38 @@ msgstr ""
 msgid "New state"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:87
+#: ../templates/default/vehicles.tpl:66
 msgid "Show full car state history"
 msgstr ""
 
-#: ../classes/auto.class.php:147
+#: ../classes/auto.class.php:148
 msgid "registration"
 msgstr ""
 
-#: ../templates/default/vehicles_list.tpl:58
+#: ../templates/default/vehicles_list.tpl:56
 msgid "Add new vehicle"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:13 ../templates/default/models_list.tpl:10
-#: ../templates/default/vehicles_list.tpl:11
+#: ../templates/default/object_list.tpl:11 ../templates/default/models_list.tpl:8
+#: ../templates/default/vehicles_list.tpl:9
 msgid "Actions"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:88
+#: ../templates/default/vehicles.tpl:67
 msgid "Change car's owner"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:43 ../templates/default/models_list.tpl:42
-#: ../templates/default/vehicles_list.tpl:44
+#: ../templates/default/object_list.tpl:40 ../templates/default/models_list.tpl:39
+#: ../templates/default/vehicles_list.tpl:42
 msgid "[del]"
 msgstr ""
 
-#: ../templates/default/owners.tpl:9 ../templates/default/owners.tpl:11
-#: ../templates/default/vehicles_list.tpl:8
+#: ../templates/default/owners.tpl:6 ../templates/default/owners.tpl:8
+#: ../templates/default/vehicles_list.tpl:6
 msgid "Name"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:103
+#: ../templates/default/vehicles.tpl:82
 msgid "Choose a state"
 msgstr ""
 
@@ -140,27 +139,27 @@ msgstr ""
 msgid "New body"
 msgstr ""
 
-#: ../classes/auto.class.php:146
+#: ../classes/auto.class.php:147
 msgid "model"
 msgstr ""
 
-#: ../templates/default/object_show.tpl:17
+#: ../templates/default/object_show.tpl:15
 msgid "The brand '%s' does not have any registered model at this time."
 msgstr ""
 
-#: ../classes/auto.class.php:149
+#: ../classes/auto.class.php:150
 msgid "first circulation date"
 msgstr ""
 
-#: ../templates/default/object_show.tpl:17
+#: ../templates/default/object_show.tpl:15
 msgid "Do you want to create a new one?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:36
+#: ../templates/default/vehicles.tpl:15
 msgid "Choose a brand"
 msgstr ""
 
-#: ../templates/default/history.tpl:9
+#: ../templates/default/history.tpl:6
 msgid "Date"
 msgstr ""
 
@@ -172,8 +171,8 @@ msgstr ""
 msgid "Do you really want to delete selected brands?"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:42 ../templates/default/models_list.tpl:41
-#: ../templates/default/vehicles_list.tpl:43
+#: ../templates/default/object_list.tpl:39 ../templates/default/models_list.tpl:38
+#: ../templates/default/vehicles_list.tpl:41
 msgid "[mod]"
 msgstr ""
 
@@ -181,16 +180,20 @@ msgstr ""
 msgid "Change state '%s'"
 msgstr ""
 
-#: ../classes/auto.class.php:253
+#: ../classes/auto.class.php:251
 msgid "Petrol"
+msgstr ""
+
+#: ../object.php:101
+msgid "Add new finition"
 msgstr ""
 
 #: ../object.php:135
 msgid "New brand"
 msgstr ""
 
-#: ../templates/default/model.tpl:17 ../templates/default/models_list.tpl:8
-#: ../templates/default/vehicles_list.tpl:10
+#: ../templates/default/model.tpl:5 ../templates/default/models_list.tpl:6
+#: ../templates/default/vehicles_list.tpl:8
 msgid "Model"
 msgstr ""
 
@@ -198,17 +201,17 @@ msgstr ""
 msgid "- An error occured while saving record. Please try again."
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:87
+#: ../templates/default/vehicles.tpl:66
 msgid "Car state history"
 msgstr ""
 
-#: ../templates/default/owners.tpl:68 ../templates/default/history.tpl:57
+#: ../templates/default/owners.tpl:65 ../templates/default/history.tpl:54
 msgid "[admin]"
 msgstr ""
 
-#: ../object.php:140 ../templates/default/model.tpl:22
-#: ../templates/default/models_list.tpl:9 ../templates/default/vehicles.tpl:33
-#: ../templates/default/vehicles_list.tpl:9
+#: ../object.php:140 ../templates/default/model.tpl:10
+#: ../templates/default/models_list.tpl:7 ../templates/default/vehicles.tpl:12
+#: ../templates/default/vehicles_list.tpl:7
 msgid "Brand"
 msgstr ""
 
@@ -216,23 +219,23 @@ msgstr ""
 msgid "Do you really want to delete selected finitions?"
 msgstr ""
 
-#: ../classes/auto.class.php:256
+#: ../classes/auto.class.php:254
 msgid "Electricity"
 msgstr ""
 
-#: ../templates/default/menu.tpl:15
+#: ../vehicles_list.php:81 ../templates/default/menu.tpl:16
 msgid "My Cars"
 msgstr ""
 
-#: ../templates/default/model.tpl:24
+#: ../templates/default/model.tpl:12
 msgid "Select one brand"
 msgstr ""
 
-#: ../classes/auto.class.php:154
+#: ../classes/auto.class.php:155
 msgid "color"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:70
+#: ../templates/default/vehicles.tpl:49
 msgid "Picture:"
 msgstr ""
 
@@ -244,33 +247,37 @@ msgstr ""
 msgid "Change body '%s'"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:118
+#: ../templates/default/vehicles.tpl:97
 msgid "Body:"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:21 ../templates/default/models_list.tpl:18
-#: ../templates/default/owners.tpl:39 ../templates/default/vehicles_list.tpl:18
-#: ../templates/default/history.tpl:28
+#: ../templates/default/object_list.tpl:18 ../templates/default/models_list.tpl:15
+#: ../templates/default/owners.tpl:36 ../templates/default/vehicles_list.tpl:16
+#: ../templates/default/history.tpl:25
 msgid "Pages:"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:136
+#: ../templates/default/vehicles.tpl:115
 msgid "Finition:"
 msgstr ""
 
-#: ../vehicles_edit.php:191
+#: ../templates/default/vehicles_list.tpl:46
+msgid "No car in the database"
+msgstr ""
+
+#: ../vehicles_edit.php:194
 msgid "- You must choose a fuel in the list"
 msgstr ""
 
-#: ../templates/default/model.tpl:30
+#: ../templates/default/model.tpl:18
 msgid "No brand is registered yet. You have to %create at least one brand% to register models."
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:116
+#: ../templates/default/vehicles.tpl:95
 msgid "Car's technical informations"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:101
+#: ../templates/default/vehicles.tpl:80
 msgid "State:"
 msgstr ""
 
@@ -278,32 +285,27 @@ msgstr ""
 msgid "Transmission"
 msgstr ""
 
-#: ../vehicles_edit.php:68
+#: ../vehicles_edit.php:71
 msgid "New vehicle"
 msgstr ""
 
-#: ../vehicles_edit.php:292
+#: ../vehicles_edit.php:295
 msgid "An SQL error has occured."
 msgstr ""
 
-#: ../classes/auto.class.php:257
+#: ../classes/auto.class.php:255
 msgid "Bio"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:88
+#: ../templates/default/vehicles.tpl:67
 msgid "Change"
-msgstr ""
-
-#: ../templates/default/object.tpl:9 ../templates/default/model.tpl:6
-#: ../templates/default/vehicles.tpl:4
-msgid "- ERROR -"
 msgstr ""
 
 #: ../object.php:70
 msgid "New color"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:149
+#: ../templates/default/vehicles.tpl:128
 msgid "Horsepower:"
 msgstr ""
 
@@ -311,24 +313,24 @@ msgstr ""
 msgid "Do you really want to delete selected bodies?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:120
+#: ../templates/default/vehicles.tpl:99
 msgid "Choose a body"
 msgstr ""
 
-#: ../templates/default/object.tpl:27 ../templates/default/model.tpl:37
+#: ../templates/default/object.tpl:16 ../templates/default/model.tpl:25
 msgid "Cancel"
 msgstr ""
 
-#: ../object.php:99 ../templates/default/menu.tpl:6
+#: ../object.php:99 ../templates/default/menu.tpl:7
 msgid "Finitions list"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:265
+#: ../templates/default/vehicles.tpl:249
 msgid "Click to choose this owner for current car"
 msgstr ""
 
-#: ../templates/default/object.tpl:26 ../templates/default/model.tpl:36
-#: ../templates/default/vehicles.tpl:176
+#: ../templates/default/object.tpl:15 ../templates/default/model.tpl:24
+#: ../templates/default/vehicles.tpl:155
 msgid "Save"
 msgstr ""
 
@@ -336,52 +338,56 @@ msgstr ""
 msgid "Do you really want to delete the color '%s'?"
 msgstr ""
 
-#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+#: ../templates/default/object.tpl:21 ../templates/default/model.tpl:29
 msgid "red"
 msgstr ""
 
-#: ../templates/default/object_show.tpl:15
+#: ../templates/default/object_show.tpl:13
 msgid "Create a new model for brand '%s'"
 msgstr ""
 
-#: ../classes/auto.class.php:151
+#: ../classes/auto.class.php:152
 msgid "seats"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:159
+#: ../templates/default/vehicles.tpl:138
 msgid "Choose a fuel"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:53 ../templates/default/models_list.tpl:52
-#: ../templates/default/vehicles_list.tpl:54
+#: ../templates/default/object_list.tpl:50 ../templates/default/models_list.tpl:49
+#: ../templates/default/vehicles_list.tpl:52
 msgid "Selection:"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:127
+#: ../templates/default/vehicles.tpl:106
 msgid "Transmission:"
 msgstr ""
 
-#: ../classes/auto.class.php:148
+#: ../classes/auto.class.php:149
 msgid "first registration date"
 msgstr ""
 
-#: ../templates/default/object_show.tpl:9
+#: ../templates/default/object_show.tpl:7
 msgid "Registered models for the brand '%s':"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:281
+#: ../templates/default/vehicles.tpl:265
 msgid "Car\\'s history"
 msgstr ""
 
-#: ../templates/default/owners.tpl:22 ../templates/default/owners.tpl:24
+#: ../templates/default/owners.tpl:19 ../templates/default/owners.tpl:21
 msgid "Nickname"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:169
+#: ../classes/auto.class.php:335
+msgid "New car added"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:148
 msgid "Comment:"
 msgstr ""
 
-#: ../object.php:125 ../templates/default/menu.tpl:8
+#: ../object.php:125 ../templates/default/menu.tpl:9
 msgid "Transmissions list"
 msgstr ""
 
@@ -389,15 +395,15 @@ msgstr ""
 msgid "New model"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:129
+#: ../templates/default/vehicles.tpl:108
 msgid "Choose a transmission"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:28
+#: ../templates/default/vehicles.tpl:7
 msgid "Name:"
 msgstr ""
 
-#: ../vehicles_edit.php:159
+#: ../vehicles_edit.php:162
 msgid "- Wrong date format for %s (dd/mm/yyyy)!"
 msgstr ""
 
@@ -405,11 +411,11 @@ msgstr ""
 msgid "Change brand '%s'"
 msgstr ""
 
-#: ../object.php:138 ../templates/default/menu.tpl:9
+#: ../object.php:138 ../templates/default/menu.tpl:10
 msgid "Brands list"
 msgstr ""
 
-#: ../vehicles_edit.php:288
+#: ../vehicles_edit.php:291
 msgid "Mime-Type not allowed"
 msgstr ""
 
@@ -417,7 +423,7 @@ msgstr ""
 msgid "Do you really want to delete selected colors?"
 msgstr ""
 
-#: ../vehicles_list.php:77
+#: ../vehicles_list.php:89
 msgid "Vehicles list"
 msgstr ""
 
@@ -425,39 +431,43 @@ msgstr ""
 msgid "Change transmission '%s'"
 msgstr ""
 
-#: ../vehicles_edit.php:283
+#: ../vehicles_edit.php:286
 msgid "File is too big. Maximum allowed size is %d"
 msgstr ""
 
-#: ../object.php:74 ../templates/default/history.tpl:18
+#: ../object.php:74 ../templates/default/history.tpl:15
 msgid "Color"
 msgstr ""
 
-#: ../templates/default/owners.tpl:59 ../templates/default/history.tpl:48
+#: ../templates/default/owners.tpl:56 ../templates/default/history.tpl:45
 msgid "[M]"
 msgstr ""
 
-#: ../classes/auto.class.php:145
+#: ../classes/auto.class.php:146
 msgid "name"
 msgstr ""
 
-#: ../classes/auto.class.php:152
+#: ../classes/auto.class.php:153
 msgid "horsepower"
 msgstr ""
 
-#: ../vehicles_edit.php:181
+#: ../vehicles_edit.php:184
 msgid "- You must enter a positive integer for %s"
 msgstr ""
 
-#: ../models.php:157 ../templates/default/menu.tpl:10
+#: ../models.php:157 ../templates/default/menu.tpl:11
 msgid "Models list"
 msgstr ""
 
-#: ../templates/default/object.tpl:32 ../templates/default/model.tpl:41
+#: ../templates/default/vehicles.tpl:231
+msgid "Owners"
+msgstr ""
+
+#: ../templates/default/object.tpl:21 ../templates/default/model.tpl:29
 msgid "NB : The mandatory fields are in"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:42
+#: ../templates/default/vehicles.tpl:21
 msgid "Choose a model"
 msgstr ""
 
@@ -465,15 +475,15 @@ msgstr ""
 msgid "Add new body"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:110
+#: ../templates/default/vehicles.tpl:89
 msgid "Registration:"
 msgstr ""
 
-#: ../templates/default/menu.tpl:1
+#: ../templates/default/menu.tpl:2
 msgid "Cars"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:138
+#: ../templates/default/vehicles.tpl:117
 msgid "Choose a finition"
 msgstr ""
 
@@ -481,23 +491,23 @@ msgstr ""
 msgid "Change model '%s'"
 msgstr ""
 
-#: ../classes/auto.class.php:254
+#: ../classes/auto.class.php:252
 msgid "Diesel"
 msgstr ""
 
-#: ../object.php:101
-msgid "Add new finition"
+#: ../vehicles_edit.php:315
+msgid "- An error has occured while saving car in the database."
 msgstr ""
 
 #: ../object.php:75
 msgid "Add new color"
 msgstr ""
 
-#: ../object.php:87 ../templates/default/history.tpl:21
+#: ../object.php:87 ../templates/default/history.tpl:18
 msgid "State"
 msgstr ""
 
-#: ../templates/default/models_list.tpl:56
+#: ../templates/default/models_list.tpl:53
 msgid "Add new model"
 msgstr ""
 
@@ -505,11 +515,11 @@ msgstr ""
 msgid "History of car #%d"
 msgstr ""
 
-#: ../templates/default/owners.tpl:77
+#: ../templates/default/owners.tpl:74
 msgid "no member"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:57
+#: ../templates/default/vehicles.tpl:36
 msgid "Mileage:"
 msgstr ""
 
@@ -517,36 +527,36 @@ msgstr ""
 msgid "Do you really want to delete selected transmissions?"
 msgstr ""
 
-#: ../templates/default/menu.tpl:11 ../templates/default/vehicles_list.tpl:1
+#: ../vehicles_list.php:81 ../templates/default/menu.tpl:12
 msgid "Cars list"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:73
+#: ../templates/default/vehicles.tpl:52
 msgid "Delete image"
 msgstr ""
 
-#: ../templates/default/models_list.tpl:42
+#: ../templates/default/models_list.tpl:39
 msgid "Do you really want to delete the model '%s'?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:153
+#: ../templates/default/vehicles.tpl:132
 msgid "Engine size:"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:20 ../templates/default/models_list.tpl:17
-#: ../templates/default/vehicles_list.tpl:80
+#: ../templates/default/object_list.tpl:77 ../templates/default/models_list.tpl:76
+#: ../templates/default/vehicles_list.tpl:78
 msgid "(Un)Check all"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:68 ../templates/default/vehicles.tpl:71
+#: ../classes/auto.class.php:354
+msgid "Car updated"
+msgstr ""
+
+#: ../templates/default/vehicles.tpl:47 ../templates/default/vehicles.tpl:50
 msgid "Car's photo"
 msgstr ""
 
-#: ../templates/default/owners.tpl:2 ../templates/default/vehicles.tpl:247
-msgid "Owners"
-msgstr ""
-
-#: ../templates/default/vehicles.tpl:61
+#: ../templates/default/vehicles.tpl:40
 msgid "Seats:"
 msgstr ""
 
@@ -558,19 +568,16 @@ msgstr ""
 msgid "Do you really want to delete the transmission '%s'?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:14
-msgid "- WARNING -"
-msgstr ""
-
-#: ../templates/default/vehicles_list.tpl:80
+#: ../templates/default/object_list.tpl:77 ../templates/default/models_list.tpl:76
+#: ../templates/default/vehicles_list.tpl:78
 msgid "Invert selection"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:167
+#: ../templates/default/vehicles.tpl:146
 msgid "Comment"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:157
+#: ../templates/default/vehicles.tpl:136
 msgid "Fuel:"
 msgstr ""
 
@@ -578,8 +585,8 @@ msgstr ""
 msgid "Add new brand"
 msgstr ""
 
-#: ../templates/default/object_list.tpl:54 ../templates/default/models_list.tpl:53
-#: ../templates/default/vehicles_list.tpl:55
+#: ../templates/default/object_list.tpl:51 ../templates/default/models_list.tpl:50
+#: ../templates/default/vehicles_list.tpl:53
 msgid "Delete"
 msgstr ""
 
@@ -587,11 +594,11 @@ msgstr ""
 msgid "Do you really want to delete the state '%s'?"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:88
+#: ../templates/default/vehicles.tpl:67
 msgid "Current owner:"
 msgstr ""
 
-#: ../classes/auto.class.php:150
+#: ../classes/auto.class.php:151
 msgid "mileage"
 msgstr ""
 
@@ -599,32 +606,32 @@ msgstr ""
 msgid "Add new transmission"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:49
+#: ../templates/default/vehicles.tpl:28
 msgid "First registration date:"
 msgstr ""
 
-#: ../classes/auto.class.php:155
+#: ../classes/auto.class.php:156
 msgid "state"
 msgstr ""
 
-#: ../templates/default/owners.tpl:61 ../templates/default/owners.tpl:63
-#: ../templates/default/history.tpl:50 ../templates/default/history.tpl:52
+#: ../templates/default/owners.tpl:58 ../templates/default/owners.tpl:60
+#: ../templates/default/history.tpl:47 ../templates/default/history.tpl:49
 msgid "[W]"
 msgstr ""
 
-#: ../templates/default/vehicles.tpl:81
+#: ../templates/default/vehicles.tpl:60
 msgid "Current car's state informations"
 msgstr ""
 
-#: ../vehicles_edit.php:247
+#: ../vehicles_edit.php:250
 msgid "- you must attach an owner to this car"
 msgstr ""
 
-#: ../templates/default/history.tpl:68
+#: ../templates/default/history.tpl:65
 msgid "no history entries"
 msgstr ""
 
-#: ../vehicles_edit.php:152
+#: ../vehicles_edit.php:155
 msgid "- Non valid date for %s!"
 msgstr ""
 
@@ -632,20 +639,28 @@ msgstr ""
 msgid "Do you really want to delete the finition '%s'?"
 msgstr ""
 
+#: ../classes/auto.class.php:500
+msgid "Y-m-d"
+msgstr ""
+
 #: ../object.php:89
 msgid "Do you really want to delete selected states?"
 msgstr ""
 
-#: ../templates/default/vehicles_list.tpl:44
+#: ../templates/default/vehicles_list.tpl:42
 msgid "Do you really want to delete the car '%s'?"
 msgstr ""
 
-#: ../object.php:112 ../templates/default/menu.tpl:7
+#: ../object.php:112 ../templates/default/menu.tpl:8
 msgid "Bodies list"
 msgstr ""
 
+#: ../templates/default/vehicles_list.tpl:46
+msgid "No car has been registered yet for your account."
+msgstr ""
+
 #: ../object.php:171 ../models.php:83
-#: ../vehicles_edit.php:85
+#: ../vehicles_edit.php:88
 msgid "- No id provided for modifying this record! (internal)"
 msgstr ""
 
@@ -653,23 +668,23 @@ msgstr ""
 msgid "- You must select a brand!"
 msgstr ""
 
-#: ../vehicles_edit.php:69
+#: ../vehicles_edit.php:72
 msgid "Change vehicle '%s'"
 msgstr ""
 
-#: ../classes/auto.class.php:255
+#: ../classes/auto.class.php:253
 msgid "Gas"
 msgstr ""
 
-#: ../object.php:86 ../templates/default/menu.tpl:5
+#: ../object.php:86 ../templates/default/menu.tpl:6
 msgid "States list"
 msgstr ""
 
-#: ../templates/default/models_list.tpl:53
+#: ../templates/default/models_list.tpl:50
 msgid "Do you really want to delete selected models?"
 msgstr ""
 
-#: ../vehicles_edit.php:276
+#: ../vehicles_edit.php:279
 msgid "- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t"
 msgstr ""
 
