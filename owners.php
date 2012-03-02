@@ -39,6 +39,9 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use Galette\Filters\MembersList;
+use Galette\Repository\Members;
+
 $base_path = '../../';
 require_once $base_path . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
@@ -49,13 +52,10 @@ if ( !$login->isLogged() ) {
 // check for ajax mode
 $ajax = ( isset($_GET['ajax']) && $_GET['ajax'] == 'true' ) ? true : false;
 
-require_once WEB_ROOT . 'classes/members.class.php';
-require_once WEB_ROOT . 'classes/varslist.class.php';
-
-if ( isset($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['varslist']) ) {
-    $varslist = unserialize($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['varslist']);
+if ( isset($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['filters']['auto']['members']) ) {
+    $varslist = unserialize($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['filters']['auto']['members']);
 } else {
-    $varslist = new VarsList();
+    $varslist = new MembersList();
 }
 
 $owners = Members::getList(true);

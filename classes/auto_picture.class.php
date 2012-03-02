@@ -35,7 +35,8 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-require_once WEB_ROOT . 'classes/picture.class.php';
+use Galette\Core\Picture;
+
 require_once '_config.inc.php';
 require_once 'auto.class.php';
 

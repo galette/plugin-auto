@@ -35,8 +35,8 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-//main Galette classes required
-require_once WEB_ROOT . 'classes/adherent.class.php';
+use Galette\Entity\Adherent;
+
 //current plugin classes required
 require_once 'auto_picture.class.php';
 require_once 'auto-models.class.php';

@@ -35,7 +35,8 @@
  * @since     Available since 0.7dev - 2009-10-02
  */
 
-require_once WEB_ROOT . 'classes/adherent.class.php';
+use Galette\Entity\Adherent;
+
 require_once 'auto.class.php';
 require_once 'auto-colors.class.php';
 require_once 'auto-states.class.php';
