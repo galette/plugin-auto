@@ -58,7 +58,8 @@ if ( isset($_SESSION['galette'][PREFIX_DB . '_' . NAME_DB]['filters']['auto']['m
     $varslist = new MembersList();
 }
 
-$owners = Members::getList(true);
+$members = new Galette\Repository\Members();
+$owners = $members->getMembersList(true);
 
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
