@@ -78,13 +78,15 @@ CREATE TABLE galette_auto_cars (
   id_transmission int(11) NOT NULL,
   id_finition int(11) NOT NULL,
   id_model int(11) NOT NULL,
+  id_adh int(10) NOT NULL,
   PRIMARY KEY (id_car),
   FOREIGN KEY(id_color) REFERENCES REFERENCES galette_auto_colors (id_color) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_body) REFERENCES galette_auto_bodies (id_body) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_state) REFERENCES galette_auto_states (id_state) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_transmission) REFERENCES galette_auto_transmissions (id_transmission) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_finition) REFERENCES galette_auto_finitions (id_finition) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (id_model) REFERENCES galette_auto_models (id_model) ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (id_model) REFERENCES galette_auto_models (id_model) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (id_adh) REFERENCES galette_adherents (id_adh) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_history
