@@ -40,7 +40,7 @@
  */
 
 $base_path = '../../';
-if( !isset($mine) ) {
+if ( !isset($mine) ) {
     $mine = false;
 }
 require_once $base_path . 'includes/galette.inc.php';
