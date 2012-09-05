@@ -35,6 +35,8 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+use Galette\Common\KLogger as KLogger;
+
 require_once 'auto-brands.class.php';
 
 /**
@@ -106,7 +108,7 @@ class AutoModels
             $log->log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -154,7 +156,7 @@ class AutoModels
             $log->log(
                 '[' . get_class($this) . '] Cannot load model from id `' . $id .
                 '` | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -194,7 +196,7 @@ class AutoModels
                 '[' . get_class($this) . '] Cannot store model' .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -220,7 +222,7 @@ class AutoModels
             $log->log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .
                 implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -240,7 +242,7 @@ class AutoModels
         if ( !in_array($name, $forbidden) ) {
             $log->log(
                 '[' . get_class($this) . '] Trying to get `' . $name . '`',
-                PEAR_LOG_DEBUG
+                KLogger::DEBUG
             );
             switch( $name ){
             case 'brand':
@@ -256,7 +258,7 @@ class AutoModels
         } else {
             $log->log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                PEAR_LOG_INFO
+                KLogger::INFO
             );
             return false;
         }

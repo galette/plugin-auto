@@ -35,6 +35,9 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use Galette\Common\KLogger as KLogger;
+use Galette\Entity\Adherent as Adherent;
+
 require_once 'auto.class.php';
 
 /**
@@ -113,7 +116,7 @@ class Autos
                             $log->log(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v,
-                                PEAR_LOG_ERR
+                                KLogger::ERR
                             );
                             throw new Exception(
                                 'Unable to delete picture for vehicle ' .
@@ -147,7 +150,7 @@ class Autos
                 $log->log(
                     'Unable to delete selected vehicle(s) |' .
                     $e->getMessage(),
-                    PEAR_LOG_ERR
+                    KLogger::ERR
                 );
                 return false;
             }
@@ -155,7 +158,7 @@ class Autos
             //not numeric and not an array: incorrect.
             $log->log(
                 'Asking to remove vehicles, but without providing an array or a single numeric value.',
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -216,7 +219,7 @@ class Autos
             $log->log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }

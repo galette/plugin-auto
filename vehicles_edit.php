@@ -39,6 +39,8 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use Galette\Common\KLogger as KLogger;
+
 $base_path = '../../';
 require_once $base_path . 'includes/galette.inc.php';
 if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
@@ -231,7 +233,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 default:
                     $log->log(
                         'Unable to retrieve the textual value for prop `' . $prop . '`',
-                        PEAR_LOG_INFO
+                        KLogger::INFO
                     );
                     $name = '(unknow)';
                 }
@@ -254,7 +256,7 @@ if ( get_numeric_form_value('modif', 0) == 1
             /** TODO: what's the default? */
             $log->log(
                 'Trying to edit an Auto property that is not catched in the source code! (prop is: ' . $prop . ')',
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             break;
         }//switch

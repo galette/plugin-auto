@@ -35,6 +35,8 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+use Galette\Common\KLogger as KLogger;
+
 require_once 'auto-objects.class.php';
 require_once 'auto-models.class.php';
 
@@ -94,11 +96,11 @@ class AutoBrands extends AutoObject
             $log->log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             $log->log(
                 'Query was: ' . $select->__toString(),
-                PEAR_LOG_DEBUG
+                KLogger::DEBUG
             );
             return false;
         }

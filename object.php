@@ -39,6 +39,8 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use Galette\Common\KLogger as KLogger;
+
 $base_path = '../../';
 require_once $base_path . 'includes/galette.inc.php';
 if ( !$login->isLogged() || !$login->isAdmin() ) {
@@ -148,7 +150,7 @@ case 'brands':
 default: //by default, we redirecto to index page
     $log->log(
         '[Auto Plugin] No "set" defined for ; could not load object.',
-        PEAR_LOG_WARNING
+        KLogger::WARN
     );
     header('location: ' . $base_path . 'index.php');
     die();

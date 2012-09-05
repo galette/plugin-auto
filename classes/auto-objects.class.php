@@ -35,6 +35,8 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+use Galette\Common\KLogger as KLogger;
+
 /**
  * Automobile Object abstract class for galette Auto plugin
  *
@@ -96,7 +98,7 @@ abstract class AutoObject
             $log->log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' list | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -129,7 +131,7 @@ abstract class AutoObject
             $log->log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' from id `' . $id . '` | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -168,7 +170,7 @@ abstract class AutoObject
                 '[' . get_class($this) . '] Cannot store ' . $this->_name .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -194,7 +196,7 @@ abstract class AutoObject
             $log->log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
                 ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -223,7 +225,7 @@ abstract class AutoObject
         } else {
             $log->log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                PEAR_LOG_INFO
+                KLogger::INFO
             );
             return false;
         }

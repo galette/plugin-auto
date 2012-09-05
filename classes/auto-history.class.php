@@ -35,6 +35,7 @@
  * @since     Available since 0.7dev - 2009-10-02
  */
 
+use Galette\Common\KLogger as KLogger;
 use Galette\Entity\Adherent;
 
 require_once 'auto.class.php';
@@ -100,7 +101,7 @@ class AutoHistory
                 '[' . get_class($this) .
                 '] Unable to load car\'s history : Invalid car id (id was: `' .
                 $id . '`)',
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -119,7 +120,7 @@ class AutoHistory
             $log->log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
                 $this->_id_car . ') | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -146,7 +147,7 @@ class AutoHistory
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -193,7 +194,7 @@ class AutoHistory
 
         $log->log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
-            PEAR_LOG_DEBUG
+            KLogger::DEBUG
         );
 
         try {
@@ -214,7 +215,7 @@ class AutoHistory
             if ( $add > 0 ) {
                 $log->log(
                     '[' . get_class($this) . '] new AutoHistory entry set successfully.',
-                    PEAR_LOG_DEBUG
+                    KLogger::DEBUG
                 );
             } else {
                 throw new Exception('An error occured registering car new history entry :(');
@@ -223,7 +224,7 @@ class AutoHistory
             $log->log(
                 '[' . get_class($this) . '] Cannot register new histroy entry | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -254,7 +255,7 @@ class AutoHistory
             $log->log(
                 '[' . get_class($this) . '] Trying to get an unknown property (' .
                 $name . ')',
-                PEAR_LOG_INFO
+                KLogger::INFO
             );
             break;
         }

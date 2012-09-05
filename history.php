@@ -39,6 +39,8 @@
  * @since     Available since 0.7dev - 2009-10-03
  */
 
+use Galette\Common\KLogger as KLogger;
+
 $base_path = '../../';
 require_once $base_path . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
@@ -53,7 +55,7 @@ $history = null;
 if ( isset($_GET['id_car']) ) {
     $history = new AutoHistory( (int)$_GET['id_car'] );
 } else {
-    $log->log('No car id provided to get its history, exiting.', PEAR_LOG_ERR);
+    $log->log('No car id provided to get its history, exiting.', KLogger::ERR);
     die();
 }
 // check for ajax mode

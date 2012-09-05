@@ -35,6 +35,7 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+use Galette\Common\KLogger as KLogger;
 use Galette\Entity\Adherent;
 
 //current plugin classes required
@@ -192,7 +193,7 @@ class Auto
             $log->log(
                 '[' . get_class($this) . '] Cannot load car form id `' . $id .
                 '` | ' . $e->getMessage(),
-                PEAR_LOG_WARNING
+                KLogger::WARN
             );
             return false;
         }
@@ -391,7 +392,7 @@ class Auto
                 '[' . get_class($this) . '] An error has occured ' .
                 (($new)?'inserting':'updating') . ' car | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                KLogger::ERR
             );
             return false;
         }
@@ -525,7 +526,7 @@ class Auto
                     $log->log(
                         '[' . get_class($this) . '] Property ' . $rname .
                         ' is not set',
-                        PEAR_LOG_WARNING
+                        KLogger::WARN
                     );
                 }
                 break;
@@ -533,7 +534,7 @@ class Auto
         } else {
             $log->log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                PEAR_LOG_INFO
+                KLogger::INFO
             );
             return false;
         }
@@ -581,7 +582,7 @@ class Auto
             $log->log(
                 '[' . get_class($this) . '] Trying to set an internal property (`' .
                 $name . '`)',
-                PEAR_LOG_INFO
+                KLogger::INFO
             );
             return false;
         }
