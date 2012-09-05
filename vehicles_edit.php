@@ -42,6 +42,9 @@
 use Galette\Common\KLogger as KLogger;
 
 $base_path = '../../';
+if ( !isset($mine) ) {
+    $mine = false;
+}
 require_once $base_path . 'includes/galette.inc.php';
 if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
     header('location: ' . $base_path . 'index.php');
