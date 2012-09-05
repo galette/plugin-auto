@@ -37,7 +37,7 @@ CREATE TABLE galette_auto_models (
   model varchar(50) NOT NULL,
   id_brand int(11) NOT NULL,
   PRIMARY KEY (id_model),
-  FOREIGN KEY (id_brand) REFERENCES galette_auto_brans(id_brand)
+  FOREIGN KEY (id_brand) REFERENCES galette_auto_brand(id_brand)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Table structure for table galette_auto_states
