@@ -36,11 +36,12 @@
  */
 
 $this->register(
-    'Galette Auto', //Name
-    'Plugin to manage Automobile clubs', //Short description
-    'Johan Cwiklinski', //Author
-    '0.0.1', //Version
-    null //Permissions needed - not yet implemented
+    'Galette Auto',                         //Name
+    'Plugin to manage Automobile clubs',    //Short description
+    'Johan Cwiklinski',                     //Author
+    '0.0.1',                                //Version
+    '0.7.1',                                //Galette compatible version
+    null                                    //Permissions needed - not yet implemented
 );
 
 ?>
