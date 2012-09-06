@@ -69,7 +69,7 @@ class AutoPicture extends Picture
     protected function getDefaultPicture()
     {
         global $plugins;
-        $this->file_path = $plugins->getTemplatesPath('Auto') . '/images/car.png';
+        $this->file_path = $plugins->getTemplatesPathFromName('Galette Auto') . '/images/car.png';
         $this->format = 'png';
         $this->mime = 'image/png';
         $this->has_picture = false;
