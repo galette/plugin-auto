@@ -35,6 +35,7 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use Galette\Common\KLogger;
 use Galette\Core\Picture;
 
 require_once '_config.inc.php';
@@ -56,8 +57,36 @@ class AutoPicture extends Picture
 {
     protected $tbl_prefix = AUTO_PREFIX;
     const PK = Auto::PK;
-    //path is relative to Picture class, not to AutoPicture
-    protected $store_path = '../plugins/Auto/auto_photos/';
+
+    /**
+    * Default constructor.
+    *
+    * @param int $id_adh the id of the member
+    */
+    public function __construct( $id_adh='' )
+    {
+        $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';
+        if ( !file_exists($this->store_path) ) {
+            if ( !mkdir($this->store_path) ) {
+                KLogger::log(
+                    'Unable to create photo dir `' . $this->store_path . '`.',
+                    KLogger::ERR
+                );
+            } else {
+                KLogger::log(
+                    'New directory `' . $this->store_path . '` has been created',
+                    KLogger::INFO
+                );
+            }
+        } else if ( !is_dir($this->store_path) ) {
+            KLogger::log(
+                'Unable to store plugin images, since `' . $this->store_path .
+                '` is not a directory.',
+                KLogger::WARN
+            );
+        }
+        parent::__construct($id_adh);
+    }
 
     /**
     * Gets the default picture to show, anyways
