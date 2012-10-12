@@ -93,6 +93,7 @@
 			</fieldset>
 			<fieldset class="cssform">
 				<legend class="ui-state-active ui-corner-top">{_T string="Car's technical informations"}</legend>
+                <div>
 				<p>
 					<label class="bline" for="body">{_T string="Body:"}</label>
 					<select name="body" id="body" required>
@@ -141,14 +142,16 @@
 	{/foreach}
 					</select>
 				</p>
+                </div>
 			</fieldset>
 			<fieldset>
 				<legend class="ui-state-active ui-corner-top">{_T string="Comment"}</legend>
+                <div>
 				<p>
 					<label for="comment" class="bline">{_T string="Comment:"}</label>
 					<textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
 				</p>
-
+                </div>
 			</fieldset>
 		</div>
 		<div class="button-container">
