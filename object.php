@@ -41,10 +41,10 @@
 
 use Galette\Common\KLogger as KLogger;
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() || !$login->isAdmin() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
@@ -152,7 +152,7 @@ default: //by default, we redirecto to index page
         '[Auto Plugin] No "set" defined for ; could not load object.',
         KLogger::WARN
     );
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
     break;
 }

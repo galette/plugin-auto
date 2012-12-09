@@ -41,10 +41,10 @@
 
 use Galette\Common\KLogger as KLogger;
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
@@ -53,7 +53,7 @@ require_once 'classes/auto-history.class.php';
 //check for required car's id
 $history = null;
 if ( isset($_GET['id_car']) ) {
-    $history = new AutoHistory( (int)$_GET['id_car'] );
+    $history = new AutoHistory((int)$_GET['id_car']);
 } else {
     $log->log('No car id provided to get its history, exiting.', KLogger::ERR);
     die();
@@ -68,7 +68,10 @@ $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('ajax', $ajax);
 $tpl->assign('entries', $history->entries);
 $apk = Auto::PK;
-$tpl->assign('page_title', str_replace('%d', $history->$apk, _T("History of car #%d")));
+$tpl->assign(
+    'page_title',
+    str_replace('%d', $history->$apk, _T("History of car #%d"))
+);
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if ( $ajax ) {

@@ -41,13 +41,13 @@
 
 use Galette\Common\KLogger as KLogger;
 
-$base_path = '../../';
+define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
     $mine = false;
 }
-require_once $base_path . 'includes/galette.inc.php';
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
