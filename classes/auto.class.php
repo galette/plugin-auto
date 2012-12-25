@@ -146,15 +146,18 @@ class Auto
         $this->_propnames = array(
             'name'                      => _T("name"),
             'model'                     => _T("model"),
-            'registration'              =>  _T("registration"),
+            'registration'              => _T("registration"),
             'first_registration_date'   => _T("first registration date"),
             'first_circulation_date'    => _T("first circulation date"),
             'mileage'                   => _T("mileage"),
-            'seats'                     =>  _T("seats"),
+            'seats'                     => _T("seats"),
             'horsepower'                => _T("horsepower"),
             'engine_size'               => _T("engine size"),
             'color'                     => _T("color"),
-            'state'                     => _T("state")
+            'state'                     => _T("state"),
+            'finition'                  => _T("finition"),
+            'transmission'              => _T("transmission"),
+            'body'                      => _T("body")
         );
 
         $this->_model = new AutoModels();
@@ -460,7 +463,11 @@ class Auto
     */
     public function getPropName($name)
     {
-        return $this->_propnames[$name];
+        if ( isset($this->_propnames[$name]) ) {
+            return $this->_propnames[$name];
+        } else {
+            throw new UnexpectedValueException('Unknown propname ' . $name);
+        }
     }
 
     /**
