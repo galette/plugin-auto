@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 
 /**
  * Automobile Object abstract class for galette Auto plugin
@@ -95,10 +95,10 @@ abstract class AutoObject
 
             return $select->query()->fetchAll();
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' list | ' . $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -128,10 +128,10 @@ abstract class AutoObject
 
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' from id `' . $id . '` | ' . $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -166,11 +166,11 @@ abstract class AutoObject
             }
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot store ' . $this->_name .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -193,10 +193,10 @@ abstract class AutoObject
                 $this->_pk . ' IN (' . implode(',', $ids) . ')'
             );
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
                 ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -223,9 +223,9 @@ abstract class AutoObject
                 }
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                KLogger::INFO
+                Analog::INFO
             );
             return false;
         }

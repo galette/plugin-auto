@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 
 require_once 'auto-objects.class.php';
 require_once 'auto-models.class.php';
@@ -93,14 +93,14 @@ class AutoBrands extends AutoObject
                 ->order(AutoModels::FIELD . ' ASC');
             return $select->query()->fetchAll();
         } catch(Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
-            $log->log(
+            Analog::log(
                 'Query was: ' . $select->__toString(),
-                KLogger::DEBUG
+                Analog::DEBUG
             );
             return false;
         }

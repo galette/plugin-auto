@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-10-02
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 use Galette\Entity\Adherent;
 
 require_once 'auto.class.php';
@@ -97,11 +97,11 @@ class AutoHistory
         global $zdb, $log;
 
         if ( $id == null || !is_int($id) ) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) .
                 '] Unable to load car\'s history : Invalid car id (id was: `' .
                 $id . '`)',
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -117,10 +117,10 @@ class AutoHistory
             $this->_entries = $select->query()->fetchAll();
             $this->_formatEntries();
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
                 $this->_id_car . ') | ' . $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -143,11 +143,11 @@ class AutoHistory
                 ->limit(1);
             return $select->query()->fetch();
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
                 $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -192,9 +192,9 @@ class AutoHistory
     {
         global $zdb, $log;
 
-        $log->log(
+        Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
-            KLogger::DEBUG
+            Analog::DEBUG
         );
 
         try {
@@ -213,18 +213,18 @@ class AutoHistory
             );
 
             if ( $add > 0 ) {
-                $log->log(
+                Analog::log(
                     '[' . get_class($this) . '] new AutoHistory entry set successfully.',
-                    KLogger::DEBUG
+                    Analog::DEBUG
                 );
             } else {
                 throw new Exception('An error occured registering car new history entry :(');
             }
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot register new histroy entry | ' .
                 $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -252,10 +252,10 @@ class AutoHistory
             return $this->_entries;
             break;
         default:
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Trying to get an unknown property (' .
                 $name . ')',
-                KLogger::INFO
+                Analog::INFO
             );
             break;
         }

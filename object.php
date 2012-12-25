@@ -39,7 +39,7 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
@@ -148,9 +148,9 @@ case 'brands':
     //$models = AutoModels::getBrandList();
     break;
 default: //by default, we redirecto to index page
-    $log->log(
+    Analog::log(
         '[Auto Plugin] No "set" defined for ; could not load object.',
-        KLogger::WARN
+        Analog::WARNING
     );
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();

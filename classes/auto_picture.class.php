@@ -70,19 +70,19 @@ class AutoPicture extends Picture
             if ( !mkdir($this->store_path) ) {
                 KLogger::log(
                     'Unable to create photo dir `' . $this->store_path . '`.',
-                    KLogger::ERR
+                    Analog::ERROR
                 );
             } else {
                 KLogger::log(
                     'New directory `' . $this->store_path . '` has been created',
-                    KLogger::INFO
+                    Analog::INFO
                 );
             }
         } else if ( !is_dir($this->store_path) ) {
             KLogger::log(
                 'Unable to store plugin images, since `' . $this->store_path .
                 '` is not a directory.',
-                KLogger::WARN
+                Analog::WARNING
             );
         }
         parent::__construct($id_adh);

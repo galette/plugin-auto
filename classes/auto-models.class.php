@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 
 require_once 'auto-brands.class.php';
 
@@ -105,10 +105,10 @@ class AutoModels
 
             return $select->query()->fetchAll();
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -153,10 +153,10 @@ class AutoModels
             $this->brand->load((int)$r->$id_brand);
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load model from id `' . $id .
                 '` | ' . $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -192,11 +192,11 @@ class AutoModels
             }
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot store model' .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -219,10 +219,10 @@ class AutoModels
                 self::PK . ' IN (' . implode(',', $ids) . ')'
             );
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .
                 implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -240,9 +240,9 @@ class AutoModels
         global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Trying to get `' . $name . '`',
-                KLogger::DEBUG
+                Analog::DEBUG
             );
             switch( $name ){
             case 'brand':
@@ -256,9 +256,9 @@ class AutoModels
                 break;
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                KLogger::INFO
+                Analog::INFO
             );
             return false;
         }

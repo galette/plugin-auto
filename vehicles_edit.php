@@ -39,7 +39,7 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 
 define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
@@ -234,9 +234,9 @@ if ( get_numeric_form_value('modif', 0) == 1
                     $name = AutoModels::FIELD;
                     break;
                 default:
-                    $log->log(
+                    Analog::log(
                         'Unable to retrieve the textual value for prop `' . $prop . '`',
-                        KLogger::INFO
+                        Analog::INFO
                     );
                     $name = '(unknow)';
                 }
@@ -257,9 +257,9 @@ if ( get_numeric_form_value('modif', 0) == 1
             break;
         default:
             /** TODO: what's the default? */
-            $log->log(
+            Analog::log(
                 'Trying to edit an Auto property that is not catched in the source code! (prop is: ' . $prop . ')',
-                KLogger::ERR
+                Analog::ERROR
             );
             break;
         }//switch

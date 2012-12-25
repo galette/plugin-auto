@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 use Galette\Entity\Adherent as Adherent;
 
 require_once 'auto.class.php';
@@ -113,10 +113,10 @@ class Autos
                     $p = new AutoPicture($vehicle->id_car);
                     if ( $p->hasPicture() ) {
                         if ( !$p->delete() ) {
-                            $log->log(
+                            Analog::log(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v,
-                                KLogger::ERR
+                                Analog::ERROR
                             );
                             throw new Exception(
                                 'Unable to delete picture for vehicle ' .
@@ -147,18 +147,18 @@ class Autos
                 $zdb->db->commit();
             } catch (Exception $e) {
                 $zdb->db->rollBack();
-                $log->log(
+                Analog::log(
                     'Unable to delete selected vehicle(s) |' .
                     $e->getMessage(),
-                    KLogger::ERR
+                    Analog::ERROR
                 );
                 return false;
             }
         } else {
             //not numeric and not an array: incorrect.
-            $log->log(
+            Analog::log(
                 'Asking to remove vehicles, but without providing an array or a single numeric value.',
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -216,10 +216,10 @@ class Autos
             }
             return $autos;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
                 $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }

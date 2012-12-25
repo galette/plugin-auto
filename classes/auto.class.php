@@ -35,7 +35,7 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-use Galette\Common\KLogger as KLogger;
+use Analog\Analog as Analog;
 use Galette\Entity\Adherent;
 
 //current plugin classes required
@@ -190,10 +190,10 @@ class Auto
             $this->_loadFromRS($select->query()->fetch());
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load car form id `' . $id .
                 '` | ' . $e->getMessage(),
-                KLogger::WARN
+                Analog::WARNING
             );
             return false;
         }
@@ -388,11 +388,11 @@ class Auto
 
             return true;
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] An error has occured ' .
                 (($new)?'inserting':'updating') . ' car | ' .
                 $e->getMessage(),
-                KLogger::ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -501,7 +501,7 @@ class Auto
                         return $d->format(_T("Y-m-d"));
                     } catch (Exception $e) {
                         //oops, we've got a bad date :/
-                        $log->log(
+                        Analog::log(
                             'Bad date (' . $his->$rname . ') | ' .
                             $e->getMessage(),
                             PER_LOG_INFO
@@ -523,18 +523,18 @@ class Auto
                 if ( isset($this->$rname) ) {
                     return $this->$rname;
                 } else {
-                    $log->log(
+                    Analog::log(
                         '[' . get_class($this) . '] Property ' . $rname .
                         ' is not set',
-                        KLogger::WARN
+                        Analog::WARNING
                     );
                 }
                 break;
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                KLogger::INFO
+                Analog::INFO
             );
             return false;
         }
@@ -579,10 +579,10 @@ class Auto
                 break;
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Trying to set an internal property (`' .
                 $name . '`)',
-                KLogger::INFO
+                Analog::INFO
             );
             return false;
         }
