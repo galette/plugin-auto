@@ -126,4 +126,3 @@ class AutoBrands extends AutoObject
         }
     }
 }
-?>

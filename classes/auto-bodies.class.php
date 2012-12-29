@@ -88,4 +88,3 @@ class AutoBodies extends AutoObject
         }
     }
 }
-?>

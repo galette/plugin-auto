@@ -44,4 +44,3 @@ $this->register(
     null                                    //Permissions needed - not yet implemented
 );
 
-?>

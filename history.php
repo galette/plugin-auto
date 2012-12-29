@@ -84,4 +84,3 @@ if ( $ajax ) {
     $tpl->template_dir = $orig_template_path;
     $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 }
-?>

@@ -88,4 +88,3 @@ class AutoFinitions extends AutoObject
         }
     }
 }
-?>

@@ -54,4 +54,3 @@ if ( !$login->isAdmin() ) {
 
 $picture = new AutoPicture($id_adh);
 $picture->display();
-?>

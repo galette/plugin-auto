@@ -58,4 +58,3 @@ if ( isset($_GET['brand']) && $_GET['brand'] != '' ) {
 }
 
 echo json_encode($list);
-?>

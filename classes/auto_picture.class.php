@@ -104,4 +104,3 @@ class AutoPicture extends Picture
         $this->has_picture = false;
     }
 }
-?>

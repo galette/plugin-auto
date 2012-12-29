@@ -257,4 +257,3 @@ $tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
 $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
-?>

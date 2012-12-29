@@ -248,4 +248,3 @@ abstract class AutoObject
         }
     }
 }
-?>

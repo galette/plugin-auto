@@ -88,4 +88,3 @@ class AutoStates extends AutoObject
         }
     }
 }
-?>
