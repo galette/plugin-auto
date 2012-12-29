@@ -163,7 +163,13 @@ class Auto
         $this->_model = new AutoModels();
         $this->_color = new AutoColors();
         $this->_state = new AutoStates();
-        $this->_owner = new Adherent();
+
+        $deps = array(
+            'picture'   => false,
+            'groups'    => false,
+            'dues'      => false
+        );
+        $this->_owner = new Adherent(null, $deps);
         $this->_transmission = new AutoTransmissions();
         $this->_finition = new AutoFinitions();
         $this->_picture = new AutoPicture();
