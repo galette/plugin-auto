@@ -10,19 +10,11 @@
 				</tr>
 			</thead>
 			<tfoot>
-				<tr>
-					<td colspan="4" class="right" id="table_footer">
+				<tr id="table_footer">
+					<td colspan="5" class="center">
 {if $autos|@count gt 0}
 						{_T string="Pages:"}
-						<span class="pagelink">
-						{* {section name="pageLoop" start=1 loop=$nb_pages+1}
-							{if $smarty.section.pageLoop.index eq $page}
-								{$smarty.section.pageLoop.index}
-							{else}
-								<a href="colors.php?nbshow={$smarty.get.nbshow}&amp;page={$smarty.section.pageLoop.index}">{$smarty.section.pageLoop.index}</a>
-							{/if}
-						{/section} *}
-						</span>
+                        <ul class="pages">{$pagination}</ul>
 {/if}
 					</td>
 				</tr>
@@ -60,24 +52,24 @@
 		<script type="text/javascript">
 		//<![CDATA[
 		var _is_checked = true;
-		var _bind_check = function(){ldelim}
-			$('#checkall').click(function(){ldelim}
-				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
+		var _bind_check = function(){
+			$('#checkall').click(function(){
+				$('#listing :checkbox[name=_sel[]]').each(function(){
 					this.checked = _is_checked;
-				{rdelim});
+				});
 				_is_checked = !_is_checked;
-			{rdelim});
-			$('#checkinvert').click(function(){ldelim}
-				$('#listing :checkbox[name=_sel[]]').each(function(){ldelim}
+			});
+			$('#checkinvert').click(function(){
+				$('#listing :checkbox[name=_sel[]]').each(function(){
 					this.checked = !$(this).is(':checked');
-				{rdelim});
-			{rdelim});
-		{rdelim}
+				});
+			});
+		}
 		{* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
-		$(function(){ldelim}
-			$('#table_footer').append('<span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span>');
+		$(function(){
+			$('#table_footer').before('<tr><td class="left" colspan="5"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></td></tr>');
 			_bind_check();
-		{rdelim});
+		});
 		//]]>
 		</script>
 {/if}

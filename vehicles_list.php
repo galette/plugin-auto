@@ -67,6 +67,7 @@ if ( isset($_GET["nbshow"]) ) {
 //Constants and classes from plugin
 require_once '_config.inc.php';
 require_once 'classes/autos.class.php';
+require_once 'classes/autoslist.class.php';
 $auto = new Autos();
 
 if (isset($_GET['sup']) || isset($_POST['delete'])) {
@@ -77,7 +78,6 @@ if (isset($_GET['sup']) || isset($_POST['delete'])) {
     }
 }
 
-
 $title = ($mine == 1) ? _T("My Cars") : _T("Cars list");
 $tpl->assign('page_title', $title);
 //Set the path to the current plugin's templates,
@@ -86,12 +86,22 @@ $orig_template_path = $tpl->template_dir;
 $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
+$afilters = new AutosList();
+
+// Simple filters
+if (isset($_GET['page'])) {
+    $afilters->current_page = (int)$_GET['page'];
+}
+
 $title = _T("Vehicles list");
 $tpl->assign('title', $title);
-$tpl->assign('autos', $auto->getList(true, $mine));
+$tpl->assign('autos', $auto->getList(true, $mine, null, $afilters));
 $tpl->assign('show_mine', $mine);
-$content = $tpl->fetch('vehicles_list.tpl', AUTO_SMARTY_PREFIX);
 
+//assign pagination variables to the template and add pagination links
+$afilters->setSmartyPagination($tpl);
+
+$content = $tpl->fetch('vehicles_list.tpl', AUTO_SMARTY_PREFIX);
 $tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;

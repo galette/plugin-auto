@@ -58,6 +58,7 @@ class Autos
     const PK = Auto::PK;
 
     private $_filter = null;
+    private $_count = null;
 
     /**
     * Default constructor
@@ -172,12 +173,12 @@ class Autos
     * @param boolean      $mine     show only current logged member cars
     * @param array|string $fields   field(s) name(s) to get. Should be a string
     *                               or an array. If null, all fields will be returned
-    * @param string       $filter   should add filter... TODO
+    * @param AutosList    $filters  Filters
     *
     * @return array|Autos[]
     */
-    public static function getList(
-        $as_autos=false, $mine=false, $fields=null, $filter=null
+    public function getList(
+        $as_autos=false, $mine=false, $fields=null, $filters=null
     ) {
         global $zdb, $login;
 
@@ -190,7 +191,7 @@ class Autos
         try {
             $select = new Zend_Db_Select($zdb->db);
             $select->from(
-                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
                 $fieldsList
             );
 
@@ -198,6 +199,12 @@ class Autos
             //requested 'my vehicles'
             if ( $mine == true || !$login->isAdmin() ) {
                 $select->where(Adherent::PK . ' = ?', $login->id);
+            }
+
+            $this->_proceedCount($select, $filters);
+
+            if ( $filters !== null ) {
+                $filters->setLimit($select);
             }
 
             $results = $select->query()->fetchAll();
@@ -214,6 +221,52 @@ class Autos
             Analog::log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
                 $e->getMessage(),
+                Analog::ERROR
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Count vehicles from the query
+     *
+     * @param Zend_Db_Select $select  Original select
+     * @param AutosList      $filters Filters
+     *
+     * @return void
+     */
+    private function _proceedCount($select, $filters)
+    {
+        global $zdb;
+
+        try {
+            $countSelect = clone $select;
+            $countSelect->reset(\Zend_Db_Select::COLUMNS);
+            $countSelect->reset(\Zend_Db_Select::ORDER);
+            $countSelect->reset(\Zend_Db_Select::HAVING);
+            $countSelect->columns('count(a.' . self::PK . ') AS ' . self::PK);
+
+            $have = $select->getPart(\Zend_Db_Select::HAVING);
+            if ( is_array($have) && count($have) > 0 ) {
+                foreach ( $have as $h ) {
+                    $countSelect->where($h);
+                }
+            }
+
+            $result = $countSelect->query()->fetch();
+
+            $k = self::PK;
+            $this->_count = $result->$k;
+            if ( isset($filters) && $this->_count > 0 ) {
+                $filters->setCounter($this->_count);
+            }
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot count vehicles | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            Analog::log(
+                'Query was: ' . $countSelect->__toString() . ' ' . $e->__toString(),
                 Analog::ERROR
             );
             return false;
