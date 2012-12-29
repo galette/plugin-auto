@@ -86,7 +86,7 @@ abstract class AutoObject
     */
     public function getList()
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -113,7 +113,7 @@ abstract class AutoObject
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -146,7 +146,7 @@ abstract class AutoObject
     */
     public function store($new = false)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $values = array(
@@ -185,7 +185,7 @@ abstract class AutoObject
     */
     public function delete($ids)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $zdb->db->delete(
@@ -211,7 +211,6 @@ abstract class AutoObject
     */
     public function __get($name)
     {
-        global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
             if ( $name =='id' || $name == 'value' ) {

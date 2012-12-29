@@ -75,7 +75,7 @@ class Autos
      */
     public function removeVehicles($ids)
     {
-        global $zdb, $log, $hist;
+        global $zdb, $hist;
 
         $list = array();
         if ( is_numeric($ids) ) {
@@ -179,12 +179,7 @@ class Autos
     public static function getList(
         $as_autos=false, $mine=false, $fields=null, $filter=null
     ) {
-        global $zdb, $log, $login;
-
-        /** TODO: Check if filter is valid ? */
-        if ( $filter != null && trim($filter) != '' ) {
-            $this->_filter = $filter;
-        }
+        global $zdb, $login;
 
         $fieldsList = ( $fields != null && !$as_autos )
             ? (( !is_array($fields) || count($fields) < 1 )

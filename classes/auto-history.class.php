@@ -79,7 +79,6 @@ class AutoHistory
     */
     public function __construct($id = null)
     {
-        global $log;
         if ( $id != null && is_int($id) ) {
             $this->load($id);
         }
@@ -94,7 +93,7 @@ class AutoHistory
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         if ( $id == null || !is_int($id) ) {
             Analog::log(
@@ -133,7 +132,7 @@ class AutoHistory
     */
     public function getLatest()
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -190,7 +189,7 @@ class AutoHistory
     */
     public function register($props)
     {
-        global $zdb, $log;
+        global $zdb;
 
         Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
@@ -239,7 +238,6 @@ class AutoHistory
     */
     public function __get($name)
     {
-        global $log;
         switch($name){
         case Auto::PK:
             $k = Auto::PK;

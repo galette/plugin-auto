@@ -183,7 +183,7 @@ class Auto
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -271,7 +271,7 @@ class Auto
     */
     public function store($new = false)
     {
-        global $zdb, $log, $hist;
+        global $zdb, $hist;
 
         if ( $new ) {
             $this->_creation_date = date('Y-m-d');
@@ -479,7 +479,6 @@ class Auto
     */
     public function __get($name)
     {
-        global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
             switch ( $name ) {
@@ -557,7 +556,6 @@ class Auto
     */
     public function __set($name, $value)
     {
-        global $log;
         if ( !in_array($name, $this->_internals) ) {
             switch($name){
             case 'finition':

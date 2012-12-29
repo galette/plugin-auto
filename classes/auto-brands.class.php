@@ -84,7 +84,7 @@ class AutoBrands extends AutoObject
     */
     public function getModels($brand)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);

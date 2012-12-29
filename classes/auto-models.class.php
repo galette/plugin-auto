@@ -83,7 +83,7 @@ class AutoModels
     */
     public function getList($brandId = null)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -139,7 +139,7 @@ class AutoModels
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $select = new Zend_Db_Select($zdb->db);
@@ -171,7 +171,7 @@ class AutoModels
     */
     public function store($new = false)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $values = array(
@@ -211,7 +211,7 @@ class AutoModels
     */
     public function delete($ids)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $zdb->db->delete(
@@ -237,13 +237,8 @@ class AutoModels
     */
     public function __get($name)
     {
-        global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
-            Analog::log(
-                '[' . get_class($this) . '] Trying to get `' . $name . '`',
-                Analog::DEBUG
-            );
             switch( $name ){
             case 'brand':
                 return $this->brand->id;
