@@ -3,12 +3,12 @@
 {assign var='field' value=$obj->field}
 {assign var='list' value=$obj->getList()}
         <form action="" method="post" id="listform">
-        <table id="listing">
+        <table class="listing">
             <thead>
                 <tr>
-                    <th class="listing actions_row"></th>
-                    <th class="listing">{$field_name}</th>
-                    <th class="listing actions_row">{_T string="Actions"}</th>
+                    <th class="actions_row"></th>
+                    <th>{$field_name}</th>
+                    <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
             </thead>
             <tfoot>
@@ -30,12 +30,12 @@
             </tfoot>
             <tbody>
 {foreach from=$list item=o name=obj_list}
-                <tr>
-                    <td class="tbl_line_{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}">
+                <tr class="{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}">
+                    <td>
                         <input type="checkbox" name="_sel[]" value="{$o->$pk}"/>
                     </td>
-                    <td class="tbl_line_{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}"><a href="object.php?set={$name}&#038;{if $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
-                    <td class="center nowrap tbl_line_{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}">
+                    <td><a href="object.php?set={$name}&#038;{if $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
+                    <td class="center nowrap">
                         <a href="object.php?set={$set}&#038;{$pk}={$o->$pk}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
                         <a onclick="return confirm('{$delete_text|escape:"javascript"}'.replace('%s', '{$o->$field}'))" href="object.php?set={$set}&#038;sup={$o->$pk}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
@@ -59,14 +59,14 @@
         var _is_checked = true;
         var _bind_check = function(){ldelim}
             $('#checkall').click(function(){ldelim}
-                $('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
                     this.checked = _is_checked;
                 {rdelim});
                 _is_checked = !_is_checked;
                 return false;
             {rdelim});
             $('#checkinvert').click(function(){ldelim}
-                $('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
                     this.checked = !$(this).is(':checked');
                 {rdelim});
                 return false;

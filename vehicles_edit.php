@@ -362,6 +362,7 @@ $tpl->assign('transmissions', $auto->transmission->getList());
 $tpl->assign('finitions', $auto->finition->getList());
 $tpl->assign('states', $auto->state->getList());
 $tpl->assign('fuels', $auto->listFuels());
+$tpl->assign('time', time());
 $content = $tpl->fetch('vehicles.tpl', AUTO_SMARTY_PREFIX);
 
 $tpl->assign('content', $content);

@@ -1,11 +1,11 @@
         <form action="" method="post" id="listform">
-        <table id="listing">
+        <table class="listing">
             <thead>
                 <tr>
-                    <th class="listing actions_row"></th>
-                    <th class="listing">{_T string="Model"}</th>
-                    <th class="listing">{_T string="Brand"}</th>
-                    <th class="listing actions_row">{_T string="Actions"}</th>
+                    <th class="actions_row"></th>
+                    <th>{_T string="Model"}</th>
+                    <th>{_T string="Brand"}</th>
+                    <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
             </thead>
             <tfoot>
@@ -28,13 +28,13 @@
             </tfoot>
             <tbody>
 {foreach from=$models item=m name=models_list}
-                <tr>
-                    <td class="tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
+                <tr class="{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
+                    <td>
                         <input type="checkbox" name="_sel[]" value="{$m->id_model}"/>
                     </td>
-                    <td class="tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}"><a href="models.php?id_model={$m->id_model}">{$m->model}</a></td>
-                    <td class="tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}"><a href="models.php?id_model={$m->id_model}">{$m->brand}</a></td>
-                    <td class="center nowrap tbl_line_{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
+                    <td><a href="models.php?id_model={$m->id_model}">{$m->model}</a></td>
+                    <td><a href="models.php?id_model={$m->id_model}">{$m->brand}</a></td>
+                    <td class="center nowrap">
                         <a href="models.php?id_model={$m->id_model}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
                         <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?"|escape:"javascript"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
@@ -58,14 +58,14 @@
         var _is_checked = true;
         var _bind_check = function(){ldelim}
             $('#checkall').click(function(){ldelim}
-                $('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
                     this.checked = _is_checked;
                 {rdelim});
                 _is_checked = !_is_checked;
                 return false;
             {rdelim});
             $('#checkinvert').click(function(){ldelim}
-                $('#listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
                     this.checked = !$(this).is(':checked');
                 {rdelim});
                 return false;
