@@ -161,10 +161,10 @@
         </div>
         </form>
         <script type="text/javascript">
-            $(function() {ldelim}
+            $(function() {
                 _collapsibleFieldsets();
 
-                $('#first_circulation_date').datepicker({ldelim}
+                $('#first_circulation_date').datepicker({
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
@@ -172,8 +172,8 @@
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100'
-                {rdelim});
-                $('#first_registration_date').datepicker({ldelim}
+                });
+                $('#first_registration_date').datepicker({
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
@@ -181,7 +181,7 @@
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100'
-                {rdelim});
+                });
                 var _models = $('#model');
                 var _modelChoose = $('#model :first');
     {if $js_init_models}
@@ -192,7 +192,7 @@
                 _modelChoose.appendTo(_models);
     {/if}
                 {* Refresh models list when brand is changed *}
-                $('#brand').change(function(){ldelim}
+                $('#brand').change(function(){
                     var id_brand = $('#brand option:selected').attr('value');
                     {* Empty model list *}
                     _models.empty();
@@ -201,82 +201,115 @@
                     {* Get the new list for selected brand, and appent it to models on the page *}
                     $.get(
                         'models-ajax.php',
-                        {ldelim} brand: id_brand {rdelim},
-                        function(data){ldelim}
-                            $(data).each(function(i){ldelim}
+                        { brand: id_brand },
+                        function(data){
+                            $(data).each(function(i){
                                 var _data = data[i];
                                 $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
-                            {rdelim});
-                        {rdelim},
+                            });
+                        },
                         'json'
                     );
-                {rdelim});
+                });
     {if $login->isAdmin()}
                 {* Popup for owner change *}
-                $('#change_owner').click(function(){ldelim}
-                    $.ajax({ldelim}
-                        url: 'owners.php',
-                        data: {ldelim}ajax: true{rdelim},
-                        {*beforeSend: function(){ldelim}
-                            flobu.enable();
-                        {rdelim},
-                        complete: function(){ldelim}
-                            flobu.disable();
-                        {rdelim},*}
-                        success: function(res){ldelim}
+                $('#change_owner').click(function(){
+
+                    $.ajax({
+                        url: '{$galette_base_path}ajax_members.php',
+                        type: "POST",
+                        data: {
+                            ajax: true,
+                            multiple: false,
+                            from: 'single',
+                            id: '{$car->owner->id}'
+                        },
+                        {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                        success: function(res){
                             _owners_dialog(res);
-                        {rdelim}
+                        },
+                        error: function() {
+                            alert("{_T string="An error occured displaying members interface :(" escape="js"}");
+                        }
                     });
                     return false;
-                {rdelim});
+                });
 
-                var _owners_dialog = function(res){ldelim}
+                var _owners_dialog = function(res){
                     var _el = $('<div id="owners_list" title="{_T string="Owners"}"> </div>');
-                    _el.appendTo('#modifform').dialog({ldelim}
+                    _el.appendTo('#modifform').dialog({
                         modal: true,
                         hide: 'fold',
                         width: '60%',
                         height: 400,
-                        close: function(event, ui){ldelim}
+                        close: function(event, ui){
                             _el.remove();
-                        {rdelim}
-                    {rdelim});
+                        }
+                    });
+                    _owners_ajax_mapper(res);
+                }
+
+                var _owners_ajax_mapper = function(res){
                     $('#owners_list').append( res );
-                    $('#owners_list').find('a').each(function(){ldelim}
-                        $(this).click(function(){ldelim}
+                    $('#owners_list tbody').find('a').each(function(){
+                        $(this).click(function(){
                             var _id = this.href.substring(this.href.indexOf('id_adh=') + 7, this.href.length);
                             $('#owner').attr('value', _id);
                             $('#current_owner_name').html($(this).html());
-                            _el.dialog('close');
+                            $('#owners_list').dialog('close');
                             return false;
-                        {rdelim}).attr('title', '{_T string="Click to choose this owner for current car"}');
-                    {rdelim});
-                {rdelim}
+                        }).attr('title', '{_T string="Click to choose this owner for current car"}');
+                    });
 
-                $('#state_history').click(function(){ldelim}
-                    $.ajax({ldelim}
+                    //Remap links
+                    $('#owners_list .pages a').click(function(){
+                        var _page = this.href.substring(this.href.indexOf('?')+6);
+
+                        $.ajax({
+                            url: '{$galette_base_path}ajax_members.php',
+                            type: "POST",
+                            data: {
+                                ajax: true,
+                                page: _page,
+                                multiple: false
+                            },
+                            {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                            success: function(res){
+                                $('#owners_list').empty();
+                                _owners_ajax_mapper(res);
+                            },
+                            error: function() {
+                                alert("{_T string="An error occured displaying members interface :(" escape="js"}");
+                            }
+                        });
+                        return false;
+                    });
+                }
+
+                $('#state_history').click(function(){
+                    $.ajax({
                         url: this.href + '&amp;ajax=true',
-                        data: {ldelim}ajax: true{rdelim},
-                        success: function(res){ldelim}
+                        data: { ajax: true },
+                        success: function(res){
                             _history_dialog(res);
-                        {rdelim}
-                    {rdelim});
+                        }
+                    });
                     return false;
-                {rdelim});
+                });
 
-                var _history_dialog = function(res){ldelim}
+                var _history_dialog = function(res){
                     var _el = $('<div id="history_list" title="{_T string="Car\\'s history"}"> </div>');
-                    _el.appendTo('#modifform').dialog({ldelim}
+                    _el.appendTo('#modifform').dialog({
                         modal: true,
                         hide: 'fold',
                         width: '60%',
                         height: 400,
-                        close: function(event, ui){ldelim}
+                        close: function(event, ui){
                             _el.remove();
-                        {rdelim}
-                    {rdelim});
+                        }
+                    });
                     $('#history_list').append( res );
-                {rdelim}
+                }
     {/if}
-            {rdelim});
+            });
         </script>
