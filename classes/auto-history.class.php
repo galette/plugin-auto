@@ -240,7 +240,8 @@ class AutoHistory
     {
         switch($name){
         case Auto::PK:
-            $k = Auto::PK;
+            $ka = Auto::PK;
+            $k = '_' . $ka;
             return $this->$k;
             break;
         case 'fields':
