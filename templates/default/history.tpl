@@ -19,22 +19,6 @@
                     </th>
                 </tr>
             </thead>
-            {*<tfoot>
-                <tr>
-                    <td colspan="3" class="right">
-                        {_T string="Pages:"}
-                        <span class="pagelink">
-                        {section name="pageLoop" start=1 loop=$nb_pages+1}
-                            {if $smarty.section.pageLoop.index eq $page}
-                                {$smarty.section.pageLoop.index}
-                            {else}
-                                <a href="owners.php?nbshow={$smarty.get.nbshow}&amp;page={$smarty.section.pageLoop.index}">{$smarty.section.pageLoop.index}</a>
-                            {/if}
-                        {/section}
-                        </span>
-                    </td>
-                </tr>
-            </tfoot>*}
             <tbody>
 {foreach from=$entries item=entry}
     {assign var='owner' value=$entry->owner}
