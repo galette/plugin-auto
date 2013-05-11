@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Members list advanced filters
+ * Autos list paginator
  *
  * PHP version 5
  *
@@ -39,9 +39,9 @@ use Analog\Analog as Analog;
 use Galette\Core\Pagination;
 
 /**
- * Members list filters and paginator
+ * Autos list filters and paginator
  *
- * @name      AdvancedMembersList
+ * @name      AutosList
  * @category  Filters
  * @package   Galette
  *
