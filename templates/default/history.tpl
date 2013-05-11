@@ -25,11 +25,11 @@
                 <tr>
                     <td>{$entry->formatted_date}</td>
                     <td>
-                        {if $owner->politeness == constant('Galette\Entity\Politeness::MR')}
+                        {if $owner->isMan()}
                             <img src="{$template_subdir}images/icon-male.png" alt="{_T string="[M]"}" width="16" height="16"/>
-                        {elseif $owner->politeness == constant('Galette\Entity\Politeness::MRS') || $owner->politeness == constant('Galette\Entity\Politeness::MISS')}
+                        {elseif $owner->isWoman()}
                             <img src="{$template_subdir}images/icon-female.png" alt="{_T string="[W]"}" width="16" height="16"/>
-                        {elseif $owner->politeness == constant('Galette\Entity\Politeness::COMPANY')}
+                        {elseif $owner->isCompany()}
                             <img src="{$template_subdir}images/icon-company.png" alt="{_T string="[W]"}" width="16" height="16"/>
                         {else}
                             <img src="{$template_subdir}images/icon-empty.png" alt="" width="10" height="12"/>
