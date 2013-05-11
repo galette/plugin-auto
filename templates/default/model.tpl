@@ -24,7 +24,7 @@
             <input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
             <input type="reset" id="btncancel" name="cancel" value="{_T string="Cancel"}"/>
             <input type="hidden" name="{$mode}" value="1"/>
-            <input type="hidden" name="model_id" value="{$model->pk}"/>
+            <input type="hidden" name="model_id" value="{$model->id}"/>
         </div>
         <p>{_T string="NB : The mandatory fields are in"} <span class="required">{_T string="red"}</span></p>
         </form>
