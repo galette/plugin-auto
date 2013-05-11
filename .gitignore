@@ -1,0 +1,4 @@
+.vimfiles*
+*.vimentry
+quick_gen_project_*
+
