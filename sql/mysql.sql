@@ -80,7 +80,7 @@ CREATE TABLE galette_auto_cars (
   id_model int(11) NOT NULL,
   id_adh int(10) NOT NULL,
   PRIMARY KEY (id_car),
-  FOREIGN KEY(id_color) REFERENCES REFERENCES galette_auto_colors (id_color) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY(id_color) REFERENCES galette_auto_colors (id_color) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_body) REFERENCES galette_auto_bodies (id_body) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_state) REFERENCES galette_auto_states (id_state) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (id_transmission) REFERENCES galette_auto_transmissions (id_transmission) ON DELETE NO ACTION ON UPDATE NO ACTION,
