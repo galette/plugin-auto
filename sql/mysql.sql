@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 -- Table structure for table galette_auto_bodies
 DROP TABLE IF EXISTS galette_auto_bodies;
 CREATE TABLE galette_auto_bodies (
@@ -114,3 +116,5 @@ CREATE TABLE galette_auto_pictures (
   PRIMARY KEY (id_car),
   FOREIGN KEY (id_car) REFERENCES galette_auto_cars (id_car) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SET FOREIGN_KEY_CHECKS=1;
