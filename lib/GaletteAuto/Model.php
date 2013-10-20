@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Automobile Object abstract class for galette Auto plugin
+ * Automobile Models class for galette Auto plugin
  *
  * PHP version 5
  *
@@ -35,13 +35,15 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+namespace GaletteAuto;
+
 use Analog\Analog as Analog;
 
 /**
- * Automobile Object abstract class for galette Auto plugin
+ * Automobile Models class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoObject
+ * @name      Model
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009-2013 The Galette Team
@@ -49,55 +51,63 @@ use Analog\Analog as Analog;
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-abstract class AutoObject
+class Model
 {
-    private $_table;
-    private $_pk;
-    private $_field;
-    private $_name;
+    const TABLE = 'models';
+    const PK = 'id_model';
+    const FIELD = 'model';
 
     protected $id;
-    protected $value;
+    protected $model;
+    protected $brand;
 
     /**
     * Default constructor
     *
-    * @param string  $table table name
-    * @param string  $pk    primary key field
-    * @param string  $field main field name
-    * @param string  $name  name
-    * @param integer $id    id to load. Defaults to null
+    * @param integer $id model's id to load. Defaults to null
     */
-    public function __construct($table, $pk, $field, $name, $id = null)
+    public function __construct($id = null)
     {
-        $this->_table = AUTO_PREFIX . $table;
-        $this->_pk = $pk;
-        $this->_field = $field;
-        $this->_name = $name;
+        $this->brand = new Brand();
         if ( is_int($id) ) {
             $this->load($id);
         }
     }
 
     /**
-    * Get the list
+    * Get models list
+    *
+    * @param integer $brandId optionnal brand we want models for
     *
     * @return ResultSet
     */
-    public function getList()
+    public function getList($brandId = null)
     {
         global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . $this->_table)
-                ->order($this->_field . ' ASC');
+            $select = new \Zend_Db_Select($zdb->db);
+
+            $select->from(
+                array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE)
+            )->join(
+                array('b' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
+                'a.' . Brand::PK . '=b.' . Brand::PK
+            );
+
+            //if required, the where clause
+            if ( isset($brandId) && is_int($brandId) ) {
+                $select->where('a.' . Brand::PK . '= ?', $brandId);
+            }
+
+            // the order clause
+            $select->order(self::FIELD . ' ASC');
 
             return $select->query()->fetchAll();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load ' . $this->_name .
-                ' list | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot load models list | ' .
+                $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -105,9 +115,25 @@ abstract class AutoObject
     }
 
     /**
-    * Loads a record
+    * Get models list for specified brand
     *
-    * @param integer $id id of the record
+    * @param integer $brandId brand we want models for
+    *
+    * @return models list
+    */
+    public function getListByBrand($brandId)
+    {
+        if ( isset($brandId) && is_int($brandId) ) {
+            return $this->getList($brandId);
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+    * Load a model
+    *
+    * @param integer $id Id for the model we want
     *
     * @return boolean
     */
@@ -116,21 +142,20 @@ abstract class AutoObject
         global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . $this->_table)
-                ->where($this->_pk . ' = ?', $id);
+            $select = new \Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
+                ->where(self::PK . ' = ?', $id);
 
             $r = $select->query()->fetch();
-            $pk = $this->_pk;
-            $this->id = $r->$pk;
-            $field = $this->_field;
-            $this->value = $r->$field;
-
+            $this->id = $r->id_model;
+            $this->model = $r->model;
+            $id_brand = Brand::PK;
+            $this->brand->load((int)$r->$id_brand);
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load ' . $this->_name .
-                ' from id `' . $id . '` | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot load model from id `' . $id .
+                '` | ' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -138,7 +163,7 @@ abstract class AutoObject
     }
 
     /**
-    * Store current record
+    * Store current model
     *
     * @param boolean $new New record or existing one
     *
@@ -150,24 +175,25 @@ abstract class AutoObject
 
         try {
             $values = array(
-                $this->_field => $this->value
+                'model'     => $this->model,
+                Brand::PK   => $this->brand->id_brand
             );
             if ( $new ) {
                 $zdb->db->insert(
-                    PREFIX_DB . $this->_table,
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
                     $values
                 );
             } else {
                 $zdb->db->update(
-                    PREFIX_DB . $this->_table,
+                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
                     $values,
-                    $this->_pk . ' = ' . $this->id
+                    self::PK . ' = ' . $this->id
                 );
             }
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot store ' . $this->_name .
+                '[' . get_class($this) . '] Cannot store model' .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
                 Analog::WARNING
@@ -177,9 +203,9 @@ abstract class AutoObject
     }
 
     /**
-    * Delete some records
+    * Delete some models
     *
-    * @param array $ids Array of records id to delete
+    * @param array $ids Array of models id to delete
     *
     * @return boolean
     */
@@ -189,13 +215,13 @@ abstract class AutoObject
 
         try {
             $zdb->db->delete(
-                PREFIX_DB . $this->_table,
-                $this->_pk . ' IN (' . implode(',', $ids) . ')'
+                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                self::PK . ' IN (' . implode(',', $ids) . ')'
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot delete ' . $this->_name .
-                ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
+                '[' . get_class($this) . '] Cannot delete models from ids `' .
+                implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
             return false;
@@ -213,13 +239,16 @@ abstract class AutoObject
     {
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
-            if ( $name =='id' || $name == 'value' ) {
+            switch( $name ){
+            case 'brand':
+                return $this->brand->id;
+                break;
+            case 'obrand':
+                return $this->brand;
+                break;
+            default:
                 return $this->$name;
-            } else {
-                $rname = '_' . $name;
-                if ( isset($this->$rname) ) {
-                    return $this->$rname;
-                }
+                break;
             }
         } else {
             Analog::log(
@@ -240,9 +269,13 @@ abstract class AutoObject
     */
     public function __set($name, $value)
     {
-        switch( $name ) {
-        case 'value':
-            $this->value = $value;
+        switch ( $name ) {
+        case 'model':
+        case self::PK:
+            $this->$name = $value;
+            break;
+        case 'brand':
+            $this->brand = new Brand((int)$value);
             break;
         }
     }

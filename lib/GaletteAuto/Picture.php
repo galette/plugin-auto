@@ -35,11 +35,12 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+namespace GaletteAuto;
+
 use Galette\Common\KLogger;
-use Galette\Core\Picture;
+use Galette\Core\Picture as GalettePicture;
 
 require_once '_config.inc.php';
-require_once 'auto.class.php';
 
 /**
  * Logo handling
@@ -53,7 +54,7 @@ require_once 'auto.class.php';
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoPicture extends Picture
+class Picture extends GalettePicture
 {
     protected $tbl_prefix = AUTO_PREFIX;
     const PK = Auto::PK;
@@ -68,18 +69,18 @@ class AutoPicture extends Picture
         $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';
         if ( !file_exists($this->store_path) ) {
             if ( !mkdir($this->store_path) ) {
-                KLogger::log(
+                Analog::log(
                     'Unable to create photo dir `' . $this->store_path . '`.',
                     Analog::ERROR
                 );
             } else {
-                KLogger::log(
+                Analog::log(
                     'New directory `' . $this->store_path . '` has been created',
                     Analog::INFO
                 );
             }
         } else if ( !is_dir($this->store_path) ) {
-            KLogger::log(
+            Analog::log(
                 'Unable to store plugin images, since `' . $this->store_path .
                 '` is not a directory.',
                 Analog::WARNING
@@ -98,7 +99,8 @@ class AutoPicture extends Picture
     protected function getDefaultPicture()
     {
         global $plugins;
-        $this->file_path = $plugins->getTemplatesPathFromName('Galette Auto') . '/images/car.png';
+        $this->file_path = $plugins->getTemplatesPathFromName('Galette Auto') .
+            '/images/car.png';
         $this->format = 'png';
         $this->mime = 'image/png';
         $this->has_picture = false;

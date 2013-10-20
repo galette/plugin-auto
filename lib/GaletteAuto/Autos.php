@@ -35,16 +35,16 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+namespace GaletteAuto;
+
 use Analog\Analog as Analog;
 use Galette\Entity\Adherent as Adherent;
-
-require_once 'auto.class.php';
 
 /**
  * Automobile autos class for galette Auto plugin
  *
  * @category  Plugins
- * @name      Auto
+ * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009-2013 The Galette Team
@@ -59,13 +59,6 @@ class Autos
 
     private $_filter = null;
     private $_count = null;
-
-    /**
-    * Default constructor
-    */
-    public function __construct()
-    {
-    }
 
     /**
      * Remove specified vehicles
@@ -91,16 +84,16 @@ class Autos
                 $zdb->db->beginTransaction();
 
                 //Retrieve some informations
-                $select = new Zend_Db_Select($zdb->db);
+                $select = new \Zend_Db_Select($zdb->db);
                 $select->from(
                     array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
                     array(self::PK, 'a.car_name', 'c.brand', 'b.model')
                 )->join(
-                    array('b' => PREFIX_DB . AUTO_PREFIX . AutoModels::TABLE),
-                    'a.' . AutoModels::PK . ' = b.' . AutoModels::PK
+                    array('b' => PREFIX_DB . AUTO_PREFIX . Model::TABLE),
+                    'a.' . Model::PK . ' = b.' . Model::PK
                 )->join(
-                    array('c' => PREFIX_DB . AUTO_PREFIX . AutoBrands::TABLE),
-                    'b.' . AutoBrands::PK . ' = c.' . AutoBrands::PK
+                    array('c' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
+                    'b.' . Brand::PK . ' = c.' . Brand::PK
                 )->where(self::PK . ' IN (?)', $ids);
 
                 $vehicles = $select->query()->fetchAll();
@@ -111,7 +104,7 @@ class Autos
                         ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
                     $infos .=  $str_v . "\n";
 
-                    $p = new AutoPicture($vehicle->id_car);
+                    $p = new Picture($vehicle->id_car);
                     if ( $p->hasPicture() ) {
                         if ( !$p->delete() ) {
                             Analog::log(
@@ -146,7 +139,7 @@ class Autos
 
                 //commit all changes
                 $zdb->db->commit();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $zdb->db->rollBack();
                 Analog::log(
                     'Unable to delete selected vehicle(s) |' .
@@ -189,7 +182,7 @@ class Autos
             : (array)'*';
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(
                 array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
                 $fieldsList
@@ -217,7 +210,7 @@ class Autos
                 $autos = $results;
             }
             return $autos;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
                 $e->getMessage(),

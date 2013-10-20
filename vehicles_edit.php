@@ -40,6 +40,12 @@
  */
 
 use Analog\Analog as Analog;
+use GaletteAuto\Color;
+use GaletteAuto\State;
+use GaletteAuto\Finition;
+use GaletteAuto\Body;
+use GaletteAuto\Transmission;
+use GaletteAuto\Auto;
 
 define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
@@ -58,9 +64,8 @@ if ( isset($_GET['nbshow']) ) {
     }
 }
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto.class.php';
 
 $is_new = ( isset($_GET[Auto::PK]) && is_int((int)$_GET[Auto::PK]) ) ? false : true;
 $set = get_form_value('set', null);
@@ -213,29 +218,27 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $name = '';
                 switch ( $prop ) {
                 case 'finition':
-                    $name = AutoFinitions::FIELD;
+                    $name = Finition::FIELD;
                     break;
                 case 'color':
-                    $name = AutoColors::FIELD;
+                    $name = Color::FIELD;
                     break;
                 case 'model':
-                    $name = AutoModels::FIELD;
+                    $name = Model::FIELD;
                     break;
                 case 'transmission':
-                    $name = AutoTransmissions::FIELD;
+                    $name = Transmission::FIELD;
                     break;
                 case 'body':
-                    $name = AutoBodies::FIELD;
+                    $name = Body::FIELD;
                     break;
                 case 'state':
-                    $name = AutoStates::FIELD;
-                    break;
-                case 'model':
-                    $name = AutoModels::FIELD;
+                    $name = State::FIELD;
                     break;
                 default:
                     Analog::log(
-                        'Unable to retrieve the textual value for prop `' . $prop . '`',
+                        'Unable to retrieve the textual value for prop `' .
+                        $prop . '`',
                         Analog::INFO
                     );
                     $name = '(unknow)';
@@ -272,7 +275,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $res = $auto->picture->store($_FILES['photo']);
                 if ( $res < 0) {
                     switch ( $res ) {
-                    case AutoPicture::INVALID_FILE:
+                    case Picture::INVALID_FILE:
                         $patterns = array('|%s|', '|%t|');
                         $replacements = array(
                             $auto->picture->getAllowedExts(),
@@ -284,19 +287,19 @@ if ( get_numeric_form_value('modif', 0) == 1
                             _T("- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t")
                         );
                         break;
-                    case AutoPicture::FILE_TOO_BIG:
+                    case Picture::FILE_TOO_BIG:
                         $error_detected[] = preg_replace(
                             '|%d|',
-                            AutoPicture::MAX_FILE_SIZE,
+                            Picture::MAX_FILE_SIZE,
                             _T("File is too big. Maximum allowed size is %d")
                         );
                         break;
-                    case AutoPicture::MIME_NOT_ALLOWED:
+                    case Picture::MIME_NOT_ALLOWED:
                         /** FIXME: should be more descriptive */
                         $error_detected[] = _T("Mime-Type not allowed");
                         break;
-                    case AutoPicture::SQL_ERROR:
-                    case AutoPicture::SQL_BLOB_ERROR:
+                    case Picture::SQL_ERROR:
+                    case Picture::SQL_BLOB_ERROR:
                         $error_detected[] = _T("An SQL error has occured.");
                         break;
                     }
@@ -319,7 +322,7 @@ if ( get_numeric_form_value('modif', 0) == 1
             $error_detected[]
                 = _T("- An error has occured while saving car in the database.");
         } else {
-            if( $mine ) {
+            if ( $mine ) {
                 header('location: my_vehicles.php');
             } else {
                 header('location: vehicles_list.php');

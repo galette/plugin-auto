@@ -35,6 +35,8 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use GaletteAuto\Model;
+
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
@@ -42,14 +44,13 @@ if ( !$login->isLogged() ) {
     die();
 }
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto-models.class.php';
 
 header('Content-Type: application/json;charset=utf-8');
 $list = array();
 
-$m = new AutoModels();
+$m = new Model();
 
 if ( isset($_GET['brand']) && $_GET['brand'] != '' ) {
     $list = $m->getListByBrand((int)$_GET['brand']);

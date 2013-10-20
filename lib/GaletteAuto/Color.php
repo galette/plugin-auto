@@ -35,13 +35,13 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-require_once 'auto-objects.class.php';
+namespace GaletteAuto;
 
 /**
  * Automobile Colors class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoColors
+ * @name      Color
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009-2013 The Galette Team
@@ -49,7 +49,7 @@ require_once 'auto-objects.class.php';
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoColors extends AutoObject
+class Color extends AbstractObject
 {
     const TABLE = 'colors';
     const PK = 'id_color';

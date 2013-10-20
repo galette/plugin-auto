@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Automobile Transmissions class for galette Auto plugin
+ * Automobile Bodies class for galette Auto plugin
  *
  * PHP version 5
  *
@@ -35,13 +35,13 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-require_once 'auto-objects.class.php';
+namespace GaletteAuto;
 
 /**
- * Automobile Transmissions class for galette Auto plugin
+ * Automobile Bodies class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoTransmissions
+ * @name      Body
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009-2013 The Galette Team
@@ -49,17 +49,17 @@ require_once 'auto-objects.class.php';
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoTransmissions extends AutoObject
+class Body extends AbstractObject
 {
-    const TABLE = 'transmissions';
-    const PK = 'id_transmission';
-    const FIELD = 'transmission';
-    const NAME = 'transmissions';
+    const TABLE = 'bodies';
+    const PK = 'id_body';
+    const FIELD = 'body';
+    const NAME = 'bodies';
 
     /**
     * Default constructor
     *
-    * @param integer $id transmission's id to load. Defaults to null
+    * @param integer $id body's id to load. Defaults to null
     */
     public function __construct($id = null)
     {

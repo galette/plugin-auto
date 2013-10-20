@@ -40,6 +40,7 @@
  */
 
 use Analog\Analog as Analog;
+use GaletteAuto\History;
 
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
@@ -48,12 +49,10 @@ if ( !$login->isLogged() ) {
     die();
 }
 
-require_once 'classes/auto-history.class.php';
-
 //check for required car's id
 $history = null;
 if ( isset($_GET['id_car']) ) {
-    $history = new AutoHistory((int)$_GET['id_car']);
+    $history = new History((int)$_GET['id_car']);
 } else {
     Analog::log('No car id provided to get its history, exiting.', Analog::ERROR);
     die();

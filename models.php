@@ -39,6 +39,9 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use GaletteAuto\Model;
+use GaletteAuto\Brand;
+
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() || !$login->isAdmin() ) {
@@ -59,11 +62,10 @@ $is_new = ( get_numeric_form_value('new', '') == 1
     : false;
 $set = get_form_value('set', null);
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto-models.class.php';
 
-$model = new AutoModels();
+$model = new Model();
 $title = ( $is_new ) ? _T("New model") : _T("Change model '%s'");
 
 //We have a new or a modified object
@@ -76,8 +78,8 @@ if ( get_numeric_form_value('modif', 0) == 1
     $warning_detected = array();
     $confirm_detected = array();
 
-    if ( !$is_new && get_numeric_form_value(AutoModels::PK, null) != null ) {
-        $model->load(get_numeric_form_value(AutoModels::PK, ''));
+    if ( !$is_new && get_numeric_form_value(Model::PK, null) != null ) {
+        $model->load(get_numeric_form_value(Model::PK, ''));
     } else if ( !$is_new ) {
         $error_detected[]
             = _T("- No id provided for modifying this record! (internal)");
@@ -139,9 +141,9 @@ $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
-if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
+if ( isset( $_GET[Model::PK] ) || $is_new ) {
     if ( !$is_new ) {
-        $model->load(get_numeric_form_value(AutoModels::PK, ''));
+        $model->load(get_numeric_form_value(Model::PK, ''));
         $title = str_replace('%s', $model->model, $title);
     }
     if ( isset($_GET['brand']) ) {
@@ -149,8 +151,7 @@ if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
     }
     $tpl->assign('page_title', $title);
     $tpl->assign('model', $model);
-    include_once 'classes/auto-brands.class.php';
-    $b = new AutoBrands();
+    $b = new Brand();
     $tpl->assign('brands', $b->getList());
     $content = $tpl->fetch('model.tpl', AUTO_SMARTY_PREFIX);
 } else {

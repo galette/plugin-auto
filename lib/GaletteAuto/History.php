@@ -35,18 +35,16 @@
  * @since     Available since 0.7dev - 2009-10-02
  */
 
+namespace GaletteAuto;
+
 use Analog\Analog as Analog;
 use Galette\Entity\Adherent;
-
-require_once 'auto.class.php';
-require_once 'auto-colors.class.php';
-require_once 'auto-states.class.php';
 
 /**
  * Automobile History class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoHistory
+ * @name      History
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2009-2013 The Galette Team
@@ -54,7 +52,7 @@ require_once 'auto-states.class.php';
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoHistory
+class History
 {
     const TABLE = 'history';
 
@@ -64,8 +62,8 @@ class AutoHistory
         Adherent::PK        => 'integer',
         'history_date'      => 'datetime',
         'car_registration'  => 'text',
-        AutoColors::PK      => 'integer',
-        AutoStates::PK      => 'integer'
+        Color::PK           => 'integer',
+        State::PK           => 'integer'
     );
 
     //history entries
@@ -108,14 +106,14 @@ class AutoHistory
         $this->_id_car = $id;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(Auto::PK . ' = ?', $id)
                 ->order('history_date ASC');
 
             $this->_entries = $select->query()->fetchAll();
             $this->_formatEntries();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
                 $this->_id_car . ') | ' . $e->getMessage(),
@@ -135,13 +133,13 @@ class AutoHistory
         global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(Auto::PK . ' = ?', $this->_id_car)
                 ->order('history_date DESC')
                 ->limit(1);
             return $select->query()->fetch();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
@@ -173,10 +171,10 @@ class AutoHistory
                 = new Adherent((int)$this->_entries[$i]->id_adh);
             //associate color
             $this->_entries[$i]->color
-                = new AutoColors((int)$this->_entries[$i]->id_color);
+                = new Color((int)$this->_entries[$i]->id_color);
             //associate state
             $this->_entries[$i]->state
-                = new AutoStates((int)$this->_entries[$i]->id_state);
+                = new State((int)$this->_entries[$i]->id_state);
         }
     }
 
@@ -213,11 +211,14 @@ class AutoHistory
 
             if ( $add > 0 ) {
                 Analog::log(
-                    '[' . get_class($this) . '] new AutoHistory entry set successfully.',
+                    '[' . get_class($this) .
+                    '] new AutoHistory entry set successfully.',
                     Analog::DEBUG
                 );
             } else {
-                throw new Exception('An error occured registering car new history entry :(');
+                throw new \Exception(
+                    'An error occured registering car new history entry :('
+                );
             }
         } catch (Exception $e) {
             Analog::log(

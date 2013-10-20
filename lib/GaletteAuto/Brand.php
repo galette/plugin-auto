@@ -35,10 +35,9 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-use Analog\Analog as Analog;
+namespace GaletteAuto;
 
-require_once 'auto-objects.class.php';
-require_once 'auto-models.class.php';
+use Analog\Analog as Analog;
 
 /**
  * Automobile Brands class for galette Auto plugin
@@ -52,7 +51,7 @@ require_once 'auto-models.class.php';
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoBrands extends AutoObject
+class Brand extends AbstractObject
 {
     const TABLE = 'brands';
     const PK = 'id_brand';
@@ -87,12 +86,12 @@ class AutoBrands extends AutoObject
         global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . AutoModels::TABLE)
+            $select = new \Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . Model::TABLE)
                 ->where(self::PK . ' = ? ', $brand)
-                ->order(AutoModels::FIELD . ' ASC');
+                ->order(Model::FIELD . ' ASC');
             return $select->query()->fetchAll();
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),

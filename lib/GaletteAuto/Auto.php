@@ -35,18 +35,10 @@
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+namespace GaletteAuto;
+
 use Analog\Analog as Analog;
 use Galette\Entity\Adherent;
-
-//current plugin classes required
-require_once 'auto_picture.class.php';
-require_once 'auto-models.class.php';
-require_once 'auto-bodies.class.php';
-require_once 'auto-colors.class.php';
-require_once 'auto-finitions.class.php';
-require_once 'auto-states.class.php';
-require_once 'auto-transmissions.class.php';
-require_once 'auto-history.class.php';
 
 /**
  * Automobile Transmissions class for galette Auto plugin
@@ -79,12 +71,12 @@ class Auto
         'car_horsepower'                => 'integer',
         'car_engine_size'               => 'integer',
         'car_fuel'                      => 'integer',
-        AutoColors::PK                  => 'integer',
-        AutoBodies::PK                  => 'integer',
-        AutoStates::PK                  => 'integer',
-        AutoTransmissions::PK           => 'integer',
-        AutoFinitions::PK               => 'integer',
-        AutoModels::PK                  => 'integer',
+        Color::PK                       => 'integer',
+        Body::PK                        => 'integer',
+        State::PK                       => 'integer',
+        Transmission::PK                => 'integer',
+        Finition::PK                    => 'integer',
+        Model::PK                       => 'integer',
         Adherent::PK                    => 'integer'
     );
 
@@ -160,9 +152,9 @@ class Auto
             'body'                      => _T("body")
         );
 
-        $this->_model = new AutoModels();
-        $this->_color = new AutoColors();
-        $this->_state = new AutoStates();
+        $this->_model = new Model();
+        $this->_color = new Color();
+        $this->_state = new State();
 
         $deps = array(
             'picture'   => false,
@@ -170,11 +162,11 @@ class Auto
             'dues'      => false
         );
         $this->_owner = new Adherent(null, $deps);
-        $this->_transmission = new AutoTransmissions();
-        $this->_finition = new AutoFinitions();
-        $this->_picture = new AutoPicture();
-        $this->_body = new AutoBodies();
-        $this->_history = new AutoHistory();
+        $this->_transmission = new Transmission();
+        $this->_finition = new Finition();
+        $this->_picture = new Picture();
+        $this->_body = new Body();
+        $this->_history = new History();
         if ( is_object($args) ) {
             $this->_loadFromRS($args);
         }
@@ -192,13 +184,13 @@ class Auto
         global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(self::PK . ' = ?', $id);
 
             $this->_loadFromRS($select->query()->fetch());
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load car form id `' . $id .
                 '` | ' . $e->getMessage(),
@@ -232,20 +224,20 @@ class Auto
         $this->_creation_date = $r->car_creation_date;
         $this->_fuel = $r->car_fuel;
         //External objects
-        $this->_picture = new AutoPicture((int)$this->_id);
-        $fpk = AutoFinitions::PK;
+        $this->_picture = new Picture((int)$this->_id);
+        $fpk = Finition::PK;
         $this->_finition->load((int)$r->$fpk);
-        $cpk = AutoColors::PK;
+        $cpk = Color::PK;
         $this->_color->load((int)$r->$cpk);
-        $mpk = AutoModels::PK;
+        $mpk = Model::PK;
         $this->_model->load((int)$r->$mpk);
-        $tpk = AutoTransmissions::PK;
+        $tpk = Transmission::PK;
         $this->_transmission->load((int)$r->$tpk);
-        $bpk = AutoBodies::PK;
+        $bpk = Body::PK;
         $this->_body->load((int)$r->$bpk);
         $opk = Adherent::PK;
         $this->_owner->load((int)$r->$opk);
-        $spk = AutoStates::PK;
+        $spk = State::PK;
         $this->_state->load((int)$r->$spk);
         $this->_history->load((int)$this->_id);
     }
@@ -290,22 +282,22 @@ class Auto
                 switch ( $k ) {
                 case self::PK:
                     break;
-                case AutoColors::PK:
+                case Color::PK:
                     $values[$k] = $this->_color->id;
                     break;
-                case AutoBodies::PK:
+                case Body::PK:
                     $values[$k] = $this->_body->id;
                     break;
-                case AutoStates::PK:
+                case State::PK:
                     $values[$k] = $this->_state->id;
                     break;
-                case AutoTransmissions::PK:
+                case Transmission::PK:
                     $values[$k] = $this->_transmission->id;
                     break;
-                case AutoFinitions::PK:
+                case Finition::PK:
                     $values[$k] = $this->_finition->id;
                     break;
-                case AutoModels::PK:
+                case Model::PK:
                     $values[$k] = $this->_model->id;
                     break;
                 case Adherent::PK:
@@ -322,7 +314,7 @@ class Auto
                         $values[$k] = (
                             ($this->$propName != 0 && $this->$propName != '')
                                 ? $this->$propName
-                                : new Zend_Db_Expr('NULL')
+                                : new \Zend_Db_Expr('NULL')
                         );
                         break;
                     default:
@@ -396,7 +388,7 @@ class Auto
             }
 
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] An error has occured ' .
                 (($new)?'inserting':'updating') . ' car | ' .
@@ -494,10 +486,10 @@ class Auto
             case Adherent::PK:
                 return $this->_owner->id;
                 break;
-            case AutoColors::PK:
+            case Color::PK:
                 return $this->_color->id;
                 break;
-            case AutoStates::PK:
+            case State::PK:
                 return $this->_state->id;
                 break;
             case 'car_registration':
@@ -509,9 +501,9 @@ class Auto
                 $rname = '_' . $name;
                 if ( $this->$rname != '' ) {
                     try {
-                        $d = new DateTime($this->$rname);
+                        $d = new \DateTime($this->$rname);
                         return $d->format(_T("Y-m-d"));
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         //oops, we've got a bad date :/
                         Analog::log(
                             'Bad date (' . $his->$rname . ') | ' .
@@ -524,7 +516,7 @@ class Auto
                 break;
 
                 break;
-            case AutoColors::PK:
+            case Color::PK:
                 return $this->_colors->id;
                 break;
             case 'picture':

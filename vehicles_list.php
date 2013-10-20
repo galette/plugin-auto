@@ -39,6 +39,9 @@
  * @since     Available since 0.7dev - 2009-09-26
  */
 
+use GaletteAuto\Autos;
+use GaletteAuto\AutosList;
+
 define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
     $mine = false;
@@ -64,10 +67,9 @@ if ( isset($_GET["nbshow"]) ) {
     }
 }
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/autos.class.php';
-require_once 'classes/autoslist.class.php';
+
 $auto = new Autos();
 
 if (isset($_GET['sup']) || isset($_POST['delete'])) {
