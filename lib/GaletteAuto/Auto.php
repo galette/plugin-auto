@@ -304,7 +304,7 @@ class Auto
                     $values[$k] = $this->_owner->id;
                     break;
                 default:
-                    $propName = substr($k, 4, strlen($k));
+                    $propName = substr($k, 3, strlen($k));
                     switch($v){
                     case 'string':
                     case 'date':
@@ -508,7 +508,7 @@ class Auto
                         Analog::log(
                             'Bad date (' . $his->$rname . ') | ' .
                             $e->getMessage(),
-                            PER_LOG_INFO
+                            Analog::WARNING
                         );
                         return $this->$rname;
                     }
@@ -578,7 +578,8 @@ class Auto
                 $this->_state->load((int)$value);
                 break;
             default:
-                $this->$name = $value;
+                $rname = '_' . $name;
+                $this->$rname = $value;
                 break;
             }
         } else {
