@@ -171,7 +171,7 @@
                     buttonImage: '{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
-                    yearRange: 'c-100'
+                    yearRange: 'c-100:c+0'
                 });
                 $('#first_registration_date').datepicker({
                     changeMonth: true,
@@ -180,7 +180,7 @@
                     buttonImage: '{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
-                    yearRange: 'c-100'
+                    yearRange: 'c-100:c+0'
                 });
                 var _models = $('#model');
                 var _modelChoose = $('#model :first');
