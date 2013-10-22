@@ -40,6 +40,7 @@
  */
 
 use Analog\Analog as Analog;
+use GaletteAuto\Auto;
 use GaletteAuto\History;
 
 define('GALETTE_BASE_PATH', '../../');
@@ -48,6 +49,9 @@ if ( !$login->isLogged() ) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
+
+//Constants from plugin
+require_once '_config.inc.php';
 
 //check for required car's id
 $history = null;
