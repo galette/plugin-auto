@@ -159,6 +159,19 @@ class Autos
     }
 
     /**
+     * Get vehicles list for specified member
+     *
+     * @param int   $id_adh  Members id
+     * @param array $filters Filters
+     *
+     * @return array
+     */
+    public function getMemberList($id_adh, $filters)
+    {
+        return $this->getList(true, false, null, $filters, $id_adh);
+    }
+
+    /**
     * Get the list of all vehicles
     *
     * @param boolean      $as_autos return the results as an array of Auto object.
@@ -167,11 +180,12 @@ class Autos
     * @param array|string $fields   field(s) name(s) to get. Should be a string
     *                               or an array. If null, all fields will be returned
     * @param AutosList    $filters  Filters
+    * @param int          $id_adh   Member id
     *
     * @return array|Autos[]
     */
     public function getList(
-        $as_autos=false, $mine=false, $fields=null, $filters=null
+        $as_autos=false, $mine=false, $fields=null, $filters=null, $id_adh = null
     ) {
         global $zdb, $login;
 
@@ -192,6 +206,11 @@ class Autos
             //requested 'my vehicles'
             if ( $mine == true || !$login->isAdmin() ) {
                 $select->where(Adherent::PK . ' = ?', $login->id);
+            }
+
+            //restrict on specified user vehicles if an id has been provided
+            if ( $id_adh !== null ) {
+                $select->where(Adherent::PK . ' = ?', $id_adh);
             }
 
             $this->_proceedCount($select, $filters);

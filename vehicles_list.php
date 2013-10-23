@@ -47,9 +47,18 @@ if ( !isset($mine) ) {
     $mine = false;
 }
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
-if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
+if ( !$login->isLogged()
+    || (!$mine && !$login->isAdmin()
+    && !$login->isStaff()
+    && !$login->isGroupManager())
+) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
+}
+
+$id_adh = null;
+if ( isset($_GET['id_adh']) && ($login->isAdmin() || $login->isStaff()) ) {
+    $id_adh = $_GET['id_adh'];
 }
 
 if ( isset($_POST['donew']) ) {
@@ -80,7 +89,13 @@ if (isset($_GET['sup']) || isset($_POST['delete'])) {
     }
 }
 
-$title = ($mine == 1) ? _T("My Cars") : _T("Cars list");
+$title = _T("Cars list");
+if ( $mine == 1 ) {
+    $title = _T("My Cars");
+}
+if ( $id_adh !== null ) {
+    $title = _T("Member's cars");
+}
 $tpl->assign('page_title', $title);
 //Set the path to the current plugin's templates,
 //but backup main Galette's template path before
@@ -97,7 +112,11 @@ if (isset($_GET['page'])) {
 
 $title = _T("Vehicles list");
 $tpl->assign('title', $title);
-$tpl->assign('autos', $auto->getList(true, $mine, null, $afilters));
+if ( $id_adh === null ) {
+    $tpl->assign('autos', $auto->getList(true, $mine, null, $afilters));
+} else {
+    $tpl->assign('autos', $auto->getMemberList($id_adh, $afilters));
+}
 $tpl->assign('show_mine', $mine);
 
 //assign pagination variables to the template and add pagination links

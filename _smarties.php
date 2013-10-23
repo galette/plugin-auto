@@ -38,5 +38,6 @@
 //additionnal Smarty variables
 $_tpl_assignments = array(
     'auto_tpl_dir' => '__plugin_templates_dir__',
+    'auto_dir'     => '__plugin_dir__'
 );
 
