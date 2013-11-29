@@ -141,6 +141,7 @@ CREATE TABLE galette_auto_cars (
   id_transmission integer NOT NULL REFERENCES galette_auto_transmissions (id_transmission) ON DELETE NO ACTION ON UPDATE NO ACTION,
   id_finition integer NOT NULL REFERENCES galette_auto_finitions (id_finition) ON DELETE NO ACTION ON UPDATE NO ACTION,
   id_model integer NOT NULL REFERENCES galette_auto_models (id_model) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  id_adh integer NOT NULL REFERENCES galette_adherents (id_adh) ON DELETE NO ACTION ON UPDATE NO ACTION,
   PRIMARY KEY (id_car)
 );
 

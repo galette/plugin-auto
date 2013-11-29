@@ -3,11 +3,11 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Automobile Bodies class for galette Auto plugin
+ * Automobile States class for galette Auto plugin
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,38 +28,38 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-require_once 'auto-objects.class.php';
+namespace GaletteAuto;
 
 /**
- * Automobile Bodies class for galette Auto plugin
+ * Automobile States class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoBodies
+ * @name      State
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoBodies extends AutoObject
+class State extends AbstractObject
 {
-    const TABLE = 'bodies';
-    const PK = 'id_body';
-    const FIELD = 'body';
-    const NAME = 'bodies';
+    const TABLE = 'states';
+    const PK = 'id_state';
+    const FIELD = 'state';
+    const NAME = 'states';
 
     /**
     * Default constructor
     *
-    * @param integer $id body's id to load. Defaults to null
+    * @param integer $id state's id to load. Defaults to null
     */
     public function __construct($id = null)
     {
@@ -88,4 +88,3 @@ class AutoBodies extends AutoObject
         }
     }
 }
-?>

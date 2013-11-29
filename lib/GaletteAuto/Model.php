@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,28 +28,30 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-require_once 'auto-brands.class.php';
+namespace GaletteAuto;
+
+use Analog\Analog as Analog;
 
 /**
  * Automobile Models class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoModels
+ * @name      Model
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoModels
+class Model
 {
     const TABLE = 'models';
     const PK = 'id_model';
@@ -66,7 +68,7 @@ class AutoModels
     */
     public function __construct($id = null)
     {
-        $this->brand = new AutoBrands();
+        $this->brand = new Brand();
         if ( is_int($id) ) {
             $this->load($id);
         }
@@ -81,32 +83,32 @@ class AutoModels
     */
     public function getList($brandId = null)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
 
             $select->from(
                 array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE)
             )->join(
-                array('b' => PREFIX_DB . AUTO_PREFIX . Autobrands::TABLE),
-                'a.' . AutoBrands::PK . '=b.' . AutoBrands::PK
+                array('b' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
+                'a.' . Brand::PK . '=b.' . Brand::PK
             );
 
             //if required, the where clause
             if ( isset($brandId) && is_int($brandId) ) {
-                $select->where('a.' . AutoBrands::PK . '= ?', $brandId);
+                $select->where('a.' . Brand::PK . '= ?', $brandId);
             }
 
             // the order clause
             $select->order(self::FIELD . ' ASC');
 
             return $select->query()->fetchAll();
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -137,24 +139,24 @@ class AutoModels
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(self::PK . ' = ?', $id);
 
             $r = $select->query()->fetch();
             $this->id = $r->id_model;
             $this->model = $r->model;
-            $id_brand = AutoBrands::PK;
+            $id_brand = Brand::PK;
             $this->brand->load((int)$r->$id_brand);
             return true;
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load model from id `' . $id .
                 '` | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -169,12 +171,12 @@ class AutoModels
     */
     public function store($new = false)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $values = array(
-                'model'         => $this->model,
-                AutoBrands::PK  => $this->brand->id_brand
+                'model'     => $this->model,
+                Brand::PK   => $this->brand->id_brand
             );
             if ( $new ) {
                 $zdb->db->insert(
@@ -189,12 +191,12 @@ class AutoModels
                 );
             }
             return true;
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot store model' .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                PEAR_LOG_WARNING
+                Analog::WARNING
             );
             return false;
         }
@@ -209,18 +211,18 @@ class AutoModels
     */
     public function delete($ids)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $zdb->db->delete(
                 PREFIX_DB . AUTO_PREFIX . self::TABLE,
                 self::PK . ' IN (' . implode(',', $ids) . ')'
             );
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .
                 implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                PEAR_LOG_WARNING
+                Analog::WARNING
             );
             return false;
         }
@@ -235,13 +237,8 @@ class AutoModels
     */
     public function __get($name)
     {
-        global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
-            $log->log(
-                '[' . get_class($this) . '] Trying to get `' . $name . '`',
-                PEAR_LOG_DEBUG
-            );
             switch( $name ){
             case 'brand':
                 return $this->brand->id;
@@ -254,9 +251,9 @@ class AutoModels
                 break;
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                PEAR_LOG_INFO
+                Analog::INFO
             );
             return false;
         }
@@ -278,9 +275,8 @@ class AutoModels
             $this->$name = $value;
             break;
         case 'brand':
-            $this->brand = new AutoBrands((int)$value);
+            $this->brand = new Brand((int)$value);
             break;
         }
     }
 }
-?>

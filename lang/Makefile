@@ -3,23 +3,9 @@ INSTALLDIR = .
 LANGUAGES = en_US fr_FR.utf8
 PACKAGE = galette_auto
 MKLANG = ../../../lang/make_lang_l12n.py
-PHP_SOURCES = ../object.php \
-../models.php \
-../vehicles_edit.php \
-../vehicles_list.php \
-../history.php \
-../templates/default/menu.tpl \
-../templates/default/object_list.tpl \
-../templates/default/object.tpl \
-../templates/default/object_show.tpl \
-../templates/default/model.tpl \
-../templates/default/models_list.tpl \
-../templates/default/owners.tpl \
-../templates/default/vehicles.tpl \
-../templates/default/vehicles_list.tpl \
-../templates/default/history.tpl \
-../classes/auto.class.php
-
+PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
+              $(shell find ../classes -name \*.php) \
+              $(shell find ../templates -name \*.tpl)
 
 all : messages.po lang
 	@echo "Génération des fichiers *.po :"

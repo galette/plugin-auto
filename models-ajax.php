@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,28 +28,29 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id: models-ajax.php 556 2009-03-13 06:48:49Z trashy $
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+use GaletteAuto\Model;
+
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto-models.class.php';
 
 header('Content-Type: application/json;charset=utf-8');
 $list = array();
 
-$m = new AutoModels();
+$m = new Model();
 
 if ( isset($_GET['brand']) && $_GET['brand'] != '' ) {
     $list = $m->getListByBrand((int)$_GET['brand']);
@@ -58,4 +59,3 @@ if ( isset($_GET['brand']) && $_GET['brand'] != '' ) {
 }
 
 echo json_encode($list);
-?>

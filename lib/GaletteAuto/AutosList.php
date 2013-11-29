@@ -3,11 +3,11 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Automobile States class for galette Auto plugin
+ * Autos list paginator
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2012-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -24,68 +24,72 @@
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  *
- * @category  Plugins
- * @package   GaletteAuto
+ * @category  Filters
+ * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2012-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @since     0.73dev 2012-10-16
  */
 
-require_once 'auto-objects.class.php';
+namespace GaletteAuto;
+
+use Analog\Analog as Analog;
+use Galette\Core\Pagination;
 
 /**
- * Automobile States class for galette Auto plugin
+ * Autos list filters and paginator
  *
- * @category  Plugins
- * @name      AutoStates
- * @package   GaletteAuto
+ * @name      AutosList
+ * @category  Filters
+ * @package   Galette
+ *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2012-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @since     0.7.3dev - 2012-12-29
  */
-class AutoStates extends AutoObject
+
+class AutosList extends Pagination
 {
-    const TABLE = 'states';
-    const PK = 'id_state';
-    const FIELD = 'state';
-    const NAME = 'states';
 
     /**
-    * Default constructor
-    *
-    * @param integer $id state's id to load. Defaults to null
-    */
-    public function __construct($id = null)
+     * Returns the field we want to default set order to
+     *
+     * @return string field name
+     */
+    protected function getDefaultOrder()
     {
-        parent::__construct(
-            self::TABLE,
-            self::PK,
-            self::FIELD,
-            self::NAME,
-            $id
-        );
+        return 'car_name';
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
-    public function __get($name)
+     * Add SQL limit
+     *
+     * @param Zend_Db_Select $select Original select
+     *
+     * @return <type>
+     */
+    public function setLimit($select)
     {
-        if ( $name == self::FIELD ) {
-            return parent::__get('field');
-        } else {
-            return parent::__get($name);
-        }
+        return $this->setLimits($select);
+    }
+
+
+    /**
+     * Set counter
+     *
+     * @param int $c Count
+     *
+     * @return void
+     */
+    public function setCounter($c)
+    {
+        $this->counter = (int)$c;
+        $this->countPages();
     }
 }
-?>

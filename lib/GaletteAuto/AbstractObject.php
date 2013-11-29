@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,26 +28,30 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
 
+namespace GaletteAuto;
+
+use Analog\Analog as Analog;
+
 /**
  * Automobile Object abstract class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoObject
+ * @name      AbstractObject
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-abstract class AutoObject
+abstract class AbstractObject
 {
     private $_table;
     private $_pk;
@@ -84,19 +88,19 @@ abstract class AutoObject
     */
     public function getList()
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . $this->_table)
                 ->order($this->_field . ' ASC');
 
             return $select->query()->fetchAll();
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' list | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -111,10 +115,10 @@ abstract class AutoObject
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . $this->_table)
                 ->where($this->_pk . ' = ?', $id);
 
@@ -125,11 +129,11 @@ abstract class AutoObject
             $this->value = $r->$field;
 
             return true;
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
                 ' from id `' . $id . '` | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -144,7 +148,7 @@ abstract class AutoObject
     */
     public function store($new = false)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $values = array(
@@ -163,12 +167,12 @@ abstract class AutoObject
                 );
             }
             return true;
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot store ' . $this->_name .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
-                PEAR_LOG_WARNING
+                Analog::WARNING
             );
             return false;
         }
@@ -183,18 +187,18 @@ abstract class AutoObject
     */
     public function delete($ids)
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
             $zdb->db->delete(
                 PREFIX_DB . $this->_table,
                 $this->_pk . ' IN (' . implode(',', $ids) . ')'
             );
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
                 ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
-                PEAR_LOG_WARNING
+                Analog::WARNING
             );
             return false;
         }
@@ -209,7 +213,6 @@ abstract class AutoObject
     */
     public function __get($name)
     {
-        global $log;
         $forbidden = array();
         if ( !in_array($name, $forbidden) ) {
             if ( $name =='id' || $name == 'value' ) {
@@ -221,9 +224,9 @@ abstract class AutoObject
                 }
             }
         } else {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                PEAR_LOG_INFO
+                Analog::INFO
             );
             return false;
         }
@@ -246,4 +249,3 @@ abstract class AutoObject
         }
     }
 }
-?>

@@ -11,7 +11,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,17 +32,20 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id: modeles.php 556 2009-03-13 06:48:49Z trashy $
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+use GaletteAuto\Model;
+use GaletteAuto\Brand;
+
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() || !$login->isAdmin() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
@@ -59,11 +62,10 @@ $is_new = ( get_numeric_form_value('new', '') == 1
     : false;
 $set = get_form_value('set', null);
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto-models.class.php';
 
-$model = new AutoModels();
+$model = new Model();
 $title = ( $is_new ) ? _T("New model") : _T("Change model '%s'");
 
 //We have a new or a modified object
@@ -76,8 +78,8 @@ if ( get_numeric_form_value('modif', 0) == 1
     $warning_detected = array();
     $confirm_detected = array();
 
-    if ( !$is_new && get_numeric_form_value(AutoModels::PK, null) != null ) {
-        $model->load(get_numeric_form_value(AutoModels::PK, ''));
+    if ( !$is_new && get_numeric_form_value(Model::PK, null) != null ) {
+        $model->load(get_numeric_form_value(Model::PK, ''));
     } else if ( !$is_new ) {
         $error_detected[]
             = _T("- No id provided for modifying this record! (internal)");
@@ -139,9 +141,9 @@ $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('mode', (($is_new) ? 'new' : 'modif'));
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
-if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
+if ( isset( $_GET[Model::PK] ) || $is_new ) {
     if ( !$is_new ) {
-        $model->load(get_numeric_form_value(AutoModels::PK, ''));
+        $model->load(get_numeric_form_value(Model::PK, ''));
         $title = str_replace('%s', $model->model, $title);
     }
     if ( isset($_GET['brand']) ) {
@@ -149,8 +151,7 @@ if ( isset( $_GET[AutoModels::PK] ) || $is_new ) {
     }
     $tpl->assign('page_title', $title);
     $tpl->assign('model', $model);
-    include_once 'classes/auto-brands.class.php';
-    $b = new AutoBrands();
+    $b = new Brand();
     $tpl->assign('brands', $b->getList());
     $content = $tpl->fetch('model.tpl', AUTO_SMARTY_PREFIX);
 } else {
@@ -163,4 +164,3 @@ $tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
 $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
-?>

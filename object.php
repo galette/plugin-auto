@@ -11,7 +11,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,17 +32,27 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id: object.php 556 2009-03-13 06:48:49Z trashy $
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+use GaletteAuto\Color;
+use GaletteAuto\State;
+use GaletteAuto\Finition;
+use GaletteAuto\Body;
+use GaletteAuto\Transmission;
+use GaletteAuto\Brand;
+use GaletteAuto\Model;
+
+use Analog\Analog as Analog;
+
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() || !$login->isAdmin() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
@@ -59,16 +69,15 @@ $is_new = ( get_numeric_form_value('new', '') == 1
     : false;
 $set = get_form_value('set', null);
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
 
 switch ( $set ) {
 case 'colors':
-    include_once 'classes/auto-colors.class.php';
-    $obj = new AutoColors();
+    $obj = new Color();
     $title = ( $is_new )
         ? _T("New color")
-        : ( isset($_GET[AutoColors::PK])
+        : ( isset($_GET[Color::PK])
             ? _T("Change color '%s'")
             : _T("Colors list") );
     $field_name = _T("Color");
@@ -77,11 +86,10 @@ case 'colors':
     $delete_text = _T("Do you really want to delete the color '%s'?");
     break;
 case 'states':
-    include_once 'classes/auto-states.class.php';
-    $obj = new AutoStates();
+    $obj = new State();
     $title = ( $is_new )
         ? _T("New state")
-        : ( isset($_GET[AutoStates::PK])
+        : ( isset($_GET[State::PK])
             ? _T("Change state '%s'")
             : _T("States list") );
     $field_name = _T("State");
@@ -90,11 +98,10 @@ case 'states':
     $delete_text = _T("Do you really want to delete the state '%s'?");
     break;
 case 'finitions':
-    include_once 'classes/auto-finitions.class.php';
-    $obj = new AutoFinitions();
+    $obj = new Finition();
     $title = ( $is_new )
         ? _T("New finition")
-        : ( isset($_GET[AutoFinitions::PK])
+        : ( isset($_GET[Finition::PK])
             ? _T("Change finition '%s'")
             : _T("Finitions list") );
     $field_name = _T("Finition");
@@ -103,11 +110,10 @@ case 'finitions':
     $delete_text = _T("Do you really want to delete the finition '%s'?");
     break;
 case 'bodies':
-    include_once 'classes/auto-bodies.class.php';
-    $obj = new AutoBodies();
+    $obj = new Body();
     $title = ( $is_new )
         ? _T("New body")
-        : ( isset($_GET[AutoBodies::PK])
+        : ( isset($_GET[Body::PK])
             ? _T("Change body '%s'")
             : _T("Bodies list") );
     $field_name = _T("Body");
@@ -116,11 +122,10 @@ case 'bodies':
     $delete_text = _T("Do you really want to delete the body '%s'?");
     break;
 case 'transmissions':
-    include_once 'classes/auto-transmissions.class.php';
-    $obj = new AutoTransmissions();
+    $obj = new Transmission();
     $title = ( $is_new )
         ? _T("New transmission")
-        : ( isset($_GET[AutoTransmissions::PK])
+        : ( isset($_GET[Transmission::PK])
             ? _T("Change transmission '%s'")
             : _T("Transmissions list") );
     $field_name = _T("Transmission");
@@ -129,11 +134,10 @@ case 'transmissions':
     $delete_text = _T("Do you really want to delete the transmission '%s'?");
     break;
 case 'brands':
-    include_once 'classes/auto-brands.class.php';
-    $obj = new AutoBrands();
+    $obj = new Brand();
     $title = ( $is_new )
         ? _T("New brand")
-        : ( isset($_GET[AutoBrands::PK])
+        : ( isset($_GET[Brand::PK])
             ? _T("Change brand '%s'")
             : _T("Brands list"));
     $show_title = _T("Brand '%s'");
@@ -143,14 +147,14 @@ case 'brands':
     $delete_text = _T("Do you really want to delete the brand '%s'?");
     $can_show = true;
     /** TODO: get models list */
-    //$models = AutoModels::getBrandList();
+    //$models = Model::getBrandList();
     break;
 default: //by default, we redirecto to index page
-    $log->log(
+    Analog::log(
         '[Auto Plugin] No "set" defined for ; could not load object.',
-        PEAR_LOG_WARNING
+        Analog::WARNING
     );
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
     break;
 }
@@ -255,4 +259,3 @@ $tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
 $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
-?>

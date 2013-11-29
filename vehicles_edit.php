@@ -11,7 +11,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,17 +32,32 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id: vehicles.php 556 2009-05-12 07:30:49Z trashy $
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
-if ( !$login->isLogged() || (!$mine && !$login->isAdmin() ) ) {
-    header('location: ' . $base_path . 'index.php');
+use Analog\Analog as Analog;
+use GaletteAuto\Color;
+use GaletteAuto\State;
+use GaletteAuto\Finition;
+use GaletteAuto\Body;
+use GaletteAuto\Transmission;
+use GaletteAuto\Auto;
+
+define('GALETTE_BASE_PATH', '../../');
+if ( !isset($mine) ) {
+    $mine = false;
+}
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
+if ( !$login->isLogged()
+    || (!$mine && !$login->isAdmin()
+    && !$login->isStaff()
+    && !$login->isGroupManager())
+) {
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
@@ -53,9 +68,8 @@ if ( isset($_GET['nbshow']) ) {
     }
 }
 
-//Constants and classes from plugin
+//Constants from plugin
 require_once '_config.inc.php';
-require_once 'classes/auto.class.php';
 
 $is_new = ( isset($_GET[Auto::PK]) && is_int((int)$_GET[Auto::PK]) ) ? false : true;
 $set = get_form_value('set', null);
@@ -208,30 +222,28 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $name = '';
                 switch ( $prop ) {
                 case 'finition':
-                    $name = AutoFinitions::FIELD;
+                    $name = Finition::FIELD;
                     break;
                 case 'color':
-                    $name = AutoColors::FIELD;
+                    $name = Color::FIELD;
                     break;
                 case 'model':
-                    $name = AutoModels::FIELD;
+                    $name = Model::FIELD;
                     break;
                 case 'transmission':
-                    $name = AutoTransmissions::FIELD;
+                    $name = Transmission::FIELD;
                     break;
                 case 'body':
-                    $name = AutoBodies::FIELD;
+                    $name = Body::FIELD;
                     break;
                 case 'state':
-                    $name = AutoStates::FIELD;
-                    break;
-                case 'model':
-                    $name = AutoModels::FIELD;
+                    $name = State::FIELD;
                     break;
                 default:
-                    $log->log(
-                        'Unable to retrieve the textual value for prop `' . $prop . '`',
-                        PEAR_LOG_INFO
+                    Analog::log(
+                        'Unable to retrieve the textual value for prop `' .
+                        $prop . '`',
+                        Analog::INFO
                     );
                     $name = '(unknow)';
                 }
@@ -252,9 +264,9 @@ if ( get_numeric_form_value('modif', 0) == 1
             break;
         default:
             /** TODO: what's the default? */
-            $log->log(
+            Analog::log(
                 'Trying to edit an Auto property that is not catched in the source code! (prop is: ' . $prop . ')',
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             break;
         }//switch
@@ -267,7 +279,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $res = $auto->picture->store($_FILES['photo']);
                 if ( $res < 0) {
                     switch ( $res ) {
-                    case AutoPicture::INVALID_FILE:
+                    case Picture::INVALID_FILE:
                         $patterns = array('|%s|', '|%t|');
                         $replacements = array(
                             $auto->picture->getAllowedExts(),
@@ -279,19 +291,19 @@ if ( get_numeric_form_value('modif', 0) == 1
                             _T("- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t")
                         );
                         break;
-                    case AutoPicture::FILE_TOO_BIG:
+                    case Picture::FILE_TOO_BIG:
                         $error_detected[] = preg_replace(
                             '|%d|',
-                            AutoPicture::MAX_FILE_SIZE,
+                            Picture::MAX_FILE_SIZE,
                             _T("File is too big. Maximum allowed size is %d")
                         );
                         break;
-                    case AutoPicture::MIME_NOT_ALLOWED:
+                    case Picture::MIME_NOT_ALLOWED:
                         /** FIXME: should be more descriptive */
                         $error_detected[] = _T("Mime-Type not allowed");
                         break;
-                    case AutoPicture::SQL_ERROR:
-                    case AutoPicture::SQL_BLOB_ERROR:
+                    case Picture::SQL_ERROR:
+                    case Picture::SQL_BLOB_ERROR:
                         $error_detected[] = _T("An SQL error has occured.");
                         break;
                     }
@@ -314,7 +326,7 @@ if ( get_numeric_form_value('modif', 0) == 1
             $error_detected[]
                 = _T("- An error has occured while saving car in the database.");
         } else {
-            if( $mine ) {
+            if ( $mine ) {
                 header('location: my_vehicles.php');
             } else {
                 header('location: vehicles_list.php');
@@ -357,10 +369,10 @@ $tpl->assign('transmissions', $auto->transmission->getList());
 $tpl->assign('finitions', $auto->finition->getList());
 $tpl->assign('states', $auto->state->getList());
 $tpl->assign('fuels', $auto->listFuels());
+$tpl->assign('time', time());
 $content = $tpl->fetch('vehicles.tpl', AUTO_SMARTY_PREFIX);
 
 $tpl->assign('content', $content);
 //Set path to main Galette's template
 $tpl->template_dir = $orig_template_path;
 $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
-?>

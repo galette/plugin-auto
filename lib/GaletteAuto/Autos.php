@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,23 +28,26 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-require_once 'auto.class.php';
+namespace GaletteAuto;
+
+use Analog\Analog as Analog;
+use Galette\Entity\Adherent as Adherent;
 
 /**
  * Automobile autos class for galette Auto plugin
  *
  * @category  Plugins
- * @name      Auto
+ * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
@@ -55,13 +58,7 @@ class Autos
     const PK = Auto::PK;
 
     private $_filter = null;
-
-    /**
-    * Default constructor
-    */
-    public function __construct()
-    {
-    }
+    private $_count = null;
 
     /**
      * Remove specified vehicles
@@ -72,7 +69,7 @@ class Autos
      */
     public function removeVehicles($ids)
     {
-        global $zdb, $log, $hist;
+        global $zdb, $hist;
 
         $list = array();
         if ( is_numeric($ids) ) {
@@ -87,16 +84,16 @@ class Autos
                 $zdb->db->beginTransaction();
 
                 //Retrieve some informations
-                $select = new Zend_Db_Select($zdb->db);
+                $select = new \Zend_Db_Select($zdb->db);
                 $select->from(
                     array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
                     array(self::PK, 'a.car_name', 'c.brand', 'b.model')
                 )->join(
-                    array('b' => PREFIX_DB . AUTO_PREFIX . AutoModels::TABLE),
-                    'a.' . AutoModels::PK . ' = b.' . AutoModels::PK
+                    array('b' => PREFIX_DB . AUTO_PREFIX . Model::TABLE),
+                    'a.' . Model::PK . ' = b.' . Model::PK
                 )->join(
-                    array('c' => PREFIX_DB . AUTO_PREFIX . AutoBrands::TABLE),
-                    'b.' . AutoBrands::PK . ' = c.' . AutoBrands::PK
+                    array('c' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
+                    'b.' . Brand::PK . ' = c.' . Brand::PK
                 )->where(self::PK . ' IN (?)', $ids);
 
                 $vehicles = $select->query()->fetchAll();
@@ -107,13 +104,13 @@ class Autos
                         ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
                     $infos .=  $str_v . "\n";
 
-                    $p = new AutoPicture($vehicle->id_car);
+                    $p = new Picture($vehicle->id_car);
                     if ( $p->hasPicture() ) {
                         if ( !$p->delete() ) {
-                            $log->log(
+                            Analog::log(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v,
-                                PEAR_LOG_ERR
+                                Analog::ERROR
                             );
                             throw new Exception(
                                 'Unable to delete picture for vehicle ' .
@@ -142,23 +139,36 @@ class Autos
 
                 //commit all changes
                 $zdb->db->commit();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $zdb->db->rollBack();
-                $log->log(
+                Analog::log(
                     'Unable to delete selected vehicle(s) |' .
                     $e->getMessage(),
-                    PEAR_LOG_ERR
+                    Analog::ERROR
                 );
                 return false;
             }
         } else {
             //not numeric and not an array: incorrect.
-            $log->log(
+            Analog::log(
                 'Asking to remove vehicles, but without providing an array or a single numeric value.',
-                PEAR_LOG_WARNING
+                Analog::WARNING
             );
             return false;
         }
+    }
+
+    /**
+     * Get vehicles list for specified member
+     *
+     * @param int   $id_adh  Members id
+     * @param array $filters Filters
+     *
+     * @return array
+     */
+    public function getMemberList($id_adh, $filters)
+    {
+        return $this->getList(true, false, null, $filters, $id_adh);
     }
 
     /**
@@ -169,19 +179,15 @@ class Autos
     * @param boolean      $mine     show only current logged member cars
     * @param array|string $fields   field(s) name(s) to get. Should be a string
     *                               or an array. If null, all fields will be returned
-    * @param string       $filter   should add filter... TODO
+    * @param AutosList    $filters  Filters
+    * @param int          $id_adh   Member id
     *
     * @return array|Autos[]
     */
-    public static function getList(
-        $as_autos=false, $mine=false, $fields=null, $filter=null
+    public function getList(
+        $as_autos=false, $mine=false, $fields=null, $filters=null, $id_adh = null
     ) {
-        global $zdb, $log, $login;
-
-        /** TODO: Check if filter is valid ? */
-        if ( $filter != null && trim($filter) != '' ) {
-            $this->_filter = $filter;
-        }
+        global $zdb, $login;
 
         $fieldsList = ( $fields != null && !$as_autos )
             ? (( !is_array($fields) || count($fields) < 1 )
@@ -190,9 +196,9 @@ class Autos
             : (array)'*';
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(
-                PREFIX_DB . AUTO_PREFIX . self::TABLE,
+                array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE),
                 $fieldsList
             );
 
@@ -200,6 +206,17 @@ class Autos
             //requested 'my vehicles'
             if ( $mine == true || !$login->isAdmin() ) {
                 $select->where(Adherent::PK . ' = ?', $login->id);
+            }
+
+            //restrict on specified user vehicles if an id has been provided
+            if ( $id_adh !== null ) {
+                $select->where(Adherent::PK . ' = ?', $id_adh);
+            }
+
+            $this->_proceedCount($select, $filters);
+
+            if ( $filters !== null ) {
+                $filters->setLimit($select);
             }
 
             $results = $select->query()->fetchAll();
@@ -212,14 +229,59 @@ class Autos
                 $autos = $results;
             }
             return $autos;
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot list Autos | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Count vehicles from the query
+     *
+     * @param Zend_Db_Select $select  Original select
+     * @param AutosList      $filters Filters
+     *
+     * @return void
+     */
+    private function _proceedCount($select, $filters)
+    {
+        global $zdb;
+
+        try {
+            $countSelect = clone $select;
+            $countSelect->reset(\Zend_Db_Select::COLUMNS);
+            $countSelect->reset(\Zend_Db_Select::ORDER);
+            $countSelect->reset(\Zend_Db_Select::HAVING);
+            $countSelect->columns('count(a.' . self::PK . ') AS ' . self::PK);
+
+            $have = $select->getPart(\Zend_Db_Select::HAVING);
+            if ( is_array($have) && count($have) > 0 ) {
+                foreach ( $have as $h ) {
+                    $countSelect->where($h);
+                }
+            }
+
+            $result = $countSelect->query()->fetch();
+
+            $k = self::PK;
+            $this->_count = $result->$k;
+            if ( isset($filters) && $this->_count > 0 ) {
+                $filters->setCounter($this->_count);
+            }
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot count vehicles | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            Analog::log(
+                'Query was: ' . $countSelect->__toString() . ' ' . $e->__toString(),
+                Analog::ERROR
             );
             return false;
         }
     }
 }
-?>

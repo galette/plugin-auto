@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,17 +28,19 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
  */
 
-use Galette\Core\Picture;
+namespace GaletteAuto;
+
+use Galette\Common\KLogger;
+use Galette\Core\Picture as GalettePicture;
 
 require_once '_config.inc.php';
-require_once 'auto.class.php';
 
 /**
  * Logo handling
@@ -47,17 +49,45 @@ require_once 'auto.class.php';
  * @name      AutoPicture
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoPicture extends Picture
+class Picture extends GalettePicture
 {
     protected $tbl_prefix = AUTO_PREFIX;
     const PK = Auto::PK;
-    //path is relative to Picture class, not to AutoPicture
-    protected $store_path = '../plugins/Auto/auto_photos/';
+
+    /**
+    * Default constructor.
+    *
+    * @param int $id_adh the id of the member
+    */
+    public function __construct( $id_adh='' )
+    {
+        $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';
+        if ( !file_exists($this->store_path) ) {
+            if ( !mkdir($this->store_path) ) {
+                Analog::log(
+                    'Unable to create photo dir `' . $this->store_path . '`.',
+                    Analog::ERROR
+                );
+            } else {
+                Analog::log(
+                    'New directory `' . $this->store_path . '` has been created',
+                    Analog::INFO
+                );
+            }
+        } else if ( !is_dir($this->store_path) ) {
+            Analog::log(
+                'Unable to store plugin images, since `' . $this->store_path .
+                '` is not a directory.',
+                Analog::WARNING
+            );
+        }
+        parent::__construct($id_adh);
+    }
 
     /**
     * Gets the default picture to show, anyways
@@ -69,10 +99,10 @@ class AutoPicture extends Picture
     protected function getDefaultPicture()
     {
         global $plugins;
-        $this->file_path = $plugins->getTemplatesPath('Auto') . '/images/car.png';
+        $this->file_path = $plugins->getTemplatesPathFromName('Galette Auto') .
+            '/images/car.png';
         $this->format = 'png';
         $this->mime = 'image/png';
         $this->has_picture = false;
     }
 }
-?>

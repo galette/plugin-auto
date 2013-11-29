@@ -11,7 +11,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -32,28 +32,33 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id: history.php 556 2009-03-13 06:48:49Z trashy $
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-10-03
  */
 
-$base_path = '../../';
-require_once $base_path . 'includes/galette.inc.php';
+use Analog\Analog as Analog;
+use GaletteAuto\Auto;
+use GaletteAuto\History;
+
+define('GALETTE_BASE_PATH', '../../');
+require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged() ) {
-    header('location: ' . $base_path . 'index.php');
+    header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
-require_once 'classes/auto-history.class.php';
+//Constants from plugin
+require_once '_config.inc.php';
 
 //check for required car's id
 $history = null;
 if ( isset($_GET['id_car']) ) {
-    $history = new AutoHistory( (int)$_GET['id_car'] );
+    $history = new History((int)$_GET['id_car']);
 } else {
-    $log->log('No car id provided to get its history, exiting.', PEAR_LOG_ERR);
+    Analog::log('No car id provided to get its history, exiting.', Analog::ERROR);
     die();
 }
 // check for ajax mode
@@ -66,7 +71,10 @@ $tpl->template_dir = 'templates/' . $preferences->pref_theme;
 $tpl->assign('ajax', $ajax);
 $tpl->assign('entries', $history->entries);
 $apk = Auto::PK;
-$tpl->assign('page_title', str_replace('%d', $history->$apk, _T("History of car #%d")));
+$tpl->assign(
+    'page_title',
+    str_replace('%d', $history->$apk, _T("History of car #%d"))
+);
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 
 if ( $ajax ) {
@@ -79,4 +87,3 @@ if ( $ajax ) {
     $tpl->template_dir = $orig_template_path;
     $tpl->display('page.tpl', AUTO_SMARTY_PREFIX);
 }
-?>

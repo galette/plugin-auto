@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -36,11 +36,11 @@
  */
 
 $this->register(
-    'Galette Auto', //Name
-    'Plugin to manage Automobile clubs', //Short description
-    'Johan Cwiklinski', //Author
-    '0.0.1', //Version
-    null //Permissions needed - not yet implemented
+    'Galette Auto',                         //Name
+    'Plugin to manage Automobile clubs',    //Short description
+    'Johan Cwiklinski',                     //Author
+    '1.0.0',                                //Version
+    '0.7.5',                                //Galette compatible version
+    null                                    //Permissions needed - not yet implemented
 );
 
-?>

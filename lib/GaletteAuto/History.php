@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,32 +28,31 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-10-02
  */
 
-use Galette\Entity\Adherent;
+namespace GaletteAuto;
 
-require_once 'auto.class.php';
-require_once 'auto-colors.class.php';
-require_once 'auto-states.class.php';
+use Analog\Analog as Analog;
+use Galette\Entity\Adherent;
 
 /**
  * Automobile History class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoHistory
+ * @name      History
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoHistory
+class History
 {
     const TABLE = 'history';
 
@@ -63,8 +62,8 @@ class AutoHistory
         Adherent::PK        => 'integer',
         'history_date'      => 'datetime',
         'car_registration'  => 'text',
-        AutoColors::PK      => 'integer',
-        AutoStates::PK      => 'integer'
+        Color::PK           => 'integer',
+        State::PK           => 'integer'
     );
 
     //history entries
@@ -78,7 +77,6 @@ class AutoHistory
     */
     public function __construct($id = null)
     {
-        global $log;
         if ( $id != null && is_int($id) ) {
             $this->load($id);
         }
@@ -93,14 +91,14 @@ class AutoHistory
     */
     public function load($id)
     {
-        global $zdb, $log;
+        global $zdb;
 
         if ( $id == null || !is_int($id) ) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) .
                 '] Unable to load car\'s history : Invalid car id (id was: `' .
                 $id . '`)',
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -108,18 +106,18 @@ class AutoHistory
         $this->_id_car = $id;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(Auto::PK . ' = ?', $id)
                 ->order('history_date ASC');
 
             $this->_entries = $select->query()->fetchAll();
             $this->_formatEntries();
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
                 $this->_id_car . ') | ' . $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -132,21 +130,21 @@ class AutoHistory
     */
     public function getLatest()
     {
-        global $zdb, $log;
+        global $zdb;
 
         try {
-            $select = new Zend_Db_Select($zdb->db);
+            $select = new \Zend_Db_Select($zdb->db);
             $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
                 ->where(Auto::PK . ' = ?', $this->_id_car)
                 ->order('history_date DESC')
                 ->limit(1);
             return $select->query()->fetch();
-        } catch (Exception $e) {
-            $log->log(
+        } catch (\Exception $e) {
+            Analog::log(
                 '[' . get_class($this) .
                 '] Cannot get car\'s latest history entry | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -173,10 +171,10 @@ class AutoHistory
                 = new Adherent((int)$this->_entries[$i]->id_adh);
             //associate color
             $this->_entries[$i]->color
-                = new AutoColors((int)$this->_entries[$i]->id_color);
+                = new Color((int)$this->_entries[$i]->id_color);
             //associate state
             $this->_entries[$i]->state
-                = new AutoStates((int)$this->_entries[$i]->id_state);
+                = new State((int)$this->_entries[$i]->id_state);
         }
     }
 
@@ -189,11 +187,11 @@ class AutoHistory
     */
     public function register($props)
     {
-        global $zdb, $log;
+        global $zdb;
 
-        $log->log(
+        Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
-            PEAR_LOG_DEBUG
+            Analog::DEBUG
         );
 
         try {
@@ -212,18 +210,21 @@ class AutoHistory
             );
 
             if ( $add > 0 ) {
-                $log->log(
-                    '[' . get_class($this) . '] new AutoHistory entry set successfully.',
-                    PEAR_LOG_DEBUG
+                Analog::log(
+                    '[' . get_class($this) .
+                    '] new AutoHistory entry set successfully.',
+                    Analog::DEBUG
                 );
             } else {
-                throw new Exception('An error occured registering car new history entry :(');
+                throw new \Exception(
+                    'An error occured registering car new history entry :('
+                );
             }
         } catch (Exception $e) {
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Cannot register new histroy entry | ' .
                 $e->getMessage(),
-                PEAR_LOG_ERR
+                Analog::ERROR
             );
             return false;
         }
@@ -238,10 +239,10 @@ class AutoHistory
     */
     public function __get($name)
     {
-        global $log;
         switch($name){
         case Auto::PK:
-            $k = Auto::PK;
+            $ka = Auto::PK;
+            $k = '_' . $ka;
             return $this->$k;
             break;
         case 'fields':
@@ -251,13 +252,12 @@ class AutoHistory
             return $this->_entries;
             break;
         default:
-            $log->log(
+            Analog::log(
                 '[' . get_class($this) . '] Trying to get an unknown property (' .
                 $name . ')',
-                PEAR_LOG_INFO
+                Analog::INFO
             );
             break;
         }
     }
 }
-?>

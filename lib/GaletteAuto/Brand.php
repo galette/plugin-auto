@@ -3,11 +3,11 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Automobile Finitions class for galette Auto plugin
+ * Automobile Brands class for galette Auto plugin
  *
  * PHP version 5
  *
- * Copyright © 2009-2012 The Galette Team
+ * Copyright © 2009-2013 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,38 +28,40 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
 
-require_once 'auto-objects.class.php';
+namespace GaletteAuto;
+
+use Analog\Analog as Analog;
 
 /**
- * Automobile Finitions class for galette Auto plugin
+ * Automobile Brands class for galette Auto plugin
  *
  * @category  Plugins
- * @name      AutoFinitions
+ * @name      AutoBrands
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2012 The Galette Team
+ * @copyright 2009-2013 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
  */
-class AutoFinitions extends AutoObject
+class Brand extends AbstractObject
 {
-    const TABLE = 'finitions';
-    const PK = 'id_finition';
-    const FIELD = 'finition';
-    const NAME = 'finitions';
+    const TABLE = 'brands';
+    const PK = 'id_brand';
+    const FIELD = 'brand';
+    const NAME = 'brands';
 
     /**
     * Default constructor
     *
-    * @param integer $id finition's id to load. Defaults to null
+    * @param integer $id brand's id to load. Defaults to null
     */
     public function __construct($id = null)
     {
@@ -73,6 +75,38 @@ class AutoFinitions extends AutoObject
     }
 
     /**
+    * List of models for a specific brand
+    *
+    * @param integer $brand Brand identifier
+    *
+    * @return ResultSet
+    */
+    public function getModels($brand)
+    {
+        global $zdb;
+
+        try {
+            $select = new \Zend_Db_Select($zdb->db);
+            $select->from(PREFIX_DB . AUTO_PREFIX . Model::TABLE)
+                ->where(self::PK . ' = ? ', $brand)
+                ->order(Model::FIELD . ' ASC');
+            return $select->query()->fetchAll();
+        } catch(\Exception $e) {
+            Analog::log(
+                '[' . get_class($this) . '] Cannot load models list | ' .
+                $e->getMessage(),
+                Analog::WARNING
+            );
+            Analog::log(
+                'Query was: ' . $select->__toString(),
+                Analog::DEBUG
+            );
+            return false;
+        }
+    }
+
+
+    /**
     * Global getter method
     *
     * @param string $name name of the property we want to retrive
@@ -83,9 +117,11 @@ class AutoFinitions extends AutoObject
     {
         if ( $name == self::FIELD ) {
             return parent::__get('field');
+        }
+        if ( $name == self::PK ) {
+            return parent::__get('id');
         } else {
             return parent::__get($name);
         }
     }
 }
-?>
