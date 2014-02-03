@@ -47,6 +47,9 @@
                 <li>{_T string="Other:"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new vehicle"}"/></li>
             </ul>
+{if isset($id_adh)}
+            <input type="hidden" name="id_adh" value="{$id_adh}"/>
+{/if}
         </form>
 {if $autos|@count gt 0}
         <script type="text/javascript">

@@ -65,7 +65,11 @@ if ( isset($_POST['donew']) ) {
     if ( $mine ) {
         header('location: my_vehicles_edit.php');
     } else {
-        header('location: vehicles_edit.php');
+        $location = 'vehicles_edit.php';
+        if ( isset($_POST['id_adh']) ) {
+            $location .= '?id_adh=' . $_POST['id_adh'];
+        }
+        header('location: ' . $location);
     }
 }
 
@@ -115,6 +119,7 @@ $tpl->assign('title', $title);
 if ( $id_adh === null ) {
     $tpl->assign('autos', $auto->getList(true, $mine, null, $afilters));
 } else {
+    $tpl->assign('id_adh', $id_adh);
     $tpl->assign('autos', $auto->getMemberList($id_adh, $afilters));
 }
 $tpl->assign('show_mine', $mine);

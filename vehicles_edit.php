@@ -77,8 +77,14 @@ $set = get_form_value('set', null);
 $auto = new Auto();
 if ( !$is_new ) {
     $auto->load((int)$_GET[Auto::PK]);
-} else if ( $mine ) {
-    $auto->appropriateCar();
+} else {
+    if ( $mine ) {
+        $auto->appropriateCar();
+    } else {
+        if ( isset($_GET['id_adh']) && ($login->isAdmin() || $login->isStaff()) ) {
+            $auto->owner = $_GET['id_adh'];
+        }
+    }
 }
 
 $title = ( $is_new )
