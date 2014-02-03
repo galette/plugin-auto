@@ -62,14 +62,14 @@ abstract class AbstractObject
     protected $value;
 
     /**
-    * Default constructor
-    *
-    * @param string  $table table name
-    * @param string  $pk    primary key field
-    * @param string  $field main field name
-    * @param string  $name  name
-    * @param integer $id    id to load. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param string  $table table name
+     * @param string  $pk    primary key field
+     * @param string  $field main field name
+     * @param string  $name  name
+     * @param integer $id    id to load. Defaults to null
+     */
     public function __construct($table, $pk, $field, $name, $id = null)
     {
         $this->_table = AUTO_PREFIX . $table;
@@ -82,20 +82,20 @@ abstract class AbstractObject
     }
 
     /**
-    * Get the list
-    *
-    * @return ResultSet
-    */
+     * Get the list
+     *
+     * @return ResultSet
+     */
     public function getList()
     {
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . $this->_table)
-                ->order($this->_field . ' ASC');
+            $select = $zdb->select($this->_table);
+            $select->order($this->_field . ' ASC');
 
-            return $select->query()->fetchAll();
+            $results = $zdb->execute($select);
+            return $results;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->_name .
@@ -107,26 +107,30 @@ abstract class AbstractObject
     }
 
     /**
-    * Loads a record
-    *
-    * @param integer $id id of the record
-    *
-    * @return boolean
-    */
+     * Loads a record
+     *
+     * @param integer $id id of the record
+     *
+     * @return boolean
+     */
     public function load($id)
     {
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . $this->_table)
-                ->where($this->_pk . ' = ?', $id);
+            $select = $zdb->select($this->_table);
+            $select->where(
+                array(
+                    $this->_pk => $id
+                )
+            );
 
-            $r = $select->query()->fetch();
+            $results = $zdb->execute($select);
+            $result = $results->current();
             $pk = $this->_pk;
-            $this->id = $r->$pk;
+            $this->id = $result->$pk;
             $field = $this->_field;
-            $this->value = $r->$field;
+            $this->value = $result->$field;
 
             return true;
         } catch (\Exception $e) {
@@ -140,12 +144,12 @@ abstract class AbstractObject
     }
 
     /**
-    * Store current record
-    *
-    * @param boolean $new New record or existing one
-    *
-    * @return boolean
-    */
+     * Store current record
+     *
+     * @param boolean $new New record or existing one
+     *
+     * @return boolean
+     */
     public function store($new = false)
     {
         global $zdb;
@@ -155,16 +159,17 @@ abstract class AbstractObject
                 $this->_field => $this->value
             );
             if ( $new ) {
-                $zdb->db->insert(
-                    PREFIX_DB . $this->_table,
-                    $values
-                );
+                $insert = $zdb->insert($this->_table);
+                $insert->values($values);
+                $zdb->execute($insert);
             } else {
-                $zdb->db->update(
-                    PREFIX_DB . $this->_table,
-                    $values,
-                    $this->_pk . ' = ' . $this->id
+                $update = $zdb->update($this->_table);
+                $update->set($values)->where(
+                    array(
+                        $this->_pk => $this->id
+                    )
                 );
+                $zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
@@ -179,21 +184,20 @@ abstract class AbstractObject
     }
 
     /**
-    * Delete some records
-    *
-    * @param array $ids Array of records id to delete
-    *
-    * @return boolean
-    */
+     * Delete some records
+     *
+     * @param array $ids Array of records id to delete
+     *
+     * @return boolean
+     */
     public function delete($ids)
     {
         global $zdb;
 
         try {
-            $zdb->db->delete(
-                PREFIX_DB . $this->_table,
-                $this->_pk . ' IN (' . implode(',', $ids) . ')'
-            );
+            $delete = $zdb->delete($this->_table);
+            $delete->where->in($this->_pk, $ids);
+            $zdb->execute($delete);
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->_name .
@@ -205,12 +209,12 @@ abstract class AbstractObject
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrive
+     *
+     * @return false|object the called property
+     */
     public function __get($name)
     {
         $forbidden = array();
@@ -233,13 +237,13 @@ abstract class AbstractObject
     }
 
     /**
-    * Global setter method
-    *
-    * @param string $name  name of the property we want to assign a value to
-    * @param object $value a relevant value for the property
-    *
-    * @return void
-    */
+     * Global setter method
+     *
+     * @param string $name  name of the property we want to assign a value to
+     * @param object $value a relevant value for the property
+     *
+     * @return void
+     */
     public function __set($name, $value)
     {
         switch( $name ) {

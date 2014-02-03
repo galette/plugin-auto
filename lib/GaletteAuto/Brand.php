@@ -86,20 +86,20 @@ class Brand extends AbstractObject
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . Model::TABLE)
-                ->where(self::PK . ' = ? ', $brand)
-                ->order(Model::FIELD . ' ASC');
-            return $select->query()->fetchAll();
+            $select = $zdb->select(AUTO_PREFIX . Model::TABLE);
+            $select->where(
+                array(
+                    self::PK => $brand
+                )
+            )->order(Model::FIELD . ' ASC');
+
+            $results = $zdb->execute($select);
+            return $results;
         } catch(\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
                 Analog::WARNING
-            );
-            Analog::log(
-                'Query was: ' . $select->__toString(),
-                Analog::DEBUG
             );
             return false;
         }

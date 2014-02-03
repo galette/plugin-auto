@@ -106,12 +106,15 @@ class History
         $this->_id_car = $id;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
-                ->where(Auto::PK . ' = ?', $id)
-                ->order('history_date ASC');
+            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select->where(
+                array(
+                    Auto::PK => $id
+                )
+            )->order('history_date ASC');
 
-            $this->_entries = $select->query()->fetchAll();
+            $results = $zdb->execute($select);
+            $this->_entries = $results->toArray();
             $this->_formatEntries();
         } catch (\Exception $e) {
             Analog::log(
@@ -133,12 +136,16 @@ class History
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
-                ->where(Auto::PK . ' = ?', $this->_id_car)
-                ->order('history_date DESC')
-                ->limit(1);
-            return $select->query()->fetch();
+            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select->where(
+                array(
+                    Auto::PK => $this->_id_car
+                )
+            )->order('history_date DESC')->limit(1);
+
+            $results = $zdb->execute($select);
+            $result = $results->current();
+            return $result;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) .
@@ -160,21 +167,19 @@ class History
         for ( $i = 0 ; $i < count($this->_entries); $i++ ) {
             //put a formatted date to show
             //strftime output is ISO-8859-1...
-            $this->_entries[$i]->formatted_date = utf8_encode(
-                strftime(
-                    '%d %B %Y',
-                    strtotime($this->_entries[$i]->history_date)
-                )
+            $this->_entries[$i]['formatted_date'] = strftime(
+                '%d %B %Y',
+                strtotime($this->_entries[$i]['history_date'])
             );
             //associate member to current history entry
-            $this->_entries[$i]->owner
-                = new Adherent((int)$this->_entries[$i]->id_adh);
+            $this->_entries[$i]['owner']
+                = new Adherent((int)$this->_entries[$i]['id_adh']);
             //associate color
-            $this->_entries[$i]->color
-                = new Color((int)$this->_entries[$i]->id_color);
+            $this->_entries[$i]['color']
+                = new Color((int)$this->_entries[$i]['id_color']);
             //associate state
-            $this->_entries[$i]->state
-                = new State((int)$this->_entries[$i]->id_state);
+            $this->_entries[$i]['state']
+                = new State((int)$this->_entries[$i]['id_state']);
         }
     }
 
@@ -204,12 +209,11 @@ class History
                 $values[$key] = $prop;
             }
 
-            $add = $zdb->db->insert(
-                PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                $values
-            );
+            $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+            $insert->values($values);
+            $add = $zdb->execute($insert);
 
-            if ( $add > 0 ) {
+            if ( $add->count() > 0 ) {
                 Analog::log(
                     '[' . get_class($this) .
                     '] new AutoHistory entry set successfully.',

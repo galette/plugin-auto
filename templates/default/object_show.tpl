@@ -7,7 +7,7 @@
             <p>{_T string="Registered models for the brand '%s':" pattern="/%s/" replace=$obj->value}</p>
             <ul>
         {foreach item=model from=$models}
-                <li><a href="models.php?id={$model->id_model}">{$model->model}</a></li>
+                <li><a href="models.php?id_model={$model->id_model}">{$model->model}</a></li>
         {/foreach}
             </ul>
             <p><a href="models.php?donew=1&amp;brand={$obj->id}">{_T string="Create a new model for brand '%s'" pattern="/%s/" replace=$obj->value}</a></p>

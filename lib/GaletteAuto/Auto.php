@@ -39,6 +39,7 @@ namespace GaletteAuto;
 
 use Analog\Analog as Analog;
 use Galette\Entity\Adherent;
+use Zend\Db\Sql\Expression;
 
 /**
  * Automobile Transmissions class for galette Auto plugin
@@ -129,10 +130,10 @@ class Auto
     );
 
     /**
-    * Default constructor
-    *
-    * @param ResultSet $args A resultset row to load
-    */
+     * Default constructor
+     *
+     * @param ResultSet $args A resultset row to load
+     */
     public function __construct($args = null)
     {
         $this->_propnames = array(
@@ -173,22 +174,26 @@ class Auto
     }
 
     /**
-    * Loads a car from its id
-    *
-    * @param integer $id the identifiant for the car to load
-    *
-    * @return boolean
-    */
+     * Loads a car from its id
+     *
+     * @param integer $id the identifiant for the car to load
+     *
+     * @return boolean
+     */
     public function load($id)
     {
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
-                ->where(self::PK . ' = ?', $id);
+            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select->where(
+                array(
+                    self::PK => $id
+                )
+            );
 
-            $this->_loadFromRS($select->query()->fetch());
+            $results = $zdb->execute($select);
+            $this->_loadFromRS($results->current());
             return true;
         } catch (\Exception $e) {
             Analog::log(
@@ -201,12 +206,12 @@ class Auto
     }
 
     /**
-    * Populate object from a resultset row
-    *
-    * @param ResultSet $r a resultset row
-    *
-    * @return void
-    */
+     * Populate object from a resultset row
+     *
+     * @param ResultSet $r a resultset row
+     *
+     * @return void
+     */
     private function _loadFromRS($r)
     {
         $pk = self::PK;
@@ -243,10 +248,10 @@ class Auto
     }
 
     /**
-    * Return the list of available fuels
-    *
-    * @return array
-    */
+     * Return the list of available fuels
+     *
+     * @return array
+     */
     public function listFuels()
     {
         $f = array(
@@ -260,13 +265,13 @@ class Auto
     }
 
     /**
-    * Stores the vehicle in the database
-    *
-    * @param boolean $new true if it's a new record, false to update on
-    *                       that already exists. Defaults to false
-    *
-    * @return boolean
-    */
+     * Stores the vehicle in the database
+     *
+     * @param boolean $new true if it's a new record, false to update on
+     *                       that already exists. Defaults to false
+     *
+     * @return boolean
+     */
     public function store($new = false)
     {
         global $zdb, $hist;
@@ -314,7 +319,7 @@ class Auto
                         $values[$k] = (
                             ($this->$propName != 0 && $this->$propName != '')
                                 ? $this->$propName
-                                : new \Zend_Db_Expr('NULL')
+                                : new Expression('NULL')
                         );
                         break;
                     default:
@@ -326,12 +331,19 @@ class Auto
             }
 
             if ( $new === true ) {
-                $add = $zdb->db->insert(
-                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                    $values
-                );
-                if ( $add > 0) {
-                    $this->_id = $zdb->db->lastInsertId();
+                $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+                $insert->values($values);
+                $add = $zdb->execute($insert);
+
+                if ( $add->count() > 0) {
+                    if ( $zdb->isPostgres() ) {
+                        $this->_id = $zdb->driver->getLastGeneratedValue(
+                            PREFIX_DB . AUTO_PREFIX . 'cars_id_seq'
+                        );
+                    } else {
+                        $this->_id = $zdb->driver->getLastGeneratedValue();
+                    }
+
                     // logging
                     $hist->add(
                         _T("New car added"),
@@ -344,14 +356,16 @@ class Auto
                     );
                 }
             } else {
-                $edit = $zdb->db->update(
-                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                    $values,
-                    self::PK . '=' . $this->_id
+                $update = $zdb->update(AUTO_PREFIX . self::TABLE);
+                $update->set($values)->where(
+                    array(
+                        self::PK => $this->_id
+                    )
                 );
+                $edit = $zdb->execute($update);
                 //edit == 0 does not mean there were an error, but that there
                 //were nothing to change
-                if ( $edit > 0 ) {
+                if ( $edit->count() > 0 ) {
                     $hist->add(
                         _T("Car updated"),
                         strtoupper($this->_name)
@@ -400,13 +414,13 @@ class Auto
     }
 
     /**
-    * List object's properties
-    *
-    * @param boolean $restrict true to exclude $this->_internals from returned
-    *               result, false otherwise. Default to false
-    *
-    * @return array
-    */
+     * List object's properties
+     *
+     * @param boolean $restrict true to exclude $this->_internals from returned
+     *               result, false otherwise. Default to false
+     *
+     * @return array
+     */
     private function _getAllProperties($restrict = false)
     {
         $result = array();
@@ -421,31 +435,31 @@ class Auto
     }
 
     /**
-    * Get object's properties. List only properties that can be modified
-    *   externally (ie. not in $this->_internals)
-    *
-    * @return array
-    */
+     * Get object's properties. List only properties that can be modified
+     *   externally (ie. not in $this->_internals)
+     *
+     * @return array
+     */
     public function getProperties()
     {
         return $this->_getAllProperties(true);
     }
 
     /**
-    * Does the current car has a picture?
-    *
-    * @return boolean
-    */
+     * Does the current car has a picture?
+     *
+     * @return boolean
+     */
     public function hasPicture()
     {
         return $this->_picture->hasPicture();
     }
 
     /**
-    * Set car's owner to current logged user
-    *
-    * @return void
-    */
+     * Set car's owner to current logged user
+     *
+     * @return void
+     */
     public function appropriateCar()
     {
         global $login;
@@ -453,12 +467,12 @@ class Auto
     }
 
     /**
-    * Returns plain text property name, generally used for translations
-    *
-    * @param string $name property name
-    *
-    * @return string property
-    */
+     * Returns plain text property name, generally used for translations
+     *
+     * @param string $name property name
+     *
+     * @return string property
+     */
     public function getPropName($name)
     {
         if ( isset($this->_propnames[$name]) ) {
@@ -469,12 +483,12 @@ class Auto
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrive
+     *
+     * @return false|object the called property
+     */
     public function __get($name)
     {
         $forbidden = array();
@@ -545,13 +559,13 @@ class Auto
     }
 
     /**
-    * Global setter method
-    *
-    * @param string $name  name of the property we want to assign a value to
-    * @param object $value a relevant value for the property
-    *
-    * @return void
-    */
+     * Global setter method
+     *
+     * @param string $name  name of the property we want to assign a value to
+     * @param object $value a relevant value for the property
+     *
+     * @return void
+     */
     public function __set($name, $value)
     {
         if ( !in_array($name, $this->_internals) ) {
