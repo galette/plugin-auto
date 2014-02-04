@@ -458,11 +458,12 @@ class Auto
     /**
      * Set car's owner to current logged user
      *
+     * @param Login $login Login instance
+     *
      * @return void
      */
-    public function appropriateCar()
+    public function appropriateCar($login)
     {
-        global $login;
         $this->_owner->load($login->id);
     }
 
