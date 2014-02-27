@@ -99,7 +99,7 @@ class Autos
                     array('c' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
                     'b.' . Brand::PK . ' = c.' . Brand::PK,
                     array('brand')
-                )->where->in(self::PK, $ids);
+                )->where->in(self::PK, $list);
 
                 $vehicles = $zdb->execute($select);
 
@@ -132,7 +132,7 @@ class Autos
 
                 //delete vehicles
                 $delete = $zdb->delete(AUTO_PREFIX . self::TABLE);
-                $delete->where->in(self::PK, $ids);
+                $delete->where->in(self::PK, $list);
                 $zdb->execute($delete);
 
                 //add an history entry
