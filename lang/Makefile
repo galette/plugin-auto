@@ -4,7 +4,7 @@ LANGUAGES = en_US fr_FR.utf8
 PACKAGE = galette_auto
 MKLANG = ../../../lang/make_lang_l12n.py
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
-              $(shell find ../classes -name \*.php) \
+              $(shell find ../lib -name \*.php) \
               $(shell find ../templates -name \*.tpl)
 
 all : messages.po lang

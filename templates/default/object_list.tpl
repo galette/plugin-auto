@@ -34,7 +34,7 @@
                     <td>
                         <input type="checkbox" name="_sel[]" value="{$o->$pk}"/>
                     </td>
-                    <td><a href="object.php?set={$name}&#038;{if $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
+                    <td><a href="object.php?set={$name}&#038;{if isset($show) and $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
                     <td class="center nowrap">
                         <a href="object.php?set={$set}&#038;{$pk}={$o->$pk}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
                         <a onclick="return confirm('{$delete_text|escape:"javascript"}'.replace('%s', '{$o->$field}'))" href="object.php?set={$set}&#038;sup={$o->$pk}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>

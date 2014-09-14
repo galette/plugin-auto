@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2013 The Galette Team
+ * Copyright © 2009-2014 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2013 The Galette Team
+ * @copyright 2009-2014 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -46,7 +46,7 @@ use Analog\Analog as Analog;
  * @name      AutoBrands
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2013 The Galette Team
+ * @copyright 2009-2014 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -86,20 +86,20 @@ class Brand extends AbstractObject
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . Model::TABLE)
-                ->where(self::PK . ' = ? ', $brand)
-                ->order(Model::FIELD . ' ASC');
-            return $select->query()->fetchAll();
+            $select = $zdb->select(AUTO_PREFIX . Model::TABLE);
+            $select->where(
+                array(
+                    self::PK => $brand
+                )
+            )->order(Model::FIELD . ' ASC');
+
+            $results = $zdb->execute($select);
+            return $results;
         } catch(\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
                 Analog::WARNING
-            );
-            Analog::log(
-                'Query was: ' . $select->__toString(),
-                Analog::DEBUG
             );
             return false;
         }

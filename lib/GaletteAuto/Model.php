@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2013 The Galette Team
+ * Copyright © 2009-2014 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2013 The Galette Team
+ * @copyright 2009-2014 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -46,7 +46,7 @@ use Analog\Analog as Analog;
  * @name      Model
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2013 The Galette Team
+ * @copyright 2009-2014 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -86,24 +86,26 @@ class Model
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-
-            $select->from(
-                array('a' => PREFIX_DB . AUTO_PREFIX . self::TABLE)
-            )->join(
+            $select = $zdb->select(AUTO_PREFIX . self::TABLE, 'a');
+            $select->join(
                 array('b' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
                 'a.' . Brand::PK . '=b.' . Brand::PK
             );
 
             //if required, the where clause
             if ( isset($brandId) && is_int($brandId) ) {
-                $select->where('a.' . Brand::PK . '= ?', $brandId);
+                $select->where(
+                    array(
+                        'a.' . Brand::PK => $brandId
+                    )
+                );
             }
 
             // the order clause
             $select->order(self::FIELD . ' ASC');
 
-            return $select->query()->fetchAll();
+            $results = $zdb->execute($select);
+            return $results;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
@@ -124,7 +126,7 @@ class Model
     public function getListByBrand($brandId)
     {
         if ( isset($brandId) && is_int($brandId) ) {
-            return $this->getList($brandId);
+            return $this->getList($brandId)->toArray();
         } else {
             return -1;
         }
@@ -142,15 +144,19 @@ class Model
         global $zdb;
 
         try {
-            $select = new \Zend_Db_Select($zdb->db);
-            $select->from(PREFIX_DB . AUTO_PREFIX . self::TABLE)
-                ->where(self::PK . ' = ?', $id);
+            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select->where(
+                array(
+                    self::PK => $id
+                )
+            );
 
-            $r = $select->query()->fetch();
-            $this->id = $r->id_model;
-            $this->model = $r->model;
+            $results = $zdb->execute($select);
+            $result = $results->current();
+            $this->id = $result->id_model;
+            $this->model = $result->model;
             $id_brand = Brand::PK;
-            $this->brand->load((int)$r->$id_brand);
+            $this->brand->load((int)$result->$id_brand);
             return true;
         } catch (\Exception $e) {
             Analog::log(
@@ -179,15 +185,15 @@ class Model
                 Brand::PK   => $this->brand->id_brand
             );
             if ( $new ) {
-                $zdb->db->insert(
-                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                    $values
-                );
+                $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+                $insert->values($values);
+                $zdb->execute($insert);
             } else {
-                $zdb->db->update(
-                    PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                    $values,
-                    self::PK . ' = ' . $this->id
+                $update = $zdb->update(AUTO_PREFIX . self::TABLE);
+                $update->set($values)->where(
+                    array(
+                        self::PK => $this->id
+                    )
                 );
             }
             return true;
@@ -214,10 +220,9 @@ class Model
         global $zdb;
 
         try {
-            $zdb->db->delete(
-                PREFIX_DB . AUTO_PREFIX . self::TABLE,
-                self::PK . ' IN (' . implode(',', $ids) . ')'
-            );
+            $delete = $zdb->delete(AUTO_PREFIX . self::TABLE);
+            $delete->where->in(self::PK, $ids);
+            $zdb->execute($delete);
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .

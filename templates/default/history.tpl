@@ -21,9 +21,9 @@
             </thead>
             <tbody>
 {foreach from=$entries item=entry}
-    {assign var='owner' value=$entry->owner}
+    {assign var='owner' value=$entry.owner}
                 <tr>
-                    <td>{$entry->formatted_date}</td>
+                    <td>{$entry.formatted_date}</td>
                     <td>
                         {if $owner->isMan()}
                             <img src="{$template_subdir}images/icon-male.png" alt="{_T string="[M]"}" width="16" height="16"/>
@@ -41,9 +41,9 @@
                         {/if}
                         {$owner->sfullname}
                     </td>
-                    <td>{$entry->car_registration}</td>
-                    <td>{$entry->color->value}</td>
-                    <td>{$entry->state->value}</td>
+                    <td>{$entry.car_registration}</td>
+                    <td>{$entry.color->value}</td>
+                    <td>{$entry.state->value}</td>
                 </tr>
 {foreachelse}
                 <tr><td colspan="5" class="emptylist">{_T string="no history entries"}</td></tr>
