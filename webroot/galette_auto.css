@@ -1,6 +1,6 @@
 #change_owner{
 	display:block;
-	background:url(../../../../templates/default/images/edit.png) 50% 1px no-repeat;
+	background:url(../../../../themes/default/images/edit.png) 50% 1px no-repeat;
 	width:20px;
 	height:20px;
 	text-indent:-5000px;
@@ -22,8 +22,8 @@
     background-repeat: no-repeat, repeat!important;
 }
 #btn_plugins_auto {
-    background-image:url(images/car-small.png), url("../../../../templates/default/jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png");
+    background-image:url(images/car-small.png), url("../../../../themes/default/jquery-ui/images/ui-bg_glass_75_e6e6e6_1x400.png");
 }
 #btn_plugins_auto.ui-state-hover {
-    background-image: url(images/car-small.png), url("../../../../templates/default/jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
+    background-image: url(images/car-small.png), url("../../../../themes/default/jquery-ui/images/ui-bg_glass_75_ffb619_1x400.png");
 }

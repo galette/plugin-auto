@@ -37,7 +37,8 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog as Analog;
+use Analog\Analog;
+use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
 
@@ -132,9 +133,10 @@ class Auto
     /**
      * Default constructor
      *
-     * @param ResultSet $args A resultset row to load
+     * @param Plugins   $plugins Plugins
+     * @param ResultSet $args    A resultset row to load
      */
-    public function __construct($args = null)
+    public function __construct(Plugins $plugins, $args = null)
     {
         $this->_propnames = array(
             'name'                      => _T("name"),
@@ -165,7 +167,7 @@ class Auto
         $this->_owner = new Adherent(null, $deps);
         $this->_transmission = new Transmission();
         $this->_finition = new Finition();
-        $this->_picture = new Picture();
+        $this->_picture = new Picture($plugins);
         $this->_body = new Body();
         $this->_history = new History();
         if ( is_object($args) ) {

@@ -1,3 +1,6 @@
+{extends file="page.tpl"}
+
+{block name="content"}
         <form action="" method="post" id="modifform" enctype="multipart/form-data">
         <div class="bigtable">
             <fieldset class="cssform">
@@ -47,7 +50,7 @@
                 <legend class="ui-state-active ui-corner-top">{_T string="Car's photo"}</legend>
                 <p>
                     <span class="bline">{_T string="Picture:"}</span>
-                    <img src="picture.php?id_adh={$car->id}&amp;rand={$time}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>
+                    <img src="{if $car->id}{path_for name="vehiclePhoto" data=["id" => $car->id]}{else}{path_for name="vehiclePhoto"}{/if}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>
 {if $car->hasPicture() }
                     <span class="labelalign"><label for="del_photo">{_T string="Delete image"}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
 {/if}
@@ -160,6 +163,9 @@
             <input type="hidden" name="id_car" value="{$car->id}"/>
         </div>
         </form>
+{/block}
+
+{block name="javascripts"}
         <script type="text/javascript">
             $(function() {
                 _collapsibleFieldsets();
@@ -168,7 +174,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImage: '{$base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
@@ -177,7 +183,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImage: '{$base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
@@ -224,7 +230,7 @@
                             from: 'single',
                             id: '{$car->owner->id}'
                         },
-                        {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                        {include file="js_loader.tpl"},
                         success: function(res){
                             _owners_dialog(res);
                         },
@@ -273,7 +279,7 @@
                                 page: _page,
                                 multiple: false
                             },
-                            {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                            {include file="js_loader.tpl"},
                             success: function(res){
                                 $('#owners_list').empty();
                                 _owners_ajax_mapper(res);
@@ -313,3 +319,4 @@
     {/if}
             });
         </script>
+{/block}

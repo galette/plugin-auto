@@ -1,3 +1,6 @@
+{extends file="page.tpl"}
+
+{block name="content"}
         <form action="" method="post" id="listform">
         <table class="listing">
             <thead>
@@ -45,13 +48,16 @@
                 <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?" escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:"}</li>
-                <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new vehicle"}"/></li>
+                <li><a class="button" href="{path_for name="vehicleEdit" data=["action" => "add"]}" id="btnadd">{_T string="Add new vehicle"}</a></li>
             </ul>
 {if isset($id_adh)}
             <input type="hidden" name="id_adh" value="{$id_adh}"/>
 {/if}
         </form>
-{if $autos|@count gt 0}
+{/block}
+
+{block name="javascripts"}
+    {if $autos|@count gt 0}
         <script type="text/javascript">
         //<![CDATA[
         var _is_checked = true;
@@ -70,11 +76,12 @@
                 return false;
             });
         }
-        {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
+        {* Use of Javascript to draw specific elements that are not relevant if JS is inactive *}
         $(function(){
             $('#table_footer').before('<tr><td class="left" colspan="5"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></td></tr>');
             _bind_check();
         });
         //]]>
         </script>
-{/if}
+    {/if}
+{/block}

@@ -62,13 +62,6 @@ if ( !$login->isLogged()
     die();
 }
 
-$numrows = $preferences->pref_numrows;
-if ( isset($_GET['nbshow']) ) {
-    if ( is_numeric($_GET['nbshow']) ) {
-        $numrows = $_GET['nbshow'];
-    }
-}
-
 //Constants from plugin
 require_once '_config.inc.php';
 
