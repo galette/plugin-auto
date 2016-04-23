@@ -174,7 +174,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$base_url}/{$template_subdir}images/calendar.png',
+                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
@@ -183,7 +183,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$base_url}/{$template_subdir}images/calendar.png',
+                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
