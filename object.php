@@ -51,7 +51,7 @@ use Analog\Analog as Analog;
 
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
-if ( !$login->isLogged() || !$login->isAdmin() || !$login->isStaff() ) {
+if ( !$login->isLogged() || (!$login->isAdmin() && !$login->isStaff()) ) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
