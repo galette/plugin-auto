@@ -59,14 +59,14 @@
         var _is_checked = true;
         var _bind_check = function(){ldelim}
             $('#checkall').click(function(){ldelim}
-                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
                     this.checked = _is_checked;
                 {rdelim});
                 _is_checked = !_is_checked;
                 return false;
             {rdelim});
             $('#checkinvert').click(function(){ldelim}
-                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
                     this.checked = !$(this).is(':checked');
                 {rdelim});
                 return false;
