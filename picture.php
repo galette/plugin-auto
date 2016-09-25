@@ -47,7 +47,7 @@ if ( !$login->isLogged() ) {
 }
 
 /** FIXME: these should not be fired when accessing from public pages */
-if ( !$login->isAdmin() ) {
+if ( !$login->isAdmin() && !$login->isStaff() || !isset($_GET['id_adh']) ) {
     $id_adh = $login->id;
 } else {
     $id_adh = $_GET['id_adh'];
