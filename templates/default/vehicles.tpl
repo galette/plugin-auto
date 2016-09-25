@@ -60,7 +60,7 @@
                 <legend class="ui-state-active ui-corner-top">{_T string="Current car's state informations"}</legend>
                 <div>
                 <input type="hidden" name="owner" id="owner" value="{$car->owner->id}"/>
-    {if $login->isAdmin()}
+    {if $login->isAdmin() || $login->isStaff() || $login->isGroupManager()}
                 <p class="notform">
                     {* Does car's history should be visible by the actual owner? *}
                     <a href="history.php?id_car={$car->id}" title="{_T string="Show full car state history"}" id="state_history">{_T string="Car state history"}</a>
@@ -211,7 +211,7 @@
                         'json'
                     );
                 });
-    {if $login->isAdmin()}
+    {if $login->isAdmin() || $login->isStaff() || $login->isGroupManager()}
                 {* Popup for owner change *}
                 $('#change_owner').click(function(){
 
