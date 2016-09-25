@@ -49,8 +49,7 @@ if ( !isset($mine) ) {
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged()
     || (!$mine && !$login->isAdmin()
-    && !$login->isStaff()
-    && !$login->isGroupManager())
+    && !$login->isStaff())
 ) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
