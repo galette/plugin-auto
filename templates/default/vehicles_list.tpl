@@ -57,15 +57,17 @@
         var _is_checked = true;
         var _bind_check = function(){
             $('#checkall').click(function(){
-                $('table.listing :checkbox[name=_sel[]]').each(function(){
+                $('table.listing :checkbox[name="vehicle_sel[]"]').each(function(){
                     this.checked = _is_checked;
                 });
                 _is_checked = !_is_checked;
+                return false;
             });
             $('#checkinvert').click(function(){
-                $('table.listing :checkbox[name=_sel[]]').each(function(){
+                $('table.listing :checkbox[name="vehicle_sel[]"]').each(function(){
                     this.checked = !$(this).is(':checked');
                 });
+                return false;
             });
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}

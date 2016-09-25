@@ -46,6 +46,8 @@ use GaletteAuto\Finition;
 use GaletteAuto\Body;
 use GaletteAuto\Transmission;
 use GaletteAuto\Auto;
+use GaletteAuto\Model;
+use GaletteAuto\Picture;
 
 define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
