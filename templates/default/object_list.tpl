@@ -37,7 +37,7 @@
                     <td><a href="object.php?set={$name}&#038;{if isset($show) and $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
                     <td class="center nowrap">
                         <a href="object.php?set={$set}&#038;{$pk}={$o->$pk}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{$delete_text|escape:"javascript"}'.replace('%s', '{$o->$field}'))" href="object.php?set={$set}&#038;sup={$o->$pk}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{$delete_text escape="js"}'.replace('%s', '{$o->$field}'))" href="object.php?set={$set}&#038;sup={$o->$pk}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}
@@ -48,7 +48,7 @@
             <ul class="selection_menu">
 {if $list|@count gt 0}
                 <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{$deletes_text|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
+                <li><input type="submit" id="delete" onclick="return confirm('{$deletes_text escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{$add_text}"/></li>
