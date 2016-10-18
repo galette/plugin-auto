@@ -37,7 +37,7 @@
 
 namespace GaletteAuto;
 
-use Galette\Common\KLogger;
+use Analog\Analog;
 use Galette\Core\Picture as GalettePicture;
 
 require_once '_config.inc.php';

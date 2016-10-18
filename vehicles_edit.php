@@ -46,6 +46,8 @@ use GaletteAuto\Finition;
 use GaletteAuto\Body;
 use GaletteAuto\Transmission;
 use GaletteAuto\Auto;
+use GaletteAuto\Model;
+use GaletteAuto\Picture;
 
 define('GALETTE_BASE_PATH', '../../');
 if ( !isset($mine) ) {
@@ -54,8 +56,7 @@ if ( !isset($mine) ) {
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 if ( !$login->isLogged()
     || (!$mine && !$login->isAdmin()
-    && !$login->isStaff()
-    && !$login->isGroupManager())
+    && !$login->isStaff())
 ) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();

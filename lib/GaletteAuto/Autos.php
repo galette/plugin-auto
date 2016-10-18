@@ -205,7 +205,7 @@ class Autos
 
             //restict on user self vehicles when not admin, or if admin and
             //requested 'my vehicles'
-            if ( $mine == true || !$login->isAdmin() ) {
+            if ( $mine == true || (!$login->isAdmin() && !$login->isStaff()) ) {
                 $select->where(
                     array(
                         Adherent::PK => $login->id

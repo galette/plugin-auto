@@ -31,7 +31,7 @@
                     <td><a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
                         <a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the car '%s'?"|escape:"javascript"}'.replace('%s', '{$auto->name}'))" href="{if $show_mine eq 1}my_{/if}vehicles_list.php?sup={$auto->id}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the car '%s'?" escape="js"}'.replace('%s', '{$auto->name}'))" href="{if $show_mine eq 1}my_vehicles{else}vehicles_list{/if}.php?sup={$auto->id}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}
@@ -42,7 +42,7 @@
             <ul class="selection_menu">
 {if $autos|@count gt 0}
                 <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
+                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?" escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new vehicle"}"/></li>
@@ -57,15 +57,17 @@
         var _is_checked = true;
         var _bind_check = function(){
             $('#checkall').click(function(){
-                $('table.listing :checkbox[name=_sel[]]').each(function(){
+                $('table.listing :checkbox[name="vehicle_sel[]"]').each(function(){
                     this.checked = _is_checked;
                 });
                 _is_checked = !_is_checked;
+                return false;
             });
             $('#checkinvert').click(function(){
-                $('table.listing :checkbox[name=_sel[]]').each(function(){
+                $('table.listing :checkbox[name="vehicle_sel[]"]').each(function(){
                     this.checked = !$(this).is(':checked');
                 });
+                return false;
             });
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}

@@ -36,7 +36,7 @@
                     <td><a href="models.php?id_model={$m->id_model}">{$m->brand}</a></td>
                     <td class="center nowrap">
                         <a href="models.php?id_model={$m->id_model}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?"|escape:"javascript"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}
@@ -47,7 +47,7 @@
             <ul class="selection_menu">
 {if $models|@count gt 0}
                 <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?"|escape:"javascript"}');" name="delete" value="{_T string="Delete"}"/></li>
+                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new model"}"/></li>
@@ -58,14 +58,14 @@
         var _is_checked = true;
         var _bind_check = function(){ldelim}
             $('#checkall').click(function(){ldelim}
-                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
                     this.checked = _is_checked;
                 {rdelim});
                 _is_checked = !_is_checked;
                 return false;
             {rdelim});
             $('#checkinvert').click(function(){ldelim}
-                $('table.listing :checkbox[name=member_sel[]]').each(function(){ldelim}
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
                     this.checked = !$(this).is(':checked');
                 {rdelim});
                 return false;
