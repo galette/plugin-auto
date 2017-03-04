@@ -49,13 +49,6 @@ use GaletteAuto\Auto;
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    '/',
-    function () {
-        echo 'Coucou de Auto !';
-    }
-)->setName('auto');
-
-$this->get(
     '/vehicle/photo[/{id:\d+}]',
     function ($request, $response, $args) {
         $id = isset($args['id']) ? $args['id'] : null;
