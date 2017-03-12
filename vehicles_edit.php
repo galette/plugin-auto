@@ -82,8 +82,8 @@ if ( !$is_new ) {
 }
 
 $title = ( $is_new )
-    ? _T("New vehicle")
-    : str_replace('%s', $auto->name, _T("Change vehicle '%s'"));
+    ? _T("New vehicle", "auto")
+    : str_replace('%s', $auto->name, _T("Change vehicle '%s'", "auto"));
 
 //We have a new or a modified object
 if ( get_numeric_form_value('modif', 0) == 1
@@ -99,7 +99,7 @@ if ( get_numeric_form_value('modif', 0) == 1
         $auto->load(get_numeric_form_value(Auto::PK, null));
     } else if ( !$is_new ) {
         $error_detected[]
-            = _T("- No id provided for modifying this record! (internal)");
+            = _T("- No id provided for modifying this record! (internal)", "auto");
     }
 
     /** TODO: make required fields dynamic, as in main Galette */
@@ -129,7 +129,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $error_detected[] = str_replace(
                     '%s',
                     '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>',
-                    _T("- Mandatory field %s empty.")
+                    _T("- Mandatory field %s empty.", "auto")
                 );
             } else {
                 $auto->$prop = $value;
@@ -143,7 +143,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $error_detected[] = str_replace(
                     '%s',
                     '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>',
-                    _T("- Mandatory field %s empty.")
+                    _T("- Mandatory field %s empty.", "auto")
                 );
             } else {
                 $auto->$prop = $value;
@@ -156,7 +156,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $error_detected[] = str_replace(
                     '%s',
                     '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>',
-                    _T("- Mandatory field %s empty.")
+                    _T("- Mandatory field %s empty.", "auto")
                 );
             } elseif ( preg_match("@^([0-9]{2})/([0-9]{2})/([0-9]{4})$@", $value, $array_jours) ) {
                 if ( checkdate($array_jours[2], $array_jours[1], $array_jours[3]) ) {
@@ -166,14 +166,14 @@ if ( get_numeric_form_value('modif', 0) == 1
                     $error_detected[] = str_replace(
                         '%s',
                         $auto->getPropName($prop),
-                        _T("- Non valid date for %s!")
+                        _T("- Non valid date for %s!", "auto")
                     );
                 }
             } else {
                 $error_detected[] = str_replace(
                     '%s',
                     $auto->getPropName($prop),
-                    _T("- Wrong date format for %s (dd/mm/yyyy)!")
+                    _T("- Wrong date format for %s (dd/mm/yyyy)!", "auto")
                 );
             }
             break;
@@ -186,7 +186,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $error_detected[] = str_replace(
                     '%s',
                     '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>',
-                    _T("- Mandatory field %s empty.")
+                    _T("- Mandatory field %s empty.", "auto")
                 );
             } else {
                 if ( is_int((int)$value) ) {
@@ -195,7 +195,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                     $error_detected[] = str_replace(
                         '%s',
                         '<a href="#' . $prop . '">' .$auto->getPropName($prop) . '</a>',
-                        _T("- You must enter a positive integer for %s")
+                        _T("- You must enter a positive integer for %s", "auto")
                     );
                 }
             }
@@ -205,7 +205,7 @@ if ( get_numeric_form_value('modif', 0) == 1
             if ( in_array($value, array_keys($auto->listFuels())) ) {
                 $auto->fuel = $value;
             } else {
-                $error_detected[] = _T("- You must choose a fuel in the list");
+                $error_detected[] = _T("- You must choose a fuel in the list", "auto");
             }
             break;
         //external objects
@@ -250,7 +250,7 @@ if ( get_numeric_form_value('modif', 0) == 1
                 $error_detected[] = str_replace(
                     '%s',
                     '<a href="#' . $prop . '">' . $auto->getPropName($name) . '</a>',
-                    _T("- You must choose a %s in the list")
+                    _T("- You must choose a %s in the list", "auto")
                 );
             }
             break;
@@ -259,7 +259,7 @@ if ( get_numeric_form_value('modif', 0) == 1
             if ( $value > 0 ) {
                 $auto->$prop = $value;
             } else {
-                $error_detected[] = _T("- you must attach an owner to this car");
+                $error_detected[] = _T("- you must attach an owner to this car", "auto");
             }
             break;
         default:
@@ -316,7 +316,7 @@ if ( get_numeric_form_value('modif', 0) == 1
     if ( isset($_POST['del_photo']) ) {
         if ( !$auto->picture->delete() ) {
             $error_detected[]
-                = _T("An error occured while trying to delete car's photo");
+                = _T("An error occured while trying to delete car's photo", "auto");
         }
     }
 
@@ -324,7 +324,7 @@ if ( get_numeric_form_value('modif', 0) == 1
     if ( count($error_detected) == 0 ) {
         if ( !$auto->store($is_new) ) {
             $error_detected[]
-                = _T("- An error has occured while saving car in the database.");
+                = _T("- An error has occured while saving car in the database.", "auto");
         } else {
             if ( $mine ) {
                 header('location: my_vehicles.php');

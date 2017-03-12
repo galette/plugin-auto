@@ -2,20 +2,20 @@
         <div class="bigtable">
             <fieldset class="cssform">
                 <p>
-                    <label for="model" class="bline">{_T string="Model"}</label>
+                    <label for="model" class="bline">{_T string="Model" domain="auto"}</label>
                     <input type="text" name="model" id="model" value="{$model->model}" maxlength="20" required/>
                 </p>
                 <p>
 {if $brands|@count gt 0}
-                    <label for="brand" class="bline">{_T string="Brand"}</label>
+                    <label for="brand" class="bline">{_T string="Brand" domain="auto"}</label>
                     <select name="brand" id="brand" required>
-                        <option value="-1">{_T string="Select one brand"}</option>
+                        <option value="-1">{_T string="Select one brand" domain="auto"}</option>
     {foreach from=$brands item=brand}
                         <option value="{$brand->id_brand}"{if $brand->id_brand eq $model->brand} selected="selected"{/if}>{$brand->brand}</option>
     {/foreach}
                     </select>
 {else}
-                    <p>{php}echo preg_replace('/%(.*)%/', '<a href="object.php?set=brands&#038;addnew=1">\\1</a>', _T("No brand is registered yet. You have to %create at least one brand% to register models."));{/php}</p>
+                    <p>{php}echo preg_replace('/%(.*)%/', '<a href="object.php?set=brands&#038;addnew=1">\\1</a>', _T("No brand is registered yet. You have to %create at least one brand% to register models." domain="auto"));{/php}</p>
 {/if}
                 </p>
             </fieldset>

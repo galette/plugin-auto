@@ -137,7 +137,7 @@ class Autos
 
                 //add an history entry
                 $hist->add(
-                    _T("Delete vehicles cards"),
+                    _T("Delete vehicles cards", "auto"),
                     $infos
                 );
 

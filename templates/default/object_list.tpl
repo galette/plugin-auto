@@ -41,7 +41,7 @@
                     </td>
                 </tr>
 {foreachelse}
-                <tr><td colspan="3" class="emptylist">{_T string="no record found"}</td></tr>
+                <tr><td colspan="3" class="emptylist">{_T string="no record found" domain="auto"}</td></tr>
 {/foreach}
             </tbody>
         </table>
@@ -50,7 +50,7 @@
                 <li>{_T string="Selection:"}</li>
                 <li><input type="submit" id="delete" onclick="return confirm('{$deletes_text escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
-                <li>{_T string="Other:"}</li>
+                <li>{_T string="Other:" domain="auto"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{$add_text}"/></li>
             </ul>
         </form>

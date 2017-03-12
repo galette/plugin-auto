@@ -1,0 +1,8 @@
+#: ../_routes.php:52
+msgid "/vehicle"
+msgstr ""
+
+#: ../_routes.php:52
+msgid "/photo"
+msgstr ""
+

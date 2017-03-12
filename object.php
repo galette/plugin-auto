@@ -76,75 +76,75 @@ switch ( $set ) {
 case 'colors':
     $obj = new Color();
     $title = ( $is_new )
-        ? _T("New color")
+        ? _T("New color", "auto")
         : ( isset($_GET[Color::PK])
-            ? _T("Change color '%s'")
-            : _T("Colors list") );
-    $field_name = _T("Color");
-    $add_text = _T("Add new color");
-    $deletes_text = _T("Do you really want to delete selected colors?");
-    $delete_text = _T("Do you really want to delete the color '%s'?");
+            ? _T("Change color '%s'", "auto")
+            : _T("Colors list", "auto") );
+    $field_name = _T("Color", "auto");
+    $add_text = _T("Add new color", "auto");
+    $deletes_text = _T("Do you really want to delete selected colors?", "auto");
+    $delete_text = _T("Do you really want to delete the color '%s'?", "auto");
     break;
 case 'states':
     $obj = new State();
     $title = ( $is_new )
-        ? _T("New state")
+        ? _T("New state", "auto")
         : ( isset($_GET[State::PK])
-            ? _T("Change state '%s'")
-            : _T("States list") );
-    $field_name = _T("State");
-    $add_text = _T("Add new state");
-    $deletes_text = _T("Do you really want to delete selected states?");
-    $delete_text = _T("Do you really want to delete the state '%s'?");
+            ? _T("Change state '%s'", "auto")
+            : _T("States list", "auto") );
+    $field_name = _T("State", "auto");
+    $add_text = _T("Add new state", "auto");
+    $deletes_text = _T("Do you really want to delete selected states?", "auto");
+    $delete_text = _T("Do you really want to delete the state '%s'?", "auto");
     break;
 case 'finitions':
     $obj = new Finition();
     $title = ( $is_new )
-        ? _T("New finition")
+        ? _T("New finition", "auto")
         : ( isset($_GET[Finition::PK])
-            ? _T("Change finition '%s'")
-            : _T("Finitions list") );
-    $field_name = _T("Finition");
-    $add_text = _T("Add new finition");
-    $deletes_text = _T("Do you really want to delete selected finitions?");
-    $delete_text = _T("Do you really want to delete the finition '%s'?");
+            ? _T("Change finition '%s'", "auto")
+            : _T("Finitions list", "auto") );
+    $field_name = _T("Finition", "auto");
+    $add_text = _T("Add new finition", "auto");
+    $deletes_text = _T("Do you really want to delete selected finitions?", "auto");
+    $delete_text = _T("Do you really want to delete the finition '%s'?", "auto");
     break;
 case 'bodies':
     $obj = new Body();
     $title = ( $is_new )
-        ? _T("New body")
+        ? _T("New body", "auto")
         : ( isset($_GET[Body::PK])
-            ? _T("Change body '%s'")
-            : _T("Bodies list") );
-    $field_name = _T("Body");
-    $add_text = _T("Add new body");
-    $deletes_text = _T("Do you really want to delete selected bodies?");
-    $delete_text = _T("Do you really want to delete the body '%s'?");
+            ? _T("Change body '%s'", "auto")
+            : _T("Bodies list", "auto") );
+    $field_name = _T("Body", "auto");
+    $add_text = _T("Add new body", "auto");
+    $deletes_text = _T("Do you really want to delete selected bodies?", "auto");
+    $delete_text = _T("Do you really want to delete the body '%s'?", "auto");
     break;
 case 'transmissions':
     $obj = new Transmission();
     $title = ( $is_new )
-        ? _T("New transmission")
+        ? _T("New transmission", "auto")
         : ( isset($_GET[Transmission::PK])
-            ? _T("Change transmission '%s'")
-            : _T("Transmissions list") );
-    $field_name = _T("Transmission");
-    $add_text = _T("Add new transmission");
-    $deletes_text = _T("Do you really want to delete selected transmissions?");
-    $delete_text = _T("Do you really want to delete the transmission '%s'?");
+            ? _T("Change transmission '%s'", "auto")
+            : _T("Transmissions list", "auto") );
+    $field_name = _T("Transmission", "auto");
+    $add_text = _T("Add new transmission", "auto");
+    $deletes_text = _T("Do you really want to delete selected transmissions?", "auto");
+    $delete_text = _T("Do you really want to delete the transmission '%s'?", "auto");
     break;
 case 'brands':
     $obj = new Brand();
     $title = ( $is_new )
-        ? _T("New brand")
+        ? _T("New brand", "auto")
         : ( isset($_GET[Brand::PK])
-            ? _T("Change brand '%s'")
-            : _T("Brands list"));
-    $show_title = _T("Brand '%s'");
-    $field_name = _T("Brand");
-    $add_text = _T("Add new brand");
-    $deletes_text = _T("Do you really want to delete selected brands?");
-    $delete_text = _T("Do you really want to delete the brand '%s'?");
+            ? _T("Change brand '%s'", "auto")
+            : _T("Brands list", "auto"));
+    $show_title = _T("Brand '%s'", "auto");
+    $field_name = _T("Brand", "auto");
+    $add_text = _T("Add new brand", "auto");
+    $deletes_text = _T("Do you really want to delete selected brands?", "auto");
+    $delete_text = _T("Do you really want to delete the brand '%s'?", "auto");
     $can_show = true;
     /** TODO: get models list */
     //$models = Model::getBrandList();
@@ -172,20 +172,20 @@ if ( get_numeric_form_value('modif', 0) == 1
         $obj->load(get_numeric_form_value($obj->pk, ''));
     } else if ( !$is_new ) {
         $error_detected[]
-            = _T("- No id provided for modifying this record! (internal)");
+            = _T("- No id provided for modifying this record! (internal)", "auto");
     }
 
     $obj->value = get_form_value($obj->field, null);
 
     if ( $obj->value == '' ) {
-        $error_detected[] = _T("- You must provide a value!");
+        $error_detected[] = _T("- You must provide a value!", "auto");
     }
 
     if ( count($error_detected) == 0 ) {
         $res = $obj->store($is_new);
         if ( !$res ) {
             $error_detected[]
-                = _T("- An error occured while saving record. Please try again.");
+                = _T("- An error occured while saving record. Please try again.", "auto");
         } else {
             header('location:object.php?set=' . $set);
         }

@@ -92,12 +92,12 @@ if (isset($_GET['sup']) || isset($_POST['delete'])) {
     }
 }
 
-$title = _T("Cars list");
+$title = _T("Cars list", "auto");
 if ( $mine == 1 ) {
-    $title = _T("My Cars");
+    $title = _T("My Cars", "auto");
 }
 if ( $id_adh !== null ) {
-    $title = _T("Member's cars");
+    $title = _T("Member's cars", "auto");
 }
 $tpl->assign('page_title', $title);
 //Set the path to the current plugin's templates,
@@ -113,7 +113,7 @@ if (isset($_GET['page'])) {
     $afilters->current_page = (int)$_GET['page'];
 }
 
-$title = _T("Vehicles list");
+$title = _T("Vehicles list", "auto");
 $tpl->assign('title', $title);
 if ( $id_adh === null ) {
     $tpl->assign('autos', $auto->getList(true, $mine, null, $afilters));

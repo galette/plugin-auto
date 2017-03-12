@@ -139,20 +139,20 @@ class Auto
     public function __construct(Plugins $plugins, $args = null)
     {
         $this->_propnames = array(
-            'name'                      => _T("name"),
-            'model'                     => _T("model"),
-            'registration'              => _T("registration"),
-            'first_registration_date'   => _T("first registration date"),
-            'first_circulation_date'    => _T("first circulation date"),
-            'mileage'                   => _T("mileage"),
-            'seats'                     => _T("seats"),
-            'horsepower'                => _T("horsepower"),
-            'engine_size'               => _T("engine size"),
-            'color'                     => _T("color"),
-            'state'                     => _T("state"),
-            'finition'                  => _T("finition"),
-            'transmission'              => _T("transmission"),
-            'body'                      => _T("body")
+            'name'                      => _T("name", "auto"),
+            'model'                     => _T("model", "auto"),
+            'registration'              => _T("registration", "auto"),
+            'first_registration_date'   => _T("first registration date", "auto"),
+            'first_circulation_date'    => _T("first circulation date", "auto"),
+            'mileage'                   => _T("mileage", "auto"),
+            'seats'                     => _T("seats", "auto"),
+            'horsepower'                => _T("horsepower", "auto"),
+            'engine_size'               => _T("engine size", "auto"),
+            'color'                     => _T("color", "auto"),
+            'state'                     => _T("state", "auto"),
+            'finition'                  => _T("finition", "auto"),
+            'transmission'              => _T("transmission", "auto"),
+            'body'                      => _T("body", "auto")
         );
 
         $this->_model = new Model();
@@ -257,11 +257,11 @@ class Auto
     public function listFuels()
     {
         $f = array(
-            self::FUEL_PETROL       => _T("Petrol"),
-            self::FUEL_DIESEL       => _T("Diesel"),
-            self::FUEL_GAS          => _T("Gas"),
-            self::FUEL_ELECTRICITY  => _T("Electricity"),
-            self::FUEL_BIO          => _T("Bio")
+            self::FUEL_PETROL       => _T("Petrol", "auto"),
+            self::FUEL_DIESEL       => _T("Diesel", "auto"),
+            self::FUEL_GAS          => _T("Gas", "auto"),
+            self::FUEL_ELECTRICITY  => _T("Electricity", "auto"),
+            self::FUEL_BIO          => _T("Bio", "auto")
         );
         return $f;
     }
@@ -348,7 +348,7 @@ class Auto
 
                     // logging
                     $hist->add(
-                        _T("New car added"),
+                        _T("New car added", "auto"),
                         strtoupper($this->_name)
                     );
                 } else {
@@ -369,7 +369,7 @@ class Auto
                 //were nothing to change
                 if ( $edit->count() > 0 ) {
                     $hist->add(
-                        _T("Car updated"),
+                        _T("Car updated", "auto"),
                         strtoupper($this->_name)
                     );
                 }

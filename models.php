@@ -66,7 +66,7 @@ $set = get_form_value('set', null);
 require_once '_config.inc.php';
 
 $model = new Model();
-$title = ( $is_new ) ? _T("New model") : _T("Change model '%s'");
+$title = ( $is_new ) ? _T("New model", "auto") : _T("Change model '%s'", "auto");
 
 //We have a new or a modified object
 if ( get_numeric_form_value('modif', 0) == 1
@@ -82,27 +82,27 @@ if ( get_numeric_form_value('modif', 0) == 1
         $model->load(get_numeric_form_value(Model::PK, ''));
     } else if ( !$is_new ) {
         $error_detected[]
-            = _T("- No id provided for modifying this record! (internal)");
+            = _T("- No id provided for modifying this record! (internal)", "auto");
     }
 
     $model->model = get_form_value('model', null);
     $brand_id = get_numeric_form_value('brand', null);
 
     if ( $brand_id == -1 ) {
-        $error_detected[] = _T("- You must select a brand!");
+        $error_detected[] = _T("- You must select a brand!", "auto");
     } else {
         $model->brand = $brand_id;
     }
 
     if ( $model->model == '' ) {
-        $error_detected[] = _T("- You must provide a value!");
+        $error_detected[] = _T("- You must provide a value!", "auto");
     }
 
     if ( count($error_detected) == 0 ) {
         $res = $model->store($is_new);
         if ( !$res ) {
             $error_detected[]
-                = _T("- An error occured while saving record. Please try again.");
+                = _T("- An error occured while saving record. Please try again.", "auto");
         } else {
             header('location:models.php');
         }
@@ -155,7 +155,7 @@ if ( isset( $_GET[Model::PK] ) || $is_new ) {
     $tpl->assign('brands', $b->getList());
     $content = $tpl->fetch('model.tpl', AUTO_SMARTY_PREFIX);
 } else {
-    $title = _T("Models list");
+    $title = _T("Models list", "auto");
     $tpl->assign('page_title', $title);
     $tpl->assign('models', $model->getList());
     $content = $tpl->fetch('models_list.tpl', AUTO_SMARTY_PREFIX);

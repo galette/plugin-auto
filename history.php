@@ -73,7 +73,7 @@ $tpl->assign('entries', $history->entries);
 $apk = Auto::PK;
 $tpl->assign(
     'page_title',
-    str_replace('%d', $history->$apk, _T("History of car #%d"))
+    str_replace('%d', $history->$apk, _T("History of car #%d", "auto"))
 );
 $tpl->compile_id = AUTO_SMARTY_PREFIX;
 

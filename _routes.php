@@ -49,7 +49,7 @@ use GaletteAuto\Auto;
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    '/vehicle/photo[/{id:\d+}]',
+    __('/vehicle', 'auto_routes') . __('/photo', 'auto_routes') . '[/{id:\d+}]',
     function ($request, $response, $args) {
         $id = isset($args['id']) ? $args['id'] : null;
         $picture = new GaletteAuto\Picture($this->plugins, $id);
@@ -115,20 +115,22 @@ $this->get(
             $afilters->current_page = (int)$_GET['page'];
         }*/
 
-        $title = _T("Cars list");
+        $title = _T("Cars list", "auto");
         if ($id_adh !== null) {
-            $title = _T("Member's cars");
+            $title = _T("Member's cars", "auto");
         }
 
         $params = [
             'page_title'    => $title,
-            'title'         => _T("Vehicles list"),
+            'title'         => _T("Vehicles list", "auto"),
             'show_mine'     => false
         ];
 
         /*$title = _T("Vehicles list");
         $tpl->assign('title', $title);*/
         if ($id_adh === null) {
+            //FIXME: do not hardcode!
+            $mine = false;
             $params['autos'] = $auto->getList(true, $mine, null, $afilters);
         } else {
             $params['id_adh'] = $id_adh;
@@ -164,7 +166,7 @@ $this->get(
 
         if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
-                _T("Car ID cannot be null calling edit route!")
+                _T("Car ID cannot be null calling edit route!", "auto")
             );
         } elseif ($action === 'add' && isset($args['id'])) {
             return $response
@@ -186,8 +188,8 @@ $this->get(
         }
 
         $title = ($is_new)
-            ? _T("New vehicle")
-            : str_replace('%s', $auto->name, _T("Change vehicle '%s'"));
+            ? _T("New vehicle", "auto")
+            : str_replace('%s', $auto->name, _T("Change vehicle '%s'", "auto"));
 
         $params = [
             'page_title'        => $title,

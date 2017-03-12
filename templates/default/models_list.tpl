@@ -3,8 +3,8 @@
             <thead>
                 <tr>
                     <th class="actions_row"></th>
-                    <th>{_T string="Model"}</th>
-                    <th>{_T string="Brand"}</th>
+                    <th>{_T string="Model" domain="auto"}</th>
+                    <th>{_T string="Brand" domain="auto"}</th>
                     <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
             </thead>
@@ -36,20 +36,20 @@
                     <td><a href="models.php?id_model={$m->id_model}">{$m->brand}</a></td>
                     <td class="center nowrap">
                         <a href="models.php?id_model={$m->id_model}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}
-                <tr><td colspan="4" class="emptylist">{_T string="no record found"}</td></tr>
+                <tr><td colspan="4" class="emptylist">{_T string="no record found" domain="auto"}</td></tr>
 {/foreach}
             </tbody>
         </table>
             <ul class="selection_menu">
 {if $models|@count gt 0}
                 <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js"}');" name="delete" value="{_T string="Delete"}"/></li>
+                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
-                <li>{_T string="Other:"}</li>
+                <li>{_T string="Other:" domain="auto"}</li>
                 <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new model"}"/></li>
             </ul>
         </form>
