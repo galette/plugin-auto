@@ -48,7 +48,7 @@
                 <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:" domain="auto"}</li>
-                <li><a class="button" href="{path_for name="vehicleEdit" data=["action" => "add"]}" id="btnadd">{_T string="Add new vehicle" domain="auto"}</a></li>
+                <li><a class="button" href="{path_for name="vehicleEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new vehicle" domain="auto"}</a></li>
             </ul>
 {if isset($id_adh)}
             <input type="hidden" name="id_adh" value="{$id_adh}"/>

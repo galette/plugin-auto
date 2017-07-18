@@ -66,7 +66,7 @@
     {if $login->isAdmin() || $login->isStaff()}
                 <p class="notform">
                     {* Does car's history should be visible by the actual owner? *}
-                    <a href="history.php?id_car={$car->id}" title="{_T string="Show full car state history" domain="auto"}" id="state_history">{_T string="Car state history" domain="auto"}</a>
+                    <a href="{if $mode == 'new'}#{else}history.php?id_car={$car->id}{/if}" title="{_T string="Show full car state history" domain="auto"}" id="state_history">{_T string="Car state history" domain="auto"}</a>
                     <strong class="fright"><a href="#" id="change_owner" title="{_T string="Change car's owner" domain="auto"}">{_T string="Change" domain="auto"}</a> {_T string="Current owner:" domain="auto"} <span id="current_owner_name">{$car->owner->sfullname}</span></strong>
                 </p>
     {/if}
@@ -292,6 +292,7 @@
                     });
                 }
 
+        {if $mode != 'new'}
                 $('#state_history').click(function(){
                     $.ajax({
                         url: this.href + '&amp;ajax=true',
@@ -316,6 +317,7 @@
                     });
                     $('#history_list').append( res );
                 }
+        {/if}
     {/if}
             });
         </script>
