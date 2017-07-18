@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: en_US\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-15 09:00+0100\n"
-"PO-Revision-Date: 2014-09-14 19:54+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2017-07-18 08:42+0200\n"
+"Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 1.8.12\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../object.php:143
@@ -102,9 +102,9 @@ msgstr "Car's base informations"
 msgid "New state"
 msgstr "New state"
 
-#: ../_routes.php:169
+#: ../lib/GaletteAuto/Controller.php:105
 msgid "Car ID cannot be null calling edit route!"
-msgstr ""
+msgstr "Car ID cannot be null calling edit route!"
 
 #: ../templates/default/vehicles.tpl:69
 msgid "Show full car state history"
@@ -130,7 +130,7 @@ msgstr "Change car's owner"
 msgid "Name"
 msgstr "Name"
 
-#: ../lib/GaletteAuto/Auto.php:144
+#: ../lib/GaletteAuto/Auto.php:151
 msgid "registration"
 msgstr "registration"
 
@@ -138,11 +138,11 @@ msgstr "registration"
 msgid "New body"
 msgstr "New body"
 
-#: ../lib/GaletteAuto/Auto.php:143
+#: ../lib/GaletteAuto/Auto.php:150
 msgid "model"
 msgstr "model"
 
-#: ../lib/GaletteAuto/Auto.php:146
+#: ../lib/GaletteAuto/Auto.php:153
 msgid "first circulation date"
 msgstr "first circulation date"
 
@@ -162,7 +162,7 @@ msgstr "Do you really want to delete selected brands?"
 msgid "- You must provide a value!"
 msgstr "- You must provide a value!"
 
-#: ../lib/GaletteAuto/Auto.php:150
+#: ../lib/GaletteAuto/Auto.php:157
 msgid "engine size"
 msgstr "engine size"
 
@@ -174,7 +174,7 @@ msgstr "Choose a fuel"
 msgid "Change state '%s'"
 msgstr "Change state '%s'"
 
-#: ../lib/GaletteAuto/Auto.php:260
+#: ../lib/GaletteAuto/Auto.php:265
 msgid "Petrol"
 msgstr "Petrol"
 
@@ -221,7 +221,7 @@ msgstr "Name:"
 msgid "My Cars"
 msgstr "My Cars"
 
-#: ../lib/GaletteAuto/Auto.php:154
+#: ../lib/GaletteAuto/Auto.php:161
 msgid "transmission"
 msgstr "transmission"
 
@@ -229,7 +229,7 @@ msgstr "transmission"
 msgid "Select one brand"
 msgstr "Select one brand"
 
-#: ../lib/GaletteAuto/Auto.php:151
+#: ../lib/GaletteAuto/Auto.php:158
 msgid "color"
 msgstr "color"
 
@@ -277,11 +277,11 @@ msgstr "State:"
 msgid "Transmission"
 msgstr "Transmission"
 
-#: ../vehicles_edit.php:85 ../_routes.php:191
+#: ../vehicles_edit.php:85 ../lib/GaletteAuto/Controller.php:129
 msgid "New vehicle"
 msgstr "New vehicle"
 
-#: ../lib/GaletteAuto/Auto.php:264
+#: ../lib/GaletteAuto/Auto.php:269
 msgid "Bio"
 msgstr "Bio"
 
@@ -317,7 +317,7 @@ msgstr "Click to choose this owner for current car"
 msgid "Do you really want to delete the color '%s'?"
 msgstr "Do you really want to delete the color '%s'?"
 
-#: ../lib/GaletteAuto/Auto.php:148
+#: ../lib/GaletteAuto/Auto.php:155
 msgid "seats"
 msgstr "seats"
 
@@ -325,19 +325,19 @@ msgstr "seats"
 msgid "Transmission:"
 msgstr "Transmission:"
 
-#: ../lib/GaletteAuto/Auto.php:145
+#: ../lib/GaletteAuto/Auto.php:152
 msgid "first registration date"
 msgstr "first registration date"
 
-#: ../templates/default/vehicles.tpl:307
+#: ../templates/default/vehicles.tpl:308
 msgid "Car\\'s history"
 msgstr "Car\\'s history"
 
-#: ../lib/GaletteAuto/Auto.php:155
+#: ../lib/GaletteAuto/Auto.php:162
 msgid "body"
 msgstr "body"
 
-#: ../lib/GaletteAuto/Auto.php:351
+#: ../lib/GaletteAuto/Auto.php:356
 msgid "New car added"
 msgstr "New car added"
 
@@ -357,7 +357,7 @@ msgstr "New model"
 msgid "Choose a transmission"
 msgstr "Choose a transmission"
 
-#: ../lib/GaletteAuto/Auto.php:263
+#: ../lib/GaletteAuto/Auto.php:268
 msgid "Electricity"
 msgstr "Electricity"
 
@@ -377,7 +377,7 @@ msgstr "Brands list"
 msgid "Do you really want to delete selected colors?"
 msgstr "Do you really want to delete selected colors?"
 
-#: ../vehicles_list.php:116 ../_routes.php:125
+#: ../vehicles_list.php:116 ../_routes.php:126
 msgid "Vehicles list"
 msgstr "Vehicles list"
 
@@ -393,11 +393,11 @@ msgstr "Color"
 msgid "[M]"
 msgstr "[M]"
 
-#: ../lib/GaletteAuto/Auto.php:142
+#: ../lib/GaletteAuto/Auto.php:149
 msgid "name"
 msgstr "name"
 
-#: ../lib/GaletteAuto/Auto.php:149
+#: ../lib/GaletteAuto/Auto.php:156
 msgid "horsepower"
 msgstr "horsepower"
 
@@ -437,7 +437,7 @@ msgstr "Choose a finition"
 msgid "Change model '%s'"
 msgstr "Change model '%s'"
 
-#: ../lib/GaletteAuto/Auto.php:261
+#: ../lib/GaletteAuto/Auto.php:266
 msgid "Diesel"
 msgstr "Diesel"
 
@@ -469,7 +469,7 @@ msgstr "Mileage:"
 msgid "Do you really want to delete selected transmissions?"
 msgstr "Do you really want to delete selected transmissions?"
 
-#: ../vehicles_list.php:95 ../_routes.php:118 ../templates/default/menu.tpl:12
+#: ../vehicles_list.php:95 ../_routes.php:119 ../templates/default/menu.tpl:12
 msgid "Cars list"
 msgstr "Cars list"
 
@@ -485,11 +485,11 @@ msgstr "Engine size:"
 msgid "Picture:"
 msgstr "Picture:"
 
-#: ../vehicles_list.php:100 ../_routes.php:120
+#: ../vehicles_list.php:100 ../_routes.php:121
 msgid "Member's cars"
 msgstr "Member's cars"
 
-#: ../lib/GaletteAuto/Auto.php:372
+#: ../lib/GaletteAuto/Auto.php:377
 msgid "Car updated"
 msgstr "Car updated"
 
@@ -505,7 +505,7 @@ msgstr "Seats:"
 msgid "Body"
 msgstr "Body"
 
-#: ../lib/GaletteAuto/Auto.php:153
+#: ../lib/GaletteAuto/Auto.php:160
 msgid "finition"
 msgstr "finition"
 
@@ -525,7 +525,7 @@ msgstr "Fuel:"
 msgid "Add new brand"
 msgstr "Add new brand"
 
-#: ../lib/GaletteAuto/Autos.php:140
+#: ../lib/GaletteAuto/Autos.php:155
 msgid "Delete vehicles cards"
 msgstr "Delete vehicles cards"
 
@@ -537,7 +537,7 @@ msgstr "Do you really want to delete the state '%s'?"
 msgid "Current owner:"
 msgstr "Current owner:"
 
-#: ../lib/GaletteAuto/Auto.php:147
+#: ../lib/GaletteAuto/Auto.php:154
 msgid "mileage"
 msgstr "mileage"
 
@@ -549,7 +549,7 @@ msgstr "Add new transmission"
 msgid "First registration date:"
 msgstr "First registration date:"
 
-#: ../lib/GaletteAuto/Auto.php:152
+#: ../lib/GaletteAuto/Auto.php:159
 msgid "state"
 msgstr "state"
 
@@ -597,11 +597,11 @@ msgstr "- No id provided for modifying this record! (internal)"
 msgid "- You must select a brand!"
 msgstr "- You must select a brand!"
 
-#: ../vehicles_edit.php:86 ../_routes.php:192
+#: ../vehicles_edit.php:86 ../lib/GaletteAuto/Controller.php:130
 msgid "Change vehicle '%s'"
 msgstr "Change vehicle '%s'"
 
-#: ../lib/GaletteAuto/Auto.php:262
+#: ../lib/GaletteAuto/Auto.php:267
 msgid "Gas"
 msgstr "Gas"
 
@@ -627,12 +627,8 @@ msgstr "States list"
 #~ msgid "Pages:"
 #~ msgstr "Pages:"
 
-#~ msgid ""
-#~ "No brand is registered yet. You have to %create at least one brand% to "
-#~ "register models."
-#~ msgstr ""
-#~ "No brand is registered yet. You have to %create at least one brand% to "
-#~ "register models."
+#~ msgid "No brand is registered yet. You have to %create at least one brand% to register models."
+#~ msgstr "No brand is registered yet. You have to %create at least one brand% to register models."
 
 #~ msgid "Do you really want to delete selected vehicles?"
 #~ msgstr "Do you really want to delete selected vehicles?"
@@ -694,12 +690,8 @@ msgstr "States list"
 #~ msgid "Do you really want to delete selected models?"
 #~ msgstr "Do you really want to delete selected models?"
 
-#~ msgid ""
-#~ "- Filename or extension is incorrect. Only %s files are allowed. File "
-#~ "name should not contains any of: %t"
-#~ msgstr ""
-#~ "- Filename or extension is incorrect. Only %s files are allowed. File "
-#~ "name should not contains any of: %t"
+#~ msgid "- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t"
+#~ msgstr "- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t"
 
 #~ msgid "Nickname"
 #~ msgstr "Nickname"

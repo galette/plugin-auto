@@ -10,12 +10,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
-#: ../_routes.php:52
+#: ../_routes.php:53 ../_routes.php:162
 msgid "/vehicle"
 msgstr "/vehicule"
 
-#: ../_routes.php:52
+#: ../_routes.php:62
+msgid "/vehicles"
+msgstr "/vehicules"
+
+#: ../_routes.php:167
+msgid "/myvehicle"
+msgstr "/monvehicule"
+
+#: ../_routes.php:53
 msgid "/photo"
 msgstr "/photo"
