@@ -84,7 +84,7 @@ $this->get(
             }
         }
 
-        $auto = new Autos();
+        $auto = new Autos($this->plugins, $this->zdb);
 
         /*if (isset($_GET['sup']) || isset($_POST['delete'])) {
             if (isset($_GET['sup'])) {
@@ -174,7 +174,7 @@ $this->get(
                 ->withHeader('Location', $this->router->pathFor('vehicleEdit', ['action' => 'add']));
         }
 
-        $auto = new Auto($this->plugins);
+        $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
             $auto->load((int)$args['id']);
         } else {

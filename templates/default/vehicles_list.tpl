@@ -33,8 +33,8 @@
                     <td><a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}">{$brand->value}</a></td>
                     <td><a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
-                        <a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the car '%s'?" escape="js" domain="auto"}'.replace('%s', '{$auto->name}'))" href="{if $show_mine eq 1}my_vehicles{else}vehicles_list{/if}.php?sup={$auto->id}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a href="{if $show_mine eq 1}my_{/if}vehicles_edit.php?id_car={$auto->id}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the car '%s'?" escape="js" domain="auto"}'.replace('%s', '{$auto->name}'))" href="{if $show_mine eq 1}my_vehicles{else}vehicles_list{/if}.php?sup={$auto->id}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}

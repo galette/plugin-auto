@@ -164,6 +164,8 @@ class History
     */
     private function _formatEntries()
     {
+        global $zdb;
+
         for ( $i = 0 ; $i < count($this->_entries); $i++ ) {
             //put a formatted date to show
             //strftime output is ISO-8859-1...
@@ -173,7 +175,7 @@ class History
             );
             //associate member to current history entry
             $this->_entries[$i]['owner']
-                = new Adherent((int)$this->_entries[$i]['id_adh']);
+                = new Adherent($zdb, (int)$this->_entries[$i]['id_adh']);
             //associate color
             $this->_entries[$i]['color']
                 = new Color((int)$this->_entries[$i]['id_color']);

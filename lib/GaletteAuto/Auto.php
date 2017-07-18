@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
@@ -58,6 +59,9 @@ class Auto
 {
     const TABLE = 'cars';
     const PK = 'id_car';
+
+    private $plugins;
+    private $zdb;
 
     private $_fields = array(
         'id_car'                        => 'integer',
@@ -136,8 +140,11 @@ class Auto
      * @param Plugins   $plugins Plugins
      * @param ResultSet $args    A resultset row to load
      */
-    public function __construct(Plugins $plugins, $args = null)
+    public function __construct(Plugins $plugins, Db $zdb, $args = null)
     {
+        $this->plugins = $plugins;
+        $this->zdb = $zdb;
+
         $this->_propnames = array(
             'name'                      => _T("name", "auto"),
             'model'                     => _T("model", "auto"),
@@ -164,10 +171,10 @@ class Auto
             'groups'    => false,
             'dues'      => false
         );
-        $this->_owner = new Adherent(null, $deps);
+        $this->_owner = new Adherent($this->zdb, null, $deps);
         $this->_transmission = new Transmission();
         $this->_finition = new Finition();
-        $this->_picture = new Picture($plugins);
+        $this->_picture = new Picture($this->plugins);
         $this->_body = new Body();
         $this->_history = new History();
         if ( is_object($args) ) {
@@ -184,17 +191,15 @@ class Auto
      */
     public function load($id)
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
             $select->where(
                 array(
                     self::PK => $id
                 )
             );
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             $this->_loadFromRS($results->current());
             return true;
         } catch (\Exception $e) {
@@ -231,7 +236,7 @@ class Auto
         $this->_creation_date = $r->car_creation_date;
         $this->_fuel = $r->car_fuel;
         //External objects
-        $this->_picture = new Picture((int)$this->_id);
+        $this->_picture = new Picture($this->plugins, (int)$this->_id);
         $fpk = Finition::PK;
         $this->_finition->load((int)$r->$fpk);
         $cpk = Color::PK;
@@ -276,7 +281,7 @@ class Auto
      */
     public function store($new = false)
     {
-        global $zdb, $hist;
+        global $hist;
 
         if ( $new ) {
             $this->_creation_date = date('Y-m-d');
@@ -333,17 +338,17 @@ class Auto
             }
 
             if ( $new === true ) {
-                $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+                $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
                 $insert->values($values);
-                $add = $zdb->execute($insert);
+                $add = $this->zdb->execute($insert);
 
                 if ( $add->count() > 0) {
-                    if ( $zdb->isPostgres() ) {
-                        $this->_id = $zdb->driver->getLastGeneratedValue(
+                    if ($this->zdb->isPostgres()) {
+                        $this->_id = $this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . AUTO_PREFIX . 'cars_id_seq'
                         );
                     } else {
-                        $this->_id = $zdb->driver->getLastGeneratedValue();
+                        $this->_id = $this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
@@ -358,13 +363,13 @@ class Auto
                     );
                 }
             } else {
-                $update = $zdb->update(AUTO_PREFIX . self::TABLE);
+                $update = $this->zdb->update(AUTO_PREFIX . self::TABLE);
                 $update->set($values)->where(
                     array(
                         self::PK => $this->_id
                     )
                 );
-                $edit = $zdb->execute($update);
+                $edit = $this->zdb->execute($update);
                 //edit == 0 does not mean there were an error, but that there
                 //were nothing to change
                 if ( $edit->count() > 0 ) {
