@@ -47,6 +47,7 @@ $this->register(
         'vehiclesList'      => 'groupmanager',
         'myVehiclesList'    => 'member',
         'vehicleEdit'       => 'member',
+        'ajaxModels'        => 'member',
         'doVehicleEdit'     => 'member',
     ]
 );

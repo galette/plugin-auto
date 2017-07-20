@@ -412,4 +412,28 @@ class Controller
             ->withStatus(301)
             ->withHeader('Location', $route);
     }
+
+    /**
+     * List models from ajax call
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function ajaxModels(Request $request, Response $response, $args = [])
+    {
+        $post = $request->getParsedBody();
+        $list = array();
+        $m = new Model();
+
+        if (isset($post['brand']) && $post['brand'] != '') {
+            $list = $m->getListByBrand((int)$post['brand']);
+        } else {
+            $list = $m->getList();
+        }
+
+        return $response->withJson($list);
+    }
 }

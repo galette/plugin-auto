@@ -210,8 +210,8 @@
                     {* Set the first option *}
                     _modelChoose.appendTo(_models);
                     {* Get the new list for selected brand, and appent it to models on the page *}
-                    $.get(
-                        'models-ajax.php',
+                    $.post(
+                        '{path_for name="ajaxModels"}',
                         { brand: id_brand },
                         function(data){
                             $(data).each(function(i){

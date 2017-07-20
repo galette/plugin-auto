@@ -72,3 +72,8 @@ $this->post(
     __('/vehicle', 'auto_routes') . '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
     Controller::class . ':doAddEditVehicle'
 )->setName('doVehicleEdit')->add($authenticate);
+
+$this->post(
+    __('/ajax', 'routes') . __('/models', 'auto_routes'),
+    Controller::class . ':ajaxModels'
+)->setName('ajaxModels')->add($authenticate);
