@@ -1,7 +1,12 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-        <form action="" method="post" id="modifform" enctype="multipart/form-data">
+        {if $mode eq 'new'}
+            {assign var="action" value={_T string="add" domain="routes"}}
+        {else}
+            {assign var="action" value={_T string="edit" domain="routes"}}
+        {/if}
+        <form action="{path_for name="doVehicleEdit" data=["action" => $action]}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="bigtable">
             <fieldset class="cssform">
                 <legend class="ui-state-active ui-corner-top">{_T string="Car's base informations" domain="auto"}</legend>
@@ -222,7 +227,7 @@
                 $('#change_owner').click(function(){
 
                     $.ajax({
-                        url: '{$galette_base_path}ajax_members.php',
+                        url: '{path_for name="ajaxMembers"}',
                         type: "POST",
                         data: {
                             ajax: true,
@@ -272,7 +277,7 @@
                         var _page = this.href.substring(this.href.indexOf('?')+6);
 
                         $.ajax({
-                            url: '{$galette_base_path}ajax_members.php',
+                            url: '{path_for name="ajaxMembers"}',
                             type: "POST",
                             data: {
                                 ajax: true,

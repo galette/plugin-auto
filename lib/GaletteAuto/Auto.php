@@ -42,6 +42,11 @@ use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
+use GaletteAuto\Color;
+use GaletteAuto\State;
+use GaletteAuto\Finition;
+use GaletteAuto\Body;
+use GaletteAuto\Transmission;
 
 /**
  * Automobile Transmissions class for galette Auto plugin
@@ -63,7 +68,7 @@ class Auto
     private $plugins;
     private $zdb;
 
-    private $_fields = array(
+    private $fields = array(
         'id_car'                        => 'integer',
         'car_name'                      => 'string',
         'car_registration'              => 'string',
@@ -86,30 +91,30 @@ class Auto
         Adherent::PK                    => 'integer'
     );
 
-    private $_id;                       //identifiant
-    private $_registration;             //immatriculation
-    private $_name;                     //petit nom
-    private $_first_registration_date;  //date de première immatriculation
-    private $_first_circulation_date;   //date de prmière mise en service
-    private $_mileage;                  //kilométrage
-    private $_comment;                  //commentaire
-    private $_chassis_number;           //numéro de chassis
-    private $_seats;                    //nombre de places
-    private $_horsepower;               //puissance fiscale
-    private $_engine_size;              //cylindrée
-    private $_creation_date;            //date de création
-    private $_fuel;                     //carburant
+    private $id;                       //identifiant
+    private $registration;             //immatriculation
+    private $name;                     //petit nom
+    private $first_registration_date;  //date de première immatriculation
+    private $first_circulation_date;   //date de prmière mise en service
+    private $mileage;                  //kilométrage
+    private $comment;                  //commentaire
+    private $chassis_number;           //numéro de chassis
+    private $seats;                    //nombre de places
+    private $horsepower;               //puissance fiscale
+    private $engine_size;              //cylindrée
+    private $creation_date;            //date de création
+    private $fuel;                     //carburant
 
     //External objects
-    private $_picture;                  //photo de la voiture
-    private $_finition;                 //niveau de finition
-    private $_color;                    //couleur
-    private $_model;                    //modèle
-    private $_transmission;             //type de transmission
-    private $_body;                     //carrosserie
-    private $_history;                  //historique
-    private $_owner;                    //propriétaire actuel
-    private $_state;                    //état actuel
+    private $picture;                  //photo de la voiture
+    private $finition;                 //niveau de finition
+    private $color;                    //couleur
+    private $model;                    //modèle
+    private $transmission;             //type de transmission
+    private $body;                     //carrosserie
+    private $history;                  //historique
+    private $owner;                    //propriétaire actuel
+    private $state;                    //état actuel
 
     const FUEL_PETROL = 1;
     const FUEL_DIESEL = 2;
@@ -117,13 +122,13 @@ class Auto
     const FUEL_ELECTRICITY = 4;
     const FUEL_BIO = 5;
 
-    private $_propnames;                //textual properties names
+    private $propnames;                //textual properties names
 
     //do we have to fire an history entry?
-    private $_fire_history = false;
+    private $fire_history = false;
 
     //internal properties (not updatable outside the object)
-    private $_internals = array (
+    private $internals = array (
         'id',
         'creation_date',
         'history',
@@ -131,13 +136,17 @@ class Auto
         'propnames',
         'internals',
         'fields',
-        'fire_history'
+        'fire_history',
+        'plugins',
+        'zdb'
     );
+    private $errors = [];
 
     /**
      * Default constructor
      *
      * @param Plugins   $plugins Plugins
+     * @param Db        $zdb     Database instance
      * @param ResultSet $args    A resultset row to load
      */
     public function __construct(Plugins $plugins, Db $zdb, $args = null)
@@ -145,7 +154,7 @@ class Auto
         $this->plugins = $plugins;
         $this->zdb = $zdb;
 
-        $this->_propnames = array(
+        $this->propnames = array(
             'name'                      => _T("name", "auto"),
             'model'                     => _T("model", "auto"),
             'registration'              => _T("registration", "auto"),
@@ -162,23 +171,23 @@ class Auto
             'body'                      => _T("body", "auto")
         );
 
-        $this->_model = new Model();
-        $this->_color = new Color();
-        $this->_state = new State();
+        $this->model = new Model();
+        $this->color = new Color();
+        $this->state = new State();
 
         $deps = array(
             'picture'   => false,
             'groups'    => false,
             'dues'      => false
         );
-        $this->_owner = new Adherent($this->zdb, null, $deps);
-        $this->_transmission = new Transmission();
-        $this->_finition = new Finition();
-        $this->_picture = new Picture($this->plugins);
-        $this->_body = new Body();
-        $this->_history = new History();
-        if ( is_object($args) ) {
-            $this->_loadFromRS($args);
+        $this->owner = new Adherent($this->zdb, null, $deps);
+        $this->transmission = new Transmission();
+        $this->finition = new Finition();
+        $this->picture = new Picture($this->plugins);
+        $this->body = new Body();
+        $this->history = new History();
+        if (is_object($args)) {
+            $this->loadFromRS($args);
         }
     }
 
@@ -200,11 +209,11 @@ class Auto
             );
 
             $results = $this->zdb->execute($select);
-            $this->_loadFromRS($results->current());
+            $this->loadFromRS($results->current());
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load car form id `' . $id .
+                '[' . get_class($this) . '] Cannot load car from id `' . $id .
                 '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
@@ -219,39 +228,39 @@ class Auto
      *
      * @return void
      */
-    private function _loadFromRS($r)
+    private function loadFromRS($r)
     {
         $pk = self::PK;
-        $this->_id = $r->$pk;
-        $this->_registration = $r->car_registration;
-        $this->_name = $r->car_name;
-        $this->_first_registration_date = $r->car_first_registration_date;
-        $this->_first_circulation_date = $r->car_first_circulation_date;
-        $this->_mileage = $r->car_mileage;
-        $this->_comment = $r->car_comment;
-        $this->_chassis_number = $r->car_chassis_number;
-        $this->_seats = $r->car_seats;
-        $this->_horsepower = $r->car_horsepower;
-        $this->_engine_size = $r->car_engine_size;
-        $this->_creation_date = $r->car_creation_date;
-        $this->_fuel = $r->car_fuel;
+        $this->id = $r->$pk;
+        $this->registration = $r->car_registration;
+        $this->name = $r->car_name;
+        $this->first_registration_date = $r->car_first_registration_date;
+        $this->first_circulation_date = $r->car_first_circulation_date;
+        $this->mileage = $r->car_mileage;
+        $this->comment = $r->car_comment;
+        $this->chassis_number = $r->car_chassis_number;
+        $this->seats = $r->car_seats;
+        $this->horsepower = $r->car_horsepower;
+        $this->engine_size = $r->car_engine_size;
+        $this->creation_date = $r->car_creation_date;
+        $this->fuel = $r->car_fuel;
         //External objects
-        $this->_picture = new Picture($this->plugins, (int)$this->_id);
+        $this->picture = new Picture($this->plugins, (int)$this->id);
         $fpk = Finition::PK;
-        $this->_finition->load((int)$r->$fpk);
+        $this->finition->load((int)$r->$fpk);
         $cpk = Color::PK;
-        $this->_color->load((int)$r->$cpk);
+        $this->color->load((int)$r->$cpk);
         $mpk = Model::PK;
-        $this->_model->load((int)$r->$mpk);
+        $this->model->load((int)$r->$mpk);
         $tpk = Transmission::PK;
-        $this->_transmission->load((int)$r->$tpk);
+        $this->transmission->load((int)$r->$tpk);
         $bpk = Body::PK;
-        $this->_body->load((int)$r->$bpk);
+        $this->body->load((int)$r->$bpk);
         $opk = Adherent::PK;
-        $this->_owner->load((int)$r->$opk);
+        $this->owner->load((int)$r->$opk);
         $spk = State::PK;
-        $this->_state->load((int)$r->$spk);
-        $this->_history->load((int)$this->_id);
+        $this->state->load((int)$r->$spk);
+        $this->history->load((int)$this->id);
     }
 
     /**
@@ -275,7 +284,7 @@ class Auto
      * Stores the vehicle in the database
      *
      * @param boolean $new true if it's a new record, false to update on
-     *                       that already exists. Defaults to false
+     *                     that already exists. Defaults to false
      *
      * @return boolean
      */
@@ -283,81 +292,81 @@ class Auto
     {
         global $hist;
 
-        if ( $new ) {
-            $this->_creation_date = date('Y-m-d');
+        if ($new) {
+            $this->creation_date = date('Y-m-d');
         }
 
         try {
             $values = array();
 
-            foreach ( $this->_fields as $k=>$v ) {
-                switch ( $k ) {
-                case self::PK:
-                    break;
-                case Color::PK:
-                    $values[$k] = $this->_color->id;
-                    break;
-                case Body::PK:
-                    $values[$k] = $this->_body->id;
-                    break;
-                case State::PK:
-                    $values[$k] = $this->_state->id;
-                    break;
-                case Transmission::PK:
-                    $values[$k] = $this->_transmission->id;
-                    break;
-                case Finition::PK:
-                    $values[$k] = $this->_finition->id;
-                    break;
-                case Model::PK:
-                    $values[$k] = $this->_model->id;
-                    break;
-                case Adherent::PK:
-                    $values[$k] = $this->_owner->id;
-                    break;
-                default:
-                    $propName = substr($k, 3, strlen($k));
-                    switch($v){
-                    case 'string':
-                    case 'date':
-                        $values[$k] = $this->$propName;
+            foreach ($this->fields as $k => $v) {
+                switch ($k) {
+                    case self::PK:
                         break;
-                    case 'integer':
-                        $values[$k] = (
-                            ($this->$propName != 0 && $this->$propName != '')
-                                ? $this->$propName
-                                : new Expression('NULL')
-                        );
+                    case Color::PK:
+                        $values[$k] = $this->color->id;
+                        break;
+                    case Body::PK:
+                        $values[$k] = $this->body->id;
+                        break;
+                    case State::PK:
+                        $values[$k] = $this->state->id;
+                        break;
+                    case Transmission::PK:
+                        $values[$k] = $this->transmission->id;
+                        break;
+                    case Finition::PK:
+                        $values[$k] = $this->finition->id;
+                        break;
+                    case Model::PK:
+                        $values[$k] = $this->model->id;
+                        break;
+                    case Adherent::PK:
+                        $values[$k] = $this->owner->id;
                         break;
                     default:
-                        $values[$k] = $this->$propName;
+                        $propName = substr($k, 4, strlen($k));
+                        switch ($v) {
+                            case 'string':
+                            case 'date':
+                                $values[$k] = $this->$propName;
+                                break;
+                            case 'integer':
+                                $values[$k] = (
+                                    ($this->$propName != 0 && $this->$propName != '')
+                                        ? $this->$propName
+                                        : new Expression('NULL')
+                                );
+                                break;
+                            default:
+                                $values[$k] = $this->$propName;
+                                break;
+                        }
                         break;
-                    }
-                    break;
                 }
             }
 
-            if ( $new === true ) {
+            if ($new === true) {
                 $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
                 $insert->values($values);
                 $add = $this->zdb->execute($insert);
 
-                if ( $add->count() > 0) {
+                if ($add->count() > 0) {
                     if ($this->zdb->isPostgres()) {
-                        $this->_id = $this->zdb->driver->getLastGeneratedValue(
+                        $this->id = $this->zdb->driver->getLastGeneratedValue(
                             PREFIX_DB . AUTO_PREFIX . 'cars_id_seq'
                         );
                     } else {
-                        $this->_id = $this->zdb->driver->getLastGeneratedValue();
+                        $this->id = $this->zdb->driver->getLastGeneratedValue();
                     }
 
                     // logging
                     $hist->add(
                         _T("New car added", "auto"),
-                        strtoupper($this->_name)
+                        strtoupper($this->name)
                     );
                 } else {
-                    $hist->add('Fail to add new car.');
+                    $hist->add(_T("Fail to add new car.", "auto"));
                     throw new Exception(
                         'An error occured inserting new car!'
                     );
@@ -366,46 +375,46 @@ class Auto
                 $update = $this->zdb->update(AUTO_PREFIX . self::TABLE);
                 $update->set($values)->where(
                     array(
-                        self::PK => $this->_id
+                        self::PK => $this->id
                     )
                 );
                 $edit = $this->zdb->execute($update);
                 //edit == 0 does not mean there were an error, but that there
                 //were nothing to change
-                if ( $edit->count() > 0 ) {
+                if ($edit->count() > 0) {
                     $hist->add(
                         _T("Car updated", "auto"),
-                        strtoupper($this->_name)
+                        strtoupper($this->name)
                     );
                 }
             }
 
             //if all goes well, we check to add an entry into car's history
-            $h = $this->_history->getLatest();
-            if ( $h !== false ) {
-                foreach ( $h as $k=>$v ) {
-                    if ( $k != 'history_date' && $this->$k != $v ) {
+            $h = $this->history->getLatest();
+            if ($h !== false) {
+                foreach ($h as $k => $v) {
+                    if ($k != 'history_date' && $this->$k != $v) {
                         //if one has been modified, we flag to add an entry event
-                        $this->_fire_history = true;
+                        $this->fire_history = true;
                         break;
                     }
                 }
-            } else if ( !$new ) {
+            } elseif (!$new) {
                 //no history entry... yet! Let's create one.
-                $this->_fire_history = true;
+                $this->fire_history = true;
             }
 
-            if ( $this->_fire_history ) {
+            if ($this->fire_history) {
                 $h_props = array();
-                foreach ( $this->_history->fields as $prop ) {
-                    if ( $prop != 'history_date' ) {
+                foreach ($this->history->fields as $prop) {
+                    if ($prop != 'history_date') {
                         $h_props[$prop] = $this->$prop;
                     } else {
                         $h_props[$prop] = date('Y-m-d H:i:s');
                     }
                 }
-                $this->_history->register($h_props);
-                $this->_fire_history = false;
+                $this->history->register($h_props);
+                $this->fire_history = false;
             }
 
             return true;
@@ -423,19 +432,19 @@ class Auto
     /**
      * List object's properties
      *
-     * @param boolean $restrict true to exclude $this->_internals from returned
-     *               result, false otherwise. Default to false
+     * @param boolean $restrict true to exclude $this->internals from returned
+     *                          result, false otherwise. Default to false
      *
      * @return array
      */
-    private function _getAllProperties($restrict = false)
+    private function getAllProperties($restrict = false)
     {
         $result = array();
-        foreach ( $this as $key => $value ) {
-            if ( !$restrict
-                || ($restrict && !in_array(substr($key, 1), $this->_internals))
+        foreach ($this as $key => $value) {
+            if (!$restrict
+                || ($restrict && !in_array($key, $this->internals))
             ) {
-                $result[] = substr($key, 1);
+                $result[] = $key;
             }
         }
         return $result;
@@ -443,13 +452,13 @@ class Auto
 
     /**
      * Get object's properties. List only properties that can be modified
-     *   externally (ie. not in $this->_internals)
+     *   externally (ie. not in $this->internals)
      *
      * @return array
      */
     public function getProperties()
     {
-        return $this->_getAllProperties(true);
+        return $this->getAllProperties(true);
     }
 
     /**
@@ -459,7 +468,7 @@ class Auto
      */
     public function hasPicture()
     {
-        return $this->_picture->hasPicture();
+        return $this->picture->hasPicture();
     }
 
     /**
@@ -471,7 +480,7 @@ class Auto
      */
     public function appropriateCar($login)
     {
-        $this->_owner->load($login->id);
+        $this->owner->load($login->id);
     }
 
     /**
@@ -483,8 +492,8 @@ class Auto
      */
     public function getPropName($name)
     {
-        if ( isset($this->_propnames[$name]) ) {
-            return $this->_propnames[$name];
+        if (isset($this->propnames[$name])) {
+            return $this->propnames[$name];
         } else {
             throw new UnexpectedValueException('Unknown propname ' . $name);
         }
@@ -500,62 +509,60 @@ class Auto
     public function __get($name)
     {
         $forbidden = array();
-        if ( !in_array($name, $forbidden) ) {
-            switch ( $name ) {
-            case self::PK:
-                return $this->_id;
-                break;
-            case Adherent::PK:
-                return $this->_owner->id;
-                break;
-            case Color::PK:
-                return $this->_color->id;
-                break;
-            case State::PK:
-                return $this->_state->id;
-                break;
-            case 'car_registration':
-                return $this->_registration;
-                break;
-            case 'first_registration_date':
-            case 'first_circulation_date':
-            case 'creation_date':
-                $rname = '_' . $name;
-                if ( $this->$rname != '' ) {
-                    try {
-                        $d = new \DateTime($this->$rname);
-                        return $d->format(_T("Y-m-d"));
-                    } catch (\Exception $e) {
-                        //oops, we've got a bad date :/
+        if (!in_array($name, $forbidden)) {
+            switch ($name) {
+                case self::PK:
+                    return $this->id;
+                    break;
+                case Adherent::PK:
+                    return $this->owner->id;
+                    break;
+                case Color::PK:
+                    return $this->color->id;
+                    break;
+                case State::PK:
+                    return $this->state->id;
+                    break;
+                case 'car_registration':
+                    return $this->registration;
+                    break;
+                case 'first_registration_date':
+                case 'first_circulation_date':
+                case 'creation_date':
+                    if ($this->$name != '') {
+                        try {
+                            $d = new \DateTime($this->$name);
+                            return $d->format(_T("Y-m-d"));
+                        } catch (\Exception $e) {
+                            //oops, we've got a bad date :/
+                            Analog::log(
+                                'Bad date (' . $his->$name . ') | ' .
+                                $e->getMessage(),
+                                Analog::WARNING
+                            );
+                            return $this->$name;
+                        }
+                    }
+                    break;
+
+                    break;
+                case Color::PK:
+                    return $this->color->id;
+                    break;
+                case 'picture':
+                    return $this->picture;
+                    break;
+                default:
+                    if (isset($this->$name)) {
+                        return $this->$name;
+                    } elseif (!property_exists($this, $name)) {
                         Analog::log(
-                            'Bad date (' . $his->$rname . ') | ' .
-                            $e->getMessage(),
+                            '[' . get_class($this) . '] Property ' . $name .
+                            ' does not exists',
                             Analog::WARNING
                         );
-                        return $this->$rname;
                     }
-                }
-                break;
-
-                break;
-            case Color::PK:
-                return $this->_colors->id;
-                break;
-            case 'picture':
-                return $this->_picture;
-                break;
-            default:
-                $rname = '_' . $name;
-                if ( isset($this->$rname) ) {
-                    return $this->$rname;
-                } else {
-                    Analog::log(
-                        '[' . get_class($this) . '] Property ' . $rname .
-                        ' is not set',
-                        Analog::WARNING
-                    );
-                }
-                break;
+                    break;
             }
         } else {
             Analog::log(
@@ -576,33 +583,32 @@ class Auto
      */
     public function __set($name, $value)
     {
-        if ( !in_array($name, $this->_internals) ) {
-            switch($name){
-            case 'finition':
-                $this->_finition->load((int)$value);
-                break;
-            case 'color':
-                $this->_color->load((int)$value);
-                break;
-            case 'model':
-                $this->_model->load((int)$value);
-                break;
-            case 'transmission':
-                $this->_transmission->load((int)$value);
-                break;
-            case 'body':
-                $this->_body->load((int)$value);
-                break;
-            case 'owner':
-                $this->_owner->load((int)$value);
-                break;
-            case 'state':
-                $this->_state->load((int)$value);
-                break;
-            default:
-                $rname = '_' . $name;
-                $this->$rname = $value;
-                break;
+        if (!in_array($name, $this->internals)) {
+            switch ($name) {
+                case 'finition':
+                    $this->finition->load((int)$value);
+                    break;
+                case 'color':
+                    $this->color->load((int)$value);
+                    break;
+                case 'model':
+                    $this->model->load((int)$value);
+                    break;
+                case 'transmission':
+                    $this->transmission->load((int)$value);
+                    break;
+                case 'body':
+                    $this->body->load((int)$value);
+                    break;
+                case 'owner':
+                    $this->owner->load((int)$value);
+                    break;
+                case 'state':
+                    $this->state->load((int)$value);
+                    break;
+                default:
+                    $this->$name = $value;
+                    break;
             }
         } else {
             Analog::log(
@@ -612,5 +618,194 @@ class Auto
             );
             return false;
         }
+    }
+
+    /**
+     * Check posted values validity
+     *
+     * @param array $post All values to check, basically the $_POST array
+     *                    after sending the form
+     *
+     * @return boolean
+     */
+    public function check($post)
+    {
+        /** TODO: make required fields dynamic, as in main Galette */
+        $required = array(
+            'name'                      => 1,
+            'model'                     => 1,
+            'first_registration_date'   => 1,
+            'first_circulation_date'    => 1,
+            'color'                     => 1,
+            'state'                     => 1,
+            'registration'              => 1,
+            'body'                      => 1,
+            'transmission'              => 1,
+            'finition'                  => 1,
+            'fuel'                      => 1
+        );
+
+        //check for required fields, and correct values
+        foreach ($this->getProperties(true) as $prop) {
+            $value = isset($post[$prop]) ? $post[$prop] : null;
+
+            if (($value == '' || $value == null) && in_array($prop, array_keys($required))) {
+                $this->errors[] = str_replace(
+                    '%s',
+                    '<a href="#' . $prop . '">' . $this->getPropName($prop) . '</a>',
+                    _T("- Mandatory field %field empty.")
+                );
+                continue;
+            }
+
+            switch ($prop) {
+                //string values, no check
+                case 'name':
+                case 'comment':
+                //string values with special check?
+                case 'chassis_number':
+                case 'registration':
+                    $this->$prop = $value;
+                    break;
+                //dates
+                case 'first_registration_date':
+                case 'first_circulation_date':
+                    if (preg_match("@^([0-9]{2})/([0-9]{2})/([0-9]{4})$@", $value, $array_jours)) {
+                        if (checkdate($array_jours[2], $array_jours[1], $array_jours[3])) {
+                            $value = $array_jours[3].'-'.$array_jours[2].'-'.$array_jours[1];
+                            $this->$prop = $value;
+                        } else {
+                            $this->errors[] = str_replace(
+                                '%s',
+                                $this->getPropName($prop),
+                                _T("- Non valid date for %s!")
+                            );
+                        }
+                    } else {
+                        $this->errors[] = str_replace(
+                            '%s',
+                            $this->getPropName($prop),
+                            _T("- Wrong date format for %s (dd/mm/yyyy)!")
+                        );
+                    }
+                    break;
+                //numeric values
+                case 'mileage':
+                case 'seats':
+                case 'horsepower':
+                case 'engine_size':
+                    if (is_int((int)$value)) {
+                        $this->$prop = $value;
+                    } elseif ($value != '') {
+                        $this->errors[] = str_replace(
+                            '%s',
+                            '<a href="#' . $prop . '">' .$this->getPropName($prop) . '</a>',
+                            _T("- You must enter a positive integer for %s")
+                        );
+                    }
+                    break;
+                //constants
+                case 'fuel':
+                    if (in_array($value, array_keys($this->listFuels()))) {
+                        $this->fuel = $value;
+                    } else {
+                        $this->errors[] = _T("- You must choose a fuel in the list");
+                    }
+                    break;
+                //external objects
+                case 'finition':
+                case 'color':
+                case 'model':
+                case 'transmission':
+                case 'body':
+                case 'state':
+                    if ($value > 0) {
+                        $this->$prop->load($value);
+                    } else {
+                        $class = 'GaletteAuto\\' . ucwords($prop);
+                        $name = $class::FIELD;
+                        $this->errors[] = str_replace(
+                            '%s',
+                            '<a href="#' . $prop . '">' . $this->getPropName($name) . '</a>',
+                            _T("- You must choose a %s in the list")
+                        );
+                    }
+                    break;
+                case 'owner':
+                    $value = (int)$value;
+                    if ($value > 0) {
+                        $this->$prop->load($value);
+                    } else {
+                        $this->errors[] = _T("- you must attach an owner to this car");
+                    }
+                    break;
+                default:
+                    /** TODO: what's the default? */
+                    Analog::log(
+                        'Trying to edit an Auto property that is not handled in the source code! (prop is: ' .
+                        $prop . ')',
+                        Analog::ERROR
+                    );
+                    break;
+            }//switch
+        }//foreach
+
+        // picture upload
+        if (isset($_FILES['photo'])) {
+            if ($_FILES['photo']['tmp_name'] != '') {
+                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                    $res = $this->picture->store($_FILES['photo']);
+                    if ($res < 0) {
+                        switch ($res) {
+                            case Picture::INVALID_FILE:
+                                $patterns = array('|%s|', '|%t|');
+                                $replacements = array(
+                                    $this->picture->getAllowedExts(),
+                                    htmlentities($this->picture->getBadChars())
+                                );
+                                $this->errors[] = preg_replace(
+                                    $patterns,
+                                    $replacements,
+                                    _T("- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t")
+                                );
+                                break;
+                            case Picture::FILE_TOO_BIG:
+                                $this->errors[] = preg_replace(
+                                    '|%d|',
+                                    Picture::MAX_FILE_SIZE,
+                                    _T("File is too big. Maximum allowed size is %d")
+                                );
+                                break;
+                            case Picture::MIME_NOT_ALLOWED:
+                                /** FIXME: should be more descriptive */
+                                $this->errors[] = _T("Mime-Type not allowed");
+                                break;
+                            case Picture::SQL_ERROR:
+                            case Picture::SQL_BLOB_ERROR:
+                                $this->errors[] = _T("An SQL error has occured.");
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        //delete photo
+        if (isset($post['del_photo'])) {
+            if (!$this->picture->delete()) {
+                $this->errors[]
+                    = _T("An error occured while trying to delete car's photo");
+            }
+        }
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }

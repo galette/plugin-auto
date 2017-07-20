@@ -144,8 +144,12 @@ class History
             )->order('history_date DESC')->limit(1);
 
             $results = $zdb->execute($select);
-            $result = $results->current();
-            return $result;
+            if ($results->count() > 0) {
+                $result = $results->current();
+                return $result;
+            } else {
+                return false;
+            }
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) .

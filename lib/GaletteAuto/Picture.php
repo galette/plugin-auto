@@ -101,7 +101,6 @@ class Picture extends GalettePicture
     */
     protected function getDefaultPicture()
     {
-        global $plugins;
         $this->file_path = realpath(
             $this->plugins->getTemplatesPathFromName('Galette Auto') .
             '/../../webroot/images/car.png'

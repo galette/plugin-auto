@@ -43,8 +43,10 @@ $this->register(
     '0.9',                                  //Galette compatible version
     'auto',                                 //routing name
     '2016-09-18',                           //Release date
-    [
-        'vehiclesList'  => 'groupmanager',  //Permissions needed
-        'vehicleEdit'   => 'groupmanager'
+    [ //routes permissions
+        'vehiclesList'      => 'groupmanager',
+        'myVehiclesList'    => 'member',
+        'vehicleEdit'       => 'member',
+        'doVehicleEdit'     => 'member',
     ]
 );
