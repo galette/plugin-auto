@@ -77,3 +77,45 @@ $this->post(
     __('/ajax', 'routes') . __('/models', 'auto_routes'),
     Controller::class . ':ajaxModels'
 )->setName('ajaxModels')->add($authenticate);
+
+$this->get(
+    __('/vehicle', 'auto_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    Controller::class . ':removeVehicle'
+)->setName('removeVehicle')->add($authenticate);
+
+$this->get(
+    __('/vehicles', 'auto_routes') . __('/remove', 'routes'),
+    Controller::class . ':removeVehicles'
+)->setName('removeVehicles')->add($authenticate);
+
+$this->post(
+    __('/vehicle', 'auto_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    Controller::class . ':doRemoveVehicle'
+)->setName('doRemoveVehicle')->add($authenticate);
+
+//Batch actions on vehicles list
+$this->post(
+    __('/vehicles', 'auto_routes') . __('/batch', 'routes'),
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+
+        if (isset($post['vehicle_sel'])) {
+            $this->session->filter_vehicles = $post['vehicle_sel'];
+
+            if (isset($post['delete'])) {
+                return $response
+                    ->withStatus(301)
+                    ->withHeader('Location', $this->router->pathFor('removeVehicles'));
+            }
+        } else {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No vehicle was selected, please check at least one name.", "auto")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('myVehiclesList'));
+        }
+    }
+)->setName('batch-vehicleslist')->add($authenticate);

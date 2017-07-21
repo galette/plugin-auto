@@ -49,5 +49,9 @@ $this->register(
         'vehicleEdit'       => 'member',
         'ajaxModels'        => 'member',
         'doVehicleEdit'     => 'member',
+        'batch-vehicleslist'=> 'member',
+        'removeVehicle'     => 'member',
+        'removeVehicles'    => 'member',
+        'doRemoveVehicle'   => 'member'
     ]
 );

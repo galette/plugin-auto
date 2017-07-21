@@ -1,7 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-        <form action="" method="post" id="listform">
+        <form action="{path_for name="batch-vehicleslist"}" method="post" id="listform">
         <table class="listing">
             <thead>
                 <tr>
@@ -35,7 +35,7 @@
                     <td><a href="{$edit_link}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
                         <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the car '%s'?" escape="js" domain="auto"}'.replace('%s', '{$auto->name}'))" href="{if $show_mine eq 1}my_vehicles{else}vehicles_list{/if}.php?sup={$auto->id}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a href="{path_for name="removeVehicle" data=["id" => $auto->id]}" class="delete"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%vehiclename: remove from database" pattern="/%vehiclename/" replace=$auto->name domain="auto"}"/></a>
                     </td>
                 </tr>
 {foreachelse}
@@ -45,8 +45,8 @@
         </table>
             <ul class="selection_menu">
 {if $autos|@count gt 0}
-                <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected vehicles?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
+                <li>{_T string="For the selection:"}</li>
+                <li><input type="submit" id="delete" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:" domain="auto"}</li>
                 <li><a class="button" href="{path_for name="vehicleEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new vehicle" domain="auto"}</a></li>
@@ -60,6 +60,7 @@
 {block name="javascripts"}
     {if $autos|@count gt 0}
         <script type="text/javascript">
+        {include file="js_removal.tpl"}
         //<![CDATA[
         var _is_checked = true;
         var _bind_check = function(){

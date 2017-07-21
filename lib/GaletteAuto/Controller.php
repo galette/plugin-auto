@@ -218,7 +218,8 @@ class Controller
         $params = [
             'page_title'    => $title,
             'title'         => _T("Vehicles list", "auto"),
-            'show_mine'     => isset($args['mine'])
+            'show_mine'     => isset($args['mine']),
+            'require_dialog'=> true
         ];
 
         if ($id_adh === null) {
@@ -266,8 +267,8 @@ class Controller
 
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         if (!$is_new) {
-            $this->checkAclsFor((int)$args['id_adh']);
             $auto->load((int)$args['id']);
+            $this->checkAclsFor($auto->owner->id);
         } else {
             if (isset($args['id_adh'])
                 && ($this->container->login->isAdmin() || $this->container->login->isStaff())
@@ -369,7 +370,8 @@ class Controller
                 $error_detected[] = _T("- An error has occured while saving car in the database.");
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
-                if (!$this->checkAclsFor($args['id_adh'], false) || $this->container->login->id == $args['id_adh']) {
+                $id_adh = $auto->owner->id;
+                if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
                     $route = $this->container->router->pathFor('myVehiclesList');
                 }
             }
@@ -435,5 +437,171 @@ class Controller
         }
 
         return $response->withJson($list);
+    }
+
+    /**
+     * Remove vehicle confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeVehicle(Request $request, Response $response, $args = [])
+    {
+        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto->load((int)$args['id']);
+        $id_adh = $auto->owner->id;
+        $this->checkAclsFor($id_adh);
+
+        $route = $this->container->router->pathFor('vehiclesList');
+        if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
+            $route = $this->container->router->pathFor('myVehiclesList');
+        }
+
+        $data = [
+            'id'            => $args['id'],
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Vehicle", "auto"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove vehicle %1$s', 'auto'),
+                    $auto->name
+                ),
+                'form_url'      => $this->container->router->pathFor('doRemoveVehicle', ['id' => $auto->id]),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Remove vehicles confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeVehicles(Request $request, Response $response, $args = [])
+    {
+        $route = $this->container->router->pathFor('vehiclesList');
+        $ids = $this->container->session->filter_vehicles;
+
+        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto->load((int)$ids[0]);
+        $id_adh = $auto->owner->id;
+        $this->checkAclsFor($id_adh);
+
+        $id_adh = $auto->owner->id;
+
+        if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
+            $route = $this->container->router->pathFor('myVehiclesList');
+        }
+
+        $data = [
+            'id'            => $ids,
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Vehicle", "auto"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => _T('Remove vehicles', 'auto'),
+                'message'       => str_replace(
+                    '%count',
+                    count($data['id']),
+                    _T('You are about to remove %count vehicles.', 'auto')
+                ),
+                'form_url'      => $this->container->router->pathFor('doRemoveVehicle'),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Do remove vehicles
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function doRemoveVehicle(Request $request, Response $response, $args = [])
+    {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            if (!is_array($post['id'])) {
+                $ids = (array)$post['id'];
+            } else {
+                $ids = $post['id'];
+            }
+
+            $autos = new Autos($this->container->plugins, $this->container->zdb);
+            $del = $autos->removeVehicles($ids);
+
+            if ($del !== true) {
+                $error_detected = _T("An error occured trying to remove vehicles :/", "auto");
+
+                $this->container->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = str_replace(
+                    '%count',
+                    count($ids),
+                    _T("%count vehicles have been successfully deleted.", "auto")
+                );
+
+                $this->container->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
     }
 }
