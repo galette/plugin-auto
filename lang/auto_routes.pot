@@ -1,16 +1,23 @@
-#: ../_routes.php:53 ../_routes.php:162
+#: ../_routes.php:62
+msgid "/my-vehicles"
+msgstr ""
+
+#: ../_routes.php:48 ../_routes.php:67
+#: ../_routes.php:72 ../_routes.php:82
+#: ../_routes.php:92
 msgid "/vehicle"
 msgstr ""
 
-#: ../_routes.php:62
+#: ../_routes.php:77
+msgid "/models"
+msgstr ""
+
+#: ../_routes.php:57 ../_routes.php:87
+#: ../_routes.php:98
 msgid "/vehicles"
 msgstr ""
 
-#: ../_routes.php:167
-msgid "/myvehicle"
-msgstr ""
-
-#: ../_routes.php:53
+#: ../_routes.php:48
 msgid "/photo"
 msgstr ""
 

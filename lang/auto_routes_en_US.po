@@ -11,18 +11,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: ../_routes.php:53 ../_routes.php:162
+#: ../_routes.php:62
+msgid "/my-vehicles"
+msgstr "/my-vehicles"
+
+#: ../_routes.php:48 ../_routes.php:67 ../_routes.php:72 ../_routes.php:82
+#: ../_routes.php:92
 msgid "/vehicle"
 msgstr "/vehicle"
 
-#: ../_routes.php:62
+#: ../_routes.php:77
+msgid "/models"
+msgstr "/models"
+
+#: ../_routes.php:57 ../_routes.php:87 ../_routes.php:98
 msgid "/vehicles"
 msgstr "/vehicles"
 
-#: ../_routes.php:167
-msgid "/myvehicle"
-msgstr "/myvehicle"
-
-#: ../_routes.php:53
+#: ../_routes.php:48
 msgid "/photo"
 msgstr "/photo"

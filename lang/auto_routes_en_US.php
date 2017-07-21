@@ -1,17 +1,20 @@
 <?php
-// This file was automatically generated on Tue Jul 18 06:43:13 2017 (GMT)
+// This file was automatically generated on Fri Jul 21 07:29:19 2017 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
-// ../_routes.php:167 
-$lang['auto_routes']['/myvehicle'] = '/myvehicle';
+// ../_routes.php:62 
+$lang['auto_routes']['/my-vehicles'] = '/my-vehicles';
 
-// ../_routes.php:53 
+// ../_routes.php:48 
 $lang['auto_routes']['/photo'] = '/photo';
 
-// ../_routes.php:53 ../_routes.php:162 
+// ../_routes.php:48 ../_routes.php:67 ../_routes.php:72 ../_routes.php:82 ../_routes.php:92 
 $lang['auto_routes']['/vehicle'] = '/vehicle';
 
-// ../_routes.php:62 
+// ../_routes.php:77 
+$lang['auto_routes']['/models'] = '/models';
+
+// ../_routes.php:57 ../_routes.php:87 ../_routes.php:98 
 $lang['auto_routes']['/vehicles'] = '/vehicles';
 

@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-20 16:44+0100\n"
-"PO-Revision-Date: 2017-07-18 08:43+0200\n"
+"PO-Revision-Date: 2017-07-21 09:29+0200\n"
 "Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: fr\n"
@@ -38,7 +38,7 @@ msgstr "Immatriculation"
 msgid "- Mandatory field %s empty."
 msgstr "- Champ obligatoire %s non renseigné."
 
-#: ../templates/default/vehicles.tpl:74
+#: ../templates/default/vehicles.tpl:79
 msgid "Color:"
 msgstr "Couleur&nbsp;:"
 
@@ -54,7 +54,7 @@ msgstr "Voulez vous vraiment effacer la marque « %s »&nbsp;?"
 msgid "New transmission"
 msgstr "Nouvelle transmission"
 
-#: ../templates/default/vehicles.tpl:15
+#: ../templates/default/vehicles.tpl:20
 msgid "Model:"
 msgstr "Modèle :"
 
@@ -72,18 +72,26 @@ msgid "Colors list"
 msgstr "Liste des couleurs"
 
 #: ../templates/default/object_list.tpl:53
-#: ../templates/default/vehicles_list.tpl:50
+#: ../templates/default/vehicles_list.tpl:51
 #: ../templates/default/models_list.tpl:52
 msgid "Other:"
 msgstr "Autres&nbsp;:"
 
-#: ../object.php:105
-msgid "Change finition '%s'"
-msgstr "Modifier la finition « %s »"
+#: ../lib/GaletteAuto/Controller.php:114
+msgid "You do not have enought privileges."
+msgstr "Vous n'avez pas assez de privilèges."
 
 #: ../vehicles_edit.php:253
 msgid "- You must choose a %s in the list"
 msgstr "- Vous devez sélectionner un %s dans la liste"
+
+#: ../lib/GaletteAuto/Auto.php:166
+msgid "engine size"
+msgstr "cylindrée"
+
+#: ../lib/GaletteAuto/Controller.php:213
+msgid "My cars"
+msgstr "Mes véhicules"
 
 #: ../object.php:122
 msgid "Do you really want to delete the body '%s'?"
@@ -94,7 +102,7 @@ msgstr "Voulez vous vraiment effacer la carrosserie « %s »&nbsp;?"
 msgid "no record found"
 msgstr "aucun enregistrement trouvé"
 
-#: ../templates/default/vehicles.tpl:76
+#: ../templates/default/vehicles.tpl:81
 msgid "Choose a color"
 msgstr "Choisissez une couleur"
 
@@ -102,37 +110,46 @@ msgstr "Choisissez une couleur"
 msgid "Finition"
 msgstr "Finition"
 
-#: ../templates/default/vehicles.tpl:7
+#: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
 msgstr "Informations de base de la voiture"
+
+#: ../_routes.php:113
+msgid "No vehicle was selected, please check at least one name."
+msgstr ""
+"Aucun véhicule n'a été sélectionné, veuillez en sélectionner au moins un."
 
 #: ../object.php:91
 msgid "New state"
 msgstr "Nouvel état"
 
-#: ../lib/GaletteAuto/Controller.php:105
+#: ../lib/GaletteAuto/Controller.php:260
 msgid "Car ID cannot be null calling edit route!"
 msgstr ""
 "L'identifiant du véhicule ne peut être vide lors de l'appel à la route de "
 "modification !"
 
-#: ../templates/default/vehicles.tpl:69
+#: ../templates/default/vehicles.tpl:74
 msgid "Show full car state history"
 msgstr "Afficher l'historique complet des états la voiture"
 
-#: ../templates/default/vehicles.tpl:85
+#: ../templates/default/vehicles.tpl:103
+msgid "Car's technical informations"
+msgstr "Informations techniques de la voiture"
+
+#: ../templates/default/vehicles.tpl:90
 msgid "Choose a state"
 msgstr "Choisissez un état"
 
-#: ../templates/default/vehicles_list.tpl:51
+#: ../templates/default/vehicles_list.tpl:52
 msgid "Add new vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
-#: ../templates/default/vehicles.tpl:35
+#: ../templates/default/vehicles.tpl:40
 msgid "First circulation date:"
 msgstr "Date de première mise en circulation&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:70
+#: ../templates/default/vehicles.tpl:75
 msgid "Change car's owner"
 msgstr "Modifier le propriétaire de la voiture"
 
@@ -140,7 +157,7 @@ msgstr "Modifier le propriétaire de la voiture"
 msgid "Name"
 msgstr "Nom"
 
-#: ../lib/GaletteAuto/Auto.php:151
+#: ../lib/GaletteAuto/Auto.php:160
 msgid "registration"
 msgstr "immatriculation"
 
@@ -148,11 +165,11 @@ msgstr "immatriculation"
 msgid "New body"
 msgstr "Nouvelle carrosserie"
 
-#: ../lib/GaletteAuto/Auto.php:150
+#: ../lib/GaletteAuto/Auto.php:159
 msgid "model"
 msgstr "modèle"
 
-#: ../lib/GaletteAuto/Auto.php:153
+#: ../lib/GaletteAuto/Auto.php:162
 msgid "first circulation date"
 msgstr "date de première mise en circulation"
 
@@ -160,23 +177,19 @@ msgstr "date de première mise en circulation"
 msgid "Do you want to create a new one?"
 msgstr "Souhaitez vous en créer un nouveau&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:18
+#: ../templates/default/vehicles.tpl:23
 msgid "Choose a brand"
 msgstr "Choisissez une marque"
-
-#: ../object.php:146
-msgid "Do you really want to delete selected brands?"
-msgstr "Voulez vous vraiment effacer les marques sélectionnées&nbsp;?"
 
 #: ../object.php:181 ../models.php:98
 msgid "- You must provide a value!"
 msgstr "- Vous devez fournir une valeur&nbsp;!"
 
-#: ../lib/GaletteAuto/Auto.php:157
-msgid "engine size"
-msgstr "cylindrée"
+#: ../object.php:146
+msgid "Do you really want to delete selected brands?"
+msgstr "Voulez vous vraiment effacer les marques sélectionnées&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:142
+#: ../templates/default/vehicles.tpl:147
 msgid "Choose a fuel"
 msgstr "Choisissez un carburant"
 
@@ -184,7 +197,11 @@ msgstr "Choisissez un carburant"
 msgid "Change state '%s'"
 msgstr "Modifier l'état « %s »"
 
-#: ../lib/GaletteAuto/Auto.php:265
+#: ../lib/GaletteAuto/Controller.php:473 ../lib/GaletteAuto/Controller.php:522
+msgid "Vehicle"
+msgstr "Véhicule"
+
+#: ../lib/GaletteAuto/Auto.php:274
 msgid "Petrol"
 msgstr "Essence"
 
@@ -207,7 +224,7 @@ msgstr ""
 "- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
 "nouveau."
 
-#: ../templates/default/vehicles.tpl:69
+#: ../templates/default/vehicles.tpl:74
 msgid "Car state history"
 msgstr "Historique de l'état de la voiture"
 
@@ -217,7 +234,7 @@ msgstr "[admin]"
 
 #: ../object.php:144 ../templates/default/vehicles_list.tpl:10
 #: ../templates/default/models_list.tpl:7 ../templates/default/model.tpl:10
-#: ../templates/default/vehicles.tpl:15
+#: ../templates/default/vehicles.tpl:20
 msgid "Brand"
 msgstr "Marque"
 
@@ -225,15 +242,15 @@ msgstr "Marque"
 msgid "Do you really want to delete selected finitions?"
 msgstr "Voulez vous vraiment effacer les finitions sélectionnées&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:10
+#: ../templates/default/vehicles.tpl:15
 msgid "Name:"
 msgstr "Nom&nbsp;:"
 
-#: ../vehicles_list.php:97 ../templates/default/menu.tpl:16
+#: ../vehicles_list.php:97 ../templates/default/menu.tpl:18
 msgid "My Cars"
 msgstr "Mes voitures"
 
-#: ../lib/GaletteAuto/Auto.php:161
+#: ../lib/GaletteAuto/Auto.php:170
 msgid "transmission"
 msgstr "transmission"
 
@@ -241,11 +258,11 @@ msgstr "transmission"
 msgid "Select one brand"
 msgstr "Sélectionnez une marque"
 
-#: ../lib/GaletteAuto/Auto.php:158
+#: ../lib/GaletteAuto/Auto.php:167
 msgid "color"
 msgstr "couleur"
 
-#: ../templates/default/vehicles_list.tpl:41
+#: ../templates/default/vehicles_list.tpl:42
 msgid "No car has been registered yet for your account."
 msgstr "Aucun véhicule n'a été enregistré pour votre compte."
 
@@ -257,19 +274,19 @@ msgstr "Ajouter un nouvel état"
 msgid "Change body '%s'"
 msgstr "Modifier la carrosserie « %s »"
 
-#: ../templates/default/vehicles.tpl:101
+#: ../templates/default/vehicles.tpl:106
 msgid "Body:"
 msgstr "Carrosseries&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:119
+#: ../templates/default/vehicles.tpl:124
 msgid "Finition:"
 msgstr "Finition&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:70
+#: ../templates/default/vehicles.tpl:75
 msgid "Change"
 msgstr "Changer"
 
-#: ../templates/default/vehicles_list.tpl:41
+#: ../templates/default/vehicles_list.tpl:42
 msgid "No car in the database"
 msgstr "Aucun véhicule dans la base"
 
@@ -277,11 +294,11 @@ msgstr "Aucun véhicule dans la base"
 msgid "- You must choose a fuel in the list"
 msgstr "- Vous devez choisir un carburant dans la liste"
 
-#: ../templates/default/vehicles.tpl:98
-msgid "Car's technical informations"
-msgstr "Informations techniques de la voiture"
+#: ../lib/GaletteAuto/Controller.php:528
+msgid "You are about to remove %count vehicles."
+msgstr "Vous êtes sur le point de supprimer %count véhicules."
 
-#: ../templates/default/vehicles.tpl:83
+#: ../templates/default/vehicles.tpl:88
 msgid "State:"
 msgstr "État&nbsp;:"
 
@@ -289,11 +306,11 @@ msgstr "État&nbsp;:"
 msgid "Transmission"
 msgstr "Transmission"
 
-#: ../vehicles_edit.php:85 ../lib/GaletteAuto/Controller.php:129
+#: ../vehicles_edit.php:85 ../lib/GaletteAuto/Controller.php:288
 msgid "New vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
-#: ../lib/GaletteAuto/Auto.php:269
+#: ../lib/GaletteAuto/Auto.php:278
 msgid "Bio"
 msgstr "Bio-carburant"
 
@@ -305,7 +322,7 @@ msgstr "Véhicules de l'adhérent"
 msgid "New color"
 msgstr "Nouvelle couleur"
 
-#: ../templates/default/vehicles.tpl:132
+#: ../templates/default/vehicles.tpl:137
 msgid "Horsepower:"
 msgstr "Puissance&nbsp;:"
 
@@ -313,7 +330,7 @@ msgstr "Puissance&nbsp;:"
 msgid "Do you really want to delete selected bodies?"
 msgstr "Voulez vous vraiment effacer les carrosseries sélectionnées&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:103
+#: ../templates/default/vehicles.tpl:108
 msgid "Choose a body"
 msgstr "Choisissez une carrosserie"
 
@@ -321,7 +338,7 @@ msgstr "Choisissez une carrosserie"
 msgid "Finitions list"
 msgstr "Liste des finitions"
 
-#: ../templates/default/vehicles.tpl:267
+#: ../templates/default/vehicles.tpl:272
 msgid "Click to choose this owner for current car"
 msgstr "Cliquez pour attribuer la voiture courantez à ce propriétaire"
 
@@ -329,32 +346,36 @@ msgstr "Cliquez pour attribuer la voiture courantez à ce propriétaire"
 msgid "Do you really want to delete the color '%s'?"
 msgstr "Voulez vous vraiment effacer la couleur « %s »&nbsp;?"
 
-#: ../lib/GaletteAuto/Auto.php:155
+#: ../lib/GaletteAuto/Auto.php:164
 msgid "seats"
 msgstr "places"
 
-#: ../templates/default/vehicles.tpl:110
+#: ../lib/GaletteAuto/Auto.php:369
+msgid "Fail to add new car."
+msgstr "Échec de l'ajout d'un nouveau véhicule."
+
+#: ../templates/default/vehicles.tpl:115
 msgid "Transmission:"
 msgstr "Transmission&nbsp;:"
 
-#: ../lib/GaletteAuto/Auto.php:152
+#: ../lib/GaletteAuto/Auto.php:161
 msgid "first registration date"
 msgstr "date de première immatriculation"
 
 # Chaîne Javascript !
-#: ../templates/default/vehicles.tpl:308
+#: ../templates/default/vehicles.tpl:313
 msgid "Car\\'s history"
 msgstr "Historique de la voiture"
 
-#: ../lib/GaletteAuto/Auto.php:162
+#: ../lib/GaletteAuto/Auto.php:171
 msgid "body"
 msgstr "carrosserie"
 
-#: ../lib/GaletteAuto/Auto.php:356
+#: ../lib/GaletteAuto/Auto.php:365
 msgid "New car added"
 msgstr "Nouveau véhicule ajouté"
 
-#: ../templates/default/vehicles.tpl:154
+#: ../templates/default/vehicles.tpl:159
 msgid "Comment:"
 msgstr "Commentaire&nbsp;:"
 
@@ -366,11 +387,11 @@ msgstr "Liste des transmissions"
 msgid "New model"
 msgstr "Nouveau modèle"
 
-#: ../templates/default/vehicles.tpl:112
+#: ../templates/default/vehicles.tpl:117
 msgid "Choose a transmission"
 msgstr "Choisissez une transmission"
 
-#: ../lib/GaletteAuto/Auto.php:268
+#: ../lib/GaletteAuto/Auto.php:277
 msgid "Electricity"
 msgstr "Électricité"
 
@@ -386,11 +407,19 @@ msgstr "Modifier la marque « %s »"
 msgid "Brands list"
 msgstr "Liste des marques"
 
+#: ../lib/GaletteAuto/Controller.php:583
+msgid "%count vehicles have been successfully deleted."
+msgstr "%count véhicules ont été supprimés avec succès."
+
 #: ../object.php:85
 msgid "Do you really want to delete selected colors?"
 msgstr "Voulez vous vraiment effacer les couleurs sélectionnées&nbsp;?"
 
-#: ../vehicles_list.php:116 ../_routes.php:126
+#: ../object.php:105
+msgid "Change finition '%s'"
+msgstr "Modifier la finition « %s »"
+
+#: ../vehicles_list.php:116 ../lib/GaletteAuto/Controller.php:220
 msgid "Vehicles list"
 msgstr "Liste des véhicules"
 
@@ -406,11 +435,11 @@ msgstr "Couleur"
 msgid "[M]"
 msgstr "[H]"
 
-#: ../lib/GaletteAuto/Auto.php:149
+#: ../lib/GaletteAuto/Auto.php:158
 msgid "name"
 msgstr "nom"
 
-#: ../lib/GaletteAuto/Auto.php:156
+#: ../lib/GaletteAuto/Auto.php:165
 msgid "horsepower"
 msgstr "puissance"
 
@@ -422,11 +451,15 @@ msgstr "- Vous devez entrer un entier positif pour %s"
 msgid "Models list"
 msgstr "Liste des modèles"
 
-#: ../templates/default/vehicles.tpl:245
+#: ../lib/GaletteAuto/Controller.php:524
+msgid "Remove vehicles"
+msgstr "Suppression véhicules"
+
+#: ../templates/default/vehicles.tpl:250
 msgid "Owners"
 msgstr "Propriétaires"
 
-#: ../templates/default/vehicles.tpl:24
+#: ../templates/default/vehicles.tpl:29
 msgid "Choose a model"
 msgstr "Choisissez un modèle"
 
@@ -434,7 +467,7 @@ msgstr "Choisissez un modèle"
 msgid "Add new body"
 msgstr "Ajouter une nouvelle carrosserie"
 
-#: ../templates/default/vehicles.tpl:92
+#: ../templates/default/vehicles.tpl:97
 msgid "Registration:"
 msgstr "Immatriculation&nbsp;:"
 
@@ -442,7 +475,11 @@ msgstr "Immatriculation&nbsp;:"
 msgid "Cars"
 msgstr "Voitures"
 
-#: ../templates/default/vehicles.tpl:121
+#: ../lib/GaletteAuto/Controller.php:476
+msgid "Remove vehicle %1$s"
+msgstr "Supprimer le véhicule %1$s"
+
+#: ../templates/default/vehicles.tpl:126
 msgid "Choose a finition"
 msgstr "Choisissez une finition"
 
@@ -450,7 +487,7 @@ msgstr "Choisissez une finition"
 msgid "Change model '%s'"
 msgstr "Modifier le modèle « %s »"
 
-#: ../lib/GaletteAuto/Auto.php:266
+#: ../lib/GaletteAuto/Auto.php:275
 msgid "Diesel"
 msgstr "Diesel"
 
@@ -471,11 +508,11 @@ msgstr "État"
 msgid "History of car #%d"
 msgstr "Historique de la voiture #%d"
 
-#: ../templates/default/vehicles.tpl:128
+#: ../templates/default/vehicles.tpl:133
 msgid "Chassis number:"
 msgstr "Numéro de chassis&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:39
+#: ../templates/default/vehicles.tpl:44
 msgid "Mileage:"
 msgstr "Kilométrage&nbsp;:"
 
@@ -483,35 +520,36 @@ msgstr "Kilométrage&nbsp;:"
 msgid "Do you really want to delete selected transmissions?"
 msgstr "Voulez vous vraiment effacer les transmissions sélectionnées&nbsp;?"
 
-#: ../vehicles_list.php:95 ../_routes.php:119 ../templates/default/menu.tpl:12
+#: ../vehicles_list.php:95 ../lib/GaletteAuto/Controller.php:211
+#: ../templates/default/menu.tpl:14
 msgid "Cars list"
 msgstr "Liste des voitures"
 
-#: ../templates/default/vehicles.tpl:55
+#: ../templates/default/vehicles.tpl:60
 msgid "Delete image"
 msgstr "Supprimer l'image"
 
-#: ../templates/default/vehicles.tpl:136
+#: ../templates/default/vehicles.tpl:141
 msgid "Engine size:"
 msgstr "Cylindrée&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:52
+#: ../templates/default/vehicles.tpl:57
 msgid "Picture:"
 msgstr "Image&nbsp;:"
 
-#: ../vehicles_list.php:100 ../_routes.php:121
+#: ../vehicles_list.php:100 ../lib/GaletteAuto/Controller.php:215
 msgid "Member's cars"
 msgstr "Véhicules de l'adhérent"
 
-#: ../lib/GaletteAuto/Auto.php:377
+#: ../lib/GaletteAuto/Auto.php:386
 msgid "Car updated"
 msgstr "Véhicule mis à jour"
 
-#: ../templates/default/vehicles.tpl:50 ../templates/default/vehicles.tpl:53
+#: ../templates/default/vehicles.tpl:55 ../templates/default/vehicles.tpl:58
 msgid "Car's photo"
 msgstr "Photo de la voiture"
 
-#: ../templates/default/vehicles.tpl:43
+#: ../templates/default/vehicles.tpl:48
 msgid "Seats:"
 msgstr "Places&nbsp;:"
 
@@ -519,19 +557,19 @@ msgstr "Places&nbsp;:"
 msgid "Body"
 msgstr "Carrosseries"
 
-#: ../lib/GaletteAuto/Auto.php:160
-msgid "finition"
-msgstr "finition"
+#: ../object.php:134
+msgid "Do you really want to delete the transmission '%s'?"
+msgstr "Voulez vous vraiment effacer la transmission « %s »&nbsp;?"
 
 #: ../templates/default/history.tpl:9
 msgid "Owner"
 msgstr "Propriétaire"
 
-#: ../templates/default/vehicles.tpl:151
+#: ../templates/default/vehicles.tpl:156
 msgid "Comment"
 msgstr "Commentaire"
 
-#: ../templates/default/vehicles.tpl:140
+#: ../templates/default/vehicles.tpl:145
 msgid "Fuel:"
 msgstr "Carburant&nbsp;:"
 
@@ -547,11 +585,11 @@ msgstr "Supprimer les fiches des véhicules"
 msgid "Do you really want to delete the state '%s'?"
 msgstr "Voulez vous vraiment effacer l'état « %s »&nbsp;?"
 
-#: ../templates/default/vehicles.tpl:70
+#: ../templates/default/vehicles.tpl:75
 msgid "Current owner:"
 msgstr "Propriétaire actuel&nbsp;:"
 
-#: ../lib/GaletteAuto/Auto.php:154
+#: ../lib/GaletteAuto/Auto.php:163
 msgid "mileage"
 msgstr "kilométrage"
 
@@ -559,11 +597,11 @@ msgstr "kilométrage"
 msgid "Add new transmission"
 msgstr "Ajouter une transmission"
 
-#: ../templates/default/vehicles.tpl:31
+#: ../templates/default/vehicles.tpl:36
 msgid "First registration date:"
 msgstr "Date de première immatriculation&nbsp;:"
 
-#: ../lib/GaletteAuto/Auto.php:159
+#: ../lib/GaletteAuto/Auto.php:168
 msgid "state"
 msgstr "état"
 
@@ -571,7 +609,7 @@ msgstr "état"
 msgid "[W]"
 msgstr "[F]"
 
-#: ../templates/default/vehicles.tpl:63
+#: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
 msgstr "Informations sur l'état courant de la voiture"
 
@@ -583,9 +621,9 @@ msgstr "- vous devez rattacher un propriétaire à cette voiture"
 msgid "no history entries"
 msgstr "aucune entrée dans l'historique"
 
-#: ../object.php:134
-msgid "Do you really want to delete the transmission '%s'?"
-msgstr "Voulez vous vraiment effacer la transmission « %s »&nbsp;?"
+#: ../lib/GaletteAuto/Auto.php:169
+msgid "finition"
+msgstr "finition"
 
 #: ../vehicles_edit.php:169
 msgid "- Non valid date for %s!"
@@ -612,17 +650,25 @@ msgstr ""
 msgid "- You must select a brand!"
 msgstr "- Vous devez sélectionner une marque&nbsp;!"
 
-#: ../vehicles_edit.php:86 ../lib/GaletteAuto/Controller.php:130
-msgid "Change vehicle '%s'"
-msgstr "Modifier le véhicule « %s »"
+#: ../lib/GaletteAuto/Controller.php:372
+msgid "Vehicle has been saved!"
+msgstr "Le véhicule a été enregistré !"
 
-#: ../lib/GaletteAuto/Auto.php:267
+#: ../lib/GaletteAuto/Auto.php:276
 msgid "Gas"
 msgstr "Gaz"
+
+#: ../vehicles_edit.php:86 ../lib/GaletteAuto/Controller.php:289
+msgid "Change vehicle '%s'"
+msgstr "Modifier le véhicule « %s »"
 
 #: ../object.php:94 ../templates/default/menu.tpl:6
 msgid "States list"
 msgstr "Liste des états"
+
+#: ../lib/GaletteAuto/Controller.php:573
+msgid "An error occured trying to remove vehicles :/"
+msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
 
 #~ msgid "Actions"
 #~ msgstr "Actions"
@@ -1671,9 +1717,6 @@ msgstr "Liste des états"
 #~ msgid "Enter connection data for the existing database."
 #~ msgstr "Veuillez entrer les paramÃ¨tres de connexion Ã  la base existante."
 
-#~ msgid "You are about to send an e-mail to"
-#~ msgstr "Vous Ãªtes sur le point d'envoyer un courriel Ã "
-
 #~ msgid ""
 #~ "The tables have not been totally created, it may be a permission problem."
 #~ msgstr ""
@@ -1986,9 +2029,6 @@ msgstr "Liste des états"
 #~ msgstr ""
 #~ "Un problÃ¨me est survenu dans l'envoi du courriel pour le compte&nbsp;:"
 
-#~ msgid "Your account has been successfully created."
-#~ msgstr "Votre compte a Ã©tÃ© crÃ©Ã© avec succÃ¨s."
-
 #~ msgid "Show title ?"
 #~ msgstr "Afficher le titre&nbsp;?"
 
@@ -2095,9 +2135,6 @@ msgstr "Liste des états"
 #~ msgstr ""
 #~ "-  La somme de toutes les contributions dÃ©passe le montant de la "
 #~ "transaction."
-
-#~ msgid "No member was selected, please check at least one name."
-#~ msgstr "Veuillez sÃ©lectionner au moins un adhÃ©rent."
 
 #~ msgid "Gift"
 #~ msgstr "Don"
