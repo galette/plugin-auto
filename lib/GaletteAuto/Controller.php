@@ -76,7 +76,7 @@ class Controller
      *
      * @return array
      */
-    private function getModule()
+    protected function getModule()
     {
         $modules = $this->container->plugins->getModules();
         $module = $modules[$this->container->get('Plugin Galette Auto')];
@@ -91,7 +91,7 @@ class Controller
      *
      * @return boolean
      */
-    private function checkAclsFor($id_adh, $redirect = null)
+    protected function checkAclsFor($id_adh, $redirect = null)
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if ($this->container->login->id != $id_adh
@@ -158,18 +158,6 @@ class Controller
             $this->checkAclsFor($args['id']);
         }
 
-        /*if (isset($_POST['donew'])) {
-            if ($mine) {
-                header('location: my_vehicles_edit.php');
-            } else {
-                $location = 'vehicles_edit.php';
-                if (isset($_POST['id_adh'])) {
-                    $location .= '?id_adh=' . $_POST['id_adh'];
-                }
-                header('location: ' . $location);
-            }
-        }*/
-
         $numrows = $this->container->preferences->pref_numrows;
         if (isset($_GET["nbshow"])) {
             if (is_numeric($_GET["nbshow"])) {
@@ -178,20 +166,6 @@ class Controller
         }
 
         $auto = new Autos($this->container->plugins, $this->container->zdb);
-
-        /*if (isset($_GET['sup']) || isset($_POST['delete'])) {
-            if (isset($_GET['sup'])) {
-                $auto->removeVehicles($_GET['sup']);
-            } elseif (isset($_POST['vehicle_sel'])) {
-                $auto->removeVehicles($_POST['vehicle_sel']);
-            }
-        }*/
-
-        /*$title = _T("Cars list");
-        if ($mine == 1) {
-            $title = _T("My Cars");
-        }
-        $tpl->assign('page_title', $title);*/
 
         $module = $this->getModule();
         $smarty = $this->container->view->getSmarty();
@@ -352,7 +326,7 @@ class Controller
                 $auto->load($post[Auto::PK]);
             } else {
                 $error_detected[]
-                    = _T("- No id provided for modifying this record! (internal)");
+                    = _T("- No id provided for modifying this record! (internal)", "auto");
             }
         }
 
@@ -367,7 +341,7 @@ class Controller
         //if no errors were thrown, we can store the car
         if (count($error_detected) == 0) {
             if (!$auto->store($is_new)) {
-                $error_detected[] = _T("- An error has occured while saving car in the database.");
+                $error_detected[] = _T("- An error has occured while saving vehicle in the database.", "auto");
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;

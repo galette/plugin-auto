@@ -630,6 +630,7 @@ class Auto
      */
     public function check($post)
     {
+        $this->errors = [];
         /** TODO: make required fields dynamic, as in main Galette */
         $required = array(
             'name'                      => 1,
@@ -797,6 +798,8 @@ class Auto
                     = _T("An error occured while trying to delete car's photo");
             }
         }
+
+        return count($this->errors) === 0;
     }
 
     /**

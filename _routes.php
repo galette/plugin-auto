@@ -7,6 +7,7 @@ use GaletteAuto\Autos;
 use GaletteAuto\AutosList;
 use GaletteAuto\Auto;
 use GaletteAuto\Controller;
+use GaletteAuto\PropertiesController;
 
 /**
  * Auto routes
@@ -119,3 +120,18 @@ $this->post(
         }
     }
 )->setName('batch-vehicleslist')->add($authenticate);
+
+$this->get(
+    __('/models', 'auto_routes'),
+    PropertiesController::class . ':modelsList'
+)->setName('modelsList')->add($authenticate);
+
+$this->get(
+    __('/models', 'auto_routes'). '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    PropertiesController::class . ':modelEdit'
+)->setName('modelEdit')->add($authenticate);
+
+$this->post(
+    __('/models', 'auto_routes'). '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    PropertiesController::class . ':doModelEdit'
+)->setName('doModelEdit')->add($authenticate);

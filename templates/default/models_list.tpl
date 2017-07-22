@@ -1,3 +1,6 @@
+{extends file="page.tpl"}
+
+{block name="content"}
         <form action="" method="post" id="listform">
         <table class="listing">
             <thead>
@@ -28,15 +31,16 @@
             </tfoot>
             <tbody>
 {foreach from=$models item=m name=models_list}
+    {assign var='edit_link' value={path_for name="modelEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $m->id_model]}}
                 <tr class="{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
                         <input type="checkbox" name="_sel[]" value="{$m->id_model}"/>
                     </td>
-                    <td><a href="models.php?id_model={$m->id_model}">{$m->model}</a></td>
-                    <td><a href="models.php?id_model={$m->id_model}">{$m->brand}</a></td>
+                    <td><a href="{$edit_link}">{$m->model}</a></td>
+                    <td><a href="{$edit_link}">{$m->brand}</a></td>
                     <td class="center nowrap">
-                        <a href="models.php?id_model={$m->id_model}"><img src="{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
 {foreachelse}
@@ -50,31 +54,35 @@
                 <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
 {/if}
                 <li>{_T string="Other:" domain="auto"}</li>
-                <li><input type="submit" id="btnadd" name="donew" value="{_T string="Add new model"}"/></li>
+                <li><a class="button" href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new model" domain="auto"}</a></li>
             </ul>
         </form>
-{if $models|@count gt 0}
+{/block}
+
+{block name="javascripts"}
+    {if $models|@count gt 0}
         <script type="text/javascript">
         var _is_checked = true;
-        var _bind_check = function(){ldelim}
-            $('#checkall').click(function(){ldelim}
-                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
+        var _bind_check = function(){
+            $('#checkall').click(function(){
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){
                     this.checked = _is_checked;
-                {rdelim});
+                });
                 _is_checked = !_is_checked;
                 return false;
-            {rdelim});
-            $('#checkinvert').click(function(){ldelim}
-                $('table.listing :checkbox[name="_sel[]"]').each(function(){ldelim}
+            });
+            $('#checkinvert').click(function(){
+                $('table.listing :checkbox[name="_sel[]"]').each(function(){
                     this.checked = !$(this).is(':checked');
-                {rdelim});
+                });
                 return false;
-            {rdelim});
-        {rdelim}
+            });
+        }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
-        $(function(){ldelim}
+        $(function(){
             $('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span></td></tr>');
             _bind_check();
-        {rdelim});
+        });
         </script>
-{/if}
+    {/if}
+{/block}
