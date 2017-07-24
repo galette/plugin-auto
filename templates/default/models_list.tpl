@@ -14,7 +14,7 @@
             <tfoot>
                 <tr>
                     <td colspan="4" class="right" id="table_footer">
-{if $models|@count gt 0}
+    {if $models|@count gt 0}
                         {_T string="Pages:"}
                         <span class="pagelink">
                         {* {section name="pageLoop" start=1 loop=$nb_pages+1}
@@ -25,38 +25,44 @@
                             {/if}
                         {/section} *}
                         </span>
-{/if}
+    {/if}
                     </td>
                 </tr>
             </tfoot>
             <tbody>
-{foreach from=$models item=m name=models_list}
-    {assign var='edit_link' value={path_for name="modelEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $m->id_model]}}
+    {foreach from=$models item=m name=models_list}
+        {assign var='edit_link' value={path_for name="modelEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $m->id]}}
                 <tr class="{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
-                        <input type="checkbox" name="_sel[]" value="{$m->id_model}"/>
+                        <input type="checkbox" name="_sel[]" value="{$m->id}"/>
                     </td>
                     <td><a href="{$edit_link}">{$m->model}</a></td>
-                    <td><a href="{$edit_link}">{$m->brand}</a></td>
+                    <td><a href="{$edit_link}">{$m->obrand->value}</a></td>
                     <td class="center nowrap">
                         <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id_model}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
-{foreachelse}
+    {foreachelse}
                 <tr><td colspan="4" class="emptylist">{_T string="no record found" domain="auto"}</td></tr>
-{/foreach}
+    {/foreach}
             </tbody>
         </table>
-            <ul class="selection_menu">
-{if $models|@count gt 0}
-                <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
-{/if}
-                <li>{_T string="Other:" domain="auto"}</li>
-                <li><a class="button" href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new model" domain="auto"}</a></li>
-            </ul>
-        </form>
+    {if $models|@count gt 0}
+        <div class="center cright">
+            {_T string="Pages:"}<br/>
+            <ul class="pages">{$pagination}</ul>
+        </div>
+    {/if}
+        <ul class="selection_menu">
+    {if $models|@count gt 0}
+            <li>{_T string="Selection:"}</li>
+            <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
+    {/if}
+            <li>{_T string="Other:" domain="auto"}</li>
+            <li><a class="button" href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new model" domain="auto"}</a></li>
+        </ul>
+    </form>
 {/block}
 
 {block name="javascripts"}

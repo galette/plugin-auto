@@ -122,7 +122,7 @@ $this->post(
 )->setName('batch-vehicleslist')->add($authenticate);
 
 $this->get(
-    __('/models', 'auto_routes'),
+    __('/models', 'auto_routes') . '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
     PropertiesController::class . ':modelsList'
 )->setName('modelsList')->add($authenticate);
 

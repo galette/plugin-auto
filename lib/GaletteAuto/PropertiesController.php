@@ -45,6 +45,7 @@ use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
+use GaletteAuto\Repository\Models;
 
 /**
  * Galette Auto plugin controller for properties (brands, models, colors, ...)
@@ -78,7 +79,38 @@ class PropertiesController extends Controller
             }
         }
 
-        $model = new Model($this->container->zdb);
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        if (isset($this->container->session->filter_automodels)) {
+            $mfilters = $this->container->session->filter_automodels;
+        } else {
+            $mfilters = new ModelsList();
+        }
+
+        if ($option !== null) {
+            switch ($option) {
+                case __('page', 'routes'):
+                    $mfilters->current_page = (int)$value;
+                    break;
+                case __('order', 'routes'):
+                    $mfilters->orderby = $value;
+                    break;
+            }
+        }
+
+        $models = new Models(
+            $this->container->zdb,
+            $this->container->preferences,
+            $this->container->login,
+            $mfilters
+        );
 
         $module = $this->getModule();
         $smarty = $this->container->view->getSmarty();
@@ -88,16 +120,15 @@ class PropertiesController extends Controller
         );
         $smarty->compile_id = AUTO_SMARTY_PREFIX;
 
-        $mfilters = new ModelsList();
+        //assign pagination variables to the template and add pagination links
+        $mfilters->setSmartyPagination($this->container->router, $smarty, false);
+        $this->container->session->filter_automodels = $mfilters;
 
         $params = [
             'page_title'    => _T("Models list", "auto"),
-            'models'        => $model->getList($mfilters),
+            'models'        => $models->getList(),
             'require_dialog'=> true
         ];
-
-        //assign pagination variables to the template and add pagination links
-        //$afilters->setSmartyPagination($this->container->router, $this->container->view->getSmarty());
 
         // display page
         $this->container->view->render(

@@ -69,15 +69,20 @@ class Model
     /**
     * Default constructor
     *
-    * @param Db      $zdb Database instance
-    * @param integer $id  model's id to load. Defaults to null
+    * @param Db    $zdb Database instance
+    * @param mixed $args model's id to load or ResultSet. Defaults to null
     */
-    public function __construct(Db $zdb, $id = null)
+    public function __construct(Db $zdb, $args = null)
     {
         $this->zdb = $zdb;
         $this->brand = new Brand();
-        if (is_int($id)) {
-            $this->load($id);
+
+        if ($args == null || is_int($args)) {
+            if (is_int($args) && $args > 0) {
+                $this->load($args);
+            }
+        } elseif (is_object($args)) {
+            $this->loadFromRS($args);
         }
     }
 
@@ -88,6 +93,8 @@ class Model
      * @param integer    $brandId Optionnal brand we want models for
      *
      * @return ResultSet
+     *
+     * @deprecated @see GaletteAuto\Repository\Models::getList()
      */
     public function getList(ModelsList $filters, $brandId = null)
     {
@@ -157,10 +164,7 @@ class Model
 
             $results = $this->zdb->execute($select);
             $result = $results->current();
-            $this->id = $result->id_model;
-            $this->model = $result->model;
-            $id_brand = Brand::PK;
-            $this->brand->load((int)$result->$id_brand);
+            $this->loadFromRS($result);
             return true;
         } catch (\Exception $e) {
             Analog::log(
@@ -170,6 +174,21 @@ class Model
             );
             return false;
         }
+    }
+
+    /**
+     * Populate object from a resultset row
+     *
+     * @param ResultSet $r the resultset row
+     *
+     * @return void
+     */
+    private function loadFromRS($r)
+    {
+        $this->id = $r->id_model;
+        $this->model = $r->model;
+        $id_brand = Brand::PK;
+        $this->brand->load((int)$r->$id_brand);
     }
 
     /**

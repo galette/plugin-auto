@@ -56,6 +56,8 @@ use Galette\Core\Pagination;
 
 class ModelsList extends Pagination
 {
+    const ORDERBY_MODEL = 0;
+    const ORDERBY_BRAND = 1;
 
     /**
      * Returns the field we want to default set order to
