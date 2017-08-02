@@ -28,7 +28,7 @@
                     <select name="model" id="model" required>
                         <option value="-1">{_T string="Choose a model" domain="auto"}</option>
     {foreach from=$models item=model}
-                        <option value="{$model->id_model}"{if $model->id_model eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
+                        <option value="{$model->id}"{if $model->id eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
     {/foreach}
                     </select>
                 </p>
@@ -216,7 +216,7 @@
                         function(data){
                             $(data).each(function(i){
                                 var _data = data[i];
-                                $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
+                                $('<option value="' + _data.id + '">' + _data.model + '</option>').appendTo(_models);
                             });
                         },
                         'json'

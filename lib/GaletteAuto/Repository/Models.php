@@ -99,20 +99,36 @@ class Models extends Repository
     /**
      * Get the list of all models
      *
+     * @param integer $brandId   Optionnal brand we want models for
+     * @param boolean $as_object Whether to return an array f objects or a ResultSet
+     *
      * @return Model[]
      */
-    public function getList()
+    public function getList($brandId = null, $as_object = true)
     {
         $select = $this->buildSelect();
-        $this->filters->setLimit($select);
+
+        if ($brandId !== null) {
+            $select->where(
+                array(
+                    'm.' . Brand::PK => $brandId
+                )
+            );
+        } else {
+            $this->filters->setLimit($select);
+        }
         $results = $this->zdb->execute($select);
 
-        $models = array();
-        foreach ($results as $r) {
-            $pk = self::PK;
-            $models[$r->$pk] = new Model($this->zdb, $r);
+        if ($as_object) {
+            $models = array();
+            foreach ($results as $r) {
+                $pk = self::PK;
+                $models[$r->$pk] = new Model($this->zdb, $r);
+            }
+            return $models;
+        } else {
+            return $results;
         }
-        return $models;
     }
 
     /**

@@ -69,7 +69,7 @@ class Model
     /**
     * Default constructor
     *
-    * @param Db    $zdb Database instance
+    * @param Db    $zdb  Database instance
     * @param mixed $args model's id to load or ResultSet. Defaults to null
     */
     public function __construct(Db $zdb, $args = null)
@@ -83,65 +83,6 @@ class Model
             }
         } elseif (is_object($args)) {
             $this->loadFromRS($args);
-        }
-    }
-
-    /**
-     * Get models list
-     *
-     * @param ModelsList $filters Filters
-     * @param integer    $brandId Optionnal brand we want models for
-     *
-     * @return ResultSet
-     *
-     * @deprecated @see GaletteAuto\Repository\Models::getList()
-     */
-    public function getList(ModelsList $filters, $brandId = null)
-    {
-        try {
-            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
-            $select->join(
-                array('b' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
-                'a.' . Brand::PK . '=b.' . Brand::PK
-            );
-
-            //if required, the where clause
-            if (isset($brandId) && is_int($brandId)) {
-                $select->where(
-                    array(
-                        'a.' . Brand::PK => $brandId
-                    )
-                );
-            }
-
-            // the order clause
-            $select->order(self::FIELD . ' ASC');
-
-            $results = $this->zdb->execute($select);
-            return $results;
-        } catch (\Exception $e) {
-            Analog::log(
-                '[' . get_class($this) . '] Cannot load models list | ' .
-                $e->getMessage(),
-                Analog::ERROR
-            );
-            return false;
-        }
-    }
-
-    /**
-    * Get models list for specified brand
-    *
-    * @param integer $brandId brand we want models for
-    *
-    * @return models list
-    */
-    public function getListByBrand($brandId)
-    {
-        if (isset($brandId) && is_int($brandId)) {
-            return $this->getList($brandId)->toArray();
-        } else {
-            return -1;
         }
     }
 
@@ -216,6 +157,7 @@ class Model
                         self::PK => $this->id
                     )
                 );
+                $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
@@ -242,6 +184,7 @@ class Model
             $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
             $delete->where->in(self::PK, $ids);
             $this->zdb->execute($delete);
+            return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .

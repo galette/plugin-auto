@@ -1,7 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-        <form action="" method="post" id="listform">
+        <form action="{path_for name="batch-modelslist"}" method="post" id="listform">
         <table class="listing">
             <thead>
                 <tr>
@@ -11,24 +11,6 @@
                     <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <td colspan="4" class="right" id="table_footer">
-    {if $models|@count gt 0}
-                        {_T string="Pages:"}
-                        <span class="pagelink">
-                        {* {section name="pageLoop" start=1 loop=$nb_pages+1}
-                            {if $smarty.section.pageLoop.index eq $page}
-                                {$smarty.section.pageLoop.index}
-                            {else}
-                                <a href="colors.php?nbshow={$smarty.get.nbshow}&amp;page={$smarty.section.pageLoop.index}">{$smarty.section.pageLoop.index}</a>
-                            {/if}
-                        {/section} *}
-                        </span>
-    {/if}
-                    </td>
-                </tr>
-            </tfoot>
             <tbody>
     {foreach from=$models item=m name=models_list}
         {assign var='edit_link' value={path_for name="modelEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $m->id]}}
@@ -40,7 +22,7 @@
                     <td><a href="{$edit_link}">{$m->obrand->value}</a></td>
                     <td class="center nowrap">
                         <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a onclick="return confirm('{_T string="Do you really want to delete the model '%s'?" escape="js" domain="auto"}'.replace('%s', '{$m->model}'))" href="models.php?sup={$m->id}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a href="{path_for name="removeModel" data=["id" => $m->id]}" class="delete"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>
     {foreachelse}
@@ -57,7 +39,7 @@
         <ul class="selection_menu">
     {if $models|@count gt 0}
             <li>{_T string="Selection:"}</li>
-            <li><input type="submit" id="delete" onclick="return confirm('{_T string="Do you really want to delete selected models?" escape="js" domain="auto"}');" name="delete" value="{_T string="Delete"}"/></li>
+            <li><input type="submit" id="delete" name="delete" value="{_T string="Delete"}"/></li>
     {/if}
             <li>{_T string="Other:" domain="auto"}</li>
             <li><a class="button" href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new model" domain="auto"}</a></li>
@@ -68,6 +50,28 @@
 {block name="javascripts"}
     {if $models|@count gt 0}
         <script type="text/javascript">
+        var _checkselection = function() {
+            var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
+            if ( _checkeds == 0 ) {
+                var _el = $('<div id="pleaseselect" title="{_T string="No model selected" escape="js" domain="auto"}">{_T string="Please make sure to select at least one model from the list to perform this action." escape="js" domain="auto"}</div>');
+                _el.appendTo('body').dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                            $(this).dialog( "close" );
+                        }
+                    },
+                    close: function(event, ui){
+                        _el.remove();
+                    }
+                });
+                return false;
+            }
+            return true;
+        }
+
+        {include file="js_removal.tpl"}
+        {include file="js_removal.tpl" selector="#delete" deleteurl="'{path_for name="batch-modelslist"}'" extra_check="if (!_checkselection()) {ldelim}return false;{rdelim}" extra_data="delete: true, _sel: $('#listform input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()" method="POST"}
         var _is_checked = true;
         var _bind_check = function(){
             $('#checkall').click(function(){

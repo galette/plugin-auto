@@ -135,3 +135,45 @@ $this->post(
     __('/models', 'auto_routes'). '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
     PropertiesController::class . ':doModelEdit'
 )->setName('doModelEdit')->add($authenticate);
+
+$this->get(
+    __('/model', 'auto_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    PropertiesController::class . ':removeModel'
+)->setName('removeModel')->add($authenticate);
+
+$this->get(
+    __('/models', 'auto_routes') . __('/remove', 'routes'),
+    PropertiesController::class . ':removeModels'
+)->setName('removeModels')->add($authenticate);
+
+$this->post(
+    __('/model', 'auto_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    PropertiesController::class . ':doRemoveModel'
+)->setName('doRemoveModel')->add($authenticate);
+
+//Batch actions on models list
+$this->post(
+    __('/models', 'auto_routes') . __('/batch', 'routes'),
+    function ($request, $response) {
+        $post = $request->getParsedBody();
+
+        if (isset($post['_sel'])) {
+            $this->session->filter_automodels_sel = $post['_sel'];
+
+            if (isset($post['delete'])) {
+                return $response
+                    ->withStatus(301)
+                    ->withHeader('Location', $this->router->pathFor('removeModels'));
+            }
+        } else {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No model was selected, please check at least one name.", "auto")
+            );
+
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor('modelsList'));
+        }
+    }
+)->setName('batch-modelslist')->add($authenticate);

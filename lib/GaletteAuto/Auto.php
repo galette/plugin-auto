@@ -171,7 +171,7 @@ class Auto
             'body'                      => _T("body", "auto")
         );
 
-        $this->model = new Model();
+        $this->model = new Model($this->zdb);
         $this->color = new Color();
         $this->state = new State();
 

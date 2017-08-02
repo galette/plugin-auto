@@ -44,6 +44,8 @@ use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
+use GaletteAuto\Filters\ModelsList;
+use GaletteAuto\Repository\Models;
 
 /**
  * Galette Auto plugin controller
@@ -262,13 +264,21 @@ class Controller
             ? _T("New vehicle", "auto")
             : str_replace('%s', $auto->name, _T("Change vehicle '%s'", "auto"));
 
+        $mfilters = new ModelsList();
+        $models = new Models(
+            $this->container->zdb,
+            $this->container->preferences,
+            $this->container->login,
+            $mfilters
+        );
+
         $params = [
             'page_title'        => $title,
             'mode'              => (($is_new) ? 'new' : 'modif'),
             'require_calendar'  => true,
             'require_dialog'    => true,
             'car'               => $auto,
-            'models'            => $auto->model->getList((int)$auto->model->brand),
+            'models'            => $models->getList((int)$auto->model->brand),
             'js_init_models'    => (($auto->model->brand != '') ? false : true),
             'brands'            => $auto->model->obrand->getList(),
             'colors'            => $auto->color->getList(),
@@ -402,15 +412,20 @@ class Controller
     {
         $post = $request->getParsedBody();
         $list = array();
-        $m = new Model();
+        $models = new Models(
+            $this->container->zdb,
+            $this->container->preferences,
+            $this->container->login,
+            new ModelsList()
+        );
 
+        $id_brand = null;
         if (isset($post['brand']) && $post['brand'] != '') {
-            $list = $m->getListByBrand((int)$post['brand']);
-        } else {
-            $list = $m->getList();
+            $id_brand = (int)$post['brand'];
         }
+        $list = $models->getList($id_brand, false);
 
-        return $response->withJson($list);
+        return $response->withJson($list->toArray());
     }
 
     /**

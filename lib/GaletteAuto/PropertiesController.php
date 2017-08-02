@@ -276,4 +276,153 @@ class PropertiesController extends Controller
             ->withStatus(301)
             ->withHeader('Location', $route);
     }
+
+    /**
+     * Remove model confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeModel(Request $request, Response $response, $args = [])
+    {
+        $model = new Model($this->container->zdb);
+        $model->load((int)$args['id']);
+        $route = $this->container->router->pathFor('modelsList');
+
+        $data = [
+            'id'            => $args['id'],
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Model", "auto"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove model %1$s', 'auto'),
+                    $model->model
+                ),
+                'form_url'      => $this->container->router->pathFor('doRemoveModel', ['id' => $model->id]),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Remove models confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeModels(Request $request, Response $response, $args = [])
+    {
+        $route = $this->container->router->pathFor('modelsList');
+        $ids = $this->container->session->filter_automodels_sel;
+
+        $data = [
+            'id'            => $ids,
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => _T("Model", "auto"),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => _T('Remove models', 'auto'),
+                'message'       => str_replace(
+                    '%count',
+                    count($data['id']),
+                    _T('You are about to remove %count models.', 'auto')
+                ),
+                'form_url'      => $this->container->router->pathFor('doRemoveModel'),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Do remove model
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function doRemoveModel(Request $request, Response $response, $args = [])
+    {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            if (!is_array($post['id'])) {
+                $ids = (array)$post['id'];
+            } else {
+                $ids = $post['id'];
+            }
+
+            $model = new Model($this->container->zdb);
+            $del = $model->delete($ids);
+
+            if ($del !== true) {
+                $error_detected = _T("An error occured trying to remove models :/", "auto");
+
+                $this->container->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = str_replace(
+                    '%count',
+                    count($ids),
+                    _T("%count models have been successfully deleted.", "auto")
+                );
+
+                $this->container->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
+    }
 }

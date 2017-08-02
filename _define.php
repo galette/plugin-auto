@@ -55,6 +55,10 @@ $this->register(
         'doRemoveVehicle'   => 'member',
         'modelsList'        => 'groupmanager',
         'modelEdit'         => 'groupmanager',
-        'doModelEdit'       => 'groupmanager'
+        'doModelEdit'       => 'groupmanager',
+        'removeModel'       => 'staff',
+        'removeModels'      => 'staff',
+        'doRemoveModel'     => 'staff',
+        'batch-modelslist'  => 'staff',
     ]
 );
