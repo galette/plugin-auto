@@ -37,6 +37,8 @@
 
 namespace GaletteAuto;
 
+use Galette\Core\Db;
+
 /**
  * Automobile States class for galette Auto plugin
  *
@@ -59,11 +61,13 @@ class State extends AbstractObject
     /**
     * Default constructor
     *
-    * @param integer $id state's id to load. Defaults to null
+    * @param Db      $zdb Database instance
+    * @param integer $id  state's id to load. Defaults to null
     */
-    public function __construct($id = null)
+    public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
+            $zdb,
             self::TABLE,
             self::PK,
             self::FIELD,
@@ -81,7 +85,7 @@ class State extends AbstractObject
     */
     public function __get($name)
     {
-        if ( $name == self::FIELD ) {
+        if ($name == self::FIELD) {
             return parent::__get('field');
         } else {
             return parent::__get($name);

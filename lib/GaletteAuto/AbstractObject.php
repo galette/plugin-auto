@@ -37,7 +37,9 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog as Analog;
+use Analog\Analog;
+use Galette\Core\Db;
+use GaletteAuto\Filters\PropertiesList;
 
 /**
  * Automobile Object abstract class for galette Auto plugin
@@ -53,30 +55,34 @@ use Analog\Analog as Analog;
  */
 abstract class AbstractObject
 {
-    private $_table;
-    private $_pk;
-    private $_field;
-    private $_name;
+    private $table;
+    private $pk;
+    private $field;
+    private $name;
 
+    protected $zdb;
     protected $id;
     protected $value;
+    protected $filters;
 
     /**
      * Default constructor
      *
+     * @param Db      $zdb   Database instance
      * @param string  $table table name
      * @param string  $pk    primary key field
      * @param string  $field main field name
      * @param string  $name  name
      * @param integer $id    id to load. Defaults to null
      */
-    public function __construct($table, $pk, $field, $name, $id = null)
+    public function __construct(Db $zdb, $table, $pk, $field, $name, $id = null)
     {
-        $this->_table = AUTO_PREFIX . $table;
-        $this->_pk = $pk;
-        $this->_field = $field;
-        $this->_name = $name;
-        if ( is_int($id) ) {
+        $this->zdb = $zdb;
+        $this->table = AUTO_PREFIX . $table;
+        $this->pk = $pk;
+        $this->field = $field;
+        $this->name = $name;
+        if (is_int($id)) {
             $this->load($id);
         }
     }
@@ -88,17 +94,15 @@ abstract class AbstractObject
      */
     public function getList()
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select($this->_table);
-            $select->order($this->_field . ' ASC');
+            $select = $this->zdb->select($this->table);
+            $select->order($this->field . ' ASC');
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             return $results;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load ' . $this->_name .
+                '[' . get_class($this) . '] Cannot load ' . $this->name .
                 ' list | ' . $e->getMessage(),
                 Analog::ERROR
             );
@@ -115,27 +119,25 @@ abstract class AbstractObject
      */
     public function load($id)
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select($this->_table);
+            $select = $this->zdb->select($this->table);
             $select->where(
                 array(
-                    $this->_pk => $id
+                    $this->pk => $id
                 )
             );
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             $result = $results->current();
-            $pk = $this->_pk;
+            $pk = $this->pk;
             $this->id = $result->$pk;
-            $field = $this->_field;
+            $field = $this->field;
             $this->value = $result->$field;
 
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot load ' . $this->_name .
+                '[' . get_class($this) . '] Cannot load ' . $this->name .
                 ' from id `' . $id . '` | ' . $e->getMessage(),
                 Analog::ERROR
             );
@@ -152,29 +154,27 @@ abstract class AbstractObject
      */
     public function store($new = false)
     {
-        global $zdb;
-
         try {
             $values = array(
-                $this->_field => $this->value
+                $this->field => $this->value
             );
-            if ( $new ) {
-                $insert = $zdb->insert($this->_table);
+            if ($new) {
+                $insert = $this->zdb->insert($this->table);
                 $insert->values($values);
-                $zdb->execute($insert);
+                $this->zdb->execute($insert);
             } else {
-                $update = $zdb->update($this->_table);
+                $update = $this->zdb->update($this->table);
                 $update->set($values)->where(
                     array(
-                        $this->_pk => $this->id
+                        $this->pk => $this->id
                     )
                 );
-                $zdb->execute($update);
+                $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot store ' . $this->_name .
+                '[' . get_class($this) . '] Cannot store ' . $this->name .
                 ' values `' . $this->id . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
                 Analog::WARNING
@@ -192,20 +192,30 @@ abstract class AbstractObject
      */
     public function delete($ids)
     {
-        global $zdb;
-
         try {
-            $delete = $zdb->delete($this->_table);
-            $delete->where->in($this->_pk, $ids);
-            $zdb->execute($delete);
+            $delete = $this->zdb->delete($this->table);
+            $delete->where->in($this->pk, $ids);
+            $this->zdb->execute($delete);
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot delete ' . $this->_name .
+                '[' . get_class($this) . '] Cannot delete ' . $this->name .
                 ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
             return false;
         }
+    }
+
+    /**
+     * Set filters
+     *
+     * @param PropertiesList $filters Filters
+     *
+     * @return void
+     */
+    public function setFilters(PropertiesList $filters)
+    {
+        $this->filters = $filters;
     }
 
     /**
@@ -218,13 +228,12 @@ abstract class AbstractObject
     public function __get($name)
     {
         $forbidden = array();
-        if ( !in_array($name, $forbidden) ) {
-            if ( $name =='id' || $name == 'value' ) {
+        if (!in_array($name, $forbidden)) {
+            if ($name =='id' || $name == 'value') {
                 return $this->$name;
             } else {
-                $rname = '_' . $name;
-                if ( isset($this->$rname) ) {
-                    return $this->$rname;
+                if (isset($this->$name)) {
+                    return $this->$name;
                 }
             }
         } else {
@@ -246,10 +255,10 @@ abstract class AbstractObject
      */
     public function __set($name, $value)
     {
-        switch( $name ) {
-        case 'value':
-            $this->value = $value;
-            break;
+        switch ($name) {
+            case 'value':
+                $this->value = $value;
+                break;
         }
     }
 }

@@ -177,3 +177,39 @@ $this->post(
         }
     }
 )->setName('batch-modelslist')->add($authenticate);
+
+$this->get(
+    __('/brands', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':brandsList'
+)->setName('brandsList')->add($authenticate);
+
+$this->get(
+    __('/colors', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':colorsList'
+)->setName('colorsList')->add($authenticate);
+
+$this->get(
+    __('/states', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':statesList'
+)->setName('statesList')->add($authenticate);
+
+$this->get(
+    __('/finitions', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':finitionsList'
+)->setName('finitionsList')->add($authenticate);
+
+$this->get(
+    __('/bodies', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':bodiesList'
+)->setName('bodiesList')->add($authenticate);
+
+$this->get(
+    __('/transmissions', 'auto_routes') . '[/{option:' .
+    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    PropertiesController::class . ':transmissionsList'
+)->setName('transmissionsList')->add($authenticate);

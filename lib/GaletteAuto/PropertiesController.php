@@ -45,6 +45,7 @@ use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
+use GaletteAuto\Filters\PropertiesList;
 use GaletteAuto\Repository\Models;
 
 /**
@@ -424,5 +425,239 @@ class PropertiesController extends Controller
                 ]
             );
         }
+    }
+
+    /**
+     * List brands
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function brandsList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'brands';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+    /**
+     * List colors
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function colorsList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'colors';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+    /**
+     * List states
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function statesList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'states';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+    /**
+     * List finitions
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function finitionsList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'finitions';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+    /**
+     * List bodies
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function bodiesList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'bodies';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+    /**
+     * List transmissions
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function transmissionsList(Request $request, Response $response, $args = [])
+    {
+        $args['property'] = 'transmissions';
+        return $this->propertiesList($request, $response, $args);
+    }
+
+
+    /**
+     * List properties
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function propertiesList(Request $request, Response $response, $args = [])
+    {
+        $property = $args['property'];
+
+        switch ($property) {
+            case 'colors':
+                $obj = new Color($this->container->zdb);
+                $title = _T("Colors list", "auto");
+                $field_name = _T("Color", "auto");
+                $add_text = _T("Add new color", "auto");
+                $deletes_text = _T("Do you really want to delete selected colors?", "auto");
+                $delete_text = _T("Do you really want to delete the color '%s'?", "auto");
+                break;
+            case 'states':
+                $obj = new State($this->container->zdb);
+                $title = _T("States list", "auto");
+                $field_name = _T("State", "auto");
+                $add_text = _T("Add new state", "auto");
+                $deletes_text = _T("Do you really want to delete selected states?", "auto");
+                $delete_text = _T("Do you really want to delete the state '%s'?", "auto");
+                break;
+            case 'finitions':
+                $obj = new Finition($this->container->zdb);
+                $title = _T("Finitions list", "auto");
+                $field_name = _T("Finition", "auto");
+                $add_text = _T("Add new finition", "auto");
+                $deletes_text = _T("Do you really want to delete selected finitions?", "auto");
+                $delete_text = _T("Do you really want to delete the finition '%s'?", "auto");
+                break;
+            case 'bodies':
+                $obj = new Body($this->container->zdb);
+                $title = _T("Bodies list", "auto");
+                $field_name = _T("Body", "auto");
+                $add_text = _T("Add new body", "auto");
+                $deletes_text = _T("Do you really want to delete selected bodies?", "auto");
+                $delete_text = _T("Do you really want to delete the body '%s'?", "auto");
+                break;
+            case 'transmissions':
+                $obj = new Transmission($this->container->zdb);
+                $title = _T("Transmissions list", "auto");
+                $field_name = _T("Transmission", "auto");
+                $add_text = _T("Add new transmission", "auto");
+                $deletes_text = _T("Do you really want to delete selected transmissions?", "auto");
+                $delete_text = _T("Do you really want to delete the transmission '%s'?", "auto");
+                break;
+            case 'brands':
+                $obj = new Brand($this->container->zdb);
+                $title = _T("Brands list", "auto");
+                $show_title = _T("Brand '%s'", "auto");
+                $field_name = _T("Brand", "auto");
+                $add_text = _T("Add new brand", "auto");
+                $deletes_text = _T("Do you really want to delete selected brands?", "auto");
+                $delete_text = _T("Do you really want to delete the brand '%s'?", "auto");
+                $can_show = true;
+                break;
+            default: //by default, we redirecto to index page
+                throw new \RuntimeException('Unknown property ' . $property);
+                break;
+        }
+
+        $numrows = $this->container->preferences->pref_numrows;
+        if (isset($_GET['nbshow'])) {
+            if (is_numeric($_GET['nbshow'])) {
+                $numrows = $_GET['nbshow'];
+            }
+        }
+
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
+        $filter_name = 'filter_' . $property;
+        if (isset($this->container->session->$filter_name)) {
+            $filters = $this->container->session->$filter_name;
+        } else {
+            $filters = new PropertiesList($property);
+        }
+        $obj->setFilters($filters);
+
+        if ($option !== null) {
+            switch ($option) {
+                case __('page', 'routes'):
+                    $filters->current_page = (int)$value;
+                    break;
+                case __('order', 'routes'):
+                    $filters->orderby = $value;
+                    break;
+            }
+        }
+
+        $module = $this->getModule();
+        $smarty = $this->container->view->getSmarty();
+        $smarty->addTemplateDir(
+            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
+            $module['route']
+        );
+        $smarty->compile_id = AUTO_SMARTY_PREFIX;
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setSmartyPagination($this->container->router, $smarty, false);
+        $this->container->session->$filter_name = $filters;
+
+        var_dump($obj->field);
+
+        $params = [
+            'page_title'    => $title,
+            //'models'        => $models->getList(),
+            'set'           => $property,
+            'field_name'    => $field_name,
+            'add_text'      => $add_text,
+            'deletes_text'  => $deletes_text,
+            'delete_text'   => $delete_text,
+            'obj'           => $obj,
+            'require_dialog'=> true
+        ];
+
+        if (isset($can_show)) {
+            $params['show'] = $can_show;
+        }
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'file:[' . $module['route'] . ']object_list.tpl',
+            $params
+        );
+        return $response;
     }
 }

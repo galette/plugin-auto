@@ -37,7 +37,8 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog as Analog;
+use Analog\Analog;
+use Galette\Core\Db;
 
 /**
  * Automobile Brands class for galette Auto plugin
@@ -61,11 +62,13 @@ class Brand extends AbstractObject
     /**
     * Default constructor
     *
-    * @param integer $id brand's id to load. Defaults to null
+    * @param Db      $zdb Database instance
+    * @param integer $id  brand's id to load. Defaults to null
     */
-    public function __construct($id = null)
+    public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
+            $zdb,
             self::TABLE,
             self::PK,
             self::FIELD,
@@ -83,19 +86,17 @@ class Brand extends AbstractObject
     */
     public function getModels($brand)
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select(AUTO_PREFIX . Model::TABLE);
+            $select = $this->zdb->select(AUTO_PREFIX . Model::TABLE);
             $select->where(
                 array(
                     self::PK => $brand
                 )
             )->order(Model::FIELD . ' ASC');
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             return $results;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load models list | ' .
                 $e->getMessage(),
@@ -115,10 +116,10 @@ class Brand extends AbstractObject
     */
     public function __get($name)
     {
-        if ( $name == self::FIELD ) {
+        if ($name == self::FIELD) {
             return parent::__get('field');
         }
-        if ( $name == self::PK ) {
+        if ($name == self::PK) {
             return parent::__get('id');
         } else {
             return parent::__get($name);
