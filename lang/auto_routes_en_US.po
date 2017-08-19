@@ -11,23 +11,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.12\n"
 
-#: ../_routes.php:62
+#: ../_routes.php:63
 msgid "/my-vehicles"
 msgstr "/my-vehicles"
 
-#: ../_routes.php:48 ../_routes.php:67 ../_routes.php:72 ../_routes.php:82
-#: ../_routes.php:92
-msgid "/vehicle"
-msgstr "/vehicle"
+#: ../_routes.php:219 ../_routes.php:227 ../_routes.php:241 ../_routes.php:273
+#: ../_routes.php:299 ../_routes.php:307 ../_routes.php:315
+#: ../lib/GaletteAuto/Finition.php:96 ../lib/GaletteAuto/AbstractObject.php:299
+msgid "finition"
+msgstr "finition"
 
-#: ../_routes.php:77
+#: ../_routes.php:194
+msgid "/states"
+msgstr "/states"
+
+#: ../_routes.php:182
+msgid "/brands"
+msgstr "/brands"
+
+#: ../_routes.php:220 ../_routes.php:228 ../_routes.php:242 ../_routes.php:276
+#: ../_routes.php:300 ../_routes.php:308 ../_routes.php:316
+#: ../lib/GaletteAuto/AbstractObject.php:302 ../lib/GaletteAuto/Body.php:96
+msgid "body"
+msgstr "body"
+
+#: ../_routes.php:78 ../_routes.php:125 ../_routes.php:130 ../_routes.php:135
+#: ../_routes.php:145 ../_routes.php:156
 msgid "/models"
 msgstr "/models"
 
-#: ../_routes.php:57 ../_routes.php:87 ../_routes.php:98
+#: ../_routes.php:206
+msgid "/bodies"
+msgstr "/bodies"
+
+#: ../_routes.php:218 ../_routes.php:226 ../_routes.php:234 ../_routes.php:240
+#: ../_routes.php:282 ../_routes.php:298 ../_routes.php:306 ../_routes.php:314
+#: ../lib/GaletteAuto/Brand.php:97 ../lib/GaletteAuto/AbstractObject.php:308
+msgid "brand"
+msgstr "brand"
+
+#: ../_routes.php:49
+msgid "/photo"
+msgstr "/photo"
+
+#: ../_routes.php:188
+msgid "/colors"
+msgstr "/colors"
+
+#: ../_routes.php:49 ../_routes.php:68 ../_routes.php:73 ../_routes.php:83
+#: ../_routes.php:93
+msgid "/vehicle"
+msgstr "/vehicle"
+
+#: ../_routes.php:140 ../_routes.php:150
+msgid "/model"
+msgstr "/model"
+
+#: ../_routes.php:219 ../_routes.php:227 ../_routes.php:241 ../_routes.php:270
+#: ../_routes.php:299 ../_routes.php:307 ../_routes.php:315
+#: ../lib/GaletteAuto/State.php:96 ../lib/GaletteAuto/AbstractObject.php:296
+msgid "state"
+msgstr "state"
+
+#: ../_routes.php:58 ../_routes.php:88 ../_routes.php:99
 msgid "/vehicles"
 msgstr "/vehicles"
 
-#: ../_routes.php:48
-msgid "/photo"
-msgstr "/photo"
+#: ../_routes.php:200
+msgid "/finitions"
+msgstr "/finitions"
+
+#: ../_routes.php:220 ../_routes.php:228 ../_routes.php:242 ../_routes.php:279
+#: ../_routes.php:300 ../_routes.php:308 ../_routes.php:316
+#: ../lib/GaletteAuto/AbstractObject.php:305
+#: ../lib/GaletteAuto/Transmission.php:96
+msgid "transmission"
+msgstr "transmission"
+
+#: ../_routes.php:234
+msgid "/show"
+msgstr "/show"
+
+#: ../_routes.php:218 ../_routes.php:226 ../_routes.php:240 ../_routes.php:267
+#: ../_routes.php:298 ../_routes.php:306 ../_routes.php:314
+#: ../lib/GaletteAuto/AbstractObject.php:293 ../lib/GaletteAuto/Color.php:96
+msgid "color"
+msgstr "color"
+
+#: ../_routes.php:212
+msgid "/transmissions"
+msgstr "/transmissions"
