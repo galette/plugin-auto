@@ -69,5 +69,9 @@ $this->register(
         'propertyEdit'      => 'staff',
         'doPropertyEdit'    => 'staff',
         'propertyShow'      => 'staff',
+        'batch-propertieslist' => 'staff',
+        'removeProperty'    => 'staff',
+        'removeProperties'  => 'staff',
+        'doRemoveProperty'  => 'staff'
     ]
 );

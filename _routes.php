@@ -234,3 +234,86 @@ $this->get(
     '/{property:' . __('brand', 'auto_routes') . '}' . __('/show', 'auto_routes') . '/{id:\d+}',
     PropertiesController::class . ':propertyShow'
 )->setName('propertyShow')->add($authenticate);
+
+//Batch actions on properties lists
+$this->post(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}' . __('/batch', 'routes'),
+    function ($request, $response, $args) {
+        $post = $request->getParsedBody();
+
+        if (isset($post['_sel'])) {
+            $filter_name = 'filter_auto' . $args['property'] . '_sel';
+            $this->session->$filter_name = $post['_sel'];
+
+            if (isset($post['delete'])) {
+                return $response
+                    ->withStatus(301)
+                    ->withHeader('Location', $this->router->pathFor(
+                        'removeProperties',
+                        ['property' => $args['property']]
+                    ));
+            }
+        } else {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("No entry was selected, please check at least one.", "auto")
+            );
+
+            $route = null;
+            switch ($property) {
+                case __('color', 'auto_routes'):
+                    $route = $this->container->router->pathFor('colorsList');
+                    break;
+                case __('state', 'auto_routes'):
+                    $route = $this->container->router->pathFor('statesList');
+                    break;
+                case __('finition', 'auto_routes'):
+                    $route = $this->container->router->pathFor('finitionsList');
+                    break;
+                case __('body', 'auto_routes'):
+                    $route = $this->container->router->pathFor('bodiesList');
+                    break;
+                case __('transmission', 'auto_routes'):
+                    $route = $this->container->router->pathFor('transmissionsList');
+                    break;
+                case __('brand', 'auto_routes'):
+                    $route = $this->container->router->pathFor('brandsList');
+                    break;
+                default:
+                    throw new \RuntimeException('Unknown property ' . $property);
+                    break;
+            }
+
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $route);
+        }
+    }
+)->setName('batch-propertieslist')->add($authenticate);
+
+$this->get(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}' . __('/remove', 'routes') . '/{id:\d+}',
+    PropertiesController::class . ':removeProperty'
+)->setName('removeProperty')->add($authenticate);
+
+$this->get(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}'. __('/remove', 'routes'),
+    PropertiesController::class . ':removeProperties'
+)->setName('removeProperties')->add($authenticate);
+
+$this->post(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}' . __('/remove', 'routes') . '[/{id:\d+}]',
+    PropertiesController::class . ':doRemoveProperty'
+)->setName('doRemoveProperty')->add($authenticate);

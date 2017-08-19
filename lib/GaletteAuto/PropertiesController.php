@@ -539,44 +539,32 @@ class PropertiesController extends Controller
                 $obj = new Color($this->container->zdb);
                 $title = _T("Colors list", "auto");
                 $add_text = _T("Add new color", "auto");
-                $deletes_text = _T("Do you really want to delete selected colors?", "auto");
-                $delete_text = _T("Do you really want to delete the color '%s'?", "auto");
                 break;
             case 'states':
                 $obj = new State($this->container->zdb);
                 $title = _T("States list", "auto");
                 $add_text = _T("Add new state", "auto");
-                $deletes_text = _T("Do you really want to delete selected states?", "auto");
-                $delete_text = _T("Do you really want to delete the state '%s'?", "auto");
                 break;
             case 'finitions':
                 $obj = new Finition($this->container->zdb);
                 $title = _T("Finitions list", "auto");
                 $add_text = _T("Add new finition", "auto");
-                $deletes_text = _T("Do you really want to delete selected finitions?", "auto");
-                $delete_text = _T("Do you really want to delete the finition '%s'?", "auto");
                 break;
             case 'bodies':
                 $obj = new Body($this->container->zdb);
                 $title = _T("Bodies list", "auto");
                 $add_text = _T("Add new body", "auto");
-                $deletes_text = _T("Do you really want to delete selected bodies?", "auto");
-                $delete_text = _T("Do you really want to delete the body '%s'?", "auto");
                 break;
             case 'transmissions':
                 $obj = new Transmission($this->container->zdb);
                 $title = _T("Transmissions list", "auto");
                 $add_text = _T("Add new transmission", "auto");
-                $deletes_text = _T("Do you really want to delete selected transmissions?", "auto");
-                $delete_text = _T("Do you really want to delete the transmission '%s'?", "auto");
                 break;
             case 'brands':
                 $obj = new Brand($this->container->zdb);
                 $title = _T("Brands list", "auto");
                 $show_title = _T("Brand '%s'", "auto");
                 $add_text = _T("Add new brand", "auto");
-                $deletes_text = _T("Do you really want to delete selected brands?", "auto");
-                $delete_text = _T("Do you really want to delete the brand '%s'?", "auto");
                 $can_show = true;
                 break;
             default:
@@ -637,8 +625,6 @@ class PropertiesController extends Controller
             'set'           => $property,
             'field_name'    => $obj->getFieldLabel(),
             'add_text'      => $add_text,
-            'deletes_text'  => $deletes_text,
-            'delete_text'   => $delete_text,
             'obj'           => $obj,
             'require_dialog'=> true
         ];
@@ -869,5 +855,180 @@ class PropertiesController extends Controller
             $params
         );
         return $response;
+    }
+
+    /**
+     * Remove property confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeProperty(Request $request, Response $response, $args = [])
+    {
+        $property = $args['property'];
+        $classname = '\GaletteAuto\\' . ucwords($property);
+        $object = new $classname($this->container->zdb);
+        $object->load((int)$args['id']);
+
+        $route = AbstractObject::getListRoute($this->container->router, $property);
+
+        $data = [
+            'id'            => $args['id'],
+            'property'      => $property,
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => $object->getFieldLabel(),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove %1$s %2$s', 'auto'),
+                    $object->getFieldLabel(),
+                    $object->value
+                ),
+                'form_url'      => $this->container->router->pathFor(
+                    'doRemoveProperty',
+                    ['property' => $property, 'id' => $object->id]
+                ),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Remove properties confirmation page
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function removeProperties(Request $request, Response $response, $args = [])
+    {
+        $property = $args['property'];
+        $classname = '\GaletteAuto\\' . ucwords($property);
+        $object = new $classname($this->container->zdb);
+
+        $route = AbstractObject::getListRoute($this->container->router, $property);
+        $filter_name = 'filter_auto' . $property . '_sel';
+        $ids = $this->container->session->$filter_name;
+
+        $data = [
+            'id'            => $ids,
+            'redirect_uri'  => $route
+        ];
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'confirm_removal.tpl',
+            array(
+                'type'          => $object->getFieldLabel(),
+                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'page_title'    => sprintf(
+                    _T('Remove %1$s %2$s', 'auto'),
+                    $object->getFieldLabel(),
+                    $object->value
+                ),
+                'message'       => str_replace(
+                    ['%count', '%property'],
+                    [count($data['id']), $object->getFieldLabel()],
+                    _T('You are about to remove %count %property.', 'auto')
+                ),
+                'form_url'      => $this->container->router->pathFor('doRemoveProperty', ['property' => $property]),
+                'cancel_uri'    => $route,
+                'data'          => $data
+            )
+        );
+        return $response;
+    }
+
+    /**
+     * Do remove property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function doRemoveProperty(Request $request, Response $response, $args = [])
+    {
+        $post = $request->getParsedBody();
+        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
+        $success = false;
+
+        $uri = isset($post['redirect_uri']) ?
+            $post['redirect_uri'] :
+            $this->router->pathFor('slash');
+
+        if (!isset($post['confirm'])) {
+            $this->flash->addMessage(
+                'error_detected',
+                _T("Removal has not been confirmed!")
+            );
+        } else {
+            if (!is_array($post['id'])) {
+                $ids = (array)$post['id'];
+            } else {
+                $ids = $post['id'];
+            }
+
+            $model = new Model($this->container->zdb);
+            $del = $model->delete($ids);
+
+            $property = $args['property'];
+            $classname = '\GaletteAuto\\' . ucwords($property);
+            $object = new $classname($this->container->zdb);
+            $del = $object->delete($ids);
+
+            if ($del !== true) {
+                $error_detected = str_replace(
+                    '%property',
+                    $object->getFieldLabel(),
+                    _T('An error occured trying to remove %property :/', 'auto')
+                );
+
+                $this->container->flash->addMessage(
+                    'error_detected',
+                    $error_detected
+                );
+            } else {
+                $success_detected = str_replace(
+                    ['%count', '%property'],
+                    [count($ids), $object->getFieldLabel()],
+                    _T("%count %property have been successfully deleted.", "auto")
+                );
+
+                $this->container->flash->addMessage(
+                    'success_detected',
+                    $success_detected
+                );
+
+                $success = true;
+            }
+        }
+
+        if (!$ajax) {
+            return $response
+                ->withStatus(301)
+                ->withHeader('Location', $uri);
+        } else {
+            return $response->withJson(
+                [
+                    'success'   => $success
+                ]
+            );
+        }
     }
 }

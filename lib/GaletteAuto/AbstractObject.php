@@ -197,6 +197,7 @@ abstract class AbstractObject
             $delete = $this->zdb->delete($this->table);
             $delete->where->in($this->pk, $ids);
             $this->zdb->execute($delete);
+            return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot delete ' . $this->name .
