@@ -171,6 +171,10 @@ class PropertiesController extends Controller
         $model = new Model($this->container->zdb);
         if ($is_new) {
             $title = _T("New model", "auto");
+            $get = $request->getQueryParams();
+            if (isset($get['brand'])) {
+                $model->setBrand((int)$get['brand']);
+            }
         } else {
             $model->load($id);
             $title = str_replace(
@@ -180,12 +184,12 @@ class PropertiesController extends Controller
             );
         }
 
-        if ($this->container->session->model !== null) {
-            $model->check($this->container->session->model);
-            $this->container->session->model = null;
+        if ($this->container->session->auto_model !== null) {
+            $model->check($this->container->session->auto_model);
+            $this->container->session->auto_model = null;
         }
 
-        $brand = new Brand();
+        $brand = new Brand($this->container->zdb);
 
         $params = [
             'page_title'        => $title,
@@ -259,7 +263,7 @@ class PropertiesController extends Controller
         $route = $this->container->router->pathFor('modelsList');
         if (count($error_detected) > 0) {
             //store entity in session
-            $this->container->session->model = $post;
+            $this->container->session->auto_model = $post;
             if (!$is_new && !isset($args[Model::PK])) {
                 $args['id'] = $post[Model::PK];
             }
@@ -517,7 +521,6 @@ class PropertiesController extends Controller
         return $this->propertiesList($request, $response, $args);
     }
 
-
     /**
      * List properties
      *
@@ -535,7 +538,6 @@ class PropertiesController extends Controller
             case 'colors':
                 $obj = new Color($this->container->zdb);
                 $title = _T("Colors list", "auto");
-                $field_name = _T("Color", "auto");
                 $add_text = _T("Add new color", "auto");
                 $deletes_text = _T("Do you really want to delete selected colors?", "auto");
                 $delete_text = _T("Do you really want to delete the color '%s'?", "auto");
@@ -543,7 +545,6 @@ class PropertiesController extends Controller
             case 'states':
                 $obj = new State($this->container->zdb);
                 $title = _T("States list", "auto");
-                $field_name = _T("State", "auto");
                 $add_text = _T("Add new state", "auto");
                 $deletes_text = _T("Do you really want to delete selected states?", "auto");
                 $delete_text = _T("Do you really want to delete the state '%s'?", "auto");
@@ -551,7 +552,6 @@ class PropertiesController extends Controller
             case 'finitions':
                 $obj = new Finition($this->container->zdb);
                 $title = _T("Finitions list", "auto");
-                $field_name = _T("Finition", "auto");
                 $add_text = _T("Add new finition", "auto");
                 $deletes_text = _T("Do you really want to delete selected finitions?", "auto");
                 $delete_text = _T("Do you really want to delete the finition '%s'?", "auto");
@@ -559,7 +559,6 @@ class PropertiesController extends Controller
             case 'bodies':
                 $obj = new Body($this->container->zdb);
                 $title = _T("Bodies list", "auto");
-                $field_name = _T("Body", "auto");
                 $add_text = _T("Add new body", "auto");
                 $deletes_text = _T("Do you really want to delete selected bodies?", "auto");
                 $delete_text = _T("Do you really want to delete the body '%s'?", "auto");
@@ -567,7 +566,6 @@ class PropertiesController extends Controller
             case 'transmissions':
                 $obj = new Transmission($this->container->zdb);
                 $title = _T("Transmissions list", "auto");
-                $field_name = _T("Transmission", "auto");
                 $add_text = _T("Add new transmission", "auto");
                 $deletes_text = _T("Do you really want to delete selected transmissions?", "auto");
                 $delete_text = _T("Do you really want to delete the transmission '%s'?", "auto");
@@ -576,13 +574,12 @@ class PropertiesController extends Controller
                 $obj = new Brand($this->container->zdb);
                 $title = _T("Brands list", "auto");
                 $show_title = _T("Brand '%s'", "auto");
-                $field_name = _T("Brand", "auto");
                 $add_text = _T("Add new brand", "auto");
                 $deletes_text = _T("Do you really want to delete selected brands?", "auto");
                 $delete_text = _T("Do you really want to delete the brand '%s'?", "auto");
                 $can_show = true;
                 break;
-            default: //by default, we redirecto to index page
+            default:
                 throw new \RuntimeException('Unknown property ' . $property);
                 break;
         }
@@ -603,7 +600,7 @@ class PropertiesController extends Controller
             $value = $args['value'];
         }
 
-        $filter_name = 'filter_' . $property;
+        $filter_name = 'filter_auto' . $property;
         if (isset($this->container->session->$filter_name)) {
             $filters = $this->container->session->$filter_name;
         } else {
@@ -634,13 +631,11 @@ class PropertiesController extends Controller
         $filters->setSmartyPagination($this->container->router, $smarty, false);
         $this->container->session->$filter_name = $filters;
 
-        var_dump($obj->field);
-
         $params = [
             'page_title'    => $title,
             //'models'        => $models->getList(),
             'set'           => $property,
-            'field_name'    => $field_name,
+            'field_name'    => $obj->getFieldLabel(),
             'add_text'      => $add_text,
             'deletes_text'  => $deletes_text,
             'delete_text'   => $delete_text,
@@ -656,6 +651,221 @@ class PropertiesController extends Controller
         $this->container->view->render(
             $response,
             'file:[' . $module['route'] . ']object_list.tpl',
+            $params
+        );
+        return $response;
+    }
+
+    /**
+     * Add/edit property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function propertyEdit(Request $request, Response $response, $args = [])
+    {
+        $action = $args['action'];
+        $property = $args['property'];
+        $id = null;
+        $is_new = $args['action'] === __('add', 'routes');
+        if (isset($args['id'])) {
+            $id = (int)$args['id'];
+        }
+
+        if (!$is_new && $id === null) {
+            throw new \RuntimeException(
+                str_replace(
+                    '%property',
+                    $property,
+                    _T("%property ID cannot ben null calling edit route!", "auto")
+                )
+            );
+        } elseif ($is_new && $id !== null) {
+             return $response
+                ->withStatus(301)
+                ->withHeader('Location', $this->router->pathFor(
+                    'propertyEdit',
+                    [
+                        'property'  => $property,
+                        'action'    => __('add', 'routes')
+                    ]
+                ));
+        }
+
+        $classname = '\GaletteAuto\\' . ucwords($property);
+        $object = new $classname($this->container->zdb);
+        if ($is_new) {
+            $title = _T("New", "auto");
+        } else {
+            $object->load($id);
+            $title = str_replace(
+                '%s',
+                $object->{$object::FIELD},
+                _T("Change '%s'", "auto")
+            );
+        }
+
+        $session_oname = 'auto_' . $property;
+        if ($this->container->session->$session_oname !== null) {
+            $object = $this->container->session->$session_oname;
+            $this->container->session->$session_oname = null;
+        }
+
+        $params = [
+            'page_title'    => $title,
+            'mode'          => ($is_new ? 'new' : 'modif'),
+            'obj'           => $object,
+        ];
+
+        $module = $this->getModule();
+        $smarty = $this->container->view->getSmarty();
+        $smarty->addTemplateDir(
+            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
+            $module['route']
+        );
+        $smarty->compile_id = AUTO_SMARTY_PREFIX;
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'file:[' . $module['route'] . ']object.tpl',
+            $params
+        );
+        return $response;
+    }
+
+    /**
+     * Do add/edit property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function doPropertyEdit(Request $request, Response $response, $args = [])
+    {
+        $property = $args['property'];
+        $classname = '\GaletteAuto\\' . ucwords($property);
+        $object = new $classname($this->container->zdb);
+
+        $post = $request->getParsedBody();
+        $is_new = $args['action'] === __('add', 'routes');
+
+        $error_detected = [];
+
+        if (!$is_new) {
+            if (isset($post[$object->pk])) {
+                $object->load($post[$object->pk]);
+            } else {
+                $error_detected[]
+                    = _T("- No id provided for modifying this record! (internal)", "auto");
+            }
+        }
+
+        $value = $request->getParsedBodyParam($object->field, $default = null);
+        if ($value == null) {
+            $error_detected[] = _T("- You must provide a value!", "auto");
+        } else {
+            $object->value = $value;
+        }
+
+        if (count($error_detected) == 0) {
+            $res = $object->store($is_new);
+            if (!$res) {
+                $error_detected[]
+                    = _T("- An error occured while saving record. Please try again.", "auto");
+            } else {
+                $msg = str_replace(
+                    '%property',
+                    $object->getFieldLabel(),
+                    $is_new ? _T("New %property has been added!", "auto") :
+                    _T("%property has been saved!", "auto")
+                );
+                $this->container->flash->addMessage(
+                    'success_detected',
+                    $msg
+                );
+            }
+        }
+
+        $route = AbstractObject::getListRoute($this->container->router, $property);
+
+        if (count($error_detected) > 0) {
+            //store entity in session
+            $session_oname = 'auto_' . $property;
+            $this->container->session->$session_oname = $object;
+            if (!$is_new && !isset($args[$object->pk])) {
+                $args['id'] = $post[$object->pk];
+            }
+            $route = $this->container->router->pathFor('propertyEdit', $args);
+
+            foreach ($error_detected as $error) {
+                $this->container->flash->addMessage(
+                    'error_detected',
+                    $error
+                );
+            }
+        }
+
+        return $response
+            ->withStatus(301)
+            ->withHeader('Location', $route);
+    }
+
+    /**
+     * Show property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function propertyShow(Request $request, Response $response, $args = [])
+    {
+        $property = $args['property'];
+        $id = $args['id'];
+
+        $classname = '\GaletteAuto\\' . ucwords($property);
+        $object = new $classname($this->container->zdb);
+        $object->load($id);
+        $title = str_replace(
+            '%s',
+            $object->{$object::FIELD},
+            _T("Show '%s'", "auto")
+        );
+
+        $params = [
+            'page_title'    => $title,
+            'obj'           => $object
+        ];
+
+        $module = $this->getModule();
+        $smarty = $this->container->view->getSmarty();
+        $smarty->addTemplateDir(
+            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
+            $module['route']
+        );
+        $smarty->compile_id = AUTO_SMARTY_PREFIX;
+
+        if ($object instanceof \GaletteAuto\Brand) {
+            $models = new Models(
+                $this->container->zdb,
+                $this->container->preferences,
+                $this->container->login,
+                new ModelsList()
+            );
+            $params['models'] = $models->getList($object->id);
+        }
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'file:[' . $module['route'] . ']object_show.tpl',
             $params
         );
         return $response;

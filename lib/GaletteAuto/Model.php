@@ -75,7 +75,7 @@ class Model
     public function __construct(Db $zdb, $args = null)
     {
         $this->zdb = $zdb;
-        $this->brand = new Brand();
+        $this->brand = new Brand($zdb);
 
         if ($args == null || is_int($args)) {
             if (is_int($args) && $args > 0) {
@@ -259,5 +259,17 @@ class Model
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * Set brand from ID
+     *
+     * @param integer $id Brand ID
+     *
+     * @return Model
+     */
+    public function setBrand($id)
+    {
+        $this->brand = new Brand($this->zdb, $id);
     }
 }

@@ -16,13 +16,14 @@
             </thead>
             <tbody>
     {foreach from=$list item=o name=obj_list}
+        {assign var="edit_link" value={path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => {_T string="edit" domain="routes"}, "id" => $o->$pk]}}
                 <tr class="{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
                         <input type="checkbox" name="_sel[]" value="{$o->$pk}"/>
                     </td>
-                    <td><a href="object.php?set={$name}&#038;{if isset($show) and $show eq true}show{else}{$pk}{/if}={$o->$pk}">{$o->$field}</a></td>
+                    <td><a href="{if isset($show) and $show eq true}{path_for name="propertyShow" data=["property" => $obj->getRouteName(), "id" => $o->$pk]}{else}{$edit_link}{/if}">{$o->$field}</a></td>
                     <td class="center nowrap">
-                        <a href="object.php?set={$set}&#038;{$pk}={$o->$pk}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
+                        <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
                         <a onclick="return confirm('{$delete_text}'.replace('%s', '{$o->$field}'))" href="object.php?set={$set}&#038;sup={$o->$pk}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
                     </td>
                 </tr>

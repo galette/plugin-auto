@@ -77,6 +77,26 @@ class Transmission extends AbstractObject
     }
 
     /**
+     * Get field label
+     *
+     * @return string
+     */
+    public function getFieldLabel()
+    {
+        return _T('Transmission', 'auto');
+    }
+
+    /**
+     * Get property route name
+     *
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return __('transmission', 'auto_routes');
+    }
+
+    /**
     * Global getter method
     *
     * @param string $name name of the property we want to retrive

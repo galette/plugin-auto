@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use Slim\Router;
 use Galette\Core\Db;
 use GaletteAuto\Filters\PropertiesList;
 
@@ -219,6 +220,20 @@ abstract class AbstractObject
     }
 
     /**
+     * Get field label
+     *
+     * @return string
+     */
+    abstract public function getFieldLabel();
+
+    /**
+     * Get property route name
+     *
+     * @return string
+     */
+    abstract public function getRouteName();
+
+    /**
      * Global getter method
      *
      * @param string $name name of the property we want to retrive
@@ -260,5 +275,42 @@ abstract class AbstractObject
                 $this->value = $value;
                 break;
         }
+    }
+
+    /**
+     * Get list route
+     *
+     * @param Router $router   Router instance
+     * @param string $property Property name
+     *
+     * @return string
+     */
+    public static function getListRoute(Router $router, $property)
+    {
+        $route = null;
+        switch ($property) {
+            case __('color', 'auto_routes'):
+                $route = $router->pathFor('colorsList');
+                break;
+            case __('state', 'auto_routes'):
+                $route = $router->pathFor('statesList');
+                break;
+            case __('finition', 'auto_routes'):
+                $route = $router->pathFor('finitionsList');
+                break;
+            case __('body', 'auto_routes'):
+                $route = $router->pathFor('bodiesList');
+                break;
+            case __('transmission', 'auto_routes'):
+                $route = $router->pathFor('transmissionsList');
+                break;
+            case __('brand', 'auto_routes'):
+                $route = $router->pathFor('brandsList');
+                break;
+            default:
+                throw new \RuntimeException('Unknown property ' . $property);
+                break;
+        }
+        return $route;
     }
 }

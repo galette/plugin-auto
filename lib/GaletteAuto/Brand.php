@@ -78,34 +78,24 @@ class Brand extends AbstractObject
     }
 
     /**
-    * List of models for a specific brand
-    *
-    * @param integer $brand Brand identifier
-    *
-    * @return ResultSet
-    */
-    public function getModels($brand)
+     * Get field label
+     *
+     * @return string
+     */
+    public function getFieldLabel()
     {
-        try {
-            $select = $this->zdb->select(AUTO_PREFIX . Model::TABLE);
-            $select->where(
-                array(
-                    self::PK => $brand
-                )
-            )->order(Model::FIELD . ' ASC');
-
-            $results = $this->zdb->execute($select);
-            return $results;
-        } catch (\Exception $e) {
-            Analog::log(
-                '[' . get_class($this) . '] Cannot load models list | ' .
-                $e->getMessage(),
-                Analog::WARNING
-            );
-            return false;
-        }
+        return _T('Brand', 'auto');
     }
 
+    /**
+     * Get property route name
+     *
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return __('brand', 'auto_routes');
+    }
 
     /**
     * Global getter method

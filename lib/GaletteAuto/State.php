@@ -77,6 +77,26 @@ class State extends AbstractObject
     }
 
     /**
+     * Get field label
+     *
+     * @return string
+     */
+    public function getFieldLabel()
+    {
+        return _T('State', 'auto');
+    }
+
+    /**
+     * Get property route name
+     *
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return __('state', 'auto_routes');
+    }
+
+    /**
     * Global getter method
     *
     * @param string $name name of the property we want to retrive

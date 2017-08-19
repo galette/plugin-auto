@@ -213,3 +213,24 @@ $this->get(
     __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
     PropertiesController::class . ':transmissionsList'
 )->setName('transmissionsList')->add($authenticate);
+
+$this->get(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    PropertiesController::class . ':propertyEdit'
+)->setName('propertyEdit')->add($authenticate);
+
+$this->post(
+    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
+    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
+    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
+    '}/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    PropertiesController::class . ':doPropertyEdit'
+)->setName('doPropertyEdit')->add($authenticate);
+
+$this->get(
+    '/{property:' . __('brand', 'auto_routes') . '}' . __('/show', 'auto_routes') . '/{id:\d+}',
+    PropertiesController::class . ':propertyShow'
+)->setName('propertyShow')->add($authenticate);

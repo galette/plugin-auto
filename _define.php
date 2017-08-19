@@ -65,6 +65,9 @@ $this->register(
         'statesList'        => 'staff',
         'finitionsList'     => 'staff',
         'bodiesList'        => 'staff',
-        'transmissionsList' => 'staff'
+        'transmissionsList' => 'staff',
+        'propertyEdit'      => 'staff',
+        'doPropertyEdit'    => 'staff',
+        'propertyShow'      => 'staff',
     ]
 );
