@@ -172,8 +172,8 @@ class Auto
         );
 
         $this->model = new Model($this->zdb);
-        $this->color = new Color();
-        $this->state = new State();
+        $this->color = new Color($this->zdb);
+        $this->state = new State($this->zdb);
 
         $deps = array(
             'picture'   => false,
@@ -181,11 +181,11 @@ class Auto
             'dues'      => false
         );
         $this->owner = new Adherent($this->zdb, null, $deps);
-        $this->transmission = new Transmission();
-        $this->finition = new Finition();
+        $this->transmission = new Transmission($this->zdb);
+        $this->finition = new Finition($this->zdb);
         $this->picture = new Picture($this->plugins);
-        $this->body = new Body();
-        $this->history = new History();
+        $this->body = new Body($this->zdb);
+        $this->history = new History($this->zdb);
         if (is_object($args)) {
             $this->loadFromRS($args);
         }
@@ -495,7 +495,7 @@ class Auto
         if (isset($this->propnames[$name])) {
             return $this->propnames[$name];
         } else {
-            throw new UnexpectedValueException('Unknown propname ' . $name);
+            throw new \UnexpectedValueException('Unknown propname ' . $name);
         }
     }
 

@@ -74,6 +74,11 @@ $this->post(
     Controller::class . ':doAddEditVehicle'
 )->setName('doVehicleEdit')->add($authenticate);
 
+$this->get(
+    __('/vehicle', 'auto_routes') . __('/history', 'auto_routes') . '[/{id:\d+}]',
+    Controller::class . ':vehicleHistory'
+)->setName('vehicleHistory')->add($authenticate);
+
 $this->post(
     __('/ajax', 'routes') . __('/models', 'auto_routes'),
     Controller::class . ':ajaxModels'

@@ -37,7 +37,8 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog as Analog;
+use Analog\Analog;
+use Galette\Core\Db;
 use Galette\Entity\Adherent;
 
 /**
@@ -54,10 +55,11 @@ use Galette\Entity\Adherent;
  */
 class History
 {
+    private $zdb;
     const TABLE = 'history';
 
     //fields list and type
-    private $_fields = array(
+    private $fields = array(
         Auto::PK            => 'integer',
         Adherent::PK        => 'integer',
         'history_date'      => 'datetime',
@@ -67,17 +69,19 @@ class History
     );
 
     //history entries
-    private $_entries;
-    private $_id_car;
+    private $entries;
+    private $id_car;
 
     /**
     * Default constructor
     *
-    * @param integer $id history entry's id to load. Defaults to null
+    * @param Db      $zdb Database instance
+    * @param integer $id  history entry's id to load. Defaults to null
     */
-    public function __construct($id = null)
+    public function __construct(Db $zdb, $id = null)
     {
-        if ( $id != null && is_int($id) ) {
+        $this->zdb = $zdb;
+        if ($id != null && is_int($id)) {
             $this->load($id);
         }
     }
@@ -91,9 +95,7 @@ class History
     */
     public function load($id)
     {
-        global $zdb;
-
-        if ( $id == null || !is_int($id) ) {
+        if ($id == null || !is_int($id)) {
             Analog::log(
                 '[' . get_class($this) .
                 '] Unable to load car\'s history : Invalid car id (id was: `' .
@@ -103,23 +105,23 @@ class History
             return false;
         }
 
-        $this->_id_car = $id;
+        $this->id_car = $id;
 
         try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
             $select->where(
                 array(
                     Auto::PK => $id
                 )
             )->order('history_date ASC');
 
-            $results = $zdb->execute($select);
-            $this->_entries = $results->toArray();
-            $this->_formatEntries();
+            $results = $this->zdb->execute($select);
+            $this->entries = $results->toArray();
+            $this->formatEntries();
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
-                $this->_id_car . ') | ' . $e->getMessage(),
+                $this->id_car . ') | ' . $e->getMessage(),
                 Analog::ERROR
             );
             return false;
@@ -133,17 +135,15 @@ class History
     */
     public function getLatest()
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
             $select->where(
                 array(
-                    Auto::PK => $this->_id_car
+                    Auto::PK => $this->id_car
                 )
             )->order('history_date DESC')->limit(1);
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             if ($results->count() > 0) {
                 $result = $results->current();
                 return $result;
@@ -166,26 +166,24 @@ class History
     *
     * @return void
     */
-    private function _formatEntries()
+    private function formatEntries()
     {
-        global $zdb;
-
-        for ( $i = 0 ; $i < count($this->_entries); $i++ ) {
+        for ($i = 0; $i < count($this->entries); $i++) {
             //put a formatted date to show
             //strftime output is ISO-8859-1...
-            $this->_entries[$i]['formatted_date'] = strftime(
+            $this->entries[$i]['formatted_date'] = strftime(
                 '%d %B %Y',
-                strtotime($this->_entries[$i]['history_date'])
+                strtotime($this->entries[$i]['history_date'])
             );
             //associate member to current history entry
-            $this->_entries[$i]['owner']
-                = new Adherent($zdb, (int)$this->_entries[$i]['id_adh']);
+            $this->entries[$i]['owner']
+                = new Adherent($this->zdb, (int)$this->entries[$i]['id_adh']);
             //associate color
-            $this->_entries[$i]['color']
-                = new Color((int)$this->_entries[$i]['id_color']);
+            $this->entries[$i]['color']
+                = new Color($this->zdb, (int)$this->entries[$i]['id_color']);
             //associate state
-            $this->_entries[$i]['state']
-                = new State((int)$this->_entries[$i]['id_state']);
+            $this->entries[$i]['state']
+                = new State($this->zdb, (int)$this->entries[$i]['id_state']);
         }
     }
 
@@ -198,28 +196,26 @@ class History
     */
     public function register($props)
     {
-        global $zdb;
-
         Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
             Analog::DEBUG
         );
 
         try {
-            $fields = $this->_fields;
+            $fields = $this->fields;
             ksort($fields);
             ksort($props);
 
             $values = array();
-            foreach ( $props as $key=>$prop ) {
+            foreach ($props as $key => $prop) {
                 $values[$key] = $prop;
             }
 
-            $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+            $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
             $insert->values($values);
-            $add = $zdb->execute($insert);
+            $add = $this->zdb->execute($insert);
 
-            if ( $add->count() > 0 ) {
+            if ($add->count() > 0) {
                 Analog::log(
                     '[' . get_class($this) .
                     '] new AutoHistory entry set successfully.',
@@ -230,7 +226,7 @@ class History
                     'An error occured registering car new history entry :('
                 );
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot register new histroy entry | ' .
                 $e->getMessage(),
@@ -249,25 +245,24 @@ class History
     */
     public function __get($name)
     {
-        switch($name){
-        case Auto::PK:
-            $ka = Auto::PK;
-            $k = '_' . $ka;
-            return $this->$k;
-            break;
-        case 'fields':
-            return array_keys($this->_fields);
-            break;
-        case 'entries':
-            return $this->_entries;
-            break;
-        default:
-            Analog::log(
-                '[' . get_class($this) . '] Trying to get an unknown property (' .
-                $name . ')',
-                Analog::INFO
-            );
-            break;
+        switch ($name) {
+            case Auto::PK:
+                $ka = Auto::PK;
+                return $this->$ka;
+                break;
+            case 'fields':
+                return array_keys($this->fields);
+                break;
+            case 'entries':
+                return $this->entries;
+                break;
+            default:
+                Analog::log(
+                    '[' . get_class($this) . '] Trying to get an unknown property (' .
+                    $name . ')',
+                    Analog::INFO
+                );
+                break;
         }
     }
 }

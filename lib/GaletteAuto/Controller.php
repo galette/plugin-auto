@@ -46,6 +46,7 @@ use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Repository\Models;
+use GaletteAuto\History;
 
 /**
  * Galette Auto plugin controller
@@ -397,6 +398,45 @@ class Controller
         return $response
             ->withStatus(301)
             ->withHeader('Location', $route);
+    }
+
+    /**
+     * Show vehicle history
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param array    $args     Optionnal args
+     *
+     * @return Response
+     */
+    public function vehicleHistory(Request $request, Response $response, $args = [])
+    {
+        $history = new History($this->container->zdb, (int)$args['id']);
+        $auto = new Auto($this->container->plugins, $this->container->zdb, $history->{Auto::PK});
+        $this->checkAclsFor($auto->owner->id);
+
+        $apk = Auto::PK;
+        $params = [
+            'entries'       => $history->entries,
+            'page_title'    => str_replace('%d', $history->$apk, _T("History of car #%d", "auto")),
+            'mode'          => $request->isXhr() ? 'ajax' : ''
+        ];
+
+        $module = $this->getModule();
+        $smarty = $this->container->view->getSmarty();
+        $smarty->addTemplateDir(
+            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
+            $module['route']
+        );
+        $smarty->compile_id = AUTO_SMARTY_PREFIX;
+
+        // display page
+        $this->container->view->render(
+            $response,
+            'file:[' . $module['route'] . ']history.tpl',
+            $params
+        );
+        return $response;
     }
 
     /**

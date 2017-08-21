@@ -1,3 +1,10 @@
+{if $mode eq 'ajax'}
+    {assign var="extend" value='ajax.tpl'}
+{else}
+    {assign var="extend" value='page.tpl'}
+{/if}
+{extends file=$extend}
+{block name="content"}
         <table id="listing">
             <thead>
                 <tr> 
@@ -26,18 +33,18 @@
                     <td>{$entry.formatted_date}</td>
                     <td>
                         {if $owner->isMan()}
-                            <img src="{$template_subdir}images/icon-male.png" alt="{_T string="[M]" domain="auto"}" width="16" height="16"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-male.png" alt="{_T string="[M]" domain="auto"}" width="16" height="16"/>
                         {elseif $owner->isWoman()}
-                            <img src="{$template_subdir}images/icon-female.png" alt="{_T string="[W]" domain="auto"}" width="16" height="16"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-female.png" alt="{_T string="[W]" domain="auto"}" width="16" height="16"/>
                         {elseif $owner->isCompany()}
-                            <img src="{$template_subdir}images/icon-company.png" alt="{_T string="[W]" domain="auto"}" width="16" height="16"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-company.png" alt="{_T string="[W]" domain="auto"}" width="16" height="16"/>
                         {else}
-                            <img src="{$template_subdir}images/icon-empty.png" alt="" width="10" height="12"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-empty.png" alt="" width="10" height="12"/>
                         {/if}
                         {if $owner->isAdmin()}
-                            <img src="{$template_subdir}images/icon-star.png" alt="{_T string="[admin]" domain="auto"}" width="16" height="16"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-star.png" alt="{_T string="[admin]" domain="auto"}" width="16" height="16"/>
                         {else}
-                            <img src="{$template_subdir}images/icon-empty.png" alt="" width="12" height="13"/>
+                            <img src="{base_url}/{$template_subdir}images/icon-empty.png" alt="" width="12" height="13"/>
                         {/if}
                         {$owner->sfullname}
                     </td>
@@ -50,3 +57,4 @@
 {/foreach}
             </tbody>
         </table>
+{/block}

@@ -53,6 +53,7 @@ $this->register(
         'removeVehicle'     => 'member',
         'removeVehicles'    => 'member',
         'doRemoveVehicle'   => 'member',
+        'vehicleHistory'    => 'member',
         'modelsList'        => 'groupmanager',
         'modelEdit'         => 'groupmanager',
         'doModelEdit'       => 'groupmanager',
