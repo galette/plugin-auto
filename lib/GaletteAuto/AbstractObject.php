@@ -314,4 +314,40 @@ abstract class AbstractObject
         }
         return $route;
     }
+
+    /**
+     * Get object name from route property
+     *
+     * @param string $property Route property
+     *
+     * @return string
+     */
+    public static function getClassForPropName($property)
+    {
+        $classname = '\GaletteAuto\\';
+        switch ($property) {
+            case __('brand', 'auto_routes'):
+                $classname .= 'Brand';
+                break;
+            case __('color', 'auto_routes'):
+                $classname .= 'Color';
+                break;
+            case __('state', 'auto_routes'):
+                $classname .= 'State';
+                break;
+            case __('finition', 'auto_routes'):
+                $classname .= 'Finition';
+                break;
+            case __('body', 'auto_routes'):
+                $classname .= 'Body';
+                break;
+            case __('transmission', 'auto_routes'):
+                $classname .= 'Transmission';
+                break;
+            default:
+                throw new \RuntimeException('Unknown property ' . $property);
+                break;
+        }
+        return $classname;
+    }
 }

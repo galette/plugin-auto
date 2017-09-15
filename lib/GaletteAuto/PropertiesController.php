@@ -681,7 +681,7 @@ class PropertiesController extends Controller
                 ));
         }
 
-        $classname = '\GaletteAuto\\' . ucwords($property);
+        $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->container->zdb);
         if ($is_new) {
             $title = _T("New", "auto");
@@ -735,7 +735,7 @@ class PropertiesController extends Controller
     public function doPropertyEdit(Request $request, Response $response, $args = [])
     {
         $property = $args['property'];
-        $classname = '\GaletteAuto\\' . ucwords($property);
+        $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->container->zdb);
 
         $post = $request->getParsedBody();
@@ -816,7 +816,7 @@ class PropertiesController extends Controller
         $property = $args['property'];
         $id = $args['id'];
 
-        $classname = '\GaletteAuto\\' . ucwords($property);
+        $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->container->zdb);
         $object->load($id);
         $title = str_replace(
@@ -869,7 +869,7 @@ class PropertiesController extends Controller
     public function removeProperty(Request $request, Response $response, $args = [])
     {
         $property = $args['property'];
-        $classname = '\GaletteAuto\\' . ucwords($property);
+        $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->container->zdb);
         $object->load((int)$args['id']);
 
@@ -916,7 +916,7 @@ class PropertiesController extends Controller
     public function removeProperties(Request $request, Response $response, $args = [])
     {
         $property = $args['property'];
-        $classname = '\GaletteAuto\\' . ucwords($property);
+        $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->container->zdb);
 
         $route = AbstractObject::getListRoute($this->container->router, $property);
@@ -988,7 +988,7 @@ class PropertiesController extends Controller
             $del = $model->delete($ids);
 
             $property = $args['property'];
-            $classname = '\GaletteAuto\\' . ucwords($property);
+            $classname = AbstractObject::getClassForPropName($property);
             $object = new $classname($this->container->zdb);
             $del = $object->delete($ids);
 
