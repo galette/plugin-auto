@@ -240,7 +240,7 @@ class Model
         if (!isset($post['brand']) || $post['brand'] == -1) {
             $this->errors[] = _T("- You must select a brand!", "auto");
         } else {
-            $this->brand = new Brand((int)$post['brand']);
+            $this->brand = new Brand($this->zdb, (int)$post['brand']);
         }
 
         if (!isset($post['model']) || $post['model'] == '') {
