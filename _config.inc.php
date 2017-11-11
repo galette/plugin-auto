@@ -36,4 +36,3 @@
  */
 
 define('AUTO_PREFIX', 'auto_');
-define('AUTO_SMARTY_PREFIX', 'plugins_auto');

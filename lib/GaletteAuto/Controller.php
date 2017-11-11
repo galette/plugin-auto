@@ -169,15 +169,6 @@ class Controller
         }
 
         $auto = new Autos($this->container->plugins, $this->container->zdb);
-
-        $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
-
         $afilters = new AutosList();
 
         // Simple filters
@@ -208,6 +199,7 @@ class Controller
 
         //assign pagination variables to the template and add pagination links
         $afilters->setSmartyPagination($this->container->router, $this->container->view->getSmarty());
+        $module = $this->getModule();
 
         // display page
         $this->container->view->render(
@@ -292,12 +284,6 @@ class Controller
         ];
 
         $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
 
         // display page
         $this->container->view->render(
@@ -423,12 +409,6 @@ class Controller
         ];
 
         $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
 
         // display page
         $this->container->view->render(

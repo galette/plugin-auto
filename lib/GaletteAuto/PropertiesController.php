@@ -113,14 +113,6 @@ class PropertiesController extends Controller
             $mfilters
         );
 
-        $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
-
         //assign pagination variables to the template and add pagination links
         $mfilters->setSmartyPagination($this->container->router, $smarty, false);
         $this->container->session->filter_automodels = $mfilters;
@@ -130,6 +122,7 @@ class PropertiesController extends Controller
             'models'        => $models->getList(),
             'require_dialog'=> true
         ];
+        $module = $this->getModule();
 
         // display page
         $this->container->view->render(
@@ -199,12 +192,6 @@ class PropertiesController extends Controller
         ];
 
         $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
 
         // display page
         $this->container->view->render(
@@ -607,14 +594,6 @@ class PropertiesController extends Controller
             }
         }
 
-        $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
-
         //assign pagination variables to the template and add pagination links
         $filters->setSmartyPagination($this->container->router, $smarty, false);
         $this->container->session->$filter_name = $filters;
@@ -632,6 +611,8 @@ class PropertiesController extends Controller
         if (isset($can_show)) {
             $params['show'] = $can_show;
         }
+
+        $module = $this->getModule();
 
         // display page
         $this->container->view->render(
@@ -707,12 +688,6 @@ class PropertiesController extends Controller
         ];
 
         $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
 
         // display page
         $this->container->view->render(
@@ -830,14 +805,6 @@ class PropertiesController extends Controller
             'obj'           => $object
         ];
 
-        $module = $this->getModule();
-        $smarty = $this->container->view->getSmarty();
-        $smarty->addTemplateDir(
-            $module['root'] . '/templates/' . $this->container->preferences->pref_theme,
-            $module['route']
-        );
-        $smarty->compile_id = AUTO_SMARTY_PREFIX;
-
         if ($object instanceof \GaletteAuto\Brand) {
             $models = new Models(
                 $this->container->zdb,
@@ -847,6 +814,8 @@ class PropertiesController extends Controller
             );
             $params['models'] = $models->getList($object->id);
         }
+
+        $module = $this->getModule();
 
         // display page
         $this->container->view->render(
