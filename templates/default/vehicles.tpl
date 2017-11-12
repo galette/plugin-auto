@@ -216,7 +216,7 @@
                         function(data){
                             $(data).each(function(i){
                                 var _data = data[i];
-                                $('<option value="' + _data.id + '">' + _data.model + '</option>').appendTo(_models);
+                                $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
                             });
                         },
                         'json'
@@ -264,7 +264,7 @@
                     $('#owners_list').append( res );
                     $('#owners_list tbody').find('a').each(function(){
                         $(this).click(function(){
-                            var _id = this.href.substring(this.href.indexOf('id_adh=') + 7, this.href.length);
+                            var _id = this.href.match(/.*\/(\d+)$/)[1];
                             $('#owner').attr('value', _id);
                             $('#current_owner_name').html($(this).html());
                             $('#owners_list').dialog('close');
@@ -274,14 +274,11 @@
 
                     //Remap links
                     $('#owners_list .pages a').click(function(){
-                        var _page = this.href.substring(this.href.indexOf('?')+6);
-
                         $.ajax({
-                            url: '{path_for name="ajaxMembers"}',
+                            url: this.href,
                             type: "POST",
                             data: {
                                 ajax: true,
-                                page: _page,
                                 multiple: false
                             },
                             {include file="js_loader.tpl"},
