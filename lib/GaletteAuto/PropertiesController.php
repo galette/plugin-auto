@@ -114,7 +114,7 @@ class PropertiesController extends Controller
         );
 
         //assign pagination variables to the template and add pagination links
-        $mfilters->setSmartyPagination($this->container->router, $smarty, false);
+        $mfilters->setSmartyPagination($this->container->router, $this->container->view->getSmarty(), false);
         $this->container->session->filter_automodels = $mfilters;
 
         $params = [
@@ -595,7 +595,7 @@ class PropertiesController extends Controller
         }
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->container->router, $smarty, false);
+        $filters->setSmartyPagination($this->container->router, $this->container->view->getSmarty(), false);
         $this->container->session->$filter_name = $filters;
 
         $params = [
