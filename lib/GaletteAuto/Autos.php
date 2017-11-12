@@ -145,6 +145,11 @@ class Autos
                     }
                 }
 
+                //delete vehicles hstory
+                $delete = $this->zdb->delete(AUTO_PREFIX . History::TABLE);
+                $delete->where->in(self::PK, $list);
+                $this->zdb->execute($delete);
+
                 //delete vehicles
                 $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
                 $delete->where->in(self::PK, $list);
@@ -158,6 +163,7 @@ class Autos
 
                 //commit all changes
                 $this->zdb->connection->commit();
+                return true;
             } catch (\Exception $e) {
                 $this->zdb->connection->rollBack();
                 Analog::log(
