@@ -112,7 +112,7 @@ class Controller
                     return false;
                 }
 
-                $this->flash->addMessage(
+                $this->container->flash->addMessage(
                     'error_detected',
                     _T("You do not have enought privileges.", "auto")
                 );
@@ -564,7 +564,7 @@ class Controller
             $this->router->pathFor('slash');
 
         if (!isset($post['confirm'])) {
-            $this->flash->addMessage(
+            $this->container->flash->addMessage(
                 'error_detected',
                 _T("Removal has not been confirmed!")
             );
