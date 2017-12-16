@@ -94,7 +94,7 @@ class Controller
      *
      * @return boolean
      */
-    protected function checkAclsFor($id_adh, $redirect = null)
+    protected function checkAclsFor(Response $response, $id_adh, $redirect = null)
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if ($this->container->login->id != $id_adh
@@ -158,7 +158,7 @@ class Controller
         $id_adh = null;
         if (isset($args['id'])) {
             $id_adh = (int)$args['id'];
-            $this->checkAclsFor($args['id']);
+            $this->checkAclsFor($response, $args['id']);
         }
 
         $numrows = $this->container->preferences->pref_numrows;
@@ -237,7 +237,7 @@ class Controller
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         if (!$is_new) {
             $auto->load((int)$args['id']);
-            $this->checkAclsFor($auto->owner->id);
+            $this->checkAclsFor($response, $auto->owner->id);
         } else {
             if (isset($args['id_adh'])
                 && ($this->container->login->isAdmin() || $this->container->login->isStaff())
@@ -315,7 +315,7 @@ class Controller
         $warning_detected = array();
         $success_detected = array();
 
-        $this->checkAclsFor((int)$post['id_adh']);
+        $this->checkAclsFor($response, (int)$post['id_adh']);
 
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         if (!$is_new) {
@@ -342,7 +342,7 @@ class Controller
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;
-                if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
+                if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
                     $route = $this->container->router->pathFor('myVehiclesList');
                 }
             }
@@ -399,7 +399,7 @@ class Controller
     {
         $history = new History($this->container->zdb, (int)$args['id']);
         $auto = new Auto($this->container->plugins, $this->container->zdb, $history->{Auto::PK});
-        $this->checkAclsFor($auto->owner->id);
+        $this->checkAclsFor($response, $auto->owner->id);
 
         $apk = Auto::PK;
         $params = [
@@ -462,10 +462,10 @@ class Controller
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         $auto->load((int)$args['id']);
         $id_adh = $auto->owner->id;
-        $this->checkAclsFor($id_adh);
+        $this->checkAclsFor($response, $id_adh);
 
         $route = $this->container->router->pathFor('vehiclesList');
-        if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
+        if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
             $route = $this->container->router->pathFor('myVehiclesList');
         }
 
@@ -510,11 +510,11 @@ class Controller
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         $auto->load((int)$ids[0]);
         $id_adh = $auto->owner->id;
-        $this->checkAclsFor($id_adh);
+        $this->checkAclsFor($response, $id_adh);
 
         $id_adh = $auto->owner->id;
 
-        if (!$this->checkAclsFor($id_adh, false) || $this->container->login->id == $id_adh) {
+        if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
             $route = $this->container->router->pathFor('myVehiclesList');
         }
 
