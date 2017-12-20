@@ -39,8 +39,7 @@ namespace GaletteAuto;
 
 use Analog\Analog;
 use Galette\Core\Picture as GalettePicture;
-
-require_once '_config.inc.php';
+use Galette\Core\Plugins;
 
 /**
  * Logo handling
@@ -56,19 +55,23 @@ require_once '_config.inc.php';
  */
 class Picture extends GalettePicture
 {
+    private $plugins;
+
     protected $tbl_prefix = AUTO_PREFIX;
     const PK = Auto::PK;
 
     /**
     * Default constructor.
     *
-    * @param int $id_adh the id of the member
+    * @param Plugins $plugins Plugins
+    * @param int     $id_adh  ID of the member
     */
-    public function __construct( $id_adh='' )
+    public function __construct(Plugins $plugins, $id_adh = '')
     {
+        $this->plugins = $plugins;
         $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';
-        if ( !file_exists($this->store_path) ) {
-            if ( !mkdir($this->store_path) ) {
+        if (!file_exists($this->store_path)) {
+            if (!mkdir($this->store_path)) {
                 Analog::log(
                     'Unable to create photo dir `' . $this->store_path . '`.',
                     Analog::ERROR
@@ -79,7 +82,7 @@ class Picture extends GalettePicture
                     Analog::INFO
                 );
             }
-        } else if ( !is_dir($this->store_path) ) {
+        } elseif (!is_dir($this->store_path)) {
             Analog::log(
                 'Unable to store plugin images, since `' . $this->store_path .
                 '` is not a directory.',
@@ -98,9 +101,10 @@ class Picture extends GalettePicture
     */
     protected function getDefaultPicture()
     {
-        global $plugins;
-        $this->file_path = $plugins->getTemplatesPathFromName('Galette Auto') .
-            '/images/car.png';
+        $this->file_path = realpath(
+            $this->plugins->getTemplatesPathFromName('Galette Auto') .
+            '/../../webroot/images/car.png'
+        );
         $this->format = 'png';
         $this->mime = 'image/png';
         $this->has_picture = false;

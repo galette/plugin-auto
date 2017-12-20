@@ -37,7 +37,9 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog as Analog;
+use Analog\Analog;
+use Galette\Core\Db;
+use GaletteAuto\Filters\ModelsList;
 
 /**
  * Automobile Models class for galette Auto plugin
@@ -61,74 +63,26 @@ class Model
     protected $model;
     protected $brand;
 
+    private $errors;
+    private $zdb;
+
     /**
     * Default constructor
     *
-    * @param integer $id model's id to load. Defaults to null
+    * @param Db    $zdb  Database instance
+    * @param mixed $args model's id to load or ResultSet. Defaults to null
     */
-    public function __construct($id = null)
+    public function __construct(Db $zdb, $args = null)
     {
-        $this->brand = new Brand();
-        if ( is_int($id) ) {
-            $this->load($id);
-        }
-    }
+        $this->zdb = $zdb;
+        $this->brand = new Brand($zdb);
 
-    /**
-    * Get models list
-    *
-    * @param integer $brandId optionnal brand we want models for
-    *
-    * @return ResultSet
-    */
-    public function getList($brandId = null)
-    {
-        global $zdb;
-
-        try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE, 'a');
-            $select->join(
-                array('b' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
-                'a.' . Brand::PK . '=b.' . Brand::PK
-            );
-
-            //if required, the where clause
-            if ( isset($brandId) && is_int($brandId) ) {
-                $select->where(
-                    array(
-                        'a.' . Brand::PK => $brandId
-                    )
-                );
+        if ($args == null || is_int($args)) {
+            if (is_int($args) && $args > 0) {
+                $this->load($args);
             }
-
-            // the order clause
-            $select->order(self::FIELD . ' ASC');
-
-            $results = $zdb->execute($select);
-            return $results;
-        } catch (\Exception $e) {
-            Analog::log(
-                '[' . get_class($this) . '] Cannot load models list | ' .
-                $e->getMessage(),
-                Analog::ERROR
-            );
-            return false;
-        }
-    }
-
-    /**
-    * Get models list for specified brand
-    *
-    * @param integer $brandId brand we want models for
-    *
-    * @return models list
-    */
-    public function getListByBrand($brandId)
-    {
-        if ( isset($brandId) && is_int($brandId) ) {
-            return $this->getList($brandId)->toArray();
-        } else {
-            return -1;
+        } elseif (is_object($args)) {
+            $this->loadFromRS($args);
         }
     }
 
@@ -141,22 +95,17 @@ class Model
     */
     public function load($id)
     {
-        global $zdb;
-
         try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE);
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
             $select->where(
                 array(
                     self::PK => $id
                 )
             );
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             $result = $results->current();
-            $this->id = $result->id_model;
-            $this->model = $result->model;
-            $id_brand = Brand::PK;
-            $this->brand->load((int)$result->$id_brand);
+            $this->loadFromRS($result);
             return true;
         } catch (\Exception $e) {
             Analog::log(
@@ -169,6 +118,21 @@ class Model
     }
 
     /**
+     * Populate object from a resultset row
+     *
+     * @param ResultSet $r the resultset row
+     *
+     * @return void
+     */
+    private function loadFromRS($r)
+    {
+        $this->id = $r->id_model;
+        $this->model = $r->model;
+        $id_brand = Brand::PK;
+        $this->brand->load((int)$r->$id_brand);
+    }
+
+    /**
     * Store current model
     *
     * @param boolean $new New record or existing one
@@ -177,30 +141,29 @@ class Model
     */
     public function store($new = false)
     {
-        global $zdb;
-
         try {
             $values = array(
                 'model'     => $this->model,
                 Brand::PK   => $this->brand->id_brand
             );
-            if ( $new ) {
-                $insert = $zdb->insert(AUTO_PREFIX . self::TABLE);
+            if ($new) {
+                $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
                 $insert->values($values);
-                $zdb->execute($insert);
+                $this->zdb->execute($insert);
             } else {
-                $update = $zdb->update(AUTO_PREFIX . self::TABLE);
+                $update = $this->zdb->update(AUTO_PREFIX . self::TABLE);
                 $update->set($values)->where(
                     array(
                         self::PK => $this->id
                     )
                 );
+                $this->zdb->execute($update);
             }
             return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot store model' .
-                ' values `' . $this->id . '`, `' . $this->value . '` | ' .
+                ' values `' . $this->id . '`, `' . implode('`, `', $values) . '` | ' .
                 $e->getMessage(),
                 Analog::WARNING
             );
@@ -217,12 +180,11 @@ class Model
     */
     public function delete($ids)
     {
-        global $zdb;
-
         try {
-            $delete = $zdb->delete(AUTO_PREFIX . self::TABLE);
+            $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
             $delete->where->in(self::PK, $ids);
-            $zdb->execute($delete);
+            $this->zdb->execute($delete);
+            return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot delete models from ids `' .
@@ -243,17 +205,17 @@ class Model
     public function __get($name)
     {
         $forbidden = array();
-        if ( !in_array($name, $forbidden) ) {
-            switch( $name ){
-            case 'brand':
-                return $this->brand->id;
-                break;
-            case 'obrand':
-                return $this->brand;
-                break;
-            default:
-                return $this->$name;
-                break;
+        if (!in_array($name, $forbidden)) {
+            switch ($name) {
+                case 'brand':
+                    return $this->brand->id;
+                    break;
+                case 'obrand':
+                    return $this->brand;
+                    break;
+                default:
+                    return $this->$name;
+                    break;
             }
         } else {
             Analog::log(
@@ -265,23 +227,49 @@ class Model
     }
 
     /**
-    * Global setter method
-    *
-    * @param string $name  name of the property we want to assign a value to
-    * @param object $value a relevant value for the property
-    *
-    * @return void
-    */
-    public function __set($name, $value)
+     * Check posted values validity
+     *
+     * @param array $post All values to check, basically the $_POST array
+     *                    after sending the form
+     *
+     * @return boolean
+     */
+    public function check($post)
     {
-        switch ( $name ) {
-        case 'model':
-        case self::PK:
-            $this->$name = $value;
-            break;
-        case 'brand':
-            $this->brand = new Brand((int)$value);
-            break;
+        $this->errors = [];
+        if (!isset($post['brand']) || $post['brand'] == -1) {
+            $this->errors[] = _T("- You must select a brand!", "auto");
+        } else {
+            $this->brand = new Brand($this->zdb, (int)$post['brand']);
         }
+
+        if (!isset($post['model']) || $post['model'] == '') {
+            $this->errors[] = _T("- You must provide a value!", "auto");
+        } else {
+            $this->model = $post['model'];
+        }
+        return count($this->errors) === 0;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Set brand from ID
+     *
+     * @param integer $id Brand ID
+     *
+     * @return Model
+     */
+    public function setBrand($id)
+    {
+        $this->brand = new Brand($this->zdb, $id);
     }
 }

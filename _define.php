@@ -39,9 +39,40 @@ $this->register(
     'Galette Auto',                         //Name
     'Plugin to manage Automobile clubs',    //Short description
     'Johan Cwiklinski',                     //Author
-    '1.2.0',                                //Version
-    '0.8',                                  //Galette compatible version
-    '2016-09-18',                           //Release date
-    null                                    //Permissions needed - not yet implemented
+    '1.3.0',                                //Version
+    '0.9',                                  //Galette compatible version
+    'auto',                                 //routing name
+    '2017-12-21',                           //Release date
+    [ //routes permissions
+        'vehiclesList'      => 'groupmanager',
+        'myVehiclesList'    => 'member',
+        'vehicleEdit'       => 'member',
+        'ajaxModels'        => 'member',
+        'doVehicleEdit'     => 'member',
+        'batch-vehicleslist'=> 'member',
+        'removeVehicle'     => 'member',
+        'removeVehicles'    => 'member',
+        'doRemoveVehicle'   => 'member',
+        'vehicleHistory'    => 'member',
+        'modelsList'        => 'groupmanager',
+        'modelEdit'         => 'groupmanager',
+        'doModelEdit'       => 'groupmanager',
+        'removeModel'       => 'staff',
+        'removeModels'      => 'staff',
+        'doRemoveModel'     => 'staff',
+        'batch-modelslist'  => 'staff',
+        'brandsList'        => 'staff',
+        'colorsList'        => 'staff',
+        'statesList'        => 'staff',
+        'finitionsList'     => 'staff',
+        'bodiesList'        => 'staff',
+        'transmissionsList' => 'staff',
+        'propertyEdit'      => 'staff',
+        'doPropertyEdit'    => 'staff',
+        'propertyShow'      => 'staff',
+        'batch-propertieslist' => 'staff',
+        'removeProperty'    => 'staff',
+        'removeProperties'  => 'staff',
+        'doRemoveProperty'  => 'staff'
+    ]
 );
-

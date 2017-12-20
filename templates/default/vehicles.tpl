@@ -1,55 +1,63 @@
-        <form action="" method="post" id="modifform" enctype="multipart/form-data">
+{extends file="page.tpl"}
+
+{block name="content"}
+        {if $mode eq 'new'}
+            {assign var="action" value={_T string="add" domain="routes"}}
+        {else}
+            {assign var="action" value={_T string="edit" domain="routes"}}
+        {/if}
+        <form action="{path_for name="doVehicleEdit" data=["action" => $action]}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="bigtable">
             <fieldset class="cssform">
-                <legend class="ui-state-active ui-corner-top">{_T string="Car's base informations"}</legend>
+                <legend class="ui-state-active ui-corner-top">{_T string="Car's base informations" domain="auto"}</legend>
                 <div>
                 <p>
-                    <label for="name" class="bline">{_T string="Name:"}</label>
+                    <label for="name" class="bline">{_T string="Name:" domain="auto"}</label>
                     <input type="text" name="name" id="name" value="{$car->name}" maxlength="20" required/>
                 </p>
                 <p>
                     <span class="bline">
-                        <label for="brand">{_T string="Brand"}</label>/<label for="model">{_T string="Model:"}</label>
+                        <label for="brand">{_T string="Brand" domain="auto"}</label>/<label for="model">{_T string="Model:" domain="auto"}</label>
                     </span>
                     <select name="brand" id="brand" required>
-                        <option value="-1">{_T string="Choose a brand"}</option>
+                        <option value="-1">{_T string="Choose a brand" domain="auto"}</option>
     {foreach from=$brands item=brand}
                         <option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->brand} selected="selected"{/if}>{$brand->brand}</option>
     {/foreach}
                     </select>
                     <select name="model" id="model" required>
-                        <option value="-1">{_T string="Choose a model"}</option>
+                        <option value="-1">{_T string="Choose a model" domain="auto"}</option>
     {foreach from=$models item=model}
-                        <option value="{$model->id_model}"{if $model->id_model eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
+                        <option value="{$model->id}"{if $model->id eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label for="first_registration_date" class="bline">{_T string="First registration date:"}</label>
+                    <label for="first_registration_date" class="bline">{_T string="First registration date:" domain="auto"}</label>
                     <input type="text" name="first_registration_date" id="first_registration_date" value="{$car->first_registration_date}" maxlength="20" required/>
                 </p>
                 <p>
-                    <label for="first_circulation_date" class="bline">{_T string="First circulation date:"}</label>
+                    <label for="first_circulation_date" class="bline">{_T string="First circulation date:" domain="auto"}</label>
                     <input type="text" name="first_circulation_date" id="first_circulation_date" value="{$car->first_circulation_date}" maxlength="20" required/>
                 </p>
                 <p>
-                    <label for="mileage" class="bline">{_T string="Mileage:"}</label>
+                    <label for="mileage" class="bline">{_T string="Mileage:" domain="auto"}</label>
                     <input type="text" name="mileage" id="mileage" value="{$car->mileage}" maxlength="20"/>
                 </p>
                 <p>
-                    <label for="seats" class="bline">{_T string="Seats:"}</label>
+                    <label for="seats" class="bline">{_T string="Seats:" domain="auto"}</label>
                     <input type="text" name="seats" id="seats" value="{$car->seats}"/>
                 </p>
                 </div>
             </fieldset>
 
             <fieldset>
-                <legend class="ui-state-active ui-corner-top">{_T string="Car's photo"}</legend>
+                <legend class="ui-state-active ui-corner-top">{_T string="Car's photo" domain="auto"}</legend>
                 <p>
-                    <span class="bline">{_T string="Picture:"}</span>
-                    <img src="picture.php?id_adh={$car->id}&amp;rand={$time}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo"}"/><br/>
+                    <span class="bline">{_T string="Picture:" domain="auto"}</span>
+                    <img src="{if $car->id}{path_for name="vehiclePhoto" data=["id" => $car->id]}{else}{path_for name="vehiclePhoto"}{/if}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo" domain="auto"}"/><br/>
 {if $car->hasPicture() }
-                    <span class="labelalign"><label for="del_photo">{_T string="Delete image"}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
+                    <span class="labelalign"><label for="del_photo">{_T string="Delete image" domain="auto"}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
 {/if}
                     <input class="labelalign" type="file" name="photo"/>
                 </p>
@@ -57,86 +65,86 @@
             </fieldset>
 
             <fieldset class="cssform">
-                <legend class="ui-state-active ui-corner-top">{_T string="Current car's state informations"}</legend>
+                <legend class="ui-state-active ui-corner-top">{_T string="Current car's state informations" domain="auto"}</legend>
                 <div>
                 <input type="hidden" name="owner" id="owner" value="{$car->owner->id}"/>
     {if $login->isAdmin() || $login->isStaff()}
                 <p class="notform">
                     {* Does car's history should be visible by the actual owner? *}
-                    <a href="history.php?id_car={$car->id}" title="{_T string="Show full car state history"}" id="state_history">{_T string="Car state history"}</a>
-                    <strong class="fright"><a href="#" id="change_owner" title="{_T string="Change car's owner"}">{_T string="Change"}</a> {_T string="Current owner:"} <span id="current_owner_name">{$car->owner->sfullname}</span></strong>
+                    <a href="{if $mode == 'new'}#{else}{path_for name="vehicleHistory" data=["id" => $car->id]}{/if}" title="{_T string="Show full car state history" domain="auto"}" id="state_history">{_T string="Car state history" domain="auto"}</a>
+                    <strong class="fright"><a href="#" id="change_owner" title="{_T string="Change car's owner" domain="auto"}">{_T string="Change" domain="auto"}</a> {_T string="Current owner:" domain="auto"} <span id="current_owner_name">{$car->owner->sfullname}</span></strong>
                 </p>
     {/if}
                 <p>
-                    <label for="color" class="bline">{_T string="Color:"}</label>
+                    <label for="color" class="bline">{_T string="Color:" domain="auto"}</label>
                     <select name="color" id="color" required>
-                        <option value="-1">{_T string="Choose a color"}</option>
+                        <option value="-1">{_T string="Choose a color" domain="auto"}</option>
     {foreach from=$colors item=color}
                         <option value="{$color->id_color}"{if $color->id_color eq $car->color->id} selected="selected"{/if}>{$color->color}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label for="state" class="bline">{_T string="State:"}</label>
+                    <label for="state" class="bline">{_T string="State:" domain="auto"}</label>
                     <select name="state" id="state" required>
-                        <option value="-1">{_T string="Choose a state"}</option>
+                        <option value="-1">{_T string="Choose a state" domain="auto"}</option>
     {foreach from=$states item=state}
                         <option value="{$state->id_state}"{if $state->id_state eq $car->state->id} selected="selected"{/if}>{$state->state}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label for="registration" class="bline">{_T string="Registration:"}</label>
+                    <label for="registration" class="bline">{_T string="Registration:" domain="auto"}</label>
                     <input type="text" name="registration" id="registration" value="{$car->registration}" required/>
                 </p>
                 </div>
             </fieldset>
             <fieldset class="cssform">
-                <legend class="ui-state-active ui-corner-top">{_T string="Car's technical informations"}</legend>
+                <legend class="ui-state-active ui-corner-top">{_T string="Car's technical informations" domain="auto"}</legend>
                 <div>
                 <p>
-                    <label class="bline" for="body">{_T string="Body:"}</label>
+                    <label class="bline" for="body">{_T string="Body:" domain="auto"}</label>
                     <select name="body" id="body" required>
-                        <option value="-1">{_T string="Choose a body"}</option>
+                        <option value="-1">{_T string="Choose a body" domain="auto"}</option>
     {foreach from=$bodies item=body}
                         <option value="{$body->id_body}"{if $body->id_body eq $car->body->id} selected="selected"{/if}>{$body->body}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label class="bline" for="transmission">{_T string="Transmission:"}</label>
+                    <label class="bline" for="transmission">{_T string="Transmission:" domain="auto"}</label>
                     <select name="transmission" id="transmission" required>
-                        <option value="-1">{_T string="Choose a transmission"}</option>
+                        <option value="-1">{_T string="Choose a transmission" domain="auto"}</option>
     {foreach from=$transmissions item=transmission}
                         <option value="{$transmission->id_transmission}"{if $transmission->id_transmission eq $car->transmission->id} selected="selected"{/if}>{$transmission->transmission}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label class="bline" for="finition">{_T string="Finition:"}</label>
+                    <label class="bline" for="finition">{_T string="Finition:" domain="auto"}</label>
                     <select name="finition" id="finition" required>
-                        <option value="-1">{_T string="Choose a finition"}</option>
+                        <option value="-1">{_T string="Choose a finition" domain="auto"}</option>
     {foreach from=$finitions item=finition}
                         <option value="{$finition->id_finition}"{if $finition->id_finition eq $car->finition->id} selected="selected"{/if}>{$finition->finition}</option>
     {/foreach}
                     </select>
                 </p>
                 <p>
-                    <label for="chassis_number" class="bline">{_T string="Chassis number:"}</label>
+                    <label for="chassis_number" class="bline">{_T string="Chassis number:" domain="auto"}</label>
                     <input type="text" name="chassis_number" id="chassis_number" value="{$car->chassis_number}"/>
                 </p>
                 <p>
-                    <label for="horsepower" class="bline">{_T string="Horsepower:"}</label>
+                    <label for="horsepower" class="bline">{_T string="Horsepower:" domain="auto"}</label>
                     <input type="text" name="horsepower" id="horsepower" value="{$car->horsepower}"/>
                 </p>
                 <p>
-                    <label for="engine_size" class="bline">{_T string="Engine size:"}</label>
+                    <label for="engine_size" class="bline">{_T string="Engine size:" domain="auto"}</label>
                     <input type="text" name="engine_size" id="engine_size" value="{$car->engine_size}"/>
                 </p>
                 <p>
-                    <label for="fuel" class="bline">{_T string="Fuel:"}</label>
+                    <label for="fuel" class="bline">{_T string="Fuel:" domain="auto"}</label>
                     <select name="fuel" id="fuel" required>
-                        <option value="-1">{_T string="Choose a fuel"}</option>
+                        <option value="-1">{_T string="Choose a fuel" domain="auto"}</option>
     {foreach from=$fuels key=k item=fuel}
                         <option value="{$k}"{if $k eq $car->fuel} selected="selected"{/if}>{$fuel}</option>
     {/foreach}
@@ -145,10 +153,10 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend class="ui-state-active ui-corner-top">{_T string="Comment"}</legend>
+                <legend class="ui-state-active ui-corner-top">{_T string="Comment" domain="auto"}</legend>
                 <div>
                 <p>
-                    <label for="comment" class="bline">{_T string="Comment:"}</label>
+                    <label for="comment" class="bline">{_T string="Comment:" domain="auto"}</label>
                     <textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
                 </p>
                 </div>
@@ -160,6 +168,9 @@
             <input type="hidden" name="id_car" value="{$car->id}"/>
         </div>
         </form>
+{/block}
+
+{block name="javascripts"}
         <script type="text/javascript">
             $(function() {
                 _collapsibleFieldsets();
@@ -168,7 +179,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
@@ -177,7 +188,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{$template_subdir}images/calendar.png',
+                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
                     buttonImageOnly: true,
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
@@ -199,8 +210,8 @@
                     {* Set the first option *}
                     _modelChoose.appendTo(_models);
                     {* Get the new list for selected brand, and appent it to models on the page *}
-                    $.get(
-                        'models-ajax.php',
+                    $.post(
+                        '{path_for name="ajaxModels"}',
                         { brand: id_brand },
                         function(data){
                             $(data).each(function(i){
@@ -216,7 +227,7 @@
                 $('#change_owner').click(function(){
 
                     $.ajax({
-                        url: '{$galette_base_path}ajax_members.php',
+                        url: '{path_for name="ajaxMembers"}',
                         type: "POST",
                         data: {
                             ajax: true,
@@ -224,7 +235,7 @@
                             from: 'single',
                             id: '{$car->owner->id}'
                         },
-                        {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                        {include file="js_loader.tpl"},
                         success: function(res){
                             _owners_dialog(res);
                         },
@@ -236,7 +247,7 @@
                 });
 
                 var _owners_dialog = function(res){
-                    var _el = $('<div id="owners_list" title="{_T string="Owners"}"> </div>');
+                    var _el = $('<div id="owners_list" title="{_T string="Owners" domain="auto"}"> </div>');
                     _el.appendTo('#modifform').dialog({
                         modal: true,
                         hide: 'fold',
@@ -253,27 +264,24 @@
                     $('#owners_list').append( res );
                     $('#owners_list tbody').find('a').each(function(){
                         $(this).click(function(){
-                            var _id = this.href.substring(this.href.indexOf('id_adh=') + 7, this.href.length);
+                            var _id = this.href.match(/.*\/(\d+)$/)[1];
                             $('#owner').attr('value', _id);
                             $('#current_owner_name').html($(this).html());
                             $('#owners_list').dialog('close');
                             return false;
-                        }).attr('title', '{_T string="Click to choose this owner for current car"}');
+                        }).attr('title', '{_T string="Click to choose this owner for current car" domain="auto"}');
                     });
 
                     //Remap links
                     $('#owners_list .pages a').click(function(){
-                        var _page = this.href.substring(this.href.indexOf('?')+6);
-
                         $.ajax({
-                            url: '{$galette_base_path}ajax_members.php',
+                            url: this.href,
                             type: "POST",
                             data: {
                                 ajax: true,
-                                page: _page,
                                 multiple: false
                             },
-                            {include file="{php}echo GALETTE_ROOT . GALETTE_TPL_SUBDIR;{/php}js_loader.tpl"},
+                            {include file="js_loader.tpl"},
                             success: function(res){
                                 $('#owners_list').empty();
                                 _owners_ajax_mapper(res);
@@ -286,10 +294,10 @@
                     });
                 }
 
+        {if $mode != 'new'}
                 $('#state_history').click(function(){
                     $.ajax({
-                        url: this.href + '&amp;ajax=true',
-                        data: { ajax: true },
+                        url: this.href,
                         success: function(res){
                             _history_dialog(res);
                         }
@@ -298,7 +306,7 @@
                 });
 
                 var _history_dialog = function(res){
-                    var _el = $('<div id="history_list" title="{_T string="Car\\'s history"}"> </div>');
+                    var _el = $('<div id="history_list" title="{_T string="Car\\'s history" domain="auto"}"> </div>');
                     _el.appendTo('#modifform').dialog({
                         modal: true,
                         hide: 'fold',
@@ -310,6 +318,8 @@
                     });
                     $('#history_list').append( res );
                 }
+        {/if}
     {/if}
             });
         </script>
+{/block}

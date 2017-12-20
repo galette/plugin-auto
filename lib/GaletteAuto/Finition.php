@@ -37,6 +37,8 @@
 
 namespace GaletteAuto;
 
+use Galette\Core\Db;
+
 /**
  * Automobile Finitions class for galette Auto plugin
  *
@@ -59,17 +61,39 @@ class Finition extends AbstractObject
     /**
     * Default constructor
     *
-    * @param integer $id finition's id to load. Defaults to null
+    * @param Db      $zdb Database instance
+    * @param integer $id  finition's id to load. Defaults to null
     */
-    public function __construct($id = null)
+    public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
+            $zdb,
             self::TABLE,
             self::PK,
             self::FIELD,
             self::NAME,
             $id
         );
+    }
+
+    /**
+     * Get field label
+     *
+     * @return string
+     */
+    public function getFieldLabel()
+    {
+        return _T('Finition', 'auto');
+    }
+
+    /**
+     * Get property route name
+     *
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return __('finition', 'auto_routes');
     }
 
     /**
@@ -81,7 +105,7 @@ class Finition extends AbstractObject
     */
     public function __get($name)
     {
-        if ( $name == self::FIELD ) {
+        if ($name == self::FIELD) {
             return parent::__get('field');
         } else {
             return parent::__get($name);

@@ -38,6 +38,8 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use Galette\Core\Db;
+use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Zend\Db\Sql\Expression;
 
@@ -58,8 +60,21 @@ class Autos
     const TABLE = Auto::TABLE;
     const PK = Auto::PK;
 
-    private $_filter = null;
-    private $_count = null;
+    private $plugins;
+    private $zdb;
+    private $count = null;
+
+    /**
+     * Constructor
+     *
+     * @param Plugins $plugins Plugins instance
+     * @param Db      $zdb     Database instance
+     */
+    public function __construct(Plugins $plugins, Db $zdb)
+    {
+        $this->plugins = $plugins;
+        $this->zdb = $zdb;
+    }
 
     /**
      * Remove specified vehicles
@@ -70,22 +85,22 @@ class Autos
      */
     public function removeVehicles($ids)
     {
-        global $zdb, $hist;
+        global $hist;
 
         $list = array();
-        if ( is_numeric($ids) ) {
+        if (is_numeric($ids)) {
             //we've got only one identifier
             $list[] = $ids;
         } else {
             $list = $ids;
         }
 
-        if ( is_array($list) ) {
+        if (is_array($list)) {
             try {
-                $zdb->connection->beginTransaction();
+                $this->zdb->connection->beginTransaction();
 
                 //Retrieve some informations
-                $select = $zdb->select(AUTO_PREFIX . self::TABLE, 'a');
+                $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
                 $select->columns(
                     array(
                         self::PK,
@@ -101,17 +116,17 @@ class Autos
                     array('brand')
                 )->where->in(self::PK, $list);
 
-                $vehicles = $zdb->execute($select);
+                $vehicles = $this->zdb->execute($select);
 
                 $infos = null;
-                foreach ($vehicles as $vehicle ) {
+                foreach ($vehicles as $vehicle) {
                     $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
                         ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
                     $infos .=  $str_v . "\n";
 
-                    $p = new Picture($vehicle->id_car);
-                    if ( $p->hasPicture() ) {
-                        if ( !$p->delete() ) {
+                    $p = new Picture($this->plugins, $vehicle->id_car);
+                    if ($p->hasPicture()) {
+                        if (!$p->delete()) {
                             Analog::log(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v,
@@ -130,21 +145,27 @@ class Autos
                     }
                 }
 
-                //delete vehicles
-                $delete = $zdb->delete(AUTO_PREFIX . self::TABLE);
+                //delete vehicles hstory
+                $delete = $this->zdb->delete(AUTO_PREFIX . History::TABLE);
                 $delete->where->in(self::PK, $list);
-                $zdb->execute($delete);
+                $this->zdb->execute($delete);
+
+                //delete vehicles
+                $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
+                $delete->where->in(self::PK, $list);
+                $this->zdb->execute($delete);
 
                 //add an history entry
                 $hist->add(
-                    _T("Delete vehicles cards"),
+                    _T("Delete vehicles cards", "auto"),
                     $infos
                 );
 
                 //commit all changes
-                $zdb->connection->commit();
+                $this->zdb->connection->commit();
+                return true;
             } catch (\Exception $e) {
-                $zdb->connection->rollBack();
+                $this->zdb->connection->rollBack();
                 Analog::log(
                     'Unable to delete selected vehicle(s) |' .
                     $e->getMessage(),
@@ -179,7 +200,7 @@ class Autos
      * Get the list of all vehicles
      *
      * @param boolean      $as_autos return the results as an array of Auto object.
-     *                                   When true, fields are not relevant
+     *                               When true, fields are not relevant
      * @param boolean      $mine     show only current logged member cars
      * @param array|string $fields   field(s) name(s) to get. Should be a string
      *                               or an array. If null, all fields will be returned
@@ -189,9 +210,13 @@ class Autos
      * @return array|Autos[]
      */
     public function getList(
-        $as_autos=false, $mine=false, $fields=null, $filters=null, $id_adh = null
+        $as_autos = false,
+        $mine = false,
+        $fields = null,
+        $filters = null,
+        $id_adh = null
     ) {
-        global $zdb, $login;
+        global $login;
 
         $fieldsList = ( $fields != null && !$as_autos )
             ? (( !is_array($fields) || count($fields) < 1 )
@@ -200,12 +225,12 @@ class Autos
             : (array)'*';
 
         try {
-            $select = $zdb->select(AUTO_PREFIX . self::TABLE, 'a');
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
             $select->columns($fieldsList);
 
             //restict on user self vehicles when not admin, or if admin and
             //requested 'my vehicles'
-            if ( $mine == true || (!$login->isAdmin() && !$login->isStaff()) ) {
+            if ($mine == true || (!$login->isAdmin() && !$login->isStaff())) {
                 $select->where(
                     array(
                         Adherent::PK => $login->id
@@ -214,7 +239,7 @@ class Autos
             }
 
             //restrict on specified user vehicles if an id has been provided
-            if ( $id_adh !== null ) {
+            if ($id_adh !== null) {
                 $select->where(
                     array(
                         Adherent::PK => $id_adh
@@ -222,17 +247,17 @@ class Autos
                 );
             }
 
-            $this->_proceedCount($select, $filters);
+            $this->proceedCount($select, $filters);
 
-            if ( $filters !== null ) {
+            if ($filters !== null) {
                 $filters->setLimit($select);
             }
 
-            $results = $zdb->execute($select);
+            $results = $this->zdb->execute($select);
             $autos = array();
-            if ( $as_autos ) {
-                foreach ( $results as $row ) {
-                    $autos[] = new Auto($row);
+            if ($as_autos) {
+                foreach ($results as $row) {
+                    $autos[] = new Auto($this->plugins, $this->zdb, $row);
                 }
             } else {
                 $autos = $results;
@@ -256,10 +281,8 @@ class Autos
      *
      * @return void
      */
-    private function _proceedCount($select, $filters)
+    private function proceedCount($select, $filters)
     {
-        global $zdb;
-
         try {
             $countSelect = clone $select;
             $countSelect->reset($countSelect::COLUMNS);
@@ -272,16 +295,16 @@ class Autos
             );
 
             $have = $select->having;
-            if ( $have->count() > 0 ) {
-                foreach ( $have->getPredicates() as $h ) {
+            if ($have->count() > 0) {
+                foreach ($have->getPredicates() as $h) {
                     $countSelect->where($h);
                 }
             }
 
-            $results = $zdb->execute($countSelect);
-            $this->_count = $results->current()->count;
-            if ( isset($filters) && $this->_count > 0 ) {
-                $filters->setCounter($this->_count);
+            $results = $this->zdb->execute($countSelect);
+            $this->count = $results->current()->count;
+            if (isset($filters) && $this->count > 0) {
+                $filters->setCounter($this->count);
             }
         } catch (\Exception $e) {
             Analog::log(
