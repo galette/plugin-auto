@@ -37,6 +37,7 @@
                     <td><a href="{$edit_link}">{$brand->value}</a></td>
                     <td><a href="{$edit_link}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
+    {if $login->isAdmin() or $login->isStaff() or $auto->owner->id eq $login->id || $login->isGroupManager() and $preferences->pref_bool_groupsmanagers_edit_member}
                         <a href="{$edit_link}" class="tooltip action">
                             <i class="fas fa-edit"></i>
                             <span class="sr-only">{_T string="Edit %vehicle" domain="auto" pattern="/%vehicle/" replace=$auto->name}</span>
@@ -48,6 +49,7 @@
                             <i class="fas fa-trash"></i>
                             <span class="sr-only">{_T string="%vehiclename: remove from database" pattern="/%vehiclename/" replace=$auto->name domain="auto"}</span>
                         </a>
+    {/if}
                     </td>
                 </tr>
 {foreachelse}

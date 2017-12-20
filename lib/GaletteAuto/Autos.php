@@ -223,7 +223,7 @@ class Autos
             ? (( !is_array($fields) || count($fields) < 1 )
                 ? (array)'*'
                 : implode(', ', $fields))
-            : (array)'*';
+                : (array)'*';
 
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
@@ -231,7 +231,23 @@ class Autos
 
             //restrict on user self vehicles when not admin, or if admin and
             //requested 'my vehicles'
-            if ($mine == true || (!$login->isAdmin() && !$login->isStaff())) {
+            $on_logged = false;
+            if ($mine) {
+                $on_logged = true;
+            } elseif (!$login->isAdmin() && !$login->isStaff() && $login->isGroupManager()) {
+                $groups = new \Galette\Repository\Groups($this->zdb, $login);
+                $managed_users = $groups->getManagerUsers();
+                $managed_users[] = $login->id;
+                if (count($managed_users)) {
+                    $select->where->in(Adherent::PK, $managed_users);
+                } else {
+                    $on_logged = true;
+                }
+            } elseif (!$login->isAdmin() && !$login->isStaff()) {
+                $on_logged = true;
+            }
+
+            if ($on_logged) {
                 $select->where(
                     array(
                         Adherent::PK => $login->id
