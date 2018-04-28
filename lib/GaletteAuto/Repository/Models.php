@@ -75,7 +75,7 @@ class Models extends Repository
      */
     public function __construct(Db $zdb, Preferences $preferences, Login $login, ModelsList $filters)
     {
-        parent::__construct($zdb, $preferences, $login, null, 'GaletteAuto');
+        parent::__construct($zdb, $preferences, $login, null, 'GaletteAuto', AUTO_PREFIX);
         $this->setFilters($filters);
     }
 
