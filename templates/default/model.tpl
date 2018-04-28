@@ -24,7 +24,7 @@
                     </select>
     {else}
                     {_T string="No brand is registered yet. You have to create at least one brand to register models." domain="auto"}.<br/>
-                    <a href='{path_for name="modelsList"}'>{_T string="Add a brand" domain="auto"}<a>
+                    <a href="{path_for name="propertyEdit" data=["property" => {_T string="brand" domain="auto_routes"}, "action" => {_T string="add" domain="routes"}]}">{_T string="Add a brand" domain="auto"}<a>
     {/if}
                 </p>
             </fieldset>
