@@ -695,7 +695,7 @@ class Auto
                 case 'seats':
                 case 'horsepower':
                 case 'engine_size':
-                    if (is_int((int)$value)) {
+                    if (is_int((int)str_replace(' ', '', $value))) {
                         $this->$prop = $value;
                     } elseif ($value != '') {
                         $this->errors[] = str_replace(

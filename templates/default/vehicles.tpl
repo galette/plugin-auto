@@ -42,7 +42,7 @@
                 </p>
                 <p>
                     <label for="mileage" class="bline">{_T string="Mileage:" domain="auto"}</label>
-                    <input type="text" name="mileage" id="mileage" value="{$car->mileage}" maxlength="20"/>
+                    <input type="number" name="mileage" id="mileage" value="{$car->mileage}" maxlength="20"/>
                 </p>
                 <p>
                     <label for="seats" class="bline">{_T string="Seats:" domain="auto"}</label>
@@ -179,8 +179,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                    buttonImageOnly: true,
+                    buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
                 });
@@ -188,8 +187,7 @@
                     changeMonth: true,
                     changeYear: true,
                     showOn: 'button',
-                    buttonImage: '{base_url}/{$template_subdir}images/calendar.png',
-                    buttonImageOnly: true,
+                    buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{_T string="Select a date" escape="js"}</span>',
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
                 });
@@ -203,7 +201,7 @@
                 _modelChoose.appendTo(_models);
     {/if}
                 {* Refresh models list when brand is changed *}
-                $('#brand').change(function(){
+                $('#brand').on('change', function(){
                     var id_brand = $('#brand option:selected').attr('value');
                     {* Empty model list *}
                     _models.empty();
@@ -218,6 +216,7 @@
                                 var _data = data[i];
                                 $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
                             });
+                            _models.trigger("chosen:updated");
                         },
                         'json'
                     );
