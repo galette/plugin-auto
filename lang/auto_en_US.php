@@ -1,5 +1,5 @@
 <?php
-// This file was automatically generated on Wed Dec 20 20:49:14 2017 (GMT)
+// This file was automatically generated on Sat Dec 22 19:48:53 2018 (GMT)
 // Don't modify it by hand, rather use the target lang from the Makefile.
 
 
@@ -33,10 +33,10 @@ $lang['auto']['Show full car state history'] = 'Show full car state history';
 // ../templates/default/vehicles.tpl:124 
 $lang['auto']['Finition:'] = 'Finition:';
 
-// ../lib/GaletteAuto/Auto.php:365 
-$lang['auto']['New car added'] = 'New car added';
+// ../templates/default/vehicles.tpl:75 
+$lang['auto']['Change car\'s owner'] = 'Change car\'s owner';
 
-// ../templates/default/vehicles_list.tpl:42 
+// ../templates/default/vehicles_list.tpl:51 
 $lang['auto']['No car has been registered yet for your account.'] = 'No car has been registered yet for your account.';
 
 // ../lib/GaletteAuto/Auto.php:278 
@@ -51,7 +51,7 @@ $lang['auto']['Brands list'] = 'Brands list';
 // ../lib/GaletteAuto/Controller.php:188 
 $lang['auto']['Vehicles list'] = 'Vehicles list';
 
-// ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles_list.tpl:10 ../templates/default/models_list.tpl:10 ../templates/default/model.tpl:18 ../templates/default/vehicles.tpl:20 
+// ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles.tpl:20 ../templates/default/models_list.tpl:10 ../templates/default/vehicles_list.tpl:10 ../templates/default/model.tpl:18 
 $lang['auto']['Brand'] = 'Brand';
 
 // ../lib/GaletteAuto/Auto.php:276 
@@ -60,7 +60,7 @@ $lang['auto']['Gas'] = 'Gas';
 // ../lib/GaletteAuto/PropertiesController.php:800 
 $lang['auto']['Show \'%s\''] = 'Show \'%s\'';
 
-// ../templates/default/vehicles.tpl:309 
+// ../templates/default/vehicles.tpl:308 
 $lang['auto']['Car\\\'s history'] = 'Car\\\'s history';
 
 // ../lib/GaletteAuto/Auto.php:277 
@@ -78,13 +78,13 @@ $lang['auto']['No model was selected, please check at least one name.'] = 'No mo
 // ../lib/GaletteAuto/Auto.php:386 
 $lang['auto']['Car updated'] = 'Car updated';
 
-// ../templates/default/vehicles.tpl:272 
+// ../templates/default/vehicles.tpl:271 
 $lang['auto']['Click to choose this owner for current car'] = 'Click to choose this owner for current car';
 
 // ../templates/default/vehicles.tpl:75 
 $lang['auto']['Change'] = 'Change';
 
-// ../templates/default/vehicles.tpl:250 
+// ../templates/default/vehicles.tpl:249 
 $lang['auto']['Owners'] = 'Owners';
 
 // ../lib/GaletteAuto/PropertiesController.php:396 
@@ -96,7 +96,7 @@ $lang['auto']['An error occured trying to remove models :/'] = 'An error occured
 // ../lib/GaletteAuto/Controller.php:183 
 $lang['auto']['Member\'s cars'] = 'Member\'s cars';
 
-// ../lib/GaletteAuto/Model.php:247 ../lib/GaletteAuto/PropertiesController.php:732 
+// ../lib/GaletteAuto/PropertiesController.php:732 ../lib/GaletteAuto/Model.php:247 
 $lang['auto']['- You must provide a value!'] = '- You must provide a value!';
 
 // ../templates/default/model.tpl:20 
@@ -123,7 +123,7 @@ $lang['auto']['Registration'] = 'Registration';
 // ../templates/default/vehicles.tpl:115 
 $lang['auto']['Transmission:'] = 'Transmission:';
 
-// ../templates/default/object_list.tpl:46 ../templates/default/vehicles_list.tpl:51 ../templates/default/models_list.tpl:44 
+// ../templates/default/models_list.tpl:56 ../templates/default/object_list.tpl:60 ../templates/default/vehicles_list.tpl:65 
 $lang['auto']['Other:'] = 'Other:';
 
 // ../templates/default/vehicles.tpl:68 
@@ -156,13 +156,13 @@ $lang['auto']['state'] = 'state';
 // ../lib/GaletteAuto/Controller.php:229 
 $lang['auto']['Car ID cannot be null calling edit route!'] = 'Car ID cannot be null calling edit route!';
 
-// ../templates/default/vehicles.tpl:75 
-$lang['auto']['Change car\'s owner'] = 'Change car\'s owner';
+// ../lib/GaletteAuto/Auto.php:365 
+$lang['auto']['New car added'] = 'New car added';
 
 // ../lib/GaletteAuto/Auto.php:163 
 $lang['auto']['mileage'] = 'mileage';
 
-// ../templates/default/object_list.tpl:31 ../templates/default/models_list.tpl:29 
+// ../templates/default/models_list.tpl:38 ../templates/default/object_list.tpl:40 
 $lang['auto']['no record found'] = 'no record found';
 
 // ../lib/GaletteAuto/Auto.php:171 
@@ -219,7 +219,7 @@ $lang['auto']['color'] = 'color';
 // ../templates/default/vehicles.tpl:126 
 $lang['auto']['Choose a finition'] = 'Choose a finition';
 
-// ../templates/default/vehicles_list.tpl:42 
+// ../templates/default/vehicles_list.tpl:51 
 $lang['auto']['No car in the database'] = 'No car in the database';
 
 // ../lib/GaletteAuto/PropertiesController.php:746 
@@ -228,7 +228,7 @@ $lang['auto']['New %property has been added!'] = 'New %property has been added!'
 // ../lib/GaletteAuto/PropertiesController.php:527 ../templates/default/menu.tpl:5 
 $lang['auto']['Colors list'] = 'Colors list';
 
-// ../lib/GaletteAuto/Controller.php:181 
+// ../lib/GaletteAuto/Controller.php:181 ../templates/default/dashboard_member.tpl:1 
 $lang['auto']['My cars'] = 'My cars';
 
 // ../lib/GaletteAuto/Auto.php:166 
@@ -282,7 +282,7 @@ $lang['auto']['Picture:'] = 'Picture:';
 // ../lib/GaletteAuto/Controller.php:179 ../templates/default/menu.tpl:14 
 $lang['auto']['Cars list'] = 'Cars list';
 
-// ../templates/default/models_list.tpl:45 
+// ../templates/default/models_list.tpl:62 
 $lang['auto']['Add new model'] = 'Add new model';
 
 // ../templates/default/model.tpl:26 
@@ -318,7 +318,10 @@ $lang['auto']['Transmissions list'] = 'Transmissions list';
 // ../templates/default/vehicles.tpl:48 
 $lang['auto']['Seats:'] = 'Seats:';
 
-// ../templates/default/vehicles_list.tpl:52 
+// ../lib/GaletteAuto/Color.php:86 ../templates/default/history.tpl:22 
+$lang['auto']['Color'] = 'Color';
+
+// ../templates/default/vehicles_list.tpl:72 
 $lang['auto']['Add new vehicle'] = 'Add new vehicle';
 
 // ../lib/GaletteAuto/PropertiesController.php:337 
@@ -411,7 +414,7 @@ $lang['auto']['Vehicle'] = 'Vehicle';
 // ../lib/GaletteAuto/PropertiesController.php:553 
 $lang['auto']['Brand \'%s\''] = 'Brand \'%s\'';
 
-// ../lib/GaletteAuto/PropertiesController.php:297 ../lib/GaletteAuto/PropertiesController.php:335 ../templates/default/vehicles_list.tpl:11 ../templates/default/models_list.tpl:9 ../templates/default/model.tpl:13 
+// ../lib/GaletteAuto/PropertiesController.php:297 ../lib/GaletteAuto/PropertiesController.php:335 ../templates/default/models_list.tpl:9 ../templates/default/vehicles_list.tpl:11 ../templates/default/model.tpl:13 
 $lang['auto']['Model'] = 'Model';
 
 // ../templates/default/model.tpl:27 
@@ -423,8 +426,8 @@ $lang['auto']['- You must select a brand!'] = '- You must select a brand!';
 // ../lib/GaletteAuto/PropertiesController.php:528 
 $lang['auto']['Add new color'] = 'Add new color';
 
-// ../lib/GaletteAuto/Color.php:86 ../templates/default/history.tpl:22 
-$lang['auto']['Color'] = 'Color';
+// ../templates/default/models_list.tpl:26 ../templates/default/object_list.tpl:28 
+$lang['auto']['Edit %property'] = 'Edit %property';
 
 // ../templates/default/vehicles.tpl:145 
 $lang['auto']['Fuel:'] = 'Fuel:';
@@ -443,4 +446,7 @@ $lang['auto']['New model has been added!'] = 'New model has been added!';
 
 // ../lib/GaletteAuto/Auto.php:159 
 $lang['auto']['model'] = 'model';
+
+// ../templates/default/vehicles_list.tpl:39 
+$lang['auto']['Edit %vehicle'] = 'Edit %vehicle';
 
