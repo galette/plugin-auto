@@ -15,23 +15,23 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-20 16:44+0100\n"
-"PO-Revision-Date: 2017-08-19 09:05+0200\n"
+"PO-Revision-Date: 2018-12-22 20:48+0100\n"
 "Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../lib/GaletteAuto/PropertiesController.php:553
 msgid "Brand '%s'"
 msgstr "Marque « %s »"
 
-#: ../templates/default/history.tpl:19
-msgid "Registration"
-msgstr "Immatriculation"
+#: ../templates/default/vehicles.tpl:79
+msgid "Color:"
+msgstr "Couleur&nbsp;:"
 
 #: ../lib/GaletteAuto/PropertiesController.php:668
 msgid "New"
@@ -51,13 +51,14 @@ msgstr ""
 msgid "%property has been saved!"
 msgstr "%property a été enregistrée !"
 
-#: ../templates/default/vehicles.tpl:79
-msgid "Color:"
-msgstr "Couleur&nbsp;:"
+#: ../templates/default/history.tpl:19
+msgid "Registration"
+msgstr "Immatriculation"
 
-#: ../lib/GaletteAuto/Auto.php:365
-msgid "New car added"
-msgstr "Nouveau véhicule ajouté"
+#: ../lib/GaletteAuto/Controller.php:341
+msgid "- An error has occured while saving vehicle in the database."
+msgstr ""
+"- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
 
 #: ../templates/default/vehicles.tpl:20
 msgid "Model:"
@@ -84,9 +85,9 @@ msgstr ""
 "Aucune marque n'a été enregistrée. Vous devez au moins en créer une pour "
 "ajouter des modèles."
 
-#: ../templates/default/object_list.tpl:46
-#: ../templates/default/vehicles_list.tpl:51
-#: ../templates/default/models_list.tpl:44
+#: ../templates/default/models_list.tpl:56
+#: ../templates/default/object_list.tpl:60
+#: ../templates/default/vehicles_list.tpl:65
 msgid "Other:"
 msgstr "Autres&nbsp;:"
 
@@ -103,6 +104,7 @@ msgid "New model has been added!"
 msgstr "Le modèle a été ajouté !"
 
 #: ../lib/GaletteAuto/Controller.php:181
+#: ../templates/default/dashboard_member.tpl:1
 msgid "My cars"
 msgstr "Mes véhicules"
 
@@ -110,10 +112,15 @@ msgstr "Mes véhicules"
 msgid "Finition:"
 msgstr "Finition&nbsp;:"
 
-#: ../templates/default/object_list.tpl:31
-#: ../templates/default/models_list.tpl:29
+#: ../templates/default/models_list.tpl:38
+#: ../templates/default/object_list.tpl:40
 msgid "no record found"
 msgstr "aucun enregistrement trouvé"
+
+#: ../templates/default/models_list.tpl:26
+#: ../templates/default/object_list.tpl:28
+msgid "Edit %property"
+msgstr "Modifier %property"
 
 #: ../lib/GaletteAuto/PropertiesController.php:979
 msgid "%count %property have been successfully deleted."
@@ -154,7 +161,7 @@ msgstr "Informations techniques de la voiture"
 msgid "Choose a state"
 msgstr "Choisissez un état"
 
-#: ../templates/default/vehicles_list.tpl:52
+#: ../templates/default/vehicles_list.tpl:72
 msgid "Add new vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
@@ -195,8 +202,8 @@ msgstr "Choisissez une marque"
 msgid "Model has been saved!"
 msgstr "Le modèle a été enregistré !"
 
-#: ../lib/GaletteAuto/Model.php:247
 #: ../lib/GaletteAuto/PropertiesController.php:732
+#: ../lib/GaletteAuto/Model.php:247
 msgid "- You must provide a value!"
 msgstr "- Vous devez fournir une valeur&nbsp;!"
 
@@ -222,8 +229,8 @@ msgstr "Essence"
 
 #: ../lib/GaletteAuto/PropertiesController.php:297
 #: ../lib/GaletteAuto/PropertiesController.php:335
-#: ../templates/default/vehicles_list.tpl:11
-#: ../templates/default/models_list.tpl:9 ../templates/default/model.tpl:13
+#: ../templates/default/models_list.tpl:9
+#: ../templates/default/vehicles_list.tpl:11 ../templates/default/model.tpl:13
 msgid "Model"
 msgstr "Modèle"
 
@@ -242,9 +249,9 @@ msgstr "Historique de l'état de la voiture"
 msgid "[admin]"
 msgstr "[admin]"
 
-#: ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles_list.tpl:10
-#: ../templates/default/models_list.tpl:10 ../templates/default/model.tpl:18
-#: ../templates/default/vehicles.tpl:20
+#: ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles.tpl:20
+#: ../templates/default/models_list.tpl:10
+#: ../templates/default/vehicles_list.tpl:10 ../templates/default/model.tpl:18
 msgid "Brand"
 msgstr "Marque"
 
@@ -268,9 +275,9 @@ msgstr "Sélectionnez une marque"
 msgid "color"
 msgstr "couleur"
 
-#: ../templates/default/vehicles.tpl:57
-msgid "Picture:"
-msgstr "Image&nbsp;:"
+#: ../templates/default/vehicles_list.tpl:51
+msgid "No car has been registered yet for your account."
+msgstr "Aucun véhicule n'a été enregistré pour votre compte."
 
 #: ../lib/GaletteAuto/PropertiesController.php:533
 msgid "Add new state"
@@ -288,11 +295,11 @@ msgstr "Supprimer le modèle %1$s"
 msgid "Remove models"
 msgstr "Suppression modèles"
 
-#: ../templates/default/vehicles.tpl:75
-msgid "Change"
-msgstr "Changer"
+#: ../templates/default/adh_fiche_action.tpl:2
+msgid "Member cars"
+msgstr "Véhicules de l'adhérent"
 
-#: ../templates/default/vehicles_list.tpl:42
+#: ../templates/default/vehicles_list.tpl:51
 msgid "No car in the database"
 msgstr "Aucun véhicule dans la base"
 
@@ -322,9 +329,9 @@ msgstr "Ajouter un nouveau véhicule"
 msgid "Bio"
 msgstr "Bio-carburant"
 
-#: ../templates/default/adh_fiche_action.tpl:2
-msgid "Member cars"
-msgstr "Véhicules de l'adhérent"
+#: ../templates/default/vehicles.tpl:75
+msgid "Change"
+msgstr "Changer"
 
 #: ../templates/default/vehicles.tpl:137
 msgid "Horsepower:"
@@ -339,7 +346,11 @@ msgstr "Choisissez une carrosserie"
 msgid "Finitions list"
 msgstr "Liste des finitions"
 
-#: ../templates/default/vehicles.tpl:272
+#: ../templates/default/history.tpl:38 ../templates/default/history.tpl:40
+msgid "[W]"
+msgstr "[F]"
+
+#: ../templates/default/vehicles.tpl:271
 msgid "Click to choose this owner for current car"
 msgstr "Cliquez pour attribuer la voiture courantez à ce propriétaire"
 
@@ -352,7 +363,7 @@ msgid "first registration date"
 msgstr "date de première immatriculation"
 
 # Chaîne Javascript !
-#: ../templates/default/vehicles.tpl:309
+#: ../templates/default/vehicles.tpl:308
 msgid "Car\\'s history"
 msgstr "Historique de la voiture"
 
@@ -360,10 +371,9 @@ msgstr "Historique de la voiture"
 msgid "body"
 msgstr "carrosserie"
 
-#: ../lib/GaletteAuto/Controller.php:341
-msgid "- An error has occured while saving vehicle in the database."
-msgstr ""
-"- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
+#: ../lib/GaletteAuto/Auto.php:365
+msgid "New car added"
+msgstr "Nouveau véhicule ajouté"
 
 #: ../lib/GaletteAuto/PropertiesController.php:396
 msgid "%count models have been successfully deleted."
@@ -390,9 +400,9 @@ msgstr "Choisissez une transmission"
 msgid "Electricity"
 msgstr "Électricité"
 
-#: ../templates/default/vehicles_list.tpl:42
-msgid "No car has been registered yet for your account."
-msgstr "Aucun véhicule n'a été enregistré pour votre compte."
+#: ../templates/default/vehicles.tpl:57
+msgid "Picture:"
+msgstr "Image&nbsp;:"
 
 #: ../lib/GaletteAuto/PropertiesController.php:968
 msgid "An error occured trying to remove %property :/"
@@ -440,10 +450,6 @@ msgstr "Liste des modèles"
 msgid "Remove vehicles"
 msgstr "Suppression véhicules"
 
-#: ../templates/default/vehicles.tpl:250
-msgid "Owners"
-msgstr "Propriétaires"
-
 #: ../templates/default/vehicles.tpl:29
 msgid "Choose a model"
 msgstr "Choisissez un modèle"
@@ -489,7 +495,7 @@ msgstr "Ajouter une nouvelle couleur"
 msgid "State"
 msgstr "État"
 
-#: ../templates/default/models_list.tpl:45
+#: ../templates/default/models_list.tpl:62
 msgid "Add new model"
 msgstr "Ajouter un nouveau modèle"
 
@@ -569,6 +575,10 @@ msgstr "Ajouter une nouvelle marque"
 msgid "Delete vehicles cards"
 msgstr "Supprimer les fiches des véhicules"
 
+#: ../templates/default/vehicles_list.tpl:39
+msgid "Edit %vehicle"
+msgstr "Modifier %vehicle"
+
 #: ../templates/default/vehicles.tpl:75
 msgid "Current owner:"
 msgstr "Propriétaire actuel&nbsp;:"
@@ -593,9 +603,9 @@ msgstr "Date de première immatriculation&nbsp;:"
 msgid "state"
 msgstr "état"
 
-#: ../templates/default/history.tpl:38 ../templates/default/history.tpl:40
-msgid "[W]"
-msgstr "[F]"
+#: ../templates/default/vehicles.tpl:249
+msgid "Owners"
+msgstr "Propriétaires"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
@@ -642,14 +652,14 @@ msgstr ""
 msgid "Gas"
 msgstr "Gaz"
 
+#: ../lib/GaletteAuto/Controller.php:582
+msgid "An error occured trying to remove vehicles :/"
+msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
+
 #: ../lib/GaletteAuto/PropertiesController.php:532
 #: ../templates/default/menu.tpl:6
 msgid "States list"
 msgstr "Liste des états"
-
-#: ../lib/GaletteAuto/Controller.php:582
-msgid "An error occured trying to remove vehicles :/"
-msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
 
 #~ msgid "- Mandatory field %s empty."
 #~ msgstr "- Champ obligatoire %s non renseigné."

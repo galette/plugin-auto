@@ -34,8 +34,17 @@
                     <td><a href="{$edit_link}">{$brand->value}</a></td>
                     <td><a href="{$edit_link}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
-                        <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a href="{path_for name="removeVehicle" data=["id" => $auto->id]}" class="delete"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%vehiclename: remove from database" pattern="/%vehiclename/" replace=$auto->name domain="auto"}"/></a>
+                        <a href="{$edit_link}" class="tooltip action">
+                            <i class="fas fa-edit"></i>
+                            <span class="sr-only">{_T string="Edit %vehicle" domain="auto" pattern="/%vehicle/" replace=$auto->name}</span>
+                        </a>
+                        <a
+                            class="delete tooltip"
+                            href="{path_for name="removeVehicle" data=["id" => $auto->id]}"
+                        >
+                            <i class="fas fa-trash"></i>
+                            <span class="sr-only">{_T string="%vehiclename: remove from database" pattern="/%vehiclename/" replace=$auto->name domain="auto"}</span>
+                        </a>
                     </td>
                 </tr>
 {foreachelse}
@@ -46,10 +55,23 @@
             <ul class="selection_menu">
 {if $autos|@count gt 0}
                 <li>{_T string="For the selection:"}</li>
-                <li><input type="submit" id="delete" name="delete" value="{_T string="Delete"}"/></li>
+                <li>
+                    <button type="submit" id="delete" name="delete" class="delete">
+                        <i class="fas fa-trash" aria-hidden="true"></i>
+                        {_T string="Delete"}
+                    </button>
+                </li>
 {/if}
                 <li>{_T string="Other:" domain="auto"}</li>
-                <li><a class="button" href="{path_for name="vehicleEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new vehicle" domain="auto"}</a></li>
+                <li>
+                    <a
+                        class="button"
+                        href="{path_for name="vehicleEdit" data=["action" => {_T string="add" domain="routes"}]}"
+                    >
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                        {_T string="Add new vehicle" domain="auto"}
+                    </a>
+                </li>
             </ul>
 {if isset($id_adh)}
             <input type="hidden" name="id_adh" value="{$id_adh}"/>

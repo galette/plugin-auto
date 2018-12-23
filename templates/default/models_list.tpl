@@ -21,8 +21,17 @@
                     <td><a href="{$edit_link}">{$m->model}</a></td>
                     <td><a href="{$edit_link}">{$m->obrand->value}</a></td>
                     <td class="center nowrap">
-                        <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a href="{path_for name="removeModel" data=["id" => $m->id]}" class="delete"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16"/></a>
+                        <a href="{$edit_link}" class="tooltip action">
+                            <i class="fas fa-edit"></i>
+                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace=$o->$field}</span>
+                        </a>
+                        <a
+                            class="delete tooltip"
+                            href="{path_for name="removeModel" data=["id" => $m->id]}"
+                        >
+                            <i class="fas fa-trash"></i>
+                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace=$o->$field domain="auto"}</span>
+                        </a>
                     </td>
                 </tr>
     {foreachelse}
@@ -39,10 +48,19 @@
         <ul class="selection_menu">
     {if $models|@count gt 0}
             <li>{_T string="Selection:"}</li>
-            <li><input type="submit" id="delete" name="delete" value="{_T string="Delete"}"/></li>
+            <button type="submit" id="delete" name="delete" class="delete">
+                <i class="fas fa-trash" aria-hidden="true"></i>
+                {_T string="Delete"}
+            </button>
     {/if}
             <li>{_T string="Other:" domain="auto"}</li>
-            <li><a class="button" href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}" id="btnadd">{_T string="Add new model" domain="auto"}</a></li>
+            <a
+                class="button"
+                href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}"
+            >
+                <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                {_T string="Add new model" domain="auto"}
+            </a>
         </ul>
     </form>
 {/block}

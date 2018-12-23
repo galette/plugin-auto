@@ -23,8 +23,17 @@
                     </td>
                     <td><a href="{if isset($show) and $show eq true}{path_for name="propertyShow" data=["property" => $obj->getRouteName(), "id" => $o->$pk]}{else}{$edit_link}{/if}">{$o->$field}</a></td>
                     <td class="center nowrap">
-                        <a href="{$edit_link}"><img src="{base_url}/{$template_subdir}images/icon-edit.png" alt="{_T string="[mod]"}" width="16" height="16"/></a>
-                        <a class="delete" href="{path_for name="removeProperty" data=["property" => $obj->getRouteName(), "id" => $o->$pk]}"><img src="{base_url}/{$template_subdir}images/icon-trash.png" alt="{_T string="[del]"}" width="16" height="16" title="{_T string="%property: remove from database" pattern="/%property/" replace=$o->$field domain="auto"}"/></a>
+                        <a href="{$edit_link}" class="tooltip action">
+                            <i class="fas fa-edit"></i>
+                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace=$o->$field}</span>
+                        </a>
+                        <a
+                            class="delete tooltip"
+                            href="{path_for name="removeProperty" data=["property" => $obj->getRouteName(), "id" => $o->$pk]}"
+                        >
+                            <i class="fas fa-trash"></i>
+                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace=$o->$field domain="auto"}</span>
+                        </a>
                     </td>
                 </tr>
     {foreachelse}
@@ -41,10 +50,23 @@
             <ul class="selection_menu">
     {if $list|@count gt 0}
                 <li>{_T string="Selection:"}</li>
-                <li><input type="submit" id="delete" name="delete" value="{_T string="Delete"}"/></li>
+                <li>
+                    <button type="submit" id="delete" name="delete" class="delete">
+                        <i class="fas fa-trash" aria-hidden="true"></i>
+                        {_T string="Delete"}
+                    </button>
+                </li>
     {/if}
                 <li>{_T string="Other:" domain="auto"}</li>
-                <li><a class="button" id="btnadd" href="{path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => {_T string="add" domain="routes"}]}">{$add_text}</a></li>
+                <li>
+                    <a
+                        class="button"
+                        href="{path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => {_T string="add" domain="routes"}]}"
+                    >
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                        {$add_text}
+                    </a>
+                </li>
             </ul>
         </form>
 {/block}

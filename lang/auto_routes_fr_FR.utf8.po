@@ -33,8 +33,8 @@ msgstr "/marques"
 
 #: ../_routes.php:225 ../_routes.php:233 ../_routes.php:247 ../_routes.php:281
 #: ../_routes.php:305 ../_routes.php:313 ../_routes.php:321
-#: ../lib/GaletteAuto/AbstractObject.php:302
-#: ../lib/GaletteAuto/AbstractObject.php:341 ../lib/GaletteAuto/Body.php:96
+#: ../lib/GaletteAuto/Body.php:96 ../lib/GaletteAuto/AbstractObject.php:302
+#: ../lib/GaletteAuto/AbstractObject.php:341
 msgid "body"
 msgstr "carrosserie"
 
@@ -49,8 +49,9 @@ msgstr "/historique"
 
 #: ../_routes.php:223 ../_routes.php:231 ../_routes.php:239 ../_routes.php:245
 #: ../_routes.php:287 ../_routes.php:303 ../_routes.php:311 ../_routes.php:319
-#: ../lib/GaletteAuto/Brand.php:97 ../lib/GaletteAuto/AbstractObject.php:308
-#: ../lib/GaletteAuto/AbstractObject.php:329
+#: ../lib/GaletteAuto/AbstractObject.php:308
+#: ../lib/GaletteAuto/AbstractObject.php:329 ../lib/GaletteAuto/Brand.php:97
+#: ../templates/default/model.tpl:27
 msgid "brand"
 msgstr "marque"
 
@@ -73,8 +74,8 @@ msgstr "/modele"
 
 #: ../_routes.php:224 ../_routes.php:232 ../_routes.php:246 ../_routes.php:275
 #: ../_routes.php:304 ../_routes.php:312 ../_routes.php:320
-#: ../lib/GaletteAuto/State.php:96 ../lib/GaletteAuto/AbstractObject.php:296
-#: ../lib/GaletteAuto/AbstractObject.php:335
+#: ../lib/GaletteAuto/AbstractObject.php:296
+#: ../lib/GaletteAuto/AbstractObject.php:335 ../lib/GaletteAuto/State.php:96
 msgid "state"
 msgstr "etat"
 
@@ -92,9 +93,9 @@ msgstr "/carrosseries"
 
 #: ../_routes.php:225 ../_routes.php:233 ../_routes.php:247 ../_routes.php:284
 #: ../_routes.php:305 ../_routes.php:313 ../_routes.php:321
+#: ../lib/GaletteAuto/Transmission.php:96
 #: ../lib/GaletteAuto/AbstractObject.php:305
 #: ../lib/GaletteAuto/AbstractObject.php:344
-#: ../lib/GaletteAuto/Transmission.php:96
 msgid "transmission"
 msgstr "transmission"
 
