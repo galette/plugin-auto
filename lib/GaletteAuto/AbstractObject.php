@@ -100,7 +100,11 @@ abstract class AbstractObject
             $select->order($this->field . ' ASC');
 
             $results = $this->zdb->execute($select);
-            return $results;
+            $list = [];
+            foreach ($results as $row) {
+                $list[] = $row;
+            }
+            return $list;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot load ' . $this->name .
