@@ -294,22 +294,22 @@ abstract class AbstractObject
     {
         $route = null;
         switch ($property) {
-            case __('color', 'auto_routes'):
+            case 'color':
                 $route = $router->pathFor('colorsList');
                 break;
-            case __('state', 'auto_routes'):
+            case 'state':
                 $route = $router->pathFor('statesList');
                 break;
-            case __('finition', 'auto_routes'):
+            case 'finition':
                 $route = $router->pathFor('finitionsList');
                 break;
-            case __('body', 'auto_routes'):
+            case 'body':
                 $route = $router->pathFor('bodiesList');
                 break;
-            case __('transmission', 'auto_routes'):
+            case 'transmission':
                 $route = $router->pathFor('transmissionsList');
                 break;
-            case __('brand', 'auto_routes'):
+            case 'brand':
                 $route = $router->pathFor('brandsList');
                 break;
             default:
@@ -330,22 +330,22 @@ abstract class AbstractObject
     {
         $classname = '\GaletteAuto\\';
         switch ($property) {
-            case __('brand', 'auto_routes'):
+            case 'brand':
                 $classname .= 'Brand';
                 break;
-            case __('color', 'auto_routes'):
+            case 'color':
                 $classname .= 'Color';
                 break;
-            case __('state', 'auto_routes'):
+            case 'state':
                 $classname .= 'State';
                 break;
-            case __('finition', 'auto_routes'):
+            case 'finition':
                 $classname .= 'Finition';
                 break;
-            case __('body', 'auto_routes'):
+            case 'body':
                 $classname .= 'Body';
                 break;
-            case __('transmission', 'auto_routes'):
+            case 'transmission':
                 $classname .= 'Transmission';
                 break;
             default:

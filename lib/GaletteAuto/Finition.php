@@ -93,7 +93,7 @@ class Finition extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('finition', 'auto_routes');
+        return 'finition';
     }
 
     /**

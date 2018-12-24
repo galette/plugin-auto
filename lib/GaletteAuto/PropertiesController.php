@@ -97,10 +97,10 @@ class PropertiesController extends Controller
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $mfilters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $mfilters->orderby = $value;
                     break;
             }
@@ -146,7 +146,7 @@ class PropertiesController extends Controller
     {
         $action = $args['action'];
         $id = null;
-        $is_new = $args['action'] === __('add', 'routes');
+        $is_new = $args['action'] === 'add';
         if (isset($args['id'])) {
             $id = (int)$args['id'];
         }
@@ -158,7 +158,7 @@ class PropertiesController extends Controller
         } elseif ($is_new && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('modelEdit', ['action' => __('add', 'routes')]));
+                ->withHeader('Location', $this->router->pathFor('modelEdit', ['action' => 'add']));
         }
 
         $model = new Model($this->container->zdb);
@@ -214,7 +214,7 @@ class PropertiesController extends Controller
     public function doModelEdit(Request $request, Response $response, $args = [])
     {
         $post = $request->getParsedBody();
-        $is_new = $args['action'] === __('add', 'routes');
+        $is_new = $args['action'] === 'add';
 
         $model = new Model($this->container->zdb);
         $error_detected = [];
@@ -585,10 +585,10 @@ class PropertiesController extends Controller
 
         if ($option !== null) {
             switch ($option) {
-                case __('page', 'routes'):
+                case 'page':
                     $filters->current_page = (int)$value;
                     break;
-                case __('order', 'routes'):
+                case 'order':
                     $filters->orderby = $value;
                     break;
             }
@@ -637,7 +637,7 @@ class PropertiesController extends Controller
         $action = $args['action'];
         $property = $args['property'];
         $id = null;
-        $is_new = $args['action'] === __('add', 'routes');
+        $is_new = $args['action'] === 'add';
         if (isset($args['id'])) {
             $id = (int)$args['id'];
         }
@@ -657,7 +657,7 @@ class PropertiesController extends Controller
                     'propertyEdit',
                     [
                         'property'  => $property,
-                        'action'    => __('add', 'routes')
+                        'action'    => 'add'
                     ]
                 ));
         }
@@ -714,7 +714,7 @@ class PropertiesController extends Controller
         $object = new $classname($this->container->zdb);
 
         $post = $request->getParsedBody();
-        $is_new = $args['action'] === __('add', 'routes');
+        $is_new = $args['action'] === 'add';
 
         $error_detected = [];
 

@@ -94,7 +94,7 @@ class Brand extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('brand', 'auto_routes');
+        return 'brand';
     }
 
     /**

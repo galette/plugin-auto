@@ -222,7 +222,7 @@ class Controller
     public function showAddEditVehicle(Request $request, Response $response, $args = [])
     {
         $action = $args['action'];
-        $is_new = $action === __('add', 'routes');
+        $is_new = $action === 'add';
 
         if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
@@ -308,7 +308,7 @@ class Controller
         $post = $request->getParsedBody();
 
         $action = $args['action'];
-        $is_new = $action === __('add', 'routes');
+        $is_new = $action === 'add';
 
         // initialize warnings
         $error_detected = array();
