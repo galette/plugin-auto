@@ -2,9 +2,9 @@
 
 {block name="content"}
         {if $mode eq 'new'}
-            {assign var="action" value={_T string="add" domain="routes"}}
+            {assign var="action" value="add"}
         {else}
-            {assign var="action" value={_T string="edit" domain="routes"}}
+            {assign var="action" value="edit"}
         {/if}
         <form action="{path_for name="doVehicleEdit" data=["action" => $action]}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="bigtable">

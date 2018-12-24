@@ -10,13 +10,13 @@
             <p>{_T string="Registered models for the brand '%s':" pattern="/%s/" replace=$obj->value domain="auto"}</p>
             <ul>
         {foreach item=model from=$models}
-                <li><a href="{path_for name="modelEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $model->id]}">{$model->model}</a></li>
+                <li><a href="{path_for name="modelEdit" data=["action" => "edit", "id" => $model->id]}">{$model->model}</a></li>
         {/foreach}
             </ul>
     {else}
             <p>{_T string="The brand '%s' does not have any registered model at this time." pattern="/%s/" replace=$obj->value domain="auto"}</p>
     {/if}
-            <p><a href="{path_for name="modelEdit" data=["action" => {_T string="add" domain="routes"}]}?brand={$obj->id}">{_T string="Create a new model for brand '%s'" pattern="/%s/" replace=$obj->value domain="auto"}</a></p>
+            <p><a href="{path_for name="modelEdit" data=["action" => "add"]}?brand={$obj->id}">{_T string="Create a new model for brand '%s'" pattern="/%s/" replace=$obj->value domain="auto"}</a></p>
 {/if}
         </div>
 {/block}

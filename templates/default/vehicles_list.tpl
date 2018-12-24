@@ -25,7 +25,7 @@
             <tbody>
 {foreach from=$autos item=auto name=autos_list}
     {assign var='brand' value=$auto->model->obrand}
-    {assign var='edit_link' value={path_for name="vehicleEdit" data=["action" => {_T string="edit" domain="routes"}, "id" => $auto->id]}}
+    {assign var='edit_link' value={path_for name="vehicleEdit" data=["action" => "edit", "id" => $auto->id]}}
                 <tr class="{if $smarty.foreach.autos_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
                         <input type="checkbox" name="vehicle_sel[]" value="{$auto->id}"/>
@@ -66,7 +66,7 @@
                 <li>
                     <a
                         class="button"
-                        href="{path_for name="vehicleEdit" data=["action" => {_T string="add" domain="routes"}]}"
+                        href="{path_for name="vehicleEdit" data=["action" => "add"]}"
                     >
                         <i class="fas fa-plus-circle" aria-hidden="true"></i>
                         {_T string="Add new vehicle" domain="auto"}

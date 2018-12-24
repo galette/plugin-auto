@@ -16,7 +16,7 @@
             </thead>
             <tbody>
     {foreach from=$list item=o name=obj_list}
-        {assign var="edit_link" value={path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => {_T string="edit" domain="routes"}, "id" => $o->$pk]}}
+        {assign var="edit_link" value={path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => "edit", "id" => $o->$pk]}}
                 <tr class="{if $smarty.foreach.obj_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
                         <input type="checkbox" name="_sel[]" value="{$o->$pk}"/>
@@ -61,7 +61,7 @@
                 <li>
                     <a
                         class="button"
-                        href="{path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => {_T string="add" domain="routes"}]}"
+                        href="{path_for name="propertyEdit" data=["property" => $obj->getRouteName(), "action" => "add"]}"
                     >
                         <i class="fas fa-plus-circle" aria-hidden="true"></i>
                         {$add_text}
