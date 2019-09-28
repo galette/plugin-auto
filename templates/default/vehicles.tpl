@@ -13,19 +13,19 @@
                 <div>
                 <p>
                     <label for="name" class="bline">{_T string="Name:" domain="auto"}</label>
-                    <input type="text" name="name" id="name" value="{$car->name}" maxlength="20" required/>
+                    <input type="text" name="name" id="name" value="{$car->name}" maxlength="20" required="required"/>
                 </p>
                 <p>
                     <span class="bline">
                         <label for="brand">{_T string="Brand" domain="auto"}</label>/<label for="model">{_T string="Model:" domain="auto"}</label>
                     </span>
-                    <select name="brand" id="brand" required>
+                    <select name="brand" id="brand" required="required">
                         <option value="-1">{_T string="Choose a brand" domain="auto"}</option>
     {foreach from=$brands item=brand}
                         <option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->brand} selected="selected"{/if}>{$brand->brand}</option>
     {/foreach}
                     </select>
-                    <select name="model" id="model" required>
+                    <select name="model" id="model" required="required" class="nochosen">
                         <option value="-1">{_T string="Choose a model" domain="auto"}</option>
     {foreach from=$models item=model}
                         <option value="{$model->id}"{if $model->id eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
@@ -172,6 +172,7 @@
 
 {block name="javascripts"}
         <script type="text/javascript">
+            var _models;
             $(function() {
                 _collapsibleFieldsets();
 
@@ -191,22 +192,34 @@
                     maxDate: '-0d',
                     yearRange: 'c-100:c+0'
                 });
-                var _models = $('#model');
+
                 var _modelChoose = $('#model :first');
+                _models = $('#model').selectize({
+                    maxItems:       1,
+                    render: {
+                        option: function(item, escape) {
+                            return '<div class="option">' + escape(item.text) + '</div>';
+                        }
+                    }
+                });
     {if $js_init_models}
                 {* If javascript is active, we do not want complete models list when page loads *}
                 {* Empty model list *}
-                _models.empty();
+                _models[0].selectize.clear();
+                _models[0].selectize.clearOptions();
                 {* Set the first option *}
-                _modelChoose.appendTo(_models);
+                _models[0].selectize.settings.placeholder = _modelChoose.text();
+                _models[0].selectize.updatePlaceholder();
     {/if}
                 {* Refresh models list when brand is changed *}
                 $('#brand').on('change', function(){
                     var id_brand = $('#brand option:selected').attr('value');
                     {* Empty model list *}
-                    _models.empty();
+                    _models[0].selectize.clear();
+                    _models[0].selectize.clearOptions();
                     {* Set the first option *}
-                    _modelChoose.appendTo(_models);
+                    _models[0].selectize.settings.placeholder = _modelChoose.text();
+                    _models[0].selectize.updatePlaceholder();
                     {* Get the new list for selected brand, and appent it to models on the page *}
                     $.post(
                         '{path_for name="ajaxModels"}',
@@ -214,9 +227,11 @@
                         function(data){
                             $(data).each(function(i){
                                 var _data = data[i];
-                                $('<option value="' + _data.id_model + '">' + _data.model + '</option>').appendTo(_models);
+                                _models[0].selectize.addOption({
+                                    value: _data.id_model,
+                                    text: _data.model
+                                });
                             });
-                            _models.trigger("chosen:updated");
                         },
                         'json'
                     );
