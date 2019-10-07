@@ -121,6 +121,7 @@ class Auto
     const FUEL_GAS = 3;
     const FUEL_ELECTRICITY = 4;
     const FUEL_BIO = 5;
+    const FUEL_HYBRID = 6;
 
     private $propnames;                //textual properties names
 
@@ -274,6 +275,7 @@ class Auto
             self::FUEL_PETROL       => _T("Petrol", "auto"),
             self::FUEL_DIESEL       => _T("Diesel", "auto"),
             self::FUEL_GAS          => _T("Gas", "auto"),
+            self::FUEL_HYBRID       => _T("Hybrid", "auto"),
             self::FUEL_ELECTRICITY  => _T("Electricity", "auto"),
             self::FUEL_BIO          => _T("Bio", "auto")
         );
