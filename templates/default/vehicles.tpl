@@ -51,10 +51,10 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="galette_form">
                 <legend class="ui-state-active ui-corner-top">{_T string="Car's photo" domain="auto"}</legend>
                 <p>
-                    <span class="bline">{_T string="Picture:" domain="auto"}</span>
+                    <span class="bline vtop">{_T string="Picture:" domain="auto"}</span>
                     <img src="{if $car->id}{path_for name="vehiclePhoto" data=["id" => $car->id]}{else}{path_for name="vehiclePhoto"}{/if}" class="picture" width="{$car->picture->getOptimalWidth()}" height="{$car->picture->getOptimalHeight()}" alt="{_T string="Car's photo" domain="auto"}"/><br/>
 {if $car->hasPicture() }
                     <span class="labelalign"><label for="del_photo">{_T string="Delete image" domain="auto"}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
@@ -67,14 +67,39 @@
             <fieldset class="cssform">
                 <legend class="ui-state-active ui-corner-top">{_T string="Current car's state informations" domain="auto"}</legend>
                 <div>
-                <input type="hidden" name="owner" id="owner" value="{$car->owner->id}"/>
+{if $car->id}
+                    <p>
+                        <span class="bline">{_T string="Current owner:" domain="auto"}</span>
+                        <span>
+                            {$car->owner->sfullname}
     {if $login->isAdmin() || $login->isStaff()}
-                <p class="notform">
-                    {* Does car's history should be visible by the actual owner? *}
-                    <a href="{if $mode == 'new'}#{else}{path_for name="vehicleHistory" data=["id" => $car->id]}{/if}" title="{_T string="Show full car state history" domain="auto"}" id="state_history">{_T string="Car state history" domain="auto"}</a>
-                    <strong class="fright"><a href="#" id="change_owner" title="{_T string="Change car's owner" domain="auto"}">{_T string="Change" domain="auto"}</a> {_T string="Current owner:" domain="auto"} <span id="current_owner_name">{$car->owner->sfullname}</span></strong>
-                </p>
+                            {* Does car's history should be visible by the actual owner? *}
+                            <a href="{path_for name="vehicleHistory" data=["id" => $car->id]}" title="{_T string="Show full car state history" domain="auto"}" id="state_history">
+                                <i class="fa fa-history"></i>
+                                <span class="sr-only">{_T string="Car state history" domain="auto"}</span>
+                            </a>
+                            <input type="checkbox" name="change_owner" id="change_owner" title="{_T string="Change car's owner" domain="auto"}" value="1"/>
+                            <label for="change_owner" title="{_T string="Change car's owner" domain="auto"}">{_T string="Change owner" domain="auto"}</label>
+                            {*<a href="#" id="change_owner" title="{_T string="Change car's owner" domain="auto"}">
+                                <i class="fa fa-edit"></i>
+                                <span class="sr-only">{_T string="Change" domain="auto"}</span>
+                            </a>*}
     {/if}
+                        </span>
+                    </p>
+{/if}
+                    <p id="owners_list"{if $car->id} class="hidden"{/if}>
+{if not $car->id}
+                        <input type="hidden" name="change_owner" id="change_owner" value="1"/>
+{/if}
+                        <label class="bline" for="owner">{_T string="Owner:" domain="auto"}</label>
+                        <select name="owner" id="owner" class="nochosen"{if not $car->id} require="required"{/if}>
+                            <option value="">{_T string="Search for name or ID and pick member"}</option>
+                            {foreach $members.list as $k=>$v}
+                                <option value="{$k}"{if $car->owner->id == $k} selected="selected"{/if}>{$v}</option>
+                            {/foreach}
+                        </select>
+                    </p>
                 <p>
                     <label for="color" class="bline">{_T string="Color:" domain="auto"}</label>
                     <select name="color" id="color" required>
@@ -152,11 +177,11 @@
                 </p>
                 </div>
             </fieldset>
-            <fieldset>
+            <fieldset class="galette_form">
                 <legend class="ui-state-active ui-corner-top">{_T string="Comment" domain="auto"}</legend>
                 <div>
                 <p>
-                    <label for="comment" class="bline">{_T string="Comment:" domain="auto"}</label>
+                    <label for="comment" class="bline vtop">{_T string="Comment:" domain="auto"}</label>
                     <textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
                 </p>
                 </div>
@@ -173,6 +198,7 @@
 {block name="javascripts"}
         <script type="text/javascript">
             var _models;
+            {include file="js_chosen_adh.tpl" js_chosen_id="#owner"}
             $(function() {
                 _collapsibleFieldsets();
 
@@ -238,75 +264,24 @@
                 });
     {if $login->isAdmin() || $login->isStaff()}
                 {* Popup for owner change *}
-                $('#change_owner').click(function(){
-
-                    $.ajax({
-                        url: '{path_for name="ajaxMembers"}',
-                        type: "POST",
-                        data: {
-                            ajax: true,
-                            multiple: false,
-                            from: 'single',
-                            id: '{$car->owner->id}'
+                $('#change_owner').change(function(e){
+                    e.preventDefault();
+                    $('#owners_list').toggleClass('hidden');
+                    $('#owners_list').backgroundFade(
+                        {
+                            sColor:'#ffffff',
+                            eColor:'#DDDDFF',
+                            steps:10
                         },
-                        {include file="js_loader.tpl"},
-                        success: function(res){
-                            _owners_dialog(res);
-                        },
-                        error: function() {
-                            alert("{_T string="An error occured displaying members interface :(" escape="js"}");
-                        }
-                    });
-                    return false;
-                });
-
-                var _owners_dialog = function(res){
-                    var _el = $('<div id="owners_list" title="{_T string="Owners" domain="auto"}"> </div>');
-                    _el.appendTo('#modifform').dialog({
-                        modal: true,
-                        hide: 'fold',
-                        width: '60%',
-                        height: 400,
-                        close: function(event, ui){
-                            _el.remove();
-                        }
-                    });
-                    _owners_ajax_mapper(res);
-                }
-
-                var _owners_ajax_mapper = function(res){
-                    $('#owners_list').append( res );
-                    $('#owners_list tbody').find('a').each(function(){
-                        $(this).click(function(){
-                            var _id = this.href.match(/.*\/(\d+)$/)[1];
-                            $('#owner').attr('value', _id);
-                            $('#current_owner_name').html($(this).html());
-                            $('#owners_list').dialog('close');
-                            return false;
-                        }).attr('title', '{_T string="Click to choose this owner for current car" domain="auto"}');
-                    });
-
-                    //Remap links
-                    $('#owners_list .pages a').click(function(){
-                        $.ajax({
-                            url: this.href,
-                            type: "POST",
-                            data: {
-                                ajax: true,
-                                multiple: false
-                            },
-                            {include file="js_loader.tpl"},
-                            success: function(res){
-                                $('#owners_list').empty();
-                                _owners_ajax_mapper(res);
-                            },
-                            error: function() {
-                                alert("{_T string="An error occured displaying members interface :(" escape="js"}");
-                            }
+                        function() {
+                            $(this).backgroundFade(
+                                {
+                                    sColor:'#DDDDFF',
+                                    eColor:'#ffffff'
+                                }
+                            );
                         });
-                        return false;
-                    });
-                }
+                });
 
         {if $mode != 'new'}
                 $('#state_history').click(function(){

@@ -733,11 +733,13 @@ class Auto
                     }
                     break;
                 case 'owner':
-                    $value = (int)$value;
-                    if ($value > 0) {
-                        $this->$prop->load($value);
-                    } else {
-                        $this->errors[] = _T("- you must attach an owner to this car");
+                    if (isset($post['change_owner'])) {
+                        $value = (int)$value;
+                        if ($value > 0) {
+                            $this->$prop->load($value);
+                        } else {
+                            $this->errors[] = _T("- you must attach an owner to this car");
+                        }
                     }
                     break;
                 default:

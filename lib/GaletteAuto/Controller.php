@@ -283,6 +283,42 @@ class Controller
             'time'              => time()
         ];
 
+        // members
+        $members = [];
+        $m = new \Galette\Repository\Members();
+        $required_fields = array(
+            'id_adh',
+            'nom_adh',
+            'prenom_adh'
+        );
+        $list_members = $m->getList(false, $required_fields, true);
+
+        if (count($list_members) > 0) {
+            foreach ($list_members as $member) {
+                $pk = Adherent::PK;
+                $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
+                    ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
+                    ' (' . $member->id_adh . ')';
+                $members[$member->$pk] = $sname;
+            }
+        }
+
+        $params['members'] = [
+            'filters'   => $m->getFilters(),
+            'count'     => $m->getCount()
+        ];
+
+        //check if current attached member is part of the list
+        if ($auto->owner->id > 0
+            && !isset($members[$auto->owner->id])
+        ) {
+            $members[$auto->owner->id] = Adherent::getSName($this->zdb, $auto->owner->id, true);
+        }
+
+        if (count($members)) {
+            $params['members']['list'] = $members;
+        }
+
         $module = $this->getModule();
 
         // display page
