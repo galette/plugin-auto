@@ -391,7 +391,7 @@ class Auto
 
             //if all goes well, we check to add an entry into car's history
             $h = $this->history->getLatest();
-            if ($h !== false) {
+            if (!$new && $h !== false) {
                 foreach ($h as $k => $v) {
                     if ($k != 'history_date' && $this->$k != $v) {
                         //if one has been modified, we flag to add an entry event
@@ -399,7 +399,7 @@ class Auto
                         break;
                     }
                 }
-            } elseif (!$new) {
+            } elseif ($new) {
                 //no history entry... yet! Let's create one.
                 $this->fire_history = true;
             }
