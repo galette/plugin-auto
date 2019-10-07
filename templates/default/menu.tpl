@@ -11,7 +11,7 @@
             <li{if $cur_route eq "modelsList" || $cur_route eq "modelEdit"} class="selected"{/if}><a href="{path_for name="modelsList"}">{_T string="Models list" domain="auto"}</a></li>
     {/if}
     {if $login->isAdmin() || $login->isStaff() || $login->isGroupManager()}
-            <li{if $cur_route eq "vehiclesList"} class="selected"{/if}><a href="{path_for name="vehiclesList"}">{_T string="Cars list" domain="auto"}</a></li>
+            <li{if $cur_route eq "vehiclesList" || $cur_route eq 'vehicleEdit'} class="selected"{/if}><a href="{path_for name="vehiclesList"}">{_T string="Cars list" domain="auto"}</a></li>
     {/if}
     {* Super Admin is not a regular user *}
     {if !$login->isSuperAdmin()}
