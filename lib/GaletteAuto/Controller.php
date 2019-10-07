@@ -172,9 +172,9 @@ class Controller
         $afilters = new AutosList();
 
         // Simple filters
-        /*if (isset($_GET['page'])) {
+        if (isset($_GET['page'])) {
             $afilters->current_page = (int)$_GET['page'];
-        }*/
+        }
 
         $title = _T("Cars list", "auto");
         if (isset($args['mine'])) {
