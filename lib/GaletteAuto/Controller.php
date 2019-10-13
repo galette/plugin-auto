@@ -161,6 +161,15 @@ class Controller
             $this->checkAclsFor($response, $args['id']);
         }
 
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
         $numrows = $this->container->preferences->pref_numrows;
         if (isset($_GET["nbshow"])) {
             if (is_numeric($_GET["nbshow"])) {
@@ -172,8 +181,15 @@ class Controller
         $afilters = new AutosList();
 
         // Simple filters
-        if (isset($_GET['page'])) {
-            $afilters->current_page = (int)$_GET['page'];
+        if ($option !== null) {
+            switch ($option) {
+                case 'page':
+                    $afilters->current_page = (int)$value;
+                    break;
+                case 'order':
+                    $afilters->orderby = $value;
+                    break;
+            }
         }
 
         $title = _T("Cars list", "auto");
@@ -312,7 +328,7 @@ class Controller
         if ($auto->owner->id > 0
             && !isset($members[$auto->owner->id])
         ) {
-            $members[$auto->owner->id] = Adherent::getSName($this->zdb, $auto->owner->id, true);
+            $members[$auto->owner->id] = Adherent::getSName($this->container->zdb, $auto->owner->id, true);
         }
 
         if (count($members)) {

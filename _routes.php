@@ -55,12 +55,17 @@ $this->get(
 )->setName('vehiclePhoto');
 
 $this->get(
-    '/vehicles[/member/{id:\d+}]',
+    '/vehicles[/{option:page|order}/{value:\d+}]',
     Controller::class . ':vehiclesList'
 )->setName('vehiclesList')->add($authenticate);
 
 $this->get(
-    '/my-vehicles[/member/{id:\d+}]',
+    '/member/{id:\d+}/vehicles[/{option:page|order}/{value:\d+}]',
+    Controller::class . ':vehiclesList'
+)->setName('memberVehiclesList')->add($authenticate);
+
+$this->get(
+    '/my-vehicles',
     Controller::class . ':myVehiclesList'
 )->setName('myVehiclesList')->add($authenticate);
 

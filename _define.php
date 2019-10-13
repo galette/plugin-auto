@@ -45,6 +45,7 @@ $this->register(
     '2018-12-22',                           //Release date
     [ //routes permissions
         'vehiclesList'      => 'groupmanager',
+        'memberVehiclesList' => 'groupmanager',
         'myVehiclesList'    => 'member',
         'vehicleEdit'       => 'member',
         'ajaxModels'        => 'member',

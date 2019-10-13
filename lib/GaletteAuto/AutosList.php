@@ -92,4 +92,33 @@ class AutosList extends Pagination
         $this->counter = (int)$c;
         $this->countPages();
     }
+
+    /**
+     * Build href
+     *
+     * @param int $page Page
+     *
+     * @return string
+     */
+    protected function getHref($page)
+    {
+        $args = [
+            'option'    => 'page',
+            'value'     => $page
+        ];
+
+        if ($this->view->getTemplateVars('cur_subroute')) {
+            $args['type'] = $this->view->getTemplateVars('cur_subroute');
+        }
+
+        if ($this->view->getTemplateVars('cur_route') === 'memberVehiclesList') {
+            $args['id'] = $this->view->getTemplateVars('cur_subroute');
+        }
+
+        $href = $this->router->pathFor(
+            $this->view->getTemplateVars('cur_route'),
+            $args
+        );
+        return $href;
+    }
 }
