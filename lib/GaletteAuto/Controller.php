@@ -296,7 +296,8 @@ class Controller
             'finitions'         => $auto->finition->getList(),
             'states'            => $auto->state->getList(),
             'fuels'             => $auto->listFuels(),
-            'time'              => time()
+            'time'              => time(),
+            'required'          => $auto->getRequired()
         ];
 
         // members

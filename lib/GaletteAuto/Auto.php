@@ -91,6 +91,20 @@ class Auto
         Adherent::PK                    => 'integer'
     );
 
+    private $required = array(
+        'name'                      => 1,
+        'model'                     => 1,
+        'first_registration_date'   => 1,
+        'first_circulation_date'    => 1,
+        'color'                     => 1,
+        'state'                     => 1,
+        'registration'              => 1,
+        'body'                      => 1,
+        'transmission'              => 1,
+        'finition'                  => 1,
+        'fuel'                      => 1
+    );
+
     private $id;                       //identifiant
     private $registration;             //immatriculation
     private $name;                     //petit nom
@@ -633,22 +647,9 @@ class Auto
     public function check($post)
     {
         $this->errors = [];
-        /** TODO: make required fields dynamic, as in main Galette */
-        $required = array(
-            'name'                      => 1,
-            'model'                     => 1,
-            'first_registration_date'   => 1,
-            'first_circulation_date'    => 1,
-            'color'                     => 1,
-            'state'                     => 1,
-            'registration'              => 1,
-            'body'                      => 1,
-            'transmission'              => 1,
-            'finition'                  => 1,
-            'fuel'                      => 1
-        );
 
         //check for required fields, and correct values
+        $required = $this->getRequired();
         foreach ($this->getProperties(true) as $prop) {
             $value = isset($post[$prop]) ? $post[$prop] : null;
 
@@ -814,5 +815,21 @@ class Auto
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * Get required fields
+     *
+     * @return array
+     */
+    public function getRequired()
+    {
+        $required = $this->required;
+
+        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
+            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
+        }
+
+        return $required;
     }
 }

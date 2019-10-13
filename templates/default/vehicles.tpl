@@ -13,19 +13,19 @@
                 <div>
                 <p>
                     <label for="name" class="bline">{_T string="Name:" domain="auto"}</label>
-                    <input type="text" name="name" id="name" value="{$car->name}" maxlength="20" required="required"/>
+                    <input type="text" name="name" id="name" value="{$car->name}" maxlength="20"{if isset($required.name)} required="required"{/if}/>
                 </p>
                 <p>
                     <span class="bline">
                         <label for="brand">{_T string="Brand" domain="auto"}</label>/<label for="model">{_T string="Model:" domain="auto"}</label>
                     </span>
-                    <select name="brand" id="brand" required="required">
+                    <select name="brand" id="brand"{if isset($required.brand)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a brand" domain="auto"}</option>
     {foreach from=$brands item=brand}
                         <option value="{$brand->id_brand}"{if $brand->id_brand eq $car->model->brand} selected="selected"{/if}>{$brand->brand}</option>
     {/foreach}
                     </select>
-                    <select name="model" id="model" required="required" class="nochosen">
+                    <select name="model" id="model" class="nochosen"{if isset($required.model)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a model" domain="auto"}</option>
     {foreach from=$models item=model}
                         <option value="{$model->id}"{if $model->id eq $car->model->id} selected="selected"{/if}>{$model->model}</option>
@@ -34,19 +34,19 @@
                 </p>
                 <p>
                     <label for="first_registration_date" class="bline">{_T string="First registration date:" domain="auto"}</label>
-                    <input type="text" name="first_registration_date" id="first_registration_date" value="{$car->first_registration_date}" maxlength="20" required/>
+                    <input type="text" name="first_registration_date" id="first_registration_date" value="{$car->first_registration_date}" maxlength="20"{if isset($required.first_registration_date)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="first_circulation_date" class="bline">{_T string="First circulation date:" domain="auto"}</label>
-                    <input type="text" name="first_circulation_date" id="first_circulation_date" value="{$car->first_circulation_date}" maxlength="20" required/>
+                    <input type="text" name="first_circulation_date" id="first_circulation_date" value="{$car->first_circulation_date}" maxlength="20"{if isset($required.first_circulation_date)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="mileage" class="bline">{_T string="Mileage:" domain="auto"}</label>
-                    <input type="number" name="mileage" id="mileage" value="{$car->mileage}" maxlength="20"/>
+                    <input type="number" name="mileage" id="mileage" value="{$car->mileage}" maxlength="20"{if isset($required.mileage)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="seats" class="bline">{_T string="Seats:" domain="auto"}</label>
-                    <input type="text" name="seats" id="seats" value="{$car->seats}"/>
+                    <input type="text" name="seats" id="seats" value="{$car->seats}"{if isset($required.seats)} required="required"{/if}/>
                 </p>
                 </div>
             </fieldset>
@@ -80,10 +80,6 @@
                             </a>
                             <input type="checkbox" name="change_owner" id="change_owner" title="{_T string="Change car's owner" domain="auto"}" value="1"/>
                             <label for="change_owner" title="{_T string="Change car's owner" domain="auto"}">{_T string="Change owner" domain="auto"}</label>
-                            {*<a href="#" id="change_owner" title="{_T string="Change car's owner" domain="auto"}">
-                                <i class="fa fa-edit"></i>
-                                <span class="sr-only">{_T string="Change" domain="auto"}</span>
-                            </a>*}
     {/if}
                         </span>
                     </p>
@@ -93,7 +89,7 @@
                         <input type="hidden" name="change_owner" id="change_owner" value="1"/>
 {/if}
                         <label class="bline" for="owner">{_T string="Owner:" domain="auto"}</label>
-                        <select name="owner" id="owner" class="nochosen"{if not $car->id} require="required"{/if}>
+                        <select name="owner" id="owner" class="nochosen"{if not $car->id} required="required"{/if}>
                             <option value="">{_T string="Search for name or ID and pick member"}</option>
                             {foreach $members.list as $k=>$v}
                                 <option value="{$k}"{if $car->owner->id == $k} selected="selected"{/if}>{$v}</option>
@@ -102,7 +98,7 @@
                     </p>
                 <p>
                     <label for="color" class="bline">{_T string="Color:" domain="auto"}</label>
-                    <select name="color" id="color" required>
+                    <select name="color" id="color"{if isset($required.color)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a color" domain="auto"}</option>
     {foreach from=$colors item=color}
                         <option value="{$color->id_color}"{if $color->id_color eq $car->color->id} selected="selected"{/if}>{$color->color}</option>
@@ -111,7 +107,7 @@
                 </p>
                 <p>
                     <label for="state" class="bline">{_T string="State:" domain="auto"}</label>
-                    <select name="state" id="state" required>
+                    <select name="state" id="state"{if isset($required.state)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a state" domain="auto"}</option>
     {foreach from=$states item=state}
                         <option value="{$state->id_state}"{if $state->id_state eq $car->state->id} selected="selected"{/if}>{$state->state}</option>
@@ -120,7 +116,7 @@
                 </p>
                 <p>
                     <label for="registration" class="bline">{_T string="Registration:" domain="auto"}</label>
-                    <input type="text" name="registration" id="registration" value="{$car->registration}" required/>
+                    <input type="text" name="registration" id="registration" value="{$car->registration}"{if isset($required.registration)} required="required"{/if}/>
                 </p>
                 </div>
             </fieldset>
@@ -129,7 +125,7 @@
                 <div>
                 <p>
                     <label class="bline" for="body">{_T string="Body:" domain="auto"}</label>
-                    <select name="body" id="body" required>
+                    <select name="body" id="body"{if isset($required.body)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a body" domain="auto"}</option>
     {foreach from=$bodies item=body}
                         <option value="{$body->id_body}"{if $body->id_body eq $car->body->id} selected="selected"{/if}>{$body->body}</option>
@@ -138,7 +134,7 @@
                 </p>
                 <p>
                     <label class="bline" for="transmission">{_T string="Transmission:" domain="auto"}</label>
-                    <select name="transmission" id="transmission" required>
+                    <select name="transmission" id="transmission"{if isset($required.transmission)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a transmission" domain="auto"}</option>
     {foreach from=$transmissions item=transmission}
                         <option value="{$transmission->id_transmission}"{if $transmission->id_transmission eq $car->transmission->id} selected="selected"{/if}>{$transmission->transmission}</option>
@@ -147,7 +143,7 @@
                 </p>
                 <p>
                     <label class="bline" for="finition">{_T string="Finition:" domain="auto"}</label>
-                    <select name="finition" id="finition" required>
+                    <select name="finition" id="finition"{if isset($required.finition)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a finition" domain="auto"}</option>
     {foreach from=$finitions item=finition}
                         <option value="{$finition->id_finition}"{if $finition->id_finition eq $car->finition->id} selected="selected"{/if}>{$finition->finition}</option>
@@ -156,19 +152,19 @@
                 </p>
                 <p>
                     <label for="chassis_number" class="bline">{_T string="Chassis number:" domain="auto"}</label>
-                    <input type="text" name="chassis_number" id="chassis_number" value="{$car->chassis_number}"/>
+                    <input type="text" name="chassis_number" id="chassis_number" value="{$car->chassis_number}"{if isset($required.chassis_number)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="horsepower" class="bline">{_T string="Horsepower:" domain="auto"}</label>
-                    <input type="text" name="horsepower" id="horsepower" value="{$car->horsepower}"/>
+                    <input type="text" name="horsepower" id="horsepower" value="{$car->horsepower}"{if isset($required.horsepower)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="engine_size" class="bline">{_T string="Engine size:" domain="auto"}</label>
-                    <input type="text" name="engine_size" id="engine_size" value="{$car->engine_size}"/>
+                    <input type="text" name="engine_size" id="engine_size" value="{$car->engine_size}"{if isset($required.engine_size)} required="required"{/if}/>
                 </p>
                 <p>
                     <label for="fuel" class="bline">{_T string="Fuel:" domain="auto"}</label>
-                    <select name="fuel" id="fuel" required>
+                    <select name="fuel" id="fuel"{if isset($required.fuel)} required="required"{/if}>
                         <option value="-1">{_T string="Choose a fuel" domain="auto"}</option>
     {foreach from=$fuels key=k item=fuel}
                         <option value="{$k}"{if $k eq $car->fuel} selected="selected"{/if}>{$fuel}</option>
@@ -182,7 +178,7 @@
                 <div>
                 <p>
                     <label for="comment" class="bline vtop">{_T string="Comment:" domain="auto"}</label>
-                    <textarea name="comment" id="comment" cols="80" rows="3">{$car->comment}</textarea>
+                    <textarea name="comment" id="comment" cols="80" rows="3"{if isset($required.comment)} required="required"{/if}>{$car->comment}</textarea>
                 </p>
                 </div>
             </fieldset>
