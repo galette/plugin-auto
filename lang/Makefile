@@ -1,13 +1,15 @@
 INSTALLDIR = .
-LANGUAGES = en_US fr_FR.utf8
-DOMAINS = auto auto_routes
+LANGUAGES = `find ./ -name "auto_*.po" -print | sed 's|^\./auto_\(.*\).po|\1|'`
+DOMAINS = auto
 MKLANG = ../../../lang/make_lang_l12n.py
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
               $(shell find ../lib/GaletteAuto/ -name \*.php) \
               $(shell find ../templates -name \*.tpl)
 
 
-all : messages.po lang check
+all : extract mo
+
+po :
 	@echo "Generating PO files:"
 	@for l in ${LANGUAGES}; do \
 	  for d in ${DOMAINS}; do \
@@ -18,6 +20,13 @@ all : messages.po lang check
 	      echo "  Creating of $${d}_$${l}.po"; \
 	      msginit -o $${d}_$${l}.po -i $$d.pot >/dev/null ; \
 	    fi; \
+	  done \
+	done
+
+mo :
+	@echo "Generating MO files:"
+	@for l in ${LANGUAGES}; do \
+	  for d in ${DOMAINS}; do \
 	    mkdir -p ${INSTALLDIR}/$${l}/LC_MESSAGES; \
 	    echo "    formatting ${INSTALLDIR}/$${l}/LC_MESSAGES/$${d}.mo."; \
 	    msgfmt $${d}_$${l}.po -o ${INSTALLDIR}/$${l}/LC_MESSAGES/$${d}.mo.new; \
@@ -31,30 +40,9 @@ all : messages.po lang check
 	  done \
 	done
 
-
-lang :
-	@echo "Generating PHP lang files:"
-	@for l in ${LANGUAGES}; do \
-	  for d in ${DOMAINS}; do \
-	    echo "    extracting $${d} $${l} strings..."; \
-	    if [ ! -f $${d}_$${l}.php ]; then \
-	      touch $${d}_$${l}.php; \
-	    fi; \
-	    ${MKLANG} $${d}_$${l}.po $${d}_$${l}.php.new $${d}; \
-	    if diff -qI 'This file was automatically generated.*' $${d}_$${l}.php $${d}_$${l}.php.new > /dev/null; then \
-	      echo "    $${d}_$${l}.php NOT updated."; \
-	      rm $${d}_$${l}.php.new; \
-	    else \
-	      echo "    $${d}_$${l}.php UPDATED."; \
-	      mv $${d}_$${l}.php.new $${d}_$${l}.php; \
-	    fi; \
-	  done \
-	done
-
-messages.po : ${PHP_SOURCES} Makefile xgettext.py
+extract : ${PHP_SOURCES} Makefile xgettext.py
 	./xgettext.py ${PHP_SOURCES}
-
-check:
-	@for NFILE in ./*.php; do \
-		php -l $$NFILE; \
+	@echo "Generating en_US:"
+	@for d in ${DOMAINS}; do \
+	  LANG=C msgen $$d.pot -o $${d}_en_US.po; \
 	done
