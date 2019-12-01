@@ -93,7 +93,7 @@ class Body extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('body', 'auto_routes');
+        return 'body';
     }
 
     /**

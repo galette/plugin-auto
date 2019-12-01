@@ -91,6 +91,20 @@ class Auto
         Adherent::PK                    => 'integer'
     );
 
+    private $required = array(
+        'name'                      => 1,
+        'model'                     => 1,
+        'first_registration_date'   => 1,
+        'first_circulation_date'    => 1,
+        'color'                     => 1,
+        'state'                     => 1,
+        'registration'              => 1,
+        'body'                      => 1,
+        'transmission'              => 1,
+        'finition'                  => 1,
+        'fuel'                      => 1
+    );
+
     private $id;                       //identifiant
     private $registration;             //immatriculation
     private $name;                     //petit nom
@@ -121,6 +135,7 @@ class Auto
     const FUEL_GAS = 3;
     const FUEL_ELECTRICITY = 4;
     const FUEL_BIO = 5;
+    const FUEL_HYBRID = 6;
 
     private $propnames;                //textual properties names
 
@@ -274,6 +289,7 @@ class Auto
             self::FUEL_PETROL       => _T("Petrol", "auto"),
             self::FUEL_DIESEL       => _T("Diesel", "auto"),
             self::FUEL_GAS          => _T("Gas", "auto"),
+            self::FUEL_HYBRID       => _T("Hybrid", "auto"),
             self::FUEL_ELECTRICITY  => _T("Electricity", "auto"),
             self::FUEL_BIO          => _T("Bio", "auto")
         );
@@ -391,7 +407,7 @@ class Auto
 
             //if all goes well, we check to add an entry into car's history
             $h = $this->history->getLatest();
-            if ($h !== false) {
+            if (!$new && $h !== false) {
                 foreach ($h as $k => $v) {
                     if ($k != 'history_date' && $this->$k != $v) {
                         //if one has been modified, we flag to add an entry event
@@ -399,7 +415,7 @@ class Auto
                         break;
                     }
                 }
-            } elseif (!$new) {
+            } elseif ($new) {
                 //no history entry... yet! Let's create one.
                 $this->fire_history = true;
             }
@@ -631,22 +647,9 @@ class Auto
     public function check($post)
     {
         $this->errors = [];
-        /** TODO: make required fields dynamic, as in main Galette */
-        $required = array(
-            'name'                      => 1,
-            'model'                     => 1,
-            'first_registration_date'   => 1,
-            'first_circulation_date'    => 1,
-            'color'                     => 1,
-            'state'                     => 1,
-            'registration'              => 1,
-            'body'                      => 1,
-            'transmission'              => 1,
-            'finition'                  => 1,
-            'fuel'                      => 1
-        );
 
         //check for required fields, and correct values
+        $required = $this->getRequired();
         foreach ($this->getProperties(true) as $prop) {
             $value = isset($post[$prop]) ? $post[$prop] : null;
 
@@ -733,11 +736,13 @@ class Auto
                     }
                     break;
                 case 'owner':
-                    $value = (int)$value;
-                    if ($value > 0) {
-                        $this->$prop->load($value);
-                    } else {
-                        $this->errors[] = _T("- you must attach an owner to this car");
+                    if (isset($post['change_owner'])) {
+                        $value = (int)$value;
+                        if ($value > 0) {
+                            $this->$prop->load($value);
+                        } else {
+                            $this->errors[] = _T("- you must attach an owner to this car");
+                        }
                     }
                     break;
                 default:
@@ -810,5 +815,21 @@ class Auto
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    /**
+     * Get required fields
+     *
+     * @return array
+     */
+    public function getRequired()
+    {
+        $required = $this->required;
+
+        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
+            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
+        }
+
+        return $required;
     }
 }

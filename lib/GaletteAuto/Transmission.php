@@ -93,7 +93,7 @@ class Transmission extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('transmission', 'auto_routes');
+        return 'transmission';
     }
 
     /**

@@ -93,7 +93,7 @@ class State extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('state', 'auto_routes');
+        return 'state';
     }
 
     /**

@@ -2,9 +2,9 @@
 
 {block name="content"}
     {if $mode eq "new"}
-        {assign var="action" value={_T string="add" domain="routes"}}
+        {assign var="action" value="add"}
     {else}
-        {assign var="action" value={_T string="edit" domain="routes"}}
+        {assign var="action" value="edit"}
     {/if}
     <form action="{path_for name="doModelEdit" data=["action" => $action]}" method="post" id="modifform">
         <div class="bigtable">
@@ -24,7 +24,7 @@
                     </select>
     {else}
                     {_T string="No brand is registered yet. You have to create at least one brand to register models." domain="auto"}.<br/>
-                    <a href="{path_for name="propertyEdit" data=["property" => {_T string="brand" domain="auto_routes"}, "action" => {_T string="add" domain="routes"}]}">{_T string="Add a brand" domain="auto"}<a>
+                    <a href="{path_for name="propertyEdit" data=["property" => "brand", "action" => "add"]}">{_T string="Add a brand" domain="auto"}<a>
     {/if}
                 </p>
             </fieldset>

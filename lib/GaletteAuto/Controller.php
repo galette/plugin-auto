@@ -161,6 +161,15 @@ class Controller
             $this->checkAclsFor($response, $args['id']);
         }
 
+        $option = null;
+        if (isset($args['option'])) {
+            $option = $args['option'];
+        }
+        $value = null;
+        if (isset($args['value'])) {
+            $value = $args['value'];
+        }
+
         $numrows = $this->container->preferences->pref_numrows;
         if (isset($_GET["nbshow"])) {
             if (is_numeric($_GET["nbshow"])) {
@@ -172,9 +181,16 @@ class Controller
         $afilters = new AutosList();
 
         // Simple filters
-        /*if (isset($_GET['page'])) {
-            $afilters->current_page = (int)$_GET['page'];
-        }*/
+        if ($option !== null) {
+            switch ($option) {
+                case 'page':
+                    $afilters->current_page = (int)$value;
+                    break;
+                case 'order':
+                    $afilters->orderby = $value;
+                    break;
+            }
+        }
 
         $title = _T("Cars list", "auto");
         if (isset($args['mine'])) {
@@ -222,7 +238,7 @@ class Controller
     public function showAddEditVehicle(Request $request, Response $response, $args = [])
     {
         $action = $args['action'];
-        $is_new = $action === __('add', 'routes');
+        $is_new = $action === 'add';
 
         if ($action === 'edit' && !isset($args['id'])) {
             throw new \RuntimeException(
@@ -280,8 +296,45 @@ class Controller
             'finitions'         => $auto->finition->getList(),
             'states'            => $auto->state->getList(),
             'fuels'             => $auto->listFuels(),
-            'time'              => time()
+            'time'              => time(),
+            'required'          => $auto->getRequired()
         ];
+
+        // members
+        $members = [];
+        $m = new \Galette\Repository\Members();
+        $required_fields = array(
+            'id_adh',
+            'nom_adh',
+            'prenom_adh'
+        );
+        $list_members = $m->getList(false, $required_fields);
+
+        if (count($list_members) > 0) {
+            foreach ($list_members as $member) {
+                $pk = Adherent::PK;
+                $sname = mb_strtoupper($member->nom_adh, 'UTF-8') .
+                    ' ' . ucwords(mb_strtolower($member->prenom_adh, 'UTF-8')) .
+                    ' (' . $member->id_adh . ')';
+                $members[$member->$pk] = $sname;
+            }
+        }
+
+        $params['members'] = [
+            'filters'   => $m->getFilters(),
+            'count'     => $m->getCount()
+        ];
+
+        //check if current attached member is part of the list
+        if ($auto->owner->id > 0
+            && !isset($members[$auto->owner->id])
+        ) {
+            $members[$auto->owner->id] = Adherent::getSName($this->container->zdb, $auto->owner->id, true);
+        }
+
+        if (count($members)) {
+            $params['members']['list'] = $members;
+        }
 
         $module = $this->getModule();
 
@@ -308,7 +361,7 @@ class Controller
         $post = $request->getParsedBody();
 
         $action = $args['action'];
-        $is_new = $action === __('add', 'routes');
+        $is_new = $action === 'add';
 
         // initialize warnings
         $error_detected = array();

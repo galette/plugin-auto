@@ -2,13 +2,6 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-use Analog\Analog;
-use GaletteAuto\Autos;
-use GaletteAuto\AutosList;
-use GaletteAuto\Auto;
-use GaletteAuto\Controller;
-use GaletteAuto\PropertiesController;
-
 /**
  * Auto routes
  *
@@ -42,11 +35,18 @@ use GaletteAuto\PropertiesController;
  * @since     0.9dev 2016-03-02
  */
 
+use Analog\Analog;
+use GaletteAuto\Autos;
+use GaletteAuto\AutosList;
+use GaletteAuto\Auto;
+use GaletteAuto\Controller;
+use GaletteAuto\PropertiesController;
+
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
-    __('/vehicle', 'auto_routes') . __('/photo', 'auto_routes') . '[/{id:\d+}]',
+    '/vehicle/photo[/{id:\d+}]',
     function ($request, $response, $args) {
         $id = isset($args['id']) ? $args['id'] : '';
         $picture = new GaletteAuto\Picture($this->plugins, $id);
@@ -55,53 +55,58 @@ $this->get(
 )->setName('vehiclePhoto');
 
 $this->get(
-    __('/vehicles', 'auto_routes') . '[' . __('/member', 'routes') . '/{id:\d+}]',
+    '/vehicles[/{option:page|order}/{value:\d+}]',
     Controller::class . ':vehiclesList'
 )->setName('vehiclesList')->add($authenticate);
 
 $this->get(
-    __('/my-vehicles', 'auto_routes') . '[' . __('/member', 'routes') . '/{id:\d+}]',
+    '/member/{id:\d+}/vehicles[/{option:page|order}/{value:\d+}]',
+    Controller::class . ':vehiclesList'
+)->setName('memberVehiclesList')->add($authenticate);
+
+$this->get(
+    '/my-vehicles',
     Controller::class . ':myVehiclesList'
 )->setName('myVehiclesList')->add($authenticate);
 
 $this->get(
-    __('/vehicle', 'auto_routes') . '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/vehicle/{action:add|edit}[/{id:\d+}]',
     Controller::class . ':showAddEditVehicle'
 )->setName('vehicleEdit')->add($authenticate);
 
 $this->post(
-    __('/vehicle', 'auto_routes') . '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/vehicle/{action:add|edit}[/{id:\d+}]',
     Controller::class . ':doAddEditVehicle'
 )->setName('doVehicleEdit')->add($authenticate);
 
 $this->get(
-    __('/vehicle', 'auto_routes') . __('/history', 'auto_routes') . '[/{id:\d+}]',
+    '/vehicle/history[/{id:\d+}]',
     Controller::class . ':vehicleHistory'
 )->setName('vehicleHistory')->add($authenticate);
 
 $this->post(
-    __('/ajax', 'routes') . __('/models', 'auto_routes'),
+    '/ajax/models',
     Controller::class . ':ajaxModels'
 )->setName('ajaxModels')->add($authenticate);
 
 $this->get(
-    __('/vehicle', 'auto_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/vehicle/remove/{id:\d+}',
     Controller::class . ':removeVehicle'
 )->setName('removeVehicle')->add($authenticate);
 
 $this->get(
-    __('/vehicles', 'auto_routes') . __('/remove', 'routes'),
+    '/vehicles/remove',
     Controller::class . ':removeVehicles'
 )->setName('removeVehicles')->add($authenticate);
 
 $this->post(
-    __('/vehicle', 'auto_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/vehicle/remove[/{id:\d+}]',
     Controller::class . ':doRemoveVehicle'
 )->setName('doRemoveVehicle')->add($authenticate);
 
 //Batch actions on vehicles list
 $this->post(
-    __('/vehicles', 'auto_routes') . __('/batch', 'routes'),
+    '/vehicles/batch',
     function ($request, $response) {
         $post = $request->getParsedBody();
 
@@ -127,38 +132,38 @@ $this->post(
 )->setName('batch-vehicleslist')->add($authenticate);
 
 $this->get(
-    __('/models', 'auto_routes') . '[/{option:' . __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/models[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':modelsList'
 )->setName('modelsList')->add($authenticate);
 
 $this->get(
-    __('/models', 'auto_routes'). '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/models/{action:add|edit}[/{id:\d+}]',
     PropertiesController::class . ':modelEdit'
 )->setName('modelEdit')->add($authenticate);
 
 $this->post(
-    __('/models', 'auto_routes'). '/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/models/{action:add|edit}[/{id:\d+}]',
     PropertiesController::class . ':doModelEdit'
 )->setName('doModelEdit')->add($authenticate);
 
 $this->get(
-    __('/model', 'auto_routes') . __('/remove', 'routes') . '/{id:\d+}',
+    '/model/remove/{id:\d+}',
     PropertiesController::class . ':removeModel'
 )->setName('removeModel')->add($authenticate);
 
 $this->get(
-    __('/models', 'auto_routes') . __('/remove', 'routes'),
+    '/models/remove',
     PropertiesController::class . ':removeModels'
 )->setName('removeModels')->add($authenticate);
 
 $this->post(
-    __('/model', 'auto_routes') . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/model/remove[/{id:\d+}]',
     PropertiesController::class . ':doRemoveModel'
 )->setName('doRemoveModel')->add($authenticate);
 
 //Batch actions on models list
 $this->post(
-    __('/models', 'auto_routes') . __('/batch', 'routes'),
+    '/models/batch',
     function ($request, $response) {
         $post = $request->getParsedBody();
 
@@ -184,68 +189,53 @@ $this->post(
 )->setName('batch-modelslist')->add($authenticate);
 
 $this->get(
-    __('/brands', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/brands[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':brandsList'
 )->setName('brandsList')->add($authenticate);
 
 $this->get(
-    __('/colors', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/colors[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':colorsList'
 )->setName('colorsList')->add($authenticate);
 
 $this->get(
-    __('/states', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/states[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':statesList'
 )->setName('statesList')->add($authenticate);
 
 $this->get(
-    __('/finitions', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/finitions[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':finitionsList'
 )->setName('finitionsList')->add($authenticate);
 
 $this->get(
-    __('/bodies', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/bodies[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':bodiesList'
 )->setName('bodiesList')->add($authenticate);
 
 $this->get(
-    __('/transmissions', 'auto_routes') . '[/{option:' .
-    __('page', 'routes') . '|' . __('order', 'routes') . '}/{value:\d+}]',
+    '/transmissions[/{option:page|order}/{value:\d+}]',
     PropertiesController::class . ':transmissionsList'
 )->setName('transmissionsList')->add($authenticate);
 
 $this->get(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
     PropertiesController::class . ':propertyEdit'
 )->setName('propertyEdit')->add($authenticate);
 
 $this->post(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}/{action:' . __('add', 'routes') . '|' . __('edit', 'routes') .  '}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
     PropertiesController::class . ':doPropertyEdit'
 )->setName('doPropertyEdit')->add($authenticate);
 
 $this->get(
-    '/{property:' . __('brand', 'auto_routes') . '}' . __('/show', 'auto_routes') . '/{id:\d+}',
+    '/{property:brand}/show/{id:\d+}',
     PropertiesController::class . ':propertyShow'
 )->setName('propertyShow')->add($authenticate);
 
 //Batch actions on properties lists
 $this->post(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}' . __('/batch', 'routes'),
+    '/{property:brand|color|state|finition|body|transmission}/batch',
     function ($request, $response, $args) {
         $post = $request->getParsedBody();
 
@@ -269,22 +259,22 @@ $this->post(
 
             $route = null;
             switch ($property) {
-                case __('color', 'auto_routes'):
+                case 'color':
                     $route = $this->container->router->pathFor('colorsList');
                     break;
-                case __('state', 'auto_routes'):
+                case 'state':
                     $route = $this->container->router->pathFor('statesList');
                     break;
-                case __('finition', 'auto_routes'):
+                case 'finition':
                     $route = $this->container->router->pathFor('finitionsList');
                     break;
-                case __('body', 'auto_routes'):
+                case 'body':
                     $route = $this->container->router->pathFor('bodiesList');
                     break;
-                case __('transmission', 'auto_routes'):
+                case 'transmission':
                     $route = $this->container->router->pathFor('transmissionsList');
                     break;
-                case __('brand', 'auto_routes'):
+                case 'brand':
                     $route = $this->container->router->pathFor('brandsList');
                     break;
                 default:
@@ -300,25 +290,16 @@ $this->post(
 )->setName('batch-propertieslist')->add($authenticate);
 
 $this->get(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}' . __('/remove', 'routes') . '/{id:\d+}',
+    '/{property:brand|color|state|finition|body|transmission}/remove/{id:\d+}',
     PropertiesController::class . ':removeProperty'
 )->setName('removeProperty')->add($authenticate);
 
 $this->get(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}'. __('/remove', 'routes'),
+    '/{property:brand|color|state|finition|body|transmission}'. '/remove',
     PropertiesController::class . ':removeProperties'
 )->setName('removeProperties')->add($authenticate);
 
 $this->post(
-    '/{property:' . __('brand', 'auto_routes') . '|' . __('color', 'auto_routes') . '|' .
-    __('state', 'auto_routes') . '|' . __('finition', 'auto_routes') . '|' .
-    __('body', 'auto_routes') . '|' . __('transmission', 'auto_routes') .
-    '}' . __('/remove', 'routes') . '[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/remove[/{id:\d+}]',
     PropertiesController::class . ':doRemoveProperty'
 )->setName('doRemoveProperty')->add($authenticate);

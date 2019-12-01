@@ -93,7 +93,7 @@ class Color extends AbstractObject
      */
     public function getRouteName()
     {
-        return __('color', 'auto_routes');
+        return 'color';
     }
 
     /**
