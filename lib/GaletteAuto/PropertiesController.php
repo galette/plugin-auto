@@ -43,7 +43,7 @@ use Slim\Http\Response;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Filters\PropertiesList;
 use GaletteAuto\Repository\Models;
