@@ -30,10 +30,10 @@ import sys
 import re
 
 # pattern definition
-translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")?\)")
+translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")\)")
 #same, with single quotes...
-translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')?\)")
-tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")?")
+translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')\)")
+tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")")
 
 # constants string
 startLoc = "#: "
@@ -57,7 +57,7 @@ def handleMatches(matches, repl_quotes=False):
             trans = '"%s"' % trans[1:-1]
 
         #define domain
-        cur_domain = 'auto'
+        cur_domain = 'galette'
         if match[3] != '':
             cur_domain = match[3]
 
