@@ -1,16 +1,19 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
 "POT-Creation-Date: 2020-06-19 05:46+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-06-20 09:16+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.1.1\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -351,7 +354,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/PropertiesController.php:668
 msgid "New"
-msgstr ""
+msgstr "Neu"
 
 #: ../lib/GaletteAuto/PropertiesController.php:674
 msgid "Change '%s'"
@@ -440,15 +443,15 @@ msgstr ""
 
 #: ../templates/default/history.tpl:36
 msgid "[M]"
-msgstr ""
+msgstr "[M]"
 
 #: ../templates/default/history.tpl:38 ../templates/default/history.tpl:40
 msgid "[W]"
-msgstr ""
+msgstr "[W]"
 
 #: ../templates/default/history.tpl:45
 msgid "[admin]"
-msgstr ""
+msgstr "[Administrator]"
 
 #: ../templates/default/history.tpl:56
 msgid "no history entries"
@@ -482,7 +485,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:15
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: ../templates/default/vehicles.tpl:20
 msgid "Model:"
@@ -518,11 +521,11 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:57
 msgid "Picture:"
-msgstr ""
+msgstr "Bild:"
 
 #: ../templates/default/vehicles.tpl:60
 msgid "Delete image"
-msgstr ""
+msgstr "Bild löschen"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
