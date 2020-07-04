@@ -1,7 +1,6 @@
 INSTALLDIR = .
 LANGUAGES = `find ./ -name "auto_*.po" -print | sed 's|^\./auto_\(.*\).po|\1|'`
 DOMAINS = auto
-MKLANG = ../../../lang/make_lang_l12n.py
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
               $(shell find ../lib/GaletteAuto/ -name \*.php) \
               $(shell find ../templates -name \*.tpl)

@@ -41,7 +41,7 @@ use Analog\Analog;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Automobile autos class for galette Auto plugin

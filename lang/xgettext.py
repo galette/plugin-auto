@@ -30,10 +30,10 @@ import sys
 import re
 
 # pattern definition
-translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")?\)")
+translatable        = re.compile("_(T|_)\((\"[^\"]*\")(, \"([^\"]*)\")\)")
 #same, with single quotes...
-translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')?\)")
-tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")?")
+translatable_single = re.compile("_(T|_)\(('[^']*')(, '([^']*)')\)")
+tpl_translatable    = re.compile("_(T|_)\ string=(\"[^\"]*\")( domain=\"([^\"]*)\")")
 
 # constants string
 startLoc = "#: "
@@ -57,15 +57,14 @@ def handleMatches(matches, repl_quotes=False):
             trans = '"%s"' % trans[1:-1]
 
         #define domain
-        if match[3] != '' and match[3] != 'routes':
+        cur_domain = 'galette'
+        if match[3] != '':
             cur_domain = match[3]
-        else:
-            continue
 
-        if not domains.has_key(cur_domain):
+        if cur_domain not in domains:
             domains[cur_domain] = {}
 
-        if domains[cur_domain].has_key(trans):
+        if trans in domains[cur_domain]:
             if domains[cur_domain][trans][-1:] == "\n":
                 domains[cur_domain][trans] += startLoc + location()
             else:
@@ -88,9 +87,9 @@ for inputFileName in sys.argv[1:]:
         matches = tpl_translatable.findall(line)
         handleMatches(matches)
 
-for domain, strings in domains.iteritems():
+for domain, strings in domains.items():
     outFile = open("%s.pot" % domain, 'w')
-    for k, v in strings.iteritems():
+    for k, v in strings.items():
         outFile.write(v)
         if v[-1:] != "\n":
             outFile.write("\n")

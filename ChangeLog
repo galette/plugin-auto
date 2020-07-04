@@ -1,3 +1,8 @@
+* 2020-07-03 - 1.6.0
+- Galette 0.9.4 compatible
+- Add translations in available core languages (see https://hosted.weblate.org/projects/galette)
+- Rely on fontawesome for icons
+
 * 2019-12-01 - 1.5.0
 - Galette 0.9.3 compatible
 - Remove routes translations

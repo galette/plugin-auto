@@ -45,7 +45,7 @@ use GaletteAuto\Model;
 use GaletteAuto\Brand;
 use GaletteAuto\Filters\ModelsList;
 use Analog\Analog;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 /**
  * Models repository management
