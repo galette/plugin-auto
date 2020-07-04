@@ -437,7 +437,7 @@ class Auto
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] An error has occured ' .
-                (($new)?'inserting':'updating') . ' car | ' .
+                (($new) ? 'inserting' : 'updating') . ' car | ' .
                 $e->getMessage(),
                 Analog::ERROR
             );
@@ -457,7 +457,8 @@ class Auto
     {
         $result = array();
         foreach ($this as $key => $value) {
-            if (!$restrict
+            if (
+                !$restrict
                 || ($restrict && !in_array($key, $this->internals))
             ) {
                 $result[] = $key;
@@ -676,7 +677,7 @@ class Auto
                 case 'first_circulation_date':
                     if (preg_match("@^([0-9]{2})/([0-9]{2})/([0-9]{4})$@", $value, $array_jours)) {
                         if (checkdate($array_jours[2], $array_jours[1], $array_jours[3])) {
-                            $value = $array_jours[3].'-'.$array_jours[2].'-'.$array_jours[1];
+                            $value = $array_jours[3] . '-' . $array_jours[2] . '-' . $array_jours[1];
                             $this->$prop = $value;
                         } else {
                             $this->errors[] = str_replace(
@@ -703,7 +704,7 @@ class Auto
                     } elseif ($value != '') {
                         $this->errors[] = str_replace(
                             '%s',
-                            '<a href="#' . $prop . '">' .$this->getPropName($prop) . '</a>',
+                            '<a href="#' . $prop . '">' . $this->getPropName($prop) . '</a>',
                             _T("- You must enter a positive integer for %s")
                         );
                     }

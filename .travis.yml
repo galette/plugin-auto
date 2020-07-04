@@ -1,0 +1,40 @@
+sudo: false
+services:
+  - postgresql
+  - mysql
+before_script:
+  - git clone --depth=1 https://github.com/galette/galette -b develop ../galette && pushd ../galette
+  - ./bin/install_deps
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -v ON_ERROR_STOP=1 -c 'DROP DATABASE IF EXISTS galette_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -v ON_ERROR_STOP=1 -c 'create database galette_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -v ON_ERROR_STOP=1 -d galette_tests -a -f galette/install/scripts/pgsql.sql -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS galette_tests;'; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'use galette_tests; source galette/install/scripts/mysql.sql;'; fi"
+  - popd
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -v ON_ERROR_STOP=1 -d galette_tests -a -f scripts/pgsql.sql -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'use galette_tests; source scripts/mysql.sql;'; fi"
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.4" && $DB == "mysql" ]]; then composer require squizlabs/php_codesniffer; fi
+
+script:
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.4" && $DB == "mysql" ]]; then vendor/bin/phpcs -n -p --standard=../galette/phpcs-rules.xml lib/ ./*.php; fi
+
+language: php
+
+php:
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+env:
+  - DB=pgsql
+  - DB=mysql
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.npm/_cacache

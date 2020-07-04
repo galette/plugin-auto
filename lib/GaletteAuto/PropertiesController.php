@@ -120,7 +120,7 @@ class PropertiesController extends Controller
         $params = [
             'page_title'    => _T("Models list", "auto"),
             'models'        => $models->getList(),
-            'require_dialog'=> true
+            'require_dialog' => true
         ];
         $module = $this->getModule();
 
@@ -605,7 +605,7 @@ class PropertiesController extends Controller
             'field_name'    => $obj->getFieldLabel(),
             'add_text'      => $add_text,
             'obj'           => $obj,
-            'require_dialog'=> true
+            'require_dialog' => true
         ];
 
         if (isset($can_show)) {

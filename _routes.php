@@ -295,7 +295,7 @@ $this->get(
 )->setName('removeProperty')->add($authenticate);
 
 $this->get(
-    '/{property:brand|color|state|finition|body|transmission}'. '/remove',
+    '/{property:brand|color|state|finition|body|transmission}' . '/remove',
     PropertiesController::class . ':removeProperties'
 )->setName('removeProperties')->add($authenticate);
 

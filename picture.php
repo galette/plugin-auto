@@ -41,13 +41,13 @@ use GaletteAuto\Picture;
 define('GALETTE_BASE_PATH', '../../');
 require_once GALETTE_BASE_PATH . 'includes/galette.inc.php';
 
-if ( !$login->isLogged() ) {
+if (!$login->isLogged()) {
     header('location: ' . GALETTE_BASE_PATH . 'index.php');
     die();
 }
 
 /** FIXME: these should not be fired when accessing from public pages */
-if ( !$login->isAdmin() && !$login->isStaff() || !isset($_GET['id_adh']) ) {
+if (!$login->isAdmin() && !$login->isStaff() || !isset($_GET['id_adh'])) {
     $id_adh = $login->id;
 } else {
     $id_adh = $_GET['id_adh'];

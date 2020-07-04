@@ -89,15 +89,17 @@ class Controller
     /**
      * Check ACLs for specific member
      *
-     * @param integer $id_adh   Members id to check right for
-     * @param string  $redirect Path to redirect to (myVehiclesList per default)
+     * @param Response $response Response
+     * @param integer  $id_adh   Members id to check right for
+     * @param string   $redirect Path to redirect to (myVehiclesList per default)
      *
      * @return boolean
      */
     protected function checkAclsFor(Response $response, $id_adh, $redirect = null)
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
-        if ($this->container->login->id != $id_adh
+        if (
+            $this->container->login->id != $id_adh
             && !$this->container->login->isAdmin()
             && !$this->container->login->isStaff()
         ) {
@@ -203,7 +205,7 @@ class Controller
             'page_title'    => $title,
             'title'         => _T("Vehicles list", "auto"),
             'show_mine'     => isset($args['mine']),
-            'require_dialog'=> true
+            'require_dialog' => true
         ];
 
         if ($id_adh === null) {
@@ -255,7 +257,8 @@ class Controller
             $auto->load((int)$args['id']);
             $this->checkAclsFor($response, $auto->owner->id);
         } else {
-            if (isset($args['id_adh'])
+            if (
+                isset($args['id_adh'])
                 && ($this->container->login->isAdmin() || $this->container->login->isStaff())
             ) {
                 $auto->owner = $args['id_adh'];
@@ -326,7 +329,8 @@ class Controller
         ];
 
         //check if current attached member is part of the list
-        if ($auto->owner->id > 0
+        if (
+            $auto->owner->id > 0
             && !isset($members[$auto->owner->id])
         ) {
             $members[$auto->owner->id] = Adherent::getSName($this->container->zdb, $auto->owner->id, true);

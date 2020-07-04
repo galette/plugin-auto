@@ -249,7 +249,7 @@ abstract class AbstractObject
     {
         $forbidden = array();
         if (!in_array($name, $forbidden)) {
-            if ($name =='id' || $name == 'value') {
+            if ($name == 'id' || $name == 'value') {
                 return $this->$name;
             } else {
                 if (isset($this->$name)) {
