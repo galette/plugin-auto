@@ -39,10 +39,10 @@ $this->register(
     'Galette Auto',                         //Name
     'Plugin to manage Automobile clubs',    //Short description
     'Johan Cwiklinski',                     //Author
-    '1.5.0',                                //Version
-    '0.9.3',                                //Galette compatible version
+    '1.6.0',                                //Version
+    '0.9.4',                                //Galette compatible version
     'auto',                                 //routing name
-    '2019-12-01',                           //Release date
+    '2020-07-03',                           //Release date
     [ //routes permissions
         'vehiclesList'      => 'groupmanager',
         'memberVehiclesList' => 'groupmanager',
@@ -50,7 +50,7 @@ $this->register(
         'vehicleEdit'       => 'member',
         'ajaxModels'        => 'member',
         'doVehicleEdit'     => 'member',
-        'batch-vehicleslist'=> 'member',
+        'batch-vehicleslist' => 'member',
         'removeVehicle'     => 'member',
         'removeVehicles'    => 'member',
         'doRemoveVehicle'   => 'member',
