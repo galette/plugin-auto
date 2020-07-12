@@ -18,8 +18,8 @@ msgstr ""
 "POT-Creation-Date: 2005-12-20 16:44+0100\n"
 "PO-Revision-Date: 2020-07-12 09:08+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,82 +77,82 @@ msgstr "Carrosseries"
 msgid "Delete vehicles cards"
 msgstr "Supprimer les fiches des véhicules"
 
-#: ../lib/GaletteAuto/Controller.php:117
+#: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
 msgstr "Vous n'avez pas assez de privilèges."
 
-#: ../lib/GaletteAuto/Controller.php:195 ../templates/default/menu.tpl:14
+#: ../lib/GaletteAuto/Controller.php:197 ../templates/default/menu.tpl:14
 msgid "Cars list"
 msgstr "Liste des voitures"
 
-#: ../lib/GaletteAuto/Controller.php:197
+#: ../lib/GaletteAuto/Controller.php:199
 #: ../templates/default/dashboard_member.tpl:1
 msgid "My cars"
 msgstr "Mes véhicules"
 
-#: ../lib/GaletteAuto/Controller.php:199
+#: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
 msgstr "Véhicules de l'adhérent"
 
-#: ../lib/GaletteAuto/Controller.php:204
+#: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
 msgstr "Liste des véhicules"
 
-#: ../lib/GaletteAuto/Controller.php:245
+#: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
 msgstr ""
 "L'identifiant du véhicule ne peut être vide lors de l'appel à la route de "
 "modification !"
 
-#: ../lib/GaletteAuto/Controller.php:273
+#: ../lib/GaletteAuto/Controller.php:276
 msgid "New vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
-#: ../lib/GaletteAuto/Controller.php:274
+#: ../lib/GaletteAuto/Controller.php:277
 msgid "Change vehicle '%s'"
 msgstr "Modifier le véhicule « %s »"
 
-#: ../lib/GaletteAuto/Controller.php:379
+#: ../lib/GaletteAuto/Controller.php:383
 #: ../lib/GaletteAuto/PropertiesController.php:227
 #: ../lib/GaletteAuto/PropertiesController.php:726
 msgid "- No id provided for modifying this record! (internal)"
 msgstr ""
 "- Pas d'identifiant fourni pour modifier cet enregistrement ! (interne)"
 
-#: ../lib/GaletteAuto/Controller.php:394
+#: ../lib/GaletteAuto/Controller.php:398
 msgid "- An error has occured while saving vehicle in the database."
 msgstr ""
 "- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
 
-#: ../lib/GaletteAuto/Controller.php:396
+#: ../lib/GaletteAuto/Controller.php:400
 msgid "Vehicle has been saved!"
 msgstr "Le véhicule a été enregistré !"
 
-#: ../lib/GaletteAuto/Controller.php:460
+#: ../lib/GaletteAuto/Controller.php:464
 msgid "History of car #%d"
 msgstr "Historique de la voiture #%d"
 
-#: ../lib/GaletteAuto/Controller.php:535 ../lib/GaletteAuto/Controller.php:584
+#: ../lib/GaletteAuto/Controller.php:539 ../lib/GaletteAuto/Controller.php:588
 msgid "Vehicle"
 msgstr "Véhicule"
 
-#: ../lib/GaletteAuto/Controller.php:538
+#: ../lib/GaletteAuto/Controller.php:542
 msgid "Remove vehicle %1$s"
 msgstr "Supprimer le véhicule %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:586
+#: ../lib/GaletteAuto/Controller.php:590
 msgid "Remove vehicles"
 msgstr "Suppression véhicules"
 
-#: ../lib/GaletteAuto/Controller.php:590
+#: ../lib/GaletteAuto/Controller.php:594
 msgid "You are about to remove %count vehicles."
 msgstr "Vous êtes sur le point de supprimer %count véhicules."
 
-#: ../lib/GaletteAuto/Controller.php:635
+#: ../lib/GaletteAuto/Controller.php:639
 msgid "An error occured trying to remove vehicles :/"
 msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
 
-#: ../lib/GaletteAuto/Controller.php:645
+#: ../lib/GaletteAuto/Controller.php:649
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count véhicules ont été supprimés avec succès."
 
