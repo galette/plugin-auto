@@ -45,78 +45,78 @@ msgstr "Body"
 msgid "Delete vehicles cards"
 msgstr "Delete vehicles cards"
 
-#: ../lib/GaletteAuto/Controller.php:117
+#: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
 msgstr "You do not have enought privileges."
 
-#: ../lib/GaletteAuto/Controller.php:195 ../templates/default/menu.tpl:14
+#: ../lib/GaletteAuto/Controller.php:197 ../templates/default/menu.tpl:14
 msgid "Cars list"
 msgstr "Cars list"
 
-#: ../lib/GaletteAuto/Controller.php:197
+#: ../lib/GaletteAuto/Controller.php:199
 #: ../templates/default/dashboard_member.tpl:1
 msgid "My cars"
 msgstr "My cars"
 
-#: ../lib/GaletteAuto/Controller.php:199
+#: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
 msgstr "Member's cars"
 
-#: ../lib/GaletteAuto/Controller.php:204
+#: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
 msgstr "Vehicles list"
 
-#: ../lib/GaletteAuto/Controller.php:245
+#: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
 msgstr "Car ID cannot be null calling edit route!"
 
-#: ../lib/GaletteAuto/Controller.php:273
+#: ../lib/GaletteAuto/Controller.php:276
 msgid "New vehicle"
 msgstr "New vehicle"
 
-#: ../lib/GaletteAuto/Controller.php:274
+#: ../lib/GaletteAuto/Controller.php:277
 msgid "Change vehicle '%s'"
 msgstr "Change vehicle '%s'"
 
-#: ../lib/GaletteAuto/Controller.php:379
+#: ../lib/GaletteAuto/Controller.php:383
 #: ../lib/GaletteAuto/PropertiesController.php:227
 #: ../lib/GaletteAuto/PropertiesController.php:726
 msgid "- No id provided for modifying this record! (internal)"
 msgstr "- No id provided for modifying this record! (internal)"
 
-#: ../lib/GaletteAuto/Controller.php:394
+#: ../lib/GaletteAuto/Controller.php:398
 msgid "- An error has occured while saving vehicle in the database."
 msgstr "- An error has occured while saving vehicle in the database."
 
-#: ../lib/GaletteAuto/Controller.php:396
+#: ../lib/GaletteAuto/Controller.php:400
 msgid "Vehicle has been saved!"
 msgstr "Vehicle has been saved!"
 
-#: ../lib/GaletteAuto/Controller.php:460
+#: ../lib/GaletteAuto/Controller.php:464
 msgid "History of car #%d"
 msgstr "History of car #%d"
 
-#: ../lib/GaletteAuto/Controller.php:535 ../lib/GaletteAuto/Controller.php:584
+#: ../lib/GaletteAuto/Controller.php:539 ../lib/GaletteAuto/Controller.php:588
 msgid "Vehicle"
 msgstr "Vehicle"
 
-#: ../lib/GaletteAuto/Controller.php:538
+#: ../lib/GaletteAuto/Controller.php:542
 msgid "Remove vehicle %1$s"
 msgstr "Remove vehicle %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:586
+#: ../lib/GaletteAuto/Controller.php:590
 msgid "Remove vehicles"
 msgstr "Remove vehicles"
 
-#: ../lib/GaletteAuto/Controller.php:590
+#: ../lib/GaletteAuto/Controller.php:594
 msgid "You are about to remove %count vehicles."
 msgstr "You are about to remove %count vehicles."
 
-#: ../lib/GaletteAuto/Controller.php:635
+#: ../lib/GaletteAuto/Controller.php:639
 msgid "An error occured trying to remove vehicles :/"
 msgstr "An error occured trying to remove vehicles :/"
 
-#: ../lib/GaletteAuto/Controller.php:645
+#: ../lib/GaletteAuto/Controller.php:649
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count vehicles have been successfully deleted."
 
