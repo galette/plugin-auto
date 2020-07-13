@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# J. Lavoie <j.lavoie@net-c.ca>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:46+0200\n"
-"PO-Revision-Date: 2020-06-28 06:21+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/de/>\n"
+"PO-Revision-Date: 2020-07-13 07:41+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -375,7 +376,7 @@ msgstr ""
 #: ../lib/GaletteAuto/PropertiesController.php:861
 #: ../lib/GaletteAuto/PropertiesController.php:908
 msgid "Remove %1$s %2$s"
-msgstr ""
+msgstr "%1$s·%2$s entfernen"
 
 #: ../lib/GaletteAuto/PropertiesController.php:915
 msgid "You are about to remove %count %property."
