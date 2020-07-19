@@ -372,7 +372,9 @@ class Controller
         $warning_detected = array();
         $success_detected = array();
 
-        $this->checkAclsFor($response, (int)$post['id_adh']);
+        if (isset($post['id_adh'])) {
+            $this->checkAclsFor($response, (int)$post['id_adh']);
+        }
 
         $auto = new Auto($this->container->plugins, $this->container->zdb);
         if (!$is_new) {

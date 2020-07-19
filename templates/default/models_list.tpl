@@ -23,14 +23,14 @@
                     <td class="center nowrap">
                         <a href="{$edit_link}" class="tooltip action">
                             <i class="fas fa-edit"></i>
-                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace=$o->$field}</span>
+                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace={$m->obrand->value|cat:' '|cat:$m->model}}</span>
                         </a>
                         <a
                             class="delete tooltip"
                             href="{path_for name="removeModel" data=["id" => $m->id]}"
                         >
                             <i class="fas fa-trash"></i>
-                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace=$o->$field domain="auto"}</span>
+                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace={$m->obrand->value|cat:' '|cat:$m->model} domain="auto"}</span>
                         </a>
                     </td>
                 </tr>
