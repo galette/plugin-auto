@@ -1,20 +1,21 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Amr Darwish <adarweesh@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: trasher@x-tnd.be\n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:46+0200\n"
-"PO-Revision-Date: 2020-06-20 09:16+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/ar/>\n"
+"PO-Revision-Date: 2020-08-18 11:32+0000\n"
+"Last-Translator: Amr Darwish <adarweesh@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.1.1\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -22,34 +23,34 @@ msgstr ""
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
-msgstr ""
+msgstr "لم يتم اختيار أي طراز، الرجاء التحقق من اسم واحد على الأقل."
 
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
-msgstr ""
+msgstr "لم يتم تحديد أي إدخال ، يرجى تحديد واحد على الأقل."
 
 #: ../lib/GaletteAuto/State.php:86 ../templates/default/history.tpl:25
 msgid "State"
-msgstr ""
+msgstr "حالة"
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
-msgstr ""
+msgstr "- يجب عليك تحديد علامة تجارية!"
 
 #: ../lib/GaletteAuto/Model.php:247
 #: ../lib/GaletteAuto/PropertiesController.php:732
 msgid "- You must provide a value!"
-msgstr ""
+msgstr "- يجب عليك تقديم قيمة!"
 
 #: ../lib/GaletteAuto/Color.php:86 ../templates/default/history.tpl:22
 msgid "Color"
-msgstr ""
+msgstr "لون"
 
 #: ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles_list.tpl:10
 #: ../templates/default/models_list.tpl:10 ../templates/default/model.tpl:18
 #: ../templates/default/vehicles.tpl:20
 msgid "Brand"
-msgstr ""
+msgstr "العلامة التجارية"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
