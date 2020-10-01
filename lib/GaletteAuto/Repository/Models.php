@@ -62,8 +62,8 @@ use Laminas\Db\Sql\Expression;
 
 class Models extends Repository
 {
-    const TABLE = Model::TABLE;
-    const PK = Model::PK;
+    public const TABLE = Model::TABLE;
+    public const PK = Model::PK;
 
     /**
      * Main constructor

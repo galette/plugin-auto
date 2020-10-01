@@ -53,10 +53,10 @@ use Galette\Core\Db;
  */
 class Finition extends AbstractObject
 {
-    const TABLE = 'finitions';
-    const PK = 'id_finition';
-    const FIELD = 'finition';
-    const NAME = 'finitions';
+    public const TABLE = 'finitions';
+    public const PK = 'id_finition';
+    public const FIELD = 'finition';
+    public const NAME = 'finitions';
 
     /**
     * Default constructor

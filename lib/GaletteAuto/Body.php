@@ -53,10 +53,10 @@ use Galette\Core\Db;
  */
 class Body extends AbstractObject
 {
-    const TABLE = 'bodies';
-    const PK = 'id_body';
-    const FIELD = 'body';
-    const NAME = 'bodies';
+    public const TABLE = 'bodies';
+    public const PK = 'id_body';
+    public const FIELD = 'body';
+    public const NAME = 'bodies';
 
     /**
     * Default constructor

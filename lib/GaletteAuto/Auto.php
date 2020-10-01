@@ -62,8 +62,8 @@ use GaletteAuto\Transmission;
  */
 class Auto
 {
-    const TABLE = 'cars';
-    const PK = 'id_car';
+    public const TABLE = 'cars';
+    public const PK = 'id_car';
 
     private $plugins;
     private $zdb;
@@ -130,12 +130,12 @@ class Auto
     private $owner;                    //propriétaire actuel
     private $state;                    //état actuel
 
-    const FUEL_PETROL = 1;
-    const FUEL_DIESEL = 2;
-    const FUEL_GAS = 3;
-    const FUEL_ELECTRICITY = 4;
-    const FUEL_BIO = 5;
-    const FUEL_HYBRID = 6;
+    public const FUEL_PETROL = 1;
+    public const FUEL_DIESEL = 2;
+    public const FUEL_GAS = 3;
+    public const FUEL_ELECTRICITY = 4;
+    public const FUEL_BIO = 5;
+    public const FUEL_HYBRID = 6;
 
     private $propnames;                //textual properties names
 

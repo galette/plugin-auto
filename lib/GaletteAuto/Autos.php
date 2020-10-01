@@ -57,8 +57,8 @@ use Laminas\Db\Sql\Expression;
  */
 class Autos
 {
-    const TABLE = Auto::TABLE;
-    const PK = Auto::PK;
+    public const TABLE = Auto::TABLE;
+    public const PK = Auto::PK;
 
     private $plugins;
     private $zdb;

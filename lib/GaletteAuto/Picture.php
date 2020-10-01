@@ -58,7 +58,7 @@ class Picture extends GalettePicture
     private $plugins;
 
     protected $tbl_prefix = AUTO_PREFIX;
-    const PK = Auto::PK;
+    public const PK = Auto::PK;
 
     /**
     * Default constructor.
