@@ -1,11 +1,12 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Kristian Fagerlie <kris_fagerlie@hotmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:47+0200\n"
-"PO-Revision-Date: 2020-10-02 12:41+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2020-10-24 09:48+0000\n"
+"Last-Translator: Kristian Fagerlie <kris_fagerlie@hotmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -13,15 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3-dev\n"
+"X-Generator: Weblate 4.3.1\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
-msgstr ""
+msgstr "Ingen kjøretøy ble valgt, vennligst sjekk minst ett av navnene."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
-msgstr ""
+msgstr "Ingen modell ble valgt, vennligst sjekk ett av navnene."
 
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
