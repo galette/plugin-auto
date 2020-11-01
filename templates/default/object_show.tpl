@@ -16,7 +16,7 @@
     {else}
             <p>{_T string="The brand '%s' does not have any registered model at this time." pattern="/%s/" replace=$obj->value domain="auto"}</p>
     {/if}
-            <p><a href="{path_for name="modelEdit" data=["action" => "add"]}?brand={$obj->id}">{_T string="Create a new model for brand '%s'" pattern="/%s/" replace=$obj->value domain="auto"}</a></p>
+            <p><a href="{path_for name="modelAdd"}?brand={$obj->id}">{_T string="Create a new model for brand '%s'" pattern="/%s/" replace=$obj->value domain="auto"}</a></p>
 {/if}
         </div>
 {/block}

@@ -37,7 +37,6 @@
 
 namespace GaletteAuto\Filters;
 
-use Analog\Analog as Analog;
 use Galette\Core\Pagination;
 
 /**
@@ -64,34 +63,8 @@ class ModelsList extends Pagination
      *
      * @return string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): string
     {
         return 'model';
-    }
-
-    /**
-     * Add SQL limit
-     *
-     * @param Zend_Db_Select $select Original select
-     *
-     * @return <type>
-     */
-    public function setLimit($select)
-    {
-        return $this->setLimits($select);
-    }
-
-
-    /**
-     * Set counter
-     *
-     * @param int $c Count
-     *
-     * @return void
-     */
-    public function setCounter($c)
-    {
-        $this->counter = (int)$c;
-        $this->countPages();
     }
 }

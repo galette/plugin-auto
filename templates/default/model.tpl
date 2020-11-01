@@ -1,12 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-    {if $mode eq "new"}
-        {assign var="action" value="add"}
-    {else}
-        {assign var="action" value="edit"}
-    {/if}
-    <form action="{path_for name="doModelEdit" data=["action" => $action]}" method="post" id="modifform">
+    <form action="{if $mode eq "new"}{path_for name="doModelAdd"}{else}{path_for name="doModelEdit" data=["id" => $model->id]}{/if}" method="post" id="modifform">
         <div class="bigtable">
             <fieldset class="cssform">
                 <p>

@@ -5,6 +5,20 @@
     {assign var='pk' value=$obj->pk}
     {assign var='field' value=$obj->field}
     {assign var='list' value=$obj->getList()}
+    {assign var='filterPath' value=$field}
+        <form action="{path_for name="propertyFilter" data=["property" => $field]}" method="post" id="filtre">
+        <div class="infoline">
+            {$obj->displayCount()}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+            </div>
+        </div>
+        </form>
+
         <form action="{path_for name="batch-propertieslist" data=["property" => $obj->getRouteName()]}" method="post" id="listform">
         <table class="listing">
             <thead>
@@ -49,7 +63,7 @@
     {/if}
             <ul class="selection_menu">
     {if $list|@count gt 0}
-                <li>{_T string="Selection:"}</li>
+                <li>{_T string="For the selection:"}</li>
                 <li>
                     <button type="submit" id="delete" name="delete" class="delete">
                         <i class="fas fa-trash" aria-hidden="true"></i>

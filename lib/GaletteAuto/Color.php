@@ -111,4 +111,21 @@ class Color extends AbstractObject
             return parent::__get($name);
         }
     }
+
+    /**
+     * Get localized count string for object list
+     *
+     * @param integer $count Count
+     *
+     * @return string
+     */
+    protected function getLocalizedCount(int $count): string
+    {
+        return _Tn(
+            '%count color',
+            '%count colors',
+            $this->getCount(),
+            'auto'
+        );
+    }
 }

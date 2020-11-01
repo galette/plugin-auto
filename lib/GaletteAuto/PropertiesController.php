@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
@@ -36,14 +36,9 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog;
-use Psr\Container\ContainerInterface;
+use Galette\Controllers\AbstractPluginController;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Galette\Core\Db;
-use Galette\Core\Plugins;
-use Galette\Entity\Adherent;
-use Laminas\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Filters\PropertiesList;
 use GaletteAuto\Repository\Models;
@@ -55,500 +50,181 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
  */
-class PropertiesController extends Controller
+class PropertiesController extends AbstractPluginController
 {
     /**
-     * List models
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
+     * @Inject("Plugin Galette Auto")
+     * @var integer
      */
-    public function modelsList(Request $request, Response $response, $args = [])
-    {
-        $numrows = $this->container->preferences->pref_numrows;
-        if (isset($_GET['nbshow'])) {
-            if (is_numeric($_GET['nbshow'])) {
-                $numrows = $_GET['nbshow'];
-            }
-        }
-
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
-
-        if (isset($this->container->session->filter_automodels)) {
-            $mfilters = $this->container->session->filter_automodels;
-        } else {
-            $mfilters = new ModelsList();
-        }
-
-        if ($option !== null) {
-            switch ($option) {
-                case 'page':
-                    $mfilters->current_page = (int)$value;
-                    break;
-                case 'order':
-                    $mfilters->orderby = $value;
-                    break;
-            }
-        }
-
-        $models = new Models(
-            $this->container->zdb,
-            $this->container->preferences,
-            $this->container->login,
-            $mfilters
-        );
-
-        //assign pagination variables to the template and add pagination links
-        $mfilters->setSmartyPagination($this->container->router, $this->container->view->getSmarty(), false);
-        $this->container->session->filter_automodels = $mfilters;
-
-        $params = [
-            'page_title'    => _T("Models list", "auto"),
-            'models'        => $models->getList(),
-            'require_dialog' => true
-        ];
-        $module = $this->getModule();
-
-        // display page
-        $this->container->view->render(
-            $response,
-            'file:[' . $module['route'] . ']models_list.tpl',
-            $params
-        );
-        return $response;
-    }
-
-    /**
-     * Add/edit model
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
-     */
-    public function modelEdit(Request $request, Response $response, $args = [])
-    {
-        $action = $args['action'];
-        $id = null;
-        $is_new = $args['action'] === 'add';
-        if (isset($args['id'])) {
-            $id = (int)$args['id'];
-        }
-
-        if (!$is_new && $id === null) {
-            throw new \RuntimeException(
-                _T("Model ID cannot ben null calling edit route!", "auto")
-            );
-        } elseif ($is_new && $id !== null) {
-             return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('modelEdit', ['action' => 'add']));
-        }
-
-        $model = new Model($this->container->zdb);
-        if ($is_new) {
-            $title = _T("New model", "auto");
-            $get = $request->getQueryParams();
-            if (isset($get['brand'])) {
-                $model->setBrand((int)$get['brand']);
-            }
-        } else {
-            $model->load($id);
-            $title = str_replace(
-                '%s',
-                $model->model,
-                _T("Change model '%s'", "auto")
-            );
-        }
-
-        if ($this->container->session->auto_model !== null) {
-            $model->check($this->container->session->auto_model);
-            $this->container->session->auto_model = null;
-        }
-
-        $brand = new Brand($this->container->zdb);
-
-        $params = [
-            'page_title'        => $title,
-            'mode'              => ($is_new ? 'new' : 'modif'),
-            'model'             => $model,
-            'brands'            => $brand->getList(),
-        ];
-
-        $module = $this->getModule();
-
-        // display page
-        $this->container->view->render(
-            $response,
-            'file:[' . $module['route'] . ']model.tpl',
-            $params
-        );
-        return $response;
-    }
-
-    /**
-     * Do add/edit model
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
-     */
-    public function doModelEdit(Request $request, Response $response, $args = [])
-    {
-        $post = $request->getParsedBody();
-        $is_new = $args['action'] === 'add';
-
-        $model = new Model($this->container->zdb);
-        $error_detected = [];
-
-        if (!$is_new) {
-            if (isset($post[Model::PK])) {
-                $model->load($post[Model::PK]);
-            } else {
-                $error_detected[]
-                    = _T("- No id provided for modifying this record! (internal)", "auto");
-            }
-        }
-
-        if (!$model->check($post)) {
-            $error_detected = $model->getErrors();
-        }
-
-        if (count($error_detected) == 0) {
-            $res = $model->store($is_new);
-            if (!$res) {
-                $error_detected[]
-                    = _T("- An error occured while saving record. Please try again.", "auto");
-            } else {
-                $msg = $is_new ? _T("New model has been added!", "auto") :
-                    _T("Model has been saved!", "auto");
-                $this->container->flash->addMessage(
-                    'success_detected',
-                    $msg
-                );
-            }
-        }
-
-        $route = $this->container->router->pathFor('modelsList');
-        if (count($error_detected) > 0) {
-            //store entity in session
-            $this->container->session->auto_model = $post;
-            if (!$is_new && !isset($args[Model::PK])) {
-                $args['id'] = $post[Model::PK];
-            }
-            $route = $this->container->router->pathFor('modelEdit', $args);
-
-            foreach ($error_detected as $error) {
-                $this->container->flash->addMessage(
-                    'error_detected',
-                    $error
-                );
-            }
-        }
-
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $route);
-    }
-
-    /**
-     * Remove model confirmation page
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
-     */
-    public function removeModel(Request $request, Response $response, $args = [])
-    {
-        $model = new Model($this->container->zdb);
-        $model->load((int)$args['id']);
-        $route = $this->container->router->pathFor('modelsList');
-
-        $data = [
-            'id'            => $args['id'],
-            'redirect_uri'  => $route
-        ];
-
-        // display page
-        $this->container->view->render(
-            $response,
-            'confirm_removal.tpl',
-            array(
-                'type'          => _T("Model", "auto"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => sprintf(
-                    _T('Remove model %1$s', 'auto'),
-                    $model->model
-                ),
-                'form_url'      => $this->container->router->pathFor('doRemoveModel', ['id' => $model->id]),
-                'cancel_uri'    => $route,
-                'data'          => $data
-            )
-        );
-        return $response;
-    }
-
-    /**
-     * Remove models confirmation page
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
-     */
-    public function removeModels(Request $request, Response $response, $args = [])
-    {
-        $route = $this->container->router->pathFor('modelsList');
-        $ids = $this->container->session->filter_automodels_sel;
-
-        $data = [
-            'id'            => $ids,
-            'redirect_uri'  => $route
-        ];
-
-        // display page
-        $this->container->view->render(
-            $response,
-            'confirm_removal.tpl',
-            array(
-                'type'          => _T("Model", "auto"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
-                'page_title'    => _T('Remove models', 'auto'),
-                'message'       => str_replace(
-                    '%count',
-                    count($data['id']),
-                    _T('You are about to remove %count models.', 'auto')
-                ),
-                'form_url'      => $this->container->router->pathFor('doRemoveModel'),
-                'cancel_uri'    => $route,
-                'data'          => $data
-            )
-        );
-        return $response;
-    }
-
-    /**
-     * Do remove model
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
-     *
-     * @return Response
-     */
-    public function doRemoveModel(Request $request, Response $response, $args = [])
-    {
-        $post = $request->getParsedBody();
-        $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
-        $success = false;
-
-        $uri = isset($post['redirect_uri']) ?
-            $post['redirect_uri'] :
-            $this->router->pathFor('slash');
-
-        if (!isset($post['confirm'])) {
-            $this->flash->addMessage(
-                'error_detected',
-                _T("Removal has not been confirmed!")
-            );
-        } else {
-            if (!is_array($post['id'])) {
-                $ids = (array)$post['id'];
-            } else {
-                $ids = $post['id'];
-            }
-
-            $model = new Model($this->container->zdb);
-            $del = $model->delete($ids);
-
-            if ($del !== true) {
-                $error_detected = _T("An error occured trying to remove models :/", "auto");
-
-                $this->container->flash->addMessage(
-                    'error_detected',
-                    $error_detected
-                );
-            } else {
-                $success_detected = str_replace(
-                    '%count',
-                    count($ids),
-                    _T("%count models have been successfully deleted.", "auto")
-                );
-
-                $this->container->flash->addMessage(
-                    'success_detected',
-                    $success_detected
-                );
-
-                $success = true;
-            }
-        }
-
-        if (!$ajax) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $uri);
-        } else {
-            return $response->withJson(
-                [
-                    'success'   => $success
-                ]
-            );
-        }
-    }
+    protected $module_info;
 
     /**
      * List brands
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function brandsList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'brands';
-        return $this->propertiesList($request, $response, $args);
+    public function brandsList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'brands', $option, $value);
     }
 
     /**
      * List colors
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function colorsList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'colors';
-        return $this->propertiesList($request, $response, $args);
+    public function colorsList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'colors', $option, $value);
     }
 
     /**
      * List states
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function statesList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'states';
-        return $this->propertiesList($request, $response, $args);
+    public function statesList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'states', $option, $value);
     }
 
     /**
      * List finitions
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function finitionsList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'finitions';
-        return $this->propertiesList($request, $response, $args);
+    public function finitionsList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'finitions', $option, $value);
     }
 
     /**
      * List bodies
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function bodiesList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'bodies';
-        return $this->propertiesList($request, $response, $args);
+    public function bodiesList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'bodies', $option, $value);
     }
 
     /**
      * List transmissions
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function transmissionsList(Request $request, Response $response, $args = [])
-    {
-        $args['property'] = 'transmissions';
-        return $this->propertiesList($request, $response, $args);
+    public function transmissionsList(
+        Request $request,
+        Response $response,
+        string $option = null,
+        $value = null
+    ): Response {
+        return $this->propertiesList($request, $response, 'transmissions', $option, $value);
     }
 
     /**
      * List properties
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request        $request  Request
+     * @param Response       $response Response
+     * @param string         $property Property name
+     * @param string|null    $option   One of 'page' or 'order'
+     * @param string|integer $value    Value of the option
      *
      * @return Response
      */
-    public function propertiesList(Request $request, Response $response, $args = [])
-    {
-        $property = $args['property'];
+    protected function propertiesList(
+        Request $request,
+        Response $response,
+        string $property,
+        string $option = null,
+        $value = null
+    ): Response {
+        $get = $request->getQueryParams();
 
         switch ($property) {
             case 'colors':
-                $obj = new Color($this->container->zdb);
+                $obj = new Color($this->zdb);
                 $title = _T("Colors list", "auto");
                 $add_text = _T("Add new color", "auto");
                 break;
             case 'states':
-                $obj = new State($this->container->zdb);
+                $obj = new State($this->zdb);
                 $title = _T("States list", "auto");
                 $add_text = _T("Add new state", "auto");
                 break;
             case 'finitions':
-                $obj = new Finition($this->container->zdb);
+                $obj = new Finition($this->zdb);
                 $title = _T("Finitions list", "auto");
                 $add_text = _T("Add new finition", "auto");
                 break;
             case 'bodies':
-                $obj = new Body($this->container->zdb);
+                $obj = new Body($this->zdb);
                 $title = _T("Bodies list", "auto");
                 $add_text = _T("Add new body", "auto");
                 break;
             case 'transmissions':
-                $obj = new Transmission($this->container->zdb);
+                $obj = new Transmission($this->zdb);
                 $title = _T("Transmissions list", "auto");
                 $add_text = _T("Add new transmission", "auto");
                 break;
             case 'brands':
-                $obj = new Brand($this->container->zdb);
+                $obj = new Brand($this->zdb);
                 $title = _T("Brands list", "auto");
                 $show_title = _T("Brand '%s'", "auto");
                 $add_text = _T("Add new brand", "auto");
@@ -559,44 +235,25 @@ class PropertiesController extends Controller
                 break;
         }
 
-        $numrows = $this->container->preferences->pref_numrows;
-        if (isset($_GET['nbshow'])) {
-            if (is_numeric($_GET['nbshow'])) {
-                $numrows = $_GET['nbshow'];
-            }
-        }
-
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
-
-        $filter_name = 'filter_auto' . $property;
-        if (isset($this->container->session->$filter_name)) {
-            $filters = $this->container->session->$filter_name;
-        } else {
-            $filters = new PropertiesList($property);
+        $filters = $this->getFilters($obj);
+        if (isset($get['nbshow']) && is_numeric($get['nbshow'])) {
+            $filters->show = $get['nbshow'];
         }
         $obj->setFilters($filters);
 
-        if ($option !== null) {
-            switch ($option) {
-                case 'page':
-                    $filters->current_page = (int)$value;
-                    break;
-                case 'order':
-                    $filters->orderby = $value;
-                    break;
-            }
+        switch ($option) {
+            case 'page':
+                $filters->current_page = (int)$value;
+                break;
+            case 'order':
+                $filters->orderby = $value;
+                break;
         }
 
+        $this->saveFilters($obj, $filters);
+
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->container->router, $this->container->view->getSmarty(), false);
-        $this->container->session->$filter_name = $filters;
+        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
 
         $params = [
             'page_title'    => $title,
@@ -612,15 +269,46 @@ class PropertiesController extends Controller
             $params['show'] = $can_show;
         }
 
-        $module = $this->getModule();
-
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']object_list.tpl',
+            'file:[' . $this->getModuleRoute() . ']object_list.tpl',
             $params
         );
         return $response;
+    }
+
+    /**
+     * Filtering
+     *
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     * @param string   $property Property name
+     *
+     * @return Response
+     */
+    public function filter(Request $request, Response $response, string $property): Response
+    {
+        $post = $request->getParsedBody();
+        $class = '\GaletteAuto\\' . ucwords($property);
+        $filters = $this->getFilters($class);
+
+        if (isset($post['clear_filter'])) {
+            $filters->reinit();
+        } else {
+            if (isset($post['nbshow']) && is_numeric($post['nbshow'])) {
+                $filters->show = $post['nbshow'];
+            }
+        }
+
+        $this->saveFilters($class, $filters);
+
+        return $response
+            ->withStatus(301)
+            ->withHeader(
+                'Location',
+                $class::getListRoute($this->router, $property)
+            );
     }
 
     /**
@@ -628,19 +316,16 @@ class PropertiesController extends Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $action   'add' or 'edit'
+     * @param string   $property Property name
+     * @param integer  $id       Property ID, if any
+     *
      *
      * @return Response
      */
-    public function propertyEdit(Request $request, Response $response, $args = [])
+    public function propertyEdit(Request $request, Response $response, string $action, string $property, int $id = null)
     {
-        $action = $args['action'];
-        $property = $args['property'];
-        $id = null;
-        $is_new = $args['action'] === 'add';
-        if (isset($args['id'])) {
-            $id = (int)$args['id'];
-        }
+        $is_new = ($action === 'add');
 
         if (!$is_new && $id === null) {
             throw new \RuntimeException(
@@ -663,7 +348,7 @@ class PropertiesController extends Controller
         }
 
         $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->container->zdb);
+        $object = new $classname($this->zdb);
         if ($is_new) {
             $title = _T("New", "auto");
         } else {
@@ -676,23 +361,22 @@ class PropertiesController extends Controller
         }
 
         $session_oname = 'auto_' . $property;
-        if ($this->container->session->$session_oname !== null) {
-            $object = $this->container->session->$session_oname;
-            $this->container->session->$session_oname = null;
+        if ($this->session->$session_oname !== null) {
+            $object = $this->session->$session_oname;
+            $this->session->$session_oname = null;
         }
 
         $params = [
             'page_title'    => $title,
             'mode'          => ($is_new ? 'new' : 'modif'),
             'obj'           => $object,
+            'set'           => $property,
         ];
 
-        $module = $this->getModule();
-
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']object.tpl',
+            'file:[' . $this->getModuleRoute() . ']object.tpl',
             $params
         );
         return $response;
@@ -703,18 +387,25 @@ class PropertiesController extends Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $action   'add' or 'edit'
+     * @param string   $property Property name
+     * @param integer  $id       Property ID, if any
+     *
      *
      * @return Response
      */
-    public function doPropertyEdit(Request $request, Response $response, $args = [])
-    {
-        $property = $args['property'];
+    public function doPropertyEdit(
+        Request $request,
+        Response $response,
+        string $action,
+        string $property,
+        int $id = null
+    ): Response {
         $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->container->zdb);
+        $object = new $classname($this->zdb);
 
         $post = $request->getParsedBody();
-        $is_new = $args['action'] === 'add';
+        $is_new = ($action === 'add');
 
         $error_detected = [];
 
@@ -746,26 +437,33 @@ class PropertiesController extends Controller
                     $is_new ? _T("New %property has been added!", "auto") :
                     _T("%property has been saved!", "auto")
                 );
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'success_detected',
                     $msg
                 );
             }
         }
 
-        $route = AbstractObject::getListRoute($this->container->router, $property);
+        $route = AbstractObject::getListRoute($this->router, $property);
 
         if (count($error_detected) > 0) {
             //store entity in session
             $session_oname = 'auto_' . $property;
-            $this->container->session->$session_oname = $object;
-            if (!$is_new && !isset($args[$object->pk])) {
-                $args['id'] = $post[$object->pk];
+            $this->session->$session_oname = $object;
+            if (!$is_new) {
+                $id = $post[$object->pk];
             }
-            $route = $this->container->router->pathFor('propertyEdit', $args);
+            $route = $this->router->pathFor(
+                'propertyEdit',
+                [
+                    'action' => $action,
+                    'property' => $property,
+                    'id' => $id
+                ]
+            );
 
             foreach ($error_detected as $error) {
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'error_detected',
                     $error
                 );
@@ -782,17 +480,16 @@ class PropertiesController extends Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $property Property name
+     * @param integer  $id       Property ID, if any
+     *
      *
      * @return Response
      */
-    public function propertyShow(Request $request, Response $response, $args = [])
+    public function propertyShow(Request $request, Response $response, string $property, int $id)
     {
-        $property = $args['property'];
-        $id = $args['id'];
-
         $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->container->zdb);
+        $object = new $classname($this->zdb);
         $object->load($id);
         $title = str_replace(
             '%s',
@@ -807,20 +504,18 @@ class PropertiesController extends Controller
 
         if ($object instanceof \GaletteAuto\Brand) {
             $models = new Models(
-                $this->container->zdb,
-                $this->container->preferences,
-                $this->container->login,
+                $this->zdb,
+                $this->preferences,
+                $this->login,
                 new ModelsList()
             );
             $params['models'] = $models->getList($object->id);
         }
 
-        $module = $this->getModule();
-
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']object_show.tpl',
+            'file:[' . $this->getModuleRoute() . ']object_show.tpl',
             $params
         );
         return $response;
@@ -839,10 +534,10 @@ class PropertiesController extends Controller
     {
         $property = $args['property'];
         $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->container->zdb);
+        $object = new $classname($this->zdb);
         $object->load((int)$args['id']);
 
-        $route = AbstractObject::getListRoute($this->container->router, $property);
+        $route = AbstractObject::getListRoute($this->router, $property);
 
         $data = [
             'id'            => $args['id'],
@@ -851,7 +546,7 @@ class PropertiesController extends Controller
         ];
 
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
             'confirm_removal.tpl',
             array(
@@ -862,7 +557,7 @@ class PropertiesController extends Controller
                     $object->getFieldLabel(),
                     $object->value
                 ),
-                'form_url'      => $this->container->router->pathFor(
+                'form_url'      => $this->router->pathFor(
                     'doRemoveProperty',
                     ['property' => $property, 'id' => $object->id]
                 ),
@@ -886,11 +581,11 @@ class PropertiesController extends Controller
     {
         $property = $args['property'];
         $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->container->zdb);
+        $object = new $classname($this->zdb);
 
-        $route = AbstractObject::getListRoute($this->container->router, $property);
+        $route = AbstractObject::getListRoute($this->router, $property);
         $filter_name = 'filter_auto' . $property . '_sel';
-        $ids = $this->container->session->$filter_name;
+        $ids = $this->session->$filter_name;
 
         $data = [
             'id'            => $ids,
@@ -898,7 +593,7 @@ class PropertiesController extends Controller
         ];
 
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
             'confirm_removal.tpl',
             array(
@@ -914,7 +609,7 @@ class PropertiesController extends Controller
                     [count($data['id']), $object->getFieldLabel()],
                     _T('You are about to remove %count %property.', 'auto')
                 ),
-                'form_url'      => $this->container->router->pathFor('doRemoveProperty', ['property' => $property]),
+                'form_url'      => $this->router->pathFor('doRemoveProperty', ['property' => $property]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -953,12 +648,12 @@ class PropertiesController extends Controller
                 $ids = $post['id'];
             }
 
-            $model = new Model($this->container->zdb);
+            $model = new Model($this->zdb);
             $del = $model->delete($ids);
 
             $property = $args['property'];
             $classname = AbstractObject::getClassForPropName($property);
-            $object = new $classname($this->container->zdb);
+            $object = new $classname($this->zdb);
             $del = $object->delete($ids);
 
             if ($del !== true) {
@@ -968,7 +663,7 @@ class PropertiesController extends Controller
                     _T('An error occured trying to remove %property :/', 'auto')
                 );
 
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'error_detected',
                     $error_detected
                 );
@@ -979,7 +674,7 @@ class PropertiesController extends Controller
                     _T("%count %property have been successfully deleted.", "auto")
                 );
 
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'success_detected',
                     $success_detected
                 );
@@ -999,5 +694,32 @@ class PropertiesController extends Controller
                 ]
             );
         }
+    }
+
+    /**
+     * Get filters
+     *
+     * @param AbstractObject|string $class Class name or instance
+     *
+     * @return PropertiesList
+     */
+    protected function getFilters($class): PropertiesList
+    {
+        $filter_name = 'filter_auto' . $class::FIELD;
+        return $this->session->$filter_name ?? new PropertiesList($class::FIELD);
+    }
+
+    /**
+     * Save filters
+     *
+     * @param AbstractObject|string $class   Class name or instance
+     * @param PropertiesList        $filters Filters instance
+     *
+     * @return void
+     */
+    protected function saveFilters($class, PropertiesList $filters): void
+    {
+        $filter_name = 'filter_auto' . $class::FIELD;
+        $this->session->$filter_name = $filters;
     }
 }

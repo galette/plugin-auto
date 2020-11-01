@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2020 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2020 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -36,17 +36,13 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog;
-use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Galette\Core\Db;
-use Galette\Core\Plugins;
+use Galette\Controllers\AbstractPluginController;
 use Galette\Entity\Adherent;
-use Laminas\Db\Sql\Expression;
 use GaletteAuto\Filters\ModelsList;
+use GaletteAuto\Filters\AutosList;
 use GaletteAuto\Repository\Models;
-use GaletteAuto\History;
 
 /**
  * Galette Auto plugin controller
@@ -60,31 +56,14 @@ use GaletteAuto\History;
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
  */
-class Controller
+class Controller extends AbstractPluginController
 {
-    protected $container;
 
     /**
-     * Constructor
-     *
-     * @param ContainerInterface $container Dependencies container
+     * @Inject("Plugin Galette Auto")
+     * @var integer
      */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * Get current module informations
-     *
-     * @return array
-     */
-    protected function getModule()
-    {
-        $modules = $this->container->plugins->getModules();
-        $module = $modules[$this->container->get('Plugin Galette Auto')];
-        return $module;
-    }
+    protected $module_info;
 
     /**
      * Check ACLs for specific member
@@ -99,28 +78,28 @@ class Controller
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if (
-            $this->container->login->id != $id_adh
-            && !$this->container->login->isAdmin()
-            && !$this->container->login->isStaff()
+            $this->login->id != $id_adh
+            && !$this->login->isAdmin()
+            && !$this->login->isStaff()
         ) {
             $deps = array(
                 'picture'   => false,
                 'dues'      => false
             );
-            $member = new Adherent($this->container->zdb, $id_adh, $deps);
-            if (!$this->container->login->isGroupManager($member->groups)) {
+            $member = new Adherent($this->zdb, $id_adh, $deps);
+            if (!$this->login->isGroupManager($member->groups)) {
                 //no right to see requested member.
                 if ($redirect === false) {
                     return false;
                 }
 
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'error_detected',
-                    _T("You do not have enought privileges.", "auto")
+                    _T("You do not have enough privileges.", "auto")
                 );
 
                 if ($redirect === null) {
-                    $redirect = $this->container->router->pathFor('myVehiclesList');
+                    $redirect = $this->router->pathFor('myVehiclesList');
                 }
                 return $response
                     ->withStatus(403)
@@ -128,6 +107,32 @@ class Controller
             }
         }
         return true;
+    }
+
+    /**
+     * Vehicle photo
+     *
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     * @param integer  $id       Vehicle id
+     *
+     * @return Response
+     */
+    public function vehiclePhoto(Request $request, Response $response, int $id = null): Response
+    {
+        $picture = new Picture($this->plugins, $id);
+
+        $response = $response->withHeader('Content-Type', $picture->getMime())
+            ->withHeader('Content-Transfer-Encoding', 'binary')
+            ->withHeader('Expires', '0')
+            ->withHeader('Cache-Control', 'must-revalidate')
+            ->withHeader('Pragma', 'public');
+
+        $stream = fopen('php://memory', 'r+');
+        fwrite($stream, file_get_contents($picture->getPath()));
+        rewind($stream);
+
+        return $response->withBody(new \Slim\Http\Stream($stream));
     }
 
     /**
@@ -141,7 +146,7 @@ class Controller
      */
     public function myVehiclesList(Request $request, Response $response, $args = [])
     {
-        $args['id_adh'] = $this->container->login->id;
+        $args['id_adh'] = $this->login->id;
         $args['mine']   = true;
         return $this->vehiclesList($request, $response, $args);
     }
@@ -149,38 +154,25 @@ class Controller
     /**
      * List vehicles
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request     $request  Request
+     * @param Response    $response Response
+     * @param string|null $option   Either 'page' or 'order'
+     * @param int|null    $value    Option value
      *
      * @return Response
      */
-    public function vehiclesList(Request $request, Response $response, $args = [])
+    public function vehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
     {
+        $get = $request->getQueryParams();
         $id_adh = null;
         if (isset($args['id'])) {
             $id_adh = (int)$args['id'];
             $this->checkAclsFor($response, $args['id']);
         }
 
-        $option = null;
-        if (isset($args['option'])) {
-            $option = $args['option'];
-        }
-        $value = null;
-        if (isset($args['value'])) {
-            $value = $args['value'];
-        }
 
-        $numrows = $this->container->preferences->pref_numrows;
-        if (isset($_GET["nbshow"])) {
-            if (is_numeric($_GET["nbshow"])) {
-                $numrows = $_GET["nbshow"];
-            }
-        }
-
-        $auto = new Autos($this->container->plugins, $this->container->zdb);
-        $afilters = new AutosList();
+        $auto = new Autos($this->plugins, $this->zdb);
+        $afilters = $this->session->vehicles_filters ?? new AutosList();
 
         // Simple filters
         if ($option !== null) {
@@ -192,6 +184,10 @@ class Controller
                     $afilters->orderby = $value;
                     break;
             }
+        }
+
+        if (isset($get["nbshow"]) && is_numeric($get["nbshow"])) {
+            $afilters->show = $get["nbshow"];
         }
 
         $title = _T("Cars list", "auto");
@@ -214,15 +210,17 @@ class Controller
             $params['id_adh'] = $id_adh;
             $params['autos'] = $auto->getMemberList($id_adh, $afilters);
         }
+        $params['count_vehicles'] = $auto->getCount();
+
+        $this->session->vehicles_filters = $afilters;
 
         //assign pagination variables to the template and add pagination links
-        $afilters->setSmartyPagination($this->container->router, $this->container->view->getSmarty());
-        $module = $this->getModule();
+        $afilters->setSmartyPagination($this->router, $this->view->getSmarty());
 
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']vehicles_list.tpl',
+            'file:[' . $this->getModuleRoute() . ']vehicles_list.tpl',
             $params
         );
         return $response;
@@ -233,43 +231,44 @@ class Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $action   Either 'add' or 'edit'
+     * @param int|null $id       Vehicle id
      *
      * @return Response
      */
-    public function showAddEditVehicle(Request $request, Response $response, $args = [])
+    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null)
     {
-        $action = $args['action'];
-        $is_new = $action === 'add';
+        $is_new = ($action === 'add');
 
-        if ($action === 'edit' && !isset($args['id'])) {
+        if ($action === 'edit' && $id === null) {
             throw new \RuntimeException(
                 _T("Car ID cannot be null calling edit route!", "auto")
             );
-        } elseif ($action === 'add' && isset($args['id'])) {
+        } elseif ($action === 'add' && $id !== null) {
             return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->container->router->pathFor('vehicleEdit', ['action' => 'add']));
+                ->withHeader('Location', $this->router->pathFor('vehicleEdit', ['action' => 'add']));
         }
 
-        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
-            $auto->load((int)$args['id']);
+            $auto->load($id);
             $this->checkAclsFor($response, $auto->owner->id);
         } else {
+            $get = $request->getQueryParams();
             if (
-                isset($args['id_adh'])
-                && ($this->container->login->isAdmin() || $this->container->login->isStaff())
+                isset($get['id_adh'])
+                && ($this->login->isAdmin() || $this->login->isStaff())
             ) {
-                $auto->owner = $args['id_adh'];
+                $auto->owner = (int)$get['id_adh'];
             } else {
-                $auto->appropriateCar($this->container->login);
+                $auto->appropriateCar($this->login);
             }
         }
 
-        if ($this->container->session->auto !== null) {
-            $auto->check($this->container->session->auto);
-            $this->container->session->auto = null;
+        if ($this->session->auto !== null) {
+            $auto->check($this->session->auto);
+            $this->session->auto = null;
         }
 
         $title = ($is_new)
@@ -278,9 +277,9 @@ class Controller
 
         $mfilters = new ModelsList();
         $models = new Models(
-            $this->container->zdb,
-            $this->container->preferences,
-            $this->container->login,
+            $this->zdb,
+            $this->preferences,
+            $this->login,
             $mfilters
         );
 
@@ -333,19 +332,17 @@ class Controller
             $auto->owner->id > 0
             && !isset($members[$auto->owner->id])
         ) {
-            $members[$auto->owner->id] = Adherent::getSName($this->container->zdb, $auto->owner->id, true);
+            $members[$auto->owner->id] = Adherent::getSName($this->zdb, $auto->owner->id, true);
         }
 
         if (count($members)) {
             $params['members']['list'] = $members;
         }
 
-        $module = $this->getModule();
-
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']vehicles.tpl',
+            'file:[' . $this->getModuleRoute() . ']vehicles.tpl',
             $params
         );
         return $response;
@@ -356,16 +353,16 @@ class Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $action   Either 'add' or 'edit'
+     * @param int|null $id       Vehicle id
      *
      * @return Response
      */
-    public function doAddEditVehicle(Request $request, Response $response, $args = [])
+    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null)
     {
         $post = $request->getParsedBody();
 
-        $action = $args['action'];
-        $is_new = $action === 'add';
+        $is_new = ($action === 'add');
 
         // initialize warnings
         $error_detected = array();
@@ -376,14 +373,9 @@ class Controller
             $this->checkAclsFor($response, (int)$post['id_adh']);
         }
 
-        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
-            if (isset($post[Auto::PK])) {
-                $auto->load($post[Auto::PK]);
-            } else {
-                $error_detected[]
-                    = _T("- No id provided for modifying this record! (internal)", "auto");
-            }
+            $auto->load($post[Auto::PK]);
         }
 
         if (!count($error_detected)) {
@@ -393,7 +385,7 @@ class Controller
             }
         }
 
-        $route = $this->container->router->pathFor('vehiclesList');
+        $route = $this->router->pathFor('vehiclesList');
         //if no errors were thrown, we can store the car
         if (count($error_detected) == 0) {
             if (!$auto->store($is_new)) {
@@ -401,22 +393,21 @@ class Controller
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;
-                if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
-                    $route = $this->container->router->pathFor('myVehiclesList');
+                if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
+                    $route = $this->router->pathFor('myVehiclesList');
                 }
             }
         }
 
         if (count($error_detected) > 0) {
             //store entity in session
-            $this->container->session->auto = $post;
-            if (!$is_new && !isset($args[Auto::PK])) {
-                $args['id'] = $auto->id;
-            }
-            $route = $this->container->router->pathFor('vehicleEdit', $args);
+            $this->session->auto = $post;
+            $args = ['action' => $action];
+            $routename = 'vehicleEdit';
+            $route = $this->router->pathFor($routename, $args);
 
             foreach ($error_detected as $error) {
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'error_detected',
                     $error
                 );
@@ -425,7 +416,7 @@ class Controller
 
         if (count($warning_detected) > 0) {
             foreach ($warning_detected as $warning) {
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'warning_detected',
                     $warning
                 );
@@ -433,7 +424,7 @@ class Controller
         }
         if (count($success_detected) > 0) {
             foreach ($success_detected as $success) {
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'success_detected',
                     $success
                 );
@@ -450,14 +441,14 @@ class Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param integer  $id       Vehicle id
      *
      * @return Response
      */
-    public function vehicleHistory(Request $request, Response $response, $args = [])
+    public function vehicleHistory(Request $request, Response $response, int $id)
     {
-        $history = new History($this->container->zdb, (int)$args['id']);
-        $auto = new Auto($this->container->plugins, $this->container->zdb, $history->{Auto::PK});
+        $history = new History($this->zdb, $id);
+        $auto = new Auto($this->plugins, $this->zdb, $history->{Auto::PK});
         $this->checkAclsFor($response, $auto->owner->id);
 
         $apk = Auto::PK;
@@ -467,12 +458,10 @@ class Controller
             'mode'          => $request->isXhr() ? 'ajax' : ''
         ];
 
-        $module = $this->getModule();
-
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
-            'file:[' . $module['route'] . ']history.tpl',
+            'file:[' . $this->getModuleRoute() . ']history.tpl',
             $params
         );
         return $response;
@@ -483,18 +472,17 @@ class Controller
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
      *
      * @return Response
      */
-    public function ajaxModels(Request $request, Response $response, $args = [])
+    public function ajaxModels(Request $request, Response $response)
     {
         $post = $request->getParsedBody();
         $list = array();
         $models = new Models(
-            $this->container->zdb,
-            $this->container->preferences,
-            $this->container->login,
+            $this->zdb,
+            $this->preferences,
+            $this->login,
             new ModelsList()
         );
 
@@ -518,14 +506,14 @@ class Controller
      */
     public function removeVehicle(Request $request, Response $response, $args = [])
     {
-        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto = new Auto($this->plugins, $this->zdb);
         $auto->load((int)$args['id']);
         $id_adh = $auto->owner->id;
         $this->checkAclsFor($response, $id_adh);
 
-        $route = $this->container->router->pathFor('vehiclesList');
-        if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
-            $route = $this->container->router->pathFor('myVehiclesList');
+        $route = $this->router->pathFor('vehiclesList');
+        if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
+            $route = $this->router->pathFor('myVehiclesList');
         }
 
         $data = [
@@ -534,7 +522,7 @@ class Controller
         ];
 
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
             'confirm_removal.tpl',
             array(
@@ -544,7 +532,7 @@ class Controller
                     _T('Remove vehicle %1$s', 'auto'),
                     $auto->name
                 ),
-                'form_url'      => $this->container->router->pathFor('doRemoveVehicle', ['id' => $auto->id]),
+                'form_url'      => $this->router->pathFor('doRemoveVehicle', ['id' => $auto->id]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -563,18 +551,19 @@ class Controller
      */
     public function removeVehicles(Request $request, Response $response, $args = [])
     {
-        $route = $this->container->router->pathFor('vehiclesList');
-        $ids = $this->container->session->filter_vehicles;
+        $post = $request->getParsedBody();
+        $route = $this->router->pathFor('vehiclesList');
+        $ids = $this->session->filter_vehicles ?? $post['vehicles_sel'];
 
-        $auto = new Auto($this->container->plugins, $this->container->zdb);
+        $auto = new Auto($this->plugins, $this->zdb);
         $auto->load((int)$ids[0]);
         $id_adh = $auto->owner->id;
         $this->checkAclsFor($response, $id_adh);
 
         $id_adh = $auto->owner->id;
 
-        if (!$this->checkAclsFor($response, $id_adh, false) || $this->container->login->id == $id_adh) {
-            $route = $this->container->router->pathFor('myVehiclesList');
+        if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
+            $route = $this->router->pathFor('myVehiclesList');
         }
 
         $data = [
@@ -583,7 +572,7 @@ class Controller
         ];
 
         // display page
-        $this->container->view->render(
+        $this->view->render(
             $response,
             'confirm_removal.tpl',
             array(
@@ -593,9 +582,9 @@ class Controller
                 'message'       => str_replace(
                     '%count',
                     count($data['id']),
-                    _T('You are about to remove %count vehicles.', 'auto')
+                    _Tn('You are about to remove %count vehicle.', 'You are about to remove %count vehicles.', count($data['id']), 'auto')
                 ),
-                'form_url'      => $this->container->router->pathFor('doRemoveVehicle'),
+                'form_url'      => $this->router->pathFor('doRemoveVehicle'),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -623,7 +612,7 @@ class Controller
             $this->router->pathFor('slash');
 
         if (!isset($post['confirm'])) {
-            $this->container->flash->addMessage(
+            $this->flash->addMessage(
                 'error_detected',
                 _T("Removal has not been confirmed!")
             );
@@ -634,13 +623,13 @@ class Controller
                 $ids = $post['id'];
             }
 
-            $autos = new Autos($this->container->plugins, $this->container->zdb);
+            $autos = new Autos($this->plugins, $this->zdb);
             $del = $autos->removeVehicles($ids);
 
             if ($del !== true) {
                 $error_detected = _T("An error occured trying to remove vehicles :/", "auto");
 
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'error_detected',
                     $error_detected
                 );
@@ -651,7 +640,7 @@ class Controller
                     _T("%count vehicles have been successfully deleted.", "auto")
                 );
 
-                $this->container->flash->addMessage(
+                $this->flash->addMessage(
                     'success_detected',
                     $success_detected
                 );
@@ -671,5 +660,37 @@ class Controller
                 ]
             );
         }
+    }
+
+    /**
+     * Filtering
+     *
+     * @param Request  $request  PSR Request
+     * @param Response $response PSR Response
+     *
+     * @return Response
+     */
+    public function filter(Request $request, Response $response): Response
+    {
+        $post = $request->getParsedBody();
+
+        $filters = $this->session->vehicles_filters ?? new AutosList();
+
+        if (isset($post['clear_filter'])) {
+            $filters->reinit();
+        } else {
+            if (isset($post['nbshow']) && is_numeric($post['nbshow'])) {
+                $filters->show = $post['nbshow'];
+            }
+        }
+
+        $this->session->vehicles_filter = $filters;
+
+        return $response
+            ->withStatus(301)
+            ->withHeader(
+                'Location',
+                $this->router->pathFor('vehiclesList')
+            );
     }
 }

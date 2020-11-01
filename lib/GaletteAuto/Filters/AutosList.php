@@ -35,7 +35,7 @@
  * @since     0.73dev 2012-10-16
  */
 
-namespace GaletteAuto;
+namespace GaletteAuto\Filters;
 
 use Analog\Analog as Analog;
 use Galette\Core\Pagination;
