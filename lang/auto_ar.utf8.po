@@ -1,12 +1,13 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Amr Darwish <adarweesh@gmail.com>, 2020.
+# Woodyx <shiposhouyou@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:46+0200\n"
-"PO-Revision-Date: 2020-08-18 11:32+0000\n"
-"Last-Translator: Amr Darwish <adarweesh@gmail.com>\n"
+"PO-Revision-Date: 2020-11-27 13:29+0000\n"
+"Last-Translator: Woodyx <shiposhouyou@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ar/>\n"
 "Language: ar\n"
@@ -15,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.4-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
-msgstr ""
+msgstr "لم يتم إختيار اي مركبة، رجاء اختر اسم واحد."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
@@ -54,36 +55,36 @@ msgstr "العلامة التجارية"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
-msgstr ""
+msgstr "الانتقال"
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
-msgstr ""
+msgstr "هيكل"
 
 #: ../lib/GaletteAuto/Autos.php:160
 msgid "Delete vehicles cards"
-msgstr ""
+msgstr "حذف بطاقات المركبات"
 
 #: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
-msgstr ""
+msgstr "ليس لديك امتيازات كافية."
 
 #: ../lib/GaletteAuto/Controller.php:197 ../templates/default/menu.tpl:14
 msgid "Cars list"
-msgstr ""
+msgstr "لائحة السيارات"
 
 #: ../lib/GaletteAuto/Controller.php:199
 #: ../templates/default/dashboard_member.tpl:1
 msgid "My cars"
-msgstr ""
+msgstr "سياراتي"
 
 #: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
-msgstr ""
+msgstr "سيارات الاعضاء"
 
 #: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
-msgstr ""
+msgstr "لائحة المركبات"
 
 #: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
