@@ -132,7 +132,7 @@ class Autos
                                 $str_v,
                                 Analog::ERROR
                             );
-                            throw new Exception(
+                            throw new \Exception(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v
                             );

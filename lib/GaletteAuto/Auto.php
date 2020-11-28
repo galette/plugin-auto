@@ -383,7 +383,7 @@ class Auto
                     );
                 } else {
                     $hist->add(_T("Fail to add new car.", "auto"));
-                    throw new Exception(
+                    throw new \Exception(
                         'An error occured inserting new car!'
                     );
                 }
