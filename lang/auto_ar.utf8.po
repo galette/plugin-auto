@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-06-19 05:46+0200\n"
-"PO-Revision-Date: 2020-11-27 13:29+0000\n"
+"PO-Revision-Date: 2020-12-04 11:29+0000\n"
 "Last-Translator: Woodyx <shiposhouyou@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ar/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
-msgstr "لم يتم إختيار اي مركبة، رجاء اختر اسم واحد."
+msgstr "لم يتم إختيار اي مركبة، رجاء اختر اسم واحد على اقل."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
