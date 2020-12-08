@@ -14,18 +14,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-08 21:57+0100\n"
-"PO-Revision-Date: 2020-12-08 22:03+0100\n"
-"Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/fr/>\n"
+"PO-Revision-Date: 2020-12-08 22:19+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Weblate 4.4-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -510,7 +510,7 @@ msgstr "aucun enregistrement trouvé"
 #: ../templates/default/vehicles_list.tpl:19
 #: ../templates/default/models_list.tpl:44
 msgid "Pages:"
-msgstr "Pages&nbsp;:"
+msgstr "Pages :"
 
 #: ../templates/default/object_list.tpl:52
 #: ../templates/default/models_list.tpl:50
@@ -563,7 +563,7 @@ msgstr "Modifier %vehicle"
 
 #: ../templates/default/vehicles_list.tpl:46
 msgid "%vehiclename: remove from database"
-msgstr "%vehiclename: remove from database"
+msgstr "%vehiclename : supprimer de la base"
 
 #: ../templates/default/vehicles_list.tpl:51
 msgid "No car has been registered yet for your account."
@@ -660,11 +660,11 @@ msgstr "Enregistrer"
 
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 msgid "Cancel"
-msgstr "Effacer"
+msgstr "Annuler"
 
 #: ../templates/default/model.tpl:40 ../templates/default/object.tpl:24
 msgid "NB : The mandatory fields are in"
-msgstr "NB&nbsp;: Les champs obligatoires apparaissent en"
+msgstr "NB : Les champs obligatoires apparaissent en"
 
 #: ../templates/default/model.tpl:40 ../templates/default/object.tpl:24
 msgid "red"
@@ -673,7 +673,7 @@ msgstr "rouge"
 #: ../templates/default/object_show.tpl:10
 #, php-format
 msgid "Registered models for the brand '%s':"
-msgstr "Modèles enregistrés pour la marque « %s  »&nbsp;:"
+msgstr "Modèles enregistrés pour la marque « %s » :"
 
 #: ../templates/default/object_show.tpl:17
 #, php-format
@@ -683,7 +683,7 @@ msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
 #: ../templates/default/object_show.tpl:19
 #, php-format
 msgid "Create a new model for brand '%s'"
-msgstr "Créer un nouveau modèle pour la marque « %s  »"
+msgstr "Créer un nouveau modèle pour la marque « %s »"
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
