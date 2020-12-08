@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-08 21:57+0100\n"
-"PO-Revision-Date: 2020-07-12 09:08+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2020-12-08 22:03+0100\n"
+"Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
 "plugin/fr/>\n"
 "Language: fr_FR\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -152,10 +152,8 @@ msgstr "Vous êtes sur le point de supprimer %count véhicules."
 #: ../lib/GaletteAuto/Controller.php:628
 #: ../lib/GaletteAuto/PropertiesController.php:373
 #: ../lib/GaletteAuto/PropertiesController.php:947
-#, fuzzy
-#| msgid "Email: '%s' has not been modified!"
 msgid "Removal has not been confirmed!"
-msgstr "Le courriel Â« %s Â» n'as pas Ã©tÃ© modifiÃ©&nbsp;!"
+msgstr "La suppression n’a pas été confirmée !"
 
 #: ../lib/GaletteAuto/Controller.php:641
 msgid "An error occured trying to remove vehicles :/"
@@ -263,10 +261,9 @@ msgid "Y-m-d"
 msgstr "d/m/Y"
 
 #: ../lib/GaletteAuto/Auto.php:661
-#, fuzzy, php-format
-#| msgid "- Mandatory field %s empty."
+#, php-format
 msgid "- Mandatory field %field empty."
-msgstr "- Champ obligatoire %s non renseigné."
+msgstr "- Champ obligatoire %field vide."
 
 #: ../lib/GaletteAuto/Auto.php:686
 #, php-format
@@ -316,7 +313,7 @@ msgstr "Type mime non autorisé"
 
 #: ../lib/GaletteAuto/Auto.php:792
 msgid "An SQL error has occured."
-msgstr "Une erreur SQL est survenue"
+msgstr "Une erreur SQL est survenue."
 
 #: ../lib/GaletteAuto/Auto.php:804
 msgid "An error occured while trying to delete car's photo"
@@ -502,7 +499,7 @@ msgstr "Modifier %property"
 #: ../templates/default/object_list.tpl:35
 #: ../templates/default/models_list.tpl:33
 msgid "%property: remove from database"
-msgstr ""
+msgstr "%property : supprimer de la base"
 
 #: ../templates/default/object_list.tpl:40
 #: ../templates/default/models_list.tpl:38
@@ -534,13 +531,15 @@ msgstr "Autres&nbsp;:"
 
 #: ../templates/default/object_list.tpl:80
 msgid "No entry selected"
-msgstr ""
+msgstr "Aucune entrée sélectionnée"
 
 #: ../templates/default/object_list.tpl:80
 msgid ""
 "Please make sure to select at least one entry from the list to perform this "
 "action."
 msgstr ""
+"Assurez-vous de sélectionner au moins une entrée dans la liste avant "
+"d'effectuer cette action."
 
 #: ../templates/default/object_list.tpl:117
 #: ../templates/default/vehicles_list.tpl:105
@@ -564,7 +563,7 @@ msgstr "Modifier %vehicle"
 
 #: ../templates/default/vehicles_list.tpl:46
 msgid "%vehiclename: remove from database"
-msgstr ""
+msgstr "%vehiclename: remove from database"
 
 #: ../templates/default/vehicles_list.tpl:51
 msgid "No car has been registered yet for your account."
@@ -575,10 +574,8 @@ msgid "No car in the database"
 msgstr "Aucun véhicule dans la base"
 
 #: ../templates/default/vehicles_list.tpl:57
-#, fuzzy
-#| msgid "Invert selection"
 msgid "For the selection:"
-msgstr "Inverser la sélection"
+msgstr "Pour la sélection :"
 
 #: ../templates/default/vehicles_list.tpl:72
 msgid "Add new vehicle"
@@ -625,16 +622,16 @@ msgid "Add new model"
 msgstr "Ajouter un nouveau modèle"
 
 #: ../templates/default/models_list.tpl:74
-#, fuzzy
-#| msgid "New model has been added!"
 msgid "No model selected"
-msgstr "Le modèle a été ajouté !"
+msgstr "Aucun modèle sélectionné"
 
 #: ../templates/default/models_list.tpl:74
 msgid ""
 "Please make sure to select at least one model from the list to perform this "
 "action."
 msgstr ""
+"Assurez-vous de sélectionner au moins un modèle dans la liste avant "
+"d’effectuer cette action."
 
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
@@ -766,7 +763,7 @@ msgstr "Propriétaire :"
 
 #: ../templates/default/vehicles.tpl:93
 msgid "Search for name or ID and pick member"
-msgstr ""
+msgstr "Chercher un nom ou un identifiant et sélectionner l'adhérent"
 
 #: ../templates/default/vehicles.tpl:100
 msgid "Color:"
@@ -845,15 +842,11 @@ msgid "Comment:"
 msgstr "Commentaire :"
 
 #: ../templates/default/vehicles.tpl:205 ../templates/default/vehicles.tpl:213
-#, fuzzy
-#| msgid "-- select a name --"
 msgid "Select a date"
-msgstr "-- selectionner un nom --"
+msgstr "Sélectionnez une date"
 
 # Chaîne Javascript !
 #: ../templates/default/vehicles.tpl:294
-#, fuzzy
-#| msgid "Car\\'s history"
 msgid "Car's history"
 msgstr "Historique de la voiture"
 
