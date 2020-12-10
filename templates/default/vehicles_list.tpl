@@ -12,16 +12,6 @@
                     <th class="actions_row">{_T string="Actions"}</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr id="table_footer">
-                    <td colspan="5" class="center">
-{if $autos|@count gt 0}
-                        {_T string="Pages:"}
-                        <ul class="pages">{$pagination}</ul>
-{/if}
-                    </td>
-                </tr>
-            </tfoot>
             <tbody>
 {foreach from=$autos item=auto name=autos_list}
     {assign var='brand' value=$auto->model->obrand}
@@ -52,6 +42,13 @@
 {/foreach}
             </tbody>
         </table>
+
+{if $autos|@count gt 0}
+        <div class="center cright">
+            {_T string="Pages:"}<br/>
+            <ul class="pages">{$pagination}</ul>
+        </div>
+{/if}
             <ul class="selection_menu">
 {if $autos|@count gt 0}
                 <li>{_T string="For the selection:"}</li>
@@ -102,7 +99,9 @@
         }
         {* Use of Javascript to draw specific elements that are not relevant if JS is inactive *}
         $(function(){
-            $('#table_footer').before('<tr><td class="left" colspan="5"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></td></tr>');
+            var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {_T string="(Un)Check all" escape="js"}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {_T string="Invert selection" escape="js"}</a></div>';
+            $('.listing').before(_checklinks);
+            $('.listing').after(_checklinks);
             _bind_check();
         });
         //]]>

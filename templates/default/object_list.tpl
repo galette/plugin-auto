@@ -114,7 +114,7 @@
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
-            var _checklinks = '<div class="checkboxes"><span class="fleft"><a href="#" class="checkall">{_T string="(Un)Check all"}</a> | <a href="#" class="checkinvert">{_T string="Invert selection"}</a></span></div>';
+            var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {_T string="(Un)Check all" escape="js"}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {_T string="Invert selection" escape="js"}</a></div>';
             $('.listing').before(_checklinks);
             $('.listing').after(_checklinks);
             _bind_check();

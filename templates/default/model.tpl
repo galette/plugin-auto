@@ -30,8 +30,9 @@
             </fieldset>
         </div>
         <div class="button-container">
-            <input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
-            <input type="reset" id="btncancel" name="cancel" value="{_T string="Cancel"}"/>
+            <button type="submit" id="btnsave" name="valid" class="action">
+                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            </button>
             <input type="hidden" name="{$mode}" value="1"/>
     {if $mode neq "new"}
             <input type="hidden" name="{constant('GaletteAuto\Model::PK')}" value="{$model->id}"/>

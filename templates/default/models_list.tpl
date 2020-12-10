@@ -108,7 +108,9 @@
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
-            $('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span></td></tr>');
+            var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {_T string="(Un)Check all" escape="js"}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {_T string="Invert selection" escape="js"}</a></div>';
+            $('.listing').before(_checklinks);
+            $('.listing').after(_checklinks);
             _bind_check();
         });
         </script>
