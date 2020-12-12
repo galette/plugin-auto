@@ -3,18 +3,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-08 21:57+0100\n"
-"PO-Revision-Date: 2020-07-13 07:41+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/de/>\n"
+"PO-Revision-Date: 2020-12-12 09:45+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.4-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -240,7 +240,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:552
 msgid "Y-m-d"
-msgstr ""
+msgstr "d.m.Y"
 
 #: ../lib/GaletteAuto/Auto.php:661
 #, php-format
@@ -628,7 +628,7 @@ msgstr ""
 
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: ../templates/default/model.tpl:40 ../templates/default/object.tpl:24
 msgid "NB : The mandatory fields are in"
