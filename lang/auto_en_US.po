@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-08 21:57+0100\n"
+"POT-Creation-Date: 2020-12-12 10:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,42 @@ msgstr "No entry was selected, please check at least one."
 #: ../lib/GaletteAuto/State.php:86
 msgid "State"
 msgstr "State"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:120
+msgid "User statuses"
+msgstr "User statuses"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:126
+msgid "Contribution types"
+msgstr "Contribution types"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:191
+msgid "Edit status"
+msgstr "Edit status"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:197
+msgid "Edit contribution type"
+msgstr "Edit contribution type"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
+msgid "%type has not been added :("
+msgstr "%type has not been added :("
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
+msgid "%type #%id has not been updated"
+msgstr "%type #%id has not been updated"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
+msgid "%type has been successfully added!"
+msgstr "%type has been successfully added!"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
+msgid "%type #%id has been successfully updated!"
+msgstr "%type #%id has been successfully updated!"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:353
+msgid "Remove %type '%label'"
+msgstr "Remove %type '%label'"
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
@@ -482,7 +518,7 @@ msgid "no record found"
 msgstr "no record found"
 
 #: ../templates/default/object_list.tpl:46
-#: ../templates/default/vehicles_list.tpl:19
+#: ../templates/default/vehicles_list.tpl:48
 #: ../templates/default/models_list.tpl:44
 msgid "Pages:"
 msgstr "Pages:"
@@ -493,13 +529,13 @@ msgid "Selection:"
 msgstr "Selection:"
 
 #: ../templates/default/object_list.tpl:56
-#: ../templates/default/vehicles_list.tpl:61
+#: ../templates/default/vehicles_list.tpl:58
 #: ../templates/default/models_list.tpl:53
 msgid "Delete"
 msgstr "Delete"
 
 #: ../templates/default/object_list.tpl:60
-#: ../templates/default/vehicles_list.tpl:65
+#: ../templates/default/vehicles_list.tpl:62
 #: ../templates/default/models_list.tpl:56
 msgid "Other:"
 msgstr "Other:"
@@ -517,13 +553,13 @@ msgstr ""
 "action."
 
 #: ../templates/default/object_list.tpl:117
-#: ../templates/default/vehicles_list.tpl:105
+#: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "(Un)Check all"
 msgstr "(Un)Check all"
 
 #: ../templates/default/object_list.tpl:117
-#: ../templates/default/vehicles_list.tpl:105
+#: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "Invert selection"
 msgstr "Invert selection"
@@ -532,27 +568,27 @@ msgstr "Invert selection"
 msgid "Name"
 msgstr "Name"
 
-#: ../templates/default/vehicles_list.tpl:39
+#: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
 msgstr "Edit %vehicle"
 
-#: ../templates/default/vehicles_list.tpl:46
+#: ../templates/default/vehicles_list.tpl:36
 msgid "%vehiclename: remove from database"
 msgstr "%vehiclename: remove from database"
 
-#: ../templates/default/vehicles_list.tpl:51
+#: ../templates/default/vehicles_list.tpl:41
 msgid "No car has been registered yet for your account."
 msgstr "No car has been registered yet for your account."
 
-#: ../templates/default/vehicles_list.tpl:51
+#: ../templates/default/vehicles_list.tpl:41
 msgid "No car in the database"
 msgstr "No car in the database"
 
-#: ../templates/default/vehicles_list.tpl:57
+#: ../templates/default/vehicles_list.tpl:54
 msgid "For the selection:"
 msgstr "For the selection:"
 
-#: ../templates/default/vehicles_list.tpl:72
+#: ../templates/default/vehicles_list.tpl:69
 msgid "Add new vehicle"
 msgstr "Add new vehicle"
 
@@ -628,20 +664,16 @@ msgstr ""
 msgid "Add a brand"
 msgstr "Add a brand"
 
-#: ../templates/default/model.tpl:33 ../templates/default/object.tpl:18
-#: ../templates/default/vehicles.tpl:187
+#: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
+#: ../templates/default/vehicles.tpl:188
 msgid "Save"
 msgstr "Save"
 
-#: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
-msgid "Cancel"
-msgstr "Cancel"
-
-#: ../templates/default/model.tpl:40 ../templates/default/object.tpl:24
+#: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "NB : The mandatory fields are in"
 msgstr "NB : The mandatory fields are in"
 
-#: ../templates/default/model.tpl:40 ../templates/default/object.tpl:24
+#: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "red"
 msgstr "red"
 
@@ -816,10 +848,10 @@ msgstr "Comment"
 msgid "Comment:"
 msgstr "Comment:"
 
-#: ../templates/default/vehicles.tpl:205 ../templates/default/vehicles.tpl:213
+#: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
 msgstr "Select a date"
 
-#: ../templates/default/vehicles.tpl:294
+#: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
 msgstr "Car's history"
