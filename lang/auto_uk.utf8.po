@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 10:44+0100\n"
+"POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -26,42 +26,6 @@ msgstr ""
 
 #: ../lib/GaletteAuto/State.php:86
 msgid "State"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:120
-msgid "User statuses"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:126
-msgid "Contribution types"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:191
-msgid "Edit status"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:197
-msgid "Edit contribution type"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
-msgid "%type has not been added :("
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
-msgid "%type #%id has not been updated"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
-msgid "%type has been successfully added!"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
-msgid "%type #%id has been successfully updated!"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:353
-msgid "Remove %type '%label'"
 msgstr ""
 
 #: ../lib/GaletteAuto/Model.php:241

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 10:44+0100\n"
+"POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2020-12-08 22:19+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
@@ -45,54 +45,6 @@ msgstr ""
 #: ../lib/GaletteAuto/State.php:86
 msgid "State"
 msgstr "État"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:120
-#, fuzzy
-#| msgid "New state"
-msgid "User statuses"
-msgstr "Nouvel état"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:126
-#, fuzzy
-#| msgid "Contribution type:"
-msgid "Contribution types"
-msgstr "Type de contribution&nbsp;:"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:191
-msgid "Edit status"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:197
-#, fuzzy
-#| msgid "Contribution type:"
-msgid "Edit contribution type"
-msgstr "Type de contribution&nbsp;:"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
-#, fuzzy
-#| msgid "New %property has been added!"
-msgid "%type has not been added :("
-msgstr "La %property a été enregistrée !"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:269
-msgid "%type #%id has not been updated"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
-#, fuzzy
-#| msgid "Galette has been successfully updated!"
-msgid "%type has been successfully added!"
-msgstr "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:273
-#, fuzzy
-#| msgid "Galette has been successfully updated!"
-msgid "%type #%id has been successfully updated!"
-msgstr "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiessController.php:353
-msgid "Remove %type '%label'"
-msgstr ""
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
@@ -893,6 +845,36 @@ msgstr "Sélectionnez une date"
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
 msgstr "Historique de la voiture"
+
+#, fuzzy
+#~| msgid "New state"
+#~ msgid "User statuses"
+#~ msgstr "Nouvel état"
+
+#, fuzzy
+#~| msgid "Contribution type:"
+#~ msgid "Contribution types"
+#~ msgstr "Type de contribution&nbsp;:"
+
+#, fuzzy
+#~| msgid "Contribution type:"
+#~ msgid "Edit contribution type"
+#~ msgstr "Type de contribution&nbsp;:"
+
+#, fuzzy
+#~| msgid "New %property has been added!"
+#~ msgid "%type has not been added :("
+#~ msgstr "La %property a été enregistrée !"
+
+#, fuzzy
+#~| msgid "Galette has been successfully updated!"
+#~ msgid "%type has been successfully added!"
+#~ msgstr "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
+
+#, fuzzy
+#~| msgid "Galette has been successfully updated!"
+#~ msgid "%type #%id has been successfully updated!"
+#~ msgstr "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
 
 #~ msgid "Cancel"
 #~ msgstr "Annuler"
