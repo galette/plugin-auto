@@ -1,24 +1,28 @@
+# Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-12-30 17:29+0000\n"
+"Last-Translator: Pol Casares Civit <pol.casares@e-campus.uab.cat>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 3.0.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
+"No s'ha seleccionat cap vehicle, si us plau comproveu un nom com a mínim."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
-msgstr ""
+msgstr "No s'ha seleccionat cap model, si us plau comproveu un nom com a mínim."
 
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
@@ -67,7 +71,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controller.php:199
 msgid "My cars"
-msgstr ""
+msgstr "Els meus cotxes"
 
 #: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
@@ -111,7 +115,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controller.php:541 ../lib/GaletteAuto/Controller.php:590
 msgid "Vehicle"
-msgstr ""
+msgstr "Vehicle"
 
 #: ../lib/GaletteAuto/Controller.php:544
 #, php-format
@@ -144,11 +148,11 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:173
 msgid "name"
-msgstr ""
+msgstr "nom"
 
 #: ../lib/GaletteAuto/Auto.php:174
 msgid "model"
-msgstr ""
+msgstr "model"
 
 #: ../lib/GaletteAuto/Auto.php:175
 msgid "registration"
@@ -785,19 +789,19 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:166
 msgid "Fuel:"
-msgstr ""
+msgstr "Combustible:"
 
 #: ../templates/default/vehicles.tpl:168
 msgid "Choose a fuel"
-msgstr ""
+msgstr "Escull un combustible"
 
 #: ../templates/default/vehicles.tpl:177
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: ../templates/default/vehicles.tpl:180
 msgid "Comment:"
-msgstr ""
+msgstr "Comentari:"
 
 #: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
@@ -805,4 +809,4 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
-msgstr ""
+msgstr "Història del cotxe"
