@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # J. Lavoie <j.lavoie@net-c.ca>, 2020.
 # Manuel Zeschko <moebyus@pm.me>, 2021.
+# Independent-Eye <michalek.jedrzejak@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-01-06 16:29+0000\n"
-"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
+"Last-Translator: Independent-Eye <michalek.jedrzejak@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -20,10 +21,13 @@ msgstr ""
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
+"Es wurde kein Fahrzeug ausgewählt, bitte überprüfen Sie mindestens einen "
+"Namen."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
 msgstr ""
+"Es wurde kein Modell ausgewählt, bitte überprüfen Sie mindestens einen Namen."
 
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
@@ -35,7 +39,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
-msgstr ""
+msgstr "- Sie müssen eine Marke auswählen!"
 
 #: ../lib/GaletteAuto/Model.php:247
 #: ../lib/GaletteAuto/PropertiesController.php:732
@@ -44,7 +48,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Color.php:86
 msgid "Color"
-msgstr ""
+msgstr "Farbe"
 
 #: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
