@@ -2,13 +2,14 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2020.
 # Manuel Zeschko <moebyus@pm.me>, 2021.
 # Independent-Eye <michalek.jedrzejak@gmail.com>, 2021.
+# Stefanie Schreiner <stefanie-schreiner@hotmail.de>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-01-06 16:29+0000\n"
-"Last-Translator: Independent-Eye <michalek.jedrzejak@gmail.com>\n"
+"Last-Translator: Stefanie Schreiner <stefanie-schreiner@hotmail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -52,11 +53,11 @@ msgstr "Farbe"
 
 #: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
-msgstr ""
+msgstr "Marke"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
-msgstr ""
+msgstr "Getriebe"
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
