@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-02-01 07:30+0000\n"
+"PO-Revision-Date: 2021-02-02 15:00+0000\n"
 "Last-Translator: Berto Te <Bertote@3fpj.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
@@ -335,7 +335,7 @@ msgstr ""
 #: ../lib/GaletteAuto/PropertiesController.php:297
 #: ../lib/GaletteAuto/PropertiesController.php:335
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
 #: ../lib/GaletteAuto/PropertiesController.php:300
 #, php-format
