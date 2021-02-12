@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
+# Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-02-05 23:42+0000\n"
-"Last-Translator: Eunice Soria <eunice.soria.es@gmail.com>\n"
+"PO-Revision-Date: 2021-02-13 15:50+0000\n"
+"Last-Translator: Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
 "Language: es\n"
@@ -241,7 +242,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:552
 msgid "Y-m-d"
-msgstr ""
+msgstr "A-m-d"
 
 #: ../lib/GaletteAuto/Auto.php:661
 #, php-format
