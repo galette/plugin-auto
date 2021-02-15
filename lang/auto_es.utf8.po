@@ -2,13 +2,14 @@
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>, 2021.
+# Toni Martínez <yagstyle@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-02-13 15:50+0000\n"
-"Last-Translator: Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>\n"
+"PO-Revision-Date: 2021-02-16 17:50+0000\n"
+"Last-Translator: Toni Martínez <yagstyle@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
 "Language: es\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -527,7 +528,7 @@ msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:9
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
