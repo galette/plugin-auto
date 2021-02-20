@@ -1,20 +1,21 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
+# Lory ~ <dury.lorenzo@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2020-12-15 14:29+0000\n"
-"Last-Translator: Luca De Filippo <luca.defilippo@translationcommons.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/it/>\n"
+"PO-Revision-Date: 2021-02-21 23:50+0000\n"
+"Last-Translator: Lory ~ <dury.lorenzo@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -622,7 +623,7 @@ msgstr ""
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 #: ../templates/default/vehicles.tpl:188
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "NB : The mandatory fields are in"
