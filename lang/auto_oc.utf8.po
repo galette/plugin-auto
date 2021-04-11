@@ -1,21 +1,21 @@
 # Weblate <noreply@weblate.org>, 2020.
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020.
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2020-12-12 09:45+0000\n"
+"PO-Revision-Date: 2021-04-11 10:34+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/oc/>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -462,7 +462,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:12
 #: ../templates/default/models_list.tpl:11
 msgid "Actions"
-msgstr ""
+msgstr "Accions"
 
 #: ../templates/default/object_list.tpl:28
 #: ../templates/default/models_list.tpl:26
@@ -483,7 +483,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:48
 #: ../templates/default/models_list.tpl:44
 msgid "Pages:"
-msgstr ""
+msgstr "Paginas :"
 
 #: ../templates/default/object_list.tpl:52
 #: ../templates/default/models_list.tpl:50
@@ -493,10 +493,8 @@ msgstr ""
 #: ../templates/default/object_list.tpl:56
 #: ../templates/default/vehicles_list.tpl:58
 #: ../templates/default/models_list.tpl:53
-#, fuzzy
-#| msgid "Delete image"
 msgid "Delete"
-msgstr "Suprimir imatge"
+msgstr "Suprimir"
 
 #: ../templates/default/object_list.tpl:60
 #: ../templates/default/vehicles_list.tpl:62
@@ -524,7 +522,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "Invert selection"
-msgstr ""
+msgstr "Inversar la seleccion"
 
 #: ../templates/default/vehicles_list.tpl:9
 msgid "Name"
@@ -564,7 +562,7 @@ msgstr ""
 
 #: ../templates/default/history.tpl:13
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../templates/default/history.tpl:16
 msgid "Owner"
@@ -625,7 +623,7 @@ msgstr ""
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 #: ../templates/default/vehicles.tpl:188
 msgid "Save"
-msgstr ""
+msgstr "Enregistrar"
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "NB : The mandatory fields are in"
@@ -633,7 +631,7 @@ msgstr ""
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "red"
-msgstr ""
+msgstr "roge"
 
 #: ../templates/default/object_show.tpl:10
 #, php-format
@@ -808,7 +806,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
-msgstr ""
+msgstr "Seleccionatz una data"
 
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
