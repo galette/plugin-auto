@@ -1,11 +1,12 @@
 # Pol Casares Civit <pol.casares@e-campus.uab.cat>, 2020.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2020-12-30 17:29+0000\n"
-"Last-Translator: Pol Casares Civit <pol.casares@e-campus.uab.cat>\n"
+"PO-Revision-Date: 2021-04-11 10:34+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ca/>\n"
 "Language: ca\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -443,7 +444,7 @@ msgstr ""
 #: ../lib/GaletteAuto/PropertiesController.php:908
 #, php-format
 msgid "Remove %1$s %2$s"
-msgstr ""
+msgstr "Elimina %1$s %2$s"
 
 #: ../lib/GaletteAuto/PropertiesController.php:915
 msgid "You are about to remove %count %property."
