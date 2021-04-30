@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-04-12 14:26+0000\n"
+"PO-Revision-Date: 2021-05-01 19:31+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/uk/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
-msgstr ""
+msgstr "Текст листа"
 
 #: ../lib/GaletteAuto/Autos.php:160
 msgid "Delete vehicles cards"
@@ -240,12 +240,12 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:552
 msgid "Y-m-d"
-msgstr ""
+msgstr "РР-мм-дд"
 
 #: ../lib/GaletteAuto/Auto.php:661
 #, php-format
 msgid "- Mandatory field %field empty."
-msgstr ""
+msgstr "- Обов’язкове поле %field порожнє."
 
 #: ../lib/GaletteAuto/Auto.php:686
 #, php-format
@@ -419,7 +419,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/PropertiesController.php:668
 msgid "New"
-msgstr ""
+msgstr "Нове"
 
 #: ../lib/GaletteAuto/PropertiesController.php:674
 #, php-format
@@ -461,7 +461,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:12
 #: ../templates/default/models_list.tpl:11
 msgid "Actions"
-msgstr ""
+msgstr "Дії"
 
 #: ../templates/default/object_list.tpl:28
 #: ../templates/default/models_list.tpl:26
@@ -482,7 +482,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:48
 #: ../templates/default/models_list.tpl:44
 msgid "Pages:"
-msgstr ""
+msgstr "Сторінки:"
 
 #: ../templates/default/object_list.tpl:52
 #: ../templates/default/models_list.tpl:50
@@ -493,7 +493,7 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:58
 #: ../templates/default/models_list.tpl:53
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: ../templates/default/object_list.tpl:60
 #: ../templates/default/vehicles_list.tpl:62
@@ -515,17 +515,17 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "(Un)Check all"
-msgstr ""
+msgstr "Зняти/вибрати все"
 
 #: ../templates/default/object_list.tpl:117
 #: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "Invert selection"
-msgstr ""
+msgstr "Узворотнити виділення"
 
 #: ../templates/default/vehicles_list.tpl:9
 msgid "Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
@@ -545,7 +545,7 @@ msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:54
 msgid "For the selection:"
-msgstr ""
+msgstr "Для вибору:"
 
 #: ../templates/default/vehicles_list.tpl:69
 msgid "Add new vehicle"
@@ -561,7 +561,7 @@ msgstr ""
 
 #: ../templates/default/history.tpl:13
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: ../templates/default/history.tpl:16
 msgid "Owner"
@@ -573,15 +573,15 @@ msgstr ""
 
 #: ../templates/default/history.tpl:36
 msgid "[M]"
-msgstr ""
+msgstr "[ЧОЛ]"
 
 #: ../templates/default/history.tpl:38 ../templates/default/history.tpl:40
 msgid "[W]"
-msgstr ""
+msgstr "[ЖІН]"
 
 #: ../templates/default/history.tpl:45
 msgid "[admin]"
-msgstr ""
+msgstr "[адмін]"
 
 #: ../templates/default/history.tpl:56
 msgid "no history entries"
@@ -622,15 +622,15 @@ msgstr ""
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 #: ../templates/default/vehicles.tpl:188
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "NB : The mandatory fields are in"
-msgstr ""
+msgstr "NB: Обов’язкові поля вказані в"
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "red"
-msgstr ""
+msgstr "червоний"
 
 #: ../templates/default/object_show.tpl:10
 #, php-format
@@ -653,7 +653,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:15
 msgid "Name:"
-msgstr ""
+msgstr "Ім'я:"
 
 #: ../templates/default/vehicles.tpl:20
 msgid "Model:"
@@ -689,11 +689,11 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:57
 msgid "Picture:"
-msgstr ""
+msgstr "Зображення:"
 
 #: ../templates/default/vehicles.tpl:60
 msgid "Delete image"
-msgstr ""
+msgstr "Видалити зображення"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
@@ -725,7 +725,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:93
 msgid "Search for name or ID and pick member"
-msgstr ""
+msgstr "Пошук імені або ідентифікатора та вибір члена"
 
 #: ../templates/default/vehicles.tpl:100
 msgid "Color:"
@@ -797,7 +797,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:177
 msgid "Comment"
-msgstr ""
+msgstr "Коментар"
 
 #: ../templates/default/vehicles.tpl:180
 msgid "Comment:"
@@ -805,7 +805,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
-msgstr ""
+msgstr "Виберіть дату"
 
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
