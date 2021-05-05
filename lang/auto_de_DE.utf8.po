@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-04-11 10:34+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Last-Translator: Independent-Eye <michalek.jedrzejak@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -33,10 +33,11 @@ msgstr ""
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
 msgstr ""
+"Es wurde kein Eintrag ausgewählt, bitte überprüfen Sie mindestens einen."
 
 #: ../lib/GaletteAuto/State.php:86
 msgid "State"
-msgstr ""
+msgstr "Zustand"
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
@@ -45,7 +46,7 @@ msgstr "- Sie müssen eine Marke auswählen!"
 #: ../lib/GaletteAuto/Model.php:247
 #: ../lib/GaletteAuto/PropertiesController.php:732
 msgid "- You must provide a value!"
-msgstr ""
+msgstr "- Sie müssen einen Wert angeben!"
 
 #: ../lib/GaletteAuto/Color.php:86
 msgid "Color"
