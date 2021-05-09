@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-05-08 10:32+0000\n"
+"PO-Revision-Date: 2021-05-10 11:32+0000\n"
 "Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/uk/>\n"
@@ -265,7 +265,7 @@ msgstr "- Слід ввести додатне ціле число для %s"
 
 #: ../lib/GaletteAuto/Auto.php:717
 msgid "- You must choose a fuel in the list"
-msgstr "- Ви повинні вибрати паливо в спискові"
+msgstr "- Ви повинні вибрати пальне в спискові"
 
 #: ../lib/GaletteAuto/Auto.php:735
 #, php-format
@@ -299,41 +299,43 @@ msgstr "Сталася помилка SQL."
 
 #: ../lib/GaletteAuto/Auto.php:804
 msgid "An error occured while trying to delete car's photo"
-msgstr ""
+msgstr "Під час спроби видалити світлину автомобіля сталася помилка"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
-msgstr ""
+msgstr "Оздоблення"
 
 #: ../lib/GaletteAuto/PropertiesController.php:121
 msgid "Models list"
-msgstr ""
+msgstr "Список моделей"
 
 #: ../lib/GaletteAuto/PropertiesController.php:156
 msgid "Model ID cannot ben null calling edit route!"
 msgstr ""
+"ID моделі не може дорівнювати нулю під час виклику маршруту редагування!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:166
 msgid "New model"
-msgstr ""
+msgstr "Нова модель"
 
 #: ../lib/GaletteAuto/PropertiesController.php:176
 #, php-format
 msgid "Change model '%s'"
-msgstr ""
+msgstr "Змінити модель \"%s\""
 
 #: ../lib/GaletteAuto/PropertiesController.php:239
 #: ../lib/GaletteAuto/PropertiesController.php:741
 msgid "- An error occured while saving record. Please try again."
 msgstr ""
+"- Під час збереження запису сталася помилка. Будь ласка, спробуйте ще раз."
 
 #: ../lib/GaletteAuto/PropertiesController.php:241
 msgid "New model has been added!"
-msgstr ""
+msgstr "Нову модель додано!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:242
 msgid "Model has been saved!"
-msgstr ""
+msgstr "Модель збережено!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:297
 #: ../lib/GaletteAuto/PropertiesController.php:335
@@ -343,82 +345,84 @@ msgstr "Модель"
 #: ../lib/GaletteAuto/PropertiesController.php:300
 #, php-format
 msgid "Remove model %1$s"
-msgstr ""
+msgstr "Вилучити модель %1$s"
 
 #: ../lib/GaletteAuto/PropertiesController.php:337
 msgid "Remove models"
-msgstr ""
+msgstr "Вилучити моделі"
 
 #: ../lib/GaletteAuto/PropertiesController.php:341
 #, php-format
 msgid "You are about to remove %count models."
-msgstr ""
+msgstr "Ви збираєтеся вилучити %c моделей(і)."
 
 #: ../lib/GaletteAuto/PropertiesController.php:386
 msgid "An error occured trying to remove models :/"
-msgstr ""
+msgstr "Під час вилучення моделей сталася помилка :/"
 
 #: ../lib/GaletteAuto/PropertiesController.php:396
 #, php-format
 msgid "%count models have been successfully deleted."
-msgstr ""
+msgstr "%count моделей успішно видалено."
 
 #: ../lib/GaletteAuto/PropertiesController.php:527
 msgid "Colors list"
-msgstr ""
+msgstr "Список кольорів"
 
 #: ../lib/GaletteAuto/PropertiesController.php:528
 msgid "Add new color"
-msgstr ""
+msgstr "Додати новий колір"
 
 #: ../lib/GaletteAuto/PropertiesController.php:532
 msgid "States list"
-msgstr ""
+msgstr "Список станів"
 
 #: ../lib/GaletteAuto/PropertiesController.php:533
 msgid "Add new state"
-msgstr ""
+msgstr "Додати новий стан"
 
 #: ../lib/GaletteAuto/PropertiesController.php:537
 msgid "Finitions list"
-msgstr ""
+msgstr "Список оздоблень"
 
 #: ../lib/GaletteAuto/PropertiesController.php:538
 msgid "Add new finition"
-msgstr ""
+msgstr "Додати нове оздоблення"
 
 #: ../lib/GaletteAuto/PropertiesController.php:542
 msgid "Bodies list"
-msgstr ""
+msgstr "Список кузовів"
 
 #: ../lib/GaletteAuto/PropertiesController.php:543
 msgid "Add new body"
-msgstr ""
+msgstr "Додайте новий кузов"
 
 #: ../lib/GaletteAuto/PropertiesController.php:547
 msgid "Transmissions list"
-msgstr ""
+msgstr "Список передач"
 
 #: ../lib/GaletteAuto/PropertiesController.php:548
 msgid "Add new transmission"
-msgstr ""
+msgstr "Додати нову передачу"
 
 #: ../lib/GaletteAuto/PropertiesController.php:552
 msgid "Brands list"
-msgstr ""
+msgstr "Список брендів"
 
 #: ../lib/GaletteAuto/PropertiesController.php:553
 #, php-format
 msgid "Brand '%s'"
-msgstr ""
+msgstr "Бренд '%s'"
 
 #: ../lib/GaletteAuto/PropertiesController.php:554
 msgid "Add new brand"
-msgstr ""
+msgstr "Додати новий бренд"
 
 #: ../lib/GaletteAuto/PropertiesController.php:650
 msgid "%property ID cannot ben null calling edit route!"
 msgstr ""
+"ID %property не може присвоїти виклик з нульовим значенням маршруту "
+"редагування!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:668
 msgid "New"
@@ -427,20 +431,20 @@ msgstr "Нове"
 #: ../lib/GaletteAuto/PropertiesController.php:674
 #, php-format
 msgid "Change '%s'"
-msgstr ""
+msgstr "Змінити \"%s\""
 
 #: ../lib/GaletteAuto/PropertiesController.php:746
 msgid "New %property has been added!"
-msgstr ""
+msgstr "Додано нову властивість %property!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:747
 msgid "%property has been saved!"
-msgstr ""
+msgstr "Властивість %property збережена!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:800
 #, php-format
 msgid "Show '%s'"
-msgstr ""
+msgstr "Показати \"%s\""
 
 #: ../lib/GaletteAuto/PropertiesController.php:861
 #: ../lib/GaletteAuto/PropertiesController.php:908
@@ -450,15 +454,15 @@ msgstr "Вилучити %1$s %2$s"
 
 #: ../lib/GaletteAuto/PropertiesController.php:915
 msgid "You are about to remove %count %property."
-msgstr ""
+msgstr "Ви ось-ось вилучите %count властивостей %property."
 
 #: ../lib/GaletteAuto/PropertiesController.php:968
 msgid "An error occured trying to remove %property :/"
-msgstr ""
+msgstr "Сталася помилка під час спроби вилучити властивість %property :/"
 
 #: ../lib/GaletteAuto/PropertiesController.php:979
 msgid "%count %property have been successfully deleted."
-msgstr ""
+msgstr "%count властивостей %property було успішно видалено."
 
 #: ../templates/default/object_list.tpl:14
 #: ../templates/default/vehicles_list.tpl:12
@@ -469,17 +473,17 @@ msgstr "Дії"
 #: ../templates/default/object_list.tpl:28
 #: ../templates/default/models_list.tpl:26
 msgid "Edit %property"
-msgstr ""
+msgstr "Редагувати %property"
 
 #: ../templates/default/object_list.tpl:35
 #: ../templates/default/models_list.tpl:33
 msgid "%property: remove from database"
-msgstr ""
+msgstr "%property: вилучити з бази даних"
 
 #: ../templates/default/object_list.tpl:40
 #: ../templates/default/models_list.tpl:38
 msgid "no record found"
-msgstr ""
+msgstr "жодного запису не знайдено"
 
 #: ../templates/default/object_list.tpl:46
 #: ../templates/default/vehicles_list.tpl:48
@@ -490,7 +494,7 @@ msgstr "Сторінки:"
 #: ../templates/default/object_list.tpl:52
 #: ../templates/default/models_list.tpl:50
 msgid "Selection:"
-msgstr ""
+msgstr "Вибір:"
 
 #: ../templates/default/object_list.tpl:56
 #: ../templates/default/vehicles_list.tpl:58
@@ -502,17 +506,19 @@ msgstr "Видалити"
 #: ../templates/default/vehicles_list.tpl:62
 #: ../templates/default/models_list.tpl:56
 msgid "Other:"
-msgstr ""
+msgstr "Інше:"
 
 #: ../templates/default/object_list.tpl:80
 msgid "No entry selected"
-msgstr ""
+msgstr "Не вибрано жодного запису"
 
 #: ../templates/default/object_list.tpl:80
 msgid ""
 "Please make sure to select at least one entry from the list to perform this "
 "action."
 msgstr ""
+"Будь ласка, не забудьте вибрати хоча б один запис зі списку, щоб виконати цю "
+"дію."
 
 #: ../templates/default/object_list.tpl:117
 #: ../templates/default/vehicles_list.tpl:102
@@ -532,19 +538,19 @@ msgstr "Ім'я"
 
 #: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
-msgstr ""
+msgstr "Редагувати %vehicle"
 
 #: ../templates/default/vehicles_list.tpl:36
 msgid "%vehiclename: remove from database"
-msgstr ""
+msgstr "%vehiclename: вилучити з бази даних"
 
 #: ../templates/default/vehicles_list.tpl:41
 msgid "No car has been registered yet for your account."
-msgstr ""
+msgstr "На ваш обліковий запис ще не зареєстровано жодної автівки."
 
 #: ../templates/default/vehicles_list.tpl:41
 msgid "No car in the database"
-msgstr ""
+msgstr "У базі даних немає автомобіля"
 
 #: ../templates/default/vehicles_list.tpl:54
 msgid "For the selection:"
@@ -552,15 +558,15 @@ msgstr "Для вибору:"
 
 #: ../templates/default/vehicles_list.tpl:69
 msgid "Add new vehicle"
-msgstr ""
+msgstr "Додати новий транспортний засіб"
 
 #: ../templates/default/menu.tpl:2
 msgid "Cars"
-msgstr ""
+msgstr "Автомобілі"
 
 #: ../templates/default/menu.tpl:18
 msgid "My Cars"
-msgstr ""
+msgstr "Мої автомобілі"
 
 #: ../templates/default/history.tpl:13
 msgid "Date"
@@ -568,11 +574,11 @@ msgstr "Дата"
 
 #: ../templates/default/history.tpl:16
 msgid "Owner"
-msgstr ""
+msgstr "Власник"
 
 #: ../templates/default/history.tpl:19
 msgid "Registration"
-msgstr ""
+msgstr "Реєстрація"
 
 #: ../templates/default/history.tpl:36
 msgid "[M]"
@@ -588,39 +594,43 @@ msgstr "[адмін]"
 
 #: ../templates/default/history.tpl:56
 msgid "no history entries"
-msgstr ""
+msgstr "записи в історії відсутні"
 
 #: ../templates/default/models_list.tpl:62
 msgid "Add new model"
-msgstr ""
+msgstr "Додати нову модель"
 
 #: ../templates/default/models_list.tpl:74
 msgid "No model selected"
-msgstr ""
+msgstr "Жодна модель не вибрана"
 
 #: ../templates/default/models_list.tpl:74
 msgid ""
 "Please make sure to select at least one model from the list to perform this "
 "action."
 msgstr ""
+"Будь ласка, не забудьте вибрати принаймні одного члена зі списку для "
+"виконання цієї дії."
 
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
-msgstr ""
+msgstr "Членські автомобілі"
 
 #: ../templates/default/model.tpl:20
 msgid "Select one brand"
-msgstr ""
+msgstr "Виберіть один бренд"
 
 #: ../templates/default/model.tpl:26
 msgid ""
 "No brand is registered yet. You have to create at least one brand to "
 "register models."
 msgstr ""
+"Жоден бренд ще не зареєстровано. Ви повинні створити принаймні один бренд "
+"для реєстрації моделей."
 
 #: ../templates/default/model.tpl:27
 msgid "Add a brand"
-msgstr ""
+msgstr "Додати бренд"
 
 #: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
 #: ../templates/default/vehicles.tpl:188
@@ -638,21 +648,21 @@ msgstr "червоний"
 #: ../templates/default/object_show.tpl:10
 #, php-format
 msgid "Registered models for the brand '%s':"
-msgstr ""
+msgstr "Зареєстровані моделі для бренду '%s':"
 
 #: ../templates/default/object_show.tpl:17
 #, php-format
 msgid "The brand '%s' does not have any registered model at this time."
-msgstr ""
+msgstr "Бренд '%s' наразі не має зареєстрованої моделі."
 
 #: ../templates/default/object_show.tpl:19
 #, php-format
 msgid "Create a new model for brand '%s'"
-msgstr ""
+msgstr "Створіть нову модель для бренду '%s'"
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
-msgstr ""
+msgstr "Основні відомості автомобіля"
 
 #: ../templates/default/vehicles.tpl:15
 msgid "Name:"
@@ -660,35 +670,35 @@ msgstr "Ім'я:"
 
 #: ../templates/default/vehicles.tpl:20
 msgid "Model:"
-msgstr ""
+msgstr "Модель:"
 
 #: ../templates/default/vehicles.tpl:23
 msgid "Choose a brand"
-msgstr ""
+msgstr "Виберіть бренд"
 
 #: ../templates/default/vehicles.tpl:29
 msgid "Choose a model"
-msgstr ""
+msgstr "Виберіть модель"
 
 #: ../templates/default/vehicles.tpl:36
 msgid "First registration date:"
-msgstr ""
+msgstr "Дата першої реєстрації:"
 
 #: ../templates/default/vehicles.tpl:40
 msgid "First circulation date:"
-msgstr ""
+msgstr "Дата першого тиражу:"
 
 #: ../templates/default/vehicles.tpl:44
 msgid "Mileage:"
-msgstr ""
+msgstr "Пробіг:"
 
 #: ../templates/default/vehicles.tpl:48
 msgid "Seats:"
-msgstr ""
+msgstr "Місць:"
 
 #: ../templates/default/vehicles.tpl:55 ../templates/default/vehicles.tpl:58
 msgid "Car's photo"
-msgstr ""
+msgstr "Світлина автомобіля"
 
 #: ../templates/default/vehicles.tpl:57
 msgid "Picture:"
@@ -700,31 +710,31 @@ msgstr "Видалити зображення"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
-msgstr ""
+msgstr "Поточні відомості про стан автомобіля"
 
 #: ../templates/default/vehicles.tpl:72
 msgid "Current owner:"
-msgstr ""
+msgstr "Поточний власник:"
 
 #: ../templates/default/vehicles.tpl:77
 msgid "Show full car state history"
-msgstr ""
+msgstr "Показати повну історію стану автомобіля"
 
 #: ../templates/default/vehicles.tpl:79
 msgid "Car state history"
-msgstr ""
+msgstr "Історія стану автомобіля"
 
 #: ../templates/default/vehicles.tpl:81 ../templates/default/vehicles.tpl:82
 msgid "Change car's owner"
-msgstr ""
+msgstr "Змінити власника автомобіля"
 
 #: ../templates/default/vehicles.tpl:82
 msgid "Change owner"
-msgstr ""
+msgstr "Змінити власника"
 
 #: ../templates/default/vehicles.tpl:91
 msgid "Owner:"
-msgstr ""
+msgstr "Власник:"
 
 #: ../templates/default/vehicles.tpl:93
 msgid "Search for name or ID and pick member"
@@ -732,71 +742,71 @@ msgstr "Пошук імені або ідентифікатора та вибі�
 
 #: ../templates/default/vehicles.tpl:100
 msgid "Color:"
-msgstr ""
+msgstr "Колір:"
 
 #: ../templates/default/vehicles.tpl:102
 msgid "Choose a color"
-msgstr ""
+msgstr "Виберіть колір"
 
 #: ../templates/default/vehicles.tpl:109
 msgid "State:"
-msgstr ""
+msgstr "Стан:"
 
 #: ../templates/default/vehicles.tpl:111
 msgid "Choose a state"
-msgstr ""
+msgstr "Виберіть стан"
 
 #: ../templates/default/vehicles.tpl:118
 msgid "Registration:"
-msgstr ""
+msgstr "Реєстрація:"
 
 #: ../templates/default/vehicles.tpl:124
 msgid "Car's technical informations"
-msgstr ""
+msgstr "Технічні дані про автомобіль"
 
 #: ../templates/default/vehicles.tpl:127
 msgid "Body:"
-msgstr ""
+msgstr "Корпус:"
 
 #: ../templates/default/vehicles.tpl:129
 msgid "Choose a body"
-msgstr ""
+msgstr "Виберіть корпус"
 
 #: ../templates/default/vehicles.tpl:136
 msgid "Transmission:"
-msgstr ""
+msgstr "Передачі:"
 
 #: ../templates/default/vehicles.tpl:138
 msgid "Choose a transmission"
-msgstr ""
+msgstr "Виберіть передачі"
 
 #: ../templates/default/vehicles.tpl:145
 msgid "Finition:"
-msgstr ""
+msgstr "Оздоблення:"
 
 #: ../templates/default/vehicles.tpl:147
 msgid "Choose a finition"
-msgstr ""
+msgstr "Виберіть оздоблення"
 
 #: ../templates/default/vehicles.tpl:154
 msgid "Chassis number:"
-msgstr ""
+msgstr "Номер шасі:"
 
 #: ../templates/default/vehicles.tpl:158
 msgid "Horsepower:"
-msgstr ""
+msgstr "Кінська сила:"
 
 #: ../templates/default/vehicles.tpl:162
 msgid "Engine size:"
-msgstr ""
+msgstr "Об'єм двигуна:"
 
 #: ../templates/default/vehicles.tpl:166
 msgid "Fuel:"
-msgstr ""
+msgstr "Пальне:"
 
 #: ../templates/default/vehicles.tpl:168
 msgid "Choose a fuel"
-msgstr ""
+msgstr "Виберіть пальне"
 
 #: ../templates/default/vehicles.tpl:177
 msgid "Comment"
@@ -804,7 +814,7 @@ msgstr "Коментар"
 
 #: ../templates/default/vehicles.tpl:180
 msgid "Comment:"
-msgstr ""
+msgstr "Коментар:"
 
 #: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
@@ -812,4 +822,4 @@ msgstr "Виберіть дату"
 
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
-msgstr ""
+msgstr "Історія автомобіля"
