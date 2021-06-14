@@ -5,13 +5,14 @@
 # Toni Martínez <yagstyle@gmail.com>, 2021.
 # เอกชัย แซ่ต้ง <ekachai8866@gmail.com>, 2021.
 # Dario Briones <dariobriones101481@gmail.com>, 2021.
+# felipe <felipecandia@live.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-04-27 14:31+0000\n"
-"Last-Translator: Dario Briones <dariobriones101481@gmail.com>\n"
+"PO-Revision-Date: 2021-06-15 16:32+0000\n"
+"Last-Translator: felipe <felipecandia@live.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
 "Language: es\n"
@@ -807,7 +808,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:177
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: ../templates/default/vehicles.tpl:180
 msgid "Comment:"
