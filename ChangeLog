@@ -1,3 +1,6 @@
+* 2021-07-03 - 1.7.0
+- Galette 0.9.5 compatible
+
 * 2020-07-03 - 1.6.0
 - Galette 0.9.4 compatible
 - Add translations in available core languages (see https://hosted.weblate.org/projects/galette)
