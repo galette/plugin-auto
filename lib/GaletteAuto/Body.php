@@ -53,10 +53,10 @@ use Galette\Core\Db;
  */
 class Body extends AbstractObject
 {
-    const TABLE = 'bodies';
-    const PK = 'id_body';
-    const FIELD = 'body';
-    const NAME = 'bodies';
+    public const TABLE = 'bodies';
+    public const PK = 'id_body';
+    public const FIELD = 'body';
+    public const NAME = 'bodies';
 
     /**
     * Default constructor
@@ -110,5 +110,22 @@ class Body extends AbstractObject
         } else {
             return parent::__get($name);
         }
+    }
+
+    /**
+     * Get localized count string for object list
+     *
+     * @param integer $count Count
+     *
+     * @return string
+     */
+    protected function getLocalizedCount(int $count): string
+    {
+        return _Tn(
+            '%count body',
+            '%count bodies',
+            $this->getCount(),
+            'auto'
+        );
     }
 }

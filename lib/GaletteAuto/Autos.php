@@ -41,6 +41,7 @@ use Analog\Analog;
 use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
+use GaletteAuto\Filters\AutosList;
 use Laminas\Db\Sql\Expression;
 
 /**
@@ -57,8 +58,8 @@ use Laminas\Db\Sql\Expression;
  */
 class Autos
 {
-    const TABLE = Auto::TABLE;
-    const PK = Auto::PK;
+    public const TABLE = Auto::TABLE;
+    public const PK = Auto::PK;
 
     private $plugins;
     private $zdb;
@@ -132,7 +133,7 @@ class Autos
                                 $str_v,
                                 Analog::ERROR
                             );
-                            throw new Exception(
+                            throw new \Exception(
                                 'Unable to delete picture for vehicle ' .
                                 $str_v
                             );
@@ -213,7 +214,7 @@ class Autos
         $as_autos = false,
         $mine = false,
         $fields = null,
-        $filters = null,
+        AutosList $filters = null,
         $id_adh = null
     ) {
         global $login;
@@ -228,7 +229,7 @@ class Autos
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
             $select->columns($fieldsList);
 
-            //restict on user self vehicles when not admin, or if admin and
+            //restrict on user self vehicles when not admin, or if admin and
             //requested 'my vehicles'
             if ($mine == true || (!$login->isAdmin() && !$login->isStaff())) {
                 $select->where(
@@ -281,7 +282,7 @@ class Autos
      *
      * @return void
      */
-    private function proceedCount($select, $filters)
+    private function proceedCount($select, AutosList $filters)
     {
         try {
             $countSelect = clone $select;
@@ -313,5 +314,15 @@ class Autos
             );
             return false;
         }
+    }
+
+    /**
+     * Get count for list
+     *
+     * @return integer
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 }

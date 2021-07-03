@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use Laminas\Db\Sql\Expression;
 use Slim\Router;
 use Galette\Core\Db;
 use GaletteAuto\Filters\PropertiesList;
@@ -65,6 +66,8 @@ abstract class AbstractObject
     protected $id;
     protected $value;
     protected $filters;
+
+    private $count;
 
     /**
      * Default constructor
@@ -96,9 +99,7 @@ abstract class AbstractObject
     public function getList()
     {
         try {
-            $select = $this->zdb->select($this->table);
-            $select->order($this->field . ' ASC');
-
+            $select = $this->buildSelect();
             $results = $this->zdb->execute($select);
             $list = [];
             foreach ($results as $row) {
@@ -249,7 +250,7 @@ abstract class AbstractObject
     {
         $forbidden = array();
         if (!in_array($name, $forbidden)) {
-            if ($name =='id' || $name == 'value') {
+            if ($name == 'id' || $name == 'value') {
                 return $this->$name;
             } else {
                 if (isset($this->$name)) {
@@ -290,7 +291,7 @@ abstract class AbstractObject
      *
      * @return string
      */
-    public static function getListRoute(Router $router, $property)
+    public static function getListRoute(Router $router, string $property): string
     {
         $route = null;
         switch ($property) {
@@ -354,4 +355,99 @@ abstract class AbstractObject
         }
         return $classname;
     }
+
+    /**
+     * Builds the SELECT statement
+     *
+     * @return string SELECT statement
+     */
+    private function buildSelect()
+    {
+        try {
+            $select = $this->zdb->select($this->table);
+            if ($this->filters !== null) {
+                $this->filters->setLimits($select);
+            }
+            $this->proceedCount($select);
+
+            return $select;
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot build SELECT clause for models | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Count objects from the query
+     *
+     * @param Select $select Original select
+     *
+     * @return void
+     */
+    private function proceedCount($select)
+    {
+        try {
+            $countSelect = clone $select;
+            $countSelect->reset($countSelect::COLUMNS);
+            $countSelect->reset($countSelect::JOINS);
+            $countSelect->reset($countSelect::ORDER);
+            $countSelect->columns(
+                array(
+                    static::PK => new Expression('COUNT(' . static::PK . ')')
+                )
+            );
+
+            $results = $this->zdb->execute($countSelect);
+            $result = $results->current();
+
+            $k = static::PK;
+            $this->count = $result->$k;
+
+            if ($this->count > 0 && $this->filters !== null) {
+                $this->filters->setCounter($this->count);
+            }
+        } catch (\Exception $e) {
+            Analog::log(
+                'Cannot count models | ' . $e->getMessage(),
+                Analog::WARNING
+            );
+            return false;
+        }
+    }
+
+    /**
+     * Get count for list
+     *
+     * @return integer
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    /**
+     * Display localized count for object
+     *
+     * @return string
+     */
+    public function displayCount(): string
+    {
+        return str_replace(
+            '%count',
+            $this->getCount(),
+            $this->getLocalizedCount($this->getCount())
+        );
+    }
+
+    /**
+     * Get localized count string for object list
+     *
+     * @param integer $count Count
+     *
+     * @return string
+     */
+    abstract protected function getLocalizedCount(int $count): string;
 }

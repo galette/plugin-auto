@@ -55,9 +55,9 @@ use GaletteAuto\Filters\ModelsList;
  */
 class Model
 {
-    const TABLE = 'models';
-    const PK = 'id_model';
-    const FIELD = 'model';
+    public const TABLE = 'models';
+    public const PK = 'id_model';
+    public const FIELD = 'model';
 
     protected $id;
     protected $model;

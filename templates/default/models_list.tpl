@@ -1,7 +1,19 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-        <form action="{path_for name="batch-modelslist"}" method="post" id="listform">
+        <form action="{path_for name="modelsFilter"}" method="post" id="filtre">
+        <div class="infoline">
+            {_T string="%count model" plural="%count models" count=$count_models pattern="/%count/" replace=$count_models}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+            </div>
+        </div>
+        </form>
+        <form action="" method="post" id="listform">
         <table class="listing">
             <thead>
                 <tr>
@@ -13,24 +25,24 @@
             </thead>
             <tbody>
     {foreach from=$models item=m name=models_list}
-        {assign var='edit_link' value={path_for name="modelEdit" data=["action" => "edit", "id" => $m->id]}}
+        {assign var='edit_link' value={path_for name="modelEdit" data=["id" => $m->id]}}
                 <tr class="{if $smarty.foreach.models_list.iteration % 2 eq 0}even{else}odd{/if}">
                     <td>
-                        <input type="checkbox" name="_sel[]" value="{$m->id}"/>
+                        <input type="checkbox" name="models_sel[]" value="{$m->id}"/>
                     </td>
                     <td><a href="{$edit_link}">{$m->model}</a></td>
                     <td><a href="{$edit_link}">{$m->obrand->value}</a></td>
                     <td class="center nowrap">
                         <a href="{$edit_link}" class="tooltip action">
                             <i class="fas fa-edit"></i>
-                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace=$o->$field}</span>
+                            <span class="sr-only">{_T string="Edit %property" domain="auto" pattern="/%property/" replace={$m->obrand->value|cat:' '|cat:$m->model}}</span>
                         </a>
                         <a
                             class="delete tooltip"
                             href="{path_for name="removeModel" data=["id" => $m->id]}"
                         >
                             <i class="fas fa-trash"></i>
-                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace=$o->$field domain="auto"}</span>
+                            <span class="sr-only">{_T string="%property: remove from database" pattern="/%property/" replace={$m->obrand->value|cat:' '|cat:$m->model} domain="auto"}</span>
                         </a>
                     </td>
                 </tr>
@@ -47,7 +59,7 @@
     {/if}
         <ul class="selection_menu">
     {if $models|@count gt 0}
-            <li>{_T string="Selection:"}</li>
+            <li>{_T string="For the selection:"}</li>
             <button type="submit" id="delete" name="delete" class="delete">
                 <i class="fas fa-trash" aria-hidden="true"></i>
                 {_T string="Delete"}
@@ -56,7 +68,7 @@
             <li>{_T string="Other:" domain="auto"}</li>
             <a
                 class="button"
-                href="{path_for name="modelEdit" data=["action" => "add"]}"
+                href="{path_for name="modelAdd"}"
             >
                 <i class="fas fa-plus-circle" aria-hidden="true"></i>
                 {_T string="Add new model" domain="auto"}
@@ -89,18 +101,18 @@
         }
 
         {include file="js_removal.tpl"}
-        {include file="js_removal.tpl" selector="#delete" deleteurl="'{path_for name="batch-modelslist"}'" extra_check="if (!_checkselection()) {ldelim}return false;{rdelim}" extra_data="delete: true, _sel: $('#listform input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()" method="POST"}
+        {include file="js_removal.tpl" selector="#delete" deleteurl="'{path_for name="removeModels"}'" extra_check="if (!_checkselection()) {ldelim}return false;{rdelim}" extra_data="delete: true, models_sel: $('#listform input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()" method="POST"}
         var _is_checked = true;
         var _bind_check = function(){
             $('#checkall').click(function(){
-                $('table.listing :checkbox[name="_sel[]"]').each(function(){
+                $('table.listing :checkbox[name="models_sel[]"]').each(function(){
                     this.checked = _is_checked;
                 });
                 _is_checked = !_is_checked;
                 return false;
             });
             $('#checkinvert').click(function(){
-                $('table.listing :checkbox[name="_sel[]"]').each(function(){
+                $('table.listing :checkbox[name="models_sel[]"]').each(function(){
                     this.checked = !$(this).is(':checked');
                 });
                 return false;
@@ -108,7 +120,9 @@
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
-            $('#table_footer').parent().before('<tr><td id="checkboxes" colspan="4"><span class="fleft"><a href="#" id="checkall">{_T string="(Un)Check all"}</a> | <a href="#" id="checkinvert">{_T string="Invert selection"}</a></span></td></tr>');
+            var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {_T string="(Un)Check all" escape="js"}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {_T string="Invert selection" escape="js"}</a></div>';
+            $('.listing').before(_checklinks);
+            $('.listing').after(_checklinks);
             _bind_check();
         });
         </script>

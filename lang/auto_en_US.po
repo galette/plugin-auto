@@ -1,3 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-12 10:56+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
 msgstr "No vehicle was selected, please check at least one name."
@@ -10,7 +29,7 @@ msgstr "No model was selected, please check at least one name."
 msgid "No entry was selected, please check at least one."
 msgstr "No entry was selected, please check at least one."
 
-#: ../lib/GaletteAuto/State.php:86 ../templates/default/history.tpl:25
+#: ../lib/GaletteAuto/State.php:86
 msgid "State"
 msgstr "State"
 
@@ -23,13 +42,11 @@ msgstr "- You must select a brand!"
 msgid "- You must provide a value!"
 msgstr "- You must provide a value!"
 
-#: ../lib/GaletteAuto/Color.php:86 ../templates/default/history.tpl:22
+#: ../lib/GaletteAuto/Color.php:86
 msgid "Color"
 msgstr "Color"
 
-#: ../lib/GaletteAuto/Brand.php:87 ../templates/default/vehicles_list.tpl:10
-#: ../templates/default/models_list.tpl:10 ../templates/default/model.tpl:18
-#: ../templates/default/vehicles.tpl:20
+#: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
 msgstr "Brand"
 
@@ -45,78 +62,88 @@ msgstr "Body"
 msgid "Delete vehicles cards"
 msgstr "Delete vehicles cards"
 
-#: ../lib/GaletteAuto/Controller.php:117
+#: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
 msgstr "You do not have enought privileges."
 
-#: ../lib/GaletteAuto/Controller.php:195 ../templates/default/menu.tpl:14
+#: ../lib/GaletteAuto/Controller.php:197
 msgid "Cars list"
 msgstr "Cars list"
 
-#: ../lib/GaletteAuto/Controller.php:197
-#: ../templates/default/dashboard_member.tpl:1
+#: ../lib/GaletteAuto/Controller.php:199
 msgid "My cars"
 msgstr "My cars"
 
-#: ../lib/GaletteAuto/Controller.php:199
+#: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
 msgstr "Member's cars"
 
-#: ../lib/GaletteAuto/Controller.php:204
+#: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
 msgstr "Vehicles list"
 
-#: ../lib/GaletteAuto/Controller.php:245
+#: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
 msgstr "Car ID cannot be null calling edit route!"
 
-#: ../lib/GaletteAuto/Controller.php:273
+#: ../lib/GaletteAuto/Controller.php:276
 msgid "New vehicle"
 msgstr "New vehicle"
 
-#: ../lib/GaletteAuto/Controller.php:274
+#: ../lib/GaletteAuto/Controller.php:277
+#, php-format
 msgid "Change vehicle '%s'"
 msgstr "Change vehicle '%s'"
 
-#: ../lib/GaletteAuto/Controller.php:379
+#: ../lib/GaletteAuto/Controller.php:385
 #: ../lib/GaletteAuto/PropertiesController.php:227
 #: ../lib/GaletteAuto/PropertiesController.php:726
 msgid "- No id provided for modifying this record! (internal)"
 msgstr "- No id provided for modifying this record! (internal)"
 
-#: ../lib/GaletteAuto/Controller.php:394
+#: ../lib/GaletteAuto/Controller.php:400
 msgid "- An error has occured while saving vehicle in the database."
 msgstr "- An error has occured while saving vehicle in the database."
 
-#: ../lib/GaletteAuto/Controller.php:396
+#: ../lib/GaletteAuto/Controller.php:402
 msgid "Vehicle has been saved!"
 msgstr "Vehicle has been saved!"
 
-#: ../lib/GaletteAuto/Controller.php:460
+#: ../lib/GaletteAuto/Controller.php:466
+#, php-format
 msgid "History of car #%d"
 msgstr "History of car #%d"
 
-#: ../lib/GaletteAuto/Controller.php:535 ../lib/GaletteAuto/Controller.php:584
+#: ../lib/GaletteAuto/Controller.php:541 ../lib/GaletteAuto/Controller.php:590
 msgid "Vehicle"
 msgstr "Vehicle"
 
-#: ../lib/GaletteAuto/Controller.php:538
+#: ../lib/GaletteAuto/Controller.php:544
+#, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Remove vehicle %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:586
+#: ../lib/GaletteAuto/Controller.php:592
 msgid "Remove vehicles"
 msgstr "Remove vehicles"
 
-#: ../lib/GaletteAuto/Controller.php:590
+#: ../lib/GaletteAuto/Controller.php:596
+#, php-format
 msgid "You are about to remove %count vehicles."
 msgstr "You are about to remove %count vehicles."
 
-#: ../lib/GaletteAuto/Controller.php:635
+#: ../lib/GaletteAuto/Controller.php:628
+#: ../lib/GaletteAuto/PropertiesController.php:373
+#: ../lib/GaletteAuto/PropertiesController.php:947
+msgid "Removal has not been confirmed!"
+msgstr "Removal has not been confirmed!"
+
+#: ../lib/GaletteAuto/Controller.php:641
 msgid "An error occured trying to remove vehicles :/"
 msgstr "An error occured trying to remove vehicles :/"
 
-#: ../lib/GaletteAuto/Controller.php:645
+#: ../lib/GaletteAuto/Controller.php:651
+#, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count vehicles have been successfully deleted."
 
@@ -212,12 +239,73 @@ msgstr "Fail to add new car."
 msgid "Car updated"
 msgstr "Car updated"
 
+#: ../lib/GaletteAuto/Auto.php:552
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: ../lib/GaletteAuto/Auto.php:661
+#, php-format
+msgid "- Mandatory field %field empty."
+msgstr "- Mandatory field %field empty."
+
+#: ../lib/GaletteAuto/Auto.php:686
+#, php-format
+msgid "- Non valid date for %s!"
+msgstr "- Non valid date for %s!"
+
+#: ../lib/GaletteAuto/Auto.php:693
+#, php-format
+msgid "- Wrong date format for %s (dd/mm/yyyy)!"
+msgstr "- Wrong date format for %s (dd/mm/yyyy)!"
+
+#: ../lib/GaletteAuto/Auto.php:708
+#, php-format
+msgid "- You must enter a positive integer for %s"
+msgstr "- You must enter a positive integer for %s"
+
+#: ../lib/GaletteAuto/Auto.php:717
+msgid "- You must choose a fuel in the list"
+msgstr "- You must choose a fuel in the list"
+
+#: ../lib/GaletteAuto/Auto.php:735
+#, php-format
+msgid "- You must choose a %s in the list"
+msgstr "- You must choose a %s in the list"
+
+#: ../lib/GaletteAuto/Auto.php:745
+msgid "- you must attach an owner to this car"
+msgstr "- you must attach an owner to this car"
+
+#: ../lib/GaletteAuto/Auto.php:776
+msgid ""
+"- Filename or extension is incorrect. Only %s files are allowed. File name "
+"should not contains any of: %t"
+msgstr ""
+"- Filename or extension is incorrect. Only %s files are allowed. File name "
+"should not contains any of: %t"
+
+#: ../lib/GaletteAuto/Auto.php:783
+#, php-format
+msgid "File is too big. Maximum allowed size is %d"
+msgstr "File is too big. Maximum allowed size is %d"
+
+#: ../lib/GaletteAuto/Auto.php:788
+msgid "Mime-Type not allowed"
+msgstr "Mime-Type not allowed"
+
+#: ../lib/GaletteAuto/Auto.php:792
+msgid "An SQL error has occured."
+msgstr "An SQL error has occured."
+
+#: ../lib/GaletteAuto/Auto.php:804
+msgid "An error occured while trying to delete car's photo"
+msgstr "An error occured while trying to delete car's photo"
+
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
 msgstr "Finition"
 
 #: ../lib/GaletteAuto/PropertiesController.php:121
-#: ../templates/default/menu.tpl:11
 msgid "Models list"
 msgstr "Models list"
 
@@ -230,6 +318,7 @@ msgid "New model"
 msgstr "New model"
 
 #: ../lib/GaletteAuto/PropertiesController.php:176
+#, php-format
 msgid "Change model '%s'"
 msgstr "Change model '%s'"
 
@@ -248,12 +337,11 @@ msgstr "Model has been saved!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:297
 #: ../lib/GaletteAuto/PropertiesController.php:335
-#: ../templates/default/vehicles_list.tpl:11
-#: ../templates/default/models_list.tpl:9 ../templates/default/model.tpl:13
 msgid "Model"
 msgstr "Model"
 
 #: ../lib/GaletteAuto/PropertiesController.php:300
+#, php-format
 msgid "Remove model %1$s"
 msgstr "Remove model %1$s"
 
@@ -262,6 +350,7 @@ msgid "Remove models"
 msgstr "Remove models"
 
 #: ../lib/GaletteAuto/PropertiesController.php:341
+#, php-format
 msgid "You are about to remove %count models."
 msgstr "You are about to remove %count models."
 
@@ -270,11 +359,11 @@ msgid "An error occured trying to remove models :/"
 msgstr "An error occured trying to remove models :/"
 
 #: ../lib/GaletteAuto/PropertiesController.php:396
+#, php-format
 msgid "%count models have been successfully deleted."
 msgstr "%count models have been successfully deleted."
 
 #: ../lib/GaletteAuto/PropertiesController.php:527
-#: ../templates/default/menu.tpl:5
 msgid "Colors list"
 msgstr "Colors list"
 
@@ -283,7 +372,6 @@ msgid "Add new color"
 msgstr "Add new color"
 
 #: ../lib/GaletteAuto/PropertiesController.php:532
-#: ../templates/default/menu.tpl:6
 msgid "States list"
 msgstr "States list"
 
@@ -292,7 +380,6 @@ msgid "Add new state"
 msgstr "Add new state"
 
 #: ../lib/GaletteAuto/PropertiesController.php:537
-#: ../templates/default/menu.tpl:7
 msgid "Finitions list"
 msgstr "Finitions list"
 
@@ -301,7 +388,6 @@ msgid "Add new finition"
 msgstr "Add new finition"
 
 #: ../lib/GaletteAuto/PropertiesController.php:542
-#: ../templates/default/menu.tpl:8
 msgid "Bodies list"
 msgstr "Bodies list"
 
@@ -310,7 +396,6 @@ msgid "Add new body"
 msgstr "Add new body"
 
 #: ../lib/GaletteAuto/PropertiesController.php:547
-#: ../templates/default/menu.tpl:9
 msgid "Transmissions list"
 msgstr "Transmissions list"
 
@@ -319,11 +404,11 @@ msgid "Add new transmission"
 msgstr "Add new transmission"
 
 #: ../lib/GaletteAuto/PropertiesController.php:552
-#: ../templates/default/menu.tpl:10
 msgid "Brands list"
 msgstr "Brands list"
 
 #: ../lib/GaletteAuto/PropertiesController.php:553
+#, php-format
 msgid "Brand '%s'"
 msgstr "Brand '%s'"
 
@@ -340,6 +425,7 @@ msgid "New"
 msgstr "New"
 
 #: ../lib/GaletteAuto/PropertiesController.php:674
+#, php-format
 msgid "Change '%s'"
 msgstr "Change '%s'"
 
@@ -352,11 +438,13 @@ msgid "%property has been saved!"
 msgstr "%property has been saved!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:800
+#, php-format
 msgid "Show '%s'"
 msgstr "Show '%s'"
 
 #: ../lib/GaletteAuto/PropertiesController.php:861
 #: ../lib/GaletteAuto/PropertiesController.php:908
+#, php-format
 msgid "Remove %1$s %2$s"
 msgstr "Remove %1$s %2$s"
 
@@ -372,39 +460,99 @@ msgstr "An error occured trying to remove %property :/"
 msgid "%count %property have been successfully deleted."
 msgstr "%count %property have been successfully deleted."
 
+#: ../templates/default/object_list.tpl:14
+#: ../templates/default/vehicles_list.tpl:12
+#: ../templates/default/models_list.tpl:11
+msgid "Actions"
+msgstr "Actions"
+
 #: ../templates/default/object_list.tpl:28
 #: ../templates/default/models_list.tpl:26
 msgid "Edit %property"
 msgstr "Edit %property"
+
+#: ../templates/default/object_list.tpl:35
+#: ../templates/default/models_list.tpl:33
+msgid "%property: remove from database"
+msgstr "%property: remove from database"
 
 #: ../templates/default/object_list.tpl:40
 #: ../templates/default/models_list.tpl:38
 msgid "no record found"
 msgstr "no record found"
 
+#: ../templates/default/object_list.tpl:46
+#: ../templates/default/vehicles_list.tpl:48
+#: ../templates/default/models_list.tpl:44
+msgid "Pages:"
+msgstr "Pages:"
+
+#: ../templates/default/object_list.tpl:52
+#: ../templates/default/models_list.tpl:50
+msgid "Selection:"
+msgstr "Selection:"
+
+#: ../templates/default/object_list.tpl:56
+#: ../templates/default/vehicles_list.tpl:58
+#: ../templates/default/models_list.tpl:53
+msgid "Delete"
+msgstr "Delete"
+
 #: ../templates/default/object_list.tpl:60
-#: ../templates/default/vehicles_list.tpl:65
+#: ../templates/default/vehicles_list.tpl:62
 #: ../templates/default/models_list.tpl:56
 msgid "Other:"
 msgstr "Other:"
+
+#: ../templates/default/object_list.tpl:80
+msgid "No entry selected"
+msgstr "No entry selected"
+
+#: ../templates/default/object_list.tpl:80
+msgid ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
+msgstr ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
+
+#: ../templates/default/object_list.tpl:117
+#: ../templates/default/vehicles_list.tpl:102
+#: ../templates/default/models_list.tpl:111
+msgid "(Un)Check all"
+msgstr "(Un)Check all"
+
+#: ../templates/default/object_list.tpl:117
+#: ../templates/default/vehicles_list.tpl:102
+#: ../templates/default/models_list.tpl:111
+msgid "Invert selection"
+msgstr "Invert selection"
 
 #: ../templates/default/vehicles_list.tpl:9
 msgid "Name"
 msgstr "Name"
 
-#: ../templates/default/vehicles_list.tpl:39
+#: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
 msgstr "Edit %vehicle"
 
-#: ../templates/default/vehicles_list.tpl:51
+#: ../templates/default/vehicles_list.tpl:36
+msgid "%vehiclename: remove from database"
+msgstr "%vehiclename: remove from database"
+
+#: ../templates/default/vehicles_list.tpl:41
 msgid "No car has been registered yet for your account."
 msgstr "No car has been registered yet for your account."
 
-#: ../templates/default/vehicles_list.tpl:51
+#: ../templates/default/vehicles_list.tpl:41
 msgid "No car in the database"
 msgstr "No car in the database"
 
-#: ../templates/default/vehicles_list.tpl:72
+#: ../templates/default/vehicles_list.tpl:54
+msgid "For the selection:"
+msgstr "For the selection:"
+
+#: ../templates/default/vehicles_list.tpl:69
 msgid "Add new vehicle"
 msgstr "Add new vehicle"
 
@@ -415,6 +563,10 @@ msgstr "Cars"
 #: ../templates/default/menu.tpl:18
 msgid "My Cars"
 msgstr "My Cars"
+
+#: ../templates/default/history.tpl:13
+msgid "Date"
+msgstr "Date"
 
 #: ../templates/default/history.tpl:16
 msgid "Owner"
@@ -444,6 +596,18 @@ msgstr "no history entries"
 msgid "Add new model"
 msgstr "Add new model"
 
+#: ../templates/default/models_list.tpl:74
+msgid "No model selected"
+msgstr "No model selected"
+
+#: ../templates/default/models_list.tpl:74
+msgid ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+msgstr ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
 msgstr "Member cars"
@@ -463,6 +627,34 @@ msgstr ""
 #: ../templates/default/model.tpl:27
 msgid "Add a brand"
 msgstr "Add a brand"
+
+#: ../templates/default/model.tpl:34 ../templates/default/object.tpl:19
+#: ../templates/default/vehicles.tpl:188
+msgid "Save"
+msgstr "Save"
+
+#: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
+msgid "NB : The mandatory fields are in"
+msgstr "NB : The mandatory fields are in"
+
+#: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
+msgid "red"
+msgstr "red"
+
+#: ../templates/default/object_show.tpl:10
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr "Registered models for the brand '%s':"
+
+#: ../templates/default/object_show.tpl:17
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "The brand '%s' does not have any registered model at this time."
+
+#: ../templates/default/object_show.tpl:19
+#, php-format
+msgid "Create a new model for brand '%s'"
+msgstr "Create a new model for brand '%s'"
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
@@ -540,6 +732,10 @@ msgstr "Change owner"
 msgid "Owner:"
 msgstr "Owner:"
 
+#: ../templates/default/vehicles.tpl:93
+msgid "Search for name or ID and pick member"
+msgstr "Search for name or ID and pick member"
+
 #: ../templates/default/vehicles.tpl:100
 msgid "Color:"
 msgstr "Color:"
@@ -616,6 +812,10 @@ msgstr "Comment"
 msgid "Comment:"
 msgstr "Comment:"
 
-#: ../templates/default/vehicles.tpl:294
-msgid "Car\\'s history"
-msgstr "Car\\'s history"
+#: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
+msgid "Select a date"
+msgstr "Select a date"
+
+#: ../templates/default/vehicles.tpl:296
+msgid "Car's history"
+msgstr "Car's history"

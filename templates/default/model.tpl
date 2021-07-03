@@ -1,12 +1,7 @@
 {extends file="page.tpl"}
 
 {block name="content"}
-    {if $mode eq "new"}
-        {assign var="action" value="add"}
-    {else}
-        {assign var="action" value="edit"}
-    {/if}
-    <form action="{path_for name="doModelEdit" data=["action" => $action]}" method="post" id="modifform">
+    <form action="{if $mode eq "new"}{path_for name="doModelAdd"}{else}{path_for name="doModelEdit" data=["id" => $model->id]}{/if}" method="post" id="modifform">
         <div class="bigtable">
             <fieldset class="cssform">
                 <p>
@@ -30,8 +25,9 @@
             </fieldset>
         </div>
         <div class="button-container">
-            <input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
-            <input type="reset" id="btncancel" name="cancel" value="{_T string="Cancel"}"/>
+            <button type="submit" id="btnsave" name="valid" class="action">
+                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            </button>
             <input type="hidden" name="{$mode}" value="1"/>
     {if $mode neq "new"}
             <input type="hidden" name="{constant('GaletteAuto\Model::PK')}" value="{$model->id}"/>

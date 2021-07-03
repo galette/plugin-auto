@@ -5,6 +5,20 @@
     {assign var='pk' value=$obj->pk}
     {assign var='field' value=$obj->field}
     {assign var='list' value=$obj->getList()}
+    {assign var='filterPath' value=$field}
+        <form action="{path_for name="propertyFilter" data=["property" => $field]}" method="post" id="filtre">
+        <div class="infoline">
+            {$obj->displayCount()}
+            <div class="fright">
+                <label for="nbshow">{_T string="Records per page:"}</label>
+                <select name="nbshow" id="nbshow">
+                    {html_options options=$nbshow_options selected=$numrows}
+                </select>
+                <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+            </div>
+        </div>
+        </form>
+
         <form action="{path_for name="batch-propertieslist" data=["property" => $obj->getRouteName()]}" method="post" id="listform">
         <table class="listing">
             <thead>
@@ -49,7 +63,7 @@
     {/if}
             <ul class="selection_menu">
     {if $list|@count gt 0}
-                <li>{_T string="Selection:"}</li>
+                <li>{_T string="For the selection:"}</li>
                 <li>
                     <button type="submit" id="delete" name="delete" class="delete">
                         <i class="fas fa-trash" aria-hidden="true"></i>
@@ -114,7 +128,7 @@
         }
         {* Use of Javascript to draw specific elements that are not relevant is JS is inactive *}
         $(function(){
-            var _checklinks = '<div class="checkboxes"><span class="fleft"><a href="#" class="checkall">{_T string="(Un)Check all"}</a> | <a href="#" class="checkinvert">{_T string="Invert selection"}</a></span></div>';
+            var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {_T string="(Un)Check all" escape="js"}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {_T string="Invert selection" escape="js"}</a></div>';
             $('.listing').before(_checklinks);
             $('.listing').after(_checklinks);
             _bind_check();

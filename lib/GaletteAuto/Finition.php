@@ -53,10 +53,10 @@ use Galette\Core\Db;
  */
 class Finition extends AbstractObject
 {
-    const TABLE = 'finitions';
-    const PK = 'id_finition';
-    const FIELD = 'finition';
-    const NAME = 'finitions';
+    public const TABLE = 'finitions';
+    public const PK = 'id_finition';
+    public const FIELD = 'finition';
+    public const NAME = 'finitions';
 
     /**
     * Default constructor
@@ -110,5 +110,22 @@ class Finition extends AbstractObject
         } else {
             return parent::__get($name);
         }
+    }
+
+    /**
+     * Get localized count string for object list
+     *
+     * @param integer $count Count
+     *
+     * @return string
+     */
+    protected function getLocalizedCount(int $count): string
+    {
+        return _Tn(
+            '%count finition',
+            '%count finitions',
+            $this->getCount(),
+            'auto'
+        );
     }
 }

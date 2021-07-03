@@ -36,72 +36,73 @@
  */
 
 use Analog\Analog;
-use GaletteAuto\Autos;
-use GaletteAuto\AutosList;
 use GaletteAuto\Auto;
 use GaletteAuto\Controller;
 use GaletteAuto\PropertiesController;
+use GaletteAuto\Controllers\Crud\ModelsController;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
 
 $this->get(
     '/vehicle/photo[/{id:\d+}]',
-    function ($request, $response, $args) {
-        $id = isset($args['id']) ? $args['id'] : '';
-        $picture = new GaletteAuto\Picture($this->plugins, $id);
-        $picture->display();
-    }
+    [Controller::class, 'vehiclePhoto']
 )->setName('vehiclePhoto');
 
 $this->get(
     '/vehicles[/{option:page|order}/{value:\d+}]',
-    Controller::class . ':vehiclesList'
+    [Controller::class, 'vehiclesList']
 )->setName('vehiclesList')->add($authenticate);
+
+$this->post(
+    '/vehicle/filter',
+    [Controller::class, 'filter']
+)->setName('vehiclesFilter')->add($authenticate);
 
 $this->get(
     '/member/{id:\d+}/vehicles[/{option:page|order}/{value:\d+}]',
-    Controller::class . ':vehiclesList'
+    [Controller::class, 'vehiclesList']
 )->setName('memberVehiclesList')->add($authenticate);
 
 $this->get(
     '/my-vehicles',
-    Controller::class . ':myVehiclesList'
+    [Controller::class, 'myVehiclesList']
 )->setName('myVehiclesList')->add($authenticate);
 
 $this->get(
     '/vehicle/{action:add|edit}[/{id:\d+}]',
-    Controller::class . ':showAddEditVehicle'
+    [Controller::class, 'showAddEditVehicle']
 )->setName('vehicleEdit')->add($authenticate);
 
 $this->post(
     '/vehicle/{action:add|edit}[/{id:\d+}]',
-    Controller::class . ':doAddEditVehicle'
+    [Controller::class, 'doAddEditVehicle']
 )->setName('doVehicleEdit')->add($authenticate);
 
 $this->get(
-    '/vehicle/history[/{id:\d+}]',
-    Controller::class . ':vehicleHistory'
+    '/vehicle/history/{id:\d+}',
+    [Controller::class, 'vehicleHistory']
 )->setName('vehicleHistory')->add($authenticate);
 
 $this->post(
     '/ajax/models',
-    Controller::class . ':ajaxModels'
+    [Controller::class, 'ajaxModels']
 )->setName('ajaxModels')->add($authenticate);
 
 $this->get(
     '/vehicle/remove/{id:\d+}',
-    Controller::class . ':removeVehicle'
+    [Controller::class, 'removeVehicle']
 )->setName('removeVehicle')->add($authenticate);
 
-$this->get(
+$this->map(
+    ['GET', 'POST'],
     '/vehicles/remove',
-    Controller::class . ':removeVehicles'
+    [Controller::class, 'removeVehicles']
 )->setName('removeVehicles')->add($authenticate);
 
 $this->post(
     '/vehicle/remove[/{id:\d+}]',
-    Controller::class . ':doRemoveVehicle'
+    [Controller::class, 'doRemoveVehicle']
 )->setName('doRemoveVehicle')->add($authenticate);
 
 //Batch actions on vehicles list
@@ -133,104 +134,97 @@ $this->post(
 
 $this->get(
     '/models[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':modelsList'
+    [ModelsController::class, 'list']
 )->setName('modelsList')->add($authenticate);
 
+$this->post(
+    '/models/filter',
+    [ModelsController::class, 'filter']
+)->setName('modelsFilter')->add($authenticate);
+
 $this->get(
-    '/models/{action:add|edit}[/{id:\d+}]',
-    PropertiesController::class . ':modelEdit'
+    '/models/add',
+    [ModelsController::class, 'add']
+)->setName('modelAdd')->add($authenticate);
+
+$this->get(
+    '/models/edit/{id:\d+}',
+    [ModelsController::class, 'edit']
 )->setName('modelEdit')->add($authenticate);
 
 $this->post(
-    '/models/{action:add|edit}[/{id:\d+}]',
-    PropertiesController::class . ':doModelEdit'
+    '/models/add',
+    [ModelsController::class, 'doAdd']
+)->setName('doModelAdd')->add($authenticate);
+
+$this->post(
+    '/models/edit/{id:\d+}',
+    [ModelsController::class, 'doEdit']
 )->setName('doModelEdit')->add($authenticate);
 
 $this->get(
     '/model/remove/{id:\d+}',
-    PropertiesController::class . ':removeModel'
+    [ModelsController::class, 'confirmDelete']
 )->setName('removeModel')->add($authenticate);
 
-$this->get(
+$this->post(
     '/models/remove',
-    PropertiesController::class . ':removeModels'
+    [ModelsController::class, 'confirmDelete']
 )->setName('removeModels')->add($authenticate);
 
 $this->post(
     '/model/remove[/{id:\d+}]',
-    PropertiesController::class . ':doRemoveModel'
+    [ModelsController::class, 'delete']
 )->setName('doRemoveModel')->add($authenticate);
-
-//Batch actions on models list
-$this->post(
-    '/models/batch',
-    function ($request, $response) {
-        $post = $request->getParsedBody();
-
-        if (isset($post['_sel'])) {
-            $this->session->filter_automodels_sel = $post['_sel'];
-
-            if (isset($post['delete'])) {
-                return $response
-                    ->withStatus(301)
-                    ->withHeader('Location', $this->router->pathFor('removeModels'));
-            }
-        } else {
-            $this->flash->addMessage(
-                'error_detected',
-                _T("No model was selected, please check at least one name.", "auto")
-            );
-
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('modelsList'));
-        }
-    }
-)->setName('batch-modelslist')->add($authenticate);
 
 $this->get(
     '/brands[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':brandsList'
+    [PropertiesController::class, 'brandsList']
 )->setName('brandsList')->add($authenticate);
 
 $this->get(
     '/colors[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':colorsList'
+    [PropertiesController::class, 'colorsList']
 )->setName('colorsList')->add($authenticate);
 
 $this->get(
     '/states[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':statesList'
+    [PropertiesController::class, 'statesList']
 )->setName('statesList')->add($authenticate);
 
 $this->get(
     '/finitions[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':finitionsList'
+    [PropertiesController::class, 'finitionsList']
 )->setName('finitionsList')->add($authenticate);
 
 $this->get(
     '/bodies[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':bodiesList'
+    [PropertiesController::class, 'bodiesList']
 )->setName('bodiesList')->add($authenticate);
 
 $this->get(
     '/transmissions[/{option:page|order}/{value:\d+}]',
-    PropertiesController::class . ':transmissionsList'
+    [PropertiesController::class, 'transmissionsList']
 )->setName('transmissionsList')->add($authenticate);
+
+$this->post(
+    '/{property:brand|color|state|finition|body|transmission}/filter',
+    [PropertiesController::class, 'filter']
+)->setName('propertyFilter')->add($authenticate);
 
 $this->get(
     '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
-    PropertiesController::class . ':propertyEdit'
+    [PropertiesController::class, 'propertyEdit']
 )->setName('propertyEdit')->add($authenticate);
 
 $this->post(
     '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
-    PropertiesController::class . ':doPropertyEdit'
+    [PropertiesController::class, 'doPropertyEdit']
 )->setName('doPropertyEdit')->add($authenticate);
 
 $this->get(
     '/{property:brand}/show/{id:\d+}',
-    PropertiesController::class . ':propertyShow'
+    [PropertiesController::class, 'propertyShow']
 )->setName('propertyShow')->add($authenticate);
 
 //Batch actions on properties lists
@@ -291,15 +285,15 @@ $this->post(
 
 $this->get(
     '/{property:brand|color|state|finition|body|transmission}/remove/{id:\d+}',
-    PropertiesController::class . ':removeProperty'
+    [PropertiesController::class, 'removeProperty']
 )->setName('removeProperty')->add($authenticate);
 
 $this->get(
-    '/{property:brand|color|state|finition|body|transmission}'. '/remove',
-    PropertiesController::class . ':removeProperties'
+    '/{property:brand|color|state|finition|body|transmission}' . '/remove',
+    [PropertiesController::class, 'removeProperties']
 )->setName('removeProperties')->add($authenticate);
 
 $this->post(
     '/{property:brand|color|state|finition|body|transmission}/remove[/{id:\d+}]',
-    PropertiesController::class . ':doRemoveProperty'
+    [PropertiesController::class, 'doRemoveProperty']
 )->setName('doRemoveProperty')->add($authenticate);

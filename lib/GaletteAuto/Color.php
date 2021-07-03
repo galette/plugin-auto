@@ -53,10 +53,10 @@ use Galette\Core\Db;
  */
 class Color extends AbstractObject
 {
-    const TABLE = 'colors';
-    const PK = 'id_color';
-    const FIELD = 'color';
-    const NAME = 'colors';
+    public const TABLE = 'colors';
+    public const PK = 'id_color';
+    public const FIELD = 'color';
+    public const NAME = 'colors';
 
     /**
     * Default constructor
@@ -110,5 +110,22 @@ class Color extends AbstractObject
         } else {
             return parent::__get($name);
         }
+    }
+
+    /**
+     * Get localized count string for object list
+     *
+     * @param integer $count Count
+     *
+     * @return string
+     */
+    protected function getLocalizedCount(int $count): string
+    {
+        return _Tn(
+            '%count color',
+            '%count colors',
+            $this->getCount(),
+            'auto'
+        );
     }
 }

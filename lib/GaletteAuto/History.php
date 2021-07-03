@@ -56,7 +56,7 @@ use Galette\Entity\Adherent;
 class History
 {
     private $zdb;
-    const TABLE = 'history';
+    public const TABLE = 'history';
 
     //fields list and type
     private $fields = array(

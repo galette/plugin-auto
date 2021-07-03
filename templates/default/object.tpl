@@ -15,8 +15,9 @@
             </fieldset>
         </div>
         <div class="button-container">
-            <input type="submit" id="btnsave" name="valid" value="{_T string="Save"}"/>
-            <input type="reset" id="btncancel" name="cancel" value="{_T string="Cancel"}"/>
+            <button type="submit" id="btnsave" name="valid" class="action">
+                <i class="fas fa-save fa-fw"></i> {_T string="Save"}
+            </button>
             <input type="hidden" name="set" value="{$set}"/>
             <input type="hidden" name="{$mode}" value="1"/>
             <input type="hidden" name="{$pk}" value="{$obj->id}"/>

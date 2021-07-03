@@ -62,8 +62,10 @@ use Laminas\Db\Sql\Expression;
 
 class Models extends Repository
 {
-    const TABLE = Model::TABLE;
-    const PK = Model::PK;
+    public const TABLE = Model::TABLE;
+    public const PK = Model::PK;
+
+    private $count;
 
     /**
      * Main constructor
@@ -115,7 +117,7 @@ class Models extends Repository
                 )
             );
         } else {
-            $this->filters->setLimit($select);
+            $this->filters->setLimits($select);
         }
         $results = $this->zdb->execute($select);
 
@@ -227,5 +229,15 @@ class Models extends Repository
     public function installInit($check_first = true)
     {
         return true;
+    }
+
+    /**
+     * Get count for current query
+     *
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 }
