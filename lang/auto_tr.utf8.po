@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Ahmet Aylin Öztürk <ahmetaylinozturk@gmail.com>, 2021.
+# Hüseyin Gökhun Göktaş <gokhunfb@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-08-29 12:34+0000\n"
-"Last-Translator: Ahmet Aylin Öztürk <ahmetaylinozturk@gmail.com>\n"
+"PO-Revision-Date: 2021-09-02 19:34+0000\n"
+"Last-Translator: Hüseyin Gökhun Göktaş <gokhunfb@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/tr/>\n"
 "Language: tr\n"
@@ -45,11 +46,11 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Color.php:86
 msgid "Color"
-msgstr ""
+msgstr "Renk"
 
 #: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
-msgstr ""
+msgstr "Marka"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
