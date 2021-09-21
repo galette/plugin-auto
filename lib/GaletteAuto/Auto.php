@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -55,7 +55,7 @@ use GaletteAuto\Transmission;
  * @name      Auto
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -381,6 +381,10 @@ class Auto
                         _T("New car added", "auto"),
                         strtoupper($this->name)
                     );
+
+                    //handle picture for newly added cars
+                    $this->picture = new Picture($this->plugins, (int)$this->id);
+                    $this->handlePicture();
                 } else {
                     $hist->add(_T("Fail to add new car.", "auto"));
                     throw new \Exception(
@@ -757,6 +761,55 @@ class Auto
             }//switch
         }//foreach
 
+        if ($this->id) {
+            //handle picture for updated cars
+            $this->handlePicture();
+        }
+
+        //delete photo
+        if (isset($post['del_photo'])) {
+            if (!$this->picture->delete()) {
+                $this->errors[]
+                    = _T("An error occured while trying to delete car's photo");
+            }
+        }
+
+        return count($this->errors) === 0;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Get required fields
+     *
+     * @return array
+     */
+    public function getRequired()
+    {
+        $required = $this->required;
+
+        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
+            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
+        }
+
+        return $required;
+    }
+
+    /**
+     * Handle car picture upload
+     *
+     * @return void
+     */
+    private function handlePicture()
+    {
         // picture upload
         if (isset($_FILES['photo'])) {
             if ($_FILES['photo']['tmp_name'] != '') {
@@ -796,41 +849,5 @@ class Auto
                 }
             }
         }
-
-        //delete photo
-        if (isset($post['del_photo'])) {
-            if (!$this->picture->delete()) {
-                $this->errors[]
-                    = _T("An error occured while trying to delete car's photo");
-            }
-        }
-
-        return count($this->errors) === 0;
-    }
-
-    /**
-     * Get errors
-     *
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
-     * Get required fields
-     *
-     * @return array
-     */
-    public function getRequired()
-    {
-        $required = $this->required;
-
-        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
-            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
-        }
-
-        return $required;
     }
 }
