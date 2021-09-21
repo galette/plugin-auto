@@ -138,17 +138,18 @@ class Controller extends AbstractPluginController
     /**
      * List my vehicles
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request     $request  Request
+     * @param Response    $response Response
+     * @param string|null $option   Either 'page' or 'order'
+     * @param int|null    $value    Option value
      *
      * @return Response
      */
-    public function myVehiclesList(Request $request, Response $response, $args = [])
+    public function myVehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
     {
         $args['id_adh'] = $this->login->id;
         $args['mine']   = true;
-        return $this->vehiclesList($request, $response, $args);
+        return $this->vehiclesList($request, $response, $option, $value);
     }
 
     /**
