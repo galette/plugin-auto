@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-09-24 05:13+0000\n"
-"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
+"Last-Translator: Stefanie Schreiner <stefanie-schreiner@hotmail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -63,7 +63,7 @@ msgstr "Getriebe"
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
-msgstr ""
+msgstr "Karosserie"
 
 #: ../lib/GaletteAuto/Autos.php:160
 msgid "Delete vehicles cards"
