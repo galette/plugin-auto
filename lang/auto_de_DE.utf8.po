@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-09-24 05:13+0000\n"
-"Last-Translator: CryptKid <CryptKiddie@chaospott.de>\n"
+"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
-msgstr ""
+msgstr "Fahrzeugliste"
 
 #: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:173
 msgid "name"
-msgstr ""
+msgstr "Name"
 
 #: ../lib/GaletteAuto/Auto.php:174
 msgid "model"
@@ -164,11 +164,11 @@ msgstr "Modell"
 
 #: ../lib/GaletteAuto/Auto.php:175
 msgid "registration"
-msgstr ""
+msgstr "Zulassung"
 
 #: ../lib/GaletteAuto/Auto.php:176
 msgid "first registration date"
-msgstr ""
+msgstr "Datum der Erstzulassung"
 
 #: ../lib/GaletteAuto/Auto.php:177
 msgid "first circulation date"
@@ -176,7 +176,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Auto.php:178
 msgid "mileage"
-msgstr ""
+msgstr "Kilometerstand"
 
 #: ../lib/GaletteAuto/Auto.php:179
 msgid "seats"
@@ -294,7 +294,7 @@ msgstr ""
 #: ../lib/GaletteAuto/Auto.php:783
 #, php-format
 msgid "File is too big. Maximum allowed size is %d"
-msgstr ""
+msgstr "Die Datei ist zu groß. Die maximal zulässige Größe beträgt %d"
 
 #: ../lib/GaletteAuto/Auto.php:788
 msgid "Mime-Type not allowed"
