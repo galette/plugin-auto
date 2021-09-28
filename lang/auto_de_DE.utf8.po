@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-09-28 16:03+0000\n"
-"Last-Translator: CryptKid <CryptKiddie@chaospott.de>\n"
+"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -134,7 +134,7 @@ msgstr "Fahrzeug %1$s entfernen"
 
 #: ../lib/GaletteAuto/Controller.php:592
 msgid "Remove vehicles"
-msgstr ""
+msgstr "Entferne Farhzeuge"
 
 #: ../lib/GaletteAuto/Controller.php:596
 #, php-format
