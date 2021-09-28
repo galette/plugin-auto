@@ -4,13 +4,14 @@
 # Independent-Eye <michalek.jedrzejak@gmail.com>, 2021.
 # Stefanie Schreiner <stefanie-schreiner@hotmail.de>, 2021.
 # CryptKid <CryptKiddie@chaospott.de>, 2021.
+# TwoB00m <qwertze@gmx.at>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-09-28 12:27+0000\n"
-"Last-Translator: CryptKid <CryptKiddie@chaospott.de>\n"
+"Last-Translator: TwoB00m <qwertze@gmx.at>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -67,11 +68,11 @@ msgstr "Karosserie"
 
 #: ../lib/GaletteAuto/Autos.php:160
 msgid "Delete vehicles cards"
-msgstr ""
+msgstr "Fahrzeugkarten löschen"
 
 #: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
-msgstr ""
+msgstr "Sie haben nicht genügend Berechtigungen."
 
 #: ../lib/GaletteAuto/Controller.php:197
 msgid "Cars list"
@@ -83,7 +84,7 @@ msgstr "Meine Fahrzeuge"
 
 #: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
-msgstr ""
+msgstr "Autos der Mitglieder"
 
 #: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
@@ -91,7 +92,7 @@ msgstr "Fahrzeugliste"
 
 #: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
-msgstr ""
+msgstr "Die ID des Autos darf nicht null sein!"
 
 #: ../lib/GaletteAuto/Controller.php:276
 msgid "New vehicle"
@@ -106,7 +107,7 @@ msgstr "Fahrzeug ändern '%s'"
 #: ../lib/GaletteAuto/PropertiesController.php:227
 #: ../lib/GaletteAuto/PropertiesController.php:726
 msgid "- No id provided for modifying this record! (internal)"
-msgstr ""
+msgstr "- Keine ID zum Ändern dieses Datensatzes angegeben! (intern)"
 
 #: ../lib/GaletteAuto/Controller.php:400
 msgid "- An error has occured while saving vehicle in the database."
