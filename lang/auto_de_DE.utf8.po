@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
 "PO-Revision-Date: 2021-09-28 16:03+0000\n"
-"Last-Translator: Manuel Zeschko <moebyus@pm.me>\n"
+"Last-Translator: TwoB00m <qwertze@gmx.at>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -121,7 +121,7 @@ msgstr "Fahrzeug wurde gespeichert!"
 #: ../lib/GaletteAuto/Controller.php:466
 #, php-format
 msgid "History of car #%d"
-msgstr "Geschichte  des Autos #%d"
+msgstr "Geschichte des Autos #%d"
 
 #: ../lib/GaletteAuto/Controller.php:541 ../lib/GaletteAuto/Controller.php:590
 msgid "Vehicle"
