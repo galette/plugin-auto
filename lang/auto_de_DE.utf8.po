@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-09-28 16:03+0000\n"
+"PO-Revision-Date: 2021-10-02 14:36+0000\n"
 "Last-Translator: TwoB00m <qwertze@gmx.at>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
@@ -173,8 +173,9 @@ msgid "first registration date"
 msgstr "Datum der Erstzulassung"
 
 #: ../lib/GaletteAuto/Auto.php:177
+#, fuzzy
 msgid "first circulation date"
-msgstr ""
+msgstr "Datum der Erstausgabe"
 
 #: ../lib/GaletteAuto/Auto.php:178
 msgid "mileage"
@@ -202,7 +203,7 @@ msgstr "Status"
 
 #: ../lib/GaletteAuto/Auto.php:184
 msgid "finition"
-msgstr ""
+msgstr "finition"
 
 #: ../lib/GaletteAuto/Auto.php:185
 msgid "transmission"
@@ -234,7 +235,7 @@ msgstr "Strom"
 
 #: ../lib/GaletteAuto/Auto.php:294
 msgid "Bio"
-msgstr ""
+msgstr "Bio"
 
 #: ../lib/GaletteAuto/Auto.php:381
 msgid "New car added"
@@ -242,7 +243,7 @@ msgstr "Neues Auto hinzugefügt"
 
 #: ../lib/GaletteAuto/Auto.php:385
 msgid "Fail to add new car."
-msgstr ""
+msgstr "Neues Auto kann nicht hinzugefügt werden."
 
 #: ../lib/GaletteAuto/Auto.php:402
 msgid "Car updated"
@@ -313,16 +314,15 @@ msgstr "Ein Fehler ist beim Löschen vom Foto des Autos aufgetreten"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
-msgstr ""
+msgstr "finition"
 
 #: ../lib/GaletteAuto/PropertiesController.php:121
-#, fuzzy
 msgid "Models list"
 msgstr "Modellliste"
 
 #: ../lib/GaletteAuto/PropertiesController.php:156
 msgid "Model ID cannot ben null calling edit route!"
-msgstr ""
+msgstr "Die ID des Models darf nicht null sein!"
 
 #: ../lib/GaletteAuto/PropertiesController.php:166
 msgid "New model"
@@ -355,9 +355,9 @@ msgid "Model"
 msgstr "Modell"
 
 #: ../lib/GaletteAuto/PropertiesController.php:300
-#, php-format
+#, fuzzy, php-format
 msgid "Remove model %1$s"
-msgstr ""
+msgstr "Modell %1$s entfernen"
 
 #: ../lib/GaletteAuto/PropertiesController.php:337
 msgid "Remove models"
