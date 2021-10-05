@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-10-05 12:04+0000\n"
+"PO-Revision-Date: 2021-10-06 17:06+0000\n"
 "Last-Translator: Cecilia Frego <cecilia.frego@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/it/>\n"
@@ -21,118 +21,123 @@ msgstr ""
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
-"Non è stato selezionato alcun veicolo, inserire per favore almeno un nome."
+"Non è stato selezionato alcun veicolo, per favore inserirne almeno un tipo."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
-msgstr ""
+msgstr "Non è stato selezionato alcun modello, per favore inserirne almeno uno."
 
 #: ../_routes.php:257
 msgid "No entry was selected, please check at least one."
-msgstr ""
+msgstr "Non è stata selezionata alcuna voce, per favore sceglierne almeno una."
 
 #: ../lib/GaletteAuto/State.php:86
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
-msgstr ""
+msgstr "- è necessario selezionare una marca!"
 
 #: ../lib/GaletteAuto/Model.php:247
 #: ../lib/GaletteAuto/PropertiesController.php:732
 msgid "- You must provide a value!"
-msgstr ""
+msgstr "- è necessario indicare un valore!"
 
 #: ../lib/GaletteAuto/Color.php:86
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 #: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
-msgstr ""
+msgstr "Marca"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
-msgstr ""
+msgstr "Cambio"
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
-msgstr ""
+msgstr "Stato della carrozzeria"
 
 #: ../lib/GaletteAuto/Autos.php:160
 msgid "Delete vehicles cards"
-msgstr ""
+msgstr "Cancellare le schede veicolo"
 
 #: ../lib/GaletteAuto/Controller.php:119
 msgid "You do not have enought privileges."
-msgstr ""
+msgstr "Non hai qualifiche sufficienti."
 
 #: ../lib/GaletteAuto/Controller.php:197
 msgid "Cars list"
-msgstr ""
+msgstr "Lista delle auto"
 
 #: ../lib/GaletteAuto/Controller.php:199
 msgid "My cars"
-msgstr ""
+msgstr "Le mie auto"
 
 #: ../lib/GaletteAuto/Controller.php:201
 msgid "Member's cars"
-msgstr ""
+msgstr "Auto del socio"
 
 #: ../lib/GaletteAuto/Controller.php:206
 msgid "Vehicles list"
-msgstr ""
+msgstr "Lista veicoli"
 
 #: ../lib/GaletteAuto/Controller.php:247
 msgid "Car ID cannot be null calling edit route!"
 msgstr ""
+"Deve essere indicata la targa dell'auto quando si richiede una modifica "
+"dell'itinerario!"
 
 #: ../lib/GaletteAuto/Controller.php:276
 msgid "New vehicle"
-msgstr ""
+msgstr "Aggiungere un nuovo veicolo"
 
 #: ../lib/GaletteAuto/Controller.php:277
 #, php-format
 msgid "Change vehicle '%s'"
-msgstr ""
+msgstr "Modificare il veicolo '%s'"
 
 #: ../lib/GaletteAuto/Controller.php:385
 #: ../lib/GaletteAuto/PropertiesController.php:227
 #: ../lib/GaletteAuto/PropertiesController.php:726
 msgid "- No id provided for modifying this record! (internal)"
 msgstr ""
+"- non è stato fornito alcun id per modificare questo documento! (interno)"
 
 #: ../lib/GaletteAuto/Controller.php:400
 msgid "- An error has occured while saving vehicle in the database."
 msgstr ""
+"- C'è stato un errore durante il salvataggio delle informazioni del veicolo "
+"nel database."
 
 #: ../lib/GaletteAuto/Controller.php:402
 msgid "Vehicle has been saved!"
-msgstr ""
+msgstr "I dati del veicolo sono stati salvati!"
 
 #: ../lib/GaletteAuto/Controller.php:466
 #, php-format
 msgid "History of car #%d"
-msgstr ""
+msgstr "Storico dell'auto #%d"
 
 #: ../lib/GaletteAuto/Controller.php:541 ../lib/GaletteAuto/Controller.php:590
 msgid "Vehicle"
-msgstr ""
+msgstr "Veicolo"
 
 #: ../lib/GaletteAuto/Controller.php:544
 #, php-format
 msgid "Remove vehicle %1$s"
-msgstr ""
+msgstr "Eliminare il veicolo %1$s"
 
 #: ../lib/GaletteAuto/Controller.php:592
 msgid "Remove vehicles"
-msgstr ""
+msgstr "Eliminare i veicoli"
 
 #: ../lib/GaletteAuto/Controller.php:596
 #, php-format
 msgid "You are about to remove %count vehicles."
-msgstr ""
+msgstr "Si stanno rimuovendo %count veicoli."
 
 #: ../lib/GaletteAuto/Controller.php:628
 #: ../lib/GaletteAuto/PropertiesController.php:373
@@ -142,156 +147,158 @@ msgstr "La rimozione non è stata confermata!"
 
 #: ../lib/GaletteAuto/Controller.php:641
 msgid "An error occured trying to remove vehicles :/"
-msgstr ""
+msgstr "C'è stato un errore mentre si tentava di rimuovere i veicoli :/"
 
 #: ../lib/GaletteAuto/Controller.php:651
 #, php-format
 msgid "%count vehicles have been successfully deleted."
-msgstr ""
+msgstr "%count veicoli sono stati rimossi correttamente."
 
 #: ../lib/GaletteAuto/Auto.php:173
 msgid "name"
-msgstr ""
+msgstr "Nome"
 
 #: ../lib/GaletteAuto/Auto.php:174
 msgid "model"
-msgstr ""
+msgstr "modello"
 
 #: ../lib/GaletteAuto/Auto.php:175
 msgid "registration"
-msgstr ""
+msgstr "Immatricolazione"
 
 #: ../lib/GaletteAuto/Auto.php:176
 msgid "first registration date"
-msgstr ""
+msgstr "Data di prima immatricolazione"
 
 #: ../lib/GaletteAuto/Auto.php:177
 msgid "first circulation date"
-msgstr ""
+msgstr "Data di prima circolazione"
 
 #: ../lib/GaletteAuto/Auto.php:178
 msgid "mileage"
-msgstr ""
+msgstr "chilometraggio"
 
 #: ../lib/GaletteAuto/Auto.php:179
 msgid "seats"
-msgstr ""
+msgstr "posti a sedere"
 
 #: ../lib/GaletteAuto/Auto.php:180
 msgid "horsepower"
-msgstr ""
+msgstr "potenza dell'auto (numero di cavalli)"
 
 #: ../lib/GaletteAuto/Auto.php:181
 msgid "engine size"
-msgstr ""
+msgstr "cilindrata"
 
 #: ../lib/GaletteAuto/Auto.php:182
 msgid "color"
-msgstr ""
+msgstr "colore"
 
 #: ../lib/GaletteAuto/Auto.php:183
 msgid "state"
-msgstr ""
+msgstr "stato"
 
 #: ../lib/GaletteAuto/Auto.php:184
 msgid "finition"
-msgstr ""
+msgstr "finitura"
 
 #: ../lib/GaletteAuto/Auto.php:185
 msgid "transmission"
-msgstr ""
+msgstr "cambio"
 
 #: ../lib/GaletteAuto/Auto.php:186
 msgid "body"
-msgstr ""
+msgstr "carrozzeria"
 
 #: ../lib/GaletteAuto/Auto.php:289
 msgid "Petrol"
-msgstr ""
+msgstr "Benzina"
 
 #: ../lib/GaletteAuto/Auto.php:290
 msgid "Diesel"
-msgstr ""
+msgstr "Diesel"
 
 #: ../lib/GaletteAuto/Auto.php:291
 msgid "Gas"
-msgstr ""
+msgstr "Gas"
 
 #: ../lib/GaletteAuto/Auto.php:292
 msgid "Hybrid"
-msgstr ""
+msgstr "Ibrido"
 
 #: ../lib/GaletteAuto/Auto.php:293
 msgid "Electricity"
-msgstr ""
+msgstr "Elettrico"
 
 #: ../lib/GaletteAuto/Auto.php:294
 msgid "Bio"
-msgstr ""
+msgstr "bio-carburante"
 
 #: ../lib/GaletteAuto/Auto.php:381
 msgid "New car added"
-msgstr ""
+msgstr "Aggiunta una nuova auto"
 
 #: ../lib/GaletteAuto/Auto.php:385
 msgid "Fail to add new car."
-msgstr ""
+msgstr "Impossibile aggiungere una nuova auto."
 
 #: ../lib/GaletteAuto/Auto.php:402
 msgid "Car updated"
-msgstr ""
+msgstr "Auto aggiornata"
 
 #: ../lib/GaletteAuto/Auto.php:552
 msgid "Y-m-d"
-msgstr "d/m/Y"
+msgstr "gg/mm/aaaa"
 
 #: ../lib/GaletteAuto/Auto.php:661
 #, php-format
 msgid "- Mandatory field %field empty."
-msgstr ""
+msgstr "- Il campo obbligatorio %field è vuoto."
 
 #: ../lib/GaletteAuto/Auto.php:686
 #, php-format
 msgid "- Non valid date for %s!"
-msgstr ""
+msgstr "- Data non valida per %s!"
 
 #: ../lib/GaletteAuto/Auto.php:693
 #, php-format
 msgid "- Wrong date format for %s (dd/mm/yyyy)!"
-msgstr ""
+msgstr "- Formato di data errato per %s (gg/mm/aaaa)!"
 
 #: ../lib/GaletteAuto/Auto.php:708
 #, php-format
 msgid "- You must enter a positive integer for %s"
-msgstr ""
+msgstr "- bisogna inserire un numero intero positivo per %s"
 
 #: ../lib/GaletteAuto/Auto.php:717
 msgid "- You must choose a fuel in the list"
-msgstr ""
+msgstr "- Bisogna scegliere un carburante dalla lista"
 
 #: ../lib/GaletteAuto/Auto.php:735
 #, php-format
 msgid "- You must choose a %s in the list"
-msgstr ""
+msgstr "- Bisogna scegliere un %s dalla lista"
 
 #: ../lib/GaletteAuto/Auto.php:745
 msgid "- you must attach an owner to this car"
-msgstr ""
+msgstr "- bisogna assegnare un proprietario all'auto"
 
 #: ../lib/GaletteAuto/Auto.php:776
 msgid ""
 "- Filename or extension is incorrect. Only %s files are allowed. File name "
 "should not contains any of: %t"
 msgstr ""
+"- il nome o l'estensione del file è scorretto. Sono permessi solo file di "
+"tipo %s. Il nome del file non deve contenere alcun: %t"
 
 #: ../lib/GaletteAuto/Auto.php:783
 #, php-format
 msgid "File is too big. Maximum allowed size is %d"
-msgstr ""
+msgstr "Il file è troppo grande. La dimensione massima consentita è %d"
 
 #: ../lib/GaletteAuto/Auto.php:788
 msgid "Mime-Type not allowed"
-msgstr ""
+msgstr "Tipo MIME non consentito"
 
 #: ../lib/GaletteAuto/Auto.php:792
 msgid "An SQL error has occured."
