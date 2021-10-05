@@ -1,13 +1,14 @@
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020.
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
 # Lory ~ <dury.lorenzo@gmail.com>, 2021.
+# Cecilia Frego <cecilia.frego@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-02-21 23:50+0000\n"
-"Last-Translator: Lory ~ <dury.lorenzo@gmail.com>\n"
+"PO-Revision-Date: 2021-10-05 12:04+0000\n"
+"Last-Translator: Cecilia Frego <cecilia.frego@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/it/>\n"
 "Language: it_IT\n"
@@ -15,11 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: ../_routes.php:124
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
+"Non è stato selezionato alcun veicolo, inserire per favore almeno un nome."
 
 #: ../_routes.php:181
 msgid "No model was selected, please check at least one name."
