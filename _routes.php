@@ -61,7 +61,7 @@ $this->post(
 
 $this->get(
     '/member/{id:\d+}/vehicles[/{option:page|order}/{value:\d+}]',
-    [Controller::class, 'vehiclesList']
+    [Controller::class, 'memberVehiclesList']
 )->setName('memberVehiclesList')->add($authenticate);
 
 $this->get(
