@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2020 The Galette Team
+ * Copyright © 2017-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -51,7 +51,7 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -64,6 +64,12 @@ class Controller extends AbstractPluginController
      * @var integer
      */
     protected $module_info;
+
+    /** @var boolean  */
+    private $mine = false;
+
+    /** @var integer */
+    private $id_adh;
 
     /**
      * Check ACLs for specific member
@@ -138,20 +144,37 @@ class Controller extends AbstractPluginController
     /**
      * List my vehicles
      *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param Request     $request  Request
+     * @param Response    $response Response
+     * @param string|null $option   Either 'page' or 'order'
+     * @param int|null    $value    Option value
      *
      * @return Response
      */
-    public function myVehiclesList(Request $request, Response $response, $args = [])
+    public function myVehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
     {
-        $args['id_adh'] = $this->login->id;
-        $args['mine']   = true;
-        return $this->vehiclesList($request, $response, $args);
+        $this->id_adh = $this->login->id;
+        $this->mine = true;
+        return $this->vehiclesList($request, $response, $option, $value);
     }
 
     /**
+     * List vehicles for a member
+     *
+     * @param Request     $request  Request
+     * @param Response    $response Response
+     * @param int         $id       Member ID
+     * @param string|null $option   Either 'page' or 'order'
+     * @param int|null    $value    Option value
+     *
+     * @return Response
+     */
+    public function memberVehiclesList(Request $request, Response $response, int $id, string $option = null, int $value = null): Response
+    {
+        $this->id_adh = $id;
+        return $this->vehiclesList($request, $response, $option, $value);
+    }
+        /**
      * List vehicles
      *
      * @param Request     $request  Request
@@ -165,11 +188,10 @@ class Controller extends AbstractPluginController
     {
         $get = $request->getQueryParams();
         $id_adh = null;
-        if (isset($args['id'])) {
-            $id_adh = (int)$args['id'];
-            $this->checkAclsFor($response, $args['id']);
+        if (!empty($this->id_adh)) {
+            $id_adh = (int)$this->id_adh;
+            $this->checkAclsFor($response, $id_adh);
         }
-
 
         $auto = new Autos($this->plugins, $this->zdb);
         $afilters = $this->session->vehicles_filters ?? new AutosList();
@@ -200,12 +222,12 @@ class Controller extends AbstractPluginController
         $params = [
             'page_title'    => $title,
             'title'         => _T("Vehicles list", "auto"),
-            'show_mine'     => isset($args['mine']),
+            'show_mine'     => $this->mine,
             'require_dialog' => true
         ];
 
         if ($id_adh === null) {
-            $params['autos'] = $auto->getList(true, isset($args['mine']), null, $afilters);
+            $params['autos'] = $auto->getList(true, $this->mine, null, $afilters);
         } else {
             $params['id_adh'] = $id_adh;
             $params['autos'] = $auto->getMemberList($id_adh, $afilters);

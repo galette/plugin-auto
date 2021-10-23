@@ -89,12 +89,17 @@
                         <input type="hidden" name="change_owner" id="change_owner" value="1"/>
 {/if}
                         <label class="bline" for="owner">{_T string="Owner:" domain="auto"}</label>
+{if $login->isAdmin() || $login->isStaff()}
                         <select name="owner" id="owner" class="nochosen"{if not $car->id} required="required"{/if}>
                             <option value="">{_T string="Search for name or ID and pick member"}</option>
                             {foreach $members.list as $k=>$v}
                                 <option value="{$k}"{if $car->owner->id == $k} selected="selected"{/if}>{$v}</option>
                             {/foreach}
                         </select>
+{else}
+                        <input type="hidden" name="owner" value="{$car->owner->id}"/>
+                        {$members.list[$car->owner->id]}
+{/if}
                     </p>
                 <p>
                     <label for="color" class="bline">{_T string="Color:" domain="auto"}</label>
