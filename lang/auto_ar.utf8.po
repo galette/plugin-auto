@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2020-12-12 10:56+0100\n"
-"PO-Revision-Date: 2021-10-23 05:24+0000\n"
+"PO-Revision-Date: 2021-10-24 14:00+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ar/>\n"
@@ -524,11 +524,11 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:102
 #: ../templates/default/models_list.tpl:111
 msgid "Invert selection"
-msgstr ""
+msgstr "اعكس الإختيار"
 
 #: ../templates/default/vehicles_list.tpl:9
 msgid "Name"
-msgstr "اسم"
+msgstr "الإسم"
 
 #: ../templates/default/vehicles_list.tpl:29
 msgid "Edit %vehicle"
@@ -629,11 +629,11 @@ msgstr ""
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "NB : The mandatory fields are in"
-msgstr ""
+msgstr "ملاحظة: الحقول الإلزامية تظهر باللون"
 
 #: ../templates/default/model.tpl:41 ../templates/default/object.tpl:25
 msgid "red"
-msgstr ""
+msgstr "الأحمر"
 
 #: ../templates/default/object_show.tpl:10
 #, php-format
@@ -808,7 +808,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:207 ../templates/default/vehicles.tpl:215
 msgid "Select a date"
-msgstr ""
+msgstr "اختر التاريخ"
 
 #: ../templates/default/vehicles.tpl:296
 msgid "Car's history"
