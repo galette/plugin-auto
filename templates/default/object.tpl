@@ -21,6 +21,7 @@
             <input type="hidden" name="set" value="{$set}"/>
             <input type="hidden" name="{$mode}" value="1"/>
             <input type="hidden" name="{$pk}" value="{$obj->id}"/>
+            {include file="forms_types/csrf.tpl"}
         </div>
         <p>{_T string="NB : The mandatory fields are in"} <span class="required">{_T string="red"}</span></p>
         </form>

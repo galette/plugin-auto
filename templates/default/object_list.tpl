@@ -15,6 +15,7 @@
                     {html_options options=$nbshow_options selected=$numrows}
                 </select>
                 <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+                {include file="forms_types/csrf.tpl"}
             </div>
         </div>
         </form>
@@ -82,6 +83,7 @@
                     </a>
                 </li>
             </ul>
+            {include file="forms_types/csrf.tpl"}
         </form>
 {/block}
 
