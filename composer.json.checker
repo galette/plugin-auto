@@ -3,8 +3,7 @@
         "psr-4": {
             "Galette\\": "galette-core/galette/lib/Galette",
             "GaletteAuto\\": "lib/GaletteAuto"
-        },
-        "files": ["galette-core/galette/includes/i18n.inc.php"]
+        }
     },
     "require": {
         "php": ">=7.3",
@@ -29,6 +28,10 @@
         "maglnet/composer-require-checker": "^2.1",
         "squizlabs/php_codesniffer": "^3.5",
         "php-di/slim-bridge": "2.0.0",
-        "doctrine/annotations": "^1.8"
+        "doctrine/annotations": "^1.8",
+        "laminas/laminas-servicemanager": "3.7",
+        "symfony/polyfill-php80": "^1.23",
+        "ezyang/htmlpurifier": "^4.13",
+        "slim/csrf": "0.8.3"
     }
 }
