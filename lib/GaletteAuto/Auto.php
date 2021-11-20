@@ -527,26 +527,21 @@ class Auto
      *
      * @return false|object the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         $forbidden = array();
         if (!in_array($name, $forbidden)) {
             switch ($name) {
                 case self::PK:
                     return $this->id;
-                    break;
                 case Adherent::PK:
                     return $this->owner->id;
-                    break;
                 case Color::PK:
                     return $this->color->id;
-                    break;
                 case State::PK:
                     return $this->state->id;
-                    break;
                 case 'car_registration':
                     return $this->registration;
-                    break;
                 case 'first_registration_date':
                 case 'first_circulation_date':
                 case 'creation_date':
@@ -557,7 +552,7 @@ class Auto
                         } catch (\Exception $e) {
                             //oops, we've got a bad date :/
                             Analog::log(
-                                'Bad date (' . $his->$name . ') | ' .
+                                'Bad date (' . $this->$name . ') | ' .
                                 $e->getMessage(),
                                 Analog::WARNING
                             );
@@ -565,14 +560,8 @@ class Auto
                         }
                     }
                     break;
-
-                    break;
-                case Color::PK:
-                    return $this->color->id;
-                    break;
                 case 'picture':
                     return $this->picture;
-                    break;
                 default:
                     if (isset($this->$name)) {
                         return $this->$name;
@@ -598,11 +587,11 @@ class Auto
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         if (!in_array($name, $this->internals)) {
             switch ($name) {
