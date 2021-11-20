@@ -20,6 +20,7 @@
                 <tr>
                     <th class="actions_row"></th>
                     <th>{_T string="Name" domain="auto"}</th>
+                    <th>{_T string="Owner" domain="auto"}</th>
                     <th>{_T string="Brand" domain="auto"}</th>
                     <th>{_T string="Model" domain="auto"}</th>
                     <th class="actions_row">{_T string="Actions"}</th>
@@ -34,6 +35,7 @@
                         <input type="checkbox" name="vehicle_sel[]" value="{$auto->id}"/>
                     </td>
                     <td><a href="{$edit_link}">{$auto->name}</a></td>
+                    <td><a href="{path_for name="member" data=["id" => $auto->owner->id]}">{$auto->owner->sfullname}</a></td>
                     <td><a href="{$edit_link}">{$brand->value}</a></td>
                     <td><a href="{$edit_link}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
