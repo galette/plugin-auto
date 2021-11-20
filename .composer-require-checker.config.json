@@ -47,6 +47,9 @@
     "_CURRENT_THEME_PATH",
     "_T",
     "__",
+    "_Tn",
+    "_Tx",
+    "_Tnx",
 
     "// Galette db constants (not detected as they are dynamically declared)",
     "HOST_DB",
