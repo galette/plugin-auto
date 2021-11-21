@@ -40,8 +40,8 @@ mo :
 	done
 
 extract : ${PHP_SOURCES} Makefile
-	xgettext ${PHP_SOURCES} --keyword=_T --keyword=__ --keyword=_Tn:1,2 --keyword=_Tx:1c,2 --keyword=_Tnx:1c,2,3  -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o auto_php.pot;
-	../../../vendor/bin/smarty-xgettext -o auto_tpl.pot ../templates/default/; \
+	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o auto_php.pot;
+	../../../vendor/bin/smarty-xgettext --domain auto -o auto_tpl.pot ../templates/default/; \
 	msgcat -o auto.pot --use-first auto_php.pot auto_tpl.pot; \
 	rm auto_php.pot auto_tpl.pot; \
 	echo "Generating en_US:"
