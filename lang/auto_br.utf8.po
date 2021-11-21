@@ -1,23 +1,24 @@
 # Egareg JAOUEN <egareg@jaouen.eu>, 2021.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 14:02+0100\n"
-"PO-Revision-Date: 2021-05-01 19:31+0000\n"
-"Last-Translator: Egareg JAOUEN <egareg@jaouen.eu>\n"
-"Language-Team: Breton <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/br/>\n"
+"PO-Revision-Date: 2021-11-21 13:11+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Breton <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/br/>\n"
 "Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=(n % 10 == 1 && n % 100 != 11 && n % 100 != "
 "71 && n % 100 != 91) ? 0 : ((n % 10 == 2 && n % 100 != 12 && n % 100 != 72 "
-"&& n % 100 != 92) ? 1 : ((((n % 10 == 3 || n % 10 == 4) || n % 10 == 9) && "
-"(n % 100 < 10 || n % 100 > 19) && (n % 100 < 70 || n % 100 > 79) && (n % 100 "
+"&& n % 100 != 92) ? 1 : ((((n % 10 == 3 || n % 10 == 4) || n % 10 == 9) && ("
+"n % 100 < 10 || n % 100 > 19) && (n % 100 < 70 || n % 100 > 79) && (n % 100 "
 "< 90 || n % 100 > 99)) ? 2 : ((n != 0 && n % 1000000 == 0) ? 3 : 4)));\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -80,10 +81,9 @@ msgstr[4] "Dilemel %1$s %2$s"
 
 #. TRANS: first parameter is the model name
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:379
-#, fuzzy, php-format
-#| msgid "Remove %1$s %2$s"
+#, php-format
 msgid "Remove model \"%1$s\""
-msgstr "Dilemel %1$s %2$s"
+msgstr ""
 
 #: ../lib/GaletteAuto/Model.php:241
 msgid "- You must select a brand!"
