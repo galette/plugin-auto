@@ -1,4 +1,4 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>, 2021.
@@ -9,18 +9,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 14:02+0100\n"
-"PO-Revision-Date: 2021-06-15 16:32+0000\n"
-"Last-Translator: felipe <felipecandia@live.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/es/>\n"
+"PO-Revision-Date: 2021-11-21 13:11+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -55,11 +55,8 @@ msgid "New model"
 msgstr "Nuevo modelo"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:289
-#, fuzzy
-#| msgid "- An error occured while saving record. Please try again."
 msgid "- An error occurred while saving record. Please try again."
-msgstr ""
-"- Ha ocurrido un error al guardar récord. Por favor intente nuevamente."
+msgstr "- Ha ocurrido un error al guardar récord. Por favor intente nuevamente."
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:291
 msgid "New model has been added!"
@@ -144,7 +141,6 @@ msgid "Delete vehicles cards"
 msgstr "Eliminar cartas del vehículo"
 
 #: ../lib/GaletteAuto/Controller.php:104
-#, fuzzy
 msgid "You do not have enough privileges."
 msgstr "No posees suficientes privilegios."
 
