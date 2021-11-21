@@ -8,18 +8,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-21 14:02+0100\n"
-"PO-Revision-Date: 2021-10-02 14:36+0000\n"
-"Last-Translator: TwoB00m <qwertze@gmx.at>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/de/>\n"
+"PO-Revision-Date: 2021-11-21 13:11+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.10-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -57,7 +57,6 @@ msgid "New model"
 msgstr "Neues Modell"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:289
-#, fuzzy
 msgid "- An error occurred while saving record. Please try again."
 msgstr ""
 "- Beim Speichern der Aufzeichnung ist ein Fehler aufgetreten. Bitte erneut "
@@ -82,7 +81,7 @@ msgstr[1] "Modelle entfernen"
 
 #. TRANS: first parameter is the model name
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:379
-#, fuzzy, php-format
+#, php-format
 msgid "Remove model \"%1$s\""
 msgstr "Modell %1$s entfernen"
 
@@ -145,8 +144,6 @@ msgid "Delete vehicles cards"
 msgstr "Fahrzeugkarten löschen"
 
 #: ../lib/GaletteAuto/Controller.php:104
-#, fuzzy
-#| msgid "You do not have enought privileges."
 msgid "You do not have enough privileges."
 msgstr "Sie haben nicht genügend Berechtigungen."
 
