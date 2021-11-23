@@ -3,20 +3,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-21 14:02+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-23 23:20+0100\n"
 "PO-Revision-Date: 2021-11-21 13:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Breton <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/br/>\n"
+"Language-Team: Breton <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/br/>\n"
 "Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=(n % 10 == 1 && n % 100 != 11 && n % 100 != "
 "71 && n % 100 != 91) ? 0 : ((n % 10 == 2 && n % 100 != 12 && n % 100 != 72 "
-"&& n % 100 != 92) ? 1 : ((((n % 10 == 3 || n % 10 == 4) || n % 10 == 9) && ("
-"n % 100 < 10 || n % 100 > 19) && (n % 100 < 70 || n % 100 > 79) && (n % 100 "
+"&& n % 100 != 92) ? 1 : ((((n % 10 == 3 || n % 10 == 4) || n % 10 == 9) && "
+"(n % 100 < 10 || n % 100 > 19) && (n % 100 < 70 || n % 100 > 79) && (n % 100 "
 "< 90 || n % 100 > 99)) ? 2 : ((n != 0 && n % 1000000 == 0) ? 3 : 4)));\n"
 "X-Generator: Weblate 4.10-dev\n"
 
@@ -187,33 +187,33 @@ msgstr ""
 msgid "Change vehicle '%s'"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:414
+#: ../lib/GaletteAuto/Controller.php:399
 msgid "- An error has occured while saving vehicle in the database."
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:416
+#: ../lib/GaletteAuto/Controller.php:401
 msgid "Vehicle has been saved!"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:479
+#: ../lib/GaletteAuto/Controller.php:464
 #, php-format
 msgid "History of car #%d"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:551 ../lib/GaletteAuto/Controller.php:601
+#: ../lib/GaletteAuto/Controller.php:536 ../lib/GaletteAuto/Controller.php:586
 msgid "Vehicle"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:554
+#: ../lib/GaletteAuto/Controller.php:539
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:603
+#: ../lib/GaletteAuto/Controller.php:588
 msgid "Remove vehicles"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:607
+#: ../lib/GaletteAuto/Controller.php:592
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
@@ -223,11 +223,11 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: ../lib/GaletteAuto/Controller.php:652
+#: ../lib/GaletteAuto/Controller.php:637
 msgid "An error occured trying to remove vehicles :/"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controller.php:662
+#: ../lib/GaletteAuto/Controller.php:647
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr ""
@@ -443,6 +443,16 @@ msgstr ""
 msgid "%count %property have been successfully deleted."
 msgstr ""
 
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:39
+msgid "Edit %property"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:50
+#: ../templates/default/models_list.tpl:46
+msgid "%property: remove from database"
+msgstr ""
+
 #: ../templates/default/object_list.tpl:55
 #: ../templates/default/models_list.tpl:51
 msgid "no record found"
@@ -452,6 +462,16 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:79
 #: ../templates/default/models_list.tpl:69
 msgid "Other:"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:96
+msgid "No entry selected"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:96
+msgid ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
 msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:22
@@ -468,6 +488,14 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
+#: ../templates/default/vehicles_list.tpl:45
+msgid "Edit %vehicle"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:52
+msgid "%vehiclename: remove from database"
+msgstr ""
+
 #: ../templates/default/vehicles_list.tpl:58
 msgid "No car has been registered yet for your account."
 msgstr ""
@@ -478,6 +506,16 @@ msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:86
 msgid "Add new vehicle"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:103
+msgid "No vehicle selected"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:103
+msgid ""
+"Please make sure to select at least one vehicle from the list to perform "
+"this action."
 msgstr ""
 
 #: ../templates/default/menu.tpl:2
@@ -512,6 +550,16 @@ msgstr ""
 msgid "Add new model"
 msgstr ""
 
+#: ../templates/default/models_list.tpl:88
+msgid "No model selected"
+msgstr ""
+
+#: ../templates/default/models_list.tpl:88
+msgid ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+msgstr ""
+
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
 msgstr ""
@@ -528,6 +576,21 @@ msgstr ""
 
 #: ../templates/default/model.tpl:22
 msgid "Add a brand"
+msgstr ""
+
+#: ../templates/default/object_show.tpl:10
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr ""
+
+#: ../templates/default/object_show.tpl:17
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr ""
+
+#: ../templates/default/object_show.tpl:19
+#, php-format
+msgid "Create a new model for brand '%s'"
 msgstr ""
 
 #: ../templates/default/vehicles.tpl:12

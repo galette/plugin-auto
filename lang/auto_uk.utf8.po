@@ -3,12 +3,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-21 14:02+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-23 23:20+0100\n"
 "PO-Revision-Date: 2021-11-21 13:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,34 +176,34 @@ msgstr "Новий транспортний засіб"
 msgid "Change vehicle '%s'"
 msgstr "Змінити транспортний засіб '%s'"
 
-#: ../lib/GaletteAuto/Controller.php:414
+#: ../lib/GaletteAuto/Controller.php:399
 msgid "- An error has occured while saving vehicle in the database."
 msgstr ""
 "- Під час збереження транспортного засобу в базі даних сталася помилка."
 
-#: ../lib/GaletteAuto/Controller.php:416
+#: ../lib/GaletteAuto/Controller.php:401
 msgid "Vehicle has been saved!"
 msgstr "Транспортний засіб збережено!"
 
-#: ../lib/GaletteAuto/Controller.php:479
+#: ../lib/GaletteAuto/Controller.php:464
 #, php-format
 msgid "History of car #%d"
 msgstr "Історія автомобіля #%d"
 
-#: ../lib/GaletteAuto/Controller.php:551 ../lib/GaletteAuto/Controller.php:601
+#: ../lib/GaletteAuto/Controller.php:536 ../lib/GaletteAuto/Controller.php:586
 msgid "Vehicle"
 msgstr "Транспортний засіб"
 
-#: ../lib/GaletteAuto/Controller.php:554
+#: ../lib/GaletteAuto/Controller.php:539
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Вилучити транспортний засіб %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:603
+#: ../lib/GaletteAuto/Controller.php:588
 msgid "Remove vehicles"
 msgstr "Вилучити транспортні засоби"
 
-#: ../lib/GaletteAuto/Controller.php:607
+#: ../lib/GaletteAuto/Controller.php:592
 #, fuzzy, php-format
 #| msgid "You are about to remove %count vehicles."
 msgid "You are about to remove %count vehicle."
@@ -212,11 +212,11 @@ msgstr[0] "Ви вилучите %count транспортних засобів.
 msgstr[1] "Ви вилучите %count транспортних засобів."
 msgstr[2] "Ви вилучите %count транспортних засобів."
 
-#: ../lib/GaletteAuto/Controller.php:652
+#: ../lib/GaletteAuto/Controller.php:637
 msgid "An error occured trying to remove vehicles :/"
 msgstr "Під час вилучення транспортних засобів сталася помилка: /"
 
-#: ../lib/GaletteAuto/Controller.php:662
+#: ../lib/GaletteAuto/Controller.php:647
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%c транспортних засобів успішно видалено."
@@ -434,6 +434,16 @@ msgstr "Сталася помилка під час спроби вилучит�
 msgid "%count %property have been successfully deleted."
 msgstr "%count властивостей %property було успішно видалено."
 
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:39
+msgid "Edit %property"
+msgstr "Редагувати %property"
+
+#: ../templates/default/object_list.tpl:50
+#: ../templates/default/models_list.tpl:46
+msgid "%property: remove from database"
+msgstr "%property: вилучити з бази даних"
+
 #: ../templates/default/object_list.tpl:55
 #: ../templates/default/models_list.tpl:51
 msgid "no record found"
@@ -444,6 +454,18 @@ msgstr "жодного запису не знайдено"
 #: ../templates/default/models_list.tpl:69
 msgid "Other:"
 msgstr "Інше:"
+
+#: ../templates/default/object_list.tpl:96
+msgid "No entry selected"
+msgstr "Не вибрано жодного запису"
+
+#: ../templates/default/object_list.tpl:96
+msgid ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
+msgstr ""
+"Будь ласка, не забудьте вибрати хоча б один запис зі списку, щоб виконати цю "
+"дію."
 
 #: ../templates/default/vehicles_list.tpl:22
 msgid "Name"
@@ -459,6 +481,14 @@ msgstr "Власник"
 msgid "Model"
 msgstr "Модель"
 
+#: ../templates/default/vehicles_list.tpl:45
+msgid "Edit %vehicle"
+msgstr "Редагувати %vehicle"
+
+#: ../templates/default/vehicles_list.tpl:52
+msgid "%vehiclename: remove from database"
+msgstr "%vehiclename: вилучити з бази даних"
+
 #: ../templates/default/vehicles_list.tpl:58
 msgid "No car has been registered yet for your account."
 msgstr "На ваш обліковий запис ще не зареєстровано жодної автівки."
@@ -470,6 +500,24 @@ msgstr "У базі даних немає автомобіля"
 #: ../templates/default/vehicles_list.tpl:86
 msgid "Add new vehicle"
 msgstr "Додати новий транспортний засіб"
+
+#: ../templates/default/vehicles_list.tpl:103
+#, fuzzy
+#| msgid "No model selected"
+msgid "No vehicle selected"
+msgstr "Жодна модель не вибрана"
+
+#: ../templates/default/vehicles_list.tpl:103
+#, fuzzy
+#| msgid ""
+#| "Please make sure to select at least one model from the list to perform "
+#| "this action."
+msgid ""
+"Please make sure to select at least one vehicle from the list to perform "
+"this action."
+msgstr ""
+"Будь ласка, не забудьте вибрати принаймні одного члена зі списку для "
+"виконання цієї дії."
 
 #: ../templates/default/menu.tpl:2
 msgid "Cars"
@@ -503,6 +551,18 @@ msgstr "записи в історії відсутні"
 msgid "Add new model"
 msgstr "Додати нову модель"
 
+#: ../templates/default/models_list.tpl:88
+msgid "No model selected"
+msgstr "Жодна модель не вибрана"
+
+#: ../templates/default/models_list.tpl:88
+msgid ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+msgstr ""
+"Будь ласка, не забудьте вибрати принаймні одного члена зі списку для "
+"виконання цієї дії."
+
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
 msgstr "Членські автомобілі"
@@ -522,6 +582,21 @@ msgstr ""
 #: ../templates/default/model.tpl:22
 msgid "Add a brand"
 msgstr "Додати бренд"
+
+#: ../templates/default/object_show.tpl:10
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr "Зареєстровані моделі для бренду '%s':"
+
+#: ../templates/default/object_show.tpl:17
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "Бренд '%s' наразі не має зареєстрованої моделі."
+
+#: ../templates/default/object_show.tpl:19
+#, php-format
+msgid "Create a new model for brand '%s'"
+msgstr "Створіть нову модель для бренду '%s'"
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
@@ -752,12 +827,6 @@ msgstr "Історія автомобіля"
 #~ msgid "Actions"
 #~ msgstr "Дії"
 
-#~ msgid "Edit %property"
-#~ msgstr "Редагувати %property"
-
-#~ msgid "%property: remove from database"
-#~ msgstr "%property: вилучити з бази даних"
-
 #~ msgid "Pages:"
 #~ msgstr "Сторінки:"
 
@@ -767,43 +836,17 @@ msgstr "Історія автомобіля"
 #~ msgid "Delete"
 #~ msgstr "Видалити"
 
-#~ msgid "No entry selected"
-#~ msgstr "Не вибрано жодного запису"
-
-#~ msgid ""
-#~ "Please make sure to select at least one entry from the list to perform "
-#~ "this action."
-#~ msgstr ""
-#~ "Будь ласка, не забудьте вибрати хоча б один запис зі списку, щоб виконати "
-#~ "цю дію."
-
 #~ msgid "(Un)Check all"
 #~ msgstr "Зняти/вибрати все"
 
 #~ msgid "Invert selection"
 #~ msgstr "Узворотнити виділення"
 
-#~ msgid "Edit %vehicle"
-#~ msgstr "Редагувати %vehicle"
-
-#~ msgid "%vehiclename: remove from database"
-#~ msgstr "%vehiclename: вилучити з бази даних"
-
 #~ msgid "For the selection:"
 #~ msgstr "Для вибору:"
 
 #~ msgid "Date"
 #~ msgstr "Дата"
-
-#~ msgid "No model selected"
-#~ msgstr "Жодна модель не вибрана"
-
-#~ msgid ""
-#~ "Please make sure to select at least one model from the list to perform "
-#~ "this action."
-#~ msgstr ""
-#~ "Будь ласка, не забудьте вибрати принаймні одного члена зі списку для "
-#~ "виконання цієї дії."
 
 #~ msgid "Save"
 #~ msgstr "Зберегти"
@@ -813,18 +856,6 @@ msgstr "Історія автомобіля"
 
 #~ msgid "red"
 #~ msgstr "червоний"
-
-#, php-format
-#~ msgid "Registered models for the brand '%s':"
-#~ msgstr "Зареєстровані моделі для бренду '%s':"
-
-#, php-format
-#~ msgid "The brand '%s' does not have any registered model at this time."
-#~ msgstr "Бренд '%s' наразі не має зареєстрованої моделі."
-
-#, php-format
-#~ msgid "Create a new model for brand '%s'"
-#~ msgstr "Створіть нову модель для бренду '%s'"
 
 #~ msgid "Search for name or ID and pick member"
 #~ msgstr "Пошук імені або ідентифікатора та вибір члена"

@@ -14,12 +14,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-21 14:02+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-23 23:20+0100\n"
 "PO-Revision-Date: 2021-11-21 13:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -181,45 +181,45 @@ msgstr "Ajouter un nouveau véhicule"
 msgid "Change vehicle '%s'"
 msgstr "Modifier le véhicule « %s »"
 
-#: ../lib/GaletteAuto/Controller.php:414
+#: ../lib/GaletteAuto/Controller.php:399
 msgid "- An error has occured while saving vehicle in the database."
 msgstr ""
 "- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
 
-#: ../lib/GaletteAuto/Controller.php:416
+#: ../lib/GaletteAuto/Controller.php:401
 msgid "Vehicle has been saved!"
 msgstr "Le véhicule a été enregistré !"
 
-#: ../lib/GaletteAuto/Controller.php:479
+#: ../lib/GaletteAuto/Controller.php:464
 #, php-format
 msgid "History of car #%d"
 msgstr "Historique de la voiture #%d"
 
-#: ../lib/GaletteAuto/Controller.php:551 ../lib/GaletteAuto/Controller.php:601
+#: ../lib/GaletteAuto/Controller.php:536 ../lib/GaletteAuto/Controller.php:586
 msgid "Vehicle"
 msgstr "Véhicule"
 
-#: ../lib/GaletteAuto/Controller.php:554
+#: ../lib/GaletteAuto/Controller.php:539
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Supprimer le véhicule %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:603
+#: ../lib/GaletteAuto/Controller.php:588
 msgid "Remove vehicles"
 msgstr "Suppression véhicules"
 
-#: ../lib/GaletteAuto/Controller.php:607
+#: ../lib/GaletteAuto/Controller.php:592
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
 msgstr[0] "Vous êtes sur le point de supprimer %count véhicule."
 msgstr[1] "Vous êtes sur le point de supprimer %count véhicules."
 
-#: ../lib/GaletteAuto/Controller.php:652
+#: ../lib/GaletteAuto/Controller.php:637
 msgid "An error occured trying to remove vehicles :/"
 msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
 
-#: ../lib/GaletteAuto/Controller.php:662
+#: ../lib/GaletteAuto/Controller.php:647
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count véhicules ont été supprimés avec succès."
@@ -437,6 +437,16 @@ msgstr "Une erreur est survenue lors de la suppression de %property :/"
 msgid "%count %property have been successfully deleted."
 msgstr "%count %property ont été supprimées avec succès."
 
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:39
+msgid "Edit %property"
+msgstr "Modifier %property"
+
+#: ../templates/default/object_list.tpl:50
+#: ../templates/default/models_list.tpl:46
+msgid "%property: remove from database"
+msgstr "%property : supprimer de la base"
+
 #: ../templates/default/object_list.tpl:55
 #: ../templates/default/models_list.tpl:51
 msgid "no record found"
@@ -447,6 +457,18 @@ msgstr "aucun enregistrement trouvé"
 #: ../templates/default/models_list.tpl:69
 msgid "Other:"
 msgstr "Autres&nbsp;:"
+
+#: ../templates/default/object_list.tpl:96
+msgid "No entry selected"
+msgstr "Aucune entrée sélectionnée"
+
+#: ../templates/default/object_list.tpl:96
+msgid ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
+msgstr ""
+"Assurez-vous de sélectionner au moins une entrée dans la liste avant "
+"d'effectuer cette action."
 
 #: ../templates/default/vehicles_list.tpl:22
 msgid "Name"
@@ -462,6 +484,14 @@ msgstr "Propriétaire"
 msgid "Model"
 msgstr "Modèle"
 
+#: ../templates/default/vehicles_list.tpl:45
+msgid "Edit %vehicle"
+msgstr "Modifier %vehicle"
+
+#: ../templates/default/vehicles_list.tpl:52
+msgid "%vehiclename: remove from database"
+msgstr "%vehiclename : supprimer de la base"
+
 #: ../templates/default/vehicles_list.tpl:58
 msgid "No car has been registered yet for your account."
 msgstr "Aucun véhicule n'a été enregistré pour votre compte."
@@ -473,6 +503,24 @@ msgstr "Aucun véhicule dans la base"
 #: ../templates/default/vehicles_list.tpl:86
 msgid "Add new vehicle"
 msgstr "Ajouter un nouveau véhicule"
+
+#: ../templates/default/vehicles_list.tpl:103
+#, fuzzy
+#| msgid "No model selected"
+msgid "No vehicle selected"
+msgstr "Aucun modèle sélectionné"
+
+#: ../templates/default/vehicles_list.tpl:103
+#, fuzzy
+#| msgid ""
+#| "Please make sure to select at least one model from the list to perform "
+#| "this action."
+msgid ""
+"Please make sure to select at least one vehicle from the list to perform "
+"this action."
+msgstr ""
+"Assurez-vous de sélectionner au moins un modèle dans la liste avant "
+"d’effectuer cette action."
 
 #: ../templates/default/menu.tpl:2
 msgid "Cars"
@@ -506,6 +554,18 @@ msgstr "aucune entrée dans l'historique"
 msgid "Add new model"
 msgstr "Ajouter un nouveau modèle"
 
+#: ../templates/default/models_list.tpl:88
+msgid "No model selected"
+msgstr "Aucun modèle sélectionné"
+
+#: ../templates/default/models_list.tpl:88
+msgid ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+msgstr ""
+"Assurez-vous de sélectionner au moins un modèle dans la liste avant "
+"d’effectuer cette action."
+
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
 msgstr "Véhicules de l'adhérent"
@@ -525,6 +585,21 @@ msgstr ""
 #: ../templates/default/model.tpl:22
 msgid "Add a brand"
 msgstr "Ajouter une marque"
+
+#: ../templates/default/object_show.tpl:10
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr "Modèles enregistrés pour la marque « %s » :"
+
+#: ../templates/default/object_show.tpl:17
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
+
+#: ../templates/default/object_show.tpl:19
+#, php-format
+msgid "Create a new model for brand '%s'"
+msgstr "Créer un nouveau modèle pour la marque « %s »"
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
@@ -760,12 +835,6 @@ msgstr "Historique de la voiture"
 #~ msgid "Actions"
 #~ msgstr "Actions"
 
-#~ msgid "Edit %property"
-#~ msgstr "Modifier %property"
-
-#~ msgid "%property: remove from database"
-#~ msgstr "%property : supprimer de la base"
-
 #~ msgid "Pages:"
 #~ msgstr "Pages :"
 
@@ -775,43 +844,17 @@ msgstr "Historique de la voiture"
 #~ msgid "Delete"
 #~ msgstr "Supprimer"
 
-#~ msgid "No entry selected"
-#~ msgstr "Aucune entrée sélectionnée"
-
-#~ msgid ""
-#~ "Please make sure to select at least one entry from the list to perform "
-#~ "this action."
-#~ msgstr ""
-#~ "Assurez-vous de sélectionner au moins une entrée dans la liste avant "
-#~ "d'effectuer cette action."
-
 #~ msgid "(Un)Check all"
 #~ msgstr "Tout (dé)cocher"
 
 #~ msgid "Invert selection"
 #~ msgstr "Inverser la sélection"
 
-#~ msgid "Edit %vehicle"
-#~ msgstr "Modifier %vehicle"
-
-#~ msgid "%vehiclename: remove from database"
-#~ msgstr "%vehiclename : supprimer de la base"
-
 #~ msgid "For the selection:"
 #~ msgstr "Pour la sélection :"
 
 #~ msgid "Date"
 #~ msgstr "Date"
-
-#~ msgid "No model selected"
-#~ msgstr "Aucun modèle sélectionné"
-
-#~ msgid ""
-#~ "Please make sure to select at least one model from the list to perform "
-#~ "this action."
-#~ msgstr ""
-#~ "Assurez-vous de sélectionner au moins un modèle dans la liste avant "
-#~ "d’effectuer cette action."
 
 #~ msgid "Save"
 #~ msgstr "Enregistrer"
@@ -821,18 +864,6 @@ msgstr "Historique de la voiture"
 
 #~ msgid "red"
 #~ msgstr "rouge"
-
-#, php-format
-#~ msgid "Registered models for the brand '%s':"
-#~ msgstr "Modèles enregistrés pour la marque « %s » :"
-
-#, php-format
-#~ msgid "The brand '%s' does not have any registered model at this time."
-#~ msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
-
-#, php-format
-#~ msgid "Create a new model for brand '%s'"
-#~ msgstr "Créer un nouveau modèle pour la marque « %s »"
 
 #~ msgid "Search for name or ID and pick member"
 #~ msgstr "Chercher un nom ou un identifiant et sélectionner l'adhérent"

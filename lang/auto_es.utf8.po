@@ -9,12 +9,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-21 14:02+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-23 23:20+0100\n"
 "PO-Revision-Date: 2021-11-21 13:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,8 @@ msgstr "Nuevo modelo"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:289
 msgid "- An error occurred while saving record. Please try again."
-msgstr "- Ha ocurrido un error al guardar récord. Por favor intente nuevamente."
+msgstr ""
+"- Ha ocurrido un error al guardar récord. Por favor intente nuevamente."
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:291
 msgid "New model has been added!"
@@ -173,33 +174,33 @@ msgstr "Nuevo vehículo"
 msgid "Change vehicle '%s'"
 msgstr "Cambiar el vehículo \"%s\""
 
-#: ../lib/GaletteAuto/Controller.php:414
+#: ../lib/GaletteAuto/Controller.php:399
 msgid "- An error has occured while saving vehicle in the database."
 msgstr "- Ha ocurrido un error al guardar el vehículo en la base de datos."
 
-#: ../lib/GaletteAuto/Controller.php:416
+#: ../lib/GaletteAuto/Controller.php:401
 msgid "Vehicle has been saved!"
 msgstr "¡Vehículo guardado!"
 
-#: ../lib/GaletteAuto/Controller.php:479
+#: ../lib/GaletteAuto/Controller.php:464
 #, php-format
 msgid "History of car #%d"
 msgstr "Historial del auto #%d"
 
-#: ../lib/GaletteAuto/Controller.php:551 ../lib/GaletteAuto/Controller.php:601
+#: ../lib/GaletteAuto/Controller.php:536 ../lib/GaletteAuto/Controller.php:586
 msgid "Vehicle"
 msgstr "Vehículo"
 
-#: ../lib/GaletteAuto/Controller.php:554
+#: ../lib/GaletteAuto/Controller.php:539
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Remover el vehículo %1$s"
 
-#: ../lib/GaletteAuto/Controller.php:603
+#: ../lib/GaletteAuto/Controller.php:588
 msgid "Remove vehicles"
 msgstr "Remover vehículos"
 
-#: ../lib/GaletteAuto/Controller.php:607
+#: ../lib/GaletteAuto/Controller.php:592
 #, fuzzy, php-format
 #| msgid "You are about to remove %count vehicles."
 msgid "You are about to remove %count vehicle."
@@ -207,11 +208,11 @@ msgid_plural "You are about to remove %count vehicles."
 msgstr[0] "Estás por remover %c vehículo(s)"
 msgstr[1] "Estás por remover %c vehículo(s)"
 
-#: ../lib/GaletteAuto/Controller.php:652
+#: ../lib/GaletteAuto/Controller.php:637
 msgid "An error occured trying to remove vehicles :/"
 msgstr "Ha ocurrido un error intentando remover vehículos :/"
 
-#: ../lib/GaletteAuto/Controller.php:662
+#: ../lib/GaletteAuto/Controller.php:647
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%c Vehículos han sido eliminados con éxito."
@@ -426,6 +427,16 @@ msgstr ""
 msgid "%count %property have been successfully deleted."
 msgstr ""
 
+#: ../templates/default/object_list.tpl:43
+#: ../templates/default/models_list.tpl:39
+msgid "Edit %property"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:50
+#: ../templates/default/models_list.tpl:46
+msgid "%property: remove from database"
+msgstr ""
+
 #: ../templates/default/object_list.tpl:55
 #: ../templates/default/models_list.tpl:51
 msgid "no record found"
@@ -435,6 +446,16 @@ msgstr ""
 #: ../templates/default/vehicles_list.tpl:79
 #: ../templates/default/models_list.tpl:69
 msgid "Other:"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:96
+msgid "No entry selected"
+msgstr ""
+
+#: ../templates/default/object_list.tpl:96
+msgid ""
+"Please make sure to select at least one entry from the list to perform this "
+"action."
 msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:22
@@ -451,6 +472,16 @@ msgstr ""
 msgid "Model"
 msgstr "Modelo"
 
+#: ../templates/default/vehicles_list.tpl:45
+#, fuzzy
+#| msgid "New vehicle"
+msgid "Edit %vehicle"
+msgstr "Nuevo vehículo"
+
+#: ../templates/default/vehicles_list.tpl:52
+msgid "%vehiclename: remove from database"
+msgstr ""
+
 #: ../templates/default/vehicles_list.tpl:58
 msgid "No car has been registered yet for your account."
 msgstr ""
@@ -461,6 +492,18 @@ msgstr ""
 
 #: ../templates/default/vehicles_list.tpl:86
 msgid "Add new vehicle"
+msgstr ""
+
+#: ../templates/default/vehicles_list.tpl:103
+#, fuzzy
+#| msgid "New vehicle"
+msgid "No vehicle selected"
+msgstr "Nuevo vehículo"
+
+#: ../templates/default/vehicles_list.tpl:103
+msgid ""
+"Please make sure to select at least one vehicle from the list to perform "
+"this action."
 msgstr ""
 
 #: ../templates/default/menu.tpl:2
@@ -495,6 +538,18 @@ msgstr ""
 msgid "Add new model"
 msgstr ""
 
+#: ../templates/default/models_list.tpl:88
+#, fuzzy
+#| msgid "New model has been added!"
+msgid "No model selected"
+msgstr "¡Nuevo modelo ha sido añadido!"
+
+#: ../templates/default/models_list.tpl:88
+msgid ""
+"Please make sure to select at least one model from the list to perform this "
+"action."
+msgstr ""
+
 #: ../templates/default/adh_fiche_action.tpl:2
 msgid "Member cars"
 msgstr ""
@@ -512,6 +567,22 @@ msgstr ""
 #: ../templates/default/model.tpl:22
 msgid "Add a brand"
 msgstr ""
+
+#: ../templates/default/object_show.tpl:10
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr ""
+
+#: ../templates/default/object_show.tpl:17
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr ""
+
+#: ../templates/default/object_show.tpl:19
+#, fuzzy, php-format
+#| msgid "Change model '%s'"
+msgid "Create a new model for brand '%s'"
+msgstr "Cambiar modelo \"%s\""
 
 #: ../templates/default/vehicles.tpl:12
 msgid "Car's base informations"
