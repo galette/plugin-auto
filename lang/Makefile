@@ -46,5 +46,5 @@ extract : ${PHP_SOURCES} Makefile
 	rm auto_php.pot auto_tpl.pot; \
 	echo "Generating en_US:"
 	@for d in ${DOMAINS}; do \
-	  LANG=C msgen $$d.pot -o $${d}_en_US.po; \
+	  LANG=C msginit --no-translator --locale=en -i $$d.pot -o $${d}_en_US.po; \
 	done
