@@ -10,6 +10,7 @@
                     {html_options options=$nbshow_options selected=$numrows}
                 </select>
                 <noscript> <span><input type="submit" value="{_T string="Change"}" /></span></noscript>
+                {include file="forms_types/csrf.tpl"}
             </div>
         </div>
         </form>
@@ -19,6 +20,7 @@
                 <tr>
                     <th class="actions_row"></th>
                     <th>{_T string="Name" domain="auto"}</th>
+                    <th>{_T string="Owner" domain="auto"}</th>
                     <th>{_T string="Brand" domain="auto"}</th>
                     <th>{_T string="Model" domain="auto"}</th>
                     <th class="actions_row">{_T string="Actions"}</th>
@@ -33,9 +35,11 @@
                         <input type="checkbox" name="vehicle_sel[]" value="{$auto->id}"/>
                     </td>
                     <td><a href="{$edit_link}">{$auto->name}</a></td>
+                    <td><a href="{path_for name="member" data=["id" => $auto->owner->id]}">{$auto->owner->sfullname}</a></td>
                     <td><a href="{$edit_link}">{$brand->value}</a></td>
                     <td><a href="{$edit_link}">{$auto->model->model}</a></td>
                     <td class="center nowrap">
+    {if $login->isAdmin() or $login->isStaff() or $auto->owner->id eq $login->id || $login->isGroupManager() and $preferences->pref_bool_groupsmanagers_edit_member}
                         <a href="{$edit_link}" class="tooltip action">
                             <i class="fas fa-edit"></i>
                             <span class="sr-only">{_T string="Edit %vehicle" domain="auto" pattern="/%vehicle/" replace=$auto->name}</span>
@@ -47,6 +51,7 @@
                             <i class="fas fa-trash"></i>
                             <span class="sr-only">{_T string="%vehiclename: remove from database" pattern="/%vehiclename/" replace=$auto->name domain="auto"}</span>
                         </a>
+    {/if}
                     </td>
                 </tr>
 {foreachelse}
@@ -85,6 +90,7 @@
 {if isset($id_adh)}
             <input type="hidden" name="id_adh" value="{$id_adh}"/>
 {/if}
+            {include file="forms_types/csrf.tpl"}
         </form>
 {/block}
 

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
@@ -50,7 +50,7 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2020 The Galette Team
+ * @copyright 2017-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
@@ -526,21 +526,21 @@ class PropertiesController extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $property Property name
+     * @param integer  $id       Property id
      *
      * @return Response
      */
-    public function removeProperty(Request $request, Response $response, $args = [])
+    public function removeProperty(Request $request, Response $response, string $property, int $id)
     {
-        $property = $args['property'];
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
-        $object->load((int)$args['id']);
+        $object->load($id);
 
         $route = AbstractObject::getListRoute($this->router, $property);
 
         $data = [
-            'id'            => $args['id'],
+            'id'            => $id,
             'property'      => $property,
             'redirect_uri'  => $route
         ];
@@ -573,13 +573,12 @@ class PropertiesController extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $property Property name
      *
      * @return Response
      */
-    public function removeProperties(Request $request, Response $response, $args = [])
+    public function removeProperties(Request $request, Response $response, string $property)
     {
-        $property = $args['property'];
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
 
@@ -622,11 +621,12 @@ class PropertiesController extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param string   $property Property name
+     * @param integer  $id       Property id
      *
      * @return Response
      */
-    public function doRemoveProperty(Request $request, Response $response, $args = [])
+    public function doRemoveProperty(Request $request, Response $response, string $property, int $id = null)
     {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -651,7 +651,6 @@ class PropertiesController extends AbstractPluginController
             $model = new Model($this->zdb);
             $del = $model->delete($ids);
 
-            $property = $args['property'];
             $classname = AbstractObject::getClassForPropName($property);
             $object = new $classname($this->zdb);
             $del = $object->delete($ids);

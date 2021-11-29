@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2021 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -51,7 +51,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2021 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
@@ -100,7 +100,7 @@ class Autos
             try {
                 $this->zdb->connection->beginTransaction();
 
-                //Retrieve some informations
+                //Retrieve some information
                 $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
                 $select->columns(
                     array(
@@ -140,13 +140,13 @@ class Autos
                         } else {
                             $hist->add(
                                 "Vehicle Picture deleted",
-                                $str_adh
+                                $str_v
                             );
                         }
                     }
                 }
 
-                //delete vehicles hstory
+                //delete vehicles history
                 $delete = $this->zdb->delete(AUTO_PREFIX . History::TABLE);
                 $delete->where->in(self::PK, $list);
                 $this->zdb->execute($delete);
@@ -223,7 +223,7 @@ class Autos
             ? (( !is_array($fields) || count($fields) < 1 )
                 ? (array)'*'
                 : implode(', ', $fields))
-            : (array)'*';
+                : (array)'*';
 
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
@@ -231,7 +231,23 @@ class Autos
 
             //restrict on user self vehicles when not admin, or if admin and
             //requested 'my vehicles'
-            if ($mine == true || (!$login->isAdmin() && !$login->isStaff())) {
+            $on_logged = false;
+            if ($mine) {
+                $on_logged = true;
+            } elseif (!$login->isAdmin() && !$login->isStaff() && $login->isGroupManager()) {
+                $groups = new \Galette\Repository\Groups($this->zdb, $login);
+                $managed_users = $groups->getManagerUsers();
+                $managed_users[] = $login->id;
+                if (count($managed_users)) {
+                    $select->where->in(Adherent::PK, $managed_users);
+                } else {
+                    $on_logged = true;
+                }
+            } elseif (!$login->isAdmin() && !$login->isStaff()) {
+                $on_logged = true;
+            }
+
+            if ($on_logged) {
                 $select->where(
                     array(
                         Adherent::PK => $login->id

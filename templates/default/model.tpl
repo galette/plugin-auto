@@ -32,6 +32,7 @@
     {if $mode neq "new"}
             <input type="hidden" name="{constant('GaletteAuto\Model::PK')}" value="{$model->id}"/>
     {/if}
+            {include file="forms_types/csrf.tpl"}
         </div>
         <p>{_T string="NB : The mandatory fields are in"} <span class="required">{_T string="red"}</span></p>
     </form>

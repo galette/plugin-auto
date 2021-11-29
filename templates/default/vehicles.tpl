@@ -194,6 +194,7 @@
             </button>
             <input type="hidden" name="{$mode}" value="1"/>
             <input type="hidden" name="id_car" value="{$car->id}"/>
+            {include file="forms_types/csrf.tpl"}
         </div>
         </form>
 {/block}
