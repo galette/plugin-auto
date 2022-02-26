@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:20+0100\n"
-"PO-Revision-Date: 2022-02-01 14:53+0000\n"
+"PO-Revision-Date: 2022-02-27 18:56+0000\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ar/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.11.1-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -646,7 +646,7 @@ msgstr "صورة:"
 
 #: ../templates/default/vehicles.tpl:60
 msgid "Delete image"
-msgstr ""
+msgstr "حذف الصورة"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
