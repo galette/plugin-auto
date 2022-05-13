@@ -7,13 +7,14 @@
 # Dario Briones <dariobriones101481@gmail.com>, 2021.
 # felipe <felipecandia@live.com>, 2021.
 # Antonio Vállez <avfmates@gmail.com>, 2021.
+# Cow <javier.fserrador@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:20+0100\n"
-"PO-Revision-Date: 2021-12-27 10:51+0000\n"
-"Last-Translator: Antonio Vállez <avfmates@gmail.com>\n"
+"PO-Revision-Date: 2022-05-14 16:14+0000\n"
+"Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
 "Language: es\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -591,7 +592,7 @@ msgstr ""
 
 #: ../templates/default/vehicles.tpl:15
 msgid "Name:"
-msgstr ""
+msgstr "Nombre:"
 
 #: ../templates/default/vehicles.tpl:20
 msgid "Model:"
@@ -631,7 +632,7 @@ msgstr "Foto:"
 
 #: ../templates/default/vehicles.tpl:60
 msgid "Delete image"
-msgstr ""
+msgstr "Borrar imagen"
 
 #: ../templates/default/vehicles.tpl:68
 msgid "Current car's state informations"
