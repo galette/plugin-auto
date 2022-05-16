@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:20+0100\n"
-"PO-Revision-Date: 2022-05-14 16:14+0000\n"
+"PO-Revision-Date: 2022-05-17 18:17+0000\n"
 "Last-Translator: Cow <javier.fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
@@ -736,7 +736,7 @@ msgstr "Comentario"
 
 #: ../templates/default/vehicles.tpl:185
 msgid "Comment:"
-msgstr ""
+msgstr "Comentario:"
 
 #: ../templates/default/vehicles.tpl:302
 msgid "Car's history"
