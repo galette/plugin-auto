@@ -1,21 +1,22 @@
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Johan Cwiklinski <trasher@x-tnd.be>, 2021.
+# Artem <artem@molotov.work>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2021-11-23 23:20+0100\n"
-"PO-Revision-Date: 2021-11-21 13:11+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/uk/>\n"
+"PO-Revision-Date: 2022-05-29 23:17+0000\n"
+"Last-Translator: Artem <artem@molotov.work>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -33,9 +34,9 @@ msgstr "Стан"
 #, php-format
 msgid "%count state"
 msgid_plural "%count states"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%count стан"
+msgstr[1] "%count стани"
+msgstr[2] "%count станів"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:148
 msgid "Models list"
@@ -65,13 +66,12 @@ msgstr "Модель збережено!"
 
 #. TRANS: first parameter is the number of models
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:371
-#, fuzzy, php-format
-#| msgid "Remove models"
+#, php-format
 msgid "Remove %1$s model"
 msgid_plural "Remove %1$s models"
-msgstr[0] "Вилучити моделі"
-msgstr[1] "Вилучити моделі"
-msgstr[2] "Вилучити моделі"
+msgstr[0] "Вилучити %1$s модель"
+msgstr[1] "Вилучити %1$s моделі"
+msgstr[2] "Вилучити %1$s моделей"
 
 #. TRANS: first parameter is the model name
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:379
@@ -96,35 +96,33 @@ msgstr "Колір"
 #, php-format
 msgid "%count color"
 msgid_plural "%count colors"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%count колір"
+msgstr[1] "%count кольори"
+msgstr[2] "%count кольорів"
 
 #: ../lib/GaletteAuto/Brand.php:87
 msgid "Brand"
 msgstr "Бренд"
 
 #: ../lib/GaletteAuto/Brand.php:129
-#, fuzzy, php-format
-#| msgid "Select one brand"
+#, php-format
 msgid "%count brand"
 msgid_plural "%count brands"
-msgstr[0] "Виберіть один бренд"
-msgstr[1] "Виберіть один бренд"
-msgstr[2] "Виберіть один бренд"
+msgstr[0] "Виберіть %count бренд"
+msgstr[1] "Виберіть %count бренди"
+msgstr[2] "Виберіть %count брендів"
 
 #: ../lib/GaletteAuto/Transmission.php:86
 msgid "Transmission"
 msgstr "Передачі"
 
 #: ../lib/GaletteAuto/Transmission.php:125
-#, fuzzy, php-format
-#| msgid "transmission"
+#, php-format
 msgid "%count transmission"
 msgid_plural "%count transmissions"
-msgstr[0] "передачі"
-msgstr[1] "передачі"
-msgstr[2] "передачі"
+msgstr[0] "%count передача"
+msgstr[1] "%count передачі"
+msgstr[2] "%count передач"
 
 #: ../lib/GaletteAuto/Body.php:86
 msgid "Body"
@@ -134,9 +132,9 @@ msgstr "Текст листа"
 #, php-format
 msgid "%count body"
 msgid_plural "%count bodies"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%count тіло"
+msgstr[1] "%count тіла"
+msgstr[2] "%count тіл"
 
 #: ../lib/GaletteAuto/Autos.php:161
 msgid "Delete vehicles cards"
@@ -204,12 +202,11 @@ msgid "Remove vehicles"
 msgstr "Вилучити транспортні засоби"
 
 #: ../lib/GaletteAuto/Controller.php:592
-#, fuzzy, php-format
-#| msgid "You are about to remove %count vehicles."
+#, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
-msgstr[0] "Ви вилучите %count транспортних засобів."
-msgstr[1] "Ви вилучите %count транспортних засобів."
+msgstr[0] "Ви вилучите %count транспортний засіб."
+msgstr[1] "Ви вилучите %count транспортні засоби."
 msgstr[2] "Ви вилучите %count транспортних засобів."
 
 #: ../lib/GaletteAuto/Controller.php:637
@@ -318,13 +315,12 @@ msgid "Finition"
 msgstr "Оздоблення"
 
 #: ../lib/GaletteAuto/Finition.php:125
-#, fuzzy, php-format
-#| msgid "finition"
+#, php-format
 msgid "%count finition"
 msgid_plural "%count finitions"
-msgstr[0] "оздоблення"
-msgstr[1] "оздоблення"
-msgstr[2] "оздоблення"
+msgstr[0] "%count оздоблення"
+msgstr[1] "%count оздоблення"
+msgstr[2] "%count оздоблень"
 
 #: ../lib/GaletteAuto/PropertiesController.php:203
 msgid "Colors list"
@@ -502,21 +498,15 @@ msgid "Add new vehicle"
 msgstr "Додати новий транспортний засіб"
 
 #: ../templates/default/vehicles_list.tpl:103
-#, fuzzy
-#| msgid "No model selected"
 msgid "No vehicle selected"
-msgstr "Жодна модель не вибрана"
+msgstr "Не вибрано жодного автомобіля"
 
 #: ../templates/default/vehicles_list.tpl:103
-#, fuzzy
-#| msgid ""
-#| "Please make sure to select at least one model from the list to perform "
-#| "this action."
 msgid ""
 "Please make sure to select at least one vehicle from the list to perform "
 "this action."
 msgstr ""
-"Будь ласка, не забудьте вибрати принаймні одного члена зі списку для "
+"Будь ласка, не забудьте вибрати принаймні один автомобіль зі списку для "
 "виконання цієї дії."
 
 #: ../templates/default/menu.tpl:2
