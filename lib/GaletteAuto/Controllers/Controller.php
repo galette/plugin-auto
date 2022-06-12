@@ -70,6 +70,8 @@ class Controller extends AbstractPluginController
 
     /** @var boolean  */
     private $mine = false;
+    /** @var boolean */
+    private $public = false;
 
     /** @var integer */
     private $id_adh;
@@ -142,6 +144,22 @@ class Controller extends AbstractPluginController
         rewind($stream);
 
         return $response->withBody(new \Slim\Http\Stream($stream));
+    }
+
+    /**
+     * Public vehicles list
+     *
+     * @param Request     $request  Request
+     * @param Response    $response Response
+     * @param string|null $option   Either 'page' or 'order'
+     * @param int|null    $value    Option value
+     *
+     * @return Response
+     */
+    public function publicVehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
+    {
+        $this->public = true;
+        return $this->vehiclesList($request, $response, $option, $value);
     }
 
     /**
@@ -230,7 +248,7 @@ class Controller extends AbstractPluginController
         ];
 
         if ($id_adh === null) {
-            $params['autos'] = $auto->getList(true, $this->mine, null, $afilters);
+            $params['autos'] = $auto->getList(true, $this->mine, null, $afilters, null, $this->public);
         } else {
             $params['id_adh'] = $id_adh;
             $params['autos'] = $auto->getMemberList($id_adh, $afilters);
@@ -245,7 +263,7 @@ class Controller extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            $this->getTemplate('vehicles_list'),
+            $this->getTemplate($this->public ? 'public_vehicles_list' : 'vehicles_list'),
             $params
         );
         return $response;

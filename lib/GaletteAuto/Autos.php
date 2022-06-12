@@ -207,6 +207,7 @@ class Autos
      *                               or an array. If null, all fields will be returned
      * @param AutosList    $filters  Filters
      * @param int          $id_adh   Member id
+     * @param boolean      $public   Get public list
      *
      * @return array|Autos[]
      */
@@ -215,7 +216,8 @@ class Autos
         $mine = false,
         $fields = null,
         AutosList $filters = null,
-        $id_adh = null
+        $id_adh = null,
+        $public = false
     ) {
         global $login;
 
@@ -229,11 +231,22 @@ class Autos
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
             $select->columns($fieldsList);
 
-            //restrict on user self vehicles when not admin, or if admin and
-            //requested 'my vehicles'
+            //restrict on user self vehicles when not admin, or if admin and requested 'my vehicles'
+            //restrict on public authorized users if public list
             $on_logged = false;
             if ($mine) {
                 $on_logged = true;
+            } elseif ($public) {
+                $members = new \Galette\Repository\Members();
+                $public = $members->getPublicList(false, false);
+                if (count($public)) {
+                    foreach ($public as $p) {
+                        $adhs[] = $p->id;
+                    }
+                    $select->where->in(Adherent::PK, $adhs);
+                } else {
+                    $on_logged = true;
+                }
             } elseif (!$login->isAdmin() && !$login->isStaff() && $login->isGroupManager()) {
                 $groups = new \Galette\Repository\Groups($this->zdb, $login);
                 $managed_users = $groups->getManagerUsers();

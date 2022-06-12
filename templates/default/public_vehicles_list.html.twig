@@ -1,0 +1,43 @@
+{% extends 'elements/list.html.twig' %}
+
+{% set nb = autos|length %}
+{% set is_public = true %}
+
+{% set form = {
+    'route': {
+        'name': 'publicVehiclesList'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count vehicle", "%count vehicles", count_vehicles, 'auto')|replace({"%count": count_vehicles}),
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% set no_action = true %}
+    {% set columns = [
+        {'label': _T("Name", "auto")},
+        {'label': _T("Owner", "auto")},
+        {'label': _T("Brand", "auto")},
+        {'label': _T("Model", "auto")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for auto in autos %}
+        {% set brand = auto.model.obrand %}
+
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+            <td>{{ auto.name }}</td>
+            <td>{{ auto.owner.sfullname }}</td>
+            <td>{{ brand.value }}</td>
+            <td>{{ auto.model.model }}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{{ _T("No car in the database", "auto") }}</td></tr>
+    {% endfor %}
+{% endblock %}

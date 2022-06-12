@@ -148,7 +148,16 @@ class PluginGaletteAuto extends GalettePlugin
      */
     public static function getPublicMenusItemsList(): array
     {
-        return [];
+        return [
+            [
+                'label' => _T("Vehicles", "auto"),
+                'title' => _T("Vehicles", "auto"),
+                'route' => [
+                    'name' => 'publicVehiclesList'
+                ],
+                'icon' => 'car'
+            ]
+        ];
     }
 
     /**

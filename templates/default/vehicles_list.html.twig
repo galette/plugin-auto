@@ -60,17 +60,17 @@
                         {
                             'label': _T("Edit %vehicle", "auto")|replace({"%vehicle": auto.name}),
                             'route': {
-                            'name': 'vehicleEdit',
-                            'args': {'action': 'edit', 'id': auto.id}
-                        },
+                                'name': 'vehicleEdit',
+                                'args': {'action': 'edit', 'id': auto.id}
+                            },
                             'icon': 'edit'
                         },
                         {
                             'label': _T("%vehiclename: remove from database", "auto")|replace({"%vehiclename": auto.name}),
                             'route': {
-                            'name': 'removeVehicle',
-                            'args': {'id': auto.id},
-                        },
+                                'name': 'removeVehicle',
+                                'args': {'id': auto.id},
+                            },
                             'icon': 'red trash',
                             'extra_class': 'delete'
                         }

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2016 The Galette Team
+ * Copyright © 2016-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2016 The Galette Team
+ * @copyright 2016-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -61,6 +61,13 @@ $this->get(
     '/member/{id:\d+}/vehicles[/{option:page|order}/{value:\d+}]',
     [Controller::class, 'memberVehiclesList']
 )->setName('memberVehiclesList')->add($authenticate);
+
+$this->group('/public', function () {
+    $this->get(
+        '/public/vehicles',
+        [Controller::class, 'publicVehiclesList']
+    )->setName('publicVehiclesList');
+})->add($showPublicPages);
 
 $this->get(
     '/my-vehicles',
