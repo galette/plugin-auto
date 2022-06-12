@@ -209,13 +209,10 @@ class Model
             switch ($name) {
                 case 'brand':
                     return $this->brand->id;
-                    break;
                 case 'obrand':
                     return $this->brand;
-                    break;
                 default:
                     return $this->$name;
-                    break;
             }
         } else {
             Analog::log(
@@ -224,6 +221,27 @@ class Model
             );
             return false;
         }
+    }
+
+    /**
+     * Global isset method
+     * Required for twig to access properties via __get
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return boolean
+     */
+    public function __isset(string $name)
+    {
+        $knowns = [
+            'obrand'
+        ];
+
+        if (in_array($name, $knowns) || property_exists($this, $name)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

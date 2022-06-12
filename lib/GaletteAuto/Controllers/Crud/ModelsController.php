@@ -142,7 +142,7 @@ class ModelsController extends AbstractPluginController
         $this->session->filter_automodels = $mfilters;
 
         //assign pagination variables to the template and add pagination links
-        $mfilters->setViewPagination($this->router, $this->view->getSmarty());
+        $mfilters->setViewPagination($this->router, $this->view);
 
         $params = [
             'page_title'     => _T("Models list", "auto"),

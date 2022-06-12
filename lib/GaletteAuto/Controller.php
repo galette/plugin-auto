@@ -236,12 +236,12 @@ class Controller extends AbstractPluginController
         $this->session->vehicles_filters = $afilters;
 
         //assign pagination variables to the template and add pagination links
-        $afilters->setViewPagination($this->router, $this->view->getSmarty());
+        $afilters->setViewPagination($this->router, $this->view);
 
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']vehicles_list.tpl',
+            $this->getTemplate('vehicles_list'),
             $params
         );
         return $response;

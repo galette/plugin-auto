@@ -267,6 +267,19 @@ abstract class AbstractObject
     }
 
     /**
+     * Global isset method
+     * Required for twig to access properties via __get
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return boolean
+     */
+    public function __isset(string $name)
+    {
+        return property_exists($this, $name);
+    }
+
+    /**
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
