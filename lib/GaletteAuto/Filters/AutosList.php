@@ -56,7 +56,6 @@ use Galette\Core\Pagination;
 
 class AutosList extends Pagination
 {
-
     /**
      * Returns the field we want to default set order to
      *

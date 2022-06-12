@@ -64,7 +64,6 @@ class PluginGaletteAuto extends GalettePlugin
         $menus = [];
 
         if ($login->isLogged()) {
-
             if ($login->isAdmin() || $login->isStaff() || $login->isGroupManager()) {
                 $menus['plugin_auto'] = [
                     'title' => _T("Cars", "auto"),

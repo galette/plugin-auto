@@ -58,7 +58,6 @@ use GaletteAuto\Repository\Models;
  */
 class Controller extends AbstractPluginController
 {
-
     /**
      * @Inject("Plugin Galette Auto")
      * @var integer
