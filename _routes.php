@@ -273,7 +273,6 @@ $this->post(
                     break;
                 default:
                     throw new \RuntimeException('Unknown property ' . $property);
-                    break;
             }
 
             return $response
