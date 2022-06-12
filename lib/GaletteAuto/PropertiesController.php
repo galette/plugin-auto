@@ -253,7 +253,7 @@ class PropertiesController extends AbstractPluginController
         $this->saveFilters($obj, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setSmartyPagination($this->router, $this->view->getSmarty(), false);
+        $filters->setViewPagination($this->router, $this->view->getSmarty(), false);
 
         $params = [
             'page_title'    => $title,
