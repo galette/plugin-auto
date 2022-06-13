@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2021 The Galette Team
+ * Copyright © 2009-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -190,12 +190,8 @@ class Auto
         $this->color = new Color($this->zdb);
         $this->state = new State($this->zdb);
 
-        $deps = array(
-            'picture'   => false,
-            'groups'    => false,
-            'dues'      => false
-        );
-        $this->owner = new Adherent($this->zdb, null, $deps);
+        $this->owner = new Adherent($this->zdb);
+        $this->owner->disableAllDeps()->enableDep('parent');
         $this->transmission = new Transmission($this->zdb);
         $this->finition = new Finition($this->zdb);
         $this->picture = new Picture($this->plugins);
@@ -638,25 +634,19 @@ class Auto
      *
      * @return boolean
      */
-    public function __isset(string $name)
+    public function __isset(string $name): bool
     {
         $knowns = [
             self::PK,
             Adherent::PK,
             Color::PK,
-            State::PK,
-            'car_registration',
-            'first_registration_date',
-            'first_circulation_date',
-            'creation_date',
-            'picture'
+            State::PK
         ];
-
-        if (in_array($name, $knowns) || property_exists($this, $name)) {
+        if (in_array($name, $knowns)) {
             return true;
         }
 
-        return false;
+        return property_exists($this, $name);
     }
 
     /**
@@ -788,7 +778,7 @@ class Auto
         if (isset($post['del_photo'])) {
             if (!$this->picture->delete()) {
                 $this->errors[]
-                    = _T("An error occured while trying to delete car's photo");
+                    = _T("An error occurred while trying to delete car's photo");
             }
         }
 

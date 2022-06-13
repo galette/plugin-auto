@@ -48,7 +48,7 @@
                         {/if}
                         {$owner->sfullname}
                     </td>
-                    <td>{$entry.car_registration}</td>
+                    <td>{$entry.registration}</td>
                     <td>{$entry.color->value}</td>
                     <td>{$entry.state->value}</td>
                 </tr>
