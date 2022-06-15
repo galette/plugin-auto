@@ -559,7 +559,7 @@ class Controller extends AbstractPluginController
     {
         $post = $request->getParsedBody();
         $route = $this->router->pathFor('vehiclesList');
-        $ids = $this->session->filter_vehicles ?? $post['vehicles_sel'];
+        $ids = $this->session->filter_vehicles ?? $post['entries_sel'];
 
         $auto = new Auto($this->plugins, $this->zdb);
         $auto->load((int)$ids[0]);

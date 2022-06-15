@@ -111,8 +111,8 @@ $this->post(
     function ($request, $response) {
         $post = $request->getParsedBody();
 
-        if (isset($post['vehicle_sel'])) {
-            $this->session->filter_vehicles = $post['vehicle_sel'];
+        if (isset($post['entries_sel'])) {
+            $this->session->filter_vehicles = $post['entries_sel'];
 
             if (isset($post['delete'])) {
                 return $response

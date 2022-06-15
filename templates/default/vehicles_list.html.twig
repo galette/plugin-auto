@@ -1,171 +1,112 @@
-{% extends 'public_page.html.twig' %}
+{% extends 'elements/list.html.twig' %}
 {% import "macros.twig" as macros %}
 
-{% block content %}
-        <form action="{{ path_for("vehiclesFilter") }}" method="post" id="filtre">
-            <div class="infoline">
-                <div class="ui basic horizontal segments">
-                    <div class="ui basic fitted segment">
-                        <div class="ui label">{{ _Tn("%count vehicle", "%count vehicles", count_vehicles, 'auto')|replace({"%count": count_vehicles}) }}</div>
-                    </div>
-                    <div class="ui basic right aligned fitted segment">
-                        <div class="inline field">
-                            <label for="nbshow">{{ _T('Records per page:') }}</label>
-                            <select name="nbshow" id="nbshow" class="ui dropdown nochosen">
-                                {% for key, value in nbshow_options %}
-                                    <option value="{{ key }}"{% if key == numrows %} selected="selected"{% endif %}>{{ value }}</option>
-                                {% endfor %}
-                            </select>
-                            <noscript> <span><input type="submit" value="{{ _T('Change') }}" /></span></noscript>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% include "components/forms/csrf.html.twig" %}
-        </form>
-        <form action="" method="post" id="listform">
-        <table class="listing">
-            <thead>
-                <tr>
-                    <th class="actions_row"></th>
-                    <th>{{ _T("Name", "auto") }}</th>
-                    <th>{{ _T("Owner", "auto") }}</th>
-                    <th>{{ _T("Brand", "auto") }}</th>
-                    <th>{{ _T("Model", "auto") }}</th>
-                    <th class="actions_row">{{ _T("Actions") }}</th>
-                </tr>
-            </thead>
-            <tbody>
-{% for auto in autos %}
-    {% set brand = auto.model.obrand %}
-    {% set edit_link = path_for("vehicleEdit", {"action": "edit", "id": auto.id}) %}
-                <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-                    <td>
-                        <input type="checkbox" name="vehicle_sel[]" value="{{ auto.id }}"/>
-                    </td>
-                    <td><a href="{{ edit_link }}">{{ auto.name }}</a></td>
-                    <td><a href="{{ path_for("member", {"id": auto.owner.id}) }}">{{ auto.owner.sfullname }}</a></td>
-                    <td><a href="{{ edit_link }}">{{ brand.value }}</a></td>
-                    <td><a href="{{ edit_link }}">{{ auto.model.model }}</a></td>
-                    <td class="center nowrap">
-    {% if login.isAdmin() or login.isStaff() or auto.owner.id == login.id or login.isGroupManager() and preferences.pref_bool_groupsmanagers_edit_member %}
-        {% set actions = [
-            {
-                'label': _T("Edit %vehicle", "auto")|replace({"%vehicle": auto.name}),
-                'route': {
-                    'name': 'vehicleEdit',
-                    'args': {'action': 'edit', 'id': auto.id}
-                },
-                'icon': 'edit'
-            },
-            {
-                'label': _T("%vehiclename: remove from database", "auto")|replace({"%vehiclename": auto.name}),
-                'route': {
-                    'name': 'removeVehicle',
-                    'args': {'id': auto.id}
-                },
-                'icon': 'times red'
-            }
-        ] %}
+{% set nb = autos|length %}
 
-        {% for action in actions %}
-            {{ macros.drawListAction(action.label, action.route, action.icon) }}
-        {% endfor %}
-    {% endif %}
-                    </td>
-                </tr>
-{% else %}
-                <tr><td colspan="6" class="emptylist">{% if show_mine == 1 %}{{ _T("No car has been registered yet for your account.", "auto") }}{% else %}{{ _T("No car in the database", "auto") }}{% endif %}</td></tr>
-{% endfor %}
-            </tbody>
-        </table>
+{% set form = {
+    'route': {
+        'name': 'vehiclesList'
+    }
+} %}
 
-{% if autos|length > 0 %}
-        <div class="ui basic center aligned fitted segment">
-            <div class="ui inverted pagination menu">
-                <div class="header item">
-                    {{ _T('Pages:') }}
-                </div>
-                {{ pagination|raw }}
-            </div>
-        </div>
-{% endif %}
-            <ul class="selection_menu">
-{% if autos|length > 0 %}
-                <li>{{ _T("For the selection:") }}</li>
-                <li>
-                    <button type="submit" id="delete" name="delete">
-                        <i class="fas fa-trash" aria-hidden="true"></i>
-                        {{ _T("Delete") }}
-                    </button>
-                </li>
-{% endif %}
-                <li>{{ _T("Other:", "auto") }}</li>
-                <li>
-                    <a
-                        class="button"
-                        href="{{ path_for("vehicleEdit", {"action": "add"}) }}"
-                    >
-                        <i class="fas fa-plus-circle" aria-hidden="true"></i>
-                        {{ _T("Add new vehicle", "auto") }}
-                    </a>
-                </li>
-            </ul>
-{% if id_adh is defined %}
-            <input type="hidden" name="id_adh" value="{{ id_adh }}"/>
-{% endif %}
-            {% include "components/forms/csrf.html.twig" %}
-        </form>
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count vehicle", "%count vehicles", count_vehicles, 'auto')|replace({"%count": count_vehicles}),
+        'route': {
+            'name': 'vehiclesFilter',
+            'args': []
+        }
+    } %}
+    {{ parent() }}
 {% endblock %}
 
-{% block javascripts %}
-    {% if autos|length > 0 %}
-        <script type="text/javascript">
-            var _checkselection = function() {
-                var _checkeds = $('table.listing').find('input[type=checkbox]:checked').length;
-                if ( _checkeds == 0 ) {
-                    var _el = $('<div id="pleaseselect" title="{{ _T("No vehicle selected", "auto")|e('js') }}">{{ _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")|e('js') }}</div>');
-                    _el.appendTo('body').dialog({
-                        modal: true,
-                        buttons: {
-                            Ok: function() {
-                                $(this).dialog( "close" );
-                            }
+{% block infoline_actions %}
+    <a
+            class="button"
+            href="{{ path_for("vehicleEdit", {"action": "add"}) }}"
+    >
+        <i class="ui plus circle icon" aria-hidden="true"></i>
+        {{ _T("Add new vehicle", "auto") }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': ''},
+        {'label': _T("Name", "auto")},
+        {'label': _T("Owner", "auto")},
+        {'label': _T("Brand", "auto")},
+        {'label': _T("Model", "auto")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for auto in autos %}
+        {% set brand = auto.model.obrand %}
+        {% set edit_link = path_for("vehicleEdit", {"action": "edit", "id": auto.id}) %}
+
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+            <td>
+                <input type="checkbox" name="entries_sel[]" value="{{ auto.id }}"/>
+            </td>
+            <td><a href="{{ edit_link }}">{{ auto.name }}</a></td>
+            <td><a href="{{ path_for("member", {"id": auto.owner.id}) }}">{{ auto.owner.sfullname }}</a></td>
+            <td><a href="{{ edit_link }}">{{ brand.value }}</a></td>
+            <td><a href="{{ edit_link }}">{{ auto.model.model }}</a></td>
+            <td class="center nowrap">
+                {% if login.isAdmin() or login.isStaff() or auto.owner.id == login.id or login.isGroupManager() and preferences.pref_bool_groupsmanagers_edit_member %}
+                    {% set actions = [
+                        {
+                            'label': _T("Edit %vehicle", "auto")|replace({"%vehicle": auto.name}),
+                            'route': {
+                            'name': 'vehicleEdit',
+                            'args': {'action': 'edit', 'id': auto.id}
                         },
-                        close: function(event, ui){
-                            _el.remove();
+                            'icon': 'edit'
+                        },
+                        {
+                            'label': _T("%vehiclename: remove from database", "auto")|replace({"%vehiclename": auto.name}),
+                            'route': {
+                            'name': 'removeVehicle',
+                            'args': {'id': auto.id}
+                        },
+                            'icon': 'times red'
                         }
-                    });
-                    return false;
-                }
-                return true;
-            }
+                    ] %}
 
-            {% include "elements/js/removal.js.twig" %}
-            {% include "elements/js/removal.js.twig" with {selector: "#delete", deleteurl: path_for("removeVehicles"), extra_check: "if (!_checkselection()) { return false; }", extra_data: "delete: true, vehicles_sel: $('#listform input[type=\"checkbox\"]:checked').map(function(){ return $(this).val(); }).get()", method: "POST"} %}
-            var _is_checked = true;
-            var _bind_check = function() {
-                $('#checkall').click(function() {
-                    $('table.listing :checkbox[name="vehicles_sel[]"]').each(function(){
-                        this.checked = _is_checked;
-                    });
-                _is_checked = !_is_checked;
-                return false;
-            });
-            $('#checkinvert').click(function(){
-                $('table.listing :checkbox[name="vehicles_sel[]"]').each(function(){
-                    this.checked = !$(this).is(':checked');
-                });
-                return false;
-            });
-            }
-            {# Use of Javascript to draw specific elements that are not relevant is JS is inactive #}
-            $(function(){
-                var _checklinks = '<div class="checkboxes"><a href="#" class="checkall tooltip"><i class="fas fa-check-square"></i> {{ _T("(Un)Check all")|e('js') }}</a> | <a href="#" class="checkinvert tooltip"><i class="fas fa-exchange-alt"></i> {{ _T("Invert selection")|e('js') }}</a></div>';
-                $('.listing').before(_checklinks);
-                $('.listing').after(_checklinks);
-                _bind_check();
-            });
-        </script>
+                    {% for action in actions %}
+                        {{ macros.drawListAction(action.label, action.route, action.icon) }}
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{% if show_mine == 1 %}{{ _T("No car has been registered yet for your account.", "auto") }}{% else %}{{ _T("No car in the database", "auto") }}{% endif %}</td></tr>
+    {% endfor %}
+{% endblock %}
+
+{% block extra_form %}
+    {% if id_adh is defined %}
+        <input type="hidden" name="id_adh" value="{{ id_adh }}"/>
     {% endif %}
 {% endblock %}
+
+{% if login.isAdmin() or login.isStaff() %}
+    {% set batch = {
+        'route': {
+            'name': 'batch-vehicleslist'
+        },
+        'modal': {
+            'title': _T("No vehicle selected", "auto"),
+            'content': _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")
+        }
+    } %}
+    {%  set batch_actions = [
+        {
+            'name': 'delete',
+            'label': _T("Delete"),
+            'icon': 'times red'
+        }
+    ] %}
+{% endif %}
