@@ -69,14 +69,15 @@
                             'label': _T("%vehiclename: remove from database", "auto")|replace({"%vehiclename": auto.name}),
                             'route': {
                             'name': 'removeVehicle',
-                            'args': {'id': auto.id}
+                            'args': {'id': auto.id},
                         },
-                            'icon': 'times red'
+                            'icon': 'red trash',
+                            'extra_class': 'delete'
                         }
                     ] %}
 
                     {% for action in actions %}
-                        {{ macros.drawListAction(action.label, action.route, action.icon) }}
+                        {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
                     {% endfor %}
                 {% endif %}
             </td>
