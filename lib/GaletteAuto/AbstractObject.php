@@ -451,16 +451,14 @@ abstract class AbstractObject
         return str_replace(
             '%count',
             $this->getCount(),
-            $this->getLocalizedCount($this->getCount())
+            $this->getLocalizedCount()
         );
     }
 
     /**
      * Get localized count string for object list
      *
-     * @param integer $count Count
-     *
      * @return string
      */
-    abstract protected function getLocalizedCount(int $count): string;
+    abstract protected function getLocalizedCount(): string;
 }

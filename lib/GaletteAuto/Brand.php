@@ -132,11 +132,9 @@ class Brand extends AbstractObject
     /**
      * Get localized count string for object list
      *
-     * @param integer $count Count
-     *
      * @return string
      */
-    protected function getLocalizedCount(int $count): string
+    protected function getLocalizedCount(): string
     {
         return _Tn(
             '%count brand',
