@@ -155,7 +155,7 @@ class ModelsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']models_list.tpl',
+            $this->getTemplate('models_list'),
             $params
         );
         return $response;
