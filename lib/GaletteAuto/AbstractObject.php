@@ -407,6 +407,8 @@ abstract class AbstractObject
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->reset($countSelect::ORDER);
+            $countSelect->reset($countSelect::LIMIT);
+            $countSelect->reset($countSelect::OFFSET);
             $countSelect->columns(
                 array(
                     static::PK => new Expression('COUNT(' . static::PK . ')')
