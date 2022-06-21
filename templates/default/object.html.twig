@@ -1,0 +1,27 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+    {% set name = obj.name %}
+    {% set pk = obj.pk %}
+    {% set field = obj.field %}
+
+    <form action="" method="post" id="modifform">
+        <div class="bigtable">
+            <fieldset class="cssform">
+                <p>
+                    <label for="{{ field }}" class="bline">{{ obj.getFieldLabel() }}</label>
+                    <input type="text" name="{{ field }}" id="{{ field }}" value="{{ obj.value }}" maxlength="20" required autofocus/>
+                </p>
+            </fieldset>
+        </div>
+        <div class="button-container">
+            <button type="submit" id="btnsave" name="valid" class="action">
+                <i class="fas fa-save fa-fw"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="set" value="{{ set }}"/>
+            <input type="hidden" name="{{ mode }}" value="1"/>
+            <input type="hidden" name="{{ pk }}" value="{{ obj.id }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+    </form>
+{% endblock %}

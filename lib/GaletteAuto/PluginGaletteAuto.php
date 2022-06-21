@@ -175,15 +175,14 @@ class PluginGaletteAuto extends GalettePlugin
         }
 
         return [
-            /*[
-                'label' => _T("My localization", "maps"),
-                'title' => _T("My localization", "maps"),
+            [
+                'label' => _T("My cars", "auto"),
+                'title' => _T("My cars", "auto"),
                 'route' => [
-                    'name' => 'maps_localize_member',
-                    'args' => ["id" => $login->id]
+                    'name' => 'myVehiclesList'
                 ],
-                'icon' => 'map marked alternate'
-            ]*/
+                'icon' => 'truck pickup'
+            ]
         ];
     }
 
@@ -197,26 +196,22 @@ class PluginGaletteAuto extends GalettePlugin
     public static function getListActionsContents(Adherent $member): array
     {
         return [
-            /*[
-                'label' => _T("Geolocalize", "maps"),
-                'title' => str_replace(
-                    '%membername',
-                    $member->sname,
-                    _T("Geolocalize %membername", "maps")
-                ),
+            [
+                'label' => _T("Member cars", "auto"),
+                'title' => _T("Member cars", "auto"),
                 'route' => [
-                    'name' => 'maps_localize_member',
+                    'name' => 'memberVehiclesList',
                     'args' => ['id' => $member->id]
                 ],
-                'icon' => 'map marker alternate grey'
-            ],*/
+                'icon' => 'truck pickup grey'
+            ],
         ];
     }
 
     /**
      * Get detailed actions contents
      *
-     * @param Adherent $member Memebr instance
+     * @param Adherent $member Member instance
      *
      * @return array|array[]
      */

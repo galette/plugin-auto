@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2020 The Galette Team
+ * Copyright © 2020-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020 The Galette Team
+ * @copyright 2020-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2020-12-09
@@ -51,7 +51,7 @@ use Slim\Http\Response;
  * @name      ModelsController
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020 The Galette Team
+ * @copyright 2020-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2020-12-09
@@ -250,7 +250,7 @@ class ModelsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']model.tpl',
+            $this->getTemplate('model'),
             $params
         );
         return $response;

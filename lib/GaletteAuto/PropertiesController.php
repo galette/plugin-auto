@@ -376,7 +376,7 @@ class PropertiesController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']object.tpl',
+            $this->getTemplate('object'),
             $params
         );
         return $response;
@@ -515,7 +515,7 @@ class PropertiesController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']object_show.tpl',
+            $this->getTemplate('object_show'),
             $params
         );
         return $response;
