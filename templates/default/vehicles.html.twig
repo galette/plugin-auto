@@ -201,10 +201,8 @@
 {% block javascripts %}
         <script type="text/javascript">
             var _models;
-            {include file="js_chosen_adh.tpl" js_chosen_id="#owner"}
+            {% include "elements/js/choose_adh.js.twig" with {"js_chosen_id": "#owner"} %}
             $(function() {
-                _collapsibleFieldsets();
-
                 $('#first_circulation_date').datepicker({
                     changeMonth: true,
                     changeYear: true,
@@ -298,7 +296,7 @@
                 });
 
                 var _history_dialog = function(res){
-                    var _el = $('<div id="history_list" title="{{ _T("Car's history", "auto") }}"> </div>');
+                    var _el = $('<div id="history_list" title="{{ _T("Car's history", "auto")|e('js') }}"> </div>');
                     _el.appendTo('#modifform').dialog({
                         modal: true,
                         hide: 'fold',
