@@ -148,16 +148,7 @@ class PluginGaletteAuto extends GalettePlugin
      */
     public static function getPublicMenusItemsList(): array
     {
-        return [
-            /*[
-                'label' => _T("Maps", "maps"),
-                'title' => _T("Maps", "maps"),
-                'route' => [
-                    'name' => 'maps_map'
-                ],
-                'icon' => 'map'
-            ]*/
-        ];
+        return [];
     }
 
     /**
