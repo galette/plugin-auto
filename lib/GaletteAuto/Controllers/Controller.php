@@ -330,7 +330,7 @@ class Controller extends AbstractPluginController
         // members
         $members = [];
         $m = new \Galette\Repository\Members();
-        $members = $m->getSelectizedMembers($this->zdb, $this->login);
+        $members = $m->getDropdownMembers($this->zdb, $this->login);
 
         $params['members'] = [
             'filters'   => $m->getFilters(),
