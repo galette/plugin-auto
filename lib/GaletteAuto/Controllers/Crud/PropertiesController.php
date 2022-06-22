@@ -42,6 +42,7 @@ use GaletteAuto\Body;
 use GaletteAuto\Brand;
 use GaletteAuto\Color;
 use GaletteAuto\Finition;
+use GaletteAuto\Model;
 use GaletteAuto\State;
 use GaletteAuto\Transmission;
 use Slim\Http\Request;

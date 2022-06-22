@@ -39,6 +39,7 @@ namespace GaletteAuto\Controllers;
 use GaletteAuto\Auto;
 use GaletteAuto\Autos;
 use GaletteAuto\History;
+use GaletteAuto\Picture;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Galette\Controllers\AbstractPluginController;
