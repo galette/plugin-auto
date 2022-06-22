@@ -1,0 +1,317 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+        {% if mode == 'new' %}
+            {% set action = "add" %}
+        {% else %}
+            {% set action = "edit" %}
+        {% endif %}
+        <form action="{{ path_for("doVehicleEdit", {"action": action}) }}" method="post" id="modifform" enctype="multipart/form-data">
+        <div class="bigtable">
+            <fieldset class="cssform">
+                <legend class="ui-state-active ui-corner-top">{{ _T("Car's base informations", "auto") }}</legend>
+                <div>
+                <p>
+                    <label for="name" class="bline">{{ _T("Name:", "auto") }}</label>
+                    <input type="text" name="name" id="name" value="{{ car.name }}" maxlength="20"{% if required.name is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <span class="bline">
+                        <label for="brand">{{ _T("Brand", "auto") }}</label>/<label for="model">{{ _T("Model:", "auto") }}</label>
+                    </span>
+                    <select name="brand" id="brand"{% if required.brand is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a brand", "auto") }}</option>
+    {% for brand in brands %}
+                        <option value="{{ brand.id_brand }}"{% if brand.id_brand == car.model.brand %} selected="selected"{% endif %}>{{ brand.brand }}</option>
+    {% endfor %}
+                    </select>
+                    <select name="model" id="model" class="nochosen"{% if required.model is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a model", "auto") }}</option>
+    {% for model in models %}
+                        <option value="{{ model.id }}"{% if model.id == car.model.id %} selected="selected"{% endif %}>{{ model.model }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="first_registration_date" class="bline">{{ _T("First registration date:", "auto") }}</label>
+                    <input type="text" name="first_registration_date" id="first_registration_date" value="{{ car.first_registration_date }}" maxlength="20"{% if required.first_registration_date is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="first_circulation_date" class="bline">{{ _T("First circulation date:", "auto") }}</label>
+                    <input type="text" name="first_circulation_date" id="first_circulation_date" value="{{ car.first_circulation_date }}" maxlength="20"{% if required.first_circulation_date is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="mileage" class="bline">{{ _T("Mileage:", "auto") }}</label>
+                    <input type="number" name="mileage" id="mileage" value="{{ car.mileage }}" maxlength="20"{% if required.mileage is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="seats" class="bline">{{ _T("Seats:", "auto") }}</label>
+                    <input type="text" name="seats" id="seats" value="{{ car.seats }}"{% if required.seats is defined %} required="required"{% endif %}/>
+                </p>
+                </div>
+            </fieldset>
+
+            <fieldset class="galette_form">
+                <legend class="ui-state-active ui-corner-top">{{ _T("Car's photo", "auto") }}</legend>
+                <p>
+                    <span class="bline vtop">{{ _T("Picture:", "auto") }}</span>
+                    <img src="{% if car.id %}{{ path_for("vehiclePhoto", {"id": car.id}) }}{% else %}{{ path_for("vehiclePhoto") }}{% endif %}" class="picture" width="{{ car.picture.getOptimalWidth() }}" height="{{ car.picture.getOptimalHeight() }}" alt="{{ _T("Car's photo", "auto") }}"/><br/>
+{% if car.hasPicture() %}
+                    <span class="labelalign"><label for="del_photo">{{ _T("Delete image", "auto") }}</label></span><input type="checkbox" name="del_photo" id="del_photo" value="1"/><br/>
+{% endif %}
+                    <input class="labelalign" type="file" name="photo"/>
+                </p>
+            </fieldset>
+
+            <fieldset class="cssform">
+                <legend class="ui-state-active ui-corner-top">{{ _T("Current car's state informations", "auto") }}</legend>
+                <div>
+{% if car.id %}
+                    <p>
+                        <span class="bline">{{ _T("Current owner:", "auto") }}</span>
+                        <span>
+                            {{ car.owner.sfullname }}
+    {% if login.isAdmin() or login.isStaff() %}
+                            {# Does car's history should be visible by the actual owner? #}
+                            <a href="{{ path_for("vehicleHistory", {"id": car.id}) }}" title="{{ _T("Show full car state history", "auto") }}" id="state_history">
+                                <i class="ui history icon"></i>
+                                <span class="sr-only">{{ _T("Car state history", "auto") }}</span>
+                            </a>
+                            <input type="checkbox" name="change_owner" id="change_owner" title="{{ _T("Change car's owner", "auto") }}" value="1"/>
+                            <label for="change_owner" title="{{ _T("Change car's owner", "auto") }}">{{ _T("Change owner", "auto") }}</label>
+    {% endif %}
+                        </span>
+                    </p>
+{% endif %}
+                    <p id="owners_list"{% if car.id %} class="hidden"{% endif %}>
+{% if not car.id %}
+                        <input type="hidden" name="change_owner" id="change_owner" value="1"/>
+{% endif %}
+                        <label class="bline" for="owner">{{ _T("Owner:", "auto") }}</label>
+{% if login.isAdmin() or login.isStaff() %}
+                        <select name="owner" id="owner" class="nochosen"{% if not car.id %} required="required"{% endif %}>
+                            <option value="">{{ _T("Search for name or ID and pick member") }}</option>
+                            {% for k, v in members.list %}
+                                <option value="{{ k }}"{% if car.owner.id == k %} selected="selected"{% endif %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+{% else %}
+                        <input type="hidden" name="owner" value="{{ car.owner.id }}"/>
+                        {{ members.list[car.owner.id] }}
+{% endif %}
+                    </p>
+                <p>
+                    <label for="color" class="bline">{{ _T("Color:", "auto") }}</label>
+                    <select name="color" id="color"{% if required.color is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a color", "auto") }}</option>
+    {% for color in colors %}
+                        <option value="{{ color.id_color }}"{% if color.id_color == car.color.id %} selected="selected"{% endif %}>{{ color.color }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="state" class="bline">{{ _T("State:", "auto") }}</label>
+                    <select name="state" id="state"{% if required.state is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a state", "auto") }}</option>
+    {% for state in states %}
+                        <option value="{{ state.id_state }}"{% if state.id_state == car.state.id %} selected="selected"{% endif %}>{{ state.state }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="registration" class="bline">{{ _T("Registration:", "auto") }}</label>
+                    <input type="text" name="registration" id="registration" value="{{ car.registration }}"{% if required.registration is defined %} required="required"{% endif %}/>
+                </p>
+                </div>
+            </fieldset>
+            <fieldset class="cssform">
+                <legend class="ui-state-active ui-corner-top">{{ _T("Car's technical informations", "auto") }}</legend>
+                <div>
+                <p>
+                    <label class="bline" for="body">{{ _T("Body:", "auto") }}</label>
+                    <select name="body" id="body"{% if required.body is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a body", "auto") }}</option>
+    {% for body in bodies %}
+                        <option value="{{ body.id_body }}"{% if body.id_body == car.body.id %} selected="selected"{% endif %}>{{ body.body }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label class="bline" for="transmission">{{ _T("Transmission:", "auto") }}</label>
+                    <select name="transmission" id="transmission"{% if required.transmission is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a transmission", "auto") }}</option>
+    {% for transmission in transmissions %}
+                        <option value="{{ transmission.id_transmission }}"{% if transmission.id_transmission == car.transmission.id %} selected="selected"{% endif %}>{{ transmission.transmission }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label class="bline" for="finition">{{ _T("Finition:", "auto") }}</label>
+                    <select name="finition" id="finition"{% if required.finition is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a finition", "auto") }}</option>
+    {% for finition in finitions %}
+                        <option value="{{ finition.id_finition }}"{% if finition.id_finition == car.finition.id %} selected="selected"{% endif %}>{{ finition.finition }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    <label for="chassis_number" class="bline">{{ _T("Chassis number:", "auto") }}</label>
+                    <input type="text" name="chassis_number" id="chassis_number" value="{{ car.chassis_number }}"{% if required.chassis_number is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="horsepower" class="bline">{{ _T("Horsepower:", "auto") }}</label>
+                    <input type="text" name="horsepower" id="horsepower" value="{{ car.horsepower }}"{% if required.horsepower is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="engine_size" class="bline">{{ _T("Engine size:", "auto") }}</label>
+                    <input type="text" name="engine_size" id="engine_size" value="{{ car.engine_size }}"{% if required.engine_size is defined %} required="required"{% endif %}/>
+                </p>
+                <p>
+                    <label for="fuel" class="bline">{{ _T("Fuel:", "auto") }}</label>
+                    <select name="fuel" id="fuel"{% if required.fuel is defined %} required="required"{% endif %}>
+                        <option value="-1">{{ _T("Choose a fuel", "auto") }}</option>
+    {% for k, fuel in fuels %}
+                        <option value="{{ k }}"{% if k == car.fuel %} selected="selected"{% endif %}>{{ fuel }}</option>
+    {% endfor %}
+                    </select>
+                </p>
+                </div>
+            </fieldset>
+            <fieldset class="galette_form">
+                <legend class="ui-state-active ui-corner-top">{{ _T("Comment", "auto") }}</legend>
+                <div>
+                <p>
+                    <label for="comment" class="bline vtop">{{ _T("Comment:", "auto") }}</label>
+                    <textarea name="comment" id="comment" cols="80" rows="3"{% if required.comment is defined %} required="required"{% endif %}>{{ car.comment }}</textarea>
+                </p>
+                </div>
+            </fieldset>
+        </div>
+        <div class="button-container">
+            <button type="submit" id="btnsave" name="valid" class="action">
+                <i class="fas fa-save fa-fw"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="{{ mode }}" value="1"/>
+            <input type="hidden" name="id_car" value="{{ car.id }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+        </form>
+{% endblock %}
+
+{% block javascripts %}
+        <script type="text/javascript">
+            var _models;
+            {include file="js_chosen_adh.tpl" js_chosen_id="#owner"}
+            $(function() {
+                _collapsibleFieldsets();
+
+                $('#first_circulation_date').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'button',
+                    buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{{ _T("Select a date")|e('js') }}</span>',
+                    maxDate: '-0d',
+                    yearRange: 'c-100:c+0'
+                });
+                $('#first_registration_date').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showOn: 'button',
+                    buttonText: '<i class="far fa-calendar-alt"></i> <span class="sr-only">{{ _T("Select a date")|e('js') }}</span>',
+                    maxDate: '-0d',
+                    yearRange: 'c-100:c+0'
+                });
+
+                var _modelChoose = $('#model :first');
+                _models = $('#model').selectize({
+                    maxItems:       1,
+                    render: {
+                        option: function(item, escape) {
+                            return '<div class="option">' + escape(item.text) + '</div>';
+                        }
+                    }
+                });
+    {% if js_init_models %}
+                {# If javascript is active, we do not want complete models list when page loads #}
+                {# Empty model list #}
+                _models[0].selectize.clear();
+                _models[0].selectize.clearOptions();
+                {# Set the first option #}
+                _models[0].selectize.settings.placeholder = _modelChoose.text();
+                _models[0].selectize.updatePlaceholder();
+    {% endif %}
+                {# Refresh models list when brand is changed #}
+                $('#brand').on('change', function(){
+                    var id_brand = $('#brand option:selected').attr('value');
+                    {# Empty model list #}
+                    _models[0].selectize.clear();
+                    _models[0].selectize.clearOptions();
+                    {# Set the first option #}
+                    _models[0].selectize.settings.placeholder = _modelChoose.text();
+                    _models[0].selectize.updatePlaceholder();
+                    {# Get the new list for selected brand, and appent it to models on the page #}
+                    $.post(
+                        '{path_for name="ajaxModels"}',
+                        { brand: id_brand },
+                        function(data){
+                            $(data).each(function(i){
+                                var _data = data[i];
+                                _models[0].selectize.addOption({
+                                    value: _data.id_model,
+                                    text: _data.model
+                                });
+                            });
+                        },
+                        'json'
+                    );
+                });
+    {% if login.isAdmin() or login.isStaff() %}
+                {# Popup for owner change #}
+                $('#change_owner').change(function(e){
+                    e.preventDefault();
+                    $('#owners_list').toggleClass('hidden');
+                    $('#owners_list').backgroundFade(
+                        {
+                            sColor:'#ffffff',
+                            eColor:'#DDDDFF',
+                            steps:10
+                        },
+                        function() {
+                            $(this).backgroundFade(
+                                {
+                                    sColor:'#DDDDFF',
+                                    eColor:'#ffffff'
+                                }
+                            );
+                        });
+                });
+
+        {% if mode != 'new' %}
+                $('#state_history').click(function(){
+                    $.ajax({
+                        url: this.href,
+                        success: function(res){
+                            _history_dialog(res);
+                        }
+                    });
+                    return false;
+                });
+
+                var _history_dialog = function(res){
+                    var _el = $('<div id="history_list" title="{{ _T("Car's history", "auto") }}"> </div>');
+                    _el.appendTo('#modifform').dialog({
+                        modal: true,
+                        hide: 'fold',
+                        width: '60%',
+                        height: 400,
+                        close: function(event, ui){
+                            _el.remove();
+                        }
+                    });
+                    $('#history_list').append( res );
+                }
+        {% endif %}
+    {% endif %}
+            });
+        </script>
+{% endblock %}

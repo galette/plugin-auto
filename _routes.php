@@ -35,10 +35,8 @@
  * @since     0.9dev 2016-03-02
  */
 
-use Analog\Analog;
-use GaletteAuto\Auto;
-use GaletteAuto\Controller;
-use GaletteAuto\PropertiesController;
+use GaletteAuto\Controllers\Controller;
+use GaletteAuto\Controllers\Crud\PropertiesController;
 use GaletteAuto\Controllers\Crud\ModelsController;
 
 //Constants and classes from plugin

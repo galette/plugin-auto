@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2022 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,14 +28,17 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
  */
 
-namespace GaletteAuto;
+namespace GaletteAuto\Controllers;
 
+use GaletteAuto\Auto;
+use GaletteAuto\Autos;
+use GaletteAuto\History;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Galette\Controllers\AbstractPluginController;
@@ -51,7 +54,7 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -348,7 +351,7 @@ class Controller extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']vehicles.tpl',
+            $this->getTemplate('vehicles'),
             $params
         );
         return $response;
@@ -467,7 +470,7 @@ class Controller extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']history.tpl',
+            $this->getTemplate('history'),
             $params
         );
         return $response;
@@ -506,14 +509,14 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
+     * @param integer  $id       Vehicle ID
      *
      * @return Response
      */
-    public function removeVehicle(Request $request, Response $response, $args = [])
+    public function removeVehicle(Request $request, Response $response, int $id)
     {
         $auto = new Auto($this->plugins, $this->zdb);
-        $auto->load((int)$args['id']);
+        $auto->load($id);
         $id_adh = $auto->owner->id;
         $this->checkAclsFor($response, $id_adh);
 
@@ -523,7 +526,7 @@ class Controller extends AbstractPluginController
         }
 
         $data = [
-            'id'            => $args['id'],
+            'id'            => $id,
             'redirect_uri'  => $route
         ];
 

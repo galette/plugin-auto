@@ -1,0 +1,50 @@
+{% extends (mode == 'ajax') ? "ajax.html.twig" : "page.html.twig" %}
+
+{% block content %}
+        <table id="listing">
+            <thead>
+                <tr>
+                    <th class="listing left">
+                        {{ _T("Date") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Owner", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Registration", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Color", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("State", "auto") }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+{% for entry in entries %}
+    {% set owner = entry.owner %}
+                <tr>
+                    <td>{{ entry.formatted_date }}</td>
+                    <td>
+                        {% if owner.isCompany() %}
+                            <i class="ui building outline icon tooltip"><span class="sr-only">{{ _T('Is a company') }}</span></i>
+                        {%  elseif owner.isMan() %}
+                            <i class="ui male icon tooltip"><span class="sr-only">{{ _T('Is a man') }}</span></i>
+                        {%  elseif owner.isWoman() %}
+                            <i class="ui female icon tooltip"><span class="sr-only">{{ _T('Is a woman') }}</span></i>
+                        {% else %}
+                            <i class="ui icon"></i>
+                        {% endif %}
+                        {{ owner.sfullname }}
+                    </td>
+                    <td>{{ entry.car_registration }}</td>
+                    <td>{{ entry.color.value }}</td>
+                    <td>{{ entry.state.value}}</td>
+                </tr>
+{% else %}
+                <tr><td colspan="5" class="emptylist">{{ _T("no history entries", "auto") }}</td></tr>
+{% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
