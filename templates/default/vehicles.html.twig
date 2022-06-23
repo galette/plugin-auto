@@ -293,10 +293,11 @@
                                 brand: id_brand
                             },
                             function(data){
-                                var _models = [];
+                                var _models = new Array();
+                                _models.push({value: '-1', name: "{{ _T("Choose a model", "auto")|e('js') }}"});
                                 $(data).each(function(i){
                                     var _data = data[i];
-                                    _models[_data.id_model] = _data.model;
+                                    _models.push({name: _data.model, value: _data.id_model});
                                 });
                                 $('#model').dropdown('change values', _models);
                                 $('#model').dropdown('set selected', -1);
