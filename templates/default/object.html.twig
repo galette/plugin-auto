@@ -5,18 +5,27 @@
     {% set pk = obj.pk %}
     {% set field = obj.field %}
 
-    <form action="" method="post" id="modifform">
-        <div class="bigtable">
-            <fieldset class="cssform">
-                <p>
-                    <label for="{{ field }}" class="bline">{{ obj.getFieldLabel() }}</label>
-                    <input type="text" name="{{ field }}" id="{{ field }}" value="{{ obj.value }}" maxlength="20" required autofocus/>
-                </p>
-            </fieldset>
+    <form class="ui form" action="" method="post" id="modifform">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ page_title }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: field,
+                    name: field,
+                    value: obj.value,
+                    label: obj.getFieldLabel(),
+                    required: true,
+                    autofocus: true
+                } %}
+            </div>
         </div>
-        <div class="button-container">
-            <button type="submit" id="btnsave" name="valid" class="action">
-                <i class="fas fa-save fa-fw"></i> {{ _T("Save") }}
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
             </button>
             <input type="hidden" name="set" value="{{ set }}"/>
             <input type="hidden" name="{{ mode }}" value="1"/>

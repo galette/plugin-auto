@@ -1,37 +1,50 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-    <form action="{% if mode == "new" %}{{ path_for("doModelAdd") }}{% else %}{{ path_for("doModelEdit", {"id": model.id}) }}{% endif %}" method="post" id="modifform">
-        <div class="bigtable">
-            <fieldset class="cssform">
-                <p>
-                    <label for="model" class="bline">{{ _T("Model", "auto") }}</label>
-                    <input type="text" name="model" id="model" value="{{ model.model }}" maxlength="20" required/>
-                </p>
-                <p>
-    {% if brands|length > 0 %}
-                    <label for="brand" class="bline">{{ _T("Brand", "auto") }}</label>
-                    <select name="brand" id="brand" required>
-                        <option value="-1">{{ _T("Select one brand", "auto") }}</option>
-        {% for brand in brands %}
-                        <option value="{{ brand.id_brand }}"{%if brand.id_brand == model.brand %} selected="selected"{% endif %}>{{ brand.brand }}</option>
-        {% endfor %}
-                    </select>
-    {% else %}
+    <form class="ui form" action="{% if mode == "new" %}{{ path_for("doModelAdd") }}{% else %}{{ path_for("doModelEdit", {"id": model.id}) }}{% endif %}" method="post" id="modifform">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ page_title }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'model',
+                    value: model.model,
+                    label: _T("Model", "auto"),
+                    required: true,
+                    autofocus: true
+                } %}
+
+                {% set brand_list_values = {(-1): _T("Choose a brand", "auto")} %}
+                {% for brand in brands %}
+                    {% set brand_list_values = brand_list_values + {(brand.id_brand): brand.brand} %}
+                {% endfor %}
+
+                {% if brands|length > 0 %}
+                    {% include "components/forms/select.html.twig" with {
+                        id: 'brand',
+                        value: model.brand,
+                        values: brand_list_values,
+                        label: _T("Brand", "auto"),
+                        required: true
+                    } %}
+                {% else %}
                     {{ _T("No brand is registered yet. You have to create at least one brand to register models.", "auto") }}.<br/>
                     <a href="{{ path_for("propertyEdit", {"property": "brand", "action": "add"}) }}">{{ _T("Add a brand", "auto") }}</a>
-    {% endif %}
-                </p>
-            </fieldset>
+                {% endif %}
+
+            </div>
         </div>
-        <div class="button-container">
-            <button type="submit" id="btnsave" name="valid" class="action">
-                <i class="fas fa-save fa-fw"></i> {{ _T("Save") }}
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
             </button>
             <input type="hidden" name="{{ mode }}" value="1"/>
-    {% if mode != "new" %}
-            <input type="hidden" name="{{ constant('GaletteAuto\\Model::PK') }}" value="{{ model.id }}"/>
-    {% endif %}
+            {% if mode != "new" %}
+                <input type="hidden" name="{{ constant('GaletteAuto\\Model::PK') }}" value="{{ model.id }}"/>
+            {% endif %}
             {% include "components/forms/csrf.html.twig" %}
         </div>
     </form>

@@ -4,19 +4,37 @@
     {% set name = obj.name %}
     {% set pk = obj.pk %}
     {% set field = obj.field %}
-        <div class="bigtable">
-    {% if name == 'brands' %}
-        {% if models|length > 0 %}
-            <p>{{ _T("Registered models for the brand '%s':", "auto")|replace({'%s': obj.value}) }}</p>
-            <ul>
+
+    <div class="ui basic fitted segment">
+        <a class="button" href="{{ path_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
+            <i class="ui plus circle icon" aria-hidden="true"></i>
+            {{ _T("Add new brand", "auto") }}
+        </a>
+    </div>
+
+    <div class="ui segment">
+    {% if models|length > 0 %}
+        <h2 class="ui header">
+            <div class="content">
+                {{ _T("Registered models for the brand '%s':", "auto")|replace({'%s': obj.value}) }}
+            </div>
+        </h2>
+        <div class="ui relaxed divided list">
             {% for model in models %}
-                <li><a href="{{ path_for("modelEdit", {"action": "edit", "id": model.id}) }}">{{ model.model }}</a></li>
+                <div class="item">
+                    <div class="content">
+                        <div class="header">
+                            <a href="{{ path_for("modelEdit", {"action": "edit", "id": model.id}) }}">{{ model.model }}</a>
+                        </div>
+                    </div>
+                </div>
+                <li></li>
             {% endfor %}
-            </ul>
-        {% else %}
-            <p>{{_T("The brand '%s' does not have any registered model at this time.", "auto")|replace({'%s': obj.value}) }}</p>
-        {% endif %}
-            <p><a href="{{ path_for("modelAdd" )}}?brand={{ obj.id }}">{{_T("Create a new model for brand '%s'", "auto")|replace({'%s': obj.value}) }}</a></p>
-    {% endif %}
         </div>
+    {% else %}
+        <div class="ui info message">
+            <p>{{_T("The brand '%s' does not have any registered model at this time.", "auto")|replace({'%s': obj.value}) }}</p>
+        </div>
+    {% endif %}
+    </div>
 {% endblock %}

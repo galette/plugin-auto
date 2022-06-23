@@ -99,14 +99,14 @@ class Color extends AbstractObject
     /**
     * Global getter method
     *
-    * @param string $name name of the property we want to retrive
+    * @param string $name name of the property we want to retrieve
     *
     * @return false|object the called property
     */
     public function __get($name)
     {
         if ($name == self::FIELD) {
-            return parent::__get('field');
+            return parent::__get('value');
         } else {
             return parent::__get($name);
         }

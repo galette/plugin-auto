@@ -502,7 +502,7 @@ class PropertiesController extends AbstractPluginController
         $title = str_replace(
             '%s',
             $object->{$object::FIELD},
-            _T("Show '%s'", "auto")
+            _T("Show '%s' brand", "auto")
         );
 
         $params = [
