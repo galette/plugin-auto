@@ -14,12 +14,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
-"Report-Msgid-Bugs-To: translations@galette.eu\n"
-"POT-Creation-Date: 2021-11-23 23:20+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-03 22:39+0200\n"
 "PO-Revision-Date: 2021-11-23 22:30+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/"
-"auto-plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
+"plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,21 +27,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.10-dev\n"
 
-#: ../_routes.php:125
+#: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
 "Aucun véhicule n'a été sélectionné, veuillez en sélectionner au moins un."
 
-#: ../_routes.php:251
+#: ../_routes.php:249
 msgid "No entry was selected, please check at least one."
 msgstr ""
 "Aucune entrée n'a été sélectionnée, veuillez en sélectionner au moins une."
 
-#: ../lib/GaletteAuto/State.php:86
+#: ../lib/GaletteAuto/State.php:86 ../tempcache/vehicles.html.twig:379
+#: ../tempcache/history.html.twig:79
 msgid "State"
 msgstr "État"
 
-#: ../lib/GaletteAuto/State.php:125
+#: ../lib/GaletteAuto/State.php:123
 #, php-format
 msgid "%count state"
 msgid_plural "%count states"
@@ -49,6 +50,8 @@ msgstr[0] "%count statut"
 msgstr[1] "%count statuts"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:148
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:110
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:111
 msgid "Models list"
 msgstr "Liste des modèles"
 
@@ -89,31 +92,243 @@ msgstr[1] "Suppression de %1$s modèles"
 msgid "Remove model \"%1$s\""
 msgstr "Supprimer le modèle «%1$s»"
 
-#: ../lib/GaletteAuto/Model.php:241
-msgid "- You must select a brand!"
-msgstr "- Vous devez sélectionner une marque&nbsp;!"
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:211
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:80
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:81
+msgid "Colors list"
+msgstr "Liste des couleurs"
 
-#: ../lib/GaletteAuto/Model.php:247
-#: ../lib/GaletteAuto/PropertiesController.php:423
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:212
+msgid "Add new color"
+msgstr "Ajouter une nouvelle couleur"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:216
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:85
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:86
+msgid "States list"
+msgstr "Liste des états"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:217
+msgid "Add new state"
+msgstr "Ajouter un nouvel état"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:221
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:90
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:91
+msgid "Finitions list"
+msgstr "Liste des finitions"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:222
+msgid "Add new finition"
+msgstr "Ajouter une finition"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:226
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:95
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:96
+msgid "Bodies list"
+msgstr "Liste des carrosseries"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:227
+msgid "Add new body"
+msgstr "Ajouter une nouvelle carrosserie"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:231
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:100
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:101
+msgid "Transmissions list"
+msgstr "Liste des transmissions"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:232
+msgid "Add new transmission"
+msgstr "Ajouter une transmission"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:236
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:105
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:106
+msgid "Brands list"
+msgstr "Liste des marques"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:237
+#, php-format
+msgid "Brand '%s'"
+msgstr "Marque « %s »"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:238
+#: ../tempcache/object_show.html.twig:68
+msgid "Add new brand"
+msgstr "Ajouter une nouvelle marque"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:343
+msgid "%property ID cannot ben null calling edit route!"
+msgstr ""
+"L'identifiant %property ne peut être vide lors de l'appel à la route de "
+"modification !"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:361
+msgid "New"
+msgstr "Nouveau"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:367
+#, php-format
+msgid "Change '%s'"
+msgstr "Modifier « %s »"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:425
+msgid "- No id provided for modifying this record! (internal)"
+msgstr ""
+"- Pas d'identifiant fourni pour modifier cet enregistrement ! (interne)"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:431
+#: ../lib/GaletteAuto/Model.php:265
 msgid "- You must provide a value!"
 msgstr "- Vous devez fournir une valeur&nbsp;!"
 
-#: ../lib/GaletteAuto/Color.php:86
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:440
+msgid "- An error occured while saving record. Please try again."
+msgstr ""
+"- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
+"nouveau."
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:445
+msgid "New %property has been added!"
+msgstr "La %property a été enregistrée !"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:446
+msgid "%property has been saved!"
+msgstr "%property a été enregistrée !"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
+#, fuzzy, php-format
+#| msgid "Show '%s'"
+msgid "Show '%s' brand"
+msgstr "Afficher « %s »"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:564
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:610
+#, php-format
+msgid "Remove %1$s %2$s"
+msgstr "Supprimer %1$s %2$s"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:617
+msgid "You are about to remove %count %property."
+msgstr "Vous êtes sur le point de supprimer %count %property."
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:670
+msgid "An error occured trying to remove %property :/"
+msgstr "Une erreur est survenue lors de la suppression de %property :/"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:681
+msgid "%count %property have been successfully deleted."
+msgstr "%count %property ont été supprimées avec succès."
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:107
+msgid "You do not have enough privileges."
+msgstr "Vous n'avez pas assez de privilèges."
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:218
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:121
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:122
+msgid "Cars list"
+msgstr "Liste des voitures"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:220
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:132
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:133
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:170
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:171
+msgid "My cars"
+msgstr "Mes véhicules"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:222
+msgid "Member's cars"
+msgstr "Véhicules de l'adhérent"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:227
+msgid "Vehicles list"
+msgstr "Liste des véhicules"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:270
+msgid "Car ID cannot be null calling edit route!"
+msgstr ""
+"L'identifiant du véhicule ne peut être vide lors de l'appel à la route de "
+"modification !"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:300
+msgid "New vehicle"
+msgstr "Ajouter un nouveau véhicule"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:301
+#, php-format
+msgid "Change vehicle '%s'"
+msgstr "Modifier le véhicule « %s »"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:402
+msgid "- An error has occured while saving vehicle in the database."
+msgstr ""
+"- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:404
+msgid "Vehicle has been saved!"
+msgstr "Le véhicule a été enregistré !"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:467
+#, php-format
+msgid "History of car #%d"
+msgstr "Historique de la voiture #%d"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:539
+#: ../lib/GaletteAuto/Controllers/Controller.php:589
+msgid "Vehicle"
+msgstr "Véhicule"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:542
+#, php-format
+msgid "Remove vehicle %1$s"
+msgstr "Supprimer le véhicule %1$s"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:591
+msgid "Remove vehicles"
+msgstr "Suppression véhicules"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:595
+#, php-format
+msgid "You are about to remove %count vehicle."
+msgid_plural "You are about to remove %count vehicles."
+msgstr[0] "Vous êtes sur le point de supprimer %count véhicule."
+msgstr[1] "Vous êtes sur le point de supprimer %count véhicules."
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:640
+msgid "An error occured trying to remove vehicles :/"
+msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
+
+#: ../lib/GaletteAuto/Controllers/Controller.php:650
+#, php-format
+msgid "%count vehicles have been successfully deleted."
+msgstr "%count véhicules ont été supprimés avec succès."
+
+#: ../lib/GaletteAuto/Model.php:259
+msgid "- You must select a brand!"
+msgstr "- Vous devez sélectionner une marque&nbsp;!"
+
+#: ../lib/GaletteAuto/Color.php:86 ../tempcache/vehicles.html.twig:352
+#: ../tempcache/history.html.twig:73
 msgid "Color"
 msgstr "Couleur"
 
-#: ../lib/GaletteAuto/Color.php:125
+#: ../lib/GaletteAuto/Color.php:123
 #, php-format
 msgid "%count color"
 msgid_plural "%count colors"
 msgstr[0] "%count couleur"
 msgstr[1] "%count couleurs"
 
-#: ../lib/GaletteAuto/Brand.php:87
+#: ../lib/GaletteAuto/Brand.php:87 ../tempcache/vehicles.html.twig:108
+#: ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:98
 msgid "Brand"
 msgstr "Marque"
 
-#: ../lib/GaletteAuto/Brand.php:129
+#: ../lib/GaletteAuto/Brand.php:127
 #, php-format
 msgid "%count brand"
 msgid_plural "%count brands"
@@ -124,7 +339,7 @@ msgstr[1] "%count marques"
 msgid "Transmission"
 msgstr "Transmission"
 
-#: ../lib/GaletteAuto/Transmission.php:125
+#: ../lib/GaletteAuto/Transmission.php:123
 #, php-format
 msgid "%count transmission"
 msgid_plural "%count transmissions"
@@ -135,7 +350,7 @@ msgstr[1] "%count transmissions"
 msgid "Body"
 msgstr "Carrosseries"
 
-#: ../lib/GaletteAuto/Body.php:125
+#: ../lib/GaletteAuto/Body.php:123
 #, php-format
 msgid "%count body"
 msgid_plural "%count bodies"
@@ -145,84 +360,6 @@ msgstr[1] "%count carrosseries"
 #: ../lib/GaletteAuto/Autos.php:161
 msgid "Delete vehicles cards"
 msgstr "Supprimer les fiches des véhicules"
-
-#: ../lib/GaletteAuto/Controller.php:104
-msgid "You do not have enough privileges."
-msgstr "Vous n'avez pas assez de privilèges."
-
-#: ../lib/GaletteAuto/Controller.php:215
-msgid "Cars list"
-msgstr "Liste des voitures"
-
-#: ../lib/GaletteAuto/Controller.php:217
-msgid "My cars"
-msgstr "Mes véhicules"
-
-#: ../lib/GaletteAuto/Controller.php:219
-msgid "Member's cars"
-msgstr "Véhicules de l'adhérent"
-
-#: ../lib/GaletteAuto/Controller.php:224
-msgid "Vehicles list"
-msgstr "Liste des véhicules"
-
-#: ../lib/GaletteAuto/Controller.php:267
-msgid "Car ID cannot be null calling edit route!"
-msgstr ""
-"L'identifiant du véhicule ne peut être vide lors de l'appel à la route de "
-"modification !"
-
-#: ../lib/GaletteAuto/Controller.php:297
-msgid "New vehicle"
-msgstr "Ajouter un nouveau véhicule"
-
-#: ../lib/GaletteAuto/Controller.php:298
-#, php-format
-msgid "Change vehicle '%s'"
-msgstr "Modifier le véhicule « %s »"
-
-#: ../lib/GaletteAuto/Controller.php:399
-msgid "- An error has occured while saving vehicle in the database."
-msgstr ""
-"- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
-
-#: ../lib/GaletteAuto/Controller.php:401
-msgid "Vehicle has been saved!"
-msgstr "Le véhicule a été enregistré !"
-
-#: ../lib/GaletteAuto/Controller.php:464
-#, php-format
-msgid "History of car #%d"
-msgstr "Historique de la voiture #%d"
-
-#: ../lib/GaletteAuto/Controller.php:536 ../lib/GaletteAuto/Controller.php:586
-msgid "Vehicle"
-msgstr "Véhicule"
-
-#: ../lib/GaletteAuto/Controller.php:539
-#, php-format
-msgid "Remove vehicle %1$s"
-msgstr "Supprimer le véhicule %1$s"
-
-#: ../lib/GaletteAuto/Controller.php:588
-msgid "Remove vehicles"
-msgstr "Suppression véhicules"
-
-#: ../lib/GaletteAuto/Controller.php:592
-#, php-format
-msgid "You are about to remove %count vehicle."
-msgid_plural "You are about to remove %count vehicles."
-msgstr[0] "Vous êtes sur le point de supprimer %count véhicule."
-msgstr[1] "Vous êtes sur le point de supprimer %count véhicules."
-
-#: ../lib/GaletteAuto/Controller.php:637
-msgid "An error occured trying to remove vehicles :/"
-msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
-
-#: ../lib/GaletteAuto/Controller.php:647
-#, php-format
-msgid "%count vehicles have been successfully deleted."
-msgstr "%count véhicules ont été supprimés avec succès."
 
 #: ../lib/GaletteAuto/Auto.php:173
 msgid "name"
@@ -280,279 +417,289 @@ msgstr "transmission"
 msgid "body"
 msgstr "carrosserie"
 
-#: ../lib/GaletteAuto/Auto.php:289
+#: ../lib/GaletteAuto/Auto.php:285
 msgid "Petrol"
 msgstr "Essence"
 
-#: ../lib/GaletteAuto/Auto.php:290
+#: ../lib/GaletteAuto/Auto.php:286
 msgid "Diesel"
 msgstr "Diesel"
 
-#: ../lib/GaletteAuto/Auto.php:291
+#: ../lib/GaletteAuto/Auto.php:287
 msgid "Gas"
 msgstr "Gaz"
 
-#: ../lib/GaletteAuto/Auto.php:292
+#: ../lib/GaletteAuto/Auto.php:288
 msgid "Hybrid"
 msgstr "Hybride"
 
-#: ../lib/GaletteAuto/Auto.php:293
+#: ../lib/GaletteAuto/Auto.php:289
 msgid "Electricity"
 msgstr "Électricité"
 
-#: ../lib/GaletteAuto/Auto.php:294
+#: ../lib/GaletteAuto/Auto.php:290
 msgid "Bio"
 msgstr "Bio-carburant"
 
-#: ../lib/GaletteAuto/Auto.php:381
+#: ../lib/GaletteAuto/Auto.php:377
 msgid "New car added"
 msgstr "Nouveau véhicule ajouté"
 
-#: ../lib/GaletteAuto/Auto.php:389
+#: ../lib/GaletteAuto/Auto.php:385
 msgid "Fail to add new car."
 msgstr "Échec de l'ajout d'un nouveau véhicule."
 
-#: ../lib/GaletteAuto/Auto.php:406
+#: ../lib/GaletteAuto/Auto.php:402
 msgid "Car updated"
 msgstr "Véhicule mis à jour"
+
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:69
+msgid "Cars"
+msgstr "Voitures"
+
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:191
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:192
+msgid "Member cars"
+msgstr "Véhicules de l'adhérent"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
 msgstr "Finition"
 
-#: ../lib/GaletteAuto/Finition.php:125
+#: ../lib/GaletteAuto/Finition.php:123
 #, php-format
 msgid "%count finition"
 msgid_plural "%count finitions"
 msgstr[0] "%count finition"
 msgstr[1] "%count finitions"
 
-#: ../lib/GaletteAuto/PropertiesController.php:203
-msgid "Colors list"
-msgstr "Liste des couleurs"
+#: ../tempcache/vehicles.html.twig:74
+msgid "Car's base informations"
+msgstr "Informations de base de la voiture"
 
-#: ../lib/GaletteAuto/PropertiesController.php:204
-msgid "Add new color"
-msgstr "Ajouter une nouvelle couleur"
+#: ../tempcache/vehicles.html.twig:81
+msgid "Name:"
+msgstr "Nom :"
 
-#: ../lib/GaletteAuto/PropertiesController.php:208
-msgid "States list"
-msgstr "Liste des états"
+#: ../tempcache/vehicles.html.twig:87 ../tempcache/model.html.twig:74
+msgid "Choose a brand"
+msgstr "Choisissez une marque"
 
-#: ../lib/GaletteAuto/PropertiesController.php:209
-msgid "Add new state"
-msgstr "Ajouter un nouvel état"
+#: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:601
+msgid "Choose a model"
+msgstr "Choisissez un modèle"
 
-#: ../lib/GaletteAuto/PropertiesController.php:213
-msgid "Finitions list"
-msgstr "Liste des finitions"
-
-#: ../lib/GaletteAuto/PropertiesController.php:214
-msgid "Add new finition"
-msgstr "Ajouter une finition"
-
-#: ../lib/GaletteAuto/PropertiesController.php:218
-msgid "Bodies list"
-msgstr "Liste des carrosseries"
-
-#: ../lib/GaletteAuto/PropertiesController.php:219
-msgid "Add new body"
-msgstr "Ajouter une nouvelle carrosserie"
-
-#: ../lib/GaletteAuto/PropertiesController.php:223
-msgid "Transmissions list"
-msgstr "Liste des transmissions"
-
-#: ../lib/GaletteAuto/PropertiesController.php:224
-msgid "Add new transmission"
-msgstr "Ajouter une transmission"
-
-#: ../lib/GaletteAuto/PropertiesController.php:228
-msgid "Brands list"
-msgstr "Liste des marques"
-
-#: ../lib/GaletteAuto/PropertiesController.php:229
-#, php-format
-msgid "Brand '%s'"
-msgstr "Marque « %s »"
-
-#: ../lib/GaletteAuto/PropertiesController.php:230
-msgid "Add new brand"
-msgstr "Ajouter une nouvelle marque"
-
-#: ../lib/GaletteAuto/PropertiesController.php:335
-msgid "%property ID cannot ben null calling edit route!"
-msgstr ""
-"L'identifiant %property ne peut être vide lors de l'appel à la route de "
-"modification !"
-
-#: ../lib/GaletteAuto/PropertiesController.php:353
-msgid "New"
-msgstr "Nouveau"
-
-#: ../lib/GaletteAuto/PropertiesController.php:359
-#, php-format
-msgid "Change '%s'"
-msgstr "Modifier « %s »"
-
-#: ../lib/GaletteAuto/PropertiesController.php:417
-msgid "- No id provided for modifying this record! (internal)"
-msgstr ""
-"- Pas d'identifiant fourni pour modifier cet enregistrement ! (interne)"
-
-#: ../lib/GaletteAuto/PropertiesController.php:432
-msgid "- An error occured while saving record. Please try again."
-msgstr ""
-"- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
-"nouveau."
-
-#: ../lib/GaletteAuto/PropertiesController.php:437
-msgid "New %property has been added!"
-msgstr "La %property a été enregistrée !"
-
-#: ../lib/GaletteAuto/PropertiesController.php:438
-msgid "%property has been saved!"
-msgstr "%property a été enregistrée !"
-
-#: ../lib/GaletteAuto/PropertiesController.php:497
-#, php-format
-msgid "Show '%s'"
-msgstr "Afficher « %s »"
-
-#: ../lib/GaletteAuto/PropertiesController.php:556
-#: ../lib/GaletteAuto/PropertiesController.php:602
-#, php-format
-msgid "Remove %1$s %2$s"
-msgstr "Supprimer %1$s %2$s"
-
-#: ../lib/GaletteAuto/PropertiesController.php:609
-msgid "You are about to remove %count %property."
-msgstr "Vous êtes sur le point de supprimer %count %property."
-
-#: ../lib/GaletteAuto/PropertiesController.php:662
-msgid "An error occured trying to remove %property :/"
-msgstr "Une erreur est survenue lors de la suppression de %property :/"
-
-#: ../lib/GaletteAuto/PropertiesController.php:673
-msgid "%count %property have been successfully deleted."
-msgstr "%count %property ont été supprimées avec succès."
-
-#: ../templates/default/object_list.tpl:43
-#: ../templates/default/models_list.tpl:39
-msgid "Edit %property"
-msgstr "Modifier %property"
-
-#: ../templates/default/object_list.tpl:50
-#: ../templates/default/models_list.tpl:46
-msgid "%property: remove from database"
-msgstr "%property : supprimer de la base"
-
-#: ../templates/default/object_list.tpl:55
-#: ../templates/default/models_list.tpl:51
-msgid "no record found"
-msgstr "aucun enregistrement trouvé"
-
-#: ../templates/default/object_list.tpl:75
-#: ../templates/default/vehicles_list.tpl:79
-#: ../templates/default/models_list.tpl:69
-msgid "Other:"
-msgstr "Autres&nbsp;:"
-
-#: ../templates/default/object_list.tpl:96
-msgid "No entry selected"
-msgstr "Aucune entrée sélectionnée"
-
-#: ../templates/default/object_list.tpl:96
-msgid ""
-"Please make sure to select at least one entry from the list to perform this "
-"action."
-msgstr ""
-"Assurez-vous de sélectionner au moins une entrée dans la liste avant "
-"d'effectuer cette action."
-
-#: ../templates/default/vehicles_list.tpl:22
-msgid "Name"
-msgstr "Nom"
-
-#: ../templates/default/vehicles_list.tpl:23
-#: ../templates/default/history.tpl:16
-msgid "Owner"
-msgstr "Propriétaire"
-
-#: ../templates/default/vehicles_list.tpl:25
-#: ../templates/default/models_list.tpl:22 ../templates/default/model.tpl:8
+#: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:69
 msgid "Model"
 msgstr "Modèle"
 
-#: ../templates/default/vehicles_list.tpl:45
-msgid "Edit %vehicle"
-msgstr "Modifier %vehicle"
+#: ../tempcache/vehicles.html.twig:142
+msgid "First registration date:"
+msgstr "Date de première immatriculation&nbsp;:"
 
-#: ../templates/default/vehicles_list.tpl:52
-msgid "%vehiclename: remove from database"
-msgstr "%vehiclename : supprimer de la base"
+#: ../tempcache/vehicles.html.twig:148
+msgid "First circulation date:"
+msgstr "Date de première mise en circulation&nbsp;:"
 
-#: ../templates/default/vehicles_list.tpl:58
-msgid "No car has been registered yet for your account."
-msgstr "Aucun véhicule n'a été enregistré pour votre compte."
+#: ../tempcache/vehicles.html.twig:154
+msgid "Mileage:"
+msgstr "Kilométrage&nbsp;:"
 
-#: ../templates/default/vehicles_list.tpl:58
-msgid "No car in the database"
-msgstr "Aucun véhicule dans la base"
+#: ../tempcache/vehicles.html.twig:161
+msgid "Seats:"
+msgstr "Places&nbsp;:"
 
-#: ../templates/default/vehicles_list.tpl:86
-msgid "Add new vehicle"
-msgstr "Ajouter un nouveau véhicule"
+#: ../tempcache/vehicles.html.twig:173 ../tempcache/vehicles.html.twig:189
+msgid "Car's photo"
+msgstr "Photo de la voiture"
 
-#: ../templates/default/vehicles_list.tpl:103
+#: ../tempcache/vehicles.html.twig:210
+msgid "Current car's state informations"
+msgstr "Informations sur l'état courant de la voiture"
+
+#: ../tempcache/vehicles.html.twig:221
+msgid "Current owner:"
+msgstr "Propriétaire actuel&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:237
+msgid "Show full car state history"
+msgstr "Afficher l'historique complet des états la voiture"
+
+#: ../tempcache/vehicles.html.twig:242
+msgid "Car state history"
+msgstr "Historique de l'état de la voiture"
+
+#: ../tempcache/vehicles.html.twig:247 ../tempcache/vehicles.html.twig:251
+msgid "Change car's owner"
+msgstr "Modifier le propriétaire de la voiture"
+
+#: ../tempcache/vehicles.html.twig:253
+msgid "Change owner"
+msgstr "Modifier le propriétaire"
+
+#: ../tempcache/vehicles.html.twig:277
+msgid "Owner:"
+msgstr "Propriétaire :"
+
+#: ../tempcache/vehicles.html.twig:331
+msgid "Choose a color"
+msgstr "Choisissez une couleur"
+
+#: ../tempcache/vehicles.html.twig:358
+msgid "Choose a state"
+msgstr "Choisissez un état"
+
+#: ../tempcache/vehicles.html.twig:386
+msgid "Registration:"
+msgstr "Immatriculation&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:398
+msgid "Car's technical informations"
+msgstr "Informations techniques de la voiture"
+
+#: ../tempcache/vehicles.html.twig:404
+msgid "Choose a body"
+msgstr "Choisissez une carrosserie"
+
+#: ../tempcache/vehicles.html.twig:425
+msgid "Body:"
+msgstr "Carrosseries&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:431
+msgid "Choose a transmission"
+msgstr "Choisissez une transmission"
+
+#: ../tempcache/vehicles.html.twig:452
+msgid "Transmission:"
+msgstr "Transmission&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:458
+msgid "Choose a finition"
+msgstr "Choisissez une finition"
+
+#: ../tempcache/vehicles.html.twig:479
+msgid "Finition:"
+msgstr "Finition&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:486
+msgid "Chassis number:"
+msgstr "Numéro de chassis&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:493
+msgid "Horsepower:"
+msgstr "Puissance&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:500
+msgid "Engine size:"
+msgstr "Cylindrée&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:506
+msgid "Choose a fuel"
+msgstr "Choisissez un carburant"
+
+#: ../tempcache/vehicles.html.twig:527
+msgid "Fuel:"
+msgstr "Carburant&nbsp;:"
+
+#: ../tempcache/vehicles.html.twig:538 ../tempcache/vehicles.html.twig:545
+msgid "Comment"
+msgstr "Commentaire"
+
+# Chaîne Javascript !
+#: ../tempcache/vehicles.html.twig:656
+msgid "Car's history"
+msgstr "Historique de la voiture"
+
+#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/object_list.html.twig:58
 msgid "No vehicle selected"
 msgstr "Aucun véhicule sélectionné"
 
-#: ../templates/default/vehicles_list.tpl:103
+#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/object_list.html.twig:58
 msgid ""
 "Please make sure to select at least one vehicle from the list to perform "
 "this action."
 msgstr ""
-"Assurez-vous de sélectionner au moins un véhicule dans la liste avant d’"
-"effectuer cette action."
+"Assurez-vous de sélectionner au moins un véhicule dans la liste avant "
+"d’effectuer cette action."
 
-#: ../templates/default/menu.tpl:2
-msgid "Cars"
-msgstr "Voitures"
+#: ../tempcache/vehicles_list.html.twig:69
+#, fuzzy, php-format
+#| msgid "%count color"
+#| msgid_plural "%count colors"
+msgid "%count vehicle"
+msgid_plural "%count vehicles"
+msgstr[0] "%count couleur"
+msgstr[1] "%count couleurs"
 
-#: ../templates/default/menu.tpl:18
-msgid "My Cars"
-msgstr "Mes voitures"
+#: ../tempcache/vehicles_list.html.twig:93
+msgid "Add new vehicle"
+msgstr "Ajouter un nouveau véhicule"
 
-#: ../templates/default/history.tpl:19
+#: ../tempcache/vehicles_list.html.twig:105
+msgid "Name"
+msgstr "Nom"
+
+#: ../tempcache/vehicles_list.html.twig:105 ../tempcache/history.html.twig:61
+msgid "Owner"
+msgstr "Propriétaire"
+
+#: ../tempcache/vehicles_list.html.twig:184
+msgid "Edit %vehicle"
+msgstr "Modifier %vehicle"
+
+#: ../tempcache/vehicles_list.html.twig:186
+msgid "%vehiclename: remove from database"
+msgstr "%vehiclename : supprimer de la base"
+
+#: ../tempcache/vehicles_list.html.twig:226
+msgid "No car has been registered yet for your account."
+msgstr "Aucun véhicule n'a été enregistré pour votre compte."
+
+#: ../tempcache/vehicles_list.html.twig:228
+msgid "No car in the database"
+msgstr "Aucun véhicule dans la base"
+
+#: ../tempcache/history.html.twig:67
 msgid "Registration"
 msgstr "Immatriculation"
 
-#: ../templates/default/history.tpl:36
-msgid "[M]"
-msgstr "[H]"
-
-#: ../templates/default/history.tpl:38 ../templates/default/history.tpl:40
-msgid "[W]"
-msgstr "[F]"
-
-#: ../templates/default/history.tpl:45
-msgid "[admin]"
-msgstr "[admin]"
-
-#: ../templates/default/history.tpl:56
+#: ../tempcache/history.html.twig:152
 msgid "no history entries"
 msgstr "aucune entrée dans l'historique"
 
-#: ../templates/default/models_list.tpl:75
-msgid "Add new model"
-msgstr "Ajouter un nouveau modèle"
+#: ../tempcache/object_list.html.twig:179
+#: ../tempcache/models_list.html.twig:143
+msgid "Edit %property"
+msgstr "Modifier %property"
 
-#: ../templates/default/models_list.tpl:88
+#: ../tempcache/object_list.html.twig:192
+#: ../tempcache/models_list.html.twig:156
+msgid "%property: remove from database"
+msgstr "%property : supprimer de la base"
+
+#: ../tempcache/object_list.html.twig:211
+#: ../tempcache/models_list.html.twig:167
+msgid "no record found"
+msgstr "aucun enregistrement trouvé"
+
+#: ../tempcache/object_show.html.twig:82
+#, php-format
+msgid "Registered models for the brand '%s':"
+msgstr "Modèles enregistrés pour la marque « %s » :"
+
+#: ../tempcache/object_show.html.twig:119
+#, php-format
+msgid "The brand '%s' does not have any registered model at this time."
+msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
+
+#: ../tempcache/models_list.html.twig:47
 msgid "No model selected"
 msgstr "Aucun modèle sélectionné"
 
-#: ../templates/default/models_list.tpl:88
+#: ../tempcache/models_list.html.twig:47
 msgid ""
 "Please make sure to select at least one model from the list to perform this "
 "action."
@@ -560,15 +707,20 @@ msgstr ""
 "Assurez-vous de sélectionner au moins un modèle dans la liste avant "
 "d’effectuer cette action."
 
-#: ../templates/default/adh_fiche_action.tpl:2
-msgid "Member cars"
-msgstr "Véhicules de l'adhérent"
+#: ../tempcache/models_list.html.twig:61
+#, fuzzy, php-format
+#| msgid "%count body"
+#| msgid_plural "%count bodies"
+msgid "%count model"
+msgid_plural "%count models"
+msgstr[0] "%count carrosserie"
+msgstr[1] "%count carrosseries"
 
-#: ../templates/default/model.tpl:15
-msgid "Select one brand"
-msgstr "Sélectionnez une marque"
+#: ../tempcache/models_list.html.twig:85
+msgid "Add new model"
+msgstr "Ajouter un nouveau modèle"
 
-#: ../templates/default/model.tpl:21
+#: ../tempcache/model.html.twig:104
 msgid ""
 "No brand is registered yet. You have to create at least one brand to "
 "register models."
@@ -576,181 +728,59 @@ msgstr ""
 "Aucune marque n'a été enregistrée. Vous devez au moins en créer une pour "
 "ajouter des modèles."
 
-#: ../templates/default/model.tpl:22
+#: ../tempcache/model.html.twig:110
 msgid "Add a brand"
 msgstr "Ajouter une marque"
 
-#: ../templates/default/object_show.tpl:10
+#~ msgid "Other:"
+#~ msgstr "Autres&nbsp;:"
+
+#~ msgid "No entry selected"
+#~ msgstr "Aucune entrée sélectionnée"
+
+#~ msgid ""
+#~ "Please make sure to select at least one entry from the list to perform "
+#~ "this action."
+#~ msgstr ""
+#~ "Assurez-vous de sélectionner au moins une entrée dans la liste avant "
+#~ "d'effectuer cette action."
+
+#~ msgid "My Cars"
+#~ msgstr "Mes voitures"
+
+#~ msgid "[M]"
+#~ msgstr "[H]"
+
+#~ msgid "[W]"
+#~ msgstr "[F]"
+
+#~ msgid "[admin]"
+#~ msgstr "[admin]"
+
+#~ msgid "Select one brand"
+#~ msgstr "Sélectionnez une marque"
+
 #, php-format
-msgid "Registered models for the brand '%s':"
-msgstr "Modèles enregistrés pour la marque « %s » :"
+#~ msgid "Create a new model for brand '%s'"
+#~ msgstr "Créer un nouveau modèle pour la marque « %s »"
 
-#: ../templates/default/object_show.tpl:17
-#, php-format
-msgid "The brand '%s' does not have any registered model at this time."
-msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
+#~ msgid "Model:"
+#~ msgstr "Modèle :"
 
-#: ../templates/default/object_show.tpl:19
-#, php-format
-msgid "Create a new model for brand '%s'"
-msgstr "Créer un nouveau modèle pour la marque « %s »"
+#~ msgid "Picture:"
+#~ msgstr "Image :"
 
-#: ../templates/default/vehicles.tpl:12
-msgid "Car's base informations"
-msgstr "Informations de base de la voiture"
+#~ msgid "Delete image"
+#~ msgstr "Supprimer l’image"
 
-#: ../templates/default/vehicles.tpl:15
-msgid "Name:"
-msgstr "Nom :"
+#~ msgid "Color:"
+#~ msgstr "Couleur&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:20
-msgid "Model:"
-msgstr "Modèle :"
+#~ msgid "State:"
+#~ msgstr "État&nbsp;:"
 
-#: ../templates/default/vehicles.tpl:23
-msgid "Choose a brand"
-msgstr "Choisissez une marque"
-
-#: ../templates/default/vehicles.tpl:29
-msgid "Choose a model"
-msgstr "Choisissez un modèle"
-
-#: ../templates/default/vehicles.tpl:36
-msgid "First registration date:"
-msgstr "Date de première immatriculation&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:40
-msgid "First circulation date:"
-msgstr "Date de première mise en circulation&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:44
-msgid "Mileage:"
-msgstr "Kilométrage&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:48
-msgid "Seats:"
-msgstr "Places&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:55 ../templates/default/vehicles.tpl:58
-msgid "Car's photo"
-msgstr "Photo de la voiture"
-
-#: ../templates/default/vehicles.tpl:57
-msgid "Picture:"
-msgstr "Image :"
-
-#: ../templates/default/vehicles.tpl:60
-msgid "Delete image"
-msgstr "Supprimer l’image"
-
-#: ../templates/default/vehicles.tpl:68
-msgid "Current car's state informations"
-msgstr "Informations sur l'état courant de la voiture"
-
-#: ../templates/default/vehicles.tpl:72
-msgid "Current owner:"
-msgstr "Propriétaire actuel&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:77
-msgid "Show full car state history"
-msgstr "Afficher l'historique complet des états la voiture"
-
-#: ../templates/default/vehicles.tpl:79
-msgid "Car state history"
-msgstr "Historique de l'état de la voiture"
-
-#: ../templates/default/vehicles.tpl:81 ../templates/default/vehicles.tpl:82
-msgid "Change car's owner"
-msgstr "Modifier le propriétaire de la voiture"
-
-#: ../templates/default/vehicles.tpl:82
-msgid "Change owner"
-msgstr "Modifier le propriétaire"
-
-#: ../templates/default/vehicles.tpl:91
-msgid "Owner:"
-msgstr "Propriétaire :"
-
-#: ../templates/default/vehicles.tpl:105
-msgid "Color:"
-msgstr "Couleur&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:107
-msgid "Choose a color"
-msgstr "Choisissez une couleur"
-
-#: ../templates/default/vehicles.tpl:114
-msgid "State:"
-msgstr "État&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:116
-msgid "Choose a state"
-msgstr "Choisissez un état"
-
-#: ../templates/default/vehicles.tpl:123
-msgid "Registration:"
-msgstr "Immatriculation&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:129
-msgid "Car's technical informations"
-msgstr "Informations techniques de la voiture"
-
-#: ../templates/default/vehicles.tpl:132
-msgid "Body:"
-msgstr "Carrosseries&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:134
-msgid "Choose a body"
-msgstr "Choisissez une carrosserie"
-
-#: ../templates/default/vehicles.tpl:141
-msgid "Transmission:"
-msgstr "Transmission&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:143
-msgid "Choose a transmission"
-msgstr "Choisissez une transmission"
-
-#: ../templates/default/vehicles.tpl:150
-msgid "Finition:"
-msgstr "Finition&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:152
-msgid "Choose a finition"
-msgstr "Choisissez une finition"
-
-#: ../templates/default/vehicles.tpl:159
-msgid "Chassis number:"
-msgstr "Numéro de chassis&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:163
-msgid "Horsepower:"
-msgstr "Puissance&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:167
-msgid "Engine size:"
-msgstr "Cylindrée&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:171
-msgid "Fuel:"
-msgstr "Carburant&nbsp;:"
-
-#: ../templates/default/vehicles.tpl:173
-msgid "Choose a fuel"
-msgstr "Choisissez un carburant"
-
-#: ../templates/default/vehicles.tpl:182
-msgid "Comment"
-msgstr "Commentaire"
-
-#: ../templates/default/vehicles.tpl:185
-msgid "Comment:"
-msgstr "Commentaire :"
-
-# Chaîne Javascript !
-#: ../templates/default/vehicles.tpl:302
-msgid "Car's history"
-msgstr "Historique de la voiture"
+#~ msgid "Comment:"
+#~ msgstr "Commentaire :"
 
 #~ msgid "No model was selected, please check at least one name."
 #~ msgstr ""
