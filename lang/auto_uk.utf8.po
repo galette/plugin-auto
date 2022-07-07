@@ -4,19 +4,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2022-05-29 23:17+0000\n"
+"PO-Revision-Date: 2022-07-08 12:15+0000\n"
 "Last-Translator: Artem <artem@molotov.work>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -186,10 +186,9 @@ msgid "%property has been saved!"
 msgstr "Властивість %property збережена!"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
-#, fuzzy, php-format
-#| msgid "Show '%s'"
+#, php-format
 msgid "Show '%s' brand"
-msgstr "Показати \"%s\""
+msgstr "Показати бренд \"%s\""
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:564
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:610
@@ -618,14 +617,12 @@ msgstr ""
 "виконання цієї дії."
 
 #: ../tempcache/vehicles_list.html.twig:69
-#, fuzzy, php-format
-#| msgid "%count color"
-#| msgid_plural "%count colors"
+#, php-format
 msgid "%count vehicle"
 msgid_plural "%count vehicles"
-msgstr[0] "%count колір"
-msgstr[1] "%count кольори"
-msgstr[2] "%count кольорів"
+msgstr[0] "%count транс. засіб"
+msgstr[1] "%count транс. засоби"
+msgstr[2] "%count транс. засобів"
 
 #: ../tempcache/vehicles_list.html.twig:93
 msgid "Add new vehicle"
@@ -701,14 +698,12 @@ msgstr ""
 "виконання цієї дії."
 
 #: ../tempcache/models_list.html.twig:61
-#, fuzzy, php-format
-#| msgid "%count body"
-#| msgid_plural "%count bodies"
+#, php-format
 msgid "%count model"
 msgid_plural "%count models"
-msgstr[0] "%count тіло"
-msgstr[1] "%count тіла"
-msgstr[2] "%count тіл"
+msgstr[0] "%count взірець"
+msgstr[1] "%count взірці"
+msgstr[2] "%count взірців"
 
 #: ../tempcache/models_list.html.twig:85
 msgid "Add new model"
