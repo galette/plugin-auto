@@ -4,9 +4,9 @@
 
     "ctype", "date", "fileinfo", "filter", "iconv", "json", "pcre", "reflection", "session", "simplexml", "spl", "xml",
 
-    "curl", "gd", "intl", "mbstring", "mysqli", "zlib", "pdo", "pgsql", "gettext", "tidy",
+    "curl", "gd", "intl", "mbstring", "mysqli", "zlib", "pdo", "pgsql", "gettext", "yaml",
 
-    "exif", "pcntl", "yaml"
+    "exif", "pcntl"
   ],
   "symbol-whitelist": [
     "// PHP symbols",
@@ -40,11 +40,10 @@
     "GALETTE_TEMPIMAGES_PATH",
     "GALETTE_THEME",
     "GALETTE_THEMES_PATH",
-    "GALETTE_THEME_DIR",
-    "GALETTE_TPL_SUBDIR",
     "GALETTE_VERSION",
     "GALETTE_X_FORWARDED_FOR_INDEX",
     "_CURRENT_THEME_PATH",
+    "GALETTE_URI",
     "_T",
     "__",
     "_Tn",

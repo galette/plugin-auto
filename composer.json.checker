@@ -17,7 +17,7 @@
         "akrabat/rka-slim-session-middleware": "^2.0",
         "laminas/laminas-i18n": "^2.11",
         "laminas/laminas-cache": "^2.10",
-        "soundasleep/html2text": "^1.1",
+        "soundasleep/html2text": "^2.0",
         "aneek/slim-event-dispatcher": "^1.0",
         "slim/flash": "^0.4.0",
         "league/event": "^2.1",
@@ -25,6 +25,7 @@
         "psr/container": "^1.0",
         "maglnet/composer-require-checker": "^2.1",
         "squizlabs/php_codesniffer": "^3.5",
+        "friendsoftwig/twigcs": "^6.0",
         "php-di/slim-bridge": "2.0.0",
         "doctrine/annotations": "^1.8",
         "laminas/laminas-servicemanager": "3.7",
@@ -33,5 +34,8 @@
         "slim/csrf": "0.8.3",
         "twig/twig": "^3.3",
         "slim/twig-view": "^2"
+    },
+    "config": {
+        "allow-plugins": false
     }
 }
