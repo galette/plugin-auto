@@ -1,4 +1,4 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022.
 # Berto Te <Bertote@3fpj.com>, 2021.
 # Eunice Soria <eunice.soria.es@gmail.com>, 2021.
 # Miguel Angel Osorio Quintero <miguel.angel25x@gmail.com>, 2021.
@@ -13,18 +13,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2022-06-28 10:18+0000\n"
-"Last-Translator: Javier <javier.fserrador@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/es/>\n"
+"PO-Revision-Date: 2022-07-14 06:40+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -68,11 +68,11 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:291
 msgid "New model has been added!"
-msgstr "Se ha añadido un modelo nuevo."
+msgstr "¡ Se ha añadido un modelo nuevo !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:292
 msgid "Model has been saved!"
-msgstr "El modelo ha sido guardado."
+msgstr "¡ El modelo ha sido guardado !"
 
 #. TRANS: first parameter is the number of models
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:371
@@ -156,7 +156,7 @@ msgstr "Añadir marca"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:343
 msgid "%property ID cannot ben null calling edit route!"
-msgstr "ID %property no puede ser completada invocando edición de ruta nula."
+msgstr "¡ ID %property no puede ser completada invocando edición de ruta nula !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:361
 msgid "New"
@@ -182,11 +182,11 @@ msgstr "- Ha ocurrido un error al guardar registro. Intente de nuevo."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:445
 msgid "New %property has been added!"
-msgstr "Se ha añadido %property propiedad nueva."
+msgstr "¡ Se ha añadido %property propiedad nueva !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:446
 msgid "%property has been saved!"
-msgstr "La propiedad %property ha sido guardada."
+msgstr "¡ %property ha sido guardada !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
 #, fuzzy, php-format
@@ -241,7 +241,7 @@ msgstr "Listado de vehículos"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:270
 msgid "Car ID cannot be null calling edit route!"
-msgstr "ID de vehículo no puede ser nulo invocando edición de ruta."
+msgstr "¡ ID de vehículo no puede ser nulo invocando edición de ruta !"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:300
 msgid "New vehicle"
