@@ -10,13 +10,14 @@
 # Cow <javier.fserrador@gmail.com>, 2022.
 # Carlos Cruzyc <crlscruzyc@gmail.com>, 2022.
 # Javier <javier.fserrador@gmail.com>, 2022.
+# gallegonovato <fran-carro@hotmail.es>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2022-07-14 06:40+0000\n"
-"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
+"PO-Revision-Date: 2022-10-05 20:23+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
 "Language: es\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -112,11 +113,11 @@ msgstr "Añadir estado"
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:90
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:91
 msgid "Finitions list"
-msgstr ""
+msgstr "Lista de acabados"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:222
 msgid "Add new finition"
-msgstr ""
+msgstr "Agregar nueva terminación"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:226
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:95
@@ -189,10 +190,9 @@ msgid "%property has been saved!"
 msgstr "¡ %property ha sido guardada !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
-#, fuzzy, php-format
-#| msgid "Show '%s'"
+#, php-format
 msgid "Show '%s' brand"
-msgstr "Mostrar «%s»"
+msgstr "Mostrar la marca '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:564
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:610
@@ -453,7 +453,7 @@ msgstr "Vehículos del miembro"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
-msgstr ""
+msgstr "Finición"
 
 #: ../lib/GaletteAuto/Finition.php:123
 #, php-format
@@ -493,7 +493,7 @@ msgstr "Primera fecha de circulación:"
 
 #: ../tempcache/vehicles.html.twig:154
 msgid "Mileage:"
-msgstr ""
+msgstr "Kilometraje:"
 
 #: ../tempcache/vehicles.html.twig:161
 msgid "Seats:"
@@ -614,13 +614,11 @@ msgstr ""
 "esta operación."
 
 #: ../tempcache/vehicles_list.html.twig:69
-#, fuzzy, php-format
-#| msgid "%count color"
-#| msgid_plural "%count colors"
+#, php-format
 msgid "%count vehicle"
 msgid_plural "%count vehicles"
-msgstr[0] "%count color"
-msgstr[1] "%count colores"
+msgstr[0] "%recuento de vehículo"
+msgstr[1] "%recuento de vehículos"
 
 #: ../tempcache/vehicles_list.html.twig:93
 msgid "Add new vehicle"
@@ -696,13 +694,11 @@ msgstr ""
 "esta operación."
 
 #: ../tempcache/models_list.html.twig:61
-#, fuzzy, php-format
-#| msgid "%count body"
-#| msgid_plural "%count bodies"
+#, php-format
 msgid "%count model"
 msgid_plural "%count models"
-msgstr[0] "%count carrocería"
-msgstr[1] "%count carrocerías"
+msgstr[0] "%countar carrocería"
+msgstr[1] "%countar carrocerías"
 
 #: ../tempcache/models_list.html.twig:85
 msgid "Add new model"
