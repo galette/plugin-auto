@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2022-10-05 20:23+0000\n"
+"PO-Revision-Date: 2022-10-17 14:54+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -258,7 +258,7 @@ msgstr "- Ha ocurrido un error mientras guardaba el vehículo en la BdD."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:404
 msgid "Vehicle has been saved!"
-msgstr "El vehículo ha sido guardado."
+msgstr "¡Se ha salvado el vehículo!"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:467
 #, php-format
@@ -283,8 +283,8 @@ msgstr "Retirar vehículos"
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
-msgstr[0] "Va a retirar %count vehículo"
-msgstr[1] "Va a retirar %count vehículos"
+msgstr[0] "Está a punto de eliminar %count vehiculo."
+msgstr[1] "Está a punto de eliminar los vehículos %count."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:640
 msgid "An error occured trying to remove vehicles :/"
@@ -428,7 +428,7 @@ msgstr "Eléctrico"
 
 #: ../lib/GaletteAuto/Auto.php:290
 msgid "Bio"
-msgstr "Bio"
+msgstr "Vida"
 
 #: ../lib/GaletteAuto/Auto.php:377
 msgid "New car added"
@@ -459,8 +459,8 @@ msgstr "Finición"
 #, php-format
 msgid "%count finition"
 msgid_plural "%count finitions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%conteo acabado"
+msgstr[1] "%conteos acabados"
 
 #: ../tempcache/vehicles.html.twig:74
 msgid "Car's base informations"
@@ -565,11 +565,11 @@ msgstr "Transmisión:"
 
 #: ../tempcache/vehicles.html.twig:458
 msgid "Choose a finition"
-msgstr ""
+msgstr "Elija un acabado"
 
 #: ../tempcache/vehicles.html.twig:479
 msgid "Finition:"
-msgstr ""
+msgstr "Acabado:"
 
 #: ../tempcache/vehicles.html.twig:486
 msgid "Chassis number:"
@@ -617,8 +617,8 @@ msgstr ""
 #, php-format
 msgid "%count vehicle"
 msgid_plural "%count vehicles"
-msgstr[0] "%recuento de vehículo"
-msgstr[1] "%recuento de vehículos"
+msgstr[0] "%count vehículo"
+msgstr[1] "%count vehículos"
 
 #: ../tempcache/vehicles_list.html.twig:93
 msgid "Add new vehicle"
