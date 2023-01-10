@@ -86,7 +86,12 @@
     "DI\\autowire",
     "DI\\Container",
     "DI\\ContainerBuilder",
-    "DI\\Bridge\\Slim\\App"
+    "DI\\Bridge\\Slim\\App",
+
+    "// Should not error (not used) but...",
+    "mt_rand",
+    "rand",
+    "random_int"
   ],
   "scan-files": [
     "*.php",
