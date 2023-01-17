@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Is that matters? <werentyou@proton.me>, 2022.
 # Evgeniy Khramov <thejenjagamertjg@gmail.com>, 2022.
+# SleepyOwl <artem726artem@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2022-12-09 16:50+0000\n"
-"Last-Translator: Evgeniy Khramov <thejenjagamertjg@gmail.com>\n"
+"PO-Revision-Date: 2023-01-18 05:42+0000\n"
+"Last-Translator: SleepyOwl <artem726artem@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ru/>\n"
 "Language: ru\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -47,20 +48,20 @@ msgstr[1] ""
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:110
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:111
 msgid "Models list"
-msgstr ""
+msgstr "Список моделей"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:231
 #, php-format
 msgid "Change model '%s'"
-msgstr ""
+msgstr "Сменить модель '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:235
 msgid "New model"
-msgstr ""
+msgstr "Новая модель"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:289
 msgid "- An error occurred while saving record. Please try again."
-msgstr ""
+msgstr "- При сохранении записи произошла ошибка. Пожалуйста попробуйте снова."
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:291
 msgid "New model has been added!"
