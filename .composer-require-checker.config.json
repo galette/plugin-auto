@@ -91,12 +91,7 @@
     "// Should not error (not used) but...",
     "mt_rand",
     "rand",
-    "random_int",
-
-    "// League\\Event functions",
-    "League\\Event\\HasEventName",
-    "League\\Event\\ListenerRegistry",
-    "League\\Event\\ListenerSubscriber"
+    "random_int"
   ],
   "scan-files": [
     "*.php",
