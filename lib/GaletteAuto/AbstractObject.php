@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -39,7 +39,7 @@ namespace GaletteAuto;
 
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Slim\Router;
+use Slim\Routing\RouteParser;
 use Galette\Core\Db;
 use GaletteAuto\Filters\PropertiesList;
 
@@ -50,7 +50,7 @@ use GaletteAuto\Filters\PropertiesList;
  * @name      AbstractObject
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -299,36 +299,35 @@ abstract class AbstractObject
     /**
      * Get list route
      *
-     * @param Router $router   Router instance
-     * @param string $property Property name
+     * @param RouteParser $routeparser Route parser instance
+     * @param string      $property    Property name
      *
      * @return string
      */
-    public static function getListRoute(Router $router, string $property): string
+    public static function getListRoute(RouteParser $routeparser, string $property): string
     {
         $route = null;
         switch ($property) {
             case 'color':
-                $route = $router->pathFor('colorsList');
+                $route = $routeparser->urlFor('colorsList');
                 break;
             case 'state':
-                $route = $router->pathFor('statesList');
+                $route = $routeparser->urlFor('statesList');
                 break;
             case 'finition':
-                $route = $router->pathFor('finitionsList');
+                $route = $routeparser->urlFor('finitionsList');
                 break;
             case 'body':
-                $route = $router->pathFor('bodiesList');
+                $route = $routeparser->urlFor('bodiesList');
                 break;
             case 'transmission':
-                $route = $router->pathFor('transmissionsList');
+                $route = $routeparser->urlFor('transmissionsList');
                 break;
             case 'brand':
-                $route = $router->pathFor('brandsList');
+                $route = $routeparser->urlFor('brandsList');
                 break;
             default:
                 throw new \RuntimeException('Unknown property ' . $property);
-                break;
         }
         return $route;
     }

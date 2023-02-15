@@ -6,7 +6,7 @@
     {% set field = obj.field %}
 
     <div class="ui basic fitted segment">
-        <a class="button" href="{{ path_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
+        <a class="button" href="{{ url_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
             <i class="ui plus circle icon" aria-hidden="true"></i>
             {{ _T("Add new brand", "auto") }}
         </a>
@@ -24,7 +24,7 @@
                 <div class="item">
                     <div class="content">
                         <div class="header">
-                            <a href="{{ path_for("modelEdit", {"action": "edit", "id": model.id}) }}">{{ model.model }}</a>
+                            <a href="{{ url_for("modelEdit", {"action": "edit", "id": model.id}) }}">{{ model.model }}</a>
                         </div>
                     </div>
                 </div>

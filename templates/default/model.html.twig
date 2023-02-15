@@ -1,7 +1,7 @@
 {% extends 'page.html.twig' %}
 
 {% block content %}
-    <form class="ui form" action="{% if mode == "new" %}{{ path_for("doModelAdd") }}{% else %}{{ path_for("doModelEdit", {"id": model.id}) }}{% endif %}" method="post" id="modifform">
+    <form class="ui form" action="{% if mode == "new" %}{{ url_for("doModelAdd") }}{% else %}{{ url_for("doModelEdit", {"id": model.id}) }}{% endif %}" method="post" id="modifform">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -31,7 +31,7 @@
                     } %}
                 {% else %}
                     {{ _T("No brand is registered yet. You have to create at least one brand to register models.", "auto") }}.<br/>
-                    <a href="{{ path_for("propertyEdit", {"property": "brand", "action": "add"}) }}">{{ _T("Add a brand", "auto") }}</a>
+                    <a href="{{ url_for("propertyEdit", {"property": "brand", "action": "add"}) }}">{{ _T("Add a brand", "auto") }}</a>
                 {% endif %}
 
             </div>

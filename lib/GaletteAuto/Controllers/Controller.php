@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2022 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2022 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -40,13 +40,14 @@ use GaletteAuto\Auto;
 use GaletteAuto\Autos;
 use GaletteAuto\History;
 use GaletteAuto\Picture;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 use Galette\Controllers\AbstractPluginController;
 use Galette\Entity\Adherent;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Filters\AutosList;
 use GaletteAuto\Repository\Models;
+use DI\Attribute\Inject;
 
 /**
  * Galette Auto plugin controller
@@ -55,7 +56,7 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2022 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-18
@@ -63,9 +64,9 @@ use GaletteAuto\Repository\Models;
 class Controller extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Auto")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Auto")]
     protected $module_info;
 
     /** @var boolean  */
@@ -110,7 +111,7 @@ class Controller extends AbstractPluginController
                 );
 
                 if ($redirect === null) {
-                    $redirect = $this->router->pathFor('myVehiclesList');
+                    $redirect = $this->routeparser->urlFor('myVehiclesList');
                 }
                 return $response
                     ->withStatus(403)
@@ -143,7 +144,7 @@ class Controller extends AbstractPluginController
         fwrite($stream, file_get_contents($picture->getPath()));
         rewind($stream);
 
-        return $response->withBody(new \Slim\Http\Stream($stream));
+        return $response->withBody(new \Slim\Psr7\Stream($stream));
     }
 
     /**
@@ -258,7 +259,7 @@ class Controller extends AbstractPluginController
         $this->session->vehicles_filters = $afilters;
 
         //assign pagination variables to the template and add pagination links
-        $afilters->setViewPagination($this->router, $this->view);
+        $afilters->setViewPagination($this->routeparser, $this->view);
 
         // display page
         $this->view->render(
@@ -290,7 +291,7 @@ class Controller extends AbstractPluginController
         } elseif ($action === 'add' && $id !== null) {
             return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor('vehicleEdit', ['action' => 'add']));
+                ->withHeader('Location', $this->routeparser->urlFor('vehicleEdit', ['action' => 'add']));
         }
 
         $auto = new Auto($this->plugins, $this->zdb);
@@ -413,7 +414,7 @@ class Controller extends AbstractPluginController
             }
         }
 
-        $route = $this->router->pathFor('vehiclesList');
+        $route = $this->routeparser->urlFor('vehiclesList');
         //if no errors were thrown, we can store the car
         if (count($error_detected) == 0) {
             if (!$auto->store($is_new)) {
@@ -422,7 +423,7 @@ class Controller extends AbstractPluginController
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;
                 if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
-                    $route = $this->router->pathFor('myVehiclesList');
+                    $route = $this->routeparser->urlFor('myVehiclesList');
                 }
             }
         }
@@ -432,7 +433,7 @@ class Controller extends AbstractPluginController
             $this->session->auto = $post;
             $args = ['action' => $action];
             $routename = 'vehicleEdit';
-            $route = $this->router->pathFor($routename, $args);
+            $route = $this->routeparser->urlFor($routename, $args);
 
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(
@@ -483,7 +484,7 @@ class Controller extends AbstractPluginController
         $params = [
             'entries'       => $history->entries,
             'page_title'    => str_replace('%d', $history->$apk, _T("History of car #%d", "auto")),
-            'mode'          => $request->isXhr() ? 'ajax' : ''
+            'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : ''
         ];
 
         // display page
@@ -539,9 +540,9 @@ class Controller extends AbstractPluginController
         $id_adh = $auto->owner->id;
         $this->checkAclsFor($response, $id_adh);
 
-        $route = $this->router->pathFor('vehiclesList');
+        $route = $this->routeparser->urlFor('vehiclesList');
         if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
-            $route = $this->router->pathFor('myVehiclesList');
+            $route = $this->routeparser->urlFor('myVehiclesList');
         }
 
         $data = [
@@ -555,12 +556,12 @@ class Controller extends AbstractPluginController
             'confirm_removal.tpl',
             array(
                 'type'          => _T("Vehicle", "auto"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
                 'page_title'    => sprintf(
                     _T('Remove vehicle %1$s', 'auto'),
                     $auto->name
                 ),
-                'form_url'      => $this->router->pathFor('doRemoveVehicle', ['id' => $auto->id]),
+                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle', ['id' => $auto->id]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -580,7 +581,7 @@ class Controller extends AbstractPluginController
     public function removeVehicles(Request $request, Response $response, $args = [])
     {
         $post = $request->getParsedBody();
-        $route = $this->router->pathFor('vehiclesList');
+        $route = $this->routeparser->urlFor('vehiclesList');
         $ids = $this->session->filter_vehicles ?? $post['entries_sel'];
 
         $auto = new Auto($this->plugins, $this->zdb);
@@ -591,7 +592,7 @@ class Controller extends AbstractPluginController
         $id_adh = $auto->owner->id;
 
         if (!$this->checkAclsFor($response, $id_adh, false) || $this->login->id == $id_adh) {
-            $route = $this->router->pathFor('myVehiclesList');
+            $route = $this->routeparser->urlFor('myVehiclesList');
         }
 
         $data = [
@@ -605,14 +606,14 @@ class Controller extends AbstractPluginController
             'confirm_removal.tpl',
             array(
                 'type'          => _T("Vehicle", "auto"),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
                 'page_title'    => _T('Remove vehicles', 'auto'),
                 'message'       => str_replace(
                     '%count',
                     count($data['id']),
                     _Tn('You are about to remove %count vehicle.', 'You are about to remove %count vehicles.', count($data['id']), 'auto')
                 ),
-                'form_url'      => $this->router->pathFor('doRemoveVehicle'),
+                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle'),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -637,7 +638,7 @@ class Controller extends AbstractPluginController
 
         $uri = isset($post['redirect_uri']) ?
             $post['redirect_uri'] :
-            $this->router->pathFor('slash');
+            $this->routeparser->urlFor('slash');
 
         if (!isset($post['confirm'])) {
             $this->flash->addMessage(
@@ -718,7 +719,7 @@ class Controller extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $this->router->pathFor('vehiclesList')
+                $this->routeparser->urlFor('vehiclesList')
             );
     }
 }

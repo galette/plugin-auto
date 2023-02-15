@@ -6,7 +6,7 @@
     {% else %}
         {% set action = "edit" %}
     {% endif %}
-    <form class="ui form" action="{{ path_for("doVehicleEdit", {"action": action}) }}" method="post" id="modifform" enctype="multipart/form-data">
+    <form class="ui form" action="{{ url_for("doVehicleEdit", {"action": action}) }}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -83,7 +83,7 @@
                 {{ _T("Car's photo", "auto") }}
             </div>
             <div class="active content">
-                <img src="{% if car.id %}{{ path_for("vehiclePhoto", {"id": car.id}) }}{% else %}{{ path_for("vehiclePhoto") }}{% endif %}" class="picture" width="{{ car.picture.getOptimalWidth() }}" height="{{ car.picture.getOptimalHeight() }}" alt="{{ _T("Car's photo", "auto") }}"/><br/>
+                <img src="{% if car.id %}{{ url_for("vehiclePhoto", {"id": car.id}) }}{% else %}{{ url_for("vehiclePhoto") }}{% endif %}" class="picture" width="{{ car.picture.getOptimalWidth() }}" height="{{ car.picture.getOptimalHeight() }}" alt="{{ _T("Car's photo", "auto") }}"/><br/>
                 {% if car.hasPicture() %}
                     {% include "components/forms/checkbox.html.twig" with {
                         id: 'del_photo',
@@ -109,7 +109,7 @@
                             {{ car.owner.sfullname }}
                             {% if login.isAdmin() or login.isStaff() %}
                                 {# Does car's history should be visible by the actual owner? #}
-                                <a href="{{ path_for("vehicleHistory", {"id": car.id}) }}" title="{{ _T("Show full car state history", "auto") }}" id="state_history">
+                                <a href="{{ url_for("vehicleHistory", {"id": car.id}) }}" title="{{ _T("Show full car state history", "auto") }}" id="state_history">
                                     <i class="ui history icon"></i>
                                     <span class="sr-only">{{ _T("Car state history", "auto") }}</span>
                                 </a>
@@ -288,7 +288,7 @@
                 $('#brand').dropdown('setting', 'onChange', function(id_brand) {
                         // Get the new list for selected brand, and append it to models on the page
                         $.post(
-                            '{{ path_for("ajaxModels") }}',
+                            '{{ url_for("ajaxModels") }}',
                             {
                                 brand: id_brand
                             },

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017-2021 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
@@ -36,6 +36,7 @@
 
 namespace GaletteAuto\Controllers\Crud;
 
+use DI\Attribute\Inject;
 use Galette\Controllers\AbstractPluginController;
 use GaletteAuto\AbstractObject;
 use GaletteAuto\Body;
@@ -45,8 +46,8 @@ use GaletteAuto\Finition;
 use GaletteAuto\Model;
 use GaletteAuto\State;
 use GaletteAuto\Transmission;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Filters\PropertiesList;
 use GaletteAuto\Repository\Models;
@@ -58,7 +59,7 @@ use GaletteAuto\Repository\Models;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2021 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 2017-07-21
@@ -66,9 +67,9 @@ use GaletteAuto\Repository\Models;
 class PropertiesController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Auto")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Auto")]
     protected $module_info;
 
     /**
@@ -261,7 +262,7 @@ class PropertiesController extends AbstractPluginController
         $this->saveFilters($obj, $filters);
 
         //assign pagination variables to the template and add pagination links
-        $filters->setViewPagination($this->router, $this->view, false);
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         $params = [
             'page_title'    => $title,
@@ -315,7 +316,7 @@ class PropertiesController extends AbstractPluginController
             ->withStatus(301)
             ->withHeader(
                 'Location',
-                $class::getListRoute($this->router, $property)
+                $class::getListRoute($this->routeparser, $property)
             );
     }
 
@@ -346,7 +347,7 @@ class PropertiesController extends AbstractPluginController
         } elseif ($is_new && $id !== null) {
              return $response
                 ->withStatus(301)
-                ->withHeader('Location', $this->router->pathFor(
+                ->withHeader('Location', $this->routeparser->urlFor(
                     'propertyEdit',
                     [
                         'property'  => $property,
@@ -426,7 +427,7 @@ class PropertiesController extends AbstractPluginController
             }
         }
 
-        $value = $request->getParsedBodyParam($object->field, $default = null);
+        $value = $post[$object->field] ?? null;
         if ($value == null) {
             $error_detected[] = _T("- You must provide a value!", "auto");
         } else {
@@ -437,7 +438,7 @@ class PropertiesController extends AbstractPluginController
             $res = $object->store($is_new);
             if (!$res) {
                 $error_detected[]
-                    = _T("- An error occured while saving record. Please try again.", "auto");
+                    = _T("- An error occurred while saving record. Please try again.", "auto");
             } else {
                 $msg = str_replace(
                     '%property',
@@ -452,7 +453,7 @@ class PropertiesController extends AbstractPluginController
             }
         }
 
-        $route = AbstractObject::getListRoute($this->router, $property);
+        $route = AbstractObject::getListRoute($this->routeparser, $property);
 
         if (count($error_detected) > 0) {
             //store entity in session
@@ -461,7 +462,7 @@ class PropertiesController extends AbstractPluginController
             if (!$is_new) {
                 $id = $post[$object->pk];
             }
-            $route = $this->router->pathFor(
+            $route = $this->routeparser->urlFor(
                 'propertyEdit',
                 [
                     'action' => $action,
@@ -545,7 +546,7 @@ class PropertiesController extends AbstractPluginController
         $object = new $classname($this->zdb);
         $object->load($id);
 
-        $route = AbstractObject::getListRoute($this->router, $property);
+        $route = AbstractObject::getListRoute($this->routeparser, $property);
 
         $data = [
             'id'            => $id,
@@ -559,13 +560,13 @@ class PropertiesController extends AbstractPluginController
             'confirm_removal.tpl',
             array(
                 'type'          => $object->getFieldLabel(),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
                 'page_title'    => sprintf(
                     _T('Remove %1$s %2$s', 'auto'),
                     $object->getFieldLabel(),
                     $object->value
                 ),
-                'form_url'      => $this->router->pathFor(
+                'form_url'      => $this->routeparser->urlFor(
                     'doRemoveProperty',
                     ['property' => $property, 'id' => $object->id]
                 ),
@@ -590,7 +591,7 @@ class PropertiesController extends AbstractPluginController
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
 
-        $route = AbstractObject::getListRoute($this->router, $property);
+        $route = AbstractObject::getListRoute($this->routeparser, $property);
         $filter_name = 'filter_auto' . $property . '_sel';
         $ids = $this->session->$filter_name;
 
@@ -605,7 +606,7 @@ class PropertiesController extends AbstractPluginController
             'confirm_removal.tpl',
             array(
                 'type'          => $object->getFieldLabel(),
-                'mode'          => $request->isXhr() ? 'ajax' : '',
+                'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
                 'page_title'    => sprintf(
                     _T('Remove %1$s %2$s', 'auto'),
                     $object->getFieldLabel(),
@@ -616,7 +617,7 @@ class PropertiesController extends AbstractPluginController
                     [count($data['id']), $object->getFieldLabel()],
                     _T('You are about to remove %count %property.', 'auto')
                 ),
-                'form_url'      => $this->router->pathFor('doRemoveProperty', ['property' => $property]),
+                'form_url'      => $this->routeparser->urlFor('doRemoveProperty', ['property' => $property]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -642,7 +643,7 @@ class PropertiesController extends AbstractPluginController
 
         $uri = isset($post['redirect_uri']) ?
             $post['redirect_uri'] :
-            $this->router->pathFor('slash');
+            $this->routeparser->urlFor('slash');
 
         if (!isset($post['confirm'])) {
             $this->flash->addMessage(
