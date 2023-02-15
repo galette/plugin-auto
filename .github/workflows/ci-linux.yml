@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: [ '7.4', '8.0', '8.1', '8.2' ]
+        php-versions: [ '8.1', '8.2' ]
         coverage: [none]
       fail-fast: false
 
@@ -46,7 +46,6 @@ jobs:
         run: |
           mv composer.json.checker composer.json
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-        if: ${{ matrix.php-versions!= '7.2' && matrix.php-versions!= '7.3' }}
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -54,23 +53,18 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-        if: ${{ matrix.php-versions!= '7.2' && matrix.php-versions!= '7.3' }}
 
       - name: Install dependencies
         run: |
           composer install --ignore-platform-reqs
-        if: ${{ matrix.php-versions!= '7.2' && matrix.php-versions!= '7.3' }}
-
-      - name: Install CS only
-        run: |
-          composer require squizlabs/php_codesniffer
-        if: ${{ matrix.php-versions== '7.2' || matrix.php-versions== '7.3' }}
 
       - name: CS
         run: |
           vendor/bin/phpcs -n -p --standard=galette-core/phpcs-rules.xml lib/ ./*.php
 
+      - name: Install checker
+        run: composer require maglnet/composer-require-checker -W
+
       - name: Check missing symbols
         run: |
           vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json
-        if: ${{ matrix.php-versions!= '7.2' && matrix.php-versions!= '7.3' }}
