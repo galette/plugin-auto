@@ -14,7 +14,7 @@ build:
         analysis:
             environment:
                 php:
-                    version: 7.4
+                    version: 8.1
 
             project_setup:
                 override:
@@ -22,9 +22,6 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
-                    -
-                        command: phpcs-run
-                        use_website_config: true
                     - js-scrutinizer-run
 
     cache:
