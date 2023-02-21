@@ -197,7 +197,8 @@ class Controller extends AbstractPluginController
         $this->id_adh = $id;
         return $this->vehiclesList($request, $response, $option, $value);
     }
-        /**
+
+    /**
      * List vehicles
      *
      * @param Request     $request  Request

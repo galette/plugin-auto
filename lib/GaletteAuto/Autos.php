@@ -124,7 +124,7 @@ class Autos
                 foreach ($vehicles as $vehicle) {
                     $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
                         ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
-                    $infos .=  $str_v . "\n";
+                    $infos .= $str_v . "\n";
 
                     $p = new Picture($this->plugins, $vehicle->id_car);
                     if ($p->hasPicture()) {
@@ -222,8 +222,8 @@ class Autos
     ) {
         global $login;
 
-        $fieldsList = ( $fields != null && !$as_autos )
-            ? (( !is_array($fields) || count($fields) < 1 )
+        $fieldsList = ($fields != null && !$as_autos)
+            ? ((!is_array($fields) || count($fields) < 1)
                 ? (array)'*'
                 : implode(', ', $fields))
                 : (array)'*';

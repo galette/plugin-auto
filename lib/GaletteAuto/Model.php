@@ -73,11 +73,11 @@ class Model
     private $zdb;
 
     /**
-    * Default constructor
-    *
-    * @param Db    $zdb  Database instance
-    * @param mixed $args model's id to load or ResultSet. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db    $zdb  Database instance
+     * @param mixed $args model's id to load or ResultSet. Defaults to null
+     */
     public function __construct(Db $zdb, $args = null)
     {
         $this->zdb = $zdb;
@@ -93,12 +93,12 @@ class Model
     }
 
     /**
-    * Load a model
-    *
-    * @param integer $id Id for the model we want
-    *
-    * @return boolean
-    */
+     * Load a model
+     *
+     * @param integer $id Id for the model we want
+     *
+     * @return boolean
+     */
     public function load($id)
     {
         try {
@@ -139,12 +139,12 @@ class Model
     }
 
     /**
-    * Store current model
-    *
-    * @param boolean $new New record or existing one
-    *
-    * @return boolean
-    */
+     * Store current model
+     *
+     * @param boolean $new New record or existing one
+     *
+     * @return boolean
+     */
     public function store($new = false)
     {
         try {
@@ -178,12 +178,12 @@ class Model
     }
 
     /**
-    * Delete some models
-    *
-    * @param array $ids Array of models id to delete
-    *
-    * @return boolean
-    */
+     * Delete some models
+     *
+     * @param array $ids Array of models id to delete
+     *
+     * @return boolean
+     */
     public function delete($ids)
     {
         try {
@@ -202,12 +202,12 @@ class Model
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrieve
-    *
-    * @return mixed the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return mixed the called property
+     */
     public function __get($name)
     {
         $forbidden = array();

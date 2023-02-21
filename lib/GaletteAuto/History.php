@@ -78,11 +78,11 @@ class History
     private $id_car;
 
     /**
-    * Default constructor
-    *
-    * @param Db      $zdb Database instance
-    * @param integer $id  history entry's id to load. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db      $zdb Database instance
+     * @param integer $id  history entry's id to load. Defaults to null
+     */
     public function __construct(Db $zdb, $id = null)
     {
         $this->zdb = $zdb;
@@ -92,12 +92,12 @@ class History
     }
 
     /**
-    * Loads history for specified car
-    *
-    * @param integer $id car's id we want history for
-    *
-    * @return void|false
-    */
+     * Loads history for specified car
+     *
+     * @param integer $id car's id we want history for
+     *
+     * @return void|false
+     */
     public function load($id)
     {
         if ($id == null || !is_int($id)) {
@@ -134,10 +134,10 @@ class History
     }
 
     /**
-    * Get the most recent history entry
-    *
-    * @return ArrayObject|false row
-    */
+     * Get the most recent history entry
+     *
+     * @return ArrayObject|false row
+     */
     public function getLatest()
     {
         try {
@@ -166,10 +166,10 @@ class History
     }
 
     /**
-    * Format entries dates, also loads Member
-    *
-    * @return void
-    */
+     * Format entries dates, also loads Member
+     *
+     * @return void
+     */
     private function formatEntries()
     {
         for ($i = 0; $i < count($this->entries); $i++) {
@@ -192,12 +192,12 @@ class History
     }
 
     /**
-    * Register a new history entry.
-    *
-    * @param array $props list of properties to update
-    *
-    * @return void
-    */
+     * Register a new history entry.
+     *
+     * @param array $props list of properties to update
+     *
+     * @return void
+     */
     public function register($props)
     {
         Analog::log(
@@ -241,12 +241,12 @@ class History
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrieve
-    *
-    * @return mixed the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return mixed the called property
+     */
     public function __get($name)
     {
         switch ($name) {

@@ -61,11 +61,11 @@ class Picture extends GalettePicture
     public const PK = Auto::PK;
 
     /**
-    * Default constructor.
-    *
-    * @param Plugins    $plugins Plugins
-    * @param mixed|null $id_adh  ID of the member
-    */
+     * Default constructor.
+     *
+     * @param Plugins    $plugins Plugins
+     * @param mixed|null $id_adh  ID of the member
+     */
     public function __construct(Plugins $plugins, $id_adh = null)
     {
         $this->plugins = $plugins;
@@ -93,12 +93,12 @@ class Picture extends GalettePicture
     }
 
     /**
-    * Gets the default picture to show, anyways
-    *
-    * @see Logo::getDefaultPicture()
-    *
-    * @return void
-    */
+     * Gets the default picture to show, anyway
+     *
+     * @see Logo::getDefaultPicture()
+     *
+     * @return void
+     */
     protected function getDefaultPicture()
     {
         $this->file_path = realpath(

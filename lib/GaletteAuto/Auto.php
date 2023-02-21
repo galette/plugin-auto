@@ -130,30 +130,30 @@ class Auto
         'fuel'                      => 1
     );
 
-    private $id;                       //identifiant
-    private $registration;             //immatriculation
-    private $name;                     //petit nom
-    private $first_registration_date;  //date de première immatriculation
-    private $first_circulation_date;   //date de prmière mise en service
-    private $mileage;                  //kilométrage
-    private $comment;                  //commentaire
-    private $chassis_number;           //numéro de chassis
-    private $seats;                    //nombre de places
-    private $horsepower;               //puissance fiscale
-    private $engine_size;              //cylindrée
-    private $creation_date;            //date de création
-    private $fuel;                     //carburant
+    private $id;
+    private $registration;
+    private $name;
+    private $first_registration_date;
+    private $first_circulation_date;
+    private $mileage;
+    private $comment;
+    private $chassis_number;
+    private $seats;
+    private $horsepower;
+    private $engine_size;
+    private $creation_date;
+    private $fuel;
 
     //External objects
-    private $picture;                  //photo de la voiture
-    private $finition;                 //niveau de finition
-    private $color;                    //couleur
-    private $model;                    //modèle
-    private $transmission;             //type de transmission
-    private $body;                     //carrosserie
-    private $history;                  //historique
-    private $owner;                    //propriétaire actuel
-    private $state;                    //état actuel
+    private $picture;
+    private $finition;
+    private $color;
+    private $model;
+    private $transmission;
+    private $body;
+    private $history;
+    private $owner;
+    private $state;
 
     public const FUEL_PETROL = 1;
     public const FUEL_DIESEL = 2;
@@ -162,13 +162,13 @@ class Auto
     public const FUEL_BIO = 5;
     public const FUEL_HYBRID = 6;
 
-    private $propnames;                //textual properties names
+    private $propnames; //textual properties names
 
-    //do we have to fire an history entry?
+    //do we have to fire a history entry?
     private $fire_history = false;
 
     //internal properties (not updatable outside the object)
-    private $internals = array (
+    private $internals = array(
         'id',
         'creation_date',
         'history',
@@ -832,8 +832,8 @@ class Auto
     {
         $required = $this->required;
 
-        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
-            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
+        if (file_exists(GALETTE_CONFIG_PATH . 'local_auto_required.inc.php')) {
+            $required = require GALETTE_CONFIG_PATH . 'local_auto_required.inc.php';
         }
 
         return $required;

@@ -345,7 +345,7 @@ class PropertiesController extends AbstractPluginController
                 )
             );
         } elseif ($is_new && $id !== null) {
-             return $response
+            return $response
                 ->withStatus(301)
                 ->withHeader('Location', $this->routeparser->urlFor(
                     'propertyEdit',

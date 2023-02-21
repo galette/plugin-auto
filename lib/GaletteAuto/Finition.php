@@ -59,11 +59,11 @@ class Finition extends AbstractObject
     public const NAME = 'finitions';
 
     /**
-    * Default constructor
-    *
-    * @param Db      $zdb Database instance
-    * @param integer $id  finition's id to load. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db      $zdb Database instance
+     * @param integer $id  finition's id to load. Defaults to null
+     */
     public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
@@ -97,12 +97,12 @@ class Finition extends AbstractObject
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrieve
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return false|object the called property
+     */
     public function __get($name)
     {
         if ($name == self::FIELD) {
