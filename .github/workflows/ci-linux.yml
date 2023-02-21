@@ -30,9 +30,6 @@ jobs:
           tools: composer
           coverage: ${{ matrix.coverage }}
 
-      - name: Checkout plugin
-        uses: actions/checkout@v3
-
       - name: Checkout Galette core
         uses: actions/checkout@v3
         with:
@@ -41,10 +38,14 @@ jobs:
           fetch-depth: 1
           ref: develop
 
+      - name: Checkout plugin
+        uses: actions/checkout@v3
+        with:
+          path: galette-core/galette/plugins/plugin-auto
+
       - name: Get composer cache directory
         id: composer-cache
         run: |
-          mv composer.json.checker composer.json
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
@@ -56,15 +57,22 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd galette-core/galette
           composer install --ignore-platform-reqs
 
       - name: CS
         run: |
-          vendor/bin/phpcs -n -p --standard=galette-core/phpcs-rules.xml lib/ ./*.php
-
-      - name: Install checker
-        run: composer require maglnet/composer-require-checker -W
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/phpcs -n -p --standard=../../../phpcs-rules.xml lib/ ./*.php
 
       - name: Check missing symbols
         run: |
-          vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json
+          cd galette-core/galette/plugins/plugin-auto
+          composer require maglnet/composer-require-checker -W
+          vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json ../../composer.json
+
+      - name: PHPStan checks
+        run: |
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/phpstan analyze --ansi --memory-limit=2G --no-interaction --no-progress
+        if: matrix.php-versions == '8.1'

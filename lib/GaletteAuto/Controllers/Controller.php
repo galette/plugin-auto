@@ -523,7 +523,7 @@ class Controller extends AbstractPluginController
         }
         /** @var ArrayObject $list */
         $list = $models->getList($id_brand, false);
-
+        //@phpstan-ignore-next-line
         return $this->withJson($response, $list->toArray());
     }
 

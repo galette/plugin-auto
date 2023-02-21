@@ -481,7 +481,7 @@ class Auto
     private function getAllProperties($restrict = false)
     {
         $result = array();
-        foreach ($this as $key => $value) {
+        foreach (get_class_vars($this) as $key => $value) {
             if (
                 !$restrict
                 || ($restrict && !in_array($key, $this->internals))

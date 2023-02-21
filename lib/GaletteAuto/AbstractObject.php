@@ -96,7 +96,7 @@ abstract class AbstractObject
     /**
      * Get the list
      *
-     * @return ArrayObject
+     * @return array
      */
     public function getList()
     {
@@ -114,7 +114,7 @@ abstract class AbstractObject
                 ' list | ' . $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -246,7 +246,7 @@ abstract class AbstractObject
      *
      * @param string $name name of the property we want to retrive
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
@@ -412,6 +412,7 @@ abstract class AbstractObject
             $countSelect->reset($countSelect::OFFSET);
             $countSelect->columns(
                 array(
+                    //@phpstan-ignore-next-line
                     static::PK => new Expression('COUNT(' . static::PK . ')')
                 )
             );
@@ -419,6 +420,7 @@ abstract class AbstractObject
             $results = $this->zdb->execute($countSelect);
             $result = $results->current();
 
+            //@phpstan-ignore-next-line
             $k = static::PK;
             $this->count = $result->$k;
 
@@ -430,7 +432,7 @@ abstract class AbstractObject
                 'Cannot count models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

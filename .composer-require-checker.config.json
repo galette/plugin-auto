@@ -44,6 +44,8 @@
     "GALETTE_X_FORWARDED_FOR_INDEX",
     "_CURRENT_THEME_PATH",
     "GALETTE_URI",
+    "GALETTE_DISPLAY_VERSION",
+    "GALETTE_PHP_MIN",
     "_T",
     "__",
     "_Tn",

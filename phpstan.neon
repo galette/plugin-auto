@@ -1,0 +1,16 @@
+parameters:
+    parallel:
+        maximumNumberOfProcesses: 2
+    level: 3
+    paths:
+        - lib/
+    scanFiles:
+        - _config.inc.php
+        - ../../config/paths.inc.php
+        - ../../config/config.inc.php.dist
+        - ../../config/galette_tcpdf_config.php
+    scanDirectories:
+        - ../../includes/
+        - ../../lib/
+    ignoreErrors:
+        - '/Access to an undefined property ArrayObject.*/'
