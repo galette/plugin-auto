@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -39,6 +39,7 @@ namespace GaletteAuto\Filters;
 
 use Analog\Analog as Analog;
 use Galette\Core\Pagination;
+use Laminas\Db\Sql\Select;
 
 /**
  * Properties list filters and paginator
@@ -48,7 +49,7 @@ use Galette\Core\Pagination;
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2017-08-05
@@ -69,13 +70,13 @@ class PropertiesList extends Pagination
     /**
      * Add SQL limit
      *
-     * @param Zend_Db_Select $select Original select
+     * @param Select $select Original select
      *
-     * @return <type>
+     * @return void
      */
     public function setLimit($select)
     {
-        return $this->setLimits($select);
+        $this->setLimits($select);
     }
 
 

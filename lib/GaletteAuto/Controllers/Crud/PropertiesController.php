@@ -696,7 +696,8 @@ class PropertiesController extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader('Location', $uri);
         } else {
-            return $response->withJson(
+            return $this->withJson(
+                $response,
                 [
                     'success'   => $success
                 ]
@@ -713,8 +714,9 @@ class PropertiesController extends AbstractPluginController
      */
     protected function getFilters($class): PropertiesList
     {
+        /** @phpstan-ignore-next-line */
         $filter_name = 'filter_auto' . $class::FIELD;
-        return $this->session->$filter_name ?? new PropertiesList($class::FIELD);
+        return $this->session->$filter_name ?? new PropertiesList();
     }
 
     /**
@@ -727,6 +729,7 @@ class PropertiesController extends AbstractPluginController
      */
     protected function saveFilters($class, PropertiesList $filters): void
     {
+        /** @phpstan-ignore-next-line */
         $filter_name = 'filter_auto' . $class::FIELD;
         $this->session->$filter_name = $filters;
     }

@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -48,7 +48,7 @@ use Galette\Core\Plugins;
  * @name      AutoPicture
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -63,10 +63,10 @@ class Picture extends GalettePicture
     /**
     * Default constructor.
     *
-    * @param Plugins $plugins Plugins
-    * @param int     $id_adh  ID of the member
+    * @param Plugins    $plugins Plugins
+    * @param mixed|null $id_adh  ID of the member
     */
-    public function __construct(Plugins $plugins, $id_adh = '')
+    public function __construct(Plugins $plugins, $id_adh = null)
     {
         $this->plugins = $plugins;
         $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';

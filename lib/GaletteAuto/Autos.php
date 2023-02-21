@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2021 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -43,6 +43,7 @@ use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use GaletteAuto\Filters\AutosList;
 use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
 
 /**
  * Automobile autos class for galette Auto plugin
@@ -51,7 +52,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Autos
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-09-26
@@ -80,7 +81,7 @@ class Autos
     /**
      * Remove specified vehicles
      *
-     * @param interger|array $ids Vehicles identifiers to delete
+     * @param integer|array $ids Vehicles identifiers to delete
      *
      * @return boolean
      */
@@ -238,7 +239,7 @@ class Autos
                 $on_logged = true;
             } elseif ($public) {
                 $members = new \Galette\Repository\Members();
-                $public = $members->getPublicList(false, false);
+                $public = $members->getPublicList(false);
                 if (count($public)) {
                     foreach ($public as $p) {
                         $adhs[] = $p->id;
@@ -299,15 +300,15 @@ class Autos
                 $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Count vehicles from the query
      *
-     * @param Zend_Db_Select $select  Original select
-     * @param AutosList      $filters Filters
+     * @param Select    $select  Original select
+     * @param AutosList $filters Filters
      *
      * @return void
      */
@@ -333,7 +334,7 @@ class Autos
 
             $results = $this->zdb->execute($countSelect);
             $this->count = $results->current()->count;
-            if (isset($filters) && $this->count > 0) {
+            if ($this->count > 0) {
                 $filters->setCounter($this->count);
             }
         } catch (\Exception $e) {
@@ -341,7 +342,7 @@ class Autos
                 'Cannot count vehicles | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

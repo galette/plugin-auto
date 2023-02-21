@@ -39,6 +39,7 @@ namespace GaletteAuto\Filters;
 
 use Analog\Analog as Analog;
 use Galette\Core\Pagination;
+use Laminas\Db\Sql\Select;
 
 /**
  * Autos list filters and paginator
@@ -69,13 +70,13 @@ class AutosList extends Pagination
     /**
      * Add SQL limit
      *
-     * @param Zend_Db_Select $select Original select
+     * @param Select $select Original select
      *
-     * @return <type>
+     * @return void
      */
     public function setLimit($select)
     {
-        return $this->setLimits($select);
+        $this->setLimits($select);
     }
 
 

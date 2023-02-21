@@ -37,8 +37,10 @@
 
 namespace GaletteAuto;
 
+use ArrayObject;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
 use Slim\Routing\RouteParser;
 use Galette\Core\Db;
 use GaletteAuto\Filters\PropertiesList;
@@ -94,7 +96,7 @@ abstract class AbstractObject
     /**
      * Get the list
      *
-     * @return ResultSet
+     * @return ArrayObject
      */
     public function getList()
     {
@@ -371,7 +373,7 @@ abstract class AbstractObject
     /**
      * Builds the SELECT statement
      *
-     * @return string SELECT statement
+     * @return Select SELECT statement
      */
     private function buildSelect()
     {
@@ -388,7 +390,7 @@ abstract class AbstractObject
                 'Cannot build SELECT clause for models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

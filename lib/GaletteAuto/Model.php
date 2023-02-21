@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 use GaletteAuto\Filters\ModelsList;
 
@@ -48,10 +49,15 @@ use GaletteAuto\Filters\ModelsList;
  * @name      Model
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id
+ * @property string $model
+ * @property integer $brand
+ * @property Brand $obrand
  */
 class Model
 {
@@ -120,7 +126,7 @@ class Model
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -198,9 +204,9 @@ class Model
     /**
     * Global getter method
     *
-    * @param string $name name of the property we want to retrive
+    * @param string $name name of the property we want to retrieve
     *
-    * @return false|object the called property
+    * @return mixed the called property
     */
     public function __get($name)
     {
@@ -289,5 +295,6 @@ class Model
     public function setBrand($id)
     {
         $this->brand = new Brand($this->zdb, $id);
+        return $this;
     }
 }

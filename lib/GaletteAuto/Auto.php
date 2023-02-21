@@ -37,8 +37,10 @@
 
 namespace GaletteAuto;
 
+use ArrayObject;
 use Analog\Analog;
 use Galette\Core\Db;
+use Galette\Core\Login;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Laminas\Db\Sql\Expression;
@@ -59,6 +61,29 @@ use GaletteAuto\Transmission;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id
+ * @property string $registration
+ * @property string $name
+ * @property string $first_registration_date
+ * @property string $first_circulation_date
+ * @property integer $mileage
+ * @property string $comment
+ * @property string $chassis_number
+ * @property integer $seats
+ * @property integer $horsepower
+ * @property integer $engine_size
+ * @property string $creation_date
+ * @property integer $fuel
+ * @property Color $color
+ * @property Body $body
+ * @property State $state
+ * @property Transmission $transmission
+ * @property Finition $finition
+ * @property Model $model
+ * @property Adherent|int $owner
+ * @property Picture $picture
+ * @property History $history
  */
 class Auto
 {
@@ -160,9 +185,9 @@ class Auto
     /**
      * Default constructor
      *
-     * @param Plugins   $plugins Plugins
-     * @param Db        $zdb     Database instance
-     * @param ResultSet $args    A resultset row to load
+     * @param Plugins     $plugins Plugins
+     * @param Db          $zdb     Database instance
+     * @param ArrayObject $args    A resultset row to load
      */
     public function __construct(Plugins $plugins, Db $zdb, $args = null)
     {
@@ -235,7 +260,7 @@ class Auto
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r a resultset row
+     * @param ArrayObject $r a resultset row
      *
      * @return void
      */
@@ -495,7 +520,7 @@ class Auto
      *
      * @return void
      */
-    public function appropriateCar($login)
+    public function appropriateCar(Login $login)
     {
         $this->owner->load($login->id);
     }
@@ -521,7 +546,7 @@ class Auto
      *
      * @param string $name name of the property we want to retrive
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get(string $name)
     {
@@ -585,7 +610,7 @@ class Auto
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
      *
-     * @return void
+     * @return void|false
      */
     public function __set(string $name, $value)
     {
@@ -611,6 +636,9 @@ class Auto
                     break;
                 case 'state':
                     $this->state->load((int)$value);
+                    break;
+                case 'owner':
+                    $this->owner->load((int)$value);
                     break;
                 default:
                     $this->$name = $value;
@@ -663,7 +691,7 @@ class Auto
 
         //check for required fields, and correct values
         $required = $this->getRequired();
-        foreach ($this->getProperties(true) as $prop) {
+        foreach ($this->getProperties() as $prop) {
             $value = isset($post[$prop]) ? $post[$prop] : null;
 
             if (($value == '' || $value == null) && in_array($prop, array_keys($required))) {

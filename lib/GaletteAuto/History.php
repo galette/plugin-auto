@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Entity\Adherent;
 
@@ -48,10 +49,14 @@ use Galette\Entity\Adherent;
  * @name      History
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id_car
+ * @property array $fields
+ * @property array $entries
  */
 class History
 {
@@ -91,7 +96,7 @@ class History
     *
     * @param integer $id car's id we want history for
     *
-    * @return void
+    * @return void|false
     */
     public function load($id)
     {
@@ -131,7 +136,7 @@ class History
     /**
     * Get the most recent history entry
     *
-    * @return ResultSet row
+    * @return ArrayObject|false row
     */
     public function getLatest()
     {
@@ -145,8 +150,7 @@ class History
 
             $results = $this->zdb->execute($select);
             if ($results->count() > 0) {
-                $result = $results->current();
-                return $result;
+                return $results->current();
             } else {
                 return false;
             }
@@ -232,16 +236,16 @@ class History
                 $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
     * Global getter method
     *
-    * @param string $name name of the property we want to retrive
+    * @param string $name name of the property we want to retrieve
     *
-    * @return false|object the called property
+    * @return mixed the called property
     */
     public function __get($name)
     {
@@ -249,13 +253,10 @@ class History
             case Auto::PK:
                 $ka = Auto::PK;
                 return $this->$ka;
-                break;
             case 'fields':
                 return array_keys($this->fields);
-                break;
             case 'entries':
                 return $this->entries;
-                break;
             default:
                 Analog::log(
                     '[' . get_class($this) . '] Trying to get an unknown property (' .

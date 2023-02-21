@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2017 The Galette Team
+ * Copyright © 2017-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -37,6 +37,7 @@
 
 namespace GaletteAuto\Repository;
 
+use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
@@ -46,6 +47,7 @@ use GaletteAuto\Brand;
 use GaletteAuto\Filters\ModelsList;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
 
 /**
  * Models repository management
@@ -54,7 +56,7 @@ use Laminas\Db\Sql\Expression;
  * @name      Models
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017 The Galette Team
+ * @copyright 2017-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2017-07-24
@@ -82,29 +84,12 @@ class Models extends Repository
     }
 
     /**
-     * Get the list of all models as an array
-     *
-     * @param Db $zdb Database instance
-     *
-     * @return array
-     */
-    /*public static function getArrayList($zdb)
-    {
-        $otitles = self::getList($zdb);
-        $titles = array();
-        foreach ($otitles as $t) {
-            $titles[$t->id] = $t->short;
-        }
-        return $titles;
-    }*/
-
-    /**
      * Get the list of all models
      *
-     * @param integer $brandId   Optionnal brand we want models for
-     * @param boolean $as_object Whether to return an array f objects or a ResultSet
+     * @param integer $brandId   Optional brand we want models for
+     * @param boolean $as_object Whether to return an array of objects or a ResultSet
      *
-     * @return Model[]
+     * @return array|ArrayObject
      */
     public function getList($brandId = null, $as_object = true)
     {
@@ -136,7 +121,7 @@ class Models extends Repository
     /**
      * Builds the SELECT statement
      *
-     * @return string SELECT statement
+     * @return Select SELECT statement
      */
     private function buildSelect()
     {
@@ -155,14 +140,14 @@ class Models extends Repository
                 'Cannot build SELECT clause for models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Builds the order clause
      *
-     * @return string SQL ORDER clause
+     * @return array SQL ORDER clause
      */
     private function buildOrderClause()
     {
@@ -215,16 +200,16 @@ class Models extends Repository
                 'Cannot count models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
      * Add default values in database
      *
-     * @param boolean $check_first Check first if it seem initialized, defaults to true
+     * @param bool $check_first Check first if it seem initialized, defaults to true
      *
-     * @return boolean
+     * @return bool
      */
     public function installInit($check_first = true)
     {

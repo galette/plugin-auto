@@ -36,6 +36,7 @@
 
 namespace GaletteAuto\Controllers;
 
+use ArrayObject;
 use GaletteAuto\Auto;
 use GaletteAuto\Autos;
 use GaletteAuto\History;
@@ -84,7 +85,7 @@ class Controller extends AbstractPluginController
      * @param integer  $id_adh   Members id to check right for
      * @param string   $redirect Path to redirect to (myVehiclesList per default)
      *
-     * @return boolean
+     * @return bool|Response
      */
     protected function checkAclsFor(Response $response, $id_adh, $redirect = null)
     {
@@ -235,7 +236,7 @@ class Controller extends AbstractPluginController
         }
 
         $title = _T("Cars list", "auto");
-        if (isset($args['mine'])) {
+        if ($this->mine === true) {
             $title = _T("My cars", "auto");
         } elseif ($id_adh !== null) {
             $title = _T("Member's cars", "auto");
@@ -519,9 +520,10 @@ class Controller extends AbstractPluginController
         if (isset($post['brand']) && $post['brand'] != '') {
             $id_brand = (int)$post['brand'];
         }
+        /** @var ArrayObject $list */
         $list = $models->getList($id_brand, false);
 
-        return $response->withJson($list->toArray());
+        return $this->withJson($response, $list->toArray());
     }
 
     /**
@@ -683,7 +685,8 @@ class Controller extends AbstractPluginController
                 ->withStatus(301)
                 ->withHeader('Location', $uri);
         } else {
-            return $response->withJson(
+            return $this->withJson(
+                $response,
                 [
                     'success'   => $success
                 ]
