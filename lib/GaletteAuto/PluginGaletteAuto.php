@@ -182,7 +182,7 @@ class PluginGaletteAuto extends GalettePlugin
                 'route' => [
                     'name' => 'myVehiclesList'
                 ],
-                'icon' => 'truck pickup'
+                'icon' => 'oncoming_automobile'
             ]
         ];
     }
