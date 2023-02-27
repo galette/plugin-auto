@@ -6,8 +6,8 @@
     {% set field = obj.field %}
 
     <div class="ui basic fitted segment">
-        <a class="button" href="{{ url_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
-            <i class="ui plus circle icon" aria-hidden="true"></i>
+        <a class="ui tiny labeled icon button" href="{{ url_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
+            <i class="plus circle green icon" aria-hidden="true"></i>
             {{ _T("Add new brand", "auto") }}
         </a>
     </div>

@@ -22,10 +22,10 @@
 
 {% block infoline_actions %}
     <a
-            class="button"
+            class="ui tiny labeled icon button"
             href="{{ url_for("vehicleEdit", {"action": "add"}) }}"
     >
-        <i class="ui plus circle icon" aria-hidden="true"></i>
+        <i class="plus circle green icon" aria-hidden="true"></i>
         {{ _T("Add new vehicle", "auto") }}
     </a>
 {% endblock %}
