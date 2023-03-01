@@ -38,6 +38,7 @@
 use GaletteAuto\Controllers\Controller;
 use GaletteAuto\Controllers\Crud\PropertiesController;
 use GaletteAuto\Controllers\Crud\ModelsController;
+use Slim\Routing\RouteParser;
 
 //Constants and classes from plugin
 require_once $module['root'] . '/_config.inc.php';
@@ -113,7 +114,7 @@ $app->post(
 //Batch actions on vehicles list
 $app->post(
     '/vehicles/batch',
-    function ($request, $response) {
+    function ($request, $response) use ($container) {
         $post = $request->getParsedBody();
 
         if (isset($post['entries_sel'])) {
@@ -122,7 +123,7 @@ $app->post(
             if (isset($post['delete'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $app->router->pathFor('removeVehicles'));
+                    ->withHeader('Location', $container->get(RouteParser::class)->urlFor('removeVehicles'));
             }
         } else {
             $app->flash->addMessage(
@@ -132,7 +133,7 @@ $app->post(
 
             return $response
                 ->withStatus(301)
-                ->withHeader('Location', $app->router->pathFor('myVehiclesList'));
+                ->withHeader('Location', $container->get(RouteParser::class)->urlFor('myVehiclesList'));
         }
     }
 )->setName('batch-vehicleslist')->add($authenticate);
@@ -235,23 +236,23 @@ $app->get(
 //Batch actions on properties lists
 $app->post(
     '/{property:brand|color|state|finition|body|transmission}/batch',
-    function ($request, $response, $args) {
+    function ($request, $response, string $property) use ($container) {
         $post = $request->getParsedBody();
 
         if (isset($post['_sel'])) {
-            $filter_name = 'filter_auto' . $args['property'] . '_sel';
-            $app->session->$filter_name = $post['_sel'];
+            $filter_name = 'filter_auto' . $property . '_sel';
+            $container->get('session')->$filter_name = $post['_sel'];
 
             if (isset($post['delete'])) {
                 return $response
                     ->withStatus(301)
-                    ->withHeader('Location', $app->router->pathFor(
+                    ->withHeader('Location', $container->get(RouteParser::class)->urlFor(
                         'removeProperties',
-                        ['property' => $args['property']]
+                        ['property' => $property]
                     ));
             }
         } else {
-            $app->flash->addMessage(
+            $container->get('flash')->addMessage(
                 'error_detected',
                 _T("No entry was selected, please check at least one.", "auto")
             );
@@ -259,22 +260,22 @@ $app->post(
             $route = null;
             switch ($property) {
                 case 'color':
-                    $route = $app->container->router->pathFor('colorsList');
+                    $route = $container->get(RouteParser::class)->urlFor('colorsList');
                     break;
                 case 'state':
-                    $route = $app->container->router->pathFor('statesList');
+                    $route = $container->get(RouteParser::class)->urlFor('statesList');
                     break;
                 case 'finition':
-                    $route = $app->container->router->pathFor('finitionsList');
+                    $route = $container->get(RouteParser::class)->urlFor('finitionsList');
                     break;
                 case 'body':
-                    $route = $app->container->router->pathFor('bodiesList');
+                    $route = $container->get(RouteParser::class)->urlFor('bodiesList');
                     break;
                 case 'transmission':
-                    $route = $app->container->router->pathFor('transmissionsList');
+                    $route = $container->get(RouteParser::class)->urlFor('transmissionsList');
                     break;
                 case 'brand':
-                    $route = $app->container->router->pathFor('brandsList');
+                    $route = $container->get(RouteParser::class)->urlFor('brandsList');
                     break;
                 default:
                     throw new \RuntimeException('Unknown property ' . $property);
