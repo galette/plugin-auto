@@ -7,13 +7,14 @@
 # TwoB00m <qwertze@gmx.at>, 2021.
 # Der_Unterhaendler <Lukas.Engelschalk@gmx.de>, 2022.
 # klausellus-wallace <muetze.polka0e@icloud.com>, 2023.
+# Noah <mail.radondev@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
 "PO-Revision-Date: 2023-03-02 16:45+0000\n"
-"Last-Translator: klausellus-wallace <muetze.polka0e@icloud.com>\n"
+"Last-Translator: Noah <mail.radondev@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/de/>\n"
 "Language: de_DE\n"
@@ -32,7 +33,7 @@ msgstr ""
 #: ../_routes.php:249
 msgid "No entry was selected, please check at least one."
 msgstr ""
-"Es wurde kein Eintrag ausgewählt, bitte überprüfen Sie mindestens einen."
+"Es wurde kein Eintrag ausgewählt, bitte wählen Sie mindestens einen aus."
 
 #: ../lib/GaletteAuto/State.php:86 ../tempcache/vehicles.html.twig:379
 #: ../tempcache/history.html.twig:79
