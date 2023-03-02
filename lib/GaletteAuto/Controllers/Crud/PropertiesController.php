@@ -578,54 +578,6 @@ class PropertiesController extends AbstractPluginController
     }
 
     /**
-     * Remove properties confirmation page
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
-     * @param string   $property Property name
-     *
-     * @return Response
-     */
-    public function removeProperties(Request $request, Response $response, string $property)
-    {
-        $classname = AbstractObject::getClassForPropName($property);
-        $object = new $classname($this->zdb);
-
-        $route = AbstractObject::getListRoute($this->routeparser, $property);
-        $filter_name = 'filter_auto' . $property . '_sel';
-        $ids = $this->session->$filter_name;
-
-        $data = [
-            'id'            => $ids,
-            'redirect_uri'  => $route
-        ];
-
-        // display page
-        $this->view->render(
-            $response,
-            'confirm_removal.tpl',
-            array(
-                'type'          => $object->getFieldLabel(),
-                'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
-                'page_title'    => sprintf(
-                    _T('Remove %1$s %2$s', 'auto'),
-                    $object->getFieldLabel(),
-                    $object->value
-                ),
-                'message'       => str_replace(
-                    ['%count', '%property'],
-                    [count($data['id']), $object->getFieldLabel()],
-                    _T('You are about to remove %count %property.', 'auto')
-                ),
-                'form_url'      => $this->routeparser->urlFor('doRemoveProperty', ['property' => $property]),
-                'cancel_uri'    => $route,
-                'data'          => $data
-            )
-        );
-        return $response;
-    }
-
-    /**
      * Do remove property
      *
      * @param Request  $request  Request

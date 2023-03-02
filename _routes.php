@@ -233,61 +233,6 @@ $app->get(
     [PropertiesController::class, 'propertyShow']
 )->setName('propertyShow')->add($authenticate);
 
-//Batch actions on properties lists
-$app->post(
-    '/{property:brand|color|state|finition|body|transmission}/batch',
-    function ($request, $response, string $property) use ($container) {
-        $post = $request->getParsedBody();
-
-        if (isset($post['_sel'])) {
-            $filter_name = 'filter_auto' . $property . '_sel';
-            $container->get('session')->$filter_name = $post['_sel'];
-
-            if (isset($post['delete'])) {
-                return $response
-                    ->withStatus(301)
-                    ->withHeader('Location', $container->get(RouteParser::class)->urlFor(
-                        'removeProperties',
-                        ['property' => $property]
-                    ));
-            }
-        } else {
-            $container->get('flash')->addMessage(
-                'error_detected',
-                _T("No entry was selected, please check at least one.", "auto")
-            );
-
-            $route = null;
-            switch ($property) {
-                case 'color':
-                    $route = $container->get(RouteParser::class)->urlFor('colorsList');
-                    break;
-                case 'state':
-                    $route = $container->get(RouteParser::class)->urlFor('statesList');
-                    break;
-                case 'finition':
-                    $route = $container->get(RouteParser::class)->urlFor('finitionsList');
-                    break;
-                case 'body':
-                    $route = $container->get(RouteParser::class)->urlFor('bodiesList');
-                    break;
-                case 'transmission':
-                    $route = $container->get(RouteParser::class)->urlFor('transmissionsList');
-                    break;
-                case 'brand':
-                    $route = $container->get(RouteParser::class)->urlFor('brandsList');
-                    break;
-                default:
-                    throw new \RuntimeException('Unknown property ' . $property);
-            }
-
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $route);
-        }
-    }
-)->setName('batch-propertieslist')->add($authenticate);
-
 $app->get(
     '/{property:brand|color|state|finition|body|transmission}/remove/{id:\d+}',
     [PropertiesController::class, 'removeProperty']

@@ -31,37 +31,15 @@
 
 {% block header %}
     {% set columns = [
-        {'label': ''},
         {'label': field_name}
     ] %}
     {{ parent() }}
 {% endblock %}
 
-{% set batch = {
-    'route': {
-        'name': 'batch-propertieslist',
-        'args': {"property": obj.getRouteName()}
-    },
-    'modal': {
-        'title': _T("No vehicle selected", "auto"),
-        'content': _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")
-    }
-} %}
-{%  set batch_actions = [
-    {
-        'name': 'delete',
-        'label': _T("Delete"),
-        'icon': 'red trash'
-    }
-] %}
-
 {% block body %}
     {% for o in list %}
         {% set edit_link = url_for("propertyEdit", {"property": obj.getRouteName(), "action": "edit", "id": o[pk]}) %}
     <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-        <td>
-            <input type="checkbox" name="entries_sel[]" value="{{ o[pk] }}"/>
-        </td>
         <td>
             <a
                 href="{% if show is defined and show == true %}{{ url_for("propertyShow", {"property": obj.getRouteName(), "id": o[pk]}) }}{% else %}{{ edit_link }}{% endif %}"
