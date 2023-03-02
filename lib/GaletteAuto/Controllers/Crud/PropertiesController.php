@@ -557,7 +557,7 @@ class PropertiesController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'confirm_removal.tpl',
+            'modals/confirm_removal.html.twig',
             array(
                 'type'          => $object->getFieldLabel(),
                 'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
@@ -668,7 +668,7 @@ class PropertiesController extends AbstractPluginController
                 $error_detected = str_replace(
                     '%property',
                     $object->getFieldLabel(),
-                    _T('An error occured trying to remove %property :/', 'auto')
+                    _T('An error occurred trying to remove %property :/', 'auto')
                 );
 
                 $this->flash->addMessage(
