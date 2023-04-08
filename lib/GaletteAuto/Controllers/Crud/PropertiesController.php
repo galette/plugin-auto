@@ -241,7 +241,6 @@ class PropertiesController extends AbstractPluginController
                 break;
             default:
                 throw new \RuntimeException('Unknown property ' . $property);
-                break;
         }
 
         $filters = $this->getFilters($obj);
@@ -261,18 +260,19 @@ class PropertiesController extends AbstractPluginController
 
         $this->saveFilters($obj, $filters);
 
-        //assign pagination variables to the template and add pagination links
-        $filters->setViewPagination($this->routeparser, $this->view, false);
-
         $params = [
             'page_title'    => $title,
             //'models'        => $models->getList(),
+            'list'          => $obj->getList(),
             'set'           => $property,
             'field_name'    => $obj->getFieldLabel(),
             'add_text'      => $add_text,
             'obj'           => $obj,
             'require_dialog' => true
         ];
+
+        //assign pagination variables to the template and add pagination links
+        $filters->setViewPagination($this->routeparser, $this->view, false);
 
         if (isset($can_show)) {
             $params['show'] = $can_show;
