@@ -37,6 +37,7 @@
 namespace GaletteAuto\Controllers;
 
 use ArrayObject;
+use Galette\Repository\Members;
 use GaletteAuto\Auto;
 use GaletteAuto\Autos;
 use GaletteAuto\History;
@@ -349,22 +350,21 @@ class Controller extends AbstractPluginController
         ];
 
         // members
-        $members = [];
-        $m = new \Galette\Repository\Members();
-        $members = $m->getDropdownMembers($this->zdb, $this->login);
+        $m = new Members();
+        $oid = null;
+        if ($auto->owner->id > 0) {
+            $oid = $auto->owner->id;
+        }
+        $members = $m->getDropdownMembers(
+            $this->zdb,
+            $this->login,
+            $oid
+        );
 
         $params['members'] = [
             'filters'   => $m->getFilters(),
             'count'     => $m->getCount()
         ];
-
-        //check if current attached member is part of the list
-        if (
-            $auto->owner->id > 0
-            && !isset($members[$auto->owner->id])
-        ) {
-            $members[$auto->owner->id] = Adherent::getSName($this->zdb, $auto->owner->id, true);
-        }
 
         if (count($members)) {
             $params['members']['list'] = $members;
