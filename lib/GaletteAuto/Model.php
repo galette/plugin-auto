@@ -56,7 +56,7 @@ use GaletteAuto\Filters\ModelsList;
  *
  * @property integer $id
  * @property string $model
- * @property integer $brand
+ * @property int|Brand $brand
  * @property Brand $obrand
  */
 class Model
@@ -150,7 +150,7 @@ class Model
         try {
             $values = array(
                 'model'     => $this->model,
-                Brand::PK   => $this->brand->id_brand
+                Brand::PK   => $this->brand->id
             );
             if ($new) {
                 $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);

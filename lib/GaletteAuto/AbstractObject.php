@@ -56,6 +56,8 @@ use GaletteAuto\Filters\PropertiesList;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property int $id
  */
 abstract class AbstractObject
 {

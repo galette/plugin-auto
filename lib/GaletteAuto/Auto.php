@@ -610,7 +610,7 @@ class Auto
      * @param string $name  name of the property we want to assign a value to
      * @param mixed  $value a relevant value for the property
      *
-     * @return void|false
+     * @return void
      */
     public function __set(string $name, $value)
     {
@@ -650,7 +650,6 @@ class Auto
                 $name . '`)',
                 Analog::INFO
             );
-            return false;
         }
     }
 
