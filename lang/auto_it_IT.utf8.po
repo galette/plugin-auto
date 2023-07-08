@@ -1,22 +1,22 @@
-# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2023.
 # Luca De Filippo <luca.defilippo@translationcommons.org>, 2020.
 # Lory ~ <dury.lorenzo@gmail.com>, 2021.
 # Cecilia Frego <cecilia.frego@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2021-11-21 13:11+0000\n"
+"PO-Revision-Date: 2023-07-08 08:09+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/it/>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: ../_routes.php:123
 msgid "No vehicle was selected, please check at least one name."
@@ -457,12 +457,11 @@ msgid "Finition"
 msgstr ""
 
 #: ../lib/GaletteAuto/Finition.php:123
-#, fuzzy, php-format
-#| msgid "finition"
+#, php-format
 msgid "%count finition"
 msgid_plural "%count finitions"
-msgstr[0] "finitura"
-msgstr[1] "finitura"
+msgstr[0] "%count finizione"
+msgstr[1] "%count finizioni"
 
 #: ../tempcache/vehicles.html.twig:74
 msgid "Car's base informations"
