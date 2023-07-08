@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2022-07-03 22:39+0200\n"
-"PO-Revision-Date: 2023-07-08 06:08+0000\n"
+"PO-Revision-Date: 2023-07-08 06:11+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/fr/>\n"
@@ -181,7 +181,7 @@ msgstr ""
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:431
 #: ../lib/GaletteAuto/Model.php:265
 msgid "- You must provide a value!"
-msgstr "- Vous devez fournir une valeur&nbsp;!"
+msgstr "- Vous devez fournir une valeur !"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:440
 msgid "- An error occured while saving record. Please try again."
@@ -307,7 +307,7 @@ msgstr "%count véhicules ont été supprimés avec succès."
 
 #: ../lib/GaletteAuto/Model.php:259
 msgid "- You must select a brand!"
-msgstr "- Vous devez sélectionner une marque&nbsp;!"
+msgstr "- Vous devez sélectionner une marque !"
 
 #: ../lib/GaletteAuto/Color.php:86 ../tempcache/vehicles.html.twig:352
 #: ../tempcache/history.html.twig:73
@@ -495,19 +495,19 @@ msgstr "Modèle"
 
 #: ../tempcache/vehicles.html.twig:142
 msgid "First registration date:"
-msgstr "Date de première immatriculation&nbsp;:"
+msgstr "Date de première immatriculation :"
 
 #: ../tempcache/vehicles.html.twig:148
 msgid "First circulation date:"
-msgstr "Date de première mise en circulation&nbsp;:"
+msgstr "Date de première mise en circulation :"
 
 #: ../tempcache/vehicles.html.twig:154
 msgid "Mileage:"
-msgstr "Kilométrage&nbsp;:"
+msgstr "Kilométrage :"
 
 #: ../tempcache/vehicles.html.twig:161
 msgid "Seats:"
-msgstr "Places&nbsp;:"
+msgstr "Places :"
 
 #: ../tempcache/vehicles.html.twig:173 ../tempcache/vehicles.html.twig:189
 msgid "Car's photo"
@@ -519,7 +519,7 @@ msgstr "Informations sur l'état courant de la voiture"
 
 #: ../tempcache/vehicles.html.twig:221
 msgid "Current owner:"
-msgstr "Propriétaire actuel&nbsp;:"
+msgstr "Propriétaire actuel :"
 
 #: ../tempcache/vehicles.html.twig:237
 msgid "Show full car state history"
@@ -551,7 +551,7 @@ msgstr "Choisissez un état"
 
 #: ../tempcache/vehicles.html.twig:386
 msgid "Registration:"
-msgstr "Immatriculation&nbsp;:"
+msgstr "Immatriculation :"
 
 #: ../tempcache/vehicles.html.twig:398
 msgid "Car's technical informations"
@@ -563,7 +563,7 @@ msgstr "Choisissez une carrosserie"
 
 #: ../tempcache/vehicles.html.twig:425
 msgid "Body:"
-msgstr "Carrosseries&nbsp;:"
+msgstr "Carrosseries :"
 
 #: ../tempcache/vehicles.html.twig:431
 msgid "Choose a transmission"
@@ -571,7 +571,7 @@ msgstr "Choisissez une transmission"
 
 #: ../tempcache/vehicles.html.twig:452
 msgid "Transmission:"
-msgstr "Transmission&nbsp;:"
+msgstr "Transmission :"
 
 #: ../tempcache/vehicles.html.twig:458
 msgid "Choose a finition"
@@ -579,19 +579,19 @@ msgstr "Choisissez une finition"
 
 #: ../tempcache/vehicles.html.twig:479
 msgid "Finition:"
-msgstr "Finition&nbsp;:"
+msgstr "Finition :"
 
 #: ../tempcache/vehicles.html.twig:486
 msgid "Chassis number:"
-msgstr "Numéro de chassis&nbsp;:"
+msgstr "Numéro de chassis :"
 
 #: ../tempcache/vehicles.html.twig:493
 msgid "Horsepower:"
-msgstr "Puissance&nbsp;:"
+msgstr "Puissance :"
 
 #: ../tempcache/vehicles.html.twig:500
 msgid "Engine size:"
-msgstr "Cylindrée&nbsp;:"
+msgstr "Cylindrée :"
 
 #: ../tempcache/vehicles.html.twig:506
 msgid "Choose a fuel"
@@ -599,7 +599,7 @@ msgstr "Choisissez un carburant"
 
 #: ../tempcache/vehicles.html.twig:527
 msgid "Fuel:"
-msgstr "Carburant&nbsp;:"
+msgstr "Carburant :"
 
 #: ../tempcache/vehicles.html.twig:538 ../tempcache/vehicles.html.twig:545
 msgid "Comment"
