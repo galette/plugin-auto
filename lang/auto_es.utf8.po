@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-09-20 02:21+0200\n"
-"PO-Revision-Date: 2023-09-20 00:26+0000\n"
+"PO-Revision-Date: 2023-09-20 00:29+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/es/>\n"
@@ -437,10 +437,8 @@ msgstr "Vehículos"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:154
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:155
-#, fuzzy
-#| msgid "Vehicle"
 msgid "Vehicles"
-msgstr "Vehículo"
+msgstr "Vehículos"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:201
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:202
