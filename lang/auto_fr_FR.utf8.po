@@ -14,18 +14,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-09-20 02:21+0200\n"
-"PO-Revision-Date: 2023-07-08 06:11+0000\n"
+"PO-Revision-Date: 2023-09-20 00:26+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: ../_routes.php:131
 msgid "No vehicle was selected, please check at least one name."
@@ -198,8 +198,6 @@ msgid "Remove %1$s %2$s"
 msgstr "Supprimer %1$s %2$s"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:623
-#, fuzzy
-#| msgid "An error occured trying to remove %property :/"
 msgid "An error occurred trying to remove %property :/"
 msgstr "Une erreur est survenue lors de la suppression de %property :/"
 
@@ -446,10 +444,8 @@ msgstr "Voitures"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:154
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:155
-#, fuzzy
-#| msgid "Vehicle"
 msgid "Vehicles"
-msgstr "Véhicule"
+msgstr "Véhicules"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:201
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:202
