@@ -103,7 +103,7 @@ class Picture extends GalettePicture
     {
         $this->file_path = realpath(
             $this->plugins->getTemplatesPathFromName('Galette Auto') .
-            '/../../webroot/images/car.png'
+            '/../../webroot/images/1f698.png'
         );
         $this->format = 'png';
         $this->mime = 'image/png';
