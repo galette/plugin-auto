@@ -102,9 +102,10 @@
                 {{ _T("Current car's state informations", "auto") }}
             </div>
             <div class="active content">
+                <div class="field required">
                 {% if car.id %}
+                    <label>{{ _T("Current owner:", "auto") }}</label>
                     <p>
-                        <span class="bline">{{ _T("Current owner:", "auto") }}</span>
                         <span>
                             {{ car.owner.sfullname }}
                             {% if login.isAdmin() or login.isStaff() %}
@@ -122,24 +123,26 @@
                         </span>
                     </p>
                 {% else %}
+                    <label>{{ _T("Owner:", "auto") }}</label>
                     <input type="hidden" name="change_owner" id="change_owner" value="1"/>
                 {% endif %}
 
                 {% if login.isAdmin() or login.isStaff() %}
-                <span id="owner_elt"{% if car.id %} class="displaynone"{% endif %}>
-                    <div id="owner" class="jsonly search-dropdown ui input nochosen paginated">
-                        <input id="owner_input" type="text" name="owner" value="{{ car.owner.id }}" placeholder="{{ _T("Owner:", "auto") }}">
-                        <i class="jsonly displaynone dropdown icon"></i>
-                        <span class="ui mini compact icon disabled button prev-results"><i class="jsonly displaynone chevron circle left icon disabled button tooltip" title="{{ _T("Load previous members...") }}"></i></span>
-                        <span class="ui mini compact icon disabled button next-results"><i class="jsonly displaynone chevron circle right icon disabled button tooltip" title="{{ _T("Load following members...") }}"></i></span>
-                        <div class="jsonly displaynone default text">{{ _T("Search for name or ID and pick member") }}</div>
-                        <div class="jsonly displaynone menu">
-        {% for k, v in members.list %}
-                            <div class="item" data-value="{{ k }}">{{ v }}</div>
-        {% endfor %}
+                    <span id="owner_elt"{% if car.id %} class="displaynone"{% endif %}>
+                        <div id="owner" class="jsonly search-dropdown ui input nochosen paginated">
+                            <input id="owner_input" type="text" name="owner" value="{{ car.owner.id }}" placeholder="{{ _T("Owner:", "auto") }}" required="required">
+                            <i class="jsonly displaynone dropdown icon"></i>
+                            <span class="ui mini compact icon disabled button prev-results"><i class="jsonly displaynone chevron circle left icon disabled button tooltip" title="{{ _T("Load previous members...") }}"></i></span>
+                            <span class="ui mini compact icon disabled button next-results"><i class="jsonly displaynone chevron circle right icon disabled button tooltip" title="{{ _T("Load following members...") }}"></i></span>
+                            <div class="jsonly displaynone default text">{{ _T("Search for name or ID and pick member") }}</div>
+                            <div class="jsonly displaynone menu">
+            {% for k, v in members.list %}
+                                <div class="item" data-value="{{ k }}">{{ v }}</div>
+            {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                </span>
+                    </span>
+                </div>
                 {% else %}
                     <input type="hidden" name="owner" value="{{ car.owner.id }}"/>
                     {{ members.list[car.owner.id] }}
