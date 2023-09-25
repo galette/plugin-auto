@@ -1,6 +1,7 @@
 {% extends (mode == 'ajax') ? "ajax.html.twig" : "page.html.twig" %}
 
 {% block content %}
+    {%  if entries|length > 0 %}
         <table id="listing">
             <thead>
                 <tr>
@@ -22,8 +23,8 @@
                 </tr>
             </thead>
             <tbody>
-{% for entry in entries %}
-    {% set owner = entry.owner %}
+        {% for entry in entries %}
+            {% set owner = entry.owner %}
                 <tr>
                     <td>{{ entry.formatted_date }}</td>
                     <td>
@@ -42,9 +43,12 @@
                     <td>{{ entry.color.value }}</td>
                     <td>{{ entry.state.value}}</td>
                 </tr>
-{% else %}
-                <tr><td colspan="5" class="emptylist">{{ _T("no history entries", "auto") }}</td></tr>
-{% endfor %}
+        {% endfor %}
             </tbody>
         </table>
+    {% else %}
+        <div class="ui message">
+            <p>{{ _T("no history entries", "auto") }}</p>
+        </div>
+    {% endif %}
 {% endblock %}

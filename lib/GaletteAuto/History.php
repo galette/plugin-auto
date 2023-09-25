@@ -174,11 +174,8 @@ class History
     {
         for ($i = 0; $i < count($this->entries); $i++) {
             //put a formatted date to show
-            //strftime output is ISO-8859-1...
-            $this->entries[$i]['formatted_date'] = strftime(
-                '%d %B %Y',
-                strtotime($this->entries[$i]['history_date'])
-            );
+            $date = new \DateTime($this->entries[$i]['history_date']);
+            $this->entries[$i]['formatted_date'] = $date->format(__('Y-m-d'));
             //associate member to current history entry
             $this->entries[$i]['owner']
                 = new Adherent($this->zdb, (int)$this->entries[$i]['id_adh']);

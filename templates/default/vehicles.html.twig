@@ -335,7 +335,7 @@
                 });
 
         {% if mode != 'new' %}
-                $('#state_history').click(function(){
+                $('#state_history').click(function() {
                     $.ajax({
                         url: this.href,
                         success: function(res){
@@ -345,18 +345,11 @@
                     return false;
                 });
 
-                var _history_dialog = function(res){
-                    var _el = $('<div id="history_list" title="{{ _T("Car's history", "auto")|e('js') }}"> </div>');
-                    _el.appendTo('#modifform').dialog({
-                        modal: true,
-                        hide: 'fold',
-                        width: '60%',
-                        height: 400,
-                        close: function(event, ui){
-                            _el.remove();
-                        }
-                    });
-                    $('#history_list').append( res );
+                var _history_dialog = function(res) {
+                    $('body').modal({
+                        title: '{{ _T("Car's history", "auto")|e('js') }}',
+                        content: res
+                    }).modal('show');
                 }
         {% endif %}
     {% endif %}
