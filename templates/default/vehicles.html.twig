@@ -93,8 +93,8 @@
                     } %}
                 {% endif %}
                 <div class="ui file action input">
-                    <input type="file" name="photo"/>
-                    <label for="photo" class="ui button">
+                    <input id="photo_file" type="file" name="photo"/>
+                    <label for="photo_file" class="ui button">
                         <i class="blue upload icon"></i>
                         {% if car.hasPicture() %}{{ _T("Choose another file") }}{% else %}{{ _T("Choose a file") }}{% endif %}
                     </label>
