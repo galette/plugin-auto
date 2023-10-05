@@ -1,7 +1,7 @@
 {% extends 'elements/list.html.twig' %}
 
 {% set nb = autos|length %}
-{% set is_public = true %}
+{% set is_public = not login.isLogged() %}
 
 {% set form = {
     'route': {
