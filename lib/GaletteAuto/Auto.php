@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2022 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -57,7 +57,7 @@ use GaletteAuto\Transmission;
  * @name      Auto
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
@@ -714,22 +714,27 @@ class Auto
                 //dates
                 case 'first_registration_date':
                 case 'first_circulation_date':
-                    if (preg_match("@^([0-9]{2})/([0-9]{2})/([0-9]{4})$@", $value, $array_jours)) {
-                        if (checkdate($array_jours[2], $array_jours[1], $array_jours[3])) {
-                            $value = $array_jours[3] . '-' . $array_jours[2] . '-' . $array_jours[1];
-                            $this->$prop = $value;
-                        } else {
-                            $this->errors[] = str_replace(
-                                '%s',
-                                $this->getPropName($prop),
-                                _T("- Non valid date for %s!")
-                            );
+                    try {
+                        $d = \DateTime::createFromFormat(__("Y-m-d"), $value);
+                        if ($d === false) {
+                            //try with non localized date
+                            $d = \DateTime::createFromFormat("Y-m-d", $value);
+                            if ($d === false) {
+                                throw new \Exception('Incorrect format');
+                            }
                         }
-                    } else {
+                        $this->$prop = $d->format('Y-m-d');
+                    } catch (\Throwable $e) {
                         $this->errors[] = str_replace(
-                            '%s',
-                            $this->getPropName($prop),
-                            _T("- Wrong date format for %s (dd/mm/yyyy)!")
+                            array(
+                                '%date_format',
+                                '%field'
+                            ),
+                            array(
+                                __("Y-m-d"),
+                                $this->getPropName($prop)
+                            ),
+                            _T("- Wrong date format (%date_format) for %field!")
                         );
                     }
                     break;
