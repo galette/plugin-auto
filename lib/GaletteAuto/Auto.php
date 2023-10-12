@@ -719,7 +719,7 @@ class Auto
                                 $this->getPropName($prop),
                                 mb_strlen($value)
                             ),
-                            _T("- Maximum size for %field is %maxsize (current %cursize)!")
+                            _T("- Maximum size for %field is %maxsize (current %cursize)!", "auto")
                         );
                     }
                     break;
