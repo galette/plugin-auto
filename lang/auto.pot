@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-20 02:21+0200\n"
+"POT-Creation-Date: 2023-10-12 16:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 msgid "No vehicle was selected, please check at least one name."
 msgstr ""
 
-#: ../lib/GaletteAuto/State.php:86 ../tempcache/vehicles.html.twig:380
-#: ../tempcache/history.html.twig:79
+#: ../lib/GaletteAuto/State.php:86 ../tempcache/vehicles.html.twig:397
+#: ../tempcache/history.html.twig:82
 msgid "State"
 msgstr ""
 
@@ -276,8 +276,8 @@ msgstr ""
 msgid "- You must select a brand!"
 msgstr ""
 
-#: ../lib/GaletteAuto/Color.php:86 ../tempcache/vehicles.html.twig:353
-#: ../tempcache/history.html.twig:73
+#: ../lib/GaletteAuto/Color.php:86 ../tempcache/vehicles.html.twig:370
+#: ../tempcache/history.html.twig:76
 msgid "Color"
 msgstr ""
 
@@ -420,6 +420,10 @@ msgstr ""
 msgid "Car updated"
 msgstr ""
 
+#: ../lib/GaletteAuto/Auto.php:722
+msgid "- Maximum size for %field is %maxsize (current %cursize)!"
+msgstr ""
+
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:70
 msgid "Cars"
 msgstr ""
@@ -457,7 +461,7 @@ msgstr ""
 msgid "Choose a brand"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:602
+#: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:619
 msgid "Choose a model"
 msgstr ""
 
@@ -487,95 +491,95 @@ msgstr ""
 msgid "Car's photo"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:210
+#: ../tempcache/vehicles.html.twig:223
 msgid "Current car's state informations"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:221
+#: ../tempcache/vehicles.html.twig:233
 msgid "Current owner:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:237
+#: ../tempcache/vehicles.html.twig:250
 msgid "Show full car state history"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:242
+#: ../tempcache/vehicles.html.twig:255
 msgid "Car state history"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:250
+#: ../tempcache/vehicles.html.twig:263
 msgid "Change car's owner"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:280
+#: ../tempcache/vehicles.html.twig:275 ../tempcache/vehicles.html.twig:296
 msgid "Owner:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:332
+#: ../tempcache/vehicles.html.twig:349
 msgid "Choose a color"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:359
+#: ../tempcache/vehicles.html.twig:376
 msgid "Choose a state"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:387
+#: ../tempcache/vehicles.html.twig:404
 msgid "Registration:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:399
+#: ../tempcache/vehicles.html.twig:416
 msgid "Car's technical informations"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:405
+#: ../tempcache/vehicles.html.twig:422
 msgid "Choose a body"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:426
+#: ../tempcache/vehicles.html.twig:443
 msgid "Body:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:432
+#: ../tempcache/vehicles.html.twig:449
 msgid "Choose a transmission"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:453
+#: ../tempcache/vehicles.html.twig:470
 msgid "Transmission:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:459
+#: ../tempcache/vehicles.html.twig:476
 msgid "Choose a finition"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:480
+#: ../tempcache/vehicles.html.twig:497
 msgid "Finition:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:487
+#: ../tempcache/vehicles.html.twig:504
 msgid "Chassis number:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:494
+#: ../tempcache/vehicles.html.twig:511
 msgid "Horsepower:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:501
+#: ../tempcache/vehicles.html.twig:518
 msgid "Engine size:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:507
+#: ../tempcache/vehicles.html.twig:524
 msgid "Choose a fuel"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:528
+#: ../tempcache/vehicles.html.twig:545
 msgid "Fuel:"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:539 ../tempcache/vehicles.html.twig:546
+#: ../tempcache/vehicles.html.twig:556 ../tempcache/vehicles.html.twig:563
 msgid "Comment"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:647
+#: ../tempcache/vehicles.html.twig:665
 msgid "Car's history"
 msgstr ""
 
@@ -606,7 +610,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:105 ../tempcache/history.html.twig:61
+#: ../tempcache/vehicles_list.html.twig:105 ../tempcache/history.html.twig:64
 #: ../tempcache/public_vehicles_list.html.twig:78
 msgid "Owner"
 msgstr ""
@@ -628,11 +632,11 @@ msgstr ""
 msgid "No car in the database"
 msgstr ""
 
-#: ../tempcache/history.html.twig:67
+#: ../tempcache/history.html.twig:70
 msgid "Registration"
 msgstr ""
 
-#: ../tempcache/history.html.twig:152
+#: ../tempcache/history.html.twig:162
 msgid "no history entries"
 msgstr ""
 
