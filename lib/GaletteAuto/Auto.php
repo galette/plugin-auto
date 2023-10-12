@@ -703,12 +703,30 @@ class Auto
             }
 
             switch ($prop) {
+                //string values with special check
+                case 'registration':
+                    if (mb_strlen($value) <= 10) {
+                        $this->$prop = $value;
+                    } else {
+                        $this->errors[] = str_replace(
+                            array(
+                                '%maxsize',
+                                '%field',
+                                '%cursize'
+                            ),
+                            array(
+                                10,
+                                $this->getPropName($prop),
+                                mb_strlen($value)
+                            ),
+                            _T("- Maximum size for %field is %maxsize (current %cursize)!")
+                        );
+                    }
+                    break;
                 //string values, no check
                 case 'name':
                 case 'comment':
-                //string values with special check?
                 case 'chassis_number':
-                case 'registration':
                     $this->$prop = $value;
                     break;
                 //dates
