@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 16:41+0200\n"
-"PO-Revision-Date: 2023-10-12 16:41+0200\n"
+"POT-Creation-Date: 2023-11-22 11:34+0100\n"
+"PO-Revision-Date: 2023-11-22 11:34+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -208,6 +208,8 @@ msgid "My cars"
 msgstr "My cars"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:244
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
 msgid "Member's cars"
 msgstr "Member's cars"
 
@@ -431,11 +433,6 @@ msgstr "Cars"
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:155
 msgid "Vehicles"
 msgstr "Vehicles"
-
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
-msgid "Member cars"
-msgstr "Member cars"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"

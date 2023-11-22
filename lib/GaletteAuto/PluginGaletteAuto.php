@@ -198,8 +198,8 @@ class PluginGaletteAuto extends GalettePlugin
     {
         return [
             [
-                'label' => _T("Member cars", "auto"),
-                'title' => _T("Member cars", "auto"),
+                'label' => _T("Member's cars", "auto"),
+                'title' => _T("Member's cars", "auto"),
                 'route' => [
                     'name' => 'memberVehiclesList',
                     'args' => ['id' => $member->id]
