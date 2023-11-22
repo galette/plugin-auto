@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 16:41+0200\n"
+"POT-Creation-Date: 2023-11-22 11:34+0100\n"
 "PO-Revision-Date: 2022-01-21 13:33+0000\n"
 "Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/auto-"
@@ -209,6 +209,8 @@ msgid "My cars"
 msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:244
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
 msgid "Member's cars"
 msgstr ""
 
@@ -431,11 +433,6 @@ msgstr ""
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:154
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:155
 msgid "Vehicles"
-msgstr ""
-
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
-msgid "Member cars"
 msgstr ""
 
 #: ../lib/GaletteAuto/Finition.php:86

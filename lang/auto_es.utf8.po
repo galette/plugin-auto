@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 16:41+0200\n"
+"POT-Creation-Date: 2023-11-22 11:34+0100\n"
 "PO-Revision-Date: 2023-09-20 00:29+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/auto-"
@@ -220,6 +220,8 @@ msgid "My cars"
 msgstr "Mis vehículos"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:244
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
 msgid "Member's cars"
 msgstr "Vehículos del miembro"
 
@@ -443,11 +445,6 @@ msgstr "Vehículos"
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:155
 msgid "Vehicles"
 msgstr "Vehículos"
-
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
-msgid "Member cars"
-msgstr "Vehículos del miembro"
 
 #: ../lib/GaletteAuto/Finition.php:86
 msgid "Finition"
@@ -712,6 +709,9 @@ msgstr ""
 #: ../tempcache/model.html.twig:110
 msgid "Add a brand"
 msgstr "Añade una marca"
+
+#~ msgid "Member cars"
+#~ msgstr "Vehículos del miembro"
 
 #~ msgid "No entry was selected, please check at least one."
 #~ msgstr "Ningún apunte fue seleccionado, marque al menos uno."
