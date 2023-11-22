@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-10-12 16:41+0200\n"
-"PO-Revision-Date: 2023-10-19 20:27+0000\n"
+"PO-Revision-Date: 2023-11-22 10:34+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/fr/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2\n"
 
 #: ../_routes.php:131
 msgid "No vehicle was selected, please check at least one name."
@@ -239,7 +239,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:322
 msgid "New vehicle"
-msgstr "Ajouter un nouveau véhicule"
+msgstr "Nouveau véhicule"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:323
 #, php-format
