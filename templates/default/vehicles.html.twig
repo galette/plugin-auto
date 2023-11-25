@@ -118,7 +118,7 @@
                                 {# Does car's history should be visible by the actual owner? #}
                                 <a href="{{ url_for("vehicleHistory", {"id": car.id}) }}" title="{{ _T("Show full car state history", "auto") }}" id="state_history">
                                     <i class="ui history icon"></i>
-                                    <span class="displaynone">{{ _T("Car state history", "auto") }}</span>
+                                    <span class="visually-hidden">{{ _T("Car state history", "auto") }}</span>
                                 </a>
 
                                 <div id="change_owner-checkbox" class="ui toggle checkbox">
