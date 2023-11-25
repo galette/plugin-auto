@@ -60,14 +60,14 @@
         <td class="center nowrap">
             <a href="{{ edit_link }}" class="tooltip action">
                 <i class="ui edit icon"></i>
-                <span class="displaynone">{{ _T("Edit %property", "auto")|replace({"%property": m.obrand.value ~ ' ' ~ m.model}) }}</span>
+                <span class="visually-hidden">{{ _T("Edit %property", "auto")|replace({"%property": m.obrand.value ~ ' ' ~ m.model}) }}</span>
             </a>
             <a
                 class="delete tooltip"
                 href="{{ url_for("removeModel", {"id": m.id}) }}"
             >
                 <i class="ui red trash icon"></i>
-                <span class="displaynone">{{ _T("%property: remove from database", "auto")|replace({"%property": m.obrand.value ~ ' ' ~ m.model}) }}</span>
+                <span class="visually-hidden">{{ _T("%property: remove from database", "auto")|replace({"%property": m.obrand.value ~ ' ' ~ m.model}) }}</span>
             </a>
         </td>
     </tr>

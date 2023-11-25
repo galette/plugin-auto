@@ -29,11 +29,11 @@
                     <td>{{ entry.formatted_date }}</td>
                     <td>
                         {% if owner.isCompany() %}
-                            <i class="ui building outline icon tooltip"><span class="displaynone">{{ _T('Is a company') }}</span></i>
+                            <i class="ui building outline icon tooltip"><span class="visually-hidden">{{ _T('Is a company') }}</span></i>
                         {%  elseif owner.isMan() %}
-                            <i class="ui male icon tooltip"><span class="displaynone">{{ _T('Is a man') }}</span></i>
+                            <i class="ui male icon tooltip"><span class="visually-hidden">{{ _T('Is a man') }}</span></i>
                         {%  elseif owner.isWoman() %}
-                            <i class="ui female icon tooltip"><span class="displaynone">{{ _T('Is a woman') }}</span></i>
+                            <i class="ui female icon tooltip"><span class="visually-hidden">{{ _T('Is a woman') }}</span></i>
                         {% else %}
                             <i class="ui icon"></i>
                         {% endif %}
