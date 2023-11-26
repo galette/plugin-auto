@@ -47,7 +47,7 @@
         {% set edit_link = url_for("vehicleEdit", {"action": "edit", "id": auto.id}) %}
 
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-            <td>
+            <td class="collapsing">
                 <input type="checkbox" name="entries_sel[]" value="{{ auto.id }}"/>
             </td>
             <td><a href="{{ edit_link }}">{{ auto.name }}</a></td>
@@ -93,21 +93,23 @@
     {% endif %}
 {% endblock %}
 
-{% if login.isAdmin() or login.isStaff() %}
-    {% set batch = {
-        'route': {
-            'name': 'batch-vehicleslist'
-        },
-        'modal': {
-            'title': _T("No vehicle selected", "auto"),
-            'content': _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")
-        }
-    } %}
-    {%  set batch_actions = [
-        {
-            'name': 'delete',
-            'label': _T("Delete"),
-            'icon': 'red trash'
-        }
-    ] %}
+{% if nb > 0 %}
+    {% if login.isAdmin() or login.isStaff() %}
+        {% set batch = {
+            'route': {
+                'name': 'batch-vehicleslist'
+            },
+            'modal': {
+                'title': _T("No vehicle selected", "auto"),
+                'content': _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")
+            }
+        } %}
+        {%  set batch_actions = [
+            {
+                'name': 'delete',
+                'label': _T("Delete"),
+                'icon': 'red trash'
+            }
+        ] %}
+    {% endif %}
 {% endif %}

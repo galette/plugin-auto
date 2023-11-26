@@ -556,7 +556,7 @@ class Controller extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'confirm_removal.tpl',
+            'modals/confirm_removal.html.twig',
             array(
                 'type'          => _T("Vehicle", "auto"),
                 'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
@@ -606,7 +606,7 @@ class Controller extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'confirm_removal.tpl',
+            'modals/confirm_removal.html.twig',
             array(
                 'type'          => _T("Vehicle", "auto"),
                 'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : '',
