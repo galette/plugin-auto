@@ -118,7 +118,7 @@ $app->post(
         $post = $request->getParsedBody();
 
         if (isset($post['entries_sel'])) {
-            $app->session->filter_vehicles = $post['entries_sel'];
+            $container->get('session')->filter_vehicles = $post['entries_sel'];
 
             if (isset($post['delete'])) {
                 return $response
