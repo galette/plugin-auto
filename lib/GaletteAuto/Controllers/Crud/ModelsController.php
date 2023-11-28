@@ -304,14 +304,15 @@ class ModelsController extends AbstractPluginController
             $this->session->auto_model = $post;
             if (!$is_new) {
                 $id = $post[Model::PK];
+                $route = $this->routeparser->urlFor(
+                    'modelEdit',
+                    [
+                        'id' => $id
+                    ]
+                );
+            } else {
+                $route = $this->routeparser->urlFor('modelAdd');
             }
-            $route = $this->routeparser->urlFor(
-                'modelEdit',
-                [
-                    'action'    => $action,
-                    'id'        => $id
-                ]
-            );
 
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(
