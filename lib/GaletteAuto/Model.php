@@ -197,7 +197,7 @@ class Model
                 implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 

@@ -56,7 +56,7 @@ use GaletteAuto\Repository\Models;
  * Galette Auto plugin controller for properties (brands, models, colors, ...)
  *
  * @category  Plugins
- * @name      Autos
+ * @name      PropertiesList
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
  * @copyright 2017-2023 The Galette Team
@@ -609,37 +609,42 @@ class PropertiesController extends AbstractPluginController
                 $ids = $post['id'];
             }
 
-            $model = new Model($this->zdb);
-            $del = $model->delete($ids);
-
             $classname = AbstractObject::getClassForPropName($property);
             $object = new $classname($this->zdb);
-            $del = $object->delete($ids);
 
-            if ($del !== true) {
-                $error_detected = str_replace(
-                    '%property',
-                    $object->getFieldLabel(),
-                    _T('An error occurred trying to remove %property :/', 'auto')
-                );
-
-                $this->flash->addMessage(
-                    'error_detected',
-                    $error_detected
-                );
-            } else {
-                $success_detected = str_replace(
-                    ['%count', '%property'],
-                    [count($ids), $object->getFieldLabel()],
-                    _T("%count %property have been successfully deleted.", "auto")
-                );
+            try {
+                $object->delete($ids);
 
                 $this->flash->addMessage(
                     'success_detected',
-                    $success_detected
+                    str_replace(
+                        ['%count', '%property'],
+                        [count($ids), $object->getFieldLabel()],
+                        _T("%count %property have been successfully deleted.", "auto")
+                    )
                 );
 
                 $success = true;
+            } catch (\Throwable $e) {
+                if ($this->zdb->isForeignKeyException($e)) {
+                    $this->flash->addMessage(
+                        'error_detected',
+                        str_replace(
+                            '%property',
+                            mb_strtolower($object->getFieldLabel()),
+                            _T("This %property is used by one or more vehicles, it cannot be deleted.", "auto")
+                        )
+                    );
+                } else {
+                    $this->flash->addMessage(
+                        'error_detected',
+                        str_replace(
+                            '%property',
+                            $object->getFieldLabel(),
+                            _T('An error occurred trying to remove %property :/', 'auto')
+                        )
+                    );
+                }
             }
         }
 

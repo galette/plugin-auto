@@ -402,7 +402,22 @@ class ModelsController extends AbstractPluginController
             $ids = $post['id'];
         }
 
-        return  $model->delete($ids);
+        try {
+            return $model->delete($ids);
+        } catch (\Throwable $e) {
+            if ($this->zdb->isForeignKeyException($e)) {
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("This model is used by one or more vehicles, it cannot be deleted.", "auto")
+                );
+            } else {
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("An error occurred while deleting model.", "auto")
+                );
+            }
+            return false;
+        }
     }
 
     // /CRUD - Delete
