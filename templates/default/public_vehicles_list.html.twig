@@ -32,10 +32,10 @@
         {% set brand = auto.model.obrand %}
 
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
-            <td>{{ auto.name }}</td>
-            <td>{{ auto.owner.sfullname }}</td>
-            <td>{{ brand.value }}</td>
-            <td>{{ auto.model.model }}</td>
+            <td data-col-label="{{ _T("Name", "auto") }}">{{ auto.name }}</td>
+            <td data-col-label="{{ _T("Owner", "auto") }}">{{ auto.owner.sfullname }}</td>
+            <td data-col-label="{{ _T("Brand", "auto") }}">{{ brand.value }}</td>
+            <td data-col-label="{{ _T("Model", "auto") }}">{{ auto.model.model }}</td>
         </tr>
     {% else %}
         <tr><td colspan="6" class="emptylist">{{ _T("No car in the database", "auto") }}</td></tr>

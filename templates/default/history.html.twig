@@ -26,8 +26,8 @@
         {% for entry in entries %}
             {% set owner = entry.owner %}
                 <tr>
-                    <td>{{ entry.formatted_date }}</td>
-                    <td>
+                    <td data-col-label="{{ _T("Date") }}">{{ entry.formatted_date }}</td>
+                    <td data-col-label="{{ _T("Owner", "auto") }}">
                         {% if owner.isCompany() %}
                             <i class="ui building outline icon tooltip"><span class="visually-hidden">{{ _T('Is a company') }}</span></i>
                         {%  elseif owner.isMan() %}
@@ -39,9 +39,9 @@
                         {% endif %}
                         {{ owner.sfullname }}
                     </td>
-                    <td>{{ entry.car_registration }}</td>
-                    <td>{{ entry.color.value }}</td>
-                    <td>{{ entry.state.value}}</td>
+                    <td data-col-label="{{ _T("Registration", "auto") }}">{{ entry.car_registration }}</td>
+                    <td data-col-label="{{ _T("Color", "auto") }}">{{ entry.color.value }}</td>
+                    <td data-col-label="{{ _T("State", "auto") }}">{{ entry.state.value}}</td>
                 </tr>
         {% endfor %}
             </tbody>
