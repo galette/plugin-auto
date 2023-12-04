@@ -79,37 +79,30 @@ class PluginGaletteAuto extends GalettePlugin
                     [
                         [
                             'label' => _T("Colors list", "auto"),
-                            'title' => _T("Colors list", "auto"),
                             'route' => ['name' => 'colorsList']
                         ],
                         [
                             'label' => _T("States list", "auto"),
-                            'title' => _T("States list", "auto"),
                             'route' => ['name' => 'statesList']
                         ],
                         [
                             'label' => _T("Finitions list", "auto"),
-                            'title' => _T("Finitions list", "auto"),
                             'route' => ['name' => 'finitionsList']
                         ],
                         [
                             'label' => _T("Bodies list", "auto"),
-                            'title' => _T("Bodies list", "auto"),
                             'route' => ['name' => 'bodiesList']
                         ],
                         [
                             'label' => _T("Transmissions list", "auto"),
-                            'title' => _T("Transmissions list", "auto"),
                             'route' => ['name' => 'transmissionsList']
                         ],
                         [
                             'label' => _T("Brands list", "auto"),
-                            'title' => _T("Brands list", "auto"),
                             'route' => ['name' => 'brandsList']
                         ],
                         [
                             'label' => _T("Models list", "auto"),
-                            'title' => _T("Models list", "auto"),
                             'route' => ['name' => 'modelsList']
                         ],
 
@@ -120,7 +113,6 @@ class PluginGaletteAuto extends GalettePlugin
             if ($login->isAdmin() || $login->isStaff() || $login->isGroupManager()) {
                 $menus['plugin_auto']['items'][] = [
                     'label' => _T("Cars list", "auto"),
-                    'title' => _T("Cars list", "auto"),
                     'route' => ['name' => 'vehiclesList']
                 ];
             }
@@ -131,7 +123,6 @@ class PluginGaletteAuto extends GalettePlugin
                     'items' => [
                         [
                             'label' => _T("My cars", "auto"),
-                            'title' => _T("My cars", "auto"),
                             'route' => ['name' => 'myVehiclesList']
                         ]
                     ]
@@ -152,7 +143,6 @@ class PluginGaletteAuto extends GalettePlugin
         return [
             [
                 'label' => _T("Vehicles", "auto"),
-                'title' => _T("Vehicles", "auto"),
                 'route' => [
                     'name' => 'publicVehiclesList'
                 ],
@@ -178,7 +168,6 @@ class PluginGaletteAuto extends GalettePlugin
         return [
             [
                 'label' => _T("My cars", "auto"),
-                'title' => _T("My cars", "auto"),
                 'route' => [
                     'name' => 'myVehiclesList'
                 ],
@@ -199,7 +188,6 @@ class PluginGaletteAuto extends GalettePlugin
         return [
             [
                 'label' => _T("Member's cars", "auto"),
-                'title' => _T("Member's cars", "auto"),
                 'route' => [
                     'name' => 'memberVehiclesList',
                     'args' => ['id' => $member->id]
