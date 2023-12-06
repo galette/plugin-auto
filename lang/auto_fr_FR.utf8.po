@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-22 11:34+0100\n"
+"POT-Creation-Date: 2023-12-06 08:12+0100\n"
 "PO-Revision-Date: 2023-11-22 10:34+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
@@ -309,9 +309,9 @@ msgstr[0] "%count couleur"
 msgstr[1] "%count couleurs"
 
 #: ../lib/GaletteAuto/Brand.php:89 ../tempcache/vehicles.html.twig:108
-#: ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:98
+#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:98
 msgid "Brand"
 msgstr "Marque"
 
@@ -482,9 +482,9 @@ msgstr "Choisissez une marque"
 msgid "Choose a model"
 msgstr "Choisissez un modèle"
 
-#: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:69
+#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:69
 msgid "Model"
 msgstr "Modèle"
 
@@ -601,11 +601,11 @@ msgstr "Commentaire"
 msgid "Car's history"
 msgstr "Historique de la voiture"
 
-#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/vehicles_list.html.twig:56
 msgid "No vehicle selected"
 msgstr "Aucun véhicule sélectionné"
 
-#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/vehicles_list.html.twig:56
 msgid ""
 "Please make sure to select at least one vehicle from the list to perform "
 "this action."
@@ -613,7 +613,7 @@ msgstr ""
 "Assurez-vous de sélectionner au moins un véhicule dans la liste avant "
 "d’effectuer cette action."
 
-#: ../tempcache/vehicles_list.html.twig:69
+#: ../tempcache/vehicles_list.html.twig:72
 #: ../tempcache/public_vehicles_list.html.twig:60
 #, php-format
 msgid "%count vehicle"
@@ -621,33 +621,33 @@ msgid_plural "%count vehicles"
 msgstr[0] "%count véhicule"
 msgstr[1] "%count véhicules"
 
-#: ../tempcache/vehicles_list.html.twig:93
+#: ../tempcache/vehicles_list.html.twig:96
 msgid "Add new vehicle"
 msgstr "Ajouter un nouveau véhicule"
 
-#: ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
 msgid "Name"
 msgstr "Nom"
 
-#: ../tempcache/vehicles_list.html.twig:105 ../tempcache/history.html.twig:64
+#: ../tempcache/vehicles_list.html.twig:108 ../tempcache/history.html.twig:64
 #: ../tempcache/public_vehicles_list.html.twig:78
 msgid "Owner"
 msgstr "Propriétaire"
 
-#: ../tempcache/vehicles_list.html.twig:184
+#: ../tempcache/vehicles_list.html.twig:187
 msgid "Edit %vehicle"
 msgstr "Modifier %vehicle"
 
-#: ../tempcache/vehicles_list.html.twig:186
+#: ../tempcache/vehicles_list.html.twig:189
 msgid "%vehiclename: remove from database"
 msgstr "%vehiclename : supprimer de la base"
 
-#: ../tempcache/vehicles_list.html.twig:226
+#: ../tempcache/vehicles_list.html.twig:229
 msgid "No car has been registered yet for your account."
 msgstr "Aucun véhicule n'a été enregistré pour votre compte."
 
-#: ../tempcache/vehicles_list.html.twig:228
+#: ../tempcache/vehicles_list.html.twig:231
 #: ../tempcache/public_vehicles_list.html.twig:149
 msgid "No car in the database"
 msgstr "Aucun véhicule dans la base"
@@ -661,17 +661,17 @@ msgid "no history entries"
 msgstr "aucune entrée dans l'historique"
 
 #: ../tempcache/object_list.html.twig:166
-#: ../tempcache/models_list.html.twig:158
+#: ../tempcache/models_list.html.twig:151
 msgid "Edit %property"
 msgstr "Modifier %property"
 
 #: ../tempcache/object_list.html.twig:179
-#: ../tempcache/models_list.html.twig:171
+#: ../tempcache/models_list.html.twig:164
 msgid "%property: remove from database"
 msgstr "%property : supprimer de la base"
 
 #: ../tempcache/object_list.html.twig:198
-#: ../tempcache/models_list.html.twig:190
+#: ../tempcache/models_list.html.twig:183
 msgid "no record found"
 msgstr "aucun enregistrement trouvé"
 
@@ -685,26 +685,14 @@ msgstr "Modèles enregistrés pour la marque « %s » :"
 msgid "The brand '%s' does not have any registered model at this time."
 msgstr "La marque « %s » ne possède pas de modèles à l'heure actuelle."
 
-#: ../tempcache/models_list.html.twig:47
-msgid "No model selected"
-msgstr "Aucun modèle sélectionné"
-
-#: ../tempcache/models_list.html.twig:47
-msgid ""
-"Please make sure to select at least one model from the list to perform this "
-"action."
-msgstr ""
-"Assurez-vous de sélectionner au moins un modèle dans la liste avant "
-"d’effectuer cette action."
-
-#: ../tempcache/models_list.html.twig:61
+#: ../tempcache/models_list.html.twig:57
 #, php-format
 msgid "%count model"
 msgid_plural "%count models"
 msgstr[0] "%count modèle"
 msgstr[1] "%count modèles"
 
-#: ../tempcache/models_list.html.twig:85
+#: ../tempcache/models_list.html.twig:81
 msgid "Add new model"
 msgstr "Ajouter un nouveau modèle"
 
@@ -719,6 +707,16 @@ msgstr ""
 #: ../tempcache/model.html.twig:110
 msgid "Add a brand"
 msgstr "Ajouter une marque"
+
+#~ msgid "No model selected"
+#~ msgstr "Aucun modèle sélectionné"
+
+#~ msgid ""
+#~ "Please make sure to select at least one model from the list to perform "
+#~ "this action."
+#~ msgstr ""
+#~ "Assurez-vous de sélectionner au moins un modèle dans la liste avant "
+#~ "d’effectuer cette action."
 
 #~ msgid "Member cars"
 #~ msgstr "Véhicules de l'adhérent"

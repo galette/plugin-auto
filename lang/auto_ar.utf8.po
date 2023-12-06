@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-22 11:34+0100\n"
+"POT-Creation-Date: 2023-12-06 08:12+0100\n"
 "PO-Revision-Date: 2023-10-19 19:38+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/galette/auto-"
@@ -309,9 +309,9 @@ msgstr[4] ""
 msgstr[5] ""
 
 #: ../lib/GaletteAuto/Brand.php:89 ../tempcache/vehicles.html.twig:108
-#: ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:98
+#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:98
 msgid "Brand"
 msgstr "العلامة التجارية"
 
@@ -499,9 +499,9 @@ msgstr ""
 msgid "Choose a model"
 msgstr "احتر نموذجًا"
 
-#: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:97 ../tempcache/model.html.twig:69
+#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:69
 msgid "Model"
 msgstr "النموذج"
 
@@ -617,17 +617,17 @@ msgstr ""
 msgid "Car's history"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/vehicles_list.html.twig:56
 msgid "No vehicle selected"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:54
+#: ../tempcache/vehicles_list.html.twig:56
 msgid ""
 "Please make sure to select at least one vehicle from the list to perform "
 "this action."
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:69
+#: ../tempcache/vehicles_list.html.twig:72
 #: ../tempcache/public_vehicles_list.html.twig:60
 #, php-format
 msgid "%count vehicle"
@@ -639,33 +639,33 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: ../tempcache/vehicles_list.html.twig:93
+#: ../tempcache/vehicles_list.html.twig:96
 msgid "Add new vehicle"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:105
+#: ../tempcache/vehicles_list.html.twig:108
 #: ../tempcache/public_vehicles_list.html.twig:78
 msgid "Name"
 msgstr "الإسم"
 
-#: ../tempcache/vehicles_list.html.twig:105 ../tempcache/history.html.twig:64
+#: ../tempcache/vehicles_list.html.twig:108 ../tempcache/history.html.twig:64
 #: ../tempcache/public_vehicles_list.html.twig:78
 msgid "Owner"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:184
+#: ../tempcache/vehicles_list.html.twig:187
 msgid "Edit %vehicle"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:186
+#: ../tempcache/vehicles_list.html.twig:189
 msgid "%vehiclename: remove from database"
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:226
+#: ../tempcache/vehicles_list.html.twig:229
 msgid "No car has been registered yet for your account."
 msgstr ""
 
-#: ../tempcache/vehicles_list.html.twig:228
+#: ../tempcache/vehicles_list.html.twig:231
 #: ../tempcache/public_vehicles_list.html.twig:149
 msgid "No car in the database"
 msgstr ""
@@ -679,17 +679,17 @@ msgid "no history entries"
 msgstr ""
 
 #: ../tempcache/object_list.html.twig:166
-#: ../tempcache/models_list.html.twig:158
+#: ../tempcache/models_list.html.twig:151
 msgid "Edit %property"
 msgstr ""
 
 #: ../tempcache/object_list.html.twig:179
-#: ../tempcache/models_list.html.twig:171
+#: ../tempcache/models_list.html.twig:164
 msgid "%property: remove from database"
 msgstr ""
 
 #: ../tempcache/object_list.html.twig:198
-#: ../tempcache/models_list.html.twig:190
+#: ../tempcache/models_list.html.twig:183
 msgid "no record found"
 msgstr ""
 
@@ -703,17 +703,7 @@ msgstr ""
 msgid "The brand '%s' does not have any registered model at this time."
 msgstr ""
 
-#: ../tempcache/models_list.html.twig:47
-msgid "No model selected"
-msgstr ""
-
-#: ../tempcache/models_list.html.twig:47
-msgid ""
-"Please make sure to select at least one model from the list to perform this "
-"action."
-msgstr ""
-
-#: ../tempcache/models_list.html.twig:61
+#: ../tempcache/models_list.html.twig:57
 #, php-format
 msgid "%count model"
 msgid_plural "%count models"
@@ -724,7 +714,7 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: ../tempcache/models_list.html.twig:85
+#: ../tempcache/models_list.html.twig:81
 msgid "Add new model"
 msgstr "إضافة نموذج جديد"
 
