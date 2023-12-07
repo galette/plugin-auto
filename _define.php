@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2022 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2022 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -42,7 +42,7 @@ $this->register(
     '2.0.0',                                //Version
     '1.0.0',                                //Galette compatible version
     'auto',                                 //routing name
-    '2022-05-29',                           //Release date
+    '2023-12-07',                           //Release date
     [ //routes permissions
         'vehiclesList'      => 'groupmanager',
         'memberVehiclesList' => 'groupmanager',
