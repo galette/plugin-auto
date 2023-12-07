@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -37,9 +37,11 @@
 
 namespace GaletteAuto;
 
+use ArrayObject;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Slim\Router;
+use Laminas\Db\Sql\Select;
+use Slim\Routing\RouteParser;
 use Galette\Core\Db;
 use GaletteAuto\Filters\PropertiesList;
 
@@ -50,10 +52,12 @@ use GaletteAuto\Filters\PropertiesList;
  * @name      AbstractObject
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property int $id
  */
 abstract class AbstractObject
 {
@@ -94,7 +98,7 @@ abstract class AbstractObject
     /**
      * Get the list
      *
-     * @return ResultSet
+     * @return array
      */
     public function getList()
     {
@@ -112,7 +116,7 @@ abstract class AbstractObject
                 ' list | ' . $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -209,7 +213,7 @@ abstract class AbstractObject
                 ' from ids `' . implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -244,7 +248,7 @@ abstract class AbstractObject
      *
      * @param string $name name of the property we want to retrive
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get($name)
     {
@@ -267,6 +271,19 @@ abstract class AbstractObject
     }
 
     /**
+     * Global isset method
+     * Required for twig to access properties via __get
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return boolean
+     */
+    public function __isset(string $name)
+    {
+        return property_exists($this, $name);
+    }
+
+    /**
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
@@ -286,36 +303,35 @@ abstract class AbstractObject
     /**
      * Get list route
      *
-     * @param Router $router   Router instance
-     * @param string $property Property name
+     * @param RouteParser $routeparser Route parser instance
+     * @param string      $property    Property name
      *
      * @return string
      */
-    public static function getListRoute(Router $router, string $property): string
+    public static function getListRoute(RouteParser $routeparser, string $property): string
     {
         $route = null;
         switch ($property) {
             case 'color':
-                $route = $router->pathFor('colorsList');
+                $route = $routeparser->urlFor('colorsList');
                 break;
             case 'state':
-                $route = $router->pathFor('statesList');
+                $route = $routeparser->urlFor('statesList');
                 break;
             case 'finition':
-                $route = $router->pathFor('finitionsList');
+                $route = $routeparser->urlFor('finitionsList');
                 break;
             case 'body':
-                $route = $router->pathFor('bodiesList');
+                $route = $routeparser->urlFor('bodiesList');
                 break;
             case 'transmission':
-                $route = $router->pathFor('transmissionsList');
+                $route = $routeparser->urlFor('transmissionsList');
                 break;
             case 'brand':
-                $route = $router->pathFor('brandsList');
+                $route = $routeparser->urlFor('brandsList');
                 break;
             default:
                 throw new \RuntimeException('Unknown property ' . $property);
-                break;
         }
         return $route;
     }
@@ -359,7 +375,7 @@ abstract class AbstractObject
     /**
      * Builds the SELECT statement
      *
-     * @return string SELECT statement
+     * @return Select SELECT statement
      */
     private function buildSelect()
     {
@@ -376,7 +392,7 @@ abstract class AbstractObject
                 'Cannot build SELECT clause for models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -394,8 +410,11 @@ abstract class AbstractObject
             $countSelect->reset($countSelect::COLUMNS);
             $countSelect->reset($countSelect::JOINS);
             $countSelect->reset($countSelect::ORDER);
+            $countSelect->reset($countSelect::LIMIT);
+            $countSelect->reset($countSelect::OFFSET);
             $countSelect->columns(
                 array(
+                    //@phpstan-ignore-next-line
                     static::PK => new Expression('COUNT(' . static::PK . ')')
                 )
             );
@@ -403,6 +422,7 @@ abstract class AbstractObject
             $results = $this->zdb->execute($countSelect);
             $result = $results->current();
 
+            //@phpstan-ignore-next-line
             $k = static::PK;
             $this->count = $result->$k;
 
@@ -414,7 +434,7 @@ abstract class AbstractObject
                 'Cannot count models | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -438,16 +458,14 @@ abstract class AbstractObject
         return str_replace(
             '%count',
             $this->getCount(),
-            $this->getLocalizedCount($this->getCount())
+            $this->getLocalizedCount()
         );
     }
 
     /**
      * Get localized count string for object list
      *
-     * @param integer $count Count
-     *
      * @return string
      */
-    abstract protected function getLocalizedCount(int $count): string;
+    abstract protected function getLocalizedCount(): string;
 }

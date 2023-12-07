@@ -51,6 +51,8 @@ use Galette\Core\Db;
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id
  */
 class Brand extends AbstractObject
 {
@@ -60,11 +62,11 @@ class Brand extends AbstractObject
     public const NAME = 'brands';
 
     /**
-    * Default constructor
-    *
-    * @param Db      $zdb Database instance
-    * @param integer $id  brand's id to load. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db      $zdb Database instance
+     * @param integer $id  brand's id to load. Defaults to null
+     */
     public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
@@ -98,16 +100,16 @@ class Brand extends AbstractObject
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retreive
+     *
+     * @return false|object the called property
+     */
     public function __get($name)
     {
         if ($name == self::FIELD) {
-            return parent::__get('field');
+            return parent::__get('value');
         }
         if ($name == self::PK) {
             return parent::__get('id');
@@ -119,11 +121,9 @@ class Brand extends AbstractObject
     /**
      * Get localized count string for object list
      *
-     * @param integer $count Count
-     *
      * @return string
      */
-    protected function getLocalizedCount(int $count): string
+    protected function getLocalizedCount(): string
     {
         return _Tn(
             '%count brand',

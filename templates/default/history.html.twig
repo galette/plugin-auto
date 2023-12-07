@@ -1,0 +1,54 @@
+{% extends (mode == 'ajax') ? "ajax.html.twig" : "page.html.twig" %}
+
+{% block content %}
+    {%  if entries|length > 0 %}
+        <table id="listing">
+            <thead>
+                <tr>
+                    <th class="listing left">
+                        {{ _T("Date") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Owner", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Registration", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("Color", "auto") }}
+                    </th>
+                    <th class="listing left">
+                        {{ _T("State", "auto") }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for entry in entries %}
+            {% set owner = entry.owner %}
+                <tr>
+                    <td data-col-label="{{ _T("Date") }}">{{ entry.formatted_date }}</td>
+                    <td data-col-label="{{ _T("Owner", "auto") }}">
+                        {% if owner.isCompany() %}
+                            <i class="ui building outline icon tooltip"><span class="visually-hidden">{{ _T('Is a company') }}</span></i>
+                        {%  elseif owner.isMan() %}
+                            <i class="ui male icon tooltip"><span class="visually-hidden">{{ _T('Is a man') }}</span></i>
+                        {%  elseif owner.isWoman() %}
+                            <i class="ui female icon tooltip"><span class="visually-hidden">{{ _T('Is a woman') }}</span></i>
+                        {% else %}
+                            <i class="ui icon"></i>
+                        {% endif %}
+                        {{ owner.sfullname }}
+                    </td>
+                    <td data-col-label="{{ _T("Registration", "auto") }}">{{ entry.car_registration }}</td>
+                    <td data-col-label="{{ _T("Color", "auto") }}">{{ entry.color.value }}</td>
+                    <td data-col-label="{{ _T("State", "auto") }}">{{ entry.state.value}}</td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="ui message">
+            <p>{{ _T("no history entries", "auto") }}</p>
+        </div>
+    {% endif %}
+{% endblock %}

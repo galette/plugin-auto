@@ -59,11 +59,11 @@ class Transmission extends AbstractObject
     public const NAME = 'transmissions';
 
     /**
-    * Default constructor
-    *
-    * @param Db      $zdb Database instance
-    * @param integer $id  transmission's id to load. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db      $zdb Database instance
+     * @param integer $id  transmission's id to load. Defaults to null
+     */
     public function __construct(Db $zdb, $id = null)
     {
         parent::__construct(
@@ -97,16 +97,16 @@ class Transmission extends AbstractObject
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return false|object the called property
+     */
     public function __get($name)
     {
         if ($name == self::FIELD) {
-            return parent::__get('field');
+            return parent::__get('value');
         } else {
             return parent::__get($name);
         }
@@ -115,11 +115,9 @@ class Transmission extends AbstractObject
     /**
      * Get localized count string for object list
      *
-     * @param integer $count Count
-     *
      * @return string
      */
-    protected function getLocalizedCount(int $count): string
+    protected function getLocalizedCount(): string
     {
         return _Tn(
             '%count transmission',

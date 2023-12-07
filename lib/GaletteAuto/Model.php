@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2014 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -38,6 +38,7 @@
 namespace GaletteAuto;
 
 use Analog\Analog;
+use ArrayObject;
 use Galette\Core\Db;
 use GaletteAuto\Filters\ModelsList;
 
@@ -48,10 +49,15 @@ use GaletteAuto\Filters\ModelsList;
  * @name      Model
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id
+ * @property string $model
+ * @property int|Brand $brand
+ * @property Brand $obrand
  */
 class Model
 {
@@ -67,11 +73,11 @@ class Model
     private $zdb;
 
     /**
-    * Default constructor
-    *
-    * @param Db    $zdb  Database instance
-    * @param mixed $args model's id to load or ResultSet. Defaults to null
-    */
+     * Default constructor
+     *
+     * @param Db    $zdb  Database instance
+     * @param mixed $args model's id to load or ResultSet. Defaults to null
+     */
     public function __construct(Db $zdb, $args = null)
     {
         $this->zdb = $zdb;
@@ -87,12 +93,12 @@ class Model
     }
 
     /**
-    * Load a model
-    *
-    * @param integer $id Id for the model we want
-    *
-    * @return boolean
-    */
+     * Load a model
+     *
+     * @param integer $id Id for the model we want
+     *
+     * @return boolean
+     */
     public function load($id)
     {
         try {
@@ -120,7 +126,7 @@ class Model
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r the resultset row
+     * @param ArrayObject $r the resultset row
      *
      * @return void
      */
@@ -133,18 +139,18 @@ class Model
     }
 
     /**
-    * Store current model
-    *
-    * @param boolean $new New record or existing one
-    *
-    * @return boolean
-    */
+     * Store current model
+     *
+     * @param boolean $new New record or existing one
+     *
+     * @return boolean
+     */
     public function store($new = false)
     {
         try {
             $values = array(
                 'model'     => $this->model,
-                Brand::PK   => $this->brand->id_brand
+                Brand::PK   => $this->brand->id
             );
             if ($new) {
                 $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
@@ -172,12 +178,12 @@ class Model
     }
 
     /**
-    * Delete some models
-    *
-    * @param array $ids Array of models id to delete
-    *
-    * @return boolean
-    */
+     * Delete some models
+     *
+     * @param array $ids Array of models id to delete
+     *
+     * @return boolean
+     */
     public function delete($ids)
     {
         try {
@@ -191,17 +197,17 @@ class Model
                 implode(' - ', $ids) . '` | ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
     /**
-    * Global getter method
-    *
-    * @param string $name name of the property we want to retrive
-    *
-    * @return false|object the called property
-    */
+     * Global getter method
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return mixed the called property
+     */
     public function __get($name)
     {
         $forbidden = array();
@@ -209,13 +215,10 @@ class Model
             switch ($name) {
                 case 'brand':
                     return $this->brand->id;
-                    break;
                 case 'obrand':
                     return $this->brand;
-                    break;
                 default:
                     return $this->$name;
-                    break;
             }
         } else {
             Analog::log(
@@ -224,6 +227,27 @@ class Model
             );
             return false;
         }
+    }
+
+    /**
+     * Global isset method
+     * Required for twig to access properties via __get
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return boolean
+     */
+    public function __isset(string $name)
+    {
+        $knowns = [
+            'obrand'
+        ];
+
+        if (in_array($name, $knowns) || property_exists($this, $name)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -271,5 +295,6 @@ class Model
     public function setBrand($id)
     {
         $this->brand = new Brand($this->zdb, $id);
+        return $this;
     }
 }

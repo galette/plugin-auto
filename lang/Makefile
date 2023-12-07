@@ -3,10 +3,12 @@ LANGUAGES = `find ./ -name "auto_*.po" -print | sed 's|^\./auto_\(.*\).po|\1|'`
 DOMAINS = auto
 PHP_SOURCES = $(shell find ../ -maxdepth 1 -name \*.php) \
               $(shell find ../lib/GaletteAuto/ -name \*.php) \
-              $(shell find ../templates -name \*.tpl)
-
+              $(shell find ../tempcache -name \*.twig)
 
 all : extract mo
+
+twig :
+	../bin/twig-cache
 
 po :
 	@echo "Generating PO files:"
@@ -39,12 +41,9 @@ mo :
 	  done \
 	done
 
-extract : ${PHP_SOURCES} Makefile
-	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o auto_php.pot;
-	../../../vendor/bin/smarty-xgettext --domain auto -o auto_tpl.pot ../templates/default/; \
-	msgcat -o auto.pot --use-first auto_php.pot auto_tpl.pot; \
-	rm auto_php.pot auto_tpl.pot; \
+extract : twig ${PHP_SOURCES} Makefile
+	xgettext ${PHP_SOURCES} --keyword=_T:1,2t --keyword=__:1,2t --keyword=_Tn:1,2,4t --keyword=_Tx:1c,2,3t --keyword=_Tnx:1c,2,3,5t -L PHP --from-code=UTF-8 --add-comments=TRANS --force-po -o auto.pot;
 	echo "Generating en_US:"
 	@for d in ${DOMAINS}; do \
-	  LANG=C msginit --no-translator --locale=en -i $$d.pot -o $${d}_en_US.po; \
+	  LANG=C msginit --no-translator -i $$d.pot --locale=en_US.utf8 -o $${d}_en_US.po; \
 	done

@@ -1,0 +1,115 @@
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = autos|length %}
+
+{% set form = {
+    'route': {
+        'name': 'vehiclesList'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%count vehicle", "%count vehicles", count_vehicles, 'auto')|replace({"%count": count_vehicles}),
+        'route': {
+            'name': 'vehiclesFilter',
+            'args': []
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    <a
+            class="ui tiny labeled icon button"
+            href="{{ url_for("vehicleEdit", {"action": "add"}) }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ _T("Add new vehicle", "auto") }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': ''},
+        {'label': _T("Name", "auto")},
+        {'label': _T("Owner", "auto")},
+        {'label': _T("Brand", "auto")},
+        {'label': _T("Model", "auto")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for auto in autos %}
+        {% set brand = auto.model.obrand %}
+        {% set edit_link = url_for("vehicleEdit", {"action": "edit", "id": auto.id}) %}
+
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+            <td class="collapsing" data-scope="row">
+                <input type="checkbox" name="entries_sel[]" value="{{ auto.id }}"/>
+            </td>
+            <td data-col-label="{{ _T("Name", "auto") }}"><a href="{{ edit_link }}">{{ auto.name }}</a></td>
+            <td data-col-label="{{ _T("Owner", "auto") }}"><a href="{{ url_for("member", {"id": auto.owner.id}) }}">{{ auto.owner.sfullname }}</a></td>
+            <td data-col-label="{{ _T("Brand", "auto") }}"><a href="{{ edit_link }}">{{ brand.value }}</a></td>
+            <td data-col-label="{{ _T("Model", "auto") }}"><a href="{{ edit_link }}">{{ auto.model.model }}</a></td>
+            <td class="center actions_row nowrap">
+                {% if login.isAdmin() or login.isStaff() or auto.owner.id == login.id or login.isGroupManager() and preferences.pref_bool_groupsmanagers_edit_member %}
+                    {% set actions = [
+                        {
+                            'label': _T("Edit %vehicle", "auto")|replace({"%vehicle": auto.name}),
+                            'route': {
+                                'name': 'vehicleEdit',
+                                'args': {'action': 'edit', 'id': auto.id}
+                            },
+                            'icon': 'edit'
+                        },
+                        {
+                            'label': _T("%vehiclename: remove from database", "auto")|replace({"%vehiclename": auto.name}),
+                            'route': {
+                                'name': 'removeVehicle',
+                                'args': {'id': auto.id},
+                            },
+                            'icon': 'red trash',
+                            'extra_class': 'delete'
+                        }
+                    ] %}
+
+                    {% for action in actions %}
+                        {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+                    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{% if show_mine == 1 %}{{ _T("No car has been registered yet for your account.", "auto") }}{% else %}{{ _T("No car in the database", "auto") }}{% endif %}</td></tr>
+    {% endfor %}
+{% endblock %}
+
+{% block extra_form %}
+    {% if id_adh is defined %}
+        <input type="hidden" name="id_adh" value="{{ id_adh }}"/>
+    {% endif %}
+{% endblock %}
+
+{% if nb > 0 %}
+    {% if login.isAdmin() or login.isStaff() %}
+        {% set batch = {
+            'route': {
+                'name': 'batch-vehicleslist'
+            },
+            'modal': {
+                'title': _T("No vehicle selected", "auto"),
+                'content': _T("Please make sure to select at least one vehicle from the list to perform this action.", "auto")
+            }
+        } %}
+        {%  set batch_actions = [
+            {
+                'name': 'delete',
+                'label': _T("Delete"),
+                'icon': 'red trash'
+            }
+        ] %}
+    {% endif %}
+{% endif %}

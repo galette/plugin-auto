@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2009-2021 The Galette Team
+ * Copyright © 2009-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2022 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -37,8 +37,10 @@
 
 namespace GaletteAuto;
 
+use ArrayObject;
 use Analog\Analog;
 use Galette\Core\Db;
+use Galette\Core\Login;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Laminas\Db\Sql\Expression;
@@ -55,10 +57,33 @@ use GaletteAuto\Transmission;
  * @name      Auto
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2021 The Galette Team
+ * @copyright 2009-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     Available since 0.7dev - 2009-03-16
+ *
+ * @property integer $id
+ * @property string $registration
+ * @property string $name
+ * @property string $first_registration_date
+ * @property string $first_circulation_date
+ * @property integer $mileage
+ * @property string $comment
+ * @property string $chassis_number
+ * @property integer $seats
+ * @property integer $horsepower
+ * @property integer $engine_size
+ * @property string $creation_date
+ * @property integer $fuel
+ * @property Color $color
+ * @property Body $body
+ * @property State $state
+ * @property Transmission $transmission
+ * @property Finition $finition
+ * @property Model $model
+ * @property Adherent|int $owner
+ * @property Picture $picture
+ * @property History $history
  */
 class Auto
 {
@@ -105,30 +130,30 @@ class Auto
         'fuel'                      => 1
     );
 
-    private $id;                       //identifiant
-    private $registration;             //immatriculation
-    private $name;                     //petit nom
-    private $first_registration_date;  //date de première immatriculation
-    private $first_circulation_date;   //date de prmière mise en service
-    private $mileage;                  //kilométrage
-    private $comment;                  //commentaire
-    private $chassis_number;           //numéro de chassis
-    private $seats;                    //nombre de places
-    private $horsepower;               //puissance fiscale
-    private $engine_size;              //cylindrée
-    private $creation_date;            //date de création
-    private $fuel;                     //carburant
+    private $id;
+    private $registration;
+    private $name;
+    private $first_registration_date;
+    private $first_circulation_date;
+    private $mileage;
+    private $comment;
+    private $chassis_number;
+    private $seats;
+    private $horsepower;
+    private $engine_size;
+    private $creation_date;
+    private $fuel;
 
     //External objects
-    private $picture;                  //photo de la voiture
-    private $finition;                 //niveau de finition
-    private $color;                    //couleur
-    private $model;                    //modèle
-    private $transmission;             //type de transmission
-    private $body;                     //carrosserie
-    private $history;                  //historique
-    private $owner;                    //propriétaire actuel
-    private $state;                    //état actuel
+    private $picture;
+    private $finition;
+    private $color;
+    private $model;
+    private $transmission;
+    private $body;
+    private $history;
+    private $owner;
+    private $state;
 
     public const FUEL_PETROL = 1;
     public const FUEL_DIESEL = 2;
@@ -137,13 +162,13 @@ class Auto
     public const FUEL_BIO = 5;
     public const FUEL_HYBRID = 6;
 
-    private $propnames;                //textual properties names
+    private $propnames; //textual properties names
 
-    //do we have to fire an history entry?
+    //do we have to fire a history entry?
     private $fire_history = false;
 
     //internal properties (not updatable outside the object)
-    private $internals = array (
+    private $internals = array(
         'id',
         'creation_date',
         'history',
@@ -160,9 +185,9 @@ class Auto
     /**
      * Default constructor
      *
-     * @param Plugins   $plugins Plugins
-     * @param Db        $zdb     Database instance
-     * @param ResultSet $args    A resultset row to load
+     * @param Plugins     $plugins Plugins
+     * @param Db          $zdb     Database instance
+     * @param ArrayObject $args    A resultset row to load
      */
     public function __construct(Plugins $plugins, Db $zdb, $args = null)
     {
@@ -190,12 +215,8 @@ class Auto
         $this->color = new Color($this->zdb);
         $this->state = new State($this->zdb);
 
-        $deps = array(
-            'picture'   => false,
-            'groups'    => false,
-            'dues'      => false
-        );
-        $this->owner = new Adherent($this->zdb, null, $deps);
+        $this->owner = new Adherent($this->zdb);
+        $this->owner->disableAllDeps()->enableDep('parent');
         $this->transmission = new Transmission($this->zdb);
         $this->finition = new Finition($this->zdb);
         $this->picture = new Picture($this->plugins);
@@ -239,7 +260,7 @@ class Auto
     /**
      * Populate object from a resultset row
      *
-     * @param ResultSet $r a resultset row
+     * @param ArrayObject $r a resultset row
      *
      * @return void
      */
@@ -460,7 +481,7 @@ class Auto
     private function getAllProperties($restrict = false)
     {
         $result = array();
-        foreach ($this as $key => $value) {
+        foreach (get_class_vars(static::class) as $key => $value) {
             if (
                 !$restrict
                 || ($restrict && !in_array($key, $this->internals))
@@ -499,7 +520,7 @@ class Auto
      *
      * @return void
      */
-    public function appropriateCar($login)
+    public function appropriateCar(Login $login)
     {
         $this->owner->load($login->id);
     }
@@ -525,7 +546,7 @@ class Auto
      *
      * @param string $name name of the property we want to retrive
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
     public function __get(string $name)
     {
@@ -616,6 +637,9 @@ class Auto
                 case 'state':
                     $this->state->load((int)$value);
                     break;
+                case 'owner':
+                    $this->owner->load((int)$value);
+                    break;
                 default:
                     $this->$name = $value;
                     break;
@@ -626,8 +650,30 @@ class Auto
                 $name . '`)',
                 Analog::INFO
             );
-            return false;
         }
+    }
+
+    /**
+     * Global isset method
+     * Required for twig to access properties via __get
+     *
+     * @param string $name name of the property we want to retrieve
+     *
+     * @return boolean
+     */
+    public function __isset(string $name): bool
+    {
+        $knowns = [
+            self::PK,
+            Adherent::PK,
+            Color::PK,
+            State::PK
+        ];
+        if (in_array($name, $knowns)) {
+            return true;
+        }
+
+        return property_exists($this, $name);
     }
 
     /**
@@ -644,7 +690,7 @@ class Auto
 
         //check for required fields, and correct values
         $required = $this->getRequired();
-        foreach ($this->getProperties(true) as $prop) {
+        foreach ($this->getProperties() as $prop) {
             $value = isset($post[$prop]) ? $post[$prop] : null;
 
             if (($value == '' || $value == null) && in_array($prop, array_keys($required))) {
@@ -657,33 +703,56 @@ class Auto
             }
 
             switch ($prop) {
+                //string values with special check
+                case 'registration':
+                    if (mb_strlen($value) <= 10) {
+                        $this->$prop = $value;
+                    } else {
+                        $this->errors[] = str_replace(
+                            array(
+                                '%maxsize',
+                                '%field',
+                                '%cursize'
+                            ),
+                            array(
+                                10,
+                                $this->getPropName($prop),
+                                mb_strlen($value)
+                            ),
+                            _T("- Maximum size for %field is %maxsize (current %cursize)!", "auto")
+                        );
+                    }
+                    break;
                 //string values, no check
                 case 'name':
                 case 'comment':
-                //string values with special check?
                 case 'chassis_number':
-                case 'registration':
                     $this->$prop = $value;
                     break;
                 //dates
                 case 'first_registration_date':
                 case 'first_circulation_date':
-                    if (preg_match("@^([0-9]{2})/([0-9]{2})/([0-9]{4})$@", $value, $array_jours)) {
-                        if (checkdate($array_jours[2], $array_jours[1], $array_jours[3])) {
-                            $value = $array_jours[3] . '-' . $array_jours[2] . '-' . $array_jours[1];
-                            $this->$prop = $value;
-                        } else {
-                            $this->errors[] = str_replace(
-                                '%s',
-                                $this->getPropName($prop),
-                                _T("- Non valid date for %s!")
-                            );
+                    try {
+                        $d = \DateTime::createFromFormat(__("Y-m-d"), $value);
+                        if ($d === false) {
+                            //try with non localized date
+                            $d = \DateTime::createFromFormat("Y-m-d", $value);
+                            if ($d === false) {
+                                throw new \Exception('Incorrect format');
+                            }
                         }
-                    } else {
+                        $this->$prop = $d->format('Y-m-d');
+                    } catch (\Throwable $e) {
                         $this->errors[] = str_replace(
-                            '%s',
-                            $this->getPropName($prop),
-                            _T("- Wrong date format for %s (dd/mm/yyyy)!")
+                            array(
+                                '%date_format',
+                                '%field'
+                            ),
+                            array(
+                                __("Y-m-d"),
+                                $this->getPropName($prop)
+                            ),
+                            _T("- Wrong date format (%date_format) for %field!")
                         );
                     }
                     break;
@@ -759,7 +828,7 @@ class Auto
         if (isset($post['del_photo'])) {
             if (!$this->picture->delete()) {
                 $this->errors[]
-                    = _T("An error occured while trying to delete car's photo");
+                    = _T("An error occurred while trying to delete car's photo");
             }
         }
 
@@ -785,8 +854,8 @@ class Auto
     {
         $required = $this->required;
 
-        if (file_exists(GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php')) {
-            $required = require GALETTE_CONFIG_PATH  . 'local_auto_required.inc.php';
+        if (file_exists(GALETTE_CONFIG_PATH . 'local_auto_required.inc.php')) {
+            $required = require GALETTE_CONFIG_PATH . 'local_auto_required.inc.php';
         }
 
         return $required;

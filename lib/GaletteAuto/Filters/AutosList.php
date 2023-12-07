@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2012-2014 The Galette Team
+ * Copyright © 2012-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2012-2014 The Galette Team
+ * @copyright 2012-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @version   SVN: $Id$
  * @link      http://galette.tuxfamily.org
@@ -39,6 +39,7 @@ namespace GaletteAuto\Filters;
 
 use Analog\Analog as Analog;
 use Galette\Core\Pagination;
+use Laminas\Db\Sql\Select;
 
 /**
  * Autos list filters and paginator
@@ -48,7 +49,7 @@ use Galette\Core\Pagination;
  * @package   Galette
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2012-2014 The Galette Team
+ * @copyright 2012-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     0.7.3dev - 2012-12-29
@@ -56,7 +57,6 @@ use Galette\Core\Pagination;
 
 class AutosList extends Pagination
 {
-
     /**
      * Returns the field we want to default set order to
      *
@@ -70,13 +70,13 @@ class AutosList extends Pagination
     /**
      * Add SQL limit
      *
-     * @param Zend_Db_Select $select Original select
+     * @param Select $select Original select
      *
-     * @return <type>
+     * @return void
      */
     public function setLimit($select)
     {
-        return $this->setLimits($select);
+        $this->setLimits($select);
     }
 
 
@@ -107,16 +107,16 @@ class AutosList extends Pagination
             'value'     => $page
         ];
 
-        if ($this->view->getTemplateVars('cur_subroute')) {
-            $args['type'] = $this->view->getTemplateVars('cur_subroute');
+        if ($this->view->getEnvironment()->getGlobals()['cur_subroute']) {
+            $args['type'] = $this->view->getEnvironment()->getGlobals()['cur_subroute'];
         }
 
-        if ($this->view->getTemplateVars('cur_route') === 'memberVehiclesList') {
-            $args['id'] = $this->view->getTemplateVars('cur_subroute');
+        if ($this->view->getEnvironment()->getGlobals()['cur_route'] === 'memberVehiclesList') {
+            $args['id'] = $this->view->getEnvironment()->getGlobals()['cur_subroute'];
         }
 
-        $href = $this->router->pathFor(
-            $this->view->getTemplateVars('cur_route'),
+        $href = $this->routeparser->urlFor(
+            $this->view->getEnvironment()->getGlobals()['cur_route'],
             $args
         );
         return $href;

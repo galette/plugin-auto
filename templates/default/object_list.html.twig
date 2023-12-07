@@ -1,0 +1,66 @@
+{% extends 'elements/list.html.twig' %}
+
+{% set name = obj.name %}
+{% set pk = obj.pk %}
+{% set field = obj.field %}
+{% set filterPath = field %}
+
+{% set nb = list|length %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': obj.displayCount(),
+        'route': {
+            'name': 'propertyFilter',
+            'args': {'property': field}
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    <a
+        class="ui tiny labeled icon button"
+        href="{{ url_for("propertyEdit", {"property": obj.getRouteName(), "action": "add"}) }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ add_text }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': field_name}
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for o in list %}
+        {% set edit_link = url_for("propertyEdit", {"property": obj.getRouteName(), "action": "edit", "id": o[pk]}) %}
+    <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+        <td data-col-label="{{ field_name }}">
+            <a
+                href="{% if show is defined and show == true %}{{ url_for("propertyShow", {"property": obj.getRouteName(), "id": o[pk]}) }}{% else %}{{ edit_link }}{% endif %}"
+            >
+                {{ o[field] }}
+            </a>
+        </td>
+        <td class="center actions_row nowrap">
+            <a href="{{ edit_link }}" class="tooltip action">
+                <i class="ui edit icon"></i>
+                <span class="visually-hidden">{{ _T("Edit %property", "auto")|replace({"%property": o[field]}) }}</span>
+            </a>
+            <a
+                class="delete tooltip"
+                href="{{ url_for("removeProperty", {"property": obj.getRouteName(), "id": o[pk]}) }}"
+            >
+                <i class="ui red trash icon"></i>
+                <span class="visually-hidden">{{ _T("%property: remove from database", "auto")|replace({"%property": o[field]}) }}</span>
+            </a>
+        </td>
+    </tr>
+    {% else %}
+        <tr><td colspan="3" class="emptylist">{{ _T("no record found", "auto") }}</td></tr>
+    {% endfor %}
+{% endblock %}

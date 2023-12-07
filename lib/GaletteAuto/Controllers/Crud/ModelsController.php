@@ -7,7 +7,7 @@
  *
  * PHP version 5
  *
- * Copyright © 2020 The Galette Team
+ * Copyright © 2020-2023 The Galette Team
  *
  * This file is part of Galette (http://galette.tuxfamily.org).
  *
@@ -28,7 +28,7 @@
  * @package   GaletteAuto
  *
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020 The Galette Team
+ * @copyright 2020-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2020-12-09
@@ -36,13 +36,14 @@
 
 namespace GaletteAuto\Controllers\Crud;
 
+use DI\Attribute\Inject;
 use Galette\Controllers\Crud\AbstractPluginController;
 use GaletteAuto\Brand;
 use GaletteAuto\Filters\ModelsList;
 use GaletteAuto\Model;
 use GaletteAuto\Repository\Models;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
 /**
  * Galette auto models controller
@@ -51,7 +52,7 @@ use Slim\Http\Response;
  * @name      ModelsController
  * @package   GaletteAuto
  * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2020 The Galette Team
+ * @copyright 2020-2023 The Galette Team
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
  * @link      http://galette.tuxfamily.org
  * @since     2020-12-09
@@ -60,9 +61,9 @@ use Slim\Http\Response;
 class ModelsController extends AbstractPluginController
 {
     /**
-     * @Inject("Plugin Galette Auto")
-     * @var integer
+     * @var array
      */
+    #[Inject("Plugin Galette Auto")]
     protected $module_info;
 
     // CRUD - Create
@@ -142,7 +143,7 @@ class ModelsController extends AbstractPluginController
         $this->session->filter_automodels = $mfilters;
 
         //assign pagination variables to the template and add pagination links
-        $mfilters->setSmartyPagination($this->router, $this->view->getSmarty());
+        $mfilters->setViewPagination($this->routeparser, $this->view);
 
         $params = [
             'page_title'     => _T("Models list", "auto"),
@@ -155,7 +156,7 @@ class ModelsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']models_list.tpl',
+            $this->getTemplate('models_list'),
             $params
         );
         return $response;
@@ -186,7 +187,7 @@ class ModelsController extends AbstractPluginController
 
         return $response
             ->withStatus(301)
-            ->withHeader('Location', $this->router->pathFor('modelsList'));
+            ->withHeader('Location', $this->routeparser->urlFor('modelsList'));
     }
 
     // /CRUD - Read
@@ -250,7 +251,7 @@ class ModelsController extends AbstractPluginController
         // display page
         $this->view->render(
             $response,
-            'file:[' . $this->getModuleRoute() . ']model.tpl',
+            $this->getTemplate('model'),
             $params
         );
         return $response;
@@ -297,20 +298,21 @@ class ModelsController extends AbstractPluginController
             }
         }
 
-        $route = $this->router->pathFor('modelsList');
+        $route = $this->routeparser->urlFor('modelsList');
         if (count($error_detected) > 0) {
             //store entity in session
             $this->session->auto_model = $post;
             if (!$is_new) {
                 $id = $post[Model::PK];
+                $route = $this->routeparser->urlFor(
+                    'modelEdit',
+                    [
+                        'id' => $id
+                    ]
+                );
+            } else {
+                $route = $this->routeparser->urlFor('modelAdd');
             }
-            $route = $this->router->pathFor(
-                'modelEdit',
-                [
-                    'action'    => $action,
-                    'id'        => $id
-                ]
-            );
 
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(
@@ -337,7 +339,7 @@ class ModelsController extends AbstractPluginController
      */
     public function redirectUri(array $args): string
     {
-        return $this->router->pathFor('modelsList');
+        return $this->routeparser->urlFor('modelsList');
     }
 
     /**
@@ -349,7 +351,7 @@ class ModelsController extends AbstractPluginController
      */
     public function formUri(array $args): string
     {
-        return $this->router->pathFor(
+        return $this->routeparser->urlFor(
             'doRemoveModel',
             $args
         );
@@ -400,7 +402,22 @@ class ModelsController extends AbstractPluginController
             $ids = $post['id'];
         }
 
-        return  $model->delete($ids);
+        try {
+            return $model->delete($ids);
+        } catch (\Throwable $e) {
+            if ($this->zdb->isForeignKeyException($e)) {
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("This model is used by one or more vehicles, it cannot be deleted.", "auto")
+                );
+            } else {
+                $this->flash->addMessage(
+                    'error_detected',
+                    _T("An error occurred while deleting model.", "auto")
+                );
+            }
+            return false;
+        }
     }
 
     // /CRUD - Delete

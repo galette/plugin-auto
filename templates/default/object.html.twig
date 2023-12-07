@@ -1,0 +1,36 @@
+{% extends 'page.html.twig' %}
+
+{% block content %}
+    {% set name = obj.name %}
+    {% set pk = obj.pk %}
+    {% set field = obj.field %}
+
+    <form class="ui form" action="" method="post" id="modifform">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ page_title }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: field,
+                    name: field,
+                    value: obj.value,
+                    label: obj.getFieldLabel(),
+                    required: true,
+                    autofocus: true
+                } %}
+            </div>
+        </div>
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="set" value="{{ set }}"/>
+            <input type="hidden" name="{{ mode }}" value="1"/>
+            <input type="hidden" name="{{ pk }}" value="{{ obj.id }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+    </form>
+{% endblock %}
