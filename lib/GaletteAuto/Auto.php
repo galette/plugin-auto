@@ -865,35 +865,7 @@ class Auto
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
                     $res = $this->picture->store($_FILES['photo']);
                     if ($res < 0) {
-                        switch ($res) {
-                            case Picture::INVALID_FILE:
-                                $patterns = array('|%s|', '|%t|');
-                                $replacements = array(
-                                    $this->picture->getAllowedExts(),
-                                    htmlentities($this->picture->getBadChars())
-                                );
-                                $this->errors[] = preg_replace(
-                                    $patterns,
-                                    $replacements,
-                                    _T("- Filename or extension is incorrect. Only %s files are allowed. File name should not contains any of: %t")
-                                );
-                                break;
-                            case Picture::FILE_TOO_BIG:
-                                $this->errors[] = preg_replace(
-                                    '|%d|',
-                                    Picture::MAX_FILE_SIZE,
-                                    _T("File is too big. Maximum allowed size is %d")
-                                );
-                                break;
-                            case Picture::MIME_NOT_ALLOWED:
-                                /** FIXME: should be more descriptive */
-                                $this->errors[] = _T("Mime-Type not allowed");
-                                break;
-                            case Picture::SQL_ERROR:
-                            case Picture::SQL_BLOB_ERROR:
-                                $this->errors[] = _T("An SQL error has occurred.");
-                                break;
-                        }
+                        $this->errors[] = $this->picture->getErrorMessage($res);
                     }
                 }
             }
