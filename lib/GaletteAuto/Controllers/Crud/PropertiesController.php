@@ -623,34 +623,91 @@ class PropertiesController extends AbstractPluginController
             try {
                 $object->delete($ids);
 
+                switch ($property) {
+                    case 'colors':
+                        $message = _Tn('%1$s color has been successfully deleted.', '%1$s colors have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    case 'states':
+                        $message = _Tn('%1$s state has been successfully deleted.', '%1$s states have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    case 'finitions':
+                        $message = _Tn('%1$s finition has been successfully deleted.', '%1$s finitions have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    case 'bodies':
+                        $message = _Tn('%1$s body has been successfully deleted.', '%1$s bodies have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    case 'transmissions':
+                        $message = _Tn('%1$s transmission has been successfully deleted.', '%1$s transmissions have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    case 'brands':
+                        $message = _Tn('%1$s brand has been successfully deleted.', '%1$s brands have been successfully deleted.', count($ids), 'auto');
+                        break;
+                    default:
+                        throw new \RuntimeException('Unknown property ' . $property);
+                }
+
                 $this->flash->addMessage(
                     'success_detected',
-                    str_replace(
-                        ['%count', '%property'],
-                        [count($ids), $object->getFieldLabel()],
-                        _T("%count %property have been successfully deleted.", "auto")
-                    )
+                    sprintf($message, count($ids))
                 );
 
                 $success = true;
             } catch (\Throwable $e) {
                 if ($this->zdb->isForeignKeyException($e)) {
+                    switch ($property) {
+                        case 'colors':
+                            $message = _T('This color is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        case 'states':
+                            $message = _T('This state is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        case 'finitions':
+                            $message = _T('This finition is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        case 'bodies':
+                            $message = _T('This body is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        case 'transmissions':
+                            $message = _T('This transmission is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        case 'brands':
+                            $message = _T('This brand is used by one or more vehicles, it cannot be deleted.', 'auto');
+                            break;
+                        default:
+                            throw new \RuntimeException('Unknown property ' . $property);
+                    }
+
                     $this->flash->addMessage(
                         'error_detected',
-                        str_replace(
-                            '%property',
-                            mb_strtolower($object->getFieldLabel()),
-                            _T("This %property is used by one or more vehicles, it cannot be deleted.", "auto")
-                        )
+                        $message
                     );
                 } else {
+                    switch ($property) {
+                        case 'colors':
+                            $message = _T('An error occurred trying to remove color :/', 'auto');
+                            break;
+                        case 'states':
+                            $message = _T('An error occurred trying to remove state :/', 'auto');
+                            break;
+                        case 'finitions':
+                            $message = _T('An error occurred trying to remove finition :/', 'auto');
+                            break;
+                        case 'bodies':
+                            $message = _T('An error occurred trying to remove body :/', 'auto');
+                            break;
+                        case 'transmissions':
+                            $message = _T('An error occurred trying to remove transmission :/', 'auto');
+                            break;
+                        case 'brands':
+                            $message = _T('An error occurred trying to remove brand :/', 'auto');
+                            break;
+                        default:
+                            throw new \RuntimeException('Unknown property ' . $property);
+                    }
+
                     $this->flash->addMessage(
                         'error_detected',
-                        str_replace(
-                            '%property',
-                            $object->getFieldLabel(),
-                            _T('An error occurred trying to remove %property :/', 'auto')
-                        )
+                        $message
                     );
                 }
             }
