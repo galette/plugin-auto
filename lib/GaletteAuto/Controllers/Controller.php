@@ -420,7 +420,7 @@ class Controller extends AbstractPluginController
         //if no errors were thrown, we can store the car
         if (count($error_detected) == 0) {
             if (!$auto->store($is_new)) {
-                $error_detected[] = _T("- An error has occured while saving vehicle in the database.", "auto");
+                $error_detected[] = _T("- An error has occurred while saving vehicle in the database.", "auto");
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;
@@ -659,7 +659,7 @@ class Controller extends AbstractPluginController
             $del = $autos->removeVehicles($ids);
 
             if ($del !== true) {
-                $error_detected = _T("An error occured trying to remove vehicles :/", "auto");
+                $error_detected = _T("An error occurred trying to remove vehicles :/", "auto");
 
                 $this->flash->addMessage(
                     'error_detected',

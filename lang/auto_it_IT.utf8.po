@@ -190,7 +190,7 @@ msgstr "Rimuovi %1$s %2$s"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:623
 #, fuzzy
-#| msgid "An error occured trying to remove vehicles :/"
+#| msgid "An error occurred trying to remove vehicles :/"
 msgid "An error occurred trying to remove %property :/"
 msgstr "C'è stato un errore mentre si tentava di rimuovere i veicoli :/"
 
@@ -242,7 +242,7 @@ msgid "Change vehicle '%s'"
 msgstr "Modificare il veicolo '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- C'è stato un errore durante il salvataggio delle informazioni del veicolo "
 "nel database."
@@ -279,7 +279,7 @@ msgstr[0] "Si stanno rimuovendo %count veicoli."
 msgstr[1] "Si stanno rimuovendo %count veicoli."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
 msgstr "C'è stato un errore mentre si tentava di rimuovere i veicoli :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672

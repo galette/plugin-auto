@@ -243,7 +243,7 @@ msgid "Change vehicle '%s'"
 msgstr "Cambiar el vehículo ‘%s’"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
 msgstr "- Ha ocurrido un error mientras guardaba el vehículo en la BdD."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:425
@@ -277,7 +277,7 @@ msgstr[0] "Está a punto de eliminar %count vehiculo."
 msgstr[1] "Está a punto de eliminar los vehículos %count."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
 msgstr "Ha ocurrido un error intentando retirar vehículos :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672
@@ -714,9 +714,6 @@ msgstr "Añade una marca"
 #~ msgid "No entry was selected, please check at least one."
 #~ msgstr "Ningún apunte fue seleccionado, marque al menos uno."
 
-#~ msgid "- An error occured while saving record. Please try again."
-#~ msgstr "- Ha ocurrido un error al guardar registro. Intente de nuevo."
-
 #~ msgid "You are about to remove %count %property."
 #~ msgstr "Va a retirar número %count de propiedad %property."
 
@@ -817,10 +814,10 @@ msgstr "Añade una marca"
 #~ msgid "Mime-Type not allowed"
 #~ msgstr "Mime-Type no permitido"
 
-#~ msgid "An SQL error has occured."
+#~ msgid "An SQL error has occurred."
 #~ msgstr "Ha ocurrido un error de SQL."
 
-#~ msgid "An error occured while trying to delete car's photo"
+#~ msgid "An error occurred while trying to delete car's photo"
 #~ msgstr "Ha ocurrido un error al intentar eliminar la foto del auto"
 
 #~ msgid "Delete"

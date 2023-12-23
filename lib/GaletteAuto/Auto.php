@@ -409,7 +409,7 @@ class Auto
                 } else {
                     $hist->add(_T("Fail to add new car.", "auto"));
                     throw new \Exception(
-                        'An error occured inserting new car!'
+                        'An error occurred inserting new car!'
                     );
                 }
             } else {
@@ -461,7 +461,7 @@ class Auto
             return true;
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] An error has occured ' .
+                '[' . get_class($this) . '] An error has occurred ' .
                 (($new) ? 'inserting' : 'updating') . ' car | ' .
                 $e->getMessage(),
                 Analog::ERROR
@@ -895,7 +895,7 @@ class Auto
                                 break;
                             case Picture::SQL_ERROR:
                             case Picture::SQL_BLOB_ERROR:
-                                $this->errors[] = _T("An SQL error has occured.");
+                                $this->errors[] = _T("An SQL error has occurred.");
                                 break;
                         }
                     }

@@ -224,7 +224,7 @@ class History
                 );
             } else {
                 throw new \Exception(
-                    'An error occured registering car new history entry :('
+                    'An error occurred registering car new history entry :('
                 );
             }
         } catch (\Exception $e) {

@@ -238,7 +238,7 @@ msgid "Change vehicle '%s'"
 msgstr "Змінити транспортний засіб '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- Під час збереження транспортного засобу в базі даних сталася помилка."
 
@@ -274,7 +274,7 @@ msgstr[1] "Ви вилучите %count транспортні засоби."
 msgstr[2] "Ви вилучите %count транспортних засобів."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
 msgstr "Під час вилучення транспортних засобів сталася помилка: /"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672
@@ -720,10 +720,6 @@ msgstr "Додати бренд"
 #~ msgid "No entry was selected, please check at least one."
 #~ msgstr "Жоден запис не вибрано. Будь ласка, відзначте хоча б один."
 
-#~ msgid "- An error occured while saving record. Please try again."
-#~ msgstr ""
-#~ "- Під час збереження запису сталася помилка. Будь ласка, спробуйте ще раз."
-
 #~ msgid "You are about to remove %count %property."
 #~ msgstr "Ви ось-ось вилучите %count властивостей %property."
 
@@ -829,10 +825,10 @@ msgstr "Додати бренд"
 #~ msgid "Mime-Type not allowed"
 #~ msgstr "Mime-Type не дозволено"
 
-#~ msgid "An SQL error has occured."
+#~ msgid "An SQL error has occurred."
 #~ msgstr "Сталася помилка SQL."
 
-#~ msgid "An error occured while trying to delete car's photo"
+#~ msgid "An error occurred while trying to delete car's photo"
 #~ msgstr "Під час спроби видалити світлину автомобіля сталася помилка"
 
 #~ msgid "Model ID cannot ben null calling edit route!"
@@ -843,7 +839,7 @@ msgstr "Додати бренд"
 #~ msgid "You are about to remove %count models."
 #~ msgstr "Ви збираєтеся вилучити %c моделей(і)."
 
-#~ msgid "An error occured trying to remove models :/"
+#~ msgid "An error occurred trying to remove models :/"
 #~ msgstr "Під час вилучення моделей сталася помилка :/"
 
 #, php-format

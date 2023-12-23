@@ -249,7 +249,7 @@ msgid "Change vehicle '%s'"
 msgstr "Modifier le véhicule « %s »"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- Une erreur est survenue lors de l'enregistrement du véhicule dans la base."
 
@@ -284,7 +284,7 @@ msgstr[0] "Vous êtes sur le point de supprimer %count véhicule."
 msgstr[1] "Vous êtes sur le point de supprimer %count véhicules."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
 msgstr "Une erreur est survenue lors de la suppression des véhicules :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672
@@ -725,11 +725,6 @@ msgstr "Ajouter une marque"
 #~ msgstr ""
 #~ "Aucune entrée n'a été sélectionnée, veuillez en sélectionner au moins une."
 
-#~ msgid "- An error occured while saving record. Please try again."
-#~ msgstr ""
-#~ "- Une erreur est survenue lors de l'enregistrement. Veuillez essayer à "
-#~ "nouveau."
-
 #~ msgid "You are about to remove %count %property."
 #~ msgstr "Vous êtes sur le point de supprimer %count %property."
 
@@ -837,10 +832,10 @@ msgstr "Ajouter une marque"
 #~ msgid "Mime-Type not allowed"
 #~ msgstr "Type mime non autorisé"
 
-#~ msgid "An SQL error has occured."
+#~ msgid "An SQL error has occurred."
 #~ msgstr "Une erreur SQL est survenue."
 
-#~ msgid "An error occured while trying to delete car's photo"
+#~ msgid "An error occurred while trying to delete car's photo"
 #~ msgstr ""
 #~ "Une erreur est survenue lors de la suppression de la photo de du véhicule"
 
@@ -853,7 +848,7 @@ msgstr "Ajouter une marque"
 #~ msgid "You are about to remove %count models."
 #~ msgstr "Vous êtes sur le point de supprimer %count modèles."
 
-#~ msgid "An error occured trying to remove models :/"
+#~ msgid "An error occurred trying to remove models :/"
 #~ msgstr "Une erreur est survenue lors de la suppression des modèles :/"
 
 #, php-format
@@ -941,7 +936,7 @@ msgstr "Ajouter une marque"
 #~ msgid "Owners"
 #~ msgstr "Propriétaires"
 
-#~ msgid "- An error has occured while saving car in the database."
+#~ msgid "- An error has occurred while saving car in the database."
 #~ msgstr ""
 #~ "- Une erreur est survenue lors de l'enregistrement du véhicule dans la "
 #~ "base."
@@ -1024,7 +1019,7 @@ msgstr "Ajouter une marque"
 #~ msgid "Do you really want to delete selected vehicles?"
 #~ msgstr "Voulez vous vraiment effacer les véhicules sélectionnés&nbsp;?"
 
-#~ msgid "An error occured displaying members interface :("
+#~ msgid "An error occurred displaying members interface :("
 #~ msgstr ""
 #~ "Une erreur est survenue lors de l'affichage de l'interface des membres :("
 

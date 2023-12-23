@@ -194,7 +194,7 @@ msgstr "%1$s·%2$s entfernen"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:623
 #, fuzzy
-#| msgid "An error occured trying to remove models :/"
+#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove %property :/"
 msgstr "Beim Entfernen der Modelle ist ein Fehler aufgetreten :/"
 
@@ -244,7 +244,7 @@ msgid "Change vehicle '%s'"
 msgstr "Fahrzeug ändern '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- Beim Speichern des Fahrzeuges in der Datenbank ist ein Fehler aufgetreten."
 
@@ -280,7 +280,7 @@ msgstr[0] "Sie sind im Begriff, %count Fahrzeuge zu löschen."
 msgstr[1] "Sie sind im Begriff, %count Fahrzeuge zu löschen."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
 msgstr "Beim Löschen der Fahrzeuge ist ein Fehler aufgetreten :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672
@@ -711,12 +711,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Es wurde kein Eintrag ausgewählt, bitte wählen Sie mindestens einen aus."
 
-#, fuzzy
-#~ msgid "- An error occured while saving record. Please try again."
-#~ msgstr ""
-#~ "- Beim Speichern der Aufzeichnung ist ein Fehler aufgetreten. Bitte "
-#~ "erneut probieren."
-
 #~ msgid "[M]"
 #~ msgstr "[M]"
 
@@ -789,10 +783,10 @@ msgstr ""
 #~ msgstr "Mime_Typ nicht erlaubt"
 
 #, fuzzy
-#~ msgid "An SQL error has occured."
+#~ msgid "An SQL error has occurred."
 #~ msgstr "Ein SQL-Fehler ist aufgetreten."
 
-#~ msgid "An error occured while trying to delete car's photo"
+#~ msgid "An error occurred while trying to delete car's photo"
 #~ msgstr "Ein Fehler ist beim Löschen vom Foto des Autos aufgetreten"
 
 #~ msgid "Model ID cannot ben null calling edit route!"

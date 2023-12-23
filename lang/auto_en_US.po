@@ -231,8 +231,8 @@ msgid "Change vehicle '%s'"
 msgstr "Change vehicle '%s'"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:423
-msgid "- An error has occured while saving vehicle in the database."
-msgstr "- An error has occured while saving vehicle in the database."
+msgid "- An error has occurred while saving vehicle in the database."
+msgstr "- An error has occurred while saving vehicle in the database."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:425
 msgid "Vehicle has been saved!"
@@ -265,8 +265,8 @@ msgstr[0] "You are about to remove %count vehicle."
 msgstr[1] "You are about to remove %count vehicles."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:662
-msgid "An error occured trying to remove vehicles :/"
-msgstr "An error occured trying to remove vehicles :/"
+msgid "An error occurred trying to remove vehicles :/"
+msgstr "An error occurred trying to remove vehicles :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:672
 #, php-format
