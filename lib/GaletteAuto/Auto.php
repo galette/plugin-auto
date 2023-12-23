@@ -758,7 +758,7 @@ class Auto
                         $this->errors[] = str_replace(
                             '%s',
                             '<a href="#' . $prop . '">' . $this->getPropName($prop) . '</a>',
-                            _T("- You must enter a positive integer for %s")
+                            _T("- You must enter a positive integer for %s", "auto")
                         );
                     }
                     break;
@@ -767,7 +767,7 @@ class Auto
                     if (in_array($value, array_keys($this->listFuels()))) {
                         $this->fuel = $value;
                     } else {
-                        $this->errors[] = _T("- You must choose a fuel in the list");
+                        $this->errors[] = _T("- You must choose a fuel in the list", "auto");
                     }
                     break;
                 //external objects
@@ -785,7 +785,7 @@ class Auto
                         $this->errors[] = str_replace(
                             '%s',
                             '<a href="#' . $prop . '">' . $this->getPropName($name) . '</a>',
-                            _T("- You must choose a %s in the list")
+                            _T("- You must choose a %s in the list", "auto")
                         );
                     }
                     break;
@@ -795,7 +795,7 @@ class Auto
                         if ($value > 0) {
                             $this->$prop->load($value);
                         } else {
-                            $this->errors[] = _T("- you must attach an owner to this car");
+                            $this->errors[] = _T("- you must attach an owner to this car", "auto");
                         }
                     }
                     break;
@@ -819,7 +819,7 @@ class Auto
         if (isset($post['del_photo'])) {
             if (!$this->picture->delete()) {
                 $this->errors[]
-                    = _T("An error occurred while trying to delete car's photo");
+                    = _T("An error occurred while trying to delete car's photo", "auto");
             }
         }
 
