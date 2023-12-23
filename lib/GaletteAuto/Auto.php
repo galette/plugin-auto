@@ -743,16 +743,11 @@ class Auto
                         }
                         $this->$prop = $d->format('Y-m-d');
                     } catch (\Throwable $e) {
-                        $this->errors[] = str_replace(
-                            array(
-                                '%date_format',
-                                '%field'
-                            ),
-                            array(
-                                __("Y-m-d"),
-                                $this->getPropName($prop)
-                            ),
-                            _T("- Wrong date format (%date_format) for %field!")
+                        $this->errors[] = sprintf(
+                            //TRANS: %1$s is the date format, %2$s is the field name
+                            _T('- Wrong date format (%1$s) for %2$s!'),
+                            __("Y-m-d"),
+                            $this->getPropName($prop)
                         );
                     }
                     break;
