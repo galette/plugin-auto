@@ -219,12 +219,22 @@ $app->post(
 )->setName('propertyFilter')->add($authenticate);
 
 $app->get(
-    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/add',
+    [PropertiesController::class, 'propertyAdd']
+)->setName('propertyAdd')->add($authenticate);
+
+$app->get(
+    '/{property:brand|color|state|finition|body|transmission}/edit/{id:\d+}',
     [PropertiesController::class, 'propertyEdit']
 )->setName('propertyEdit')->add($authenticate);
 
 $app->post(
-    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/add',
+    [PropertiesController::class, 'doPropertyAdd']
+)->setName('doPropertyAdd')->add($authenticate);
+
+$app->post(
+    '/{property:brand|color|state|finition|body|transmission}/edit/{id:\d+}',
     [PropertiesController::class, 'doPropertyEdit']
 )->setName('doPropertyEdit')->add($authenticate);
 

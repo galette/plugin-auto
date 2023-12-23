@@ -320,40 +320,33 @@ class PropertiesController extends AbstractPluginController
     }
 
     /**
+     * Add property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param string   $property Property name
+     *
+     * @return Response
+     */
+    public function propertyAdd(Request $request, Response $response, string $property)
+    {
+        return $this->propertyEdit($request, $response, $property, null, 'add');
+    }
+
+    /**
      * Add/edit property
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param string   $action   'add' or 'edit'
      * @param string   $property Property name
-     * @param integer  $id       Property ID, if any
-     *
+     * @param ?integer $id       Property ID, if any
+     * @param string   $action   'add' or 'edit'
      *
      * @return Response
      */
-    public function propertyEdit(Request $request, Response $response, string $action, string $property, int $id = null)
+    public function propertyEdit(Request $request, Response $response, string $property, int $id = null, string $action = 'edit')
     {
         $is_new = ($action === 'add');
-
-        if (!$is_new && $id === null) {
-            throw new \RuntimeException(
-                str_replace(
-                    '%property',
-                    $property,
-                    _T("%property ID cannot ben null calling edit route!", "auto")
-                )
-            );
-        } elseif ($is_new && $id !== null) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->routeparser->urlFor(
-                    'propertyEdit',
-                    [
-                        'property'  => $property,
-                        'action'    => 'add'
-                    ]
-                ));
-        }
 
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
@@ -391,23 +384,39 @@ class PropertiesController extends AbstractPluginController
     }
 
     /**
+     * Do add property
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param string   $property Property name
+     *
+     * @return Response
+     */
+    public function doPropertyAdd(
+        Request $request,
+        Response $response,
+        string $property
+    ): Response {
+        return $this->doPropertyEdit($request, $response, $property, null, 'add');
+    }
+
+    /**
      * Do add/edit property
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param string   $action   'add' or 'edit'
      * @param string   $property Property name
-     * @param integer  $id       Property ID, if any
-     *
+     * @param ?integer $id       Property ID, if any
+     * @param string   $action   'add' or 'edit'
      *
      * @return Response
      */
     public function doPropertyEdit(
         Request $request,
         Response $response,
-        string $action,
         string $property,
-        int $id = null
+        int $id = null,
+        string $action = 'edit',
     ): Response {
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);

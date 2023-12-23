@@ -31,7 +31,7 @@
                     } %}
                 {% else %}
                     {{ _T("No brand is registered yet. You have to create at least one brand to register models.", "auto") }}.<br/>
-                    <a href="{{ url_for("propertyEdit", {"property": "brand", "action": "add"}) }}">{{ _T("Add a brand", "auto") }}</a>
+                    <a href="{{ url_for("propertyAdd", {"property": "brand"}) }}">{{ _T("Add a brand", "auto") }}</a>
                 {% endif %}
 
             </div>
