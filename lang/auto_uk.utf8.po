@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-06 08:12+0100\n"
+"POT-Creation-Date: 2023-12-23 09:35+0100\n"
 "PO-Revision-Date: 2023-09-20 00:26+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/auto-"
@@ -23,7 +23,7 @@ msgid "No vehicle was selected, please check at least one name."
 msgstr "Жодного авто не обрано, будь ласка, відзначте хоча б одне."
 
 #: ../lib/GaletteAuto/State.php:86 ../tempcache/vehicles.html.twig:397
-#: ../tempcache/history.html.twig:82
+#: ../tempcache/history.html.twig:82 ../tempcache/history.html.twig:154
 msgid "State"
 msgstr "Стан"
 
@@ -36,8 +36,7 @@ msgstr[1] "%count стани"
 msgstr[2] "%count станів"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:149
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:111
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:112
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:105
 msgid "Models list"
 msgstr "Список моделей"
 
@@ -51,7 +50,7 @@ msgid "New model"
 msgstr "Нова модель"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:290
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:441
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:440
 msgid "- An error occurred while saving record. Please try again."
 msgstr ""
 "- Під час збереження запису сталася помилка. Будь ласка, спробуйте ще раз."
@@ -65,7 +64,7 @@ msgid "Model has been saved!"
 msgstr "Модель збережено!"
 
 #. TRANS: first parameter is the number of models
-#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:372
+#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:373
 #, php-format
 msgid "Remove %1$s model"
 msgid_plural "Remove %1$s models"
@@ -74,148 +73,152 @@ msgstr[1] "Вилучити %1$s моделі"
 msgstr[2] "Вилучити %1$s моделей"
 
 #. TRANS: first parameter is the model name
-#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:380
+#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:381
 #, php-format
 msgid "Remove model \"%1$s\""
 msgstr "Вилучити модель %1$s"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:212
+#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:411
+msgid "This model is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:416
+#, fuzzy
+#| msgid "An error occurred while trying to delete car's photo"
+msgid "An error occurred while deleting model."
+msgstr "Під час спроби видалити світлину автомобіля сталася помилка"
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:211
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:81
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:82
 msgid "Colors list"
 msgstr "Список кольорів"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:213
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:212
 msgid "Add new color"
 msgstr "Додати новий колір"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:217
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:86
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:87
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:216
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:85
 msgid "States list"
 msgstr "Список станів"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:218
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:217
 msgid "Add new state"
 msgstr "Додати новий стан"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:222
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:91
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:92
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:221
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:89
 msgid "Finitions list"
 msgstr "Список оздоблень"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:223
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:222
 msgid "Add new finition"
 msgstr "Додати нове оздоблення"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:227
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:96
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:97
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:226
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:93
 msgid "Bodies list"
 msgstr "Список кузовів"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:228
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:227
 msgid "Add new body"
 msgstr "Додайте новий кузов"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:232
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:101
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:102
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:231
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:97
 msgid "Transmissions list"
 msgstr "Список передач"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:233
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:232
 msgid "Add new transmission"
 msgstr "Додати нову передачу"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:237
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:106
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:107
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:236
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:101
 msgid "Brands list"
 msgstr "Список брендів"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:238
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:237
 #, php-format
 msgid "Brand '%s'"
 msgstr "Бренд '%s'"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:239
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:238
 #: ../tempcache/object_show.html.twig:68
 msgid "Add new brand"
 msgstr "Додати новий бренд"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:344
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:343
 msgid "%property ID cannot ben null calling edit route!"
 msgstr ""
 "ID %property не може присвоїти виклик з нульовим значенням маршруту "
 "редагування!"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:362
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:361
 msgid "New"
 msgstr "Нове"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:368
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:367
 #, php-format
 msgid "Change '%s'"
 msgstr "Змінити \"%s\""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:426
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:425
 msgid "- No id provided for modifying this record! (internal)"
 msgstr "- Не вказано ID для зміни цього запису! (внутрішній)"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:432
-#: ../lib/GaletteAuto/Model.php:271
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:431
+#: ../lib/GaletteAuto/Model.php:270
 msgid "- You must provide a value!"
 msgstr "- Ви повинні вказати значення!"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:446
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:445
 msgid "New %property has been added!"
 msgstr "Додано нову властивість %property!"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:447
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:446
 msgid "%property has been saved!"
 msgstr "Властивість %property збережена!"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:506
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
 #, php-format
 msgid "Show '%s' brand"
 msgstr "Показати бренд \"%s\""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:565
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:564
 #, php-format
 msgid "Remove %1$s %2$s"
 msgstr "Вилучити %1$s %2$s"
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:623
-msgid "An error occurred trying to remove %property :/"
-msgstr "Сталася помилка під час спроби вилучити властивість %property :/"
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:634
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:622
 msgid "%count %property have been successfully deleted."
 msgstr "%count властивостей %property було успішно видалено."
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:634
+msgid "This %property is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:643
+msgid "An error occurred trying to remove %property :/"
+msgstr "Сталася помилка під час спроби вилучити властивість %property :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:112
 msgid "You do not have enough privileges."
 msgstr "У вас немає прав на це."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:240
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:122
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:123
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:115
 msgid "Cars list"
 msgstr "Список автомобілів"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:242
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:133
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:134
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:180
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:181
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:125
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:170
 msgid "My cars"
 msgstr "Мої автомобілі"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:244
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:201
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:202
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:190
 msgid "Member's cars"
 msgstr "Автомобілі члена"
 
@@ -237,35 +240,35 @@ msgstr "Новий транспортний засіб"
 msgid "Change vehicle '%s'"
 msgstr "Змінити транспортний засіб '%s'"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:423
+#: ../lib/GaletteAuto/Controllers/Controller.php:420
 msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- Під час збереження транспортного засобу в базі даних сталася помилка."
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:425
+#: ../lib/GaletteAuto/Controllers/Controller.php:422
 msgid "Vehicle has been saved!"
 msgstr "Транспортний засіб збережено!"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:488
+#: ../lib/GaletteAuto/Controllers/Controller.php:477
 #, php-format
 msgid "History of car #%d"
 msgstr "Історія автомобіля #%d"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:561
-#: ../lib/GaletteAuto/Controllers/Controller.php:611
+#: ../lib/GaletteAuto/Controllers/Controller.php:550
+#: ../lib/GaletteAuto/Controllers/Controller.php:600
 msgid "Vehicle"
 msgstr "Транспортний засіб"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:564
+#: ../lib/GaletteAuto/Controllers/Controller.php:553
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Вилучити транспортний засіб %1$s"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:613
+#: ../lib/GaletteAuto/Controllers/Controller.php:602
 msgid "Remove vehicles"
 msgstr "Вилучити транспортні засоби"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:617
+#: ../lib/GaletteAuto/Controllers/Controller.php:606
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
@@ -273,21 +276,21 @@ msgstr[0] "Ви вилучите %count транспортний засіб."
 msgstr[1] "Ви вилучите %count транспортні засоби."
 msgstr[2] "Ви вилучите %count транспортних засобів."
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:662
+#: ../lib/GaletteAuto/Controllers/Controller.php:650
 msgid "An error occurred trying to remove vehicles :/"
 msgstr "Під час вилучення транспортних засобів сталася помилка: /"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:672
+#: ../lib/GaletteAuto/Controllers/Controller.php:660
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count транспортних засобів успішно видалено."
 
-#: ../lib/GaletteAuto/Model.php:265
+#: ../lib/GaletteAuto/Model.php:264
 msgid "- You must select a brand!"
 msgstr "- Ви повинні вибрати бренд!"
 
 #: ../lib/GaletteAuto/Color.php:86 ../tempcache/vehicles.html.twig:370
-#: ../tempcache/history.html.twig:76
+#: ../tempcache/history.html.twig:76 ../tempcache/history.html.twig:148
 msgid "Color"
 msgstr "Колір"
 
@@ -299,14 +302,17 @@ msgstr[0] "%count колір"
 msgstr[1] "%count кольори"
 msgstr[2] "%count кольорів"
 
-#: ../lib/GaletteAuto/Brand.php:89 ../tempcache/vehicles.html.twig:108
+#: ../lib/GaletteAuto/Brand.php:88 ../tempcache/vehicles.html.twig:108
 #: ../tempcache/vehicles_list.html.twig:108
+#: ../tempcache/vehicles_list.html.twig:175
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:98
+#: ../tempcache/public_vehicles_list.html.twig:132
+#: ../tempcache/models_list.html.twig:93 ../tempcache/models_list.html.twig:141
+#: ../tempcache/model.html.twig:98
 msgid "Brand"
 msgstr "Бренд"
 
-#: ../lib/GaletteAuto/Brand.php:129
+#: ../lib/GaletteAuto/Brand.php:128
 #, php-format
 msgid "%count brand"
 msgid_plural "%count brands"
@@ -338,112 +344,133 @@ msgstr[0] "%count тіло"
 msgstr[1] "%count тіла"
 msgstr[2] "%count тіл"
 
-#: ../lib/GaletteAuto/Autos.php:162
+#: ../lib/GaletteAuto/Autos.php:156
 msgid "Delete vehicles cards"
 msgstr "Видалення карток транспортних засобів"
 
-#: ../lib/GaletteAuto/Auto.php:198
+#: ../lib/GaletteAuto/Auto.php:193
 msgid "name"
 msgstr "назва"
 
-#: ../lib/GaletteAuto/Auto.php:199
+#: ../lib/GaletteAuto/Auto.php:194
 msgid "model"
 msgstr "модель"
 
-#: ../lib/GaletteAuto/Auto.php:200
+#: ../lib/GaletteAuto/Auto.php:195
 msgid "registration"
 msgstr "реєстрація"
 
-#: ../lib/GaletteAuto/Auto.php:201
+#: ../lib/GaletteAuto/Auto.php:196
 msgid "first registration date"
 msgstr "дата першої реєстрації"
 
-#: ../lib/GaletteAuto/Auto.php:202
+#: ../lib/GaletteAuto/Auto.php:197
 msgid "first circulation date"
 msgstr "дата першого тиражу"
 
-#: ../lib/GaletteAuto/Auto.php:203
+#: ../lib/GaletteAuto/Auto.php:198
 msgid "mileage"
 msgstr "пробіг"
 
-#: ../lib/GaletteAuto/Auto.php:204
+#: ../lib/GaletteAuto/Auto.php:199
 msgid "seats"
 msgstr "місць"
 
-#: ../lib/GaletteAuto/Auto.php:205
+#: ../lib/GaletteAuto/Auto.php:200
 msgid "horsepower"
 msgstr "кінських сил"
 
-#: ../lib/GaletteAuto/Auto.php:206
+#: ../lib/GaletteAuto/Auto.php:201
 msgid "engine size"
 msgstr "об'єм двигуна"
 
-#: ../lib/GaletteAuto/Auto.php:207
+#: ../lib/GaletteAuto/Auto.php:202
 msgid "color"
 msgstr "колір"
 
-#: ../lib/GaletteAuto/Auto.php:208
+#: ../lib/GaletteAuto/Auto.php:203
 msgid "state"
 msgstr "стан"
 
-#: ../lib/GaletteAuto/Auto.php:209
+#: ../lib/GaletteAuto/Auto.php:204
 msgid "finition"
 msgstr "оздоблення"
 
-#: ../lib/GaletteAuto/Auto.php:210
+#: ../lib/GaletteAuto/Auto.php:205
 msgid "transmission"
 msgstr "передачі"
 
-#: ../lib/GaletteAuto/Auto.php:211
+#: ../lib/GaletteAuto/Auto.php:206
 msgid "body"
 msgstr "кузов"
 
-#: ../lib/GaletteAuto/Auto.php:310
+#: ../lib/GaletteAuto/Auto.php:305
 msgid "Petrol"
 msgstr "Бензин"
 
-#: ../lib/GaletteAuto/Auto.php:311
+#: ../lib/GaletteAuto/Auto.php:306
 msgid "Diesel"
 msgstr "Дизель"
 
-#: ../lib/GaletteAuto/Auto.php:312
+#: ../lib/GaletteAuto/Auto.php:307
 msgid "Gas"
 msgstr "Газ"
 
-#: ../lib/GaletteAuto/Auto.php:313
+#: ../lib/GaletteAuto/Auto.php:308
 msgid "Hybrid"
 msgstr "Гібрид"
 
-#: ../lib/GaletteAuto/Auto.php:314
+#: ../lib/GaletteAuto/Auto.php:309
 msgid "Electricity"
 msgstr "Електрика"
 
-#: ../lib/GaletteAuto/Auto.php:315
+#: ../lib/GaletteAuto/Auto.php:310
 msgid "Bio"
 msgstr "Біо"
 
-#: ../lib/GaletteAuto/Auto.php:402
+#: ../lib/GaletteAuto/Auto.php:397
 msgid "New car added"
 msgstr "Новий автомобіль додано"
 
-#: ../lib/GaletteAuto/Auto.php:410
+#: ../lib/GaletteAuto/Auto.php:405
 msgid "Fail to add new car."
 msgstr "Не вдається додати новий автомобіль."
 
-#: ../lib/GaletteAuto/Auto.php:427
+#: ../lib/GaletteAuto/Auto.php:422
 msgid "Car updated"
 msgstr "Автомобіль оновлено"
 
-#: ../lib/GaletteAuto/Auto.php:722
+#: ../lib/GaletteAuto/Auto.php:718
 msgid "- Maximum size for %field is %maxsize (current %cursize)!"
 msgstr ""
+
+#: ../lib/GaletteAuto/Auto.php:761
+#, php-format
+msgid "- You must enter a positive integer for %s"
+msgstr "- Слід ввести додатне ціле число для %s"
+
+#: ../lib/GaletteAuto/Auto.php:770
+msgid "- You must choose a fuel in the list"
+msgstr "- Ви повинні вибрати пальне в спискові"
+
+#: ../lib/GaletteAuto/Auto.php:788
+#, php-format
+msgid "- You must choose a %s in the list"
+msgstr "- Ви повинні вибрати %s у списку"
+
+#: ../lib/GaletteAuto/Auto.php:798
+msgid "- you must attach an owner to this car"
+msgstr "- ви повинні приєднати власника до цього автомобіля"
+
+#: ../lib/GaletteAuto/Auto.php:822
+msgid "An error occurred while trying to delete car's photo"
+msgstr "Під час спроби видалити світлину автомобіля сталася помилка"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:70
 msgid "Cars"
 msgstr "Автомобілі"
 
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:154
-#: ../lib/GaletteAuto/PluginGaletteAuto.php:155
+#: ../lib/GaletteAuto/PluginGaletteAuto.php:145
 #, fuzzy
 #| msgid "Vehicle"
 msgid "Vehicles"
@@ -478,8 +505,11 @@ msgid "Choose a model"
 msgstr "Виберіть модель"
 
 #: ../tempcache/vehicles.html.twig:135 ../tempcache/vehicles_list.html.twig:108
+#: ../tempcache/vehicles_list.html.twig:183
 #: ../tempcache/public_vehicles_list.html.twig:78
-#: ../tempcache/models_list.html.twig:93 ../tempcache/model.html.twig:69
+#: ../tempcache/public_vehicles_list.html.twig:138
+#: ../tempcache/models_list.html.twig:93 ../tempcache/models_list.html.twig:133
+#: ../tempcache/model.html.twig:69
 msgid "Model"
 msgstr "Модель"
 
@@ -621,52 +651,57 @@ msgid "Add new vehicle"
 msgstr "Додати новий транспортний засіб"
 
 #: ../tempcache/vehicles_list.html.twig:108
+#: ../tempcache/vehicles_list.html.twig:159
 #: ../tempcache/public_vehicles_list.html.twig:78
+#: ../tempcache/public_vehicles_list.html.twig:120
 msgid "Name"
 msgstr "Ім'я"
 
-#: ../tempcache/vehicles_list.html.twig:108 ../tempcache/history.html.twig:64
+#: ../tempcache/vehicles_list.html.twig:108
+#: ../tempcache/vehicles_list.html.twig:167 ../tempcache/history.html.twig:64
+#: ../tempcache/history.html.twig:106
 #: ../tempcache/public_vehicles_list.html.twig:78
+#: ../tempcache/public_vehicles_list.html.twig:126
 msgid "Owner"
 msgstr "Власник"
 
-#: ../tempcache/vehicles_list.html.twig:187
+#: ../tempcache/vehicles_list.html.twig:195
 msgid "Edit %vehicle"
 msgstr "Редагувати %vehicle"
 
-#: ../tempcache/vehicles_list.html.twig:189
+#: ../tempcache/vehicles_list.html.twig:197
 msgid "%vehiclename: remove from database"
 msgstr "%vehiclename: вилучити з бази даних"
 
-#: ../tempcache/vehicles_list.html.twig:229
+#: ../tempcache/vehicles_list.html.twig:237
 msgid "No car has been registered yet for your account."
 msgstr "На ваш обліковий запис ще не зареєстровано жодної автівки."
 
-#: ../tempcache/vehicles_list.html.twig:231
-#: ../tempcache/public_vehicles_list.html.twig:149
+#: ../tempcache/vehicles_list.html.twig:239
+#: ../tempcache/public_vehicles_list.html.twig:157
 msgid "No car in the database"
 msgstr "У базі даних немає автомобіля"
 
-#: ../tempcache/history.html.twig:70
+#: ../tempcache/history.html.twig:70 ../tempcache/history.html.twig:142
 msgid "Registration"
 msgstr "Реєстрація"
 
-#: ../tempcache/history.html.twig:162
+#: ../tempcache/history.html.twig:173
 msgid "no history entries"
 msgstr "записи в історії відсутні"
 
-#: ../tempcache/object_list.html.twig:166
-#: ../tempcache/models_list.html.twig:151
+#: ../tempcache/object_list.html.twig:169
+#: ../tempcache/models_list.html.twig:155
 msgid "Edit %property"
 msgstr "Редагувати %property"
 
-#: ../tempcache/object_list.html.twig:179
-#: ../tempcache/models_list.html.twig:164
+#: ../tempcache/object_list.html.twig:182
+#: ../tempcache/models_list.html.twig:168
 msgid "%property: remove from database"
 msgstr "%property: вилучити з бази даних"
 
-#: ../tempcache/object_list.html.twig:198
-#: ../tempcache/models_list.html.twig:183
+#: ../tempcache/object_list.html.twig:201
+#: ../tempcache/models_list.html.twig:187
 msgid "no record found"
 msgstr "жодного запису не знайдено"
 
@@ -797,20 +832,6 @@ msgstr "Додати бренд"
 #~ msgid "- Wrong date format for %s (dd/mm/yyyy)!"
 #~ msgstr "- Неправильний формат дати для %s (дд/мм/рррр)!"
 
-#, php-format
-#~ msgid "- You must enter a positive integer for %s"
-#~ msgstr "- Слід ввести додатне ціле число для %s"
-
-#~ msgid "- You must choose a fuel in the list"
-#~ msgstr "- Ви повинні вибрати пальне в спискові"
-
-#, php-format
-#~ msgid "- You must choose a %s in the list"
-#~ msgstr "- Ви повинні вибрати %s у списку"
-
-#~ msgid "- you must attach an owner to this car"
-#~ msgstr "- ви повинні приєднати власника до цього автомобіля"
-
 #~ msgid ""
 #~ "- Filename or extension is incorrect. Only %s files are allowed. File "
 #~ "name should not contains any of: %t"
@@ -827,9 +848,6 @@ msgstr "Додати бренд"
 
 #~ msgid "An SQL error has occurred."
 #~ msgstr "Сталася помилка SQL."
-
-#~ msgid "An error occurred while trying to delete car's photo"
-#~ msgstr "Під час спроби видалити світлину автомобіля сталася помилка"
 
 #~ msgid "Model ID cannot ben null calling edit route!"
 #~ msgstr ""
