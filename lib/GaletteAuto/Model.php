@@ -40,7 +40,6 @@ namespace GaletteAuto;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use GaletteAuto\Filters\ModelsList;
 
 /**
  * Automobile Models class for galette Auto plugin

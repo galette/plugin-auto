@@ -82,13 +82,13 @@ class Controller extends AbstractPluginController
     /**
      * Check ACLs for specific member
      *
-     * @param Response $response Response
-     * @param integer  $id_adh   Members id to check right for
-     * @param string   $redirect Path to redirect to (myVehiclesList per default)
+     * @param Response     $response Response
+     * @param integer      $id_adh   Members id to check right for
+     * @param string|false $redirect Path to redirect to (myVehiclesList per default)
      *
      * @return bool|Response
      */
-    protected function checkAclsFor(Response $response, $id_adh, $redirect = null)
+    protected function checkAclsFor(Response $response, int $id_adh, string|false $redirect = null)
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if (
@@ -397,7 +397,6 @@ class Controller extends AbstractPluginController
 
         // initialize warnings
         $error_detected = array();
-        $warning_detected = array();
         $success_detected = array();
 
         if (isset($post['id_adh'])) {
@@ -409,11 +408,9 @@ class Controller extends AbstractPluginController
             $auto->load($post[Auto::PK]);
         }
 
-        if (!count($error_detected)) {
-            $res = $auto->check($post);
-            if ($res !== true) {
-                $error_detected = $auto->getErrors();
-            }
+        $res = $auto->check($post);
+        if ($res !== true) {
+            $error_detected = $auto->getErrors();
         }
 
         $route = $this->routeparser->urlFor('vehiclesList');
@@ -445,14 +442,6 @@ class Controller extends AbstractPluginController
             }
         }
 
-        if (count($warning_detected) > 0) {
-            foreach ($warning_detected as $warning) {
-                $this->flash->addMessage(
-                    'warning_detected',
-                    $warning
-                );
-            }
-        }
         if (count($success_detected) > 0) {
             foreach ($success_detected as $success) {
                 $this->flash->addMessage(
@@ -564,7 +553,7 @@ class Controller extends AbstractPluginController
                     _T('Remove vehicle %1$s', 'auto'),
                     $auto->name
                 ),
-                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle', ['id' => $auto->id]),
+                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle', ['id' => (string)$auto->id]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -613,7 +602,7 @@ class Controller extends AbstractPluginController
                 'page_title'    => _T('Remove vehicles', 'auto'),
                 'message'       => str_replace(
                     '%count',
-                    count($data['id']),
+                    (string)count($data['id']),
                     _Tn('You are about to remove %count vehicle.', 'You are about to remove %count vehicles.', count($data['id']), 'auto')
                 ),
                 'form_url'      => $this->routeparser->urlFor('doRemoveVehicle'),
@@ -629,11 +618,10 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
      *
      * @return Response
      */
-    public function doRemoveVehicle(Request $request, Response $response, $args = [])
+    public function doRemoveVehicle(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -668,7 +656,7 @@ class Controller extends AbstractPluginController
             } else {
                 $success_detected = str_replace(
                     '%count',
-                    count($ids),
+                    (string)count($ids),
                     _T("%count vehicles have been successfully deleted.", "auto")
                 );
 

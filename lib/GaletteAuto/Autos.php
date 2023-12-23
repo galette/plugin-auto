@@ -42,6 +42,7 @@ use Galette\Core\Db;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use GaletteAuto\Filters\AutosList;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
 
@@ -85,101 +86,86 @@ class Autos
      *
      * @return boolean
      */
-    public function removeVehicles($ids)
+    public function removeVehicles(int|array $ids)
     {
         global $hist;
 
-        $list = array();
-        if (is_numeric($ids)) {
-            //we've got only one identifier
-            $list[] = $ids;
-        } else {
-            $list = $ids;
-        }
+        $list = is_array($ids) ? $ids : [$ids];
 
-        if (is_array($list)) {
-            try {
-                $this->zdb->connection->beginTransaction();
+        try {
+            $this->zdb->connection->beginTransaction();
 
-                //Retrieve some information
-                $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
-                $select->columns(
-                    array(
-                        self::PK,
-                        'car_name'
-                    )
-                )->join(
-                    array('b' => PREFIX_DB . AUTO_PREFIX . Model::TABLE),
-                    'a.' . Model::PK . ' = b.' . Model::PK,
-                    array('model')
-                )->join(
-                    array('c' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
-                    'b.' . Brand::PK . ' = c.' . Brand::PK,
-                    array('brand')
-                )->where->in(self::PK, $list);
+            //Retrieve some information
+            $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
+            $select->columns(
+                array(
+                    self::PK,
+                    'car_name'
+                )
+            )->join(
+                array('b' => PREFIX_DB . AUTO_PREFIX . Model::TABLE),
+                'a.' . Model::PK . ' = b.' . Model::PK,
+                array('model')
+            )->join(
+                array('c' => PREFIX_DB . AUTO_PREFIX . Brand::TABLE),
+                'b.' . Brand::PK . ' = c.' . Brand::PK,
+                array('brand')
+            )->where->in(self::PK, $list);
 
-                $vehicles = $this->zdb->execute($select);
+            $vehicles = $this->zdb->execute($select);
 
-                $infos = null;
-                foreach ($vehicles as $vehicle) {
-                    $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
-                        ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
-                    $infos .= $str_v . "\n";
+            $infos = null;
+            foreach ($vehicles as $vehicle) {
+                $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
+                    ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
+                $infos .= $str_v . "\n";
 
-                    $p = new Picture($this->plugins, $vehicle->id_car);
-                    if ($p->hasPicture()) {
-                        if (!$p->delete()) {
-                            Analog::log(
-                                'Unable to delete picture for vehicle ' .
-                                $str_v,
-                                Analog::ERROR
-                            );
-                            throw new \Exception(
-                                'Unable to delete picture for vehicle ' .
-                                $str_v
-                            );
-                        } else {
-                            $hist->add(
-                                "Vehicle Picture deleted",
-                                $str_v
-                            );
-                        }
+                $p = new Picture($this->plugins, $vehicle->id_car);
+                if ($p->hasPicture()) {
+                    if (!$p->delete()) {
+                        Analog::log(
+                            'Unable to delete picture for vehicle ' .
+                            $str_v,
+                            Analog::ERROR
+                        );
+                        throw new \Exception(
+                            'Unable to delete picture for vehicle ' .
+                            $str_v
+                        );
+                    } else {
+                        $hist->add(
+                            "Vehicle Picture deleted",
+                            $str_v
+                        );
                     }
                 }
-
-                //delete vehicles history
-                $delete = $this->zdb->delete(AUTO_PREFIX . History::TABLE);
-                $delete->where->in(self::PK, $list);
-                $this->zdb->execute($delete);
-
-                //delete vehicles
-                $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
-                $delete->where->in(self::PK, $list);
-                $this->zdb->execute($delete);
-
-                //add an history entry
-                $hist->add(
-                    _T("Delete vehicles cards", "auto"),
-                    $infos
-                );
-
-                //commit all changes
-                $this->zdb->connection->commit();
-                return true;
-            } catch (\Exception $e) {
-                $this->zdb->connection->rollBack();
-                Analog::log(
-                    'Unable to delete selected vehicle(s) |' .
-                    $e->getMessage(),
-                    Analog::ERROR
-                );
-                return false;
             }
-        } else {
-            //not numeric and not an array: incorrect.
+
+            //delete vehicles history
+            $delete = $this->zdb->delete(AUTO_PREFIX . History::TABLE);
+            $delete->where->in(self::PK, $list);
+            $this->zdb->execute($delete);
+
+            //delete vehicles
+            $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
+            $delete->where->in(self::PK, $list);
+            $this->zdb->execute($delete);
+
+            //add a history entry
+            $hist->add(
+                _T("Delete vehicles cards", "auto"),
+                $infos
+            );
+
+            //commit all changes
+            $this->zdb->connection->commit();
+            return true;
+        } catch (\Exception $e) {
+            $this->zdb->connection->rollBack();
             Analog::log(
-                'Asking to remove vehicles, but without providing an array or a single numeric value.',
-                Analog::WARNING
+                'Unable to delete selected vehicle(s) |' .
+                $e->getMessage(),
+                Analog::ERROR
             );
             return false;
         }
@@ -188,12 +174,12 @@ class Autos
     /**
      * Get vehicles list for specified member
      *
-     * @param int   $id_adh  Members id
-     * @param array $filters Filters
+     * @param int        $id_adh  Members id
+     * @param ?AutosList $filters Filters
      *
      * @return array
      */
-    public function getMemberList($id_adh, $filters)
+    public function getMemberList(int $id_adh, ?AutosList $filters): array
     {
         return $this->getList(true, false, null, $filters, $id_adh);
     }
@@ -201,32 +187,31 @@ class Autos
     /**
      * Get the list of all vehicles
      *
-     * @param boolean      $as_autos return the results as an array of Auto object.
-     *                               When true, fields are not relevant
-     * @param boolean      $mine     show only current logged member cars
-     * @param array|string $fields   field(s) name(s) to get. Should be a string
-     *                               or an array. If null, all fields will be returned
-     * @param AutosList    $filters  Filters
-     * @param int          $id_adh   Member id
-     * @param boolean      $public   Get public list
+     * @param boolean    $as_autos return the results as an array of Auto object.
+     *                             When true, fields are not relevant
+     * @param boolean    $mine     show only current logged member cars
+     * @param ?array     $fields   field(s) name(s) to get.
+     *                             or an array. If null, all fields will be returned
+     * @param ?AutosList $filters  Filters
+     * @param ?int       $id_adh   Member id
+     * @param boolean    $public   Get public list
      *
-     * @return array|Autos[]
+     * @return array<int, Autos>|ResultSet
      */
     public function getList(
-        $as_autos = false,
-        $mine = false,
-        $fields = null,
-        AutosList $filters = null,
-        $id_adh = null,
-        $public = false
-    ) {
+        bool $as_autos = false,
+        bool $mine = false,
+        ?array $fields = null,
+        ?AutosList $filters = null,
+        ?int $id_adh = null,
+        bool $public = false
+    ): array|ResultSet {
         global $login;
 
-        $fieldsList = ($fields != null && !$as_autos)
-            ? ((!is_array($fields) || count($fields) < 1)
-                ? (array)'*'
-                : implode(', ', $fields))
-                : (array)'*';
+        $fieldsList = ['*'];
+        if (is_array($fields) && count($fields)) {
+            $fieldsList = $fields;
+        }
 
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'a');
@@ -251,8 +236,8 @@ class Autos
             } elseif (!$login->isAdmin() && !$login->isStaff() && $login->isGroupManager()) {
                 $groups = new \Galette\Repository\Groups($this->zdb, $login);
                 $managed_users = $groups->getManagerUsers();
-                $managed_users[] = $login->id;
                 if (count($managed_users)) {
+                    $managed_users[] = $login->id;
                     $select->where->in(Adherent::PK, $managed_users);
                 } else {
                     $on_logged = true;

@@ -37,7 +37,6 @@
 
 namespace GaletteAuto\Filters;
 
-use Analog\Analog as Analog;
 use Galette\Core\Pagination;
 use Laminas\Db\Sql\Select;
 

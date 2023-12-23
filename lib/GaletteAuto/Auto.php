@@ -44,11 +44,6 @@ use Galette\Core\Login;
 use Galette\Core\Plugins;
 use Galette\Entity\Adherent;
 use Laminas\Db\Sql\Expression;
-use GaletteAuto\Color;
-use GaletteAuto\State;
-use GaletteAuto\Finition;
-use GaletteAuto\Body;
-use GaletteAuto\Transmission;
 
 /**
  * Automobile Transmissions class for galette Auto plugin
@@ -462,6 +457,7 @@ class Auto
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] An error has occurred ' .
+                //@phpstan-ignore-next-line
                 (($new) ? 'inserting' : 'updating') . ' car | ' .
                 $e->getMessage(),
                 Analog::ERROR
@@ -478,13 +474,13 @@ class Auto
      *
      * @return array
      */
-    private function getAllProperties($restrict = false)
+    private function getAllProperties(bool $restrict = false): array
     {
         $result = array();
         foreach (get_class_vars(static::class) as $key => $value) {
             if (
                 !$restrict
-                || ($restrict && !in_array($key, $this->internals))
+                || !in_array($key, $this->internals)
             ) {
                 $result[] = $key;
             }
@@ -498,7 +494,7 @@ class Auto
      *
      * @return array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->getAllProperties(true);
     }
@@ -508,7 +504,7 @@ class Auto
      *
      * @return boolean
      */
-    public function hasPicture()
+    public function hasPicture(): bool
     {
         return $this->picture->hasPicture();
     }
@@ -520,7 +516,7 @@ class Auto
      *
      * @return void
      */
-    public function appropriateCar(Login $login)
+    public function appropriateCar(Login $login): void
     {
         $this->owner->load($login->id);
     }
@@ -532,7 +528,7 @@ class Auto
      *
      * @return string property
      */
-    public function getPropName($name)
+    public function getPropName(string $name): string
     {
         if (isset($this->propnames[$name])) {
             return $this->propnames[$name];
@@ -544,7 +540,7 @@ class Auto
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
      * @return mixed the called property
      */
@@ -756,8 +752,8 @@ class Auto
                 case 'seats':
                 case 'horsepower':
                 case 'engine_size':
-                    if (is_int((int)str_replace(' ', '', $value))) {
-                        $this->$prop = $value;
+                    if (is_numeric(str_replace(' ', '', $value))) {
+                        $this->$prop = (int)$value;
                     } elseif ($value != '') {
                         $this->errors[] = str_replace(
                             '%s',

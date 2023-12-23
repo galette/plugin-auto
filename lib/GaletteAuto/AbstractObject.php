@@ -37,7 +37,6 @@
 
 namespace GaletteAuto;
 
-use ArrayObject;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
@@ -367,7 +366,6 @@ abstract class AbstractObject
                 break;
             default:
                 throw new \RuntimeException('Unknown property ' . $property);
-                break;
         }
         return $classname;
     }
@@ -457,7 +455,7 @@ abstract class AbstractObject
     {
         return str_replace(
             '%count',
-            $this->getCount(),
+            (string)$this->getCount(),
             $this->getLocalizedCount()
         );
     }

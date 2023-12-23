@@ -37,7 +37,6 @@
 
 namespace GaletteAuto;
 
-use Analog\Analog;
 use Galette\Core\Db;
 
 /**

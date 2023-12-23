@@ -37,7 +37,6 @@
 
 namespace GaletteAuto\Repository;
 
-use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
@@ -46,6 +45,7 @@ use GaletteAuto\Model;
 use GaletteAuto\Brand;
 use GaletteAuto\Filters\ModelsList;
 use Analog\Analog;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
 
@@ -89,9 +89,9 @@ class Models extends Repository
      * @param integer $brandId   Optional brand we want models for
      * @param boolean $as_object Whether to return an array of objects or a ResultSet
      *
-     * @return array|ArrayObject
+     * @return array<int, Model>|ResultSet
      */
-    public function getList($brandId = null, $as_object = true)
+    public function getList($brandId = null, $as_object = true): array|ResultSet
     {
         $select = $this->buildSelect();
 
@@ -110,6 +110,7 @@ class Models extends Repository
             $models = array();
             foreach ($results as $r) {
                 $pk = self::PK;
+                //@phpstan-ignore-next-line
                 $models[$r->$pk] = new Model($this->zdb, $r);
             }
             return $models;
@@ -123,7 +124,7 @@ class Models extends Repository
      *
      * @return Select SELECT statement
      */
-    private function buildSelect()
+    private function buildSelect(): Select
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'm');
@@ -149,7 +150,7 @@ class Models extends Repository
      *
      * @return array SQL ORDER clause
      */
-    private function buildOrderClause()
+    private function buildOrderClause(): array
     {
         $order = array();
 
@@ -173,7 +174,7 @@ class Models extends Repository
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -190,6 +191,7 @@ class Models extends Repository
             $result = $results->current();
 
             $k = self::PK;
+            //@phpstan-ignore-next-line
             $this->count = $result->$k;
 
             if ($this->count > 0) {
@@ -207,11 +209,11 @@ class Models extends Repository
     /**
      * Add default values in database
      *
-     * @param bool $check_first Check first if it seem initialized, defaults to true
+     * @param bool $check_first Check first if it seems initialized, defaults to true
      *
      * @return bool
      */
-    public function installInit($check_first = true)
+    public function installInit(bool $check_first = true): bool
     {
         return true;
     }
