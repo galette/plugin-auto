@@ -66,18 +66,18 @@ use DI\Attribute\Inject;
 class Controller extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Auto")]
-    protected $module_info;
+    protected array $module_info;
 
     /** @var boolean  */
-    private $mine = false;
+    private bool $mine = false;
     /** @var boolean */
-    private $public = false;
+    private bool $public = false;
 
     /** @var integer */
-    private $id_adh;
+    private int $id_adh;
 
     /**
      * Check ACLs for specific member
@@ -88,7 +88,7 @@ class Controller extends AbstractPluginController
      *
      * @return bool|Response
      */
-    protected function checkAclsFor(Response $response, int $id_adh, string|false $redirect = null)
+    protected function checkAclsFor(Response $response, int $id_adh, string|false $redirect = null): bool|Response
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if (
@@ -128,7 +128,7 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     * @param integer  $id       Vehicle id
+     * @param ?integer $id       Vehicle id
      *
      * @return Response
      */
@@ -281,7 +281,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function showAddVehicle(Request $request, Response $response)
+    public function showAddVehicle(Request $request, Response $response): Response
     {
         return $this->showAddEditVehicle($request, $response, 'add');
     }
@@ -295,7 +295,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function showEditVehicle(Request $request, Response $response, int $id)
+    public function showEditVehicle(Request $request, Response $response, int $id): Response
     {
         return $this->showAddEditVehicle($request, $response, 'edit', $id);
     }
@@ -310,7 +310,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null)
+    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null): Response
     {
         $is_new = ($action === 'add');
 
@@ -353,9 +353,9 @@ class Controller extends AbstractPluginController
             'require_calendar'  => true,
             'require_dialog'    => true,
             'car'               => $auto,
-            'models'            => $models->getList((int)$auto->model->brand),
-            'js_init_models'    => (($auto->model->brand != '') ? false : true),
-            'brands'            => $auto->model->obrand->getList(),
+            'models'            => $models->getList($auto->model->brand->id),
+            'js_init_models'    => !isset($auto->model->brand),
+            'brands'            => $auto->model->brand->getList(),
             'colors'            => $auto->color->getList(),
             'bodies'            => $auto->body->getList(),
             'transmissions'     => $auto->transmission->getList(),
@@ -397,20 +397,20 @@ class Controller extends AbstractPluginController
     }
 
     /**
-     * Do add vahicle route
+     * Do add vehicle route
      *
      * @param Request  $request  Request
      * @param Response $response Response
      *
      * @return Response
      */
-    public function doAddVehicle(Request $request, Response $response)
+    public function doAddVehicle(Request $request, Response $response): Response
     {
         return $this->doAddEditVehicle($request, $response, 'new');
     }
 
     /**
-     * Do add/edit route
+     * Do edit vehicle route
      *
      * @param Request  $request  Request
      * @param Response $response Response
@@ -418,7 +418,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEditVehicle(Request $request, Response $response, int $id)
+    public function doEditVehicle(Request $request, Response $response, int $id): Response
     {
         return $this->doAddEditVehicle($request, $response, 'edit', $id);
     }
@@ -433,7 +433,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null)
+    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null): Response
     {
         $post = $request->getParsedBody();
 
@@ -511,7 +511,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function vehicleHistory(Request $request, Response $response, int $id)
+    public function vehicleHistory(Request $request, Response $response, int $id): Response
     {
         $history = new History($this->zdb, $id);
         $auto = new Auto($this->plugins, $this->zdb, $history->{Auto::PK});
@@ -541,7 +541,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function ajaxModels(Request $request, Response $response)
+    public function ajaxModels(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $list = array();
@@ -571,7 +571,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function removeVehicle(Request $request, Response $response, int $id)
+    public function removeVehicle(Request $request, Response $response, int $id): Response
     {
         $auto = new Auto($this->plugins, $this->zdb);
         $auto->load($id);
@@ -612,11 +612,10 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
      *
      * @return Response
      */
-    public function removeVehicles(Request $request, Response $response, $args = [])
+    public function removeVehicles(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $route = $this->routeparser->urlFor('vehiclesList');

@@ -61,7 +61,7 @@ class AutosList extends Pagination
      *
      * @return string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): string
     {
         return 'car_name';
     }
@@ -71,26 +71,14 @@ class AutosList extends Pagination
      *
      * @param Select $select Original select
      *
-     * @return void
+     * @return self
      */
-    public function setLimit($select)
+    public function setLimit(Select $select): self
     {
         $this->setLimits($select);
+        return $this;
     }
 
-
-    /**
-     * Set counter
-     *
-     * @param int $c Count
-     *
-     * @return void
-     */
-    public function setCounter($c)
-    {
-        $this->counter = (int)$c;
-        $this->countPages();
-    }
 
     /**
      * Build href
@@ -99,7 +87,7 @@ class AutosList extends Pagination
      *
      * @return string
      */
-    protected function getHref($page)
+    protected function getHref(int $page): string
     {
         $args = [
             'option'    => 'page',

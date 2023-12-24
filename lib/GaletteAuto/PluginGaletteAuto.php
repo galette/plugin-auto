@@ -181,7 +181,7 @@ class PluginGaletteAuto extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getListActionsContents(Adherent $member): array
     {

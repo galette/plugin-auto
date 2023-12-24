@@ -55,9 +55,9 @@ use Galette\Core\Plugins;
  */
 class Picture extends GalettePicture
 {
-    private $plugins;
+    private Plugins $plugins;
 
-    protected $tbl_prefix = AUTO_PREFIX;
+    protected string $tbl_prefix = AUTO_PREFIX;
     public const PK = Auto::PK;
 
     /**
@@ -99,7 +99,7 @@ class Picture extends GalettePicture
      *
      * @return void
      */
-    protected function getDefaultPicture()
+    protected function getDefaultPicture(): void
     {
         $this->file_path = realpath(
             $this->plugins->getTemplatesPathFromName('Galette Auto') .

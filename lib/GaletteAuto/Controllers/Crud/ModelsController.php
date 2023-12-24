@@ -61,10 +61,10 @@ use Slim\Psr7\Response;
 class ModelsController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Auto")]
-    protected $module_info;
+    protected array $module_info;
 
     // CRUD - Create
 
@@ -100,14 +100,14 @@ class ModelsController extends AbstractPluginController
     /**
      * List page
      *
-     * @param Request        $request  PSR Request
-     * @param Response       $response PSR Response
-     * @param string         $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  PSR Request
+     * @param Response        $response PSR Response
+     * @param ?string         $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, $option = null, $value = null): Response
+    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
     {
         if (isset($this->session->filter_automodels)) {
             $mfilters = $this->session->filter_automodels;
@@ -203,7 +203,7 @@ class ModelsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $model = new Model($this->zdb);
 
@@ -267,7 +267,7 @@ class ModelsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $is_new = ($action === 'add');

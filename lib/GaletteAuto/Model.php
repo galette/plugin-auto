@@ -40,6 +40,7 @@ namespace GaletteAuto;
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
+use Laminas\Db\ResultSet\ResultSet;
 
 /**
  * Automobile Models class for galette Auto plugin
@@ -54,9 +55,8 @@ use Galette\Core\Db;
  * @since     Available since 0.7dev - 2009-03-16
  *
  * @property integer $id
- * @property string $model
- * @property int|Brand $brand
- * @property Brand $obrand
+ * @property string  $model
+ * @property Brand   $brand
  */
 class Model
 {
@@ -64,9 +64,9 @@ class Model
     public const PK = 'id_model';
     public const FIELD = 'model';
 
-    protected $id;
-    protected $model;
-    protected $brand;
+    protected int $id;
+    protected string $model;
+    protected Brand $brand;
 
     private $errors;
     private $zdb;
@@ -74,20 +74,18 @@ class Model
     /**
      * Default constructor
      *
-     * @param Db    $zdb  Database instance
-     * @param mixed $args model's id to load or ResultSet. Defaults to null
+     * @param Db                   $zdb  Database instance
+     * @param ArrayObject|int|null $args model's id to load or ResultSet. Defaults to null
      */
-    public function __construct(Db $zdb, $args = null)
+    public function __construct(Db $zdb, ArrayObject|int $args = null)
     {
         $this->zdb = $zdb;
         $this->brand = new Brand($zdb);
 
-        if ($args == null || is_int($args)) {
-            if (is_int($args) && $args > 0) {
-                $this->load($args);
-            }
-        } elseif (is_object($args)) {
+        if ($args instanceof ArrayObject) {
             $this->loadFromRS($args);
+        } elseif (is_int($args)) {
+            $this->load($args);
         }
     }
 
@@ -98,7 +96,7 @@ class Model
      *
      * @return boolean
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
@@ -129,7 +127,7 @@ class Model
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $this->id = $r->id_model;
         $this->model = $r->model;
@@ -144,7 +142,7 @@ class Model
      *
      * @return boolean
      */
-    public function store($new = false)
+    public function store(bool $new = false): bool
     {
         try {
             $values = array(
@@ -183,7 +181,7 @@ class Model
      *
      * @return boolean
      */
-    public function delete($ids)
+    public function delete(array $ids): bool
     {
         try {
             $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
@@ -207,25 +205,9 @@ class Model
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
-        $forbidden = array();
-        if (!in_array($name, $forbidden)) {
-            switch ($name) {
-                case 'brand':
-                    return $this->brand->id;
-                case 'obrand':
-                    return $this->brand;
-                default:
-                    return $this->$name;
-            }
-        } else {
-            Analog::log(
-                '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                Analog::INFO
-            );
-            return false;
-        }
+        return $this->$name;
     }
 
     /**
@@ -236,17 +218,9 @@ class Model
      *
      * @return boolean
      */
-    public function __isset(string $name)
+    public function __isset(string $name): bool
     {
-        $knowns = [
-            'obrand'
-        ];
-
-        if (in_array($name, $knowns) || property_exists($this, $name)) {
-            return true;
-        }
-
-        return false;
+        return property_exists($this, $name);
     }
 
     /**
@@ -257,7 +231,7 @@ class Model
      *
      * @return boolean
      */
-    public function check($post)
+    public function check(array $post): bool
     {
         $this->errors = [];
         if (!isset($post['brand']) || $post['brand'] == -1) {
@@ -279,7 +253,7 @@ class Model
      *
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -289,9 +263,9 @@ class Model
      *
      * @param integer $id Brand ID
      *
-     * @return Model
+     * @return self
      */
-    public function setBrand($id)
+    public function setBrand(int $id): self
     {
         $this->brand = new Brand($this->zdb, $id);
         return $this;

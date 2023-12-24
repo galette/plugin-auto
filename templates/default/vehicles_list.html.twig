@@ -43,7 +43,7 @@
 
 {% block body %}
     {% for auto in autos %}
-        {% set brand = auto.model.obrand %}
+        {% set brand = auto.model.brand %}
         {% set edit_link = url_for("vehicleEdit", {"id": auto.id}) %}
 
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">

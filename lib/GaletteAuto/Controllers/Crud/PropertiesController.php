@@ -66,18 +66,18 @@ use GaletteAuto\Repository\Models;
 class PropertiesController extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Auto")]
-    protected $module_info;
+    protected array $module_info;
 
     /**
      * List brands
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -85,7 +85,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'brands', $option, $value);
     }
@@ -93,10 +93,10 @@ class PropertiesController extends AbstractPluginController
     /**
      * List colors
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -104,7 +104,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        int|string $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'colors', $option, $value);
     }
@@ -112,10 +112,10 @@ class PropertiesController extends AbstractPluginController
     /**
      * List states
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -123,7 +123,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'states', $option, $value);
     }
@@ -131,10 +131,10 @@ class PropertiesController extends AbstractPluginController
     /**
      * List finitions
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -142,7 +142,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'finitions', $option, $value);
     }
@@ -150,10 +150,10 @@ class PropertiesController extends AbstractPluginController
     /**
      * List bodies
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -161,7 +161,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'bodies', $option, $value);
     }
@@ -169,10 +169,10 @@ class PropertiesController extends AbstractPluginController
     /**
      * List transmissions
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -180,7 +180,7 @@ class PropertiesController extends AbstractPluginController
         Request $request,
         Response $response,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         return $this->propertiesList($request, $response, 'transmissions', $option, $value);
     }
@@ -188,11 +188,11 @@ class PropertiesController extends AbstractPluginController
     /**
      * List properties
      *
-     * @param Request        $request  Request
-     * @param Response       $response Response
-     * @param string         $property Property name
-     * @param string|null    $option   One of 'page' or 'order'
-     * @param string|integer $value    Value of the option
+     * @param Request         $request  Request
+     * @param Response        $response Response
+     * @param string          $property Property name
+     * @param string|null     $option   One of 'page' or 'order'
+     * @param string|int|null $value    Value of the option
      *
      * @return Response
      */
@@ -201,7 +201,7 @@ class PropertiesController extends AbstractPluginController
         Response $response,
         string $property,
         string $option = null,
-        $value = null
+        string|int $value = null
     ): Response {
         $get = $request->getQueryParams();
 
@@ -328,7 +328,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function propertyAdd(Request $request, Response $response, string $property)
+    public function propertyAdd(Request $request, Response $response, string $property): Response
     {
         return $this->propertyEdit($request, $response, $property, null, 'add');
     }
@@ -344,7 +344,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function propertyEdit(Request $request, Response $response, string $property, int $id = null, string $action = 'edit')
+    public function propertyEdit(Request $request, Response $response, string $property, int $id = null, string $action = 'edit'): Response
     {
         $is_new = ($action === 'add');
 
@@ -503,7 +503,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function propertyShow(Request $request, Response $response, string $property, int $id)
+    public function propertyShow(Request $request, Response $response, string $property, int $id): Response
     {
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
@@ -548,7 +548,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return Response
      */
-    public function removeProperty(Request $request, Response $response, string $property, int $id)
+    public function removeProperty(Request $request, Response $response, string $property, int $id): Response
     {
         $classname = AbstractObject::getClassForPropName($property);
         $object = new $classname($this->zdb);
@@ -591,11 +591,11 @@ class PropertiesController extends AbstractPluginController
      * @param Request  $request  Request
      * @param Response $response Response
      * @param string   $property Property name
-     * @param integer  $id       Property id
+     * @param ?integer $id       Property id
      *
      * @return Response
      */
-    public function doRemoveProperty(Request $request, Response $response, string $property, int $id = null)
+    public function doRemoveProperty(Request $request, Response $response, string $property, int $id = null): Response
     {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -625,21 +625,27 @@ class PropertiesController extends AbstractPluginController
 
                 switch ($property) {
                     case 'colors':
+                    case 'color':
                         $message = _Tn('%1$s color has been successfully deleted.', '%1$s colors have been successfully deleted.', count($ids), 'auto');
                         break;
                     case 'states':
+                    case 'state':
                         $message = _Tn('%1$s state has been successfully deleted.', '%1$s states have been successfully deleted.', count($ids), 'auto');
                         break;
                     case 'finitions':
+                    case 'finition':
                         $message = _Tn('%1$s finition has been successfully deleted.', '%1$s finitions have been successfully deleted.', count($ids), 'auto');
                         break;
                     case 'bodies':
+                    case 'body':
                         $message = _Tn('%1$s body has been successfully deleted.', '%1$s bodies have been successfully deleted.', count($ids), 'auto');
                         break;
                     case 'transmissions':
+                    case 'transmission':
                         $message = _Tn('%1$s transmission has been successfully deleted.', '%1$s transmissions have been successfully deleted.', count($ids), 'auto');
                         break;
                     case 'brands':
+                    case 'brand':
                         $message = _Tn('%1$s brand has been successfully deleted.', '%1$s brands have been successfully deleted.', count($ids), 'auto');
                         break;
                     default:
@@ -656,21 +662,27 @@ class PropertiesController extends AbstractPluginController
                 if ($this->zdb->isForeignKeyException($e)) {
                     switch ($property) {
                         case 'colors':
+                        case 'color':
                             $message = _T('This color is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         case 'states':
+                        case 'state':
                             $message = _T('This state is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         case 'finitions':
+                        case 'finition':
                             $message = _T('This finition is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         case 'bodies':
+                        case 'body':
                             $message = _T('This body is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         case 'transmissions':
+                        case 'transmission':
                             $message = _T('This transmission is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         case 'brands':
+                        case 'brand':
                             $message = _T('This brand is used by one or more vehicles, it cannot be deleted.', 'auto');
                             break;
                         default:
@@ -684,21 +696,27 @@ class PropertiesController extends AbstractPluginController
                 } else {
                     switch ($property) {
                         case 'colors':
+                        case 'color':
                             $message = _T('An error occurred trying to remove color :/', 'auto');
                             break;
                         case 'states':
+                        case 'state':
                             $message = _T('An error occurred trying to remove state :/', 'auto');
                             break;
                         case 'finitions':
+                        case 'finition':
                             $message = _T('An error occurred trying to remove finition :/', 'auto');
                             break;
                         case 'bodies':
+                        case 'body':
                             $message = _T('An error occurred trying to remove body :/', 'auto');
                             break;
                         case 'transmissions':
+                        case 'transmission':
                             $message = _T('An error occurred trying to remove transmission :/', 'auto');
                             break;
                         case 'brands':
+                        case 'brand':
                             $message = _T('An error occurred trying to remove brand :/', 'auto');
                             break;
                         default:
@@ -734,7 +752,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return PropertiesList
      */
-    protected function getFilters($class): PropertiesList
+    protected function getFilters(AbstractObject|string $class): PropertiesList
     {
         /** @phpstan-ignore-next-line */
         $filter_name = 'filter_auto' . $class::FIELD;
@@ -749,7 +767,7 @@ class PropertiesController extends AbstractPluginController
      *
      * @return void
      */
-    protected function saveFilters($class, PropertiesList $filters): void
+    protected function saveFilters(AbstractObject|string $class, PropertiesList $filters): void
     {
         /** @phpstan-ignore-next-line */
         $filter_name = 'filter_auto' . $class::FIELD;

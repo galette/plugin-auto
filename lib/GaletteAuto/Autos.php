@@ -63,9 +63,9 @@ class Autos
     public const TABLE = Auto::TABLE;
     public const PK = Auto::PK;
 
-    private $plugins;
-    private $zdb;
-    private $count = null;
+    private Plugins $plugins;
+    private Db $zdb;
+    private ?int $count = null;
 
     /**
      * Constructor
@@ -86,7 +86,7 @@ class Autos
      *
      * @return boolean
      */
-    public function removeVehicles(int|array $ids)
+    public function removeVehicles(int|array $ids): bool
     {
         global $hist;
 
@@ -117,7 +117,7 @@ class Autos
             $infos = null;
             foreach ($vehicles as $vehicle) {
                 $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
-                    ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
+                    ' (' . $vehicle->brand->brand . ' ' . $vehicle->model->model . ')';
                 $infos .= $str_v . "\n";
 
                 $p = new Picture($this->plugins, $vehicle->id_car);
@@ -297,7 +297,7 @@ class Autos
      *
      * @return void
      */
-    private function proceedCount($select, AutosList $filters)
+    private function proceedCount($select, AutosList $filters): void
     {
         try {
             $countSelect = clone $select;

@@ -85,10 +85,10 @@ class Auto
     public const TABLE = 'cars';
     public const PK = 'id_car';
 
-    private $plugins;
-    private $zdb;
+    private Plugins $plugins;
+    private Db $zdb;
 
-    private $fields = array(
+    private array $fields = array(
         'id_car'                        => 'integer',
         'car_name'                      => 'string',
         'car_registration'              => 'string',
@@ -111,7 +111,7 @@ class Auto
         Adherent::PK                    => 'integer'
     );
 
-    private $required = array(
+    private array $required = array(
         'name'                      => 1,
         'model'                     => 1,
         'first_registration_date'   => 1,
@@ -125,30 +125,30 @@ class Auto
         'fuel'                      => 1
     );
 
-    private $id;
-    private $registration;
-    private $name;
-    private $first_registration_date;
-    private $first_circulation_date;
+    private int $id;
+    private string $registration;
+    private string $name;
+    private string $first_registration_date;
+    private string $first_circulation_date;
     private $mileage;
-    private $comment;
-    private $chassis_number;
-    private $seats;
-    private $horsepower;
-    private $engine_size;
-    private $creation_date;
-    private $fuel;
+    private string $comment;
+    private string $chassis_number;
+    private ?int $seats;
+    private ?int $horsepower;
+    private ?int $engine_size;
+    private string $creation_date;
+    private int $fuel;
 
     //External objects
-    private $picture;
-    private $finition;
-    private $color;
-    private $model;
-    private $transmission;
-    private $body;
-    private $history;
-    private $owner;
-    private $state;
+    private Picture $picture;
+    private Finition $finition;
+    private Color $color;
+    private Model $model;
+    private Transmission $transmission;
+    private Body $body;
+    private History $history;
+    private Adherent $owner;
+    private State $state;
 
     public const FUEL_PETROL = 1;
     public const FUEL_DIESEL = 2;
@@ -157,13 +157,14 @@ class Auto
     public const FUEL_BIO = 5;
     public const FUEL_HYBRID = 6;
 
-    private $propnames; //textual properties names
+    /** @var array<string, string> */
+    private array $propnames; //textual properties names
 
     //do we have to fire a history entry?
-    private $fire_history = false;
+    private bool $fire_history = false;
 
     //internal properties (not updatable outside the object)
-    private $internals = array(
+    private array $internals = array(
         'id',
         'creation_date',
         'history',
@@ -175,16 +176,16 @@ class Auto
         'plugins',
         'zdb'
     );
-    private $errors = [];
+    private array $errors = [];
 
     /**
      * Default constructor
      *
-     * @param Plugins     $plugins Plugins
-     * @param Db          $zdb     Database instance
-     * @param ArrayObject $args    A resultset row to load
+     * @param Plugins      $plugins Plugins
+     * @param Db           $zdb     Database instance
+     * @param ?ArrayObject $args    A resultset row to load
      */
-    public function __construct(Plugins $plugins, Db $zdb, $args = null)
+    public function __construct(Plugins $plugins, Db $zdb, ArrayObject $args = null)
     {
         $this->plugins = $plugins;
         $this->zdb = $zdb;
@@ -217,7 +218,7 @@ class Auto
         $this->picture = new Picture($this->plugins);
         $this->body = new Body($this->zdb);
         $this->history = new History($this->zdb);
-        if (is_object($args)) {
+        if ($args instanceof ArrayObject) {
             $this->loadFromRS($args);
         }
     }
@@ -229,7 +230,7 @@ class Auto
      *
      * @return boolean
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
@@ -259,7 +260,7 @@ class Auto
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
         $pk = self::PK;
         $this->id = $r->$pk;
@@ -299,7 +300,7 @@ class Auto
      *
      * @return array
      */
-    public function listFuels()
+    public function listFuels(): array
     {
         $f = array(
             self::FUEL_PETROL       => _T("Petrol", "auto"),
@@ -320,7 +321,7 @@ class Auto
      *
      * @return boolean
      */
-    public function store($new = false)
+    public function store(bool $new = false): bool
     {
         global $hist;
 
@@ -384,13 +385,12 @@ class Auto
                 $add = $this->zdb->execute($insert);
 
                 if ($add->count() > 0) {
-                    if ($this->zdb->isPostgres()) {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue(
+                    /** @phpstan-ignore-next-line */
+                    $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
+                        $this->zdb->isPostgres() ?
                             PREFIX_DB . AUTO_PREFIX . 'cars_id_seq'
-                        );
-                    } else {
-                        $this->id = $this->zdb->driver->getLastGeneratedValue();
-                    }
+                            : null
+                    );
 
                     // logging
                     $hist->add(
@@ -457,7 +457,6 @@ class Auto
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] An error has occurred ' .
-                //@phpstan-ignore-next-line
                 (($new) ? 'inserting' : 'updating') . ' car | ' .
                 $e->getMessage(),
                 Analog::ERROR
@@ -608,7 +607,7 @@ class Auto
      *
      * @return void
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, $value): void
     {
         if (!in_array($name, $this->internals)) {
             switch ($name) {
@@ -680,7 +679,7 @@ class Auto
      *
      * @return boolean
      */
-    public function check($post)
+    public function check(array $post): bool
     {
         $this->errors = [];
 
@@ -831,7 +830,7 @@ class Auto
      *
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -841,7 +840,7 @@ class Auto
      *
      * @return array
      */
-    public function getRequired()
+    public function getRequired(): array
     {
         $required = $this->required;
 
@@ -857,7 +856,7 @@ class Auto
      *
      * @return void
      */
-    private function handlePicture()
+    private function handlePicture(): void
     {
         // picture upload
         if (isset($_FILES['photo'])) {

@@ -24,7 +24,7 @@
                 {% if brands|length > 0 %}
                     {% include "components/forms/select.html.twig" with {
                         id: 'brand',
-                        value: model.brand,
+                        value: model.brand.id,
                         values: brand_list_values,
                         label: _T("Brand", "auto"),
                         required: true

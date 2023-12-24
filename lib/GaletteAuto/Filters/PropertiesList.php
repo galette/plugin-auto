@@ -61,7 +61,7 @@ class PropertiesList extends Pagination
      *
      * @return string field name
      */
-    protected function getDefaultOrder()
+    protected function getDefaultOrder(): string
     {
         return 'field';
     }
@@ -71,24 +71,11 @@ class PropertiesList extends Pagination
      *
      * @param Select $select Original select
      *
-     * @return void
+     * @return self
      */
-    public function setLimit($select)
+    public function setLimit(Select $select): self
     {
         $this->setLimits($select);
-    }
-
-
-    /**
-     * Set counter
-     *
-     * @param int $c Count
-     *
-     * @return void
-     */
-    public function setCounter($c)
-    {
-        $this->counter = (int)$c;
-        $this->countPages();
+        return $$this;
     }
 }

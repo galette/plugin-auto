@@ -60,11 +60,12 @@ use Galette\Entity\Adherent;
  */
 class History
 {
-    private $zdb;
     public const TABLE = 'history';
 
+    private Db $zdb;
+
     //fields list and type
-    private $fields = array(
+    private array $fields = array(
         Auto::PK            => 'integer',
         Adherent::PK        => 'integer',
         'history_date'      => 'datetime',
@@ -74,16 +75,16 @@ class History
     );
 
     //history entries
-    private $entries;
-    private $id_car;
+    private array $entries;
+    private int $id_car;
 
     /**
      * Default constructor
      *
-     * @param Db      $zdb Database instance
-     * @param integer $id  history entry's id to load. Defaults to null
+     * @param Db       $zdb Database instance
+     * @param ?integer $id  history entry's id to load. Defaults to null
      */
-    public function __construct(Db $zdb, $id = null)
+    public function __construct(Db $zdb, int $id = null)
     {
         $this->zdb = $zdb;
         if ($id != null && is_int($id)) {
@@ -98,18 +99,8 @@ class History
      *
      * @return void|false
      */
-    public function load($id)
+    public function load(int $id)
     {
-        if ($id == null || !is_int($id)) {
-            Analog::log(
-                '[' . get_class($this) .
-                '] Unable to load car\'s history : Invalid car id (id was: `' .
-                $id . '`)',
-                Analog::ERROR
-            );
-            return false;
-        }
-
         $this->id_car = $id;
 
         try {
@@ -138,7 +129,7 @@ class History
      *
      * @return ArrayObject|false row
      */
-    public function getLatest()
+    public function getLatest(): ArrayObject|false
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
@@ -170,7 +161,7 @@ class History
      *
      * @return void
      */
-    private function formatEntries()
+    private function formatEntries(): void
     {
         for ($i = 0; $i < count($this->entries); $i++) {
             //put a formatted date to show
@@ -195,7 +186,7 @@ class History
      *
      * @return void
      */
-    public function register($props)
+    public function register(array $props): void
     {
         Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
@@ -244,7 +235,7 @@ class History
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         switch ($name) {
             case Auto::PK:

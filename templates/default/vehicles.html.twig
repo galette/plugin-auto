@@ -27,7 +27,7 @@
 
                 {% include "components/forms/select.html.twig" with {
                     id: 'brand',
-                    value: car.model.brand,
+                    value: car.model.brand.id,
                     values: brand_list_values,
                     label: _T("Brand", "auto"),
                     required: required.brand is defined

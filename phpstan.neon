@@ -12,5 +12,7 @@ parameters:
     scanDirectories:
         - ../../includes/
         - ../../lib/
+    universalObjectCratesClasses:
+        - RKA\Session
     ignoreErrors:
         - '/Access to an undefined property ArrayObject.*/'

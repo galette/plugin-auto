@@ -63,10 +63,10 @@ class Brand extends AbstractObject
     /**
      * Default constructor
      *
-     * @param Db      $zdb Database instance
-     * @param integer $id  brand's id to load. Defaults to null
+     * @param Db       $zdb Database instance
+     * @param ?integer $id  brand's id to load. Defaults to null
      */
-    public function __construct(Db $zdb, $id = null)
+    public function __construct(Db $zdb, int $id = null)
     {
         parent::__construct(
             $zdb,
@@ -83,7 +83,7 @@ class Brand extends AbstractObject
      *
      * @return string
      */
-    public function getFieldLabel()
+    public function getFieldLabel(): string
     {
         return _T('Brand', 'auto');
     }
@@ -93,7 +93,7 @@ class Brand extends AbstractObject
      *
      * @return string
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'brand';
     }
@@ -101,11 +101,11 @@ class Brand extends AbstractObject
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retreive
+     * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         if ($name == self::FIELD) {
             return parent::__get('value');

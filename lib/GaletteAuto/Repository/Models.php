@@ -67,7 +67,7 @@ class Models extends Repository
     public const TABLE = Model::TABLE;
     public const PK = Model::PK;
 
-    private $count;
+    private int $count;
 
     /**
      * Main constructor
@@ -110,7 +110,6 @@ class Models extends Repository
             $models = array();
             foreach ($results as $r) {
                 $pk = self::PK;
-                //@phpstan-ignore-next-line
                 $models[$r->$pk] = new Model($this->zdb, $r);
             }
             return $models;
@@ -191,7 +190,6 @@ class Models extends Repository
             $result = $results->current();
 
             $k = self::PK;
-            //@phpstan-ignore-next-line
             $this->count = $result->$k;
 
             if ($this->count > 0) {
