@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 09:35+0100\n"
+"POT-Creation-Date: 2023-12-23 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -47,7 +47,7 @@ msgid "New model"
 msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:290
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:440
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:449
 msgid "- An error occurred while saving record. Please try again."
 msgstr ""
 
@@ -141,56 +141,131 @@ msgstr ""
 msgid "Add new brand"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:343
-msgid "%property ID cannot ben null calling edit route!"
-msgstr ""
-
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:361
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:354
 msgid "New"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:367
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:360
 #, php-format
 msgid "Change '%s'"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:425
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:434
 msgid "- No id provided for modifying this record! (internal)"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:431
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:440
 #: ../lib/GaletteAuto/Model.php:270
 msgid "- You must provide a value!"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:445
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:454
 msgid "New %property has been added!"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:446
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:455
 msgid "%property has been saved!"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:505
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:514
 #, php-format
 msgid "Show '%s' brand"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:564
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:573
 #, php-format
 msgid "Remove %1$s %2$s"
 msgstr ""
 
-#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:622
-msgid "%count %property have been successfully deleted."
-msgstr ""
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:628
+#, php-format
+msgid "%1$s color has been successfully deleted."
+msgid_plural "%1$s colors have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:631
+#, php-format
+msgid "%1$s state has been successfully deleted."
+msgid_plural "%1$s states have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:634
-msgid "This %property is used by one or more vehicles, it cannot be deleted."
-msgstr ""
+#, php-format
+msgid "%1$s finition has been successfully deleted."
+msgid_plural "%1$s finitions have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:637
+#, php-format
+msgid "%1$s body has been successfully deleted."
+msgid_plural "%1$s bodies have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:640
+#, php-format
+msgid "%1$s transmission has been successfully deleted."
+msgid_plural "%1$s transmissions have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:643
-msgid "An error occurred trying to remove %property :/"
+#, php-format
+msgid "%1$s brand has been successfully deleted."
+msgid_plural "%1$s brands have been successfully deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:659
+msgid "This color is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:662
+msgid "This state is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:665
+msgid "This finition is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:668
+msgid "This body is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:671
+msgid ""
+"This transmission is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:674
+msgid "This brand is used by one or more vehicles, it cannot be deleted."
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:687
+msgid "An error occurred trying to remove color :/"
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:690
+msgid "An error occurred trying to remove state :/"
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:693
+msgid "An error occurred trying to remove finition :/"
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:696
+msgid "An error occurred trying to remove body :/"
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:699
+msgid "An error occurred trying to remove transmission :/"
+msgstr ""
+
+#: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:702
+msgid "An error occurred trying to remove brand :/"
 msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:112
