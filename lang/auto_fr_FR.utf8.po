@@ -14,12 +14,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2023-12-23 10:13+0100\n"
-"PO-Revision-Date: 2023-12-23 09:10+0000\n"
+"PO-Revision-Date: 2023-12-27 06:06+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,137 +195,107 @@ msgid "Remove %1$s %2$s"
 msgstr "Supprimer %1$s %2$s"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:628
-#, fuzzy, php-format
-#| msgid "%count models have been successfully deleted."
+#, php-format
 msgid "%1$s color has been successfully deleted."
 msgid_plural "%1$s colors have been successfully deleted."
-msgstr[0] "%count modèles ont été supprimés avec succès."
-msgstr[1] "%count modèles ont été supprimés avec succès."
+msgstr[0] "%1$s couleur a été supprimée avec succès."
+msgstr[1] "%1$s couleurs ont été supprimées avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:631
-#, fuzzy, php-format
-#| msgid "Galette has been successfully updated!"
+#, php-format
 msgid "%1$s state has been successfully deleted."
 msgid_plural "%1$s states have been successfully deleted."
-msgstr[0] "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
-msgstr[1] "Galette a Ã©tÃ© mis Ã  jour avec succÃ¨s&nbsp;!"
+msgstr[0] "%1$s status a été supprimé avec succès."
+msgstr[1] "%1$s status ont été supprimés avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:634
-#, fuzzy, php-format
-#| msgid "%count models have been successfully deleted."
+#, php-format
 msgid "%1$s finition has been successfully deleted."
 msgid_plural "%1$s finitions have been successfully deleted."
-msgstr[0] "%count modèles ont été supprimés avec succès."
-msgstr[1] "%count modèles ont été supprimés avec succès."
+msgstr[0] "%1$s finition a été supprimée avec succès."
+msgstr[1] "%1$s finitions ont été supprimées avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:637
-#, fuzzy, php-format
-#| msgid "%count models have been successfully deleted."
+#, php-format
 msgid "%1$s body has been successfully deleted."
 msgid_plural "%1$s bodies have been successfully deleted."
-msgstr[0] "%count modèles ont été supprimés avec succès."
-msgstr[1] "%count modèles ont été supprimés avec succès."
+msgstr[0] "%1$s carrosserie a été supprimée avec succès."
+msgstr[1] "%1$s carrosseries ont été supprimées avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:640
-#, fuzzy, php-format
-#| msgid "%count models have been successfully deleted."
+#, php-format
 msgid "%1$s transmission has been successfully deleted."
 msgid_plural "%1$s transmissions have been successfully deleted."
-msgstr[0] "%count modèles ont été supprimés avec succès."
-msgstr[1] "%count modèles ont été supprimés avec succès."
+msgstr[0] "%1$s transmission a été supprimée avec succès."
+msgstr[1] "%1$s transmissions ont été supprimées avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:643
-#, fuzzy, php-format
-#| msgid "%count models have been successfully deleted."
+#, php-format
 msgid "%1$s brand has been successfully deleted."
 msgid_plural "%1$s brands have been successfully deleted."
-msgstr[0] "%count modèles ont été supprimés avec succès."
-msgstr[1] "%count modèles ont été supprimés avec succès."
+msgstr[0] "%1$s marque a été supprimé avec succès."
+msgstr[1] "%1$s marques ont été supprimées avec succès."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:659
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid "This color is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
-"supprimé."
+"Cette couleur est utilisée par un ou plusieurs véhicules, elle ne peut être "
+"supprimée."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:662
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid "This state is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
+"Ce status est utilisé par un ou plusieurs véhicules, il ne peut être "
 "supprimé."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:665
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid "This finition is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
-"supprimé."
+"Cette finition est utilisée par un ou plusieurs véhicules, elle ne peut être "
+"supprimée."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:668
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid "This body is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
-"supprimé."
+"Cette carrosserie est utilisée par un ou plusieurs véhicules, elle ne peut "
+"être supprimée."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:671
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid ""
 "This transmission is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
-"supprimé."
+"Cette transmission est utilisée par un ou plusieurs véhicules, elle ne peut "
+"être supprimée."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:674
-#, fuzzy
-#| msgid "This model is used by one or more vehicles, it cannot be deleted."
 msgid "This brand is used by one or more vehicles, it cannot be deleted."
 msgstr ""
-"Ce modèle est utilisé par un ou plusieurs véhicules, il ne peut être "
-"supprimé."
+"Cette marque est utilisée par un ou plusieurs véhicules, elle ne peut être "
+"supprimée."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:687
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove color :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression de la couleur :/"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:690
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove state :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression du status :/"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:693
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove finition :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression de la finition :/"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:696
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove body :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression de la carrosserie :/"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:699
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove transmission :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression de la transmission :/"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:702
-#, fuzzy
-#| msgid "An error occurred trying to remove models :/"
 msgid "An error occurred trying to remove brand :/"
-msgstr "Une erreur est survenue lors de la suppression des modèles :/"
+msgstr "Une erreur est survenue lors de la suppression de la marque :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:112
 msgid "You do not have enough privileges."
