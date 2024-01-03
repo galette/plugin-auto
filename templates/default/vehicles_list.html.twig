@@ -23,7 +23,7 @@
 {% block infoline_actions %}
     <a
             class="ui tiny labeled icon button"
-            href="{{ url_for("vehicleEdit", {"action": "add"}) }}"
+            href="{{ url_for("vehicleAdd") }}"
     >
         <i class="plus circle green icon" aria-hidden="true"></i>
         {{ _T("Add new vehicle", "auto") }}
@@ -44,7 +44,7 @@
 {% block body %}
     {% for auto in autos %}
         {% set brand = auto.model.obrand %}
-        {% set edit_link = url_for("vehicleEdit", {"action": "edit", "id": auto.id}) %}
+        {% set edit_link = url_for("vehicleEdit", {"id": auto.id}) %}
 
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
             <td class="collapsing" data-scope="row">
@@ -61,7 +61,7 @@
                             'label': _T("Edit %vehicle", "auto")|replace({"%vehicle": auto.name}),
                             'route': {
                                 'name': 'vehicleEdit',
-                                'args': {'action': 'edit', 'id': auto.id}
+                                'args': {'id': auto.id}
                             },
                             'icon': 'edit'
                         },

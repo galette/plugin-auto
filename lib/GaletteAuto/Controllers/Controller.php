@@ -274,6 +274,33 @@ class Controller extends AbstractPluginController
     }
 
     /**
+     * Show add vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     *
+     * @return Response
+     */
+    public function showAddVehicle(Request $request, Response $response)
+    {
+        return $this->showAddEditVehicle($request, $response, 'add');
+    }
+
+    /**
+     * Show edit vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param int      $id       Vehicle id
+     *
+     * @return Response
+     */
+    public function showEditVehicle(Request $request, Response $response, int $id)
+    {
+        return $this->showAddEditVehicle($request, $response, 'edit', $id);
+    }
+
+    /**
      * Show add/edit route
      *
      * @param Request  $request  Request
@@ -286,16 +313,6 @@ class Controller extends AbstractPluginController
     public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null)
     {
         $is_new = ($action === 'add');
-
-        if ($action === 'edit' && $id === null) {
-            throw new \RuntimeException(
-                _T("Car ID cannot be null calling edit route!", "auto")
-            );
-        } elseif ($action === 'add' && $id !== null) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->routeparser->urlFor('vehicleEdit', ['action' => 'add']));
-        }
 
         $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
@@ -380,6 +397,33 @@ class Controller extends AbstractPluginController
     }
 
     /**
+     * Do add vahicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     *
+     * @return Response
+     */
+    public function doAddVehicle(Request $request, Response $response)
+    {
+        return $this->doAddEditVehicle($request, $response, 'new');
+    }
+
+    /**
+     * Do add/edit route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param int      $id       Vehicle id
+     *
+     * @return Response
+     */
+    public function doEditVehicle(Request $request, Response $response, int $id)
+    {
+        return $this->doAddEditVehicle($request, $response, 'edit', $id);
+    }
+
+    /**
      * Do add/edit route
      *
      * @param Request  $request  Request
@@ -430,9 +474,11 @@ class Controller extends AbstractPluginController
         if (count($error_detected) > 0) {
             //store entity in session
             $this->session->auto = $post;
-            $args = ['action' => $action];
-            $routename = 'vehicleEdit';
-            $route = $this->routeparser->urlFor($routename, $args);
+            if ($action === 'add') {
+                $route = $this->routeparser->urlFor('vehicleAdd');
+            } else {
+                $route = $this->routeparser->urlFor('vehicleEdit', ['id' => (string)$id]);
+            }
 
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(

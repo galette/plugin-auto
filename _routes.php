@@ -76,13 +76,23 @@ $app->get(
 )->setName('myVehiclesList')->add($authenticate);
 
 $app->get(
-    '/vehicle/{action:add|edit}[/{id:\d+}]',
-    [Controller::class, 'showAddEditVehicle']
+    '/vehicle/add',
+    [Controller::class, 'showAddVehicle']
+)->setName('vehicleAdd')->add($authenticate);
+
+$app->get(
+    '/vehicle/edit/{id:\d+}',
+    [Controller::class, 'showEditVehicle']
 )->setName('vehicleEdit')->add($authenticate);
 
 $app->post(
-    '/vehicle/{action:add|edit}[/{id:\d+}]',
-    [Controller::class, 'doAddEditVehicle']
+    '/vehicle/add',
+    [Controller::class, 'doAddVehicle']
+)->setName('doVehicleAdd')->add($authenticate);
+
+$app->post(
+    '/vehicle/edit/{id:\d+}',
+    [Controller::class, 'doEditVehicle']
 )->setName('doVehicleEdit')->add($authenticate);
 
 $app->get(

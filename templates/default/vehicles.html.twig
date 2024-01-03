@@ -2,11 +2,11 @@
 
 {% block content %}
     {% if mode == 'new' %}
-        {% set action = "add" %}
+        {% set action = url_for("doVehicleAdd") %}
     {% else %}
-        {% set action = "edit" %}
+        {% set action = url_for("doVehicleEdit", {"id": car.id}) %}
     {% endif %}
-    <form class="ui form" action="{{ url_for("doVehicleEdit", {"action": action}) }}" method="post" id="modifform" enctype="multipart/form-data">
+    <form class="ui form" action="{{ action }}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
