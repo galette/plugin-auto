@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 10:13+0100\n"
+"POT-Creation-Date: 2024-01-03 07:18+0100\n"
 "PO-Revision-Date: 2023-09-20 00:26+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/auto-"
@@ -18,7 +18,7 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
-#: ../_routes.php:131
+#: ../_routes.php:141
 msgid "No vehicle was selected, please check at least one name."
 msgstr "Жодного авто не обрано, будь ласка, відзначте хоча б одне."
 
@@ -323,49 +323,44 @@ msgstr "Автомобілі члена"
 msgid "Vehicles list"
 msgstr "Список транспортних засобів"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:292
-msgid "Car ID cannot be null calling edit route!"
-msgstr ""
-"ID автомобіля не може бути нульовим під час виклику редагування маршруту!"
-
-#: ../lib/GaletteAuto/Controllers/Controller.php:322
+#: ../lib/GaletteAuto/Controllers/Controller.php:339
 msgid "New vehicle"
 msgstr "Новий транспортний засіб"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:323
+#: ../lib/GaletteAuto/Controllers/Controller.php:340
 #, php-format
 msgid "Change vehicle '%s'"
 msgstr "Змінити транспортний засіб '%s'"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:420
+#: ../lib/GaletteAuto/Controllers/Controller.php:464
 msgid "- An error has occurred while saving vehicle in the database."
 msgstr ""
 "- Під час збереження транспортного засобу в базі даних сталася помилка."
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:422
+#: ../lib/GaletteAuto/Controllers/Controller.php:466
 msgid "Vehicle has been saved!"
 msgstr "Транспортний засіб збережено!"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:477
+#: ../lib/GaletteAuto/Controllers/Controller.php:523
 #, php-format
 msgid "History of car #%d"
 msgstr "Історія автомобіля #%d"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:550
-#: ../lib/GaletteAuto/Controllers/Controller.php:600
+#: ../lib/GaletteAuto/Controllers/Controller.php:596
+#: ../lib/GaletteAuto/Controllers/Controller.php:646
 msgid "Vehicle"
 msgstr "Транспортний засіб"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:553
+#: ../lib/GaletteAuto/Controllers/Controller.php:599
 #, php-format
 msgid "Remove vehicle %1$s"
 msgstr "Вилучити транспортний засіб %1$s"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:602
+#: ../lib/GaletteAuto/Controllers/Controller.php:648
 msgid "Remove vehicles"
 msgstr "Вилучити транспортні засоби"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:606
+#: ../lib/GaletteAuto/Controllers/Controller.php:652
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
@@ -373,11 +368,11 @@ msgstr[0] "Ви вилучите %count транспортний засіб."
 msgstr[1] "Ви вилучите %count транспортні засоби."
 msgstr[2] "Ви вилучите %count транспортних засобів."
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:650
+#: ../lib/GaletteAuto/Controllers/Controller.php:696
 msgid "An error occurred trying to remove vehicles :/"
 msgstr "Під час вилучення транспортних засобів сталася помилка: /"
 
-#: ../lib/GaletteAuto/Controllers/Controller.php:660
+#: ../lib/GaletteAuto/Controllers/Controller.php:706
 #, php-format
 msgid "%count vehicles have been successfully deleted."
 msgstr "%count транспортних засобів успішно видалено."
@@ -835,6 +830,10 @@ msgstr ""
 #: ../tempcache/model.html.twig:110
 msgid "Add a brand"
 msgstr "Додати бренд"
+
+#~ msgid "Car ID cannot be null calling edit route!"
+#~ msgstr ""
+#~ "ID автомобіля не може бути нульовим під час виклику редагування маршруту!"
 
 #~ msgid "%property ID cannot ben null calling edit route!"
 #~ msgstr ""
