@@ -63,7 +63,7 @@ jobs:
       - name: CS
         run: |
           cd galette-core/galette/plugins/plugin-auto
-          ../../vendor/bin/phpcs -n -p --standard=../../../phpcs-rules.xml lib/ ./*.php
+          ../../vendor/bin/phpcs lib/
 
       - name: Check missing symbols
         run: |
@@ -76,3 +76,8 @@ jobs:
           cd galette-core/galette/plugins/plugin-auto
           ../../vendor/bin/phpstan analyze --ansi --memory-limit=2G --no-interaction --no-progress
         if: matrix.php-versions == '8.1'
+
+      - name: Headers checks
+        run: |
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/docheader --docheader=../../../.docheader check lib ./*.php

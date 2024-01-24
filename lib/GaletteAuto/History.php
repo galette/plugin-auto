@@ -1,13 +1,7 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Automobile History class for galette Auto plugin
- *
- * PHP version 5
- *
- * Copyright © 2009-2023 The Galette Team
+ * Copyright © 2003-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -23,16 +17,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      https://galette.eu
- * @since     Available since 0.7dev - 2009-10-02
  */
 
 namespace GaletteAuto;
@@ -45,14 +29,7 @@ use Galette\Entity\Adherent;
 /**
  * Automobile History class for galette Auto plugin
  *
- * @category  Plugins
- * @name      History
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      https://galette.eu
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property integer $id_car
  * @property array $fields
