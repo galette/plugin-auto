@@ -2,23 +2,23 @@
 # Amr Darwish <adarweesh@gmail.com>, 2020.
 # Woodyx <shiposhouyou@gmail.com>, 2020.
 # ButterflyOfFire <ButterflyOfFire@protonmail.com>, 2021, 2022.
-# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2023.
+# ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-01-03 07:18+0100\n"
-"PO-Revision-Date: 2023-10-19 19:38+0000\n"
+"PO-Revision-Date: 2024-02-06 14:01+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/ar/>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: ../_routes.php:141
 msgid "No vehicle was selected, please check at least one name."
@@ -48,7 +48,7 @@ msgstr "قائمة النماذج"
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:232
 #, php-format
 msgid "Change model '%s'"
-msgstr ""
+msgstr "تعديل النموذج ”%s“"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:236
 msgid "New model"
@@ -61,11 +61,11 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:292
 msgid "New model has been added!"
-msgstr ""
+msgstr "أضيف النموذج الجديد!"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:293
 msgid "Model has been saved!"
-msgstr ""
+msgstr "تم حفظ النموذج!"
 
 #. TRANS: first parameter is the number of models
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:373
@@ -100,16 +100,16 @@ msgstr "قائمة الألوان"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:212
 msgid "Add new color"
-msgstr ""
+msgstr "إضافة لون جديد"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:216
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:85
 msgid "States list"
-msgstr ""
+msgstr "قائمة الحالات"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:217
 msgid "Add new state"
-msgstr ""
+msgstr "إضافة حالة جديدة"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:221
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:89
@@ -155,7 +155,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:354
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:360
 #, php-format
