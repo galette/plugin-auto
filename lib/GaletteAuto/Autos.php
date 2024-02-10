@@ -94,7 +94,7 @@ class Autos
             $infos = null;
             foreach ($vehicles as $vehicle) {
                 $str_v = $vehicle->id_car . ' - ' . $vehicle->car_name .
-                    ' (' . $vehicle->brand->brand . ' ' . $vehicle->model->model . ')';
+                    ' (' . $vehicle->brand . ' ' . $vehicle->model . ')';
                 $infos .= $str_v . "\n";
 
                 $p = new Picture($this->plugins, $vehicle->id_car);
@@ -269,12 +269,12 @@ class Autos
     /**
      * Count vehicles from the query
      *
-     * @param Select    $select  Original select
-     * @param AutosList $filters Filters
+     * @param Select     $select  Original select
+     * @param ?AutosList $filters Filters
      *
      * @return void
      */
-    private function proceedCount($select, AutosList $filters): void
+    private function proceedCount($select, ?AutosList $filters): void
     {
         try {
             $countSelect = clone $select;
@@ -296,7 +296,7 @@ class Autos
 
             $results = $this->zdb->execute($countSelect);
             $this->count = $results->current()->count;
-            if ($this->count > 0) {
+            if ($this->count > 0 && $filters !== null) {
                 $filters->setCounter($this->count);
             }
         } catch (\Exception $e) {

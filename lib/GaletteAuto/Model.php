@@ -45,8 +45,9 @@ class Model
     protected string $model;
     protected Brand $brand;
 
-    private $errors;
-    private $zdb;
+    /** @var string[] */
+    private array $errors;
+    private Db $zdb;
 
     /**
      * Default constructor
@@ -85,6 +86,9 @@ class Model
 
             $results = $this->zdb->execute($select);
             $result = $results->current();
+            if (!$result instanceof ArrayObject) {
+                throw new \RuntimeException('Model not found');
+            }
             $this->loadFromRS($result);
             return true;
         } catch (\Exception $e) {
@@ -130,6 +134,12 @@ class Model
                 $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
                 $insert->values($values);
                 $this->zdb->execute($insert);
+                /** @phpstan-ignore-next-line */
+                $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
+                    $this->zdb->isPostgres() ?
+                        PREFIX_DB . AUTO_PREFIX . self::TABLE . '_id_seq'
+                        : null
+                );
             } else {
                 $update = $this->zdb->update(AUTO_PREFIX . self::TABLE);
                 $update->set($values)->where(
@@ -228,7 +238,7 @@ class Model
     /**
      * Get errors
      *
-     * @return array
+     * @return string[]
      */
     public function getErrors(): array
     {

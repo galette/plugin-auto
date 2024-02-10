@@ -108,8 +108,8 @@ class Auto
     private string $first_registration_date;
     private string $first_circulation_date;
     private $mileage;
-    private string $comment;
-    private string $chassis_number;
+    private ?string $comment;
+    private ?string $chassis_number;
     private ?int $seats;
     private ?int $horsepower;
     private ?int $engine_size;
@@ -124,8 +124,8 @@ class Auto
     private Transmission $transmission;
     private Body $body;
     private History $history;
-    private Adherent $owner;
     private State $state;
+    private Adherent $owner;
 
     public const FUEL_PETROL = 1;
     public const FUEL_DIESEL = 2;
@@ -181,7 +181,8 @@ class Auto
             'state'                     => _T("state", "auto"),
             'finition'                  => _T("finition", "auto"),
             'transmission'              => _T("transmission", "auto"),
-            'body'                      => _T("body", "auto")
+            'body'                      => _T("body", "auto"),
+            'fuel'                      => _T("fuel", "auto"),
         );
 
         $this->model = new Model($this->zdb);
@@ -218,7 +219,11 @@ class Auto
             );
 
             $results = $this->zdb->execute($select);
-            $this->loadFromRS($results->current());
+            $result = $results->current();
+            if (!$result instanceof ArrayObject) {
+                throw new \RuntimeException('Vehicle not found');
+            }
+            $this->loadFromRS($result);
             return true;
         } catch (\Exception $e) {
             Analog::log(
@@ -279,6 +284,7 @@ class Auto
      */
     public function listFuels(): array
     {
+        //TODO: make this list configurable?
         $f = array(
             self::FUEL_PETROL       => _T("Petrol", "auto"),
             self::FUEL_DIESEL       => _T("Diesel", "auto"),
@@ -343,7 +349,7 @@ class Auto
                                 break;
                             case 'integer':
                                 $values[$k] = (
-                                    ($this->$propName != 0 && $this->$propName != '')
+                                    (!empty($this->$propName))
                                         ? $this->$propName
                                         : new Expression('NULL')
                                 );
@@ -365,7 +371,7 @@ class Auto
                     /** @phpstan-ignore-next-line */
                     $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
                         $this->zdb->isPostgres() ?
-                            PREFIX_DB . AUTO_PREFIX . 'cars_id_seq'
+                            PREFIX_DB . AUTO_PREFIX . self::TABLE . '_id_seq'
                             : null
                     );
 
@@ -374,6 +380,7 @@ class Auto
                         _T("New car added", "auto"),
                         strtoupper($this->name)
                     );
+                    $this->history->load((int)$this->id);
 
                     //handle picture for newly added cars
                     $this->picture = new Picture($this->plugins, (int)$this->id);
@@ -609,9 +616,6 @@ class Auto
                 case 'state':
                     $this->state->load((int)$value);
                     break;
-                case 'owner':
-                    $this->owner->load((int)$value);
-                    break;
                 default:
                     $this->$name = $value;
                     break;
@@ -667,7 +671,7 @@ class Auto
 
             if (($value == '' || $value == null) && in_array($prop, array_keys($required))) {
                 $this->errors[] = str_replace(
-                    '%s',
+                    '%field',
                     '<a href="#' . $prop . '">' . $this->getPropName($prop) . '</a>',
                     _T("- Mandatory field %field empty.")
                 );
@@ -728,7 +732,7 @@ class Auto
                 case 'seats':
                 case 'horsepower':
                 case 'engine_size':
-                    if (is_numeric(str_replace(' ', '', $value))) {
+                    if (is_numeric(str_replace(' ', '', $value ?? ''))) {
                         $this->$prop = (int)$value;
                     } elseif ($value != '') {
                         $this->errors[] = str_replace(
@@ -766,7 +770,7 @@ class Auto
                     }
                     break;
                 case 'owner':
-                    if (isset($post['change_owner'])) {
+                    if (isset($post['change_owner']) || !isset($this->id)) {
                         $value = (int)$value;
                         if ($value > 0) {
                             $this->$prop->load($value);
@@ -786,7 +790,7 @@ class Auto
             }//switch
         }//foreach
 
-        if ($this->id) {
+        if (isset($this->id)) {
             //handle picture for updated cars
             $this->handlePicture();
         }

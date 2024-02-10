@@ -51,7 +51,11 @@ class History
         State::PK           => 'integer'
     );
 
-    //history entries
+    /**
+     * history entries
+     *
+     * @var array<int, array<string,mixed>> $entries
+     */
     private array $entries;
     private int $id_car;
 
@@ -74,9 +78,9 @@ class History
      *
      * @param integer $id car's id we want history for
      *
-     * @return void|false
+     * @return boolean
      */
-    public function load(int $id)
+    public function load(int $id): bool
     {
         $this->id_car = $id;
 
@@ -89,8 +93,8 @@ class History
             )->order('history_date ASC');
 
             $results = $this->zdb->execute($select);
-            $this->entries = $results->toArray();
-            $this->formatEntries();
+            $this->formatEntries($results->toArray());
+            return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
@@ -136,23 +140,30 @@ class History
     /**
      * Format entries dates, also loads Member
      *
+     * @param array<int, array<string,mixed>> $entries list of entries to format
+     *
      * @return void
      */
-    private function formatEntries(): void
+    private function formatEntries(array $entries): void
     {
-        for ($i = 0; $i < count($this->entries); $i++) {
+        $this->entries = [];
+        foreach ($entries as $entry) {
             //put a formatted date to show
-            $date = new \DateTime($this->entries[$i]['history_date']);
-            $this->entries[$i]['formatted_date'] = $date->format(__('Y-m-d'));
+            $date = new \DateTime($entry['history_date']);
+            $entry['formatted_date'] = $date->format(__('Y-m-d'));
+
             //associate member to current history entry
-            $this->entries[$i]['owner']
-                = new Adherent($this->zdb, (int)$this->entries[$i]['id_adh']);
+            $entry['owner'] = new Adherent($this->zdb, (int)$entry['id_adh']);
+
             //associate color
-            $this->entries[$i]['color']
-                = new Color($this->zdb, (int)$this->entries[$i]['id_color']);
+            $color = new Color($this->zdb, (int)$entry['id_color']);
+            $entry['color'] = $color->value;
+
             //associate state
-            $this->entries[$i]['state']
-                = new State($this->zdb, (int)$this->entries[$i]['id_state']);
+            $state = new State($this->zdb, (int)$entry['id_state']);
+            $entry['state'] = $state->value;
+
+            $this->entries[] = $entry;
         }
     }
 
@@ -197,7 +208,7 @@ class History
             }
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot register new histroy entry | ' .
+                '[' . get_class($this) . '] Cannot register new history entry | ' .
                 $e->getMessage(),
                 Analog::ERROR
             );
@@ -216,12 +227,9 @@ class History
     {
         switch ($name) {
             case Auto::PK:
-                $ka = Auto::PK;
-                return $this->$ka;
+                return $this->$name;
             case 'fields':
                 return array_keys($this->fields);
-            case 'entries':
-                return $this->entries;
             default:
                 Analog::log(
                     '[' . get_class($this) . '] Trying to get an unknown property (' .
@@ -230,5 +238,15 @@ class History
                 );
                 break;
         }
+    }
+
+    /**
+     * Get current car history entries
+     *
+     * @return array<int, array<string,mixed>>
+     */
+    public function getEntries(): array
+    {
+        return $this->entries;
     }
 }

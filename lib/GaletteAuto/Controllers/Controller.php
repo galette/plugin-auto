@@ -497,7 +497,7 @@ class Controller extends AbstractPluginController
 
         $apk = Auto::PK;
         $params = [
-            'entries'       => $history->entries,
+            'entries'       => $history->getEntries(),
             'page_title'    => str_replace('%d', $history->$apk, _T("History of car #%d", "auto")),
             'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : ''
         ];

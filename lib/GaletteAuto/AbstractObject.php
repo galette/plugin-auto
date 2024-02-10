@@ -34,6 +34,7 @@ use GaletteAuto\Filters\PropertiesList;
  * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property int $id
+ * @property string $value
  */
 abstract class AbstractObject
 {
@@ -148,6 +149,12 @@ abstract class AbstractObject
                 $insert = $this->zdb->insert($this->table);
                 $insert->values($values);
                 $this->zdb->execute($insert);
+                /** @phpstan-ignore-next-line */
+                $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
+                    $this->zdb->isPostgres() ?
+                        PREFIX_DB . $this->table . '_id_seq'
+                        : null
+                );
             } else {
                 $update = $this->zdb->update($this->table);
                 $update->set($values)->where(
@@ -172,7 +179,7 @@ abstract class AbstractObject
     /**
      * Delete some records
      *
-     * @param array $ids Array of records id to delete
+     * @param int[] $ids Array of records id to delete
      *
      * @return boolean
      */
@@ -358,7 +365,7 @@ abstract class AbstractObject
             return $select;
         } catch (\Exception $e) {
             Analog::log(
-                'Cannot build SELECT clause for models | ' . $e->getMessage(),
+                'Cannot build SELECT clause | ' . $e->getMessage(),
                 Analog::WARNING
             );
             throw $e;
