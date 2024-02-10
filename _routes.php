@@ -52,7 +52,7 @@ $app->group('/public', function () use ($app) {
         '/public/vehicles',
         [Controller::class, 'publicVehiclesList']
     )->setName('publicVehiclesList');
-})->add($showPublicPages);
+})->add(\Galette\Middleware\PublicPages::class);
 
 $app->get(
     '/my-vehicles',
