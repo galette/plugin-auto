@@ -1,22 +1,22 @@
 # Weblate <noreply@weblate.org>, 2020.
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
-# Pèire Bréchet <charrar@free.fr>, 2022.
+# Pèire Bréchet <charrar@free.fr>, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-08 22:10+0100\n"
-"PO-Revision-Date: 2022-01-21 13:33+0000\n"
+"PO-Revision-Date: 2024-02-22 21:18+0000\n"
 "Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
-"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/auto-"
-"plugin/oc/>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
+"auto-plugin/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -24,7 +24,7 @@ msgstr ""
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:90
 msgid "You do not have enough privileges."
-msgstr ""
+msgstr "Avètz pas pron de provilègis."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:218
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:95
