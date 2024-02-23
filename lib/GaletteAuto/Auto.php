@@ -168,21 +168,21 @@ class Auto
         $this->zdb = $zdb;
 
         $this->propnames = array(
-            'name'                      => _T("name", "auto"),
-            'model'                     => _T("model", "auto"),
-            'registration'              => _T("registration", "auto"),
-            'first_registration_date'   => _T("first registration date", "auto"),
-            'first_circulation_date'    => _T("first circulation date", "auto"),
-            'mileage'                   => _T("mileage", "auto"),
-            'seats'                     => _T("seats", "auto"),
-            'horsepower'                => _T("horsepower", "auto"),
-            'engine_size'               => _T("engine size", "auto"),
-            'color'                     => _T("color", "auto"),
-            'state'                     => _T("state", "auto"),
-            'finition'                  => _T("finition", "auto"),
-            'transmission'              => _T("transmission", "auto"),
-            'body'                      => _T("body", "auto"),
-            'fuel'                      => _T("fuel", "auto"),
+            'name'                      => mb_strtolower( _T("Name", "auto")),
+            'model'                     => mb_strtolower( _T("Model", "auto")),
+            'registration'              => mb_strtolower( _T("Registration", "auto")),
+            'first_registration_date'   => mb_strtolower( _T("First registration date", "auto")),
+            'first_circulation_date'    => mb_strtolower( _T("First circulation date", "auto")),
+            'mileage'                   => mb_strtolower( _T("Mileage", "auto")),
+            'seats'                     => mb_strtolower( _T("Seats", "auto")),
+            'horsepower'                => mb_strtolower( _T("Horsepower", "auto")),
+            'engine_size'               => mb_strtolower( _T("Engine size", "auto")),
+            'color'                     => mb_strtolower( _T("Color", "auto")),
+            'state'                     => mb_strtolower( _T("State", "auto")),
+            'finition'                  => mb_strtolower( _T("Finition", "auto")),
+            'transmission'              => mb_strtolower( _T("Transmission", "auto")),
+            'body'                      => mb_strtolower( _T("Body", "auto")),
+            'fuel'                      => mb_strtolower(_T("Fuel", "auto")),
         );
 
         $this->model = new Model($this->zdb);
