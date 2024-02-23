@@ -691,8 +691,8 @@ msgstr "жодного запису не знайдено"
 
 #: ../tempcache/object_show.html.twig:82
 #, php-format
-msgid "Registered models for the brand '%s':"
-msgstr "Зареєстровані моделі для бренду '%s':"
+msgid "Registered models for the brand '%s'"
+msgstr "Зареєстровані моделі для бренду '%s'"
 
 #: ../tempcache/object_show.html.twig:119
 #, php-format
@@ -711,29 +711,25 @@ msgstr "записи в історії відсутні"
 msgid "Car's base informations"
 msgstr "Основні відомості автомобіля"
 
-#: ../tempcache/vehicles.html.twig:81
-msgid "Name:"
-msgstr "Ім'я:"
-
 #: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:619
 msgid "Choose a model"
 msgstr "Виберіть модель"
 
 #: ../tempcache/vehicles.html.twig:142
-msgid "First registration date:"
-msgstr "Дата першої реєстрації:"
+msgid "First registration date"
+msgstr "Дата першої реєстрації"
 
 #: ../tempcache/vehicles.html.twig:148
-msgid "First circulation date:"
-msgstr "Дата першого тиражу:"
+msgid "First circulation date"
+msgstr "Дата першого тиражу"
 
 #: ../tempcache/vehicles.html.twig:154
-msgid "Mileage:"
-msgstr "Пробіг:"
+msgid "Mileage"
+msgstr "Пробіг"
 
 #: ../tempcache/vehicles.html.twig:161
-msgid "Seats:"
-msgstr "Місць:"
+msgid "Seats"
+msgstr "Місць"
 
 #: ../tempcache/vehicles.html.twig:173 ../tempcache/vehicles.html.twig:189
 msgid "Car's photo"
@@ -744,8 +740,8 @@ msgid "Current car's state informations"
 msgstr "Поточні відомості про стан автомобіля"
 
 #: ../tempcache/vehicles.html.twig:233
-msgid "Current owner:"
-msgstr "Поточний власник:"
+msgid "Current owner"
+msgstr "Поточний власник"
 
 #: ../tempcache/vehicles.html.twig:250
 msgid "Show full car state history"
@@ -759,10 +755,6 @@ msgstr "Історія стану автомобіля"
 msgid "Change car's owner"
 msgstr "Змінити власника автомобіля"
 
-#: ../tempcache/vehicles.html.twig:275 ../tempcache/vehicles.html.twig:296
-msgid "Owner:"
-msgstr "Власник:"
-
 #: ../tempcache/vehicles.html.twig:349
 msgid "Choose a color"
 msgstr "Виберіть колір"
@@ -770,10 +762,6 @@ msgstr "Виберіть колір"
 #: ../tempcache/vehicles.html.twig:376
 msgid "Choose a state"
 msgstr "Виберіть стан"
-
-#: ../tempcache/vehicles.html.twig:404
-msgid "Registration:"
-msgstr "Реєстрація:"
 
 #: ../tempcache/vehicles.html.twig:416
 msgid "Car's technical informations"
@@ -783,45 +771,33 @@ msgstr "Технічні дані про автомобіль"
 msgid "Choose a body"
 msgstr "Виберіть корпус"
 
-#: ../tempcache/vehicles.html.twig:443
-msgid "Body:"
-msgstr "Корпус:"
-
 #: ../tempcache/vehicles.html.twig:449
 msgid "Choose a transmission"
 msgstr "Виберіть передачі"
-
-#: ../tempcache/vehicles.html.twig:470
-msgid "Transmission:"
-msgstr "Передачі:"
 
 #: ../tempcache/vehicles.html.twig:476
 msgid "Choose a finition"
 msgstr "Виберіть оздоблення"
 
-#: ../tempcache/vehicles.html.twig:497
-msgid "Finition:"
-msgstr "Оздоблення:"
-
 #: ../tempcache/vehicles.html.twig:504
-msgid "Chassis number:"
-msgstr "Номер шасі:"
+msgid "Chassis number"
+msgstr "Номер шасі"
 
 #: ../tempcache/vehicles.html.twig:511
-msgid "Horsepower:"
-msgstr "Кінська сила:"
+msgid "Horsepower"
+msgstr "Кінська сила"
 
 #: ../tempcache/vehicles.html.twig:518
-msgid "Engine size:"
-msgstr "Об'єм двигуна:"
+msgid "Engine size"
+msgstr "Об'єм двигуна"
 
 #: ../tempcache/vehicles.html.twig:524
 msgid "Choose a fuel"
 msgstr "Виберіть пальне"
 
 #: ../tempcache/vehicles.html.twig:545
-msgid "Fuel:"
-msgstr "Пальне:"
+msgid "Fuel"
+msgstr "Пальне"
 
 #: ../tempcache/vehicles.html.twig:556 ../tempcache/vehicles.html.twig:563
 msgid "Comment"

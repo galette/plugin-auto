@@ -682,8 +682,8 @@ msgstr "aucun enregistrement trouvé"
 
 #: ../tempcache/object_show.html.twig:82
 #, php-format
-msgid "Registered models for the brand '%s':"
-msgstr "Modèles enregistrés pour la marque « %s » :"
+msgid "Registered models for the brand '%s'"
+msgstr "Modèles enregistrés pour la marque « %s »"
 
 #: ../tempcache/object_show.html.twig:119
 #, php-format
@@ -702,29 +702,25 @@ msgstr "aucune entrée dans l'historique"
 msgid "Car's base informations"
 msgstr "Informations de base de la voiture"
 
-#: ../tempcache/vehicles.html.twig:81
-msgid "Name:"
-msgstr "Nom :"
-
 #: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:619
 msgid "Choose a model"
 msgstr "Choisissez un modèle"
 
 #: ../tempcache/vehicles.html.twig:142
-msgid "First registration date:"
-msgstr "Date de première immatriculation :"
+msgid "First registration date"
+msgstr "Date de première immatriculation"
 
 #: ../tempcache/vehicles.html.twig:148
-msgid "First circulation date:"
-msgstr "Date de première mise en circulation :"
+msgid "First circulation date"
+msgstr "Date de première mise en circulation"
 
 #: ../tempcache/vehicles.html.twig:154
-msgid "Mileage:"
-msgstr "Kilométrage :"
+msgid "Mileage"
+msgstr "Kilométrage"
 
 #: ../tempcache/vehicles.html.twig:161
-msgid "Seats:"
-msgstr "Places :"
+msgid "Seats"
+msgstr "Places"
 
 #: ../tempcache/vehicles.html.twig:173 ../tempcache/vehicles.html.twig:189
 msgid "Car's photo"
@@ -735,8 +731,8 @@ msgid "Current car's state informations"
 msgstr "Informations sur l'état courant de la voiture"
 
 #: ../tempcache/vehicles.html.twig:233
-msgid "Current owner:"
-msgstr "Propriétaire actuel :"
+msgid "Current owner"
+msgstr "Propriétaire actuel"
 
 #: ../tempcache/vehicles.html.twig:250
 msgid "Show full car state history"
@@ -750,10 +746,6 @@ msgstr "Historique de l'état de la voiture"
 msgid "Change car's owner"
 msgstr "Modifier le propriétaire de la voiture"
 
-#: ../tempcache/vehicles.html.twig:275 ../tempcache/vehicles.html.twig:296
-msgid "Owner:"
-msgstr "Propriétaire :"
-
 #: ../tempcache/vehicles.html.twig:349
 msgid "Choose a color"
 msgstr "Choisissez une couleur"
@@ -761,10 +753,6 @@ msgstr "Choisissez une couleur"
 #: ../tempcache/vehicles.html.twig:376
 msgid "Choose a state"
 msgstr "Choisissez un état"
-
-#: ../tempcache/vehicles.html.twig:404
-msgid "Registration:"
-msgstr "Immatriculation :"
 
 #: ../tempcache/vehicles.html.twig:416
 msgid "Car's technical informations"
@@ -774,45 +762,33 @@ msgstr "Informations techniques de la voiture"
 msgid "Choose a body"
 msgstr "Choisissez une carrosserie"
 
-#: ../tempcache/vehicles.html.twig:443
-msgid "Body:"
-msgstr "Carrosseries :"
-
 #: ../tempcache/vehicles.html.twig:449
 msgid "Choose a transmission"
 msgstr "Choisissez une transmission"
-
-#: ../tempcache/vehicles.html.twig:470
-msgid "Transmission:"
-msgstr "Transmission :"
 
 #: ../tempcache/vehicles.html.twig:476
 msgid "Choose a finition"
 msgstr "Choisissez une finition"
 
-#: ../tempcache/vehicles.html.twig:497
-msgid "Finition:"
-msgstr "Finition :"
-
 #: ../tempcache/vehicles.html.twig:504
-msgid "Chassis number:"
-msgstr "Numéro de chassis :"
+msgid "Chassis number"
+msgstr "Numéro de chassis"
 
 #: ../tempcache/vehicles.html.twig:511
-msgid "Horsepower:"
-msgstr "Puissance :"
+msgid "Horsepower"
+msgstr "Puissance"
 
 #: ../tempcache/vehicles.html.twig:518
-msgid "Engine size:"
-msgstr "Cylindrée :"
+msgid "Engine size"
+msgstr "Cylindrée"
 
 #: ../tempcache/vehicles.html.twig:524
 msgid "Choose a fuel"
 msgstr "Choisissez un carburant"
 
 #: ../tempcache/vehicles.html.twig:545
-msgid "Fuel:"
-msgstr "Carburant :"
+msgid "Fuel"
+msgstr "Carburant"
 
 #: ../tempcache/vehicles.html.twig:556 ../tempcache/vehicles.html.twig:563
 msgid "Comment"
