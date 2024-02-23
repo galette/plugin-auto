@@ -667,10 +667,6 @@ msgstr ""
 msgid "Car's base informations"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:81
-msgid "Name"
-msgstr ""
-
 #: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:619
 msgid "Choose a model"
 msgstr ""
@@ -715,20 +711,12 @@ msgstr ""
 msgid "Change car's owner"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:275 ../tempcache/vehicles.html.twig:296
-msgid "Owner"
-msgstr ""
-
 #: ../tempcache/vehicles.html.twig:349
 msgid "Choose a color"
 msgstr ""
 
 #: ../tempcache/vehicles.html.twig:376
 msgid "Choose a state"
-msgstr ""
-
-#: ../tempcache/vehicles.html.twig:404
-msgid "Registration"
 msgstr ""
 
 #: ../tempcache/vehicles.html.twig:416
@@ -739,24 +727,12 @@ msgstr ""
 msgid "Choose a body"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:443
-msgid "Body"
-msgstr ""
-
 #: ../tempcache/vehicles.html.twig:449
 msgid "Choose a transmission"
 msgstr ""
 
-#: ../tempcache/vehicles.html.twig:470
-msgid "Transmission"
-msgstr ""
-
 #: ../tempcache/vehicles.html.twig:476
 msgid "Choose a finition"
-msgstr ""
-
-#: ../tempcache/vehicles.html.twig:497
-msgid "Finition"
 msgstr ""
 
 #: ../tempcache/vehicles.html.twig:504
