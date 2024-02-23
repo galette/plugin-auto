@@ -80,7 +80,6 @@ class PluginGaletteAuto extends GalettePlugin
                         [
                             'label' => _T("Brands list", "auto"),
                             'route' => ['name' => 'brandsList']
-                            ]
                         ],
                         [
                             'label' => _T("Models list", "auto"),
