@@ -80,10 +80,14 @@ class PluginGaletteAuto extends GalettePlugin
                         [
                             'label' => _T("Brands list", "auto"),
                             'route' => ['name' => 'brandsList']
+                            ]
                         ],
                         [
                             'label' => _T("Models list", "auto"),
-                            'route' => ['name' => 'modelsList']
+                            'route' => [
+                                'name' => 'modelsList',
+                                'aliases' => ['modelAdd', 'modelEdit']
+                            ]
                         ],
 
                     ]
@@ -93,7 +97,10 @@ class PluginGaletteAuto extends GalettePlugin
             if ($login->isAdmin() || $login->isStaff() || $login->isGroupManager()) {
                 $menus['plugin_auto']['items'][] = [
                     'label' => _T("Cars list", "auto"),
-                    'route' => ['name' => 'vehiclesList']
+                    'route' => [
+                        'name' => 'vehiclesList',
+                        'aliases' => ['vehicleAdd', 'vehicleEdit']
+                    ]
                 ];
             }
 
