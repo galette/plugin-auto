@@ -100,6 +100,7 @@
     "DI\\Container",
     "DI\\ContainerBuilder",
     "DI\\Bridge\\Slim\\App",
+    "DI\\Attribute\\Inject",
 
     "// Not detected, do not know why.",
     "Psr\\Http\\Server\\RequestHandlerInterface"
