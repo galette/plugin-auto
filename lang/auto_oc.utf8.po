@@ -2,13 +2,14 @@
 # Quentin PAGÈS <quentinantonin@free.fr>, 2020.
 # Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021.
 # Pèire Bréchet <charrar@free.fr>, 2022, 2024.
+# Pèire Bréchet <oxytanistzero@tutanota.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-23 08:39+0100\n"
-"PO-Revision-Date: 2024-03-19 09:01+0000\n"
-"Last-Translator: Pèire Bréchet <charrar@free.fr>\n"
+"PO-Revision-Date: 2024-03-20 16:21+0000\n"
+"Last-Translator: Pèire Bréchet <oxytanistzero@tutanota.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/oc/>\n"
 "Language: oc\n"
@@ -621,7 +622,7 @@ msgstr ""
 
 #: ../tempcache/vehicles.html.twig:556 ../tempcache/vehicles.html.twig:563
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: ../tempcache/vehicles.html.twig:665
 msgid "Car's history"
