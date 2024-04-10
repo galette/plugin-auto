@@ -201,9 +201,10 @@ class Autos
                 $on_logged = true;
             } elseif ($public) {
                 $members = new \Galette\Repository\Members();
-                $public = $members->getPublicList(false);
-                if (count($public)) {
-                    foreach ($public as $p) {
+                $allpublic = $members->getPublicList(false);
+                $public_members = array_merge($allpublic['members'], $allpublic['staff']);
+                if (count($public_members)) {
+                    foreach ($public_members as $p) {
                         $adhs[] = $p->id;
                     }
                     $select->where->in(Adherent::PK, $adhs);
