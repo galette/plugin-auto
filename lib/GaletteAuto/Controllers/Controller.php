@@ -49,12 +49,9 @@ class Controller extends AbstractPluginController
     #[Inject("Plugin Galette Auto")]
     protected array $module_info;
 
-    /** @var boolean  */
     private bool $mine = false;
-    /** @var boolean */
     private bool $public = false;
 
-    /** @var integer */
     private int $id_adh;
 
     /**

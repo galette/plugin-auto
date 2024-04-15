@@ -192,7 +192,7 @@ class Model
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         return $this->$name;
     }

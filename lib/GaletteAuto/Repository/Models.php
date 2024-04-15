@@ -68,7 +68,7 @@ class Models extends Repository
      *
      * @return array<int, Model>|ResultSet
      */
-    public function getList($brandId = null, $as_object = true): array|ResultSet
+    public function getList(int $brandId = null, bool $as_object = true): array|ResultSet
     {
         $select = $this->buildSelect();
 

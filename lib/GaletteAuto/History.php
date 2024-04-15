@@ -223,7 +223,7 @@ class History
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case Auto::PK:

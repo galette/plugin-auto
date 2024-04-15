@@ -527,7 +527,7 @@ class Auto
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         $forbidden = array();
         if (!in_array($name, $forbidden)) {
@@ -591,7 +591,7 @@ class Auto
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         if (!in_array($name, $this->internals)) {
             switch ($name) {

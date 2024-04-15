@@ -89,7 +89,7 @@ class Brand extends AbstractObject
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         if ($name == self::FIELD) {
             return parent::__get('value');

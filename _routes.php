@@ -47,7 +47,7 @@ $app->get(
     [Controller::class, 'memberVehiclesList']
 )->setName('memberVehiclesList')->add($authenticate);
 
-$app->group('/public', function () use ($app) {
+$app->group('/public', function () use ($app): void {
     $app->get(
         '/public/vehicles',
         [Controller::class, 'publicVehiclesList']

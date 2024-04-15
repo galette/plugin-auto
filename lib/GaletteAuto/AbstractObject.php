@@ -234,7 +234,7 @@ abstract class AbstractObject
      *
      * @return mixed the called property
      */
-    public function __get(string $name)
+    public function __get(string $name): mixed
     {
         if (isset($this->$name)) {
             return $this->$name;
@@ -268,7 +268,7 @@ abstract class AbstractObject
      *
      * @return void
      */
-    public function __set(string $name, $value): void
+    public function __set(string $name, mixed $value): void
     {
         switch ($name) {
             case 'value':

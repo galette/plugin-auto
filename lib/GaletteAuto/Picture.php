@@ -43,7 +43,7 @@ class Picture extends GalettePicture
      * @param Plugins    $plugins Plugins
      * @param mixed|null $id_adh  ID of the member
      */
-    public function __construct(Plugins $plugins, $id_adh = null)
+    public function __construct(Plugins $plugins, mixed $id_adh = null)
     {
         $this->plugins = $plugins;
         $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';

@@ -275,7 +275,7 @@ class Autos
      *
      * @return void
      */
-    private function proceedCount($select, ?AutosList $filters): void
+    private function proceedCount(Select $select, ?AutosList $filters): void
     {
         try {
             $countSelect = clone $select;
