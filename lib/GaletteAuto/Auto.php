@@ -107,7 +107,7 @@ class Auto
     private string $name;
     private string $first_registration_date;
     private string $first_circulation_date;
-    private $mileage;
+    private ?int $mileage;
     private ?string $comment;
     private ?string $chassis_number;
     private ?int $seats;
