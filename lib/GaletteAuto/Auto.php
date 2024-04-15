@@ -565,22 +565,18 @@ class Auto
                 default:
                     if (isset($this->$name)) {
                         return $this->$name;
-                    } elseif (!property_exists($this, $name)) {
-                        Analog::log(
-                            '[' . get_class($this) . '] Property ' . $name .
-                            ' does not exists',
-                            Analog::WARNING
-                        );
                     }
                     break;
             }
-        } else {
-            Analog::log(
-                '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                Analog::INFO
-            );
-            return false;
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**

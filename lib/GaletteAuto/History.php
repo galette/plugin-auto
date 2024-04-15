@@ -230,14 +230,15 @@ class History
                 return $this->$name;
             case 'fields':
                 return array_keys($this->fields);
-            default:
-                Analog::log(
-                    '[' . get_class($this) . '] Trying to get an unknown property (' .
-                    $name . ')',
-                    Analog::INFO
-                );
-                break;
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
     }
 
     /**
