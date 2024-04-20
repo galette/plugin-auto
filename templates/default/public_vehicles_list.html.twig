@@ -49,7 +49,7 @@
 
 {% block body %}
     {% for auto in autos %}
-        {% set brand = auto.model.obrand %}
+        {% set brand = auto.model.brand %}
 
         <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
             <td data-col-label="{{ _T("Name", "auto") }}">{{ auto.name }}</td>
