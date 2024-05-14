@@ -563,9 +563,7 @@ class Auto
                 case 'picture':
                     return $this->picture;
                 default:
-                    if (isset($this->$name)) {
-                        return $this->$name;
-                    }
+                    return $this->$name;
                     break;
             }
         }
