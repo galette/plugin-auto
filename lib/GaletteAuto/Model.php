@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto;
 
 use Analog\Analog;
@@ -194,7 +196,7 @@ class Model
      */
     public function __get(string $name): mixed
     {
-        return $this->$name;
+        return $this->$name ?? null;
     }
 
     /**

@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto\Controllers\Crud;
 
 use DI\Attribute\Inject;
@@ -406,7 +408,7 @@ class PropertiesController extends AbstractPluginController
 
         if (!$is_new) {
             if (isset($post[$object->pk])) {
-                $object->load($post[$object->pk]);
+                $object->load((int)$post[$object->pk]);
             } else {
                 $error_detected[]
                     = _T("- No id provided for modifying this record! (internal)", "auto");

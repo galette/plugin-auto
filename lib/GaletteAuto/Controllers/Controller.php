@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto\Controllers;
 
 use ArrayObject;
@@ -299,7 +301,7 @@ class Controller extends AbstractPluginController
                 isset($get['id_adh'])
                 && ($this->login->isAdmin() || $this->login->isStaff())
             ) {
-                $auto->owner = (int)$get['id_adh'];
+                $auto->owner_id = (int)$get['id_adh'];
             } else {
                 $auto->appropriateCar($this->login);
             }
@@ -328,7 +330,7 @@ class Controller extends AbstractPluginController
             'require_calendar'  => true,
             'require_dialog'    => true,
             'car'               => $auto,
-            'models'            => $models->getList($auto->model->brand->id),
+            'models'            => $models->getList($auto->model->brand->id ?? null),
             'js_init_models'    => !isset($auto->model->brand),
             'brands'            => $auto->model->brand->getList(),
             'colors'            => $auto->color->getList(),
@@ -361,6 +363,7 @@ class Controller extends AbstractPluginController
         if (count($members)) {
             $params['members']['list'] = $members;
         }
+        $params['autocomplete'] = true;
 
         // display page
         $this->view->render(
@@ -412,7 +415,7 @@ class Controller extends AbstractPluginController
     {
         $post = $request->getParsedBody();
 
-        $is_new = ($action === 'add');
+        $is_new = ($action === 'add' || $action === 'new');
 
         // initialize warnings
         $error_detected = array();
@@ -424,7 +427,7 @@ class Controller extends AbstractPluginController
 
         $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
-            $auto->load($post[Auto::PK]);
+            $auto->load((int)$post[Auto::PK]);
         }
 
         $res = $auto->check($post);
@@ -488,14 +491,15 @@ class Controller extends AbstractPluginController
      */
     public function vehicleHistory(Request $request, Response $response, int $id): Response
     {
+        $apk = Auto::PK;
         $history = new History($this->zdb, $id);
-        $auto = new Auto($this->plugins, $this->zdb, $history->{Auto::PK});
+        $auto = new Auto($this->plugins, $this->zdb);
+        $auto->load($history->$apk);
         $this->checkAclsFor($response, $auto->owner->id);
 
-        $apk = Auto::PK;
         $params = [
             'entries'       => $history->getEntries(),
-            'page_title'    => str_replace('%d', $history->$apk, _T("History of car #%d", "auto")),
+            'page_title'    => str_replace('%d', (string)$history->$apk, _T("History of car #%d", "auto")),
             'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : ''
         ];
 

@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 use GaletteAuto\Controllers\Controller;
 use GaletteAuto\Controllers\Crud\PropertiesController;
 use GaletteAuto\Controllers\Crud\ModelsController;

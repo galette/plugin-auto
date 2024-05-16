@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto\Controllers\Crud;
 
 use DI\Attribute\Inject;
@@ -185,9 +187,9 @@ class ModelsController extends AbstractPluginController
     {
         $model = new Model($this->zdb);
 
-        if ($this->session->automodel !== null) {
+        if ($this->session->auto_model !== null) {
             $model->check($this->session->auto_model);
-            $this->session->automodel = null;
+            unset($this->session->auto_model);
         }
 
         $model_id = null;

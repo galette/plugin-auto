@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto;
 
 use ArrayObject;
@@ -53,7 +55,8 @@ use Laminas\Db\Sql\Expression;
  * @property Transmission $transmission
  * @property Finition $finition
  * @property Model $model
- * @property Adherent|int $owner
+ * @property int $owner_id
+ * @property Adherent $owner
  * @property Picture $picture
  * @property History $history
  */
@@ -125,6 +128,7 @@ class Auto
     private Body $body;
     private History $history;
     private State $state;
+    private int $owner_id;
     private Adherent $owner;
 
     public const FUEL_PETROL = 1;
@@ -271,7 +275,8 @@ class Auto
         $bpk = Body::PK;
         $this->body->load((int)$r->$bpk);
         $opk = Adherent::PK;
-        $this->owner->load((int)$r->$opk);
+        $this->owner_id = (int)$r->$opk;
+        $this->owner->load($this->owner_id);
         $spk = State::PK;
         $this->state->load((int)$r->$spk);
         $this->history->load((int)$this->id);
@@ -345,7 +350,7 @@ class Auto
                         switch ($v) {
                             case 'string':
                             case 'date':
-                                $values[$k] = $this->$propName;
+                                $values[$k] = $this->$propName ?? null;
                                 break;
                             case 'integer':
                                 $values[$k] = (
@@ -501,7 +506,8 @@ class Auto
      */
     public function appropriateCar(Login $login): void
     {
-        $this->owner->load($login->id);
+        $this->owner_id = $login->id;
+        $this->owner->load($this->owner_id);
     }
 
     /**
@@ -545,7 +551,7 @@ class Auto
                 case 'first_registration_date':
                 case 'first_circulation_date':
                 case 'creation_date':
-                    if ($this->$name != '') {
+                    if (isset($this->$name)) {
                         try {
                             $d = new \DateTime($this->$name);
                             return $d->format(_T("Y-m-d"));
@@ -559,12 +565,11 @@ class Auto
                             return $this->$name;
                         }
                     }
-                    break;
+                    return null;
                 case 'picture':
                     return $this->picture;
                 default:
-                    return $this->$name;
-                    break;
+                    return $this->$name ?? '';
             }
         }
 
@@ -604,8 +609,9 @@ class Auto
                 case 'body':
                     $this->body->load((int)$value);
                     break;
-                case 'owner':
-                    $this->owner->load((int)$value);
+                case 'owner_id':
+                    $this->owner_id = (int)$value;
+                    $this->owner->load($this->owner_id);
                     break;
                 case 'state':
                     $this->state->load((int)$value);
@@ -739,7 +745,7 @@ class Auto
                 //constants
                 case 'fuel':
                     if (in_array($value, array_keys($this->listFuels()))) {
-                        $this->fuel = $value;
+                        $this->fuel = (int)$value;
                     } else {
                         $this->errors[] = _T("- You must choose a fuel in the list", "auto");
                     }
@@ -752,7 +758,7 @@ class Auto
                 case 'body':
                 case 'state':
                     if ($value > 0) {
-                        $this->$prop->load($value);
+                        $this->$prop->load((int)$value);
                     } else {
                         $class = 'GaletteAuto\\' . ucwords($prop);
                         $name = $class::FIELD;
@@ -763,11 +769,12 @@ class Auto
                         );
                     }
                     break;
-                case 'owner':
+                case 'owner_id':
                     if (isset($post['change_owner']) || !isset($this->id)) {
                         $value = (int)$value;
                         if ($value > 0) {
-                            $this->$prop->load($value);
+                            $this->owner_id = $value;
+                            $this->owner->load($value);
                         } else {
                             $this->errors[] = _T("- you must attach an owner to this car", "auto");
                         }

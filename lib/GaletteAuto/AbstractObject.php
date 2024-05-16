@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto;
 
 use Analog\Analog;
@@ -45,7 +47,7 @@ abstract class AbstractObject
 
     protected Db $zdb;
     protected ?int $id;
-    protected string $value;
+    protected ?string $value;
     protected ?PropertiesList $filters = null;
 
     private int $count;
@@ -168,7 +170,7 @@ abstract class AbstractObject
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot store ' . $this->name .
-                ' values `' . $this->id . '`, `' . $this->value . '` | ' .
+                ' values `' . ($this->id ?? '') . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
                 Analog::WARNING
             );
@@ -236,14 +238,14 @@ abstract class AbstractObject
      */
     public function __get(string $name): mixed
     {
-        if (isset($this->$name)) {
-            return $this->$name;
+        if (property_exists($this, $name)) {
+            return $this->$name ?? null;
         } else {
             Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
                 Analog::INFO
             );
-            return false;
+            throw new \RuntimeException('Unable to retrieve `' . $name . '`');
         }
     }
 

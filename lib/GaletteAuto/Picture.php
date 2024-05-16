@@ -19,6 +19,8 @@
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
  */
 
+declare(strict_types=1);
+
 namespace GaletteAuto;
 
 use Analog\Analog;
@@ -78,7 +80,7 @@ class Picture extends GalettePicture
      */
     protected function getDefaultPicture(): void
     {
-        $this->file_path = realpath(
+        $this->file_path = (string)realpath(
             $this->plugins->getTemplatesPathFromName('Galette Auto') .
             '/../../webroot/images/1f698.png'
         );

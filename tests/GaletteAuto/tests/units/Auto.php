@@ -177,7 +177,7 @@ class Auto extends GaletteTestCase
             'finition' => $finition_id,
             'state' => $state_id,
             'transmission' => $transmission_id,
-            'owner' => $adh->id,
+            'owner_id' => $adh->id,
         ];
         $check = $auto->check($data);
         $this->assertSame([], $auto->getErrors());
@@ -238,7 +238,7 @@ class Auto extends GaletteTestCase
             'finition' => $finition_id,
             'state' => $state_id,
             'transmission' => $transmission_id,
-            'owner' => $adh2->id,
+            'owner_id' => $adh2->id,
             'change_owner' => true,
         ];
         $check = $auto->check($data);
@@ -275,7 +275,7 @@ class Auto extends GaletteTestCase
             'finition' => $finition_id,
             'state' => $state_id,
             'transmission' => $transmission_id,
-            'owner' => $adh->id,
+            'owner_id' => $adh->id,
         ];
         $check = $auto->check($data);
         $this->assertSame([], $auto->getErrors());
