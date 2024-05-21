@@ -210,8 +210,8 @@ class Auto extends GaletteTestCase
             array_keys($entry)
         );
 
-        $this->assertSame($auto->id, $entry['id_car']);
-        $this->assertSame($adh->id, $entry['id_adh']);
+        $this->assertSame($auto->id, (int)$entry['id_car']);
+        $this->assertSame($adh->id, (int)$entry['id_adh']);
         $this->assertSame('GA-123-TE', $entry['car_registration']);
         $this->assertSame('Grey', $entry['color']);
         $this->assertSame('Correct', $entry['state']);
@@ -255,8 +255,8 @@ class Auto extends GaletteTestCase
         $this->assertCount(2, $history->getEntries());
 
         $entry = $history->getEntries()[1];
-        $this->assertSame($auto->id, $entry['id_car']);
-        $this->assertSame($adh2->id, $entry['id_adh']);
+        $this->assertSame($auto->id, (int)$entry['id_car']);
+        $this->assertSame($adh2->id, (int)$entry['id_adh']);
         $this->assertSame('GA-123-TE', $entry['car_registration']);
         $this->assertSame('Yellow', $entry['color']);
         $this->assertSame('Correct', $entry['state']);

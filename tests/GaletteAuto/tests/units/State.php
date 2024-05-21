@@ -103,7 +103,7 @@ class State extends GaletteTestCase
         $list = $state->getList();
         $this->assertCount(1, $list);
         $last_state = $list[0];
-        $this->assertSame($id, $last_state->id_state);
+        $this->assertSame($id, (int)$last_state->id_state);
     }
 
     /**

@@ -103,7 +103,7 @@ class Finition extends GaletteTestCase
         $list = $finition->getList();
         $this->assertCount(1, $list);
         $last_finition = $list[0];
-        $this->assertSame($id, $last_finition->id_finition);
+        $this->assertSame($id, (int)$last_finition->id_finition);
     }
 
     /**

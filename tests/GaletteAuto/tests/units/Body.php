@@ -103,7 +103,7 @@ class Body extends GaletteTestCase
         $list = $body->getList();
         $this->assertCount(1, $list);
         $last_body = $list[0];
-        $this->assertSame($id, $last_body->id_body);
+        $this->assertSame($id, (int)$last_body->id_body);
     }
 
     /**

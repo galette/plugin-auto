@@ -112,7 +112,7 @@ class Model
      */
     private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_model;
+        $this->id = (int)$r->id_model;
         $this->model = $r->model;
         $id_brand = Brand::PK;
         $this->brand->load((int)$r->$id_brand);

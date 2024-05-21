@@ -169,7 +169,7 @@ class Models extends Repository
             $result = $results->current();
 
             $k = self::PK;
-            $this->count = $result->$k;
+            $this->count = (int)$result->$k;
 
             if ($this->count > 0) {
                 $this->filters->setCounter($this->count);

@@ -103,7 +103,7 @@ class Transmission extends GaletteTestCase
         $list = $transmission->getList();
         $this->assertCount(1, $list);
         $last_transmission = $list[0];
-        $this->assertSame($id, $last_transmission->id_transmission);
+        $this->assertSame($id, (int)$last_transmission->id_transmission);
     }
 
     /**

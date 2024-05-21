@@ -103,7 +103,7 @@ class Color extends GaletteTestCase
         $list = $color->getList();
         $this->assertCount(1, $list);
         $last_color = $list[0];
-        $this->assertSame($id, $last_color->id_color);
+        $this->assertSame($id, (int)$last_color->id_color);
     }
 
     /**

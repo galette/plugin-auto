@@ -119,7 +119,7 @@ abstract class AbstractObject
             $results = $this->zdb->execute($select);
             $result = $results->current();
             $pk = $this->pk;
-            $this->id = $result->$pk;
+            $this->id = (int)$result->$pk;
             $field = $this->field;
             $this->value = $result->$field;
 
@@ -402,7 +402,7 @@ abstract class AbstractObject
 
             //@phpstan-ignore-next-line
             $k = static::PK;
-            $this->count = $result->$k;
+            $this->count = (int)$result->$k;
 
             if ($this->count > 0 && isset($this->filters)) {
                 $this->filters->setCounter($this->count);

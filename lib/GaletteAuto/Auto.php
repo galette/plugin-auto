@@ -249,7 +249,7 @@ class Auto
     private function loadFromRS(ArrayObject $r): void
     {
         $pk = self::PK;
-        $this->id = $r->$pk;
+        $this->id = (int)$r->$pk;
         $this->registration = $r->car_registration;
         $this->name = $r->car_name;
         $this->first_registration_date = $r->car_first_registration_date;
@@ -261,7 +261,7 @@ class Auto
         $this->horsepower = $r->car_horsepower;
         $this->engine_size = $r->car_engine_size;
         $this->creation_date = $r->car_creation_date;
-        $this->fuel = $r->car_fuel;
+        $this->fuel = (int)$r->car_fuel;
         //External objects
         $this->picture = new Picture($this->plugins, (int)$this->id);
         $fpk = Finition::PK;

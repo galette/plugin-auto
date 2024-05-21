@@ -103,7 +103,7 @@ class Brand extends GaletteTestCase
         $list = $brand->getList();
         $this->assertCount(1, $list);
         $last_brand = $list[0];
-        $this->assertSame($id, $last_brand->id_brand);
+        $this->assertSame($id, (int)$last_brand->id_brand);
     }
 
     /**

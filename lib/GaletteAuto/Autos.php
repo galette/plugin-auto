@@ -298,7 +298,7 @@ class Autos
             }
 
             $results = $this->zdb->execute($countSelect);
-            $this->count = $results->current()->count;
+            $this->count = (int)$results->current()->count;
             if ($this->count > 0 && $filters !== null) {
                 $filters->setCounter($this->count);
             }
