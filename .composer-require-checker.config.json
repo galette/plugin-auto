@@ -59,6 +59,7 @@
     "GALETTE_MARIADB_MIN",
     "GALETTE_PGSQL_MIN",
     "GALETTE_DISPLAY_VERSION",
+    "GALETTE_TESTS",
     "GALETTE_PHP_MIN",
 
     "// Galette db constants (not detected as they are dynamically declared)",
