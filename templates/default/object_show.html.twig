@@ -1,3 +1,23 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'page.html.twig' %}
 
 {% block content %}
@@ -6,7 +26,7 @@
     {% set field = obj.field %}
 
     <div class="ui basic fitted segment">
-        <a class="ui tiny labeled icon button" href="{{ url_for("propertyEdit", {"property": 'brand', "action": "add"}) }}">
+        <a class="ui tiny labeled icon button" href="{{ url_for("propertyAdd", {"property": 'brand'}) }}">
             <i class="plus circle green icon" aria-hidden="true"></i>
             {{ _T("Add new brand", "auto") }}
         </a>
@@ -16,7 +36,7 @@
     {% if models|length > 0 %}
         <h2 class="ui header">
             <div class="content">
-                {{ _T("Registered models for the brand '%s':", "auto")|replace({'%s': obj.value}) }}
+                {{ _T("Registered models for the brand '%s'", "auto")|replace({'%s': obj.value}) }}
             </div>
         </h2>
         <div class="ui relaxed divided list">
@@ -33,7 +53,7 @@
         </div>
     {% else %}
         <div class="ui info message">
-            <p>{{_T("The brand '%s' does not have any registered model at this time.", "auto")|replace({'%s': obj.value}) }}</p>
+            <p>{{ _T("The brand '%s' does not have any registered model at this time.", "auto")|replace({'%s': obj.value}) }}</p>
         </div>
     {% endif %}
     </div>

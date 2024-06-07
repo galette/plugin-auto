@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Galette Auto plugin controller
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 2017-07-18
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto\Controllers;
 
@@ -54,41 +41,31 @@ use DI\Attribute\Inject;
 /**
  * Galette Auto plugin controller
  *
- * @category  Plugins
- * @name      Autos
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 2017-07-18
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Controller extends AbstractPluginController
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     #[Inject("Plugin Galette Auto")]
-    protected $module_info;
+    protected array $module_info;
 
-    /** @var boolean  */
-    private $mine = false;
-    /** @var boolean */
-    private $public = false;
+    private bool $mine = false;
+    private bool $public = false;
 
-    /** @var integer */
-    private $id_adh;
+    private int $id_adh;
 
     /**
      * Check ACLs for specific member
      *
-     * @param Response $response Response
-     * @param integer  $id_adh   Members id to check right for
-     * @param string   $redirect Path to redirect to (myVehiclesList per default)
+     * @param Response     $response Response
+     * @param integer      $id_adh   Members id to check right for
+     * @param string|false $redirect Path to redirect to (myVehiclesList per default)
      *
      * @return bool|Response
      */
-    protected function checkAclsFor(Response $response, $id_adh, $redirect = null)
+    protected function checkAclsFor(Response $response, int $id_adh, string|false $redirect = null): bool|Response
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if (
@@ -128,7 +105,7 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  PSR Request
      * @param Response $response PSR Response
-     * @param integer  $id       Vehicle id
+     * @param ?integer $id       Vehicle id
      *
      * @return Response
      */
@@ -274,6 +251,33 @@ class Controller extends AbstractPluginController
     }
 
     /**
+     * Show add vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     *
+     * @return Response
+     */
+    public function showAddVehicle(Request $request, Response $response): Response
+    {
+        return $this->showAddEditVehicle($request, $response, 'add');
+    }
+
+    /**
+     * Show edit vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param int      $id       Vehicle id
+     *
+     * @return Response
+     */
+    public function showEditVehicle(Request $request, Response $response, int $id): Response
+    {
+        return $this->showAddEditVehicle($request, $response, 'edit', $id);
+    }
+
+    /**
      * Show add/edit route
      *
      * @param Request  $request  Request
@@ -283,19 +287,9 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null)
+    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null): Response
     {
         $is_new = ($action === 'add');
-
-        if ($action === 'edit' && $id === null) {
-            throw new \RuntimeException(
-                _T("Car ID cannot be null calling edit route!", "auto")
-            );
-        } elseif ($action === 'add' && $id !== null) {
-            return $response
-                ->withStatus(301)
-                ->withHeader('Location', $this->routeparser->urlFor('vehicleEdit', ['action' => 'add']));
-        }
 
         $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
@@ -307,7 +301,7 @@ class Controller extends AbstractPluginController
                 isset($get['id_adh'])
                 && ($this->login->isAdmin() || $this->login->isStaff())
             ) {
-                $auto->owner = (int)$get['id_adh'];
+                $auto->owner_id = (int)$get['id_adh'];
             } else {
                 $auto->appropriateCar($this->login);
             }
@@ -336,9 +330,9 @@ class Controller extends AbstractPluginController
             'require_calendar'  => true,
             'require_dialog'    => true,
             'car'               => $auto,
-            'models'            => $models->getList((int)$auto->model->brand),
-            'js_init_models'    => (($auto->model->brand != '') ? false : true),
-            'brands'            => $auto->model->obrand->getList(),
+            'models'            => $models->getList($auto->model->brand->id ?? null),
+            'js_init_models'    => !isset($auto->model->brand),
+            'brands'            => $auto->model->brand->getList(),
             'colors'            => $auto->color->getList(),
             'bodies'            => $auto->body->getList(),
             'transmissions'     => $auto->transmission->getList(),
@@ -369,6 +363,7 @@ class Controller extends AbstractPluginController
         if (count($members)) {
             $params['members']['list'] = $members;
         }
+        $params['autocomplete'] = true;
 
         // display page
         $this->view->render(
@@ -377,6 +372,33 @@ class Controller extends AbstractPluginController
             $params
         );
         return $response;
+    }
+
+    /**
+     * Do add vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     *
+     * @return Response
+     */
+    public function doAddVehicle(Request $request, Response $response): Response
+    {
+        return $this->doAddEditVehicle($request, $response, 'new');
+    }
+
+    /**
+     * Do edit vehicle route
+     *
+     * @param Request  $request  Request
+     * @param Response $response Response
+     * @param int      $id       Vehicle id
+     *
+     * @return Response
+     */
+    public function doEditVehicle(Request $request, Response $response, int $id): Response
+    {
+        return $this->doAddEditVehicle($request, $response, 'edit', $id);
     }
 
     /**
@@ -389,15 +411,14 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null)
+    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null): Response
     {
         $post = $request->getParsedBody();
 
-        $is_new = ($action === 'add');
+        $is_new = ($action === 'add' || $action === 'new');
 
         // initialize warnings
         $error_detected = array();
-        $warning_detected = array();
         $success_detected = array();
 
         if (isset($post['id_adh'])) {
@@ -406,21 +427,19 @@ class Controller extends AbstractPluginController
 
         $auto = new Auto($this->plugins, $this->zdb);
         if (!$is_new) {
-            $auto->load($post[Auto::PK]);
+            $auto->load((int)$post[Auto::PK]);
         }
 
-        if (!count($error_detected)) {
-            $res = $auto->check($post);
-            if ($res !== true) {
-                $error_detected = $auto->getErrors();
-            }
+        $res = $auto->check($post);
+        if ($res !== true) {
+            $error_detected = $auto->getErrors();
         }
 
         $route = $this->routeparser->urlFor('vehiclesList');
         //if no errors were thrown, we can store the car
         if (count($error_detected) == 0) {
             if (!$auto->store($is_new)) {
-                $error_detected[] = _T("- An error has occured while saving vehicle in the database.", "auto");
+                $error_detected[] = _T("- An error has occurred while saving vehicle in the database.", "auto");
             } else {
                 $success_detected[] = _T("Vehicle has been saved!", "auto");
                 $id_adh = $auto->owner->id;
@@ -433,9 +452,11 @@ class Controller extends AbstractPluginController
         if (count($error_detected) > 0) {
             //store entity in session
             $this->session->auto = $post;
-            $args = ['action' => $action];
-            $routename = 'vehicleEdit';
-            $route = $this->routeparser->urlFor($routename, $args);
+            if ($action === 'add') {
+                $route = $this->routeparser->urlFor('vehicleAdd');
+            } else {
+                $route = $this->routeparser->urlFor('vehicleEdit', ['id' => (string)$id]);
+            }
 
             foreach ($error_detected as $error) {
                 $this->flash->addMessage(
@@ -445,14 +466,6 @@ class Controller extends AbstractPluginController
             }
         }
 
-        if (count($warning_detected) > 0) {
-            foreach ($warning_detected as $warning) {
-                $this->flash->addMessage(
-                    'warning_detected',
-                    $warning
-                );
-            }
-        }
         if (count($success_detected) > 0) {
             foreach ($success_detected as $success) {
                 $this->flash->addMessage(
@@ -476,16 +489,17 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function vehicleHistory(Request $request, Response $response, int $id)
+    public function vehicleHistory(Request $request, Response $response, int $id): Response
     {
+        $apk = Auto::PK;
         $history = new History($this->zdb, $id);
-        $auto = new Auto($this->plugins, $this->zdb, $history->{Auto::PK});
+        $auto = new Auto($this->plugins, $this->zdb);
+        $auto->load($history->$apk);
         $this->checkAclsFor($response, $auto->owner->id);
 
-        $apk = Auto::PK;
         $params = [
-            'entries'       => $history->entries,
-            'page_title'    => str_replace('%d', $history->$apk, _T("History of car #%d", "auto")),
+            'entries'       => $history->getEntries(),
+            'page_title'    => str_replace('%d', (string)$history->$apk, _T("History of car #%d", "auto")),
             'mode'          => $request->getHeaderLine('X-Requested-With') === 'XMLHttpRequest' ? 'ajax' : ''
         ];
 
@@ -506,7 +520,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function ajaxModels(Request $request, Response $response)
+    public function ajaxModels(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $list = array();
@@ -536,7 +550,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function removeVehicle(Request $request, Response $response, int $id)
+    public function removeVehicle(Request $request, Response $response, int $id): Response
     {
         $auto = new Auto($this->plugins, $this->zdb);
         $auto->load($id);
@@ -564,7 +578,7 @@ class Controller extends AbstractPluginController
                     _T('Remove vehicle %1$s', 'auto'),
                     $auto->name
                 ),
-                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle', ['id' => $auto->id]),
+                'form_url'      => $this->routeparser->urlFor('doRemoveVehicle', ['id' => (string)$auto->id]),
                 'cancel_uri'    => $route,
                 'data'          => $data
             )
@@ -577,11 +591,10 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
      *
      * @return Response
      */
-    public function removeVehicles(Request $request, Response $response, $args = [])
+    public function removeVehicles(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $route = $this->routeparser->urlFor('vehiclesList');
@@ -613,7 +626,7 @@ class Controller extends AbstractPluginController
                 'page_title'    => _T('Remove vehicles', 'auto'),
                 'message'       => str_replace(
                     '%count',
-                    count($data['id']),
+                    (string)count($data['id']),
                     _Tn('You are about to remove %count vehicle.', 'You are about to remove %count vehicles.', count($data['id']), 'auto')
                 ),
                 'form_url'      => $this->routeparser->urlFor('doRemoveVehicle'),
@@ -629,11 +642,10 @@ class Controller extends AbstractPluginController
      *
      * @param Request  $request  Request
      * @param Response $response Response
-     * @param array    $args     Optionnal args
      *
      * @return Response
      */
-    public function doRemoveVehicle(Request $request, Response $response, $args = [])
+    public function doRemoveVehicle(Request $request, Response $response): Response
     {
         $post = $request->getParsedBody();
         $ajax = isset($post['ajax']) && $post['ajax'] === 'true';
@@ -659,7 +671,7 @@ class Controller extends AbstractPluginController
             $del = $autos->removeVehicles($ids);
 
             if ($del !== true) {
-                $error_detected = _T("An error occured trying to remove vehicles :/", "auto");
+                $error_detected = _T("An error occurred trying to remove vehicles :/", "auto");
 
                 $this->flash->addMessage(
                     'error_detected',
@@ -668,7 +680,7 @@ class Controller extends AbstractPluginController
             } else {
                 $success_detected = str_replace(
                     '%count',
-                    count($ids),
+                    (string)count($ids),
                     _T("%count vehicles have been successfully deleted.", "auto")
                 );
 

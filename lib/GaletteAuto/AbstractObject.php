@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Automobile Object abstract class for galette Auto plugin
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2009-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,21 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
-use ArrayObject;
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
@@ -48,42 +33,36 @@ use GaletteAuto\Filters\PropertiesList;
 /**
  * Automobile Object abstract class for galette Auto plugin
  *
- * @category  Plugins
- * @name      AbstractObject
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property int $id
+ * @property string $value
  */
 abstract class AbstractObject
 {
-    private $table;
-    private $pk;
-    private $field;
-    private $name;
+    private string $table;
+    private string $pk;
+    private string $field;
+    private string $name;
 
-    protected $zdb;
-    protected $id;
-    protected $value;
-    protected $filters;
+    protected Db $zdb;
+    protected ?int $id;
+    protected ?string $value;
+    protected ?PropertiesList $filters = null;
 
-    private $count;
+    private int $count;
 
     /**
      * Default constructor
      *
-     * @param Db      $zdb   Database instance
-     * @param string  $table table name
-     * @param string  $pk    primary key field
-     * @param string  $field main field name
-     * @param string  $name  name
-     * @param integer $id    id to load. Defaults to null
+     * @param Db       $zdb   Database instance
+     * @param string   $table table name
+     * @param string   $pk    primary key field
+     * @param string   $field main field name
+     * @param string   $name  name
+     * @param ?integer $id    id to load. Defaults to null
      */
-    public function __construct(Db $zdb, $table, $pk, $field, $name, $id = null)
+    public function __construct(Db $zdb, string $table, string $pk, string $field, string $name, int $id = null)
     {
         $this->zdb = $zdb;
         $this->table = AUTO_PREFIX . $table;
@@ -100,7 +79,7 @@ abstract class AbstractObject
      *
      * @return array
      */
-    public function getList()
+    public function getList(): array
     {
         try {
             $select = $this->buildSelect();
@@ -127,7 +106,7 @@ abstract class AbstractObject
      *
      * @return boolean
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select($this->table);
@@ -140,7 +119,7 @@ abstract class AbstractObject
             $results = $this->zdb->execute($select);
             $result = $results->current();
             $pk = $this->pk;
-            $this->id = $result->$pk;
+            $this->id = (int)$result->$pk;
             $field = $this->field;
             $this->value = $result->$field;
 
@@ -162,7 +141,7 @@ abstract class AbstractObject
      *
      * @return boolean
      */
-    public function store($new = false)
+    public function store(bool $new = false): bool
     {
         try {
             $values = array(
@@ -172,6 +151,12 @@ abstract class AbstractObject
                 $insert = $this->zdb->insert($this->table);
                 $insert->values($values);
                 $this->zdb->execute($insert);
+                /** @phpstan-ignore-next-line */
+                $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
+                    $this->zdb->isPostgres() ?
+                        PREFIX_DB . $this->table . '_id_seq'
+                        : null
+                );
             } else {
                 $update = $this->zdb->update($this->table);
                 $update->set($values)->where(
@@ -185,7 +170,7 @@ abstract class AbstractObject
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot store ' . $this->name .
-                ' values `' . $this->id . '`, `' . $this->value . '` | ' .
+                ' values `' . ($this->id ?? '') . '`, `' . $this->value . '` | ' .
                 $e->getMessage(),
                 Analog::WARNING
             );
@@ -196,11 +181,11 @@ abstract class AbstractObject
     /**
      * Delete some records
      *
-     * @param array $ids Array of records id to delete
+     * @param int[] $ids Array of records id to delete
      *
      * @return boolean
      */
-    public function delete($ids)
+    public function delete(array $ids): bool
     {
         try {
             $delete = $this->zdb->delete($this->table);
@@ -222,11 +207,12 @@ abstract class AbstractObject
      *
      * @param PropertiesList $filters Filters
      *
-     * @return void
+     * @return self
      */
-    public function setFilters(PropertiesList $filters)
+    public function setFilters(PropertiesList $filters): self
     {
         $this->filters = $filters;
+        return $this;
     }
 
     /**
@@ -234,39 +220,32 @@ abstract class AbstractObject
      *
      * @return string
      */
-    abstract public function getFieldLabel();
+    abstract public function getFieldLabel(): string;
 
     /**
      * Get property route name
      *
      * @return string
      */
-    abstract public function getRouteName();
+    abstract public function getRouteName(): string;
 
     /**
      * Global getter method
      *
-     * @param string $name name of the property we want to retrive
+     * @param string $name name of the property we want to retrieve
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-        $forbidden = array();
-        if (!in_array($name, $forbidden)) {
-            if ($name == 'id' || $name == 'value') {
-                return $this->$name;
-            } else {
-                if (isset($this->$name)) {
-                    return $this->$name;
-                }
-            }
+        if (property_exists($this, $name)) {
+            return $this->$name ?? null;
         } else {
             Analog::log(
                 '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
                 Analog::INFO
             );
-            return false;
+            throw new \RuntimeException('Unable to retrieve `' . $name . '`');
         }
     }
 
@@ -278,7 +257,7 @@ abstract class AbstractObject
      *
      * @return boolean
      */
-    public function __isset(string $name)
+    public function __isset(string $name): bool
     {
         return property_exists($this, $name);
     }
@@ -287,11 +266,11 @@ abstract class AbstractObject
      * Global setter method
      *
      * @param string $name  name of the property we want to assign a value to
-     * @param object $value a relevant value for the property
+     * @param mixed  $value a relevant value for the property
      *
      * @return void
      */
-    public function __set($name, $value)
+    public function __set(string $name, mixed $value): void
     {
         switch ($name) {
             case 'value':
@@ -343,7 +322,7 @@ abstract class AbstractObject
      *
      * @return string
      */
-    public static function getClassForPropName($property)
+    public static function getClassForPropName(string $property): string
     {
         $classname = '\GaletteAuto\\';
         switch ($property) {
@@ -367,7 +346,6 @@ abstract class AbstractObject
                 break;
             default:
                 throw new \RuntimeException('Unknown property ' . $property);
-                break;
         }
         return $classname;
     }
@@ -377,11 +355,11 @@ abstract class AbstractObject
      *
      * @return Select SELECT statement
      */
-    private function buildSelect()
+    private function buildSelect(): Select
     {
         try {
             $select = $this->zdb->select($this->table);
-            if ($this->filters !== null) {
+            if (isset($this->filters)) {
                 $this->filters->setLimits($select);
             }
             $this->proceedCount($select);
@@ -389,7 +367,7 @@ abstract class AbstractObject
             return $select;
         } catch (\Exception $e) {
             Analog::log(
-                'Cannot build SELECT clause for models | ' . $e->getMessage(),
+                'Cannot build SELECT clause | ' . $e->getMessage(),
                 Analog::WARNING
             );
             throw $e;
@@ -403,7 +381,7 @@ abstract class AbstractObject
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -424,9 +402,9 @@ abstract class AbstractObject
 
             //@phpstan-ignore-next-line
             $k = static::PK;
-            $this->count = $result->$k;
+            $this->count = (int)$result->$k;
 
-            if ($this->count > 0 && $this->filters !== null) {
+            if ($this->count > 0 && isset($this->filters)) {
                 $this->filters->setCounter($this->count);
             }
         } catch (\Exception $e) {
@@ -457,7 +435,7 @@ abstract class AbstractObject
     {
         return str_replace(
             '%count',
-            $this->getCount(),
+            (string)$this->getCount(),
             $this->getLocalizedCount()
         );
     }

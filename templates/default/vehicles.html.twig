@@ -1,12 +1,32 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends 'page.html.twig' %}
 
 {% block content %}
     {% if mode == 'new' %}
-        {% set action = "add" %}
+        {% set action = url_for("doVehicleAdd") %}
     {% else %}
-        {% set action = "edit" %}
+        {% set action = url_for("doVehicleEdit", {"id": car.id}) %}
     {% endif %}
-    <form class="ui form" action="{{ url_for("doVehicleEdit", {"action": action}) }}" method="post" id="modifform" enctype="multipart/form-data">
+    <form class="ui form" action="{{ action }}" method="post" id="modifform" enctype="multipart/form-data">
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -16,7 +36,7 @@
                 {% include "components/forms/text.html.twig" with {
                     id: 'name',
                     value: car.name,
-                    label: _T("Name:", "auto"),
+                    label: _T("Name", "auto"),
                     required: required.name is defined
                 } %}
 
@@ -27,7 +47,7 @@
 
                 {% include "components/forms/select.html.twig" with {
                     id: 'brand',
-                    value: car.model.brand,
+                    value: car.model.brand.id,
                     values: brand_list_values,
                     label: _T("Brand", "auto"),
                     required: required.brand is defined
@@ -49,28 +69,28 @@
                 {% include "components/forms/date.html.twig" with {
                     id: 'first_registration_date',
                     value: car.first_registration_date,
-                    label: _T("First registration date:", "auto"),
-                    title: _T("First registration date:", "auto")
+                    label: _T("First registration date", "auto"),
+                    title: _T("First registration date", "auto")
                 } %}
 
                 {% include "components/forms/date.html.twig" with {
                     id: 'first_circulation_date',
                     value: car.first_circulation_date,
-                    label: _T("First circulation date:", "auto"),
-                    title: _T("First circulation date:", "auto")
+                    label: _T("First circulation date", "auto"),
+                    title: _T("First circulation date", "auto")
                 } %}
 
                 {% include "components/forms/number.html.twig" with {
                     id: 'mileage',
                     value: car.mileage,
-                    label: _T("Mileage:", "auto"),
+                    label: _T("Mileage", "auto"),
                     required: required.mileage is defined
                 } %}
 
                 {% include "components/forms/number.html.twig" with {
                     id: 'seats',
                     value: car.seats,
-                    label: _T("Seats:", "auto"),
+                    label: _T("Seats", "auto"),
                     required: required.seats is defined
                 } %}
 
@@ -110,7 +130,7 @@
             <div class="active content">
                 <div class="field required">
                 {% if car.id %}
-                    <label>{{ _T("Current owner:", "auto") }}</label>
+                    <label>{{ _T("Current owner", "auto") }}</label>
                     <p>
                         <span>
                             {{ car.owner.sfullname }}
@@ -129,25 +149,20 @@
                         </span>
                     </p>
                 {% else %}
-                    <label>{{ _T("Owner:", "auto") }}</label>
                     <input type="hidden" name="change_owner" id="change_owner" value="1"/>
                 {% endif %}
 
                 {% if login.isAdmin() or login.isStaff() %}
-                    <span id="owner_elt"{% if car.id %} class="displaynone"{% endif %}>
-                        <div id="owner" class="jsonly search-dropdown ui input nochosen paginated">
-                            <input id="owner_input" type="text" name="owner" value="{{ car.owner.id }}" placeholder="{{ _T("Owner:", "auto") }}" required="required">
-                            <i class="jsonly displaynone dropdown icon"></i>
-                            <span class="ui mini compact icon disabled button prev-results"><i class="jsonly displaynone chevron circle left icon disabled button tooltip" title="{{ _T("Load previous members...") }}"></i></span>
-                            <span class="ui mini compact icon disabled button next-results"><i class="jsonly displaynone chevron circle right icon disabled button tooltip" title="{{ _T("Load following members...") }}"></i></span>
-                            <div class="jsonly displaynone default text">{{ _T("Search for name or ID and pick member") }}</div>
-                            <div class="jsonly displaynone menu">
-            {% for k, v in members.list %}
-                                <div class="item" data-value="{{ k }}">{{ v }}</div>
-            {% endfor %}
-                            </div>
-                        </div>
-                    </span>
+                    {% set cclass = 'field' %}
+                    {% if car.id %}{% set cclass = cclass ~ ' displaynone' %}{% endif %}
+                    {% include 'components/forms/member_dropdown.html.twig' with {
+                        'required': true,
+                        'component_id': 'owner_id_elt',
+                        'id': 'owner_id',
+                        'label': _T("Owner", "auto"),
+                        'value': car.owner.id,
+                        'component_class': cclass
+                    } %}
                 </div>
                 {% else %}
                     <input type="hidden" name="owner" value="{{ car.owner.id }}"/>
@@ -183,7 +198,7 @@
                 {% include "components/forms/text.html.twig" with {
                     id: 'registration',
                     value: car.registration,
-                    label: _T("Registration:", "auto"),
+                    label: _T("Registration", "auto"),
                     required: required.registration is defined
                 } %}
 
@@ -205,7 +220,7 @@
                     id: 'body',
                     value: car.body.id,
                     values: body_list_values,
-                    label: _T("Body:", "auto"),
+                    label: _T("Body", "auto"),
                     required: required.body is defined
                 } %}
 
@@ -218,7 +233,7 @@
                     id: 'transmission',
                     value: car.transmission.id,
                     values: transmission_list_values,
-                    label: _T("Transmission:", "auto"),
+                    label: _T("Transmission", "auto"),
                     required: required.transmission is defined
                 } %}
 
@@ -231,28 +246,28 @@
                     id: 'finition',
                     value: car.finition.id,
                     values: finition_list_values,
-                    label: _T("Finition:", "auto"),
+                    label: _T("Finition", "auto"),
                     required: required.finition is defined
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'chassis_number',
                     value: car.chassis_number,
-                    label: _T("Chassis number:", "auto"),
+                    label: _T("Chassis number", "auto"),
                     required: required.chassis_number is defined
                 } %}
 
                 {% include "components/forms/number.html.twig" with {
                     id: 'horsepower',
                     value: car.horsepower,
-                    label: _T("Horsepower:", "auto"),
+                    label: _T("Horsepower", "auto"),
                     required: required.horsepower is defined
                 } %}
 
                 {% include "components/forms/number.html.twig" with {
                     id: 'engine_size',
                     value: car.engine_size,
-                    label: _T("Engine size:", "auto"),
+                    label: _T("Engine size", "auto"),
                     required: required.engine_size is defined
                 } %}
 
@@ -265,7 +280,7 @@
                     id: 'fuel',
                     value: car.fuel,
                     values: fuel_list_values,
-                    label: _T("Fuel:", "auto"),
+                    label: _T("Fuel", "auto"),
                     required: required.fuel is defined
                 } %}
             </div>
@@ -327,10 +342,10 @@
                 {# Popup for owner change #}
                 $('#change_owner-checkbox').checkbox({
                     onChecked: function() {
-                        $('#owner_elt').removeClass('displaynone');
+                        $('#owner_id_elt').removeClass('displaynone');
                     },
                     onUnchecked: function() {
-                        $('#owner_elt').addClass('displaynone');
+                        $('#owner_id_elt').addClass('displaynone');
                     }
                 });
 

@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Logo handling
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2009-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-09-26
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
@@ -42,22 +28,15 @@ use Galette\Core\Picture as GalettePicture;
 use Galette\Core\Plugins;
 
 /**
- * Logo handling
+ * Vehicle picture handling
  *
- * @category  Plugins
- * @name      AutoPicture
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Picture extends GalettePicture
 {
-    private $plugins;
+    private Plugins $plugins;
 
-    protected $tbl_prefix = AUTO_PREFIX;
+    protected string $tbl_prefix = AUTO_PREFIX;
     public const PK = Auto::PK;
 
     /**
@@ -66,7 +45,7 @@ class Picture extends GalettePicture
      * @param Plugins    $plugins Plugins
      * @param mixed|null $id_adh  ID of the member
      */
-    public function __construct(Plugins $plugins, $id_adh = null)
+    public function __construct(Plugins $plugins, mixed $id_adh = null)
     {
         $this->plugins = $plugins;
         $this->store_path = GALETTE_PHOTOS_PATH . '/auto_photos/';
@@ -99,9 +78,9 @@ class Picture extends GalettePicture
      *
      * @return void
      */
-    protected function getDefaultPicture()
+    protected function getDefaultPicture(): void
     {
-        $this->file_path = realpath(
+        $this->file_path = (string)realpath(
             $this->plugins->getTemplatesPathFromName('Galette Auto') .
             '/../../webroot/images/1f698.png'
         );

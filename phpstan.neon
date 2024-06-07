@@ -1,16 +1,18 @@
 parameters:
     parallel:
         maximumNumberOfProcesses: 2
-    level: 3
+    level: 5
     paths:
         - lib/
     scanFiles:
         - _config.inc.php
-        - ../../config/paths.inc.php
+        - ../../includes/sys_config/paths.inc.php
         - ../../config/config.inc.php.dist
-        - ../../config/galette_tcpdf_config.php
+        - ../../includes/sys_config/galette_tcpdf_config.php
     scanDirectories:
         - ../../includes/
         - ../../lib/
+    universalObjectCratesClasses:
+        - RKA\Session
     ignoreErrors:
         - '/Access to an undefined property ArrayObject.*/'

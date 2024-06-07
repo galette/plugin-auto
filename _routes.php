@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Auto routes
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2016-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2016-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     0.9dev 2016-03-02
  */
+
+declare(strict_types=1);
 
 use GaletteAuto\Controllers\Controller;
 use GaletteAuto\Controllers\Crud\PropertiesController;
@@ -63,12 +49,12 @@ $app->get(
     [Controller::class, 'memberVehiclesList']
 )->setName('memberVehiclesList')->add($authenticate);
 
-$app->group('/public', function () use ($app) {
+$app->group('/public', function () use ($app): void {
     $app->get(
         '/public/vehicles',
         [Controller::class, 'publicVehiclesList']
     )->setName('publicVehiclesList');
-})->add($showPublicPages);
+})->add(\Galette\Middleware\PublicPages::class);
 
 $app->get(
     '/my-vehicles',
@@ -76,13 +62,23 @@ $app->get(
 )->setName('myVehiclesList')->add($authenticate);
 
 $app->get(
-    '/vehicle/{action:add|edit}[/{id:\d+}]',
-    [Controller::class, 'showAddEditVehicle']
+    '/vehicle/add',
+    [Controller::class, 'showAddVehicle']
+)->setName('vehicleAdd')->add($authenticate);
+
+$app->get(
+    '/vehicle/edit/{id:\d+}',
+    [Controller::class, 'showEditVehicle']
 )->setName('vehicleEdit')->add($authenticate);
 
 $app->post(
-    '/vehicle/{action:add|edit}[/{id:\d+}]',
-    [Controller::class, 'doAddEditVehicle']
+    '/vehicle/add',
+    [Controller::class, 'doAddVehicle']
+)->setName('doVehicleAdd')->add($authenticate);
+
+$app->post(
+    '/vehicle/edit/{id:\d+}',
+    [Controller::class, 'doEditVehicle']
 )->setName('doVehicleEdit')->add($authenticate);
 
 $app->get(
@@ -219,12 +215,22 @@ $app->post(
 )->setName('propertyFilter')->add($authenticate);
 
 $app->get(
-    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/add',
+    [PropertiesController::class, 'propertyAdd']
+)->setName('propertyAdd')->add($authenticate);
+
+$app->get(
+    '/{property:brand|color|state|finition|body|transmission}/edit/{id:\d+}',
     [PropertiesController::class, 'propertyEdit']
 )->setName('propertyEdit')->add($authenticate);
 
 $app->post(
-    '/{property:brand|color|state|finition|body|transmission}/{action:add|edit}[/{id:\d+}]',
+    '/{property:brand|color|state|finition|body|transmission}/add',
+    [PropertiesController::class, 'doPropertyAdd']
+)->setName('doPropertyAdd')->add($authenticate);
+
+$app->post(
+    '/{property:brand|color|state|finition|body|transmission}/edit/{id:\d+}',
     [PropertiesController::class, 'doPropertyEdit']
 )->setName('doPropertyEdit')->add($authenticate);
 

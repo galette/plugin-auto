@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Automobile Models class for galette Auto plugin
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2009-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,41 +17,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
 use Analog\Analog;
 use ArrayObject;
 use Galette\Core\Db;
-use GaletteAuto\Filters\ModelsList;
+use Laminas\Db\ResultSet\ResultSet;
 
 /**
  * Automobile Models class for galette Auto plugin
  *
- * @category  Plugins
- * @name      Model
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property integer $id
- * @property string $model
- * @property int|Brand $brand
- * @property Brand $obrand
+ * @property string  $model
+ * @property Brand   $brand
  */
 class Model
 {
@@ -65,30 +43,29 @@ class Model
     public const PK = 'id_model';
     public const FIELD = 'model';
 
-    protected $id;
-    protected $model;
-    protected $brand;
+    protected int $id;
+    protected string $model;
+    protected Brand $brand;
 
-    private $errors;
-    private $zdb;
+    /** @var string[] */
+    private array $errors;
+    private Db $zdb;
 
     /**
      * Default constructor
      *
-     * @param Db    $zdb  Database instance
-     * @param mixed $args model's id to load or ResultSet. Defaults to null
+     * @param Db                   $zdb  Database instance
+     * @param ArrayObject|int|null $args model's id to load or ResultSet. Defaults to null
      */
-    public function __construct(Db $zdb, $args = null)
+    public function __construct(Db $zdb, ArrayObject|int $args = null)
     {
         $this->zdb = $zdb;
         $this->brand = new Brand($zdb);
 
-        if ($args == null || is_int($args)) {
-            if (is_int($args) && $args > 0) {
-                $this->load($args);
-            }
-        } elseif (is_object($args)) {
+        if ($args instanceof ArrayObject) {
             $this->loadFromRS($args);
+        } elseif (is_int($args)) {
+            $this->load($args);
         }
     }
 
@@ -99,7 +76,7 @@ class Model
      *
      * @return boolean
      */
-    public function load($id)
+    public function load(int $id): bool
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
@@ -111,6 +88,9 @@ class Model
 
             $results = $this->zdb->execute($select);
             $result = $results->current();
+            if (!$result instanceof ArrayObject) {
+                throw new \RuntimeException('Model not found');
+            }
             $this->loadFromRS($result);
             return true;
         } catch (\Exception $e) {
@@ -130,9 +110,9 @@ class Model
      *
      * @return void
      */
-    private function loadFromRS($r)
+    private function loadFromRS(ArrayObject $r): void
     {
-        $this->id = $r->id_model;
+        $this->id = (int)$r->id_model;
         $this->model = $r->model;
         $id_brand = Brand::PK;
         $this->brand->load((int)$r->$id_brand);
@@ -145,7 +125,7 @@ class Model
      *
      * @return boolean
      */
-    public function store($new = false)
+    public function store(bool $new = false): bool
     {
         try {
             $values = array(
@@ -156,6 +136,12 @@ class Model
                 $insert = $this->zdb->insert(AUTO_PREFIX . self::TABLE);
                 $insert->values($values);
                 $this->zdb->execute($insert);
+                /** @phpstan-ignore-next-line */
+                $this->id = (int)$this->zdb->driver->getLastGeneratedValue(
+                    $this->zdb->isPostgres() ?
+                        PREFIX_DB . AUTO_PREFIX . self::TABLE . '_id_seq'
+                        : null
+                );
             } else {
                 $update = $this->zdb->update(AUTO_PREFIX . self::TABLE);
                 $update->set($values)->where(
@@ -184,7 +170,7 @@ class Model
      *
      * @return boolean
      */
-    public function delete($ids)
+    public function delete(array $ids): bool
     {
         try {
             $delete = $this->zdb->delete(AUTO_PREFIX . self::TABLE);
@@ -208,25 +194,9 @@ class Model
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
-        $forbidden = array();
-        if (!in_array($name, $forbidden)) {
-            switch ($name) {
-                case 'brand':
-                    return $this->brand->id;
-                case 'obrand':
-                    return $this->brand;
-                default:
-                    return $this->$name;
-            }
-        } else {
-            Analog::log(
-                '[' . get_class($this) . '] Unable to retrieve `' . $name . '`',
-                Analog::INFO
-            );
-            return false;
-        }
+        return $this->$name ?? null;
     }
 
     /**
@@ -237,17 +207,9 @@ class Model
      *
      * @return boolean
      */
-    public function __isset(string $name)
+    public function __isset(string $name): bool
     {
-        $knowns = [
-            'obrand'
-        ];
-
-        if (in_array($name, $knowns) || property_exists($this, $name)) {
-            return true;
-        }
-
-        return false;
+        return property_exists($this, $name);
     }
 
     /**
@@ -258,7 +220,7 @@ class Model
      *
      * @return boolean
      */
-    public function check($post)
+    public function check(array $post): bool
     {
         $this->errors = [];
         if (!isset($post['brand']) || $post['brand'] == -1) {
@@ -278,9 +240,9 @@ class Model
     /**
      * Get errors
      *
-     * @return array
+     * @return string[]
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -290,9 +252,9 @@ class Model
      *
      * @param integer $id Brand ID
      *
-     * @return Model
+     * @return self
      */
-    public function setBrand($id)
+    public function setBrand(int $id): self
     {
         $this->brand = new Brand($this->zdb, $id);
         return $this;

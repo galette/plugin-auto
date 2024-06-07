@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Automobile Colors class for galette Auto plugin
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2009-2014 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
@@ -42,14 +28,7 @@ use Galette\Core\Db;
 /**
  * Automobile Colors class for galette Auto plugin
  *
- * @category  Plugins
- * @name      Color
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2014 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 class Color extends AbstractObject
 {
@@ -61,10 +40,10 @@ class Color extends AbstractObject
     /**
      * Default constructor
      *
-     * @param Db      $zdb Database instance
-     * @param integer $id  state's id to load. Defaults to null
+     * @param Db       $zdb Database instance
+     * @param ?integer $id  state's id to load. Defaults to null
      */
-    public function __construct(Db $zdb, $id = null)
+    public function __construct(Db $zdb, int $id = null)
     {
         parent::__construct(
             $zdb,
@@ -81,7 +60,7 @@ class Color extends AbstractObject
      *
      * @return string
      */
-    public function getFieldLabel()
+    public function getFieldLabel(): string
     {
         return _T('Color', 'auto');
     }
@@ -91,7 +70,7 @@ class Color extends AbstractObject
      *
      * @return string
      */
-    public function getRouteName()
+    public function getRouteName(): string
     {
         return 'color';
     }
@@ -101,9 +80,9 @@ class Color extends AbstractObject
      *
      * @param string $name name of the property we want to retrieve
      *
-     * @return false|object the called property
+     * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         if ($name == self::FIELD) {
             return parent::__get('value');

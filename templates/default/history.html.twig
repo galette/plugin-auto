@@ -1,8 +1,28 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
 {% extends (mode == 'ajax') ? "ajax.html.twig" : "page.html.twig" %}
 
 {% block content %}
     {%  if entries|length > 0 %}
-        <table id="listing">
+        <table id="listing" class="ui celled striped table">
             <thead>
                 <tr>
                     <th class="listing left">
@@ -40,8 +60,8 @@
                         {{ owner.sfullname }}
                     </td>
                     <td data-col-label="{{ _T("Registration", "auto") }}">{{ entry.car_registration }}</td>
-                    <td data-col-label="{{ _T("Color", "auto") }}">{{ entry.color.value }}</td>
-                    <td data-col-label="{{ _T("State", "auto") }}">{{ entry.state.value}}</td>
+                    <td data-col-label="{{ _T("Color", "auto") }}">{{ entry.color }}</td>
+                    <td data-col-label="{{ _T("State", "auto") }}">{{ entry.state }}</td>
                 </tr>
         {% endfor %}
             </tbody>

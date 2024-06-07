@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Automobile History class for galette Auto plugin
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2009-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-10-02
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
@@ -45,14 +31,7 @@ use Galette\Entity\Adherent;
 /**
  * Automobile History class for galette Auto plugin
  *
- * @category  Plugins
- * @name      History
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2009-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     Available since 0.7dev - 2009-03-16
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  *
  * @property integer $id_car
  * @property array $fields
@@ -60,11 +39,12 @@ use Galette\Entity\Adherent;
  */
 class History
 {
-    private $zdb;
     public const TABLE = 'history';
 
+    private Db $zdb;
+
     //fields list and type
-    private $fields = array(
+    private array $fields = array(
         Auto::PK            => 'integer',
         Adherent::PK        => 'integer',
         'history_date'      => 'datetime',
@@ -73,17 +53,21 @@ class History
         State::PK           => 'integer'
     );
 
-    //history entries
-    private $entries;
-    private $id_car;
+    /**
+     * history entries
+     *
+     * @var array<int, array<string,mixed>> $entries
+     */
+    private array $entries;
+    private int $id_car;
 
     /**
      * Default constructor
      *
-     * @param Db      $zdb Database instance
-     * @param integer $id  history entry's id to load. Defaults to null
+     * @param Db       $zdb Database instance
+     * @param ?integer $id  history entry's id to load. Defaults to null
      */
-    public function __construct(Db $zdb, $id = null)
+    public function __construct(Db $zdb, int $id = null)
     {
         $this->zdb = $zdb;
         if ($id != null && is_int($id)) {
@@ -96,20 +80,10 @@ class History
      *
      * @param integer $id car's id we want history for
      *
-     * @return void|false
+     * @return boolean
      */
-    public function load($id)
+    public function load(int $id): bool
     {
-        if ($id == null || !is_int($id)) {
-            Analog::log(
-                '[' . get_class($this) .
-                '] Unable to load car\'s history : Invalid car id (id was: `' .
-                $id . '`)',
-                Analog::ERROR
-            );
-            return false;
-        }
-
         $this->id_car = $id;
 
         try {
@@ -121,8 +95,8 @@ class History
             )->order('history_date ASC');
 
             $results = $this->zdb->execute($select);
-            $this->entries = $results->toArray();
-            $this->formatEntries();
+            $this->formatEntries($results->toArray());
+            return true;
         } catch (\Exception $e) {
             Analog::log(
                 '[' . get_class($this) . '] Cannot get car\'s history (id was ' .
@@ -138,7 +112,7 @@ class History
      *
      * @return ArrayObject|false row
      */
-    public function getLatest()
+    public function getLatest(): ArrayObject|false
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE);
@@ -168,23 +142,30 @@ class History
     /**
      * Format entries dates, also loads Member
      *
+     * @param array<int, array<string,mixed>> $entries list of entries to format
+     *
      * @return void
      */
-    private function formatEntries()
+    private function formatEntries(array $entries): void
     {
-        for ($i = 0; $i < count($this->entries); $i++) {
+        $this->entries = [];
+        foreach ($entries as $entry) {
             //put a formatted date to show
-            $date = new \DateTime($this->entries[$i]['history_date']);
-            $this->entries[$i]['formatted_date'] = $date->format(__('Y-m-d'));
+            $date = new \DateTime($entry['history_date']);
+            $entry['formatted_date'] = $date->format(__('Y-m-d'));
+
             //associate member to current history entry
-            $this->entries[$i]['owner']
-                = new Adherent($this->zdb, (int)$this->entries[$i]['id_adh']);
+            $entry['owner'] = new Adherent($this->zdb, (int)$entry['id_adh']);
+
             //associate color
-            $this->entries[$i]['color']
-                = new Color($this->zdb, (int)$this->entries[$i]['id_color']);
+            $color = new Color($this->zdb, (int)$entry['id_color']);
+            $entry['color'] = $color->value;
+
             //associate state
-            $this->entries[$i]['state']
-                = new State($this->zdb, (int)$this->entries[$i]['id_state']);
+            $state = new State($this->zdb, (int)$entry['id_state']);
+            $entry['state'] = $state->value;
+
+            $this->entries[] = $entry;
         }
     }
 
@@ -195,7 +176,7 @@ class History
      *
      * @return void
      */
-    public function register($props)
+    public function register(array $props): void
     {
         Analog::log(
             '[' . get_class($this) . '] Trying to register a new history entry.',
@@ -224,12 +205,12 @@ class History
                 );
             } else {
                 throw new \Exception(
-                    'An error occured registering car new history entry :('
+                    'An error occurred registering car new history entry :('
                 );
             }
         } catch (\Exception $e) {
             Analog::log(
-                '[' . get_class($this) . '] Cannot register new histroy entry | ' .
+                '[' . get_class($this) . '] Cannot register new history entry | ' .
                 $e->getMessage(),
                 Analog::ERROR
             );
@@ -244,23 +225,31 @@ class History
      *
      * @return mixed the called property
      */
-    public function __get($name)
+    public function __get(string $name): mixed
     {
         switch ($name) {
             case Auto::PK:
-                $ka = Auto::PK;
-                return $this->$ka;
+                return $this->$name;
             case 'fields':
                 return array_keys($this->fields);
-            case 'entries':
-                return $this->entries;
-            default:
-                Analog::log(
-                    '[' . get_class($this) . '] Trying to get an unknown property (' .
-                    $name . ')',
-                    Analog::INFO
-                );
-                break;
         }
+
+        throw new \RuntimeException(
+            sprintf(
+                'Unable to get property "%s::%s"!',
+                __CLASS__,
+                $name
+            )
+        );
+    }
+
+    /**
+     * Get current car history entries
+     *
+     * @return array<int, array<string,mixed>>
+     */
+    public function getEntries(): array
+    {
+        return $this->entries;
     }
 }

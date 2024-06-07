@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Models repository management
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2017-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,21 +17,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Repository
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @version   SVN: $Id$
- * @link      http://galette.tuxfamily.org
- * @since     2017-07-24
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto\Repository;
 
-use ArrayObject;
 use Galette\Core\Db;
 use Galette\Core\Preferences;
 use Galette\Core\Login;
@@ -46,20 +31,14 @@ use GaletteAuto\Model;
 use GaletteAuto\Brand;
 use GaletteAuto\Filters\ModelsList;
 use Analog\Analog;
+use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
 
 /**
  * Models repository management
  *
- * @category  Repository
- * @name      Models
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2017-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
- * @since     2017-07-24
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class Models extends Repository
@@ -67,7 +46,7 @@ class Models extends Repository
     public const TABLE = Model::TABLE;
     public const PK = Model::PK;
 
-    private $count;
+    private int $count;
 
     /**
      * Main constructor
@@ -89,9 +68,9 @@ class Models extends Repository
      * @param integer $brandId   Optional brand we want models for
      * @param boolean $as_object Whether to return an array of objects or a ResultSet
      *
-     * @return array|ArrayObject
+     * @return array<int, Model>|ResultSet
      */
-    public function getList($brandId = null, $as_object = true)
+    public function getList(int $brandId = null, bool $as_object = true): array|ResultSet
     {
         $select = $this->buildSelect();
 
@@ -123,7 +102,7 @@ class Models extends Repository
      *
      * @return Select SELECT statement
      */
-    private function buildSelect()
+    private function buildSelect(): Select
     {
         try {
             $select = $this->zdb->select(AUTO_PREFIX . self::TABLE, 'm');
@@ -149,7 +128,7 @@ class Models extends Repository
      *
      * @return array SQL ORDER clause
      */
-    private function buildOrderClause()
+    private function buildOrderClause(): array
     {
         $order = array();
 
@@ -173,7 +152,7 @@ class Models extends Repository
      *
      * @return void
      */
-    private function proceedCount($select)
+    private function proceedCount(Select $select): void
     {
         try {
             $countSelect = clone $select;
@@ -190,7 +169,7 @@ class Models extends Repository
             $result = $results->current();
 
             $k = self::PK;
-            $this->count = $result->$k;
+            $this->count = (int)$result->$k;
 
             if ($this->count > 0) {
                 $this->filters->setCounter($this->count);
@@ -207,11 +186,11 @@ class Models extends Repository
     /**
      * Add default values in database
      *
-     * @param bool $check_first Check first if it seem initialized, defaults to true
+     * @param bool $check_first Check first if it seems initialized, defaults to true
      *
      * @return bool
      */
-    public function installInit($check_first = true)
+    public function installInit(bool $check_first = true): bool
     {
         return true;
     }

@@ -8,19 +8,26 @@ on:
       - 'feature/*'
       - 'hotfix/*'
       - 'release/*'
+    tags:
+      - '*'
   pull_request:
+  # Enable manual run
+  workflow_dispatch:
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
 
 jobs:
-  ubuntu-latest:
+  lint:
     runs-on: ubuntu-latest
+    name: "Lint on PHP ${{ matrix.php-versions }}"
 
     strategy:
       matrix:
         php-versions: [ '8.1', '8.3' ]
         coverage: [none]
       fail-fast: false
-
-    name: PHP ${{ matrix.php-versions }} on ubuntu-latest
 
     steps:
       - name: PHP
@@ -31,7 +38,7 @@ jobs:
           coverage: ${{ matrix.coverage }}
 
       - name: Checkout Galette core
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: galette/galette
           path: galette-core
@@ -39,7 +46,7 @@ jobs:
           ref: develop
 
       - name: Checkout plugin
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: galette-core/galette/plugins/plugin-auto
 
@@ -49,7 +56,7 @@ jobs:
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -63,16 +70,154 @@ jobs:
       - name: CS
         run: |
           cd galette-core/galette/plugins/plugin-auto
-          ../../vendor/bin/phpcs -n -p --standard=../../../phpcs-rules.xml lib/ ./*.php
+          ../../vendor/bin/phpcs lib/ ./*.php
+
+      - name: Twig CS
+        run: |
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/twigcs templates/default --severity error --display blocking
 
       - name: Check missing symbols
         run: |
           cd galette-core/galette/plugins/plugin-auto
           composer require maglnet/composer-require-checker -W
           vendor/bin/composer-require-checker check --config-file=.composer-require-checker.config.json ../../composer.json
+        if: matrix.php-versions == '8.3'
 
       - name: PHPStan checks
         run: |
           cd galette-core/galette/plugins/plugin-auto
           ../../vendor/bin/phpstan analyze --ansi --memory-limit=2G --no-interaction --no-progress
-        if: matrix.php-versions == '8.1'
+
+      - name: Headers checks
+        run: |
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/docheader --docheader=../../../.docheader check lib ./*.php
+
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          #always tests higher stable php version with lower db version
+          #enable coverage on higher stable php version with higher postrgesql version
+          #lower php version
+          - { php-version: "8.1", db-image: "mysql:5.7", coverage: none, always: false }
+          - { php-version: "8.1", db-image: "mysql:8.1", coverage: none, always: false }
+          - { php-version: "8.1", db-image: "mariadb:10.4", coverage: none, always: false }
+          - { php-version: "8.1", db-image: "mariadb:11", coverage: none, always: false }
+          - { php-version: "8.1", db-image: "postgres:11", coverage: none, always: false }
+          - { php-version: "8.1", db-image: "postgres:16", coverage: none, always: false }
+          #higher stable php version
+          - { php-version: "8.3", db-image: "mysql:5.7", coverage: none, always: true }
+          - { php-version: "8.3", db-image: "mysql:8.1", coverage: none, always: false }
+          - { php-version: "8.3", db-image: "mariadb:10.4", coverage: none, always: true }
+          - { php-version: "8.3", db-image: "mariadb:11", coverage: none, always: false }
+          - { php-version: "8.3", db-image: "postgres:11", coverage: none, always: true }
+          - { php-version: "8.3", db-image: "postgres:16", coverage: none, always: true }
+      fail-fast: false
+
+    env:
+      skip: ${{ matrix.always == false && (github.event_name == 'pull_request' || github.repository != 'galette/galette-auto' || !(github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/tags'))) }}
+      DB: ${{ matrix.db-image }}
+
+    services:
+      # Label used to access the service container
+      db:
+        # Docker Hub image
+        image: ${{ matrix.db-image }}
+        # Provide env variables for both mysql and pgsql
+        env:
+          POSTGRES_USER: galette_tests
+          POSTGRES_PASSWORD: g@l3tte
+          POSTGRES_DB: galette_tests
+          MYSQL_USER: galette_tests
+          MYSQL_PASSWORD: g@l3tte
+          MYSQL_ROOT_PASSWORD: g@l3tte
+          MYSQL_DATABASE: galette_tests
+        # Open network ports for both mysql and pgsql
+        ports:
+          - 3306:3306
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd="bash -c 'if [[ -n $(command -v pg_isready) ]]; then pg_isready; else if [[ -n $(command -v mysqladmin) ]]; then mysqladmin ping; else mariadb-admin ping; fi fi'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    name: PHP ${{ matrix.php-version }} ${{ matrix.db-image }} ${{ (matrix.always == false && (github.event_name == 'pull_request' || github.repository != 'galette/galette' || !(github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/tags')))) && ' (skipped)' || matrix.coverage == 'xdebug' && ' (with coverage)' || ''}}
+
+    steps:
+      - name: PHP
+        if: env.skip != 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: composer, pecl
+          coverage: ${{ matrix.coverage }}
+          extensions: apcu
+          ini-values: apc.enable_cli=1
+
+      - name: "Show versions"
+        if: env.skip != 'true'
+        run: |
+          php --version
+          composer --version
+          echo "node $(node --version)"
+          echo "npm $(npm --version)"
+          docker exec ${{ job.services.db.id }} bash -c "if [[ -n \$(command -v psql) ]]; then psql --version; else if [[ -n \$(command -v mysql) ]]; then mysql --version; else mariadb --version; fi fi"
+
+      - name: Checkout Galette core
+        if: env.skip != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: galette/galette
+          path: galette-core
+          fetch-depth: 1
+          ref: develop
+
+      - name: Checkout plugin
+        uses: actions/checkout@v4
+        with:
+          path: galette-core/galette/plugins/plugin-auto
+
+      - name: "Restore dependencies cache"
+        if: env.skip != 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.composer/cache/
+            ~/.npm/_cacache/
+          key: "${{ runner.os }}-galette-${{ matrix.php-version }}-${{ hashFiles('galette/composer.lock', 'package-lock.json') }}"
+          restore-keys: |
+            ${{ runner.os }}-galette-${{ matrix.php-version }}-
+
+      - name: Install dependencies
+        if: env.skip != 'true'
+        run: |
+          cd galette-core
+          bin/install_deps
+
+      - name: Init for PostgreSQL
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+        run: |
+          PGPASSWORD=g@l3tte psql -d galette_tests -a -f galette-core/galette/install/scripts/pgsql.sql -U galette_tests -h localhost
+          PGPASSWORD=g@l3tte psql -d galette_tests -a -f galette-core/galette/plugins/plugin-auto/scripts/pgsql.sql -U galette_tests -h localhost
+        if: env.skip != 'true' && startsWith(matrix.db-image, 'postgres')
+
+      - name: Init for MariaDB
+        run: |
+          mysql -e 'create database IF NOT EXISTS galette_tests;' -u galette_tests --password=g@l3tte -h 127.0.0.1 -P 3306
+          mysql -e 'use galette_tests; source galette-core/galette/install/scripts/mysql.sql;' -u galette_tests --password=g@l3tte -h 127.0.0.1 -P 3306
+          mysql -e 'use galette_tests; source galette-core/galette/plugins/plugin-auto/scripts/mysql.sql;' -u galette_tests --password=g@l3tte -h 127.0.0.1 -P 3306
+        if: env.skip != 'true' && (startsWith(matrix.db-image, 'mysql') || startsWith(matrix.db-image, 'mariadb'))
+
+      - name: Unit tests
+        if: env.skip != 'true'
+        run: |
+          cd galette-core/galette/plugins/plugin-auto
+          ../../vendor/bin/phpunit --test-suffix=.php --bootstrap tests/TestsBootstrap.php --no-coverage --process-isolation tests/GaletteAuto/

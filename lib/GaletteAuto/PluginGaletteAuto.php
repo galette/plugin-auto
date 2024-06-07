@@ -1,15 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-
 /**
- * Galette Auto plugin main class
+ * Copyright © 2003-2024 The Galette Team
  *
- * PHP version 5
- *
- * Copyright © 2022-2023 The Galette Team
- *
- * This file is part of Galette (http://galette.tuxfamily.org).
+ * This file is part of Galette (https://galette.eu).
  *
  * Galette is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +17,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Galette. If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  Plugins
- * @package   GaletteAuto
- *
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
  */
+
+declare(strict_types=1);
 
 namespace GaletteAuto;
 
@@ -42,13 +30,7 @@ use Galette\Core\GalettePlugin;
 /**
  * Galette Auto plugin main class
  *
- * @category  Plugins
- * @name      PluginGaletteAuto
- * @package   GaletteAuto
- * @author    Johan Cwiklinski <johan@x-tnd.be>
- * @copyright 2022-2023 The Galette Team
- * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL License 3.0 or (at your option) any later version
- * @link      http://galette.tuxfamily.org
+ * @author Johan Cwiklinski <johan@x-tnd.be>
  */
 
 class PluginGaletteAuto extends GalettePlugin
@@ -103,7 +85,10 @@ class PluginGaletteAuto extends GalettePlugin
                         ],
                         [
                             'label' => _T("Models list", "auto"),
-                            'route' => ['name' => 'modelsList']
+                            'route' => [
+                                'name' => 'modelsList',
+                                'aliases' => ['modelAdd', 'modelEdit']
+                            ]
                         ],
 
                     ]
@@ -113,7 +98,10 @@ class PluginGaletteAuto extends GalettePlugin
             if ($login->isAdmin() || $login->isStaff() || $login->isGroupManager()) {
                 $menus['plugin_auto']['items'][] = [
                     'label' => _T("Cars list", "auto"),
-                    'route' => ['name' => 'vehiclesList']
+                    'route' => [
+                        'name' => 'vehiclesList',
+                        'aliases' => ['vehicleAdd', 'vehicleEdit']
+                    ]
                 ];
             }
 
@@ -181,7 +169,7 @@ class PluginGaletteAuto extends GalettePlugin
      *
      * @param Adherent $member Member instance
      *
-     * @return array|array[]
+     * @return array<int, string|array<string,mixed>>
      */
     public static function getListActionsContents(Adherent $member): array
     {
