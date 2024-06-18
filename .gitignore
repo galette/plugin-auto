@@ -3,3 +3,4 @@
 quick_gen_project_*
 dist/
 tempcache/
+tests/coverage/
