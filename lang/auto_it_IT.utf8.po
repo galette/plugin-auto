@@ -3,13 +3,14 @@
 # Lory ~ <dury.lorenzo@gmail.com>, 2021.
 # Cecilia Frego <cecilia.frego@gmail.com>, 2021.
 # Marco Ciampa <ciampix@posteo.net>, 2024.
+# Ilario Quinson <ilario.quinson@e.email>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-23 08:39+0100\n"
-"PO-Revision-Date: 2024-06-20 11:09+0000\n"
-"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
+"PO-Revision-Date: 2024-06-21 23:09+0000\n"
+"Last-Translator: Ilario Quinson <ilario.quinson@e.email>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/it/>\n"
 "Language: it_IT\n"
@@ -232,6 +233,7 @@ msgstr[1] "%count veicoli sono stati rimossi correttamente."
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:644
 msgid "This color is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questo colore è utilizzato in uno o più veicoli e non può essere cancellato."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:648
 msgid "This state is used by one or more vehicles, it cannot be deleted."
@@ -292,7 +294,7 @@ msgstr "C'è stato un errore mentre si tentava di rimuovere i veicoli :/"
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:90
 msgid "You do not have enough privileges."
-msgstr "Non hai qualifiche sufficienti."
+msgstr "Non si dispone dei privilegi necessari."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:218
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:99
