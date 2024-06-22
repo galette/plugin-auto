@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-23 08:39+0100\n"
-"PO-Revision-Date: 2024-06-21 23:09+0000\n"
-"Last-Translator: Ilario Quinson <ilario.quinson@e.email>\n"
+"PO-Revision-Date: 2024-06-23 22:09+0000\n"
+"Last-Translator: Marco Ciampa <ciampix@posteo.net>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/it/>\n"
 "Language: it_IT\n"
@@ -35,8 +35,8 @@ msgstr "Stato"
 #, php-format
 msgid "%count state"
 msgid_plural "%count states"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count stato"
+msgstr[1] "%count stati"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:127
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:86
@@ -238,23 +238,29 @@ msgstr ""
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:648
 msgid "This state is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questo stato viene usato da uno o più veicoli, non può essere cancellato."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:652
 msgid "This finition is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questa finitura viene usata da uno o più veicoli, non può essere cancellata."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:656
 msgid "This body is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questo corpo viene usato da uno o più veicoli, non può essere cancellato."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:660
 msgid ""
 "This transmission is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questa trasmissione viene usata da uno o più veicoli, non può essere "
+"cancellata."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:664
 msgid "This brand is used by one or more vehicles, it cannot be deleted."
 msgstr ""
+"Questa marca viene usata da uno o più veicoli, non può essere cancellata."
 
 #: ../lib/GaletteAuto/Controllers/Crud/PropertiesController.php:678
 #, fuzzy
@@ -385,8 +391,8 @@ msgstr "Colore"
 #, php-format
 msgid "%count color"
 msgid_plural "%count colors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count colore"
+msgstr[1] "%count colori"
 
 #: ../lib/GaletteAuto/Brand.php:72 ../tempcache/vehicles.html.twig:108
 #: ../tempcache/vehicles_list.html.twig:108
@@ -402,8 +408,8 @@ msgstr "Marca"
 #, php-format
 msgid "%count brand"
 msgid_plural "%count brands"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count marca"
+msgstr[1] "%count marche"
 
 #: ../lib/GaletteAuto/Transmission.php:63 ../lib/GaletteAuto/Auto.php:183
 #: ../tempcache/vehicles.html.twig:470
@@ -427,8 +433,8 @@ msgstr "Stato della carrozzeria"
 #, php-format
 msgid "%count body"
 msgid_plural "%count bodies"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%count corpo"
+msgstr[1] "%count corpi"
 
 #: ../lib/GaletteAuto/Autos.php:133
 msgid "Delete vehicles cards"
@@ -450,45 +456,45 @@ msgstr "Nome"
 #: ../tempcache/models_list.html.twig:93 ../tempcache/models_list.html.twig:133
 #: ../tempcache/model.html.twig:69
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 #: ../lib/GaletteAuto/Auto.php:173 ../tempcache/vehicles.html.twig:404
 #: ../tempcache/history.html.twig:70 ../tempcache/history.html.twig:142
 msgid "Registration"
-msgstr ""
+msgstr "Immatricolazione"
 
 #: ../lib/GaletteAuto/Auto.php:174 ../tempcache/vehicles.html.twig:142
 msgid "First registration date"
-msgstr ""
+msgstr "Data di prima immatricolazione"
 
 #: ../lib/GaletteAuto/Auto.php:175 ../tempcache/vehicles.html.twig:148
 msgid "First circulation date"
-msgstr ""
+msgstr "Data di prima circolazione"
 
 #: ../lib/GaletteAuto/Auto.php:176 ../tempcache/vehicles.html.twig:154
 msgid "Mileage"
-msgstr ""
+msgstr "Chilometraggio"
 
 #: ../lib/GaletteAuto/Auto.php:177 ../tempcache/vehicles.html.twig:161
 msgid "Seats"
-msgstr ""
+msgstr "Posti a sedere"
 
 #: ../lib/GaletteAuto/Auto.php:178 ../tempcache/vehicles.html.twig:511
 msgid "Horsepower"
-msgstr ""
+msgstr "Potenza"
 
 #: ../lib/GaletteAuto/Auto.php:179 ../tempcache/vehicles.html.twig:518
 msgid "Engine size"
-msgstr ""
+msgstr "Cilindrata"
 
 #: ../lib/GaletteAuto/Auto.php:182 ../lib/GaletteAuto/Finition.php:63
 #: ../tempcache/vehicles.html.twig:497
 msgid "Finition"
-msgstr ""
+msgstr "Finiture"
 
 #: ../lib/GaletteAuto/Auto.php:185 ../tempcache/vehicles.html.twig:545
 msgid "Fuel"
-msgstr ""
+msgstr "Carburante"
 
 #: ../lib/GaletteAuto/Auto.php:289
 msgid "Petrol"
@@ -528,7 +534,7 @@ msgstr "Auto aggiornata"
 
 #: ../lib/GaletteAuto/Auto.php:698
 msgid "- Maximum size for %field is %maxsize (current %cursize)!"
-msgstr ""
+msgstr "- La dimensione massima per %field è %maxsize (attuale %cursize)!"
 
 #: ../lib/GaletteAuto/Auto.php:741
 #, php-format
@@ -556,7 +562,7 @@ msgstr "C'è stato un errore mentre si tentava di rimuovere i veicoli :/"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:50
 msgid "Cars"
-msgstr ""
+msgstr "Auto"
 
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:132
 #, fuzzy
@@ -573,39 +579,39 @@ msgstr[1] "%count finizioni"
 
 #: ../tempcache/vehicles.html.twig:74
 msgid "Car's base informations"
-msgstr ""
+msgstr "Informazioni di base dell'auto"
 
 #: ../tempcache/vehicles.html.twig:87 ../tempcache/model.html.twig:74
 msgid "Choose a brand"
-msgstr ""
+msgstr "Scegli una marca"
 
 #: ../tempcache/vehicles.html.twig:114 ../tempcache/vehicles.html.twig:619
 msgid "Choose a model"
-msgstr ""
+msgstr "Scegli un modello"
 
 #: ../tempcache/vehicles.html.twig:173 ../tempcache/vehicles.html.twig:189
 msgid "Car's photo"
-msgstr ""
+msgstr "Foto dell'auto"
 
 #: ../tempcache/vehicles.html.twig:223
 msgid "Current car's state informations"
-msgstr ""
+msgstr "Informazioni sullo stato dell'auto corrente"
 
 #: ../tempcache/vehicles.html.twig:233
 msgid "Current owner"
-msgstr ""
+msgstr "Proprietario attuale"
 
 #: ../tempcache/vehicles.html.twig:250
 msgid "Show full car state history"
-msgstr ""
+msgstr "Mostra la storia completa dell'auto"
 
 #: ../tempcache/vehicles.html.twig:255
 msgid "Car state history"
-msgstr ""
+msgstr "Storia dell'auto"
 
 #: ../tempcache/vehicles.html.twig:263
 msgid "Change car's owner"
-msgstr ""
+msgstr "Cambia proprietario dell'auto"
 
 #: ../tempcache/vehicles.html.twig:275 ../tempcache/vehicles.html.twig:296
 #: ../tempcache/vehicles_list.html.twig:108
@@ -614,39 +620,39 @@ msgstr ""
 #: ../tempcache/public_vehicles_list.html.twig:78
 #: ../tempcache/public_vehicles_list.html.twig:126
 msgid "Owner"
-msgstr ""
+msgstr "Proprietario"
 
 #: ../tempcache/vehicles.html.twig:349
 msgid "Choose a color"
-msgstr ""
+msgstr "Scegli un colore"
 
 #: ../tempcache/vehicles.html.twig:376
 msgid "Choose a state"
-msgstr ""
+msgstr "Scegli uno stato"
 
 #: ../tempcache/vehicles.html.twig:416
 msgid "Car's technical informations"
-msgstr ""
+msgstr "Informazioni tecniche dell'auto"
 
 #: ../tempcache/vehicles.html.twig:422
 msgid "Choose a body"
-msgstr ""
+msgstr "Scegli un corpo"
 
 #: ../tempcache/vehicles.html.twig:449
 msgid "Choose a transmission"
-msgstr ""
+msgstr "Scegli una trasmissione"
 
 #: ../tempcache/vehicles.html.twig:476
 msgid "Choose a finition"
-msgstr ""
+msgstr "Scegli la finitura"
 
 #: ../tempcache/vehicles.html.twig:504
 msgid "Chassis number"
-msgstr ""
+msgstr "Numero di telaio"
 
 #: ../tempcache/vehicles.html.twig:524
 msgid "Choose a fuel"
-msgstr ""
+msgstr "Scegli un carburante"
 
 #: ../tempcache/vehicles.html.twig:556 ../tempcache/vehicles.html.twig:563
 msgid "Comment"
@@ -654,7 +660,7 @@ msgstr "Commento"
 
 #: ../tempcache/vehicles.html.twig:665
 msgid "Car's history"
-msgstr ""
+msgstr "Storia dell'auto"
 
 #: ../tempcache/vehicles_list.html.twig:56
 #, fuzzy
@@ -667,6 +673,8 @@ msgid ""
 "Please make sure to select at least one vehicle from the list to perform "
 "this action."
 msgstr ""
+"Assicurarsi di selezionare almeno un veicolo nell'elenco per eseguire questa "
+"azione."
 
 #: ../tempcache/vehicles_list.html.twig:72
 #: ../tempcache/public_vehicles_list.html.twig:60
@@ -679,7 +687,7 @@ msgstr[1] "Aggiungere un nuovo veicolo"
 
 #: ../tempcache/vehicles_list.html.twig:96
 msgid "Add new vehicle"
-msgstr ""
+msgstr "Aggiungi nuovo veicolo"
 
 #: ../tempcache/vehicles_list.html.twig:195
 #, fuzzy
@@ -689,11 +697,11 @@ msgstr "Aggiungere un nuovo veicolo"
 
 #: ../tempcache/vehicles_list.html.twig:197
 msgid "%vehiclename: remove from database"
-msgstr ""
+msgstr "%vehiclename: rimuovere dal database"
 
 #: ../tempcache/vehicles_list.html.twig:237
 msgid "No car has been registered yet for your account."
-msgstr ""
+msgstr "Nessuna auto è stata ancora registrata per l'account."
 
 #: ../tempcache/vehicles_list.html.twig:239
 #: ../tempcache/public_vehicles_list.html.twig:157
