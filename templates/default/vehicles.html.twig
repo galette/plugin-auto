@@ -314,7 +314,7 @@
 
 {% block javascripts %}
         <script type="text/javascript">
-            {% include "elements/js/choose_adh.js.twig" with {"js_chosen_id": "#owner"} %}
+            {% include "elements/js/choose_adh.js.twig" with {"js_chosen_id": "#owner_id"} %}
 
             $(function() {
                 $('#brand').dropdown('setting', 'onChange', function(id_brand) {
