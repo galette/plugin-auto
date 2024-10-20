@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: fr_FR@euro\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-23 08:39+0100\n"
-"PO-Revision-Date: 2024-07-02 19:43+0000\n"
+"PO-Revision-Date: 2024-09-15 07:51+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/fr/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: ../_routes.php:125
 msgid "No vehicle was selected, please check at least one name."
@@ -383,7 +383,7 @@ msgstr "- Vous devez sélectionner une marque !"
 #: ../tempcache/vehicles.html.twig:370 ../tempcache/history.html.twig:76
 #: ../tempcache/history.html.twig:148
 msgid "Color"
-msgstr "Coleur"
+msgstr "Couleur"
 
 #: ../lib/GaletteAuto/Color.php:100
 #, php-format

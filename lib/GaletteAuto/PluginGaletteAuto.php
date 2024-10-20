@@ -140,19 +140,12 @@ class PluginGaletteAuto extends GalettePlugin
     }
 
     /**
-     * Get dashboards contents
+     * Get current logged-in user dashboards contents
      *
      * @return array|array[]
      */
-    public static function getDashboardsContents(): array
+    public static function getMyDashboardsContents(): array
     {
-        /** @var Login $login */
-        global $login;
-
-        if ($login->isSuperAdmin()) {
-            return [];
-        }
-
         return [
             [
                 'label' => _T("My cars", "auto"),
@@ -162,6 +155,16 @@ class PluginGaletteAuto extends GalettePlugin
                 'icon' => 'oncoming_automobile'
             ]
         ];
+    }
+
+    /**
+     * Get dashboards contents
+     *
+     * @return array|array[]
+     */
+    public static function getDashboardsContents(): array
+    {
+        return [];
     }
 
     /**
