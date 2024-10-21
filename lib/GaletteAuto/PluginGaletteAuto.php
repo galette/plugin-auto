@@ -146,6 +146,13 @@ class PluginGaletteAuto extends GalettePlugin
      */
     public static function getMyDashboardsContents(): array
     {
+        /** @var Login $login */
+        global $login;
+
+        if ($login->isSuperAdmin()) {
+            return [];
+        }
+
         return [
             [
                 'label' => _T("My cars", "auto"),
