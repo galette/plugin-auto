@@ -147,7 +147,7 @@ jobs:
           --health-timeout=5s
           --health-retries=10
 
-    name: PHP ${{ matrix.php-version }} ${{ matrix.db-image }} ${{ (matrix.always == false && (github.event_name == 'pull_request' || github.repository != 'galette/galette' || !(github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/tags')))) && ' (skipped)' || matrix.coverage == 'xdebug' && ' (with coverage)' || ''}}
+    name: PHP ${{ matrix.php-version }} ${{ matrix.db-image }} ${{ (matrix.always == false && (github.event_name == 'pull_request' || github.repository != 'galette/plugin-auto' || !(github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/tags')))) && ' (skipped)' || matrix.coverage == 'xdebug' && ' (with coverage)' || ''}}
 
     steps:
       - name: PHP
