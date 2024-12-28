@@ -62,7 +62,7 @@ abstract class AbstractObject
      * @param string   $name  name
      * @param ?integer $id    id to load. Defaults to null
      */
-    public function __construct(Db $zdb, string $table, string $pk, string $field, string $name, int $id = null)
+    public function __construct(Db $zdb, string $table, string $pk, string $field, string $name, ?int $id = null)
     {
         $this->zdb = $zdb;
         $this->table = AUTO_PREFIX . $table;

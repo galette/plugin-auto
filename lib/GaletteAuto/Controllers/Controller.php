@@ -28,7 +28,9 @@ use Galette\Repository\Members;
 use GaletteAuto\Auto;
 use GaletteAuto\Autos;
 use GaletteAuto\History;
+use GaletteAuto\Model;
 use GaletteAuto\Picture;
+use Laminas\Db\ResultSet\ResultSet;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Galette\Controllers\AbstractPluginController;
@@ -59,13 +61,13 @@ class Controller extends AbstractPluginController
     /**
      * Check ACLs for specific member
      *
-     * @param Response     $response Response
-     * @param integer      $id_adh   Members id to check right for
-     * @param string|false $redirect Path to redirect to (myVehiclesList per default)
+     * @param Response          $response Response
+     * @param integer           $id_adh   Members id to check right for
+     * @param string|false|null $redirect Path to redirect to (myVehiclesList per default)
      *
      * @return bool|Response
      */
-    protected function checkAclsFor(Response $response, int $id_adh, string|false $redirect = null): bool|Response
+    protected function checkAclsFor(Response $response, int $id_adh, string|false|null $redirect = null): bool|Response
     {
         //maybe should this be a middleware... but I do not know how to pass redirect :/
         if (
@@ -78,7 +80,7 @@ class Controller extends AbstractPluginController
                 'dues'      => false
             );
             $member = new Adherent($this->zdb, $id_adh, $deps);
-            if (!$this->login->isGroupManager($member->groups)) {
+            if (!$this->login->isGroupManager(array_keys($member->groups))) {
                 //no right to see requested member.
                 if ($redirect === false) {
                     return false;
@@ -109,7 +111,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function vehiclePhoto(Request $request, Response $response, int $id = null): Response
+    public function vehiclePhoto(Request $request, Response $response, ?int $id = null): Response
     {
         $picture = new Picture($this->plugins, $id);
 
@@ -136,7 +138,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function publicVehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
+    public function publicVehiclesList(Request $request, Response $response, ?string $option = null, ?int $value = null): Response
     {
         $this->public = true;
         return $this->vehiclesList($request, $response, $option, $value);
@@ -152,7 +154,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function myVehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
+    public function myVehiclesList(Request $request, Response $response, ?string $option = null, ?int $value = null): Response
     {
         $this->id_adh = $this->login->id;
         $this->mine = true;
@@ -170,7 +172,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function memberVehiclesList(Request $request, Response $response, int $id, string $option = null, int $value = null): Response
+    public function memberVehiclesList(Request $request, Response $response, int $id, ?string $option = null, ?int $value = null): Response
     {
         $this->id_adh = $id;
         return $this->vehiclesList($request, $response, $option, $value);
@@ -186,7 +188,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function vehiclesList(Request $request, Response $response, string $option = null, int $value = null): Response
+    public function vehiclesList(Request $request, Response $response, ?string $option = null, ?int $value = null): Response
     {
         $get = $request->getQueryParams();
         $id_adh = null;
@@ -287,7 +289,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function showAddEditVehicle(Request $request, Response $response, string $action, int $id = null): Response
+    public function showAddEditVehicle(Request $request, Response $response, string $action, ?int $id = null): Response
     {
         $is_new = ($action === 'add');
 
@@ -411,7 +413,7 @@ class Controller extends AbstractPluginController
      *
      * @return Response
      */
-    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', int $id = null): Response
+    public function doAddEditVehicle(Request $request, Response $response, string $action = 'edit', ?int $id = null): Response
     {
         $post = $request->getParsedBody();
 
@@ -535,9 +537,8 @@ class Controller extends AbstractPluginController
         if (isset($post['brand']) && $post['brand'] != '') {
             $id_brand = (int)$post['brand'];
         }
-        /** @var ArrayObject $list */
+        /** @var array<int, Model>|ResultSet $list */
         $list = $models->getList($id_brand, false);
-        //@phpstan-ignore-next-line
         return $this->withJson($response, $list->toArray());
     }
 

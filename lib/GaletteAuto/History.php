@@ -67,10 +67,10 @@ class History
      * @param Db       $zdb Database instance
      * @param ?integer $id  history entry's id to load. Defaults to null
      */
-    public function __construct(Db $zdb, int $id = null)
+    public function __construct(Db $zdb, ?int $id = null)
     {
         $this->zdb = $zdb;
-        if ($id != null && is_int($id)) {
+        if ($id !== null) {
             $this->load($id);
         }
     }

@@ -65,12 +65,12 @@ class Models extends Repository
     /**
      * Get the list of all models
      *
-     * @param integer $brandId   Optional brand we want models for
-     * @param boolean $as_object Whether to return an array of objects or a ResultSet
+     * @param ?integer $brandId   Optional brand we want models for
+     * @param boolean  $as_object Whether to return an array of objects or a ResultSet
      *
      * @return array<int, Model>|ResultSet
      */
-    public function getList(int $brandId = null, bool $as_object = true): array|ResultSet
+    public function getList(?int $brandId = null, bool $as_object = true): array|ResultSet
     {
         $select = $this->buildSelect();
 

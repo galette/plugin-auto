@@ -166,7 +166,7 @@ class Auto
      * @param Db           $zdb     Database instance
      * @param ?ArrayObject $args    A resultset row to load
      */
-    public function __construct(Plugins $plugins, Db $zdb, ArrayObject $args = null)
+    public function __construct(Plugins $plugins, Db $zdb, ?ArrayObject $args = null)
     {
         $this->plugins = $plugins;
         $this->zdb = $zdb;
@@ -691,9 +691,9 @@ class Auto
                                 '%cursize'
                             ),
                             array(
-                                10,
+                                '10',
                                 $this->getPropName($prop),
-                                mb_strlen($value)
+                                (string)mb_strlen($value)
                             ),
                             _T("- Maximum size for %field is %maxsize (current %cursize)!", "auto")
                         );

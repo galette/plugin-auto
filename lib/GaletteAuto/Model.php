@@ -57,7 +57,7 @@ class Model
      * @param Db                   $zdb  Database instance
      * @param ArrayObject|int|null $args model's id to load or ResultSet. Defaults to null
      */
-    public function __construct(Db $zdb, ArrayObject|int $args = null)
+    public function __construct(Db $zdb, ArrayObject|int|null $args = null)
     {
         $this->zdb = $zdb;
         $this->brand = new Brand($zdb);

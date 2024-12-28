@@ -69,7 +69,7 @@ class AutosList extends Pagination
     {
         $args = [
             'option'    => 'page',
-            'value'     => $page
+            'value'     => (string)$page
         ];
 
         if ($this->view->getEnvironment()->getGlobals()['cur_subroute']) {
