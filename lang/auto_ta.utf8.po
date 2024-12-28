@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Languages add-on <noreply-addon-languages@weblate.org>, 2024.
 # தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024.
+# Johan Cwiklinski <trasher@x-tnd.be>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-02-23 08:39+0100\n"
-"PO-Revision-Date: 2024-12-28 06:40+0000\n"
-"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"PO-Revision-Date: 2024-12-28 07:12+0000\n"
+"Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/galette/"
 "auto-plugin/ta/>\n"
 "Language: ta\n"
@@ -34,8 +35,8 @@ msgstr "மாநிலம்"
 #, php-format
 msgid "%count state"
 msgid_plural "%count states"
-msgstr[0] "%நிலையை எண்ணுங்கள்"
-msgstr[1] "%எண்ணிக்கை நிலைகள்"
+msgstr[0] "%count எண்ணுங்கள்"
+msgstr[1] "%count நிலைகள்"
 
 #: ../lib/GaletteAuto/Controllers/Crud/ModelsController.php:127
 #: ../lib/GaletteAuto/PluginGaletteAuto.php:86
@@ -351,8 +352,8 @@ msgstr "வாகனங்களை அகற்றவும்"
 #, php-format
 msgid "You are about to remove %count vehicle."
 msgid_plural "You are about to remove %count vehicles."
-msgstr[0] "நீங்கள் %எண்ணிக்கை வாகனத்தை அகற்ற உள்ளீர்கள்."
-msgstr[1] "நீங்கள் %எண்ணிக்கை வாகனங்களை அகற்ற உள்ளீர்கள்."
+msgstr[0] "நீங்கள் %count வாகனத்தை அகற்ற உள்ளீர்கள்."
+msgstr[1] "நீங்கள் %count வாகனங்களை அகற்ற உள்ளீர்கள்."
 
 #: ../lib/GaletteAuto/Controllers/Controller.php:673
 msgid "An error occurred trying to remove vehicles :/"
@@ -361,7 +362,7 @@ msgstr "வாகனங்களை அகற்ற முயற்சிக்�
 #: ../lib/GaletteAuto/Controllers/Controller.php:683
 #, php-format
 msgid "%count vehicles have been successfully deleted."
-msgstr "%எண்ணிக்கை வாகனங்கள் வெற்றிகரமாக நீக்கப்பட்டுள்ளன."
+msgstr "%count வாகனங்கள் வெற்றிகரமாக நீக்கப்பட்டுள்ளன."
 
 #: ../lib/GaletteAuto/Model.php:225
 msgid "- You must select a brand!"
@@ -377,8 +378,8 @@ msgstr "நிறம்"
 #, php-format
 msgid "%count color"
 msgid_plural "%count colors"
-msgstr[0] "%வண்ணத்தை எண்ணுங்கள்"
-msgstr[1] "%வண்ணங்களை எண்ணுங்கள்"
+msgstr[0] "%count எண்ணுங்கள்"
+msgstr[1] "%count எண்ணுங்கள்"
 
 #: ../lib/GaletteAuto/Brand.php:72 ../tempcache/vehicles.html.twig:108
 #: ../tempcache/vehicles_list.html.twig:108
@@ -394,8 +395,8 @@ msgstr "சூட்டுக்குறி"
 #, php-format
 msgid "%count brand"
 msgid_plural "%count brands"
-msgstr[0] "%பிராண்ட்"
-msgstr[1] "%பிராண்டுகளை எண்ணுங்கள்"
+msgstr[0] "%count brand"
+msgstr[1] "%count எண்ணுங்கள்"
 
 #: ../lib/GaletteAuto/Transmission.php:63 ../lib/GaletteAuto/Auto.php:183
 #: ../tempcache/vehicles.html.twig:470
@@ -406,8 +407,8 @@ msgstr "பரவும் முறை"
 #, php-format
 msgid "%count transmission"
 msgid_plural "%count transmissions"
-msgstr[0] "%எண்ணிக்கை பரிமாற்றம்"
-msgstr[1] "%பரிமாற்றங்களை எண்ணுங்கள்"
+msgstr[0] "%count பரிமாற்றம்"
+msgstr[1] "%count எண்ணுங்கள்"
 
 #: ../lib/GaletteAuto/Body.php:63 ../lib/GaletteAuto/Auto.php:184
 #: ../tempcache/vehicles.html.twig:443
@@ -555,8 +556,8 @@ msgstr "வாகனங்கள்"
 #, php-format
 msgid "%count finition"
 msgid_plural "%count finitions"
-msgstr[0] "எண்ணிக்கை பூச்சு"
-msgstr[1] "%எண்ணிக்கை முடிந்தது"
+msgstr[0] "%count பூச்சு"
+msgstr[1] "%count முடிந்தது"
 
 #: ../tempcache/vehicles.html.twig:74
 msgid "Car's base informations"
@@ -659,8 +660,8 @@ msgstr ""
 #, php-format
 msgid "%count vehicle"
 msgid_plural "%count vehicles"
-msgstr[0] "%வாகனம் எண்ணுங்கள்"
-msgstr[1] "%வாகனங்களை எண்ணுங்கள்"
+msgstr[0] "%count எண்ணுங்கள்"
+msgstr[1] "%count எண்ணுங்கள்"
 
 #: ../tempcache/vehicles_list.html.twig:96
 msgid "Add new vehicle"
@@ -716,8 +717,8 @@ msgstr "இந்த நேரத்தில் '%s' பிராண்டி�
 #, php-format
 msgid "%count model"
 msgid_plural "%count models"
-msgstr[0] "%எண்ணிக்கை மாதிரி"
-msgstr[1] "%எண்ணிக்கை மாதிரிகள்"
+msgstr[0] "%count மாதிரி"
+msgstr[1] "%count மாதிரிகள்"
 
 #: ../tempcache/models_list.html.twig:81
 msgid "Add new model"
