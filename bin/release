@@ -534,7 +534,6 @@ def valid_commit(repo, c):
     except gitdb.exc.BadObject:
         return False
 
-
 def main():
     """
     Main method
